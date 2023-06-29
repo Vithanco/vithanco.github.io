@@ -43,10 +43,11 @@ h3 {
 
 a {
   color: black;
+  text-decoration: none;
 }
 
 li {
-  margin-left: 1em;
+  list-style: none;
 }
 
 img {
@@ -78,6 +79,7 @@ td {
   padding: 8px;
 }
 
+/* ---------------------------------------------------------------- */
 /* Header */
 header {
   background-color: var(--background);
@@ -152,6 +154,7 @@ header {
   color: var(--background);
 }
 
+/* ---------------------------------------------------------------- */
 /* INDEX WRAPPER */
 .tag-wrapper,
 .index-wrapper,
@@ -176,10 +179,30 @@ header {
   text-justify: inter-cluster;
 }
 
-.index-wrapper article img,
-.section-wrapper article img {
+.content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+}
+
+.content li {
+  margin-left: 1em;
+  list-style: disc;
+}
+
+.content a {
+  text-decoration: underline;
+}
+
+.content img,
+.content img {
   border-radius: 10px;
   align-self: center;
+}
+
+.reading-time {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .content_logo {
@@ -195,145 +218,199 @@ header {
   width: 15em;
 }
 
+/* ---------------------------------------------------------------- */
+
 .tag-wrapper {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+  align-self: center;
 }
 
 .all-tags {
+  max-width: 600px;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.3em;
-  max-width: 1000px;
+  gap: 0.25em;
 }
 
 .tag {
-  list-style: none;
-  background-color: black;
-  padding: 0.25em;
-  padding-inline: 0.6em;
-  border-radius: 3px;
-  margin-bottom: 0.1em;
-  margin: 0;
-  color: white;
+  background-color: var(--accent);
+  border-radius: 4px;
+  padding-inline: 0.5em;
 }
 
 .tag a {
-  text-decoration: none;
   color: white;
+  font-size: 14px;
 }
 
-h1 .tag {
-  margin-left: 0.5em;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-inline: 0.5em;
-  font-size: 25px;
-  font-weight: normal;
-}
-
-h1 {
-  display: flex;
-  align-items: center;
-}
-
-.tag-wrapper .item-list {
-  max-width: 400px;
-}
-
-.tag-wrapper .item-list li {
-  list-style-type: none;
-  transition: all;
-  transition-duration: 300ms;
-}
-
-.tag-wrapper .item-list li:hover {
-  transform: translateX(2px);
-}
-
-.tag-wrapper .item-list li a {
-  text-decoration: none;
-  color: white;
-}
-
+/* ---------------------------------------------------------------- */
 /* Site Nav*/
 .side-content {
-  width: 250px;
+  top: 3em;
   display: flex;
   flex-direction: column;
-  gap: 2em;
-  color: white;
+  max-width: 300px;
+  gap: 1em;
 }
 
-.side-content a {
-  text-decoration: none;
-  color: white;
+.item-list,
+.newsletter,
+.toc-list,
+.preview__article-details,
+.breadcrump-list {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border: 1px solid rgba(123, 123, 123, 0.5);
+  padding: 1em;
+  border-radius: 10px;
 }
 
-.side-content li {
-  list-style-type: none;
-  margin-left: 1rem;
-  transition: all;
-  transition-duration: 0.25s;
-}
-
-.side-content li:hover {
-  transform: translateX(3px);
-}
-
-.side-content ul p {
-  font-size: 15px;
+.item-list,
+.newsletter,
+.toc-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+  text-align: center;
 }
 
 .aside-title {
-  margin-left: 1rem;
-  font-size: 20px;
-  line-height: 23px;
+  font-size: 23px;
   font-weight: bold;
-  user-select: none;
+  color: var(--accent);
 }
 
-.toc-list,
-.item-list {
-  padding-top: 1em;
-  padding-bottom: 1em;
-  padding-right: 1em;
-}
-
-.toc-list ul,
-.item-list ul {
-  margin-bottom: 0.25em;
-}
-
-.toc-list {
-  background: rgb(51, 51, 51);
-  background: linear-gradient(
-    297deg,
-    rgb(58, 54, 54) 50%,
-    rgba(37, 37, 37, 1) 100%
-  );
-  box-shadow: rgba(51, 51, 51, 0.9) -7px -7px 0px -2px;
+.toc-list ul {
   display: flex;
   flex-direction: column;
-  gap: 0.25em;
-  padding: 0.5em;
+  gap: 0.5em;
+  width: 100%;
 }
 
-.item-list {
-  background: rgb(234, 88, 12);
-  background: linear-gradient(
-    297deg,
-    rgba(234, 88, 12, 1) 0%,
-    rgba(255, 128, 0, 1) 100%
-  );
-  box-shadow: rgba(235, 90, 13, 0.9) -7px -7px 0px -2px;
+.toc-list ul li {
+  padding: 0.25em;
+  background-color: rgba(0, 0, 0, 0.007);
+  box-shadow: rgba(0, 0, 0, 0.025) 0px 1px 4px;
+  transition: background-color;
+  transition-duration: 50ms;
+}
+
+.toc-list ul li:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.toc-list ul li ul li {
+  font-size: 12px;
+  font-weight: lighter;
+  background-color: rgba(0, 0, 0, 0.01);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 0.5em;
+  box-shadow: none;
+}
+
+.toc-list ul li {
+  border: 1px solid rgba(123, 123, 123, 0.5);
+  border-radius: 10px;
+}
+
+.item-list ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+}
+
+.item-list ul li {
+  border: 1px solid rgba(123, 123, 123, 0.25);
+  background-color: rgba(0, 0, 0, 0.0075);
+  border-radius: 10px;
+  padding: 0.25em;
+  padding-inline: 0.5em;
+  transition: background-color;
+  transition-duration: 50ms;
+}
+
+.item-list ul li:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.item-list ul li a p {
+  font-weight: normal;
+  font-size: 15px;
+}
+
+.item-list ul li p {
+  font-weight: lighter;
+  font-size: 10px;
 }
 
 .newsletter {
-  width: 100%;
-  height: 400px;
+  padding-top: 0.25em;
 }
+
+.newsletter img {
+  width: 100%;
+}
+
+.newsletter a {
+  background-color: var(--accent);
+  color: var(--background);
+  width: 100%;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  border-radius: 5px;
+}
+
+.newsletter a:hover {
+  background-color: rgba(234, 88, 12, 0.95);
+}
+
+.tag-list-title {
+  font-size: 22px;
+}
+
+.preview__article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25em;
+}
+
+.tag-preview {
+  border: 1px solid rgba(123, 123, 123, 0.1);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background-color: var(--accent);
+  padding-inline: 0.25em;
+  border-radius: 4px;
+  transition: scale;
+  transition-duration: 50ms;
+}
+
+.tag-preview:hover {
+  scale: 102%;
+}
+
+.tag-preview a {
+  color: white;
+  font-size: 14px;
+}
+
+.breadcrump-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  gap: 1em;
+}
+
+.breadcrump-list li {
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: 5px;
+  padding: 0.25em;
+}
+
+/* ---------------------------------------------------------------- */
 
 footer {
   margin-top: 2.25em;
@@ -408,6 +485,69 @@ footer div nav ul li a {
   gap: 0.125em;
 }
 
+/* ---------------------------------------------------------------- */
+
+.tagged-with__page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tagged-with__page__wrapper {
+  padding-top: 150px;
+  display: flex;
+  flex-direction: column;
+  max-width: 700px;
+  gap: 0.5em;
+  padding-inline: 1em;
+}
+
+.tagged-with__page_header {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.tagged-with__page_header a {
+  text-decoration: underline;
+}
+
+.tagged-with__page_title {
+  font-size: 25px;
+}
+
+.tagged-with__page__tag {
+  background-color: var(--accent);
+  padding-inline: 0.5em;
+  margin-left: 0.25em;
+  color: var(--background);
+  white-space: nowrap;
+}
+
+.tagged-with__page__previews {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  list-style-type: none;
+}
+
+.tagged-with__page__previews li div {
+  list-style-type: none;
+  background-color: #222;
+  color: white;
+  padding: 1em;
+  border-radius: 10px;
+}
+
+.tagged-with__page__previews li div a {
+  color: white;
+  text-decoration: none;
+  font-size: 23px;
+  font-weight: bold;
+}
+
+/* ---------------------------------------------------------------- */
+
 @media only screen and (max-width: 1000px) {
   header {
     height: 130px;
@@ -422,10 +562,15 @@ footer div nav ul li a {
   }
 
   .index-wrapper,
-  .section-wrapper {
+  .section-wrapper,
+  .tagged-with__page__wrapper {
     padding-top: 150px;
-    flex-direction: column-reverse;
     gap: 1em;
+  }
+
+  .index-wrapper,
+  .section-wrapper {
+    flex-direction: column-reverse;
   }
 
   .side-content {
@@ -442,6 +587,8 @@ footer div nav ul li a {
   }
 }
 
+/* ---------------------------------------------------------------- */
+
 @media only screen and (max-width: 768px) {
   .section-wrapper article,
   .index-wrapper article {
@@ -449,7 +596,8 @@ footer div nav ul li a {
   }
 
   .index-wrapper,
-  .section-wrapper {
+  .section-wrapper,
+  .tagged-with__page__wrapper {
     padding-inline: 2em;
     padding-top: 100px;
   }
@@ -493,6 +641,11 @@ footer div nav ul li a {
     font-size: 10px;
   }
 
+  .toc-list ul li ul li p {
+    font-weight: normal;
+    font-size: 9px;
+  }
+
   h1 {
     font-size: 30px;
     line-height: 35px;
@@ -506,3 +659,5 @@ footer div nav ul li a {
     font-size: 14px;
   }
 }
+
+/* ---------------------------------------------------------------- */
