@@ -8,8 +8,8 @@
 
 :root {
   --accent: #ea580c;
-  --filler: #000;
-  --background: #fff;
+  --filler: #fff;
+  --background: #000;
 }
 
 /* GENERAL */
@@ -42,7 +42,7 @@ h3 {
 }
 
 a {
-  color: black;
+  color: var(--filler);
   text-decoration: none;
 }
 
@@ -62,17 +62,17 @@ table {
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: #111111;
   text-align: left;
   padding: 8px;
 }
 
 tr {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #2e2e2e;
 }
 
 tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: #070707;
 }
 
 td {
@@ -81,7 +81,7 @@ td {
 
 blockquote {
   background-color: #f7f7f7;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: rgba(94, 94, 94, 0.2) 0px 8px 24px;
   border: 1px solid rgba(234, 88, 12, 0.4);
   border-left: 10px solid var(--accent);
   padding: 1em;
@@ -95,9 +95,9 @@ blockquote {
 /* ---------------------------------------------------------------- */
 /* Header */
 header {
-  background-color: var(--background);
+  background-color: #111;
   border-bottom: 1px solid rgba(123, 123, 123, 0.2);
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: rgba(71, 71, 71, 0.2) 0px 8px 24px;
   width: 100%;
   height: 100px;
   position: fixed;
@@ -150,7 +150,7 @@ header {
   text-transform: uppercase;
   color: var(--filler);
   border-radius: 2px;
-  background-color: var(--background);
+  background-color: #111;
   padding: 0.5em;
 }
 
@@ -161,10 +161,10 @@ header {
     rgba(234, 88, 12, 1) 0%,
     rgba(255, 128, 0, 1) 100%
   );
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: rgba(85, 85, 85, 0.2) 0px 8px 24px;
   border-radius: 2px;
   padding: 0.5em;
-  color: var(--background);
+  color: white;
 }
 
 /* ---------------------------------------------------------------- */
@@ -212,6 +212,7 @@ header {
 .content img {
   border-radius: 10px;
   align-self: center;
+  background-color: white;
 }
 
 .reading-time {
@@ -225,7 +226,7 @@ header {
 }
 
 .download-button img {
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: rgba(104, 104, 104, 0.2) 0px 7px 29px 0px;
 }
 
 .download-button img {
@@ -273,7 +274,7 @@ header {
 .newsletter,
 .toc-list,
 .preview__article-details {
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: rgba(75, 75, 75, 0.2) 0px 7px 29px 0px;
   border: 1px solid rgba(123, 123, 123, 0.5);
   padding: 1em;
   border-radius: 10px;
@@ -311,7 +312,7 @@ header {
 }
 
 .toc-list ul li:hover {
-  background-color: rgba(0, 0, 0, 0.03);
+  background-color: rgba(255, 255, 255, 0.03);
 }
 
 .toc-list ul li ul li {
@@ -367,11 +368,13 @@ header {
 
 .newsletter img {
   width: 100%;
+  filter: brightness(0) invert(1);
+  border-radius: 5px;
 }
 
 .newsletter a {
   background-color: var(--accent);
-  color: var(--background);
+  color: white;
   width: 100%;
   padding-top: 0.25em;
   padding-bottom: 0.25em;
@@ -436,12 +439,12 @@ header {
 footer {
   margin-top: 2.25em;
   padding: 1em;
-  background-color: var(--filler);
+  background-color: #070707;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  color: var(--background);
+  color: var(--fillers);
 }
 
 footer div {
@@ -541,7 +544,7 @@ footer div nav ul li a {
   background-color: var(--accent);
   padding-inline: 0.5em;
   margin-left: 0.25em;
-  color: var(--background);
+  color: white;
   white-space: nowrap;
 }
 
@@ -554,7 +557,7 @@ footer div nav ul li a {
 
 .tagged-with__page__previews li div {
   list-style-type: none;
-  background-color: #222;
+  background-color: #111;
   color: white;
   padding: 1em;
   border-radius: 10px;

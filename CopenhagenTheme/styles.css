@@ -79,6 +79,19 @@ td {
   padding: 8px;
 }
 
+blockquote {
+  background-color: #f7f7f7;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border: 1px solid rgba(234, 88, 12, 0.4);
+  border-left: 10px solid var(--accent);
+  padding: 1em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  font-style: italic;
+  text-align: center;
+  color: #333;
+}
+
 /* ---------------------------------------------------------------- */
 /* Header */
 header {
@@ -192,6 +205,7 @@ header {
 
 .content a {
   text-decoration: underline;
+  color: var(--accent);
 }
 
 .content img,
@@ -258,8 +272,7 @@ header {
 .item-list,
 .newsletter,
 .toc-list,
-.preview__article-details,
-.breadcrump-list {
+.preview__article-details {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border: 1px solid rgba(123, 123, 123, 0.5);
   padding: 1em;
@@ -345,6 +358,7 @@ header {
 .item-list ul li p {
   font-weight: lighter;
   font-size: 10px;
+  user-select: none;
 }
 
 .newsletter {
@@ -397,17 +411,24 @@ header {
   font-size: 14px;
 }
 
-.breadcrump-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-  gap: 1em;
+.breadcrumps {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
 }
 
-.breadcrump-list li {
+.breadcrumps a {
   white-space: nowrap;
-  overflow: hidden;
-  border-radius: 5px;
-  padding: 0.25em;
+}
+
+.breadcrumps a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumps img {
+  height: 20px;
+  margin: 0;
+  width: min-content;
 }
 
 /* ---------------------------------------------------------------- */
