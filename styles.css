@@ -92,6 +92,12 @@ blockquote {
   color: #333;
 }
 
+.caption {
+  align-self: center;
+  width: 400px;
+  font-size: 15px;
+}
+
 /* ---------------------------------------------------------------- */
 /* Header */
 header {
@@ -624,7 +630,8 @@ footer div nav ul li a {
   }
 
   .section-wrapper article img,
-  .index-wrapper article img {
+  .index-wrapper article img,
+  .caption {
     width: 100%;
   }
 
