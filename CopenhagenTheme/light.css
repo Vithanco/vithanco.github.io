@@ -417,21 +417,21 @@ header {
   font-size: 14px;
 }
 
-.breadcrumps {
+.breadcrumbs {
   display: flex;
   align-items: center;
   margin-bottom: 1em;
 }
 
-.breadcrumps a {
+.breadcrumbs a {
   white-space: nowrap;
 }
 
-.breadcrumps a:hover {
+.breadcrumbs a:hover {
   text-decoration: underline;
 }
 
-.breadcrumps img {
+.breadcrumbs img {
   height: 20px;
   margin: 0;
   width: min-content;
