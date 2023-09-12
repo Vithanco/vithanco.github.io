@@ -5,6 +5,7 @@
 */
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
 
 :root {
   --accent: #ea580c;
@@ -80,7 +81,7 @@ td {
 }
 
 blockquote {
-  background-color: #111;
+  background-color: #f7f7f7;
   box-shadow: rgba(94, 94, 94, 0.2) 0px 8px 24px;
   border: 1px solid rgba(234, 88, 12, 0.4);
   border-left: 10px solid var(--accent);
@@ -89,13 +90,7 @@ blockquote {
   margin-bottom: 0.5em;
   font-style: italic;
   text-align: center;
-  color: rgba(255, 255, 255, 0.75);
-}
-
-.caption {
-  align-self: center;
-  width: 400px;
-  font-size: 15px;
+  color: #333;
 }
 
 /* ---------------------------------------------------------------- */
@@ -279,7 +274,9 @@ header {
 .item-list,
 .newsletter,
 .toc-list,
-.preview__article-details {
+.preview__article-details,
+.user-feedback,
+.contact-form {
   box-shadow: rgba(75, 75, 75, 0.2) 0px 7px 29px 0px;
   border: 1px solid rgba(123, 123, 123, 0.5);
   padding: 1em;
@@ -420,21 +417,21 @@ header {
   font-size: 14px;
 }
 
-.breadcrumbs {
+.breadcrumps {
   display: flex;
   align-items: center;
   margin-bottom: 1em;
 }
 
-.breadcrumbs a {
+.breadcrumps a {
   white-space: nowrap;
 }
 
-.breadcrumbs a:hover {
+.breadcrumps a:hover {
   text-decoration: underline;
 }
 
-.breadcrumbs img {
+.breadcrumps img {
   height: 20px;
   margin: 0;
   width: min-content;
@@ -575,6 +572,171 @@ footer div nav ul li a {
   font-size: 23px;
   font-weight: bold;
 }
+/* ---------------------------------------------------------------- */
+
+.user-feedback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.user-feedback__header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.user-feedback img {
+  width: 75px;
+}
+
+.user-feedback__header__titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-feedback__title {
+  font-size: 20px;
+}
+
+.user-feedback__subtitle {
+  font-size: 12px;
+  color: gray;
+}
+
+.user-feedback__description {
+  max-width: 340px;
+  width: 100%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-size: 15px;
+}
+
+.rating-factor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 340px;
+  width: 100%;
+}
+
+.rating-factor__name {
+  font-size: 13px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.rating-factor__rating {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.rating-factor__rating input {
+  position: relative;
+  width: 20px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  overflow: hidden;
+  pointer-events: none;
+  cursor: none;
+}
+
+.rating-factor__rating input::before {
+  content: "\f005";
+  position: absolute;
+  font-size: 34px;
+  font-family: fontAwesome;
+  left: 4px;
+  transition: 0.2s;
+  color: rgba(255, 255, 255, 0.1);
+}
+
+.rating-factor__rating input:nth-child(2n + 1)::before {
+  right: 4px;
+  left: initial;
+}
+
+.rating-factor__rating input:checked ~ input::before,
+.rating-factor__rating input:checked::before {
+  color: #ea9c0c;
+}
+
+/* ---------------------------------------------------------------- */
+
+.contact-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.contact-form__header h2 {
+  margin: 0;
+}
+
+.contact-form__header p {
+  text-align: left !important;
+}
+
+.contact-form p {
+  font-weight: normal;
+  font-size: 15px;
+}
+
+.contact-form__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25em;
+}
+
+.contact-form__input-wrapper {
+  border-bottom: 2px solid rgba(234, 88, 12, 0.8);
+  padding-inline-start: 0.125em;
+}
+
+.contact-form__input-wrapper input,
+.contact-form__input-wrapper textarea {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-family: "Poppins";
+  font-size: 16px;
+  color: var(--filler);
+}
+
+.contact-form__input-wrapper input::placeholder,
+.contact-form__input-wrapper textarea::placeholder {
+  font-family: "Poppins";
+  font-size: 16px;
+}
+
+.contact-form__input-wrapper textarea::-webkit-resizer {
+  display: none;
+}
+
+.contact-form__submit-btn {
+  padding: 0.5em;
+  background-color: var(--accent);
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.contact-form__submit-btn:hover {
+  cursor: pointer;
+}
 
 /* ---------------------------------------------------------------- */
 
@@ -633,8 +795,7 @@ footer div nav ul li a {
   }
 
   .section-wrapper article img,
-  .index-wrapper article img,
-  .caption {
+  .index-wrapper article img {
     width: 100%;
   }
 
