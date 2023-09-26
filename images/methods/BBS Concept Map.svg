@@ -1,0 +1,1160 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<svg version="1.1" viewBox="0.00 0.00 1896.00 820.00" xmlns="http://www.w3.org/2000/svg">
+	<svg height="100.00" id="node1" width="160.00" x="845.00" y="359.00">
+		<svg height="49.00" width="135.00" x="12.50" y="25.50">
+			<path d="M2.00 24.50L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L124.00 2.00 C128.97 2.00 133.00 6.03 133.00 11.00 L133.00 38.00 C133.00 42.97 128.97 47.00 124.00 47.00 C124.00 47.00 124.00 47.00 124.00 47.00 L11.00 47.00 C6.03 47.00 2.00 42.97 2.00 38.00 ZM2.00 24.50" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="49.00" width="135.00" x="0.00" y="0.00">
+				<path d="M2.00 24.50L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L124.00 2.00 C128.97 2.00 133.00 6.03 133.00 11.00 L133.00 38.00 C133.00 42.97 128.97 47.00 124.00 47.00 C124.00 47.00 124.00 47.00 124.00 47.00 L11.00 47.00 C6.03 47.00 2.00 42.97 2.00 38.00 ZM2.00 24.50" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="35.00" width="121.00" x="7.00" y="7.00">
+					<svg height="35.00" width="121.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="60.50" y="8.75">Change Initiative</text>
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="60.50" y="26.25">Manager</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="36.99" id="edgeLine1" width="9.28" x="922.14" y="431.89">
+		<path d="M4.22 8.97C4.41 13.20 4.59 17.49 4.78 21.58 L5.28 32.99 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="11.41" id="edgeHead1" width="0.50" x="4.78" y="21.58">
+			<path d="M0.50 11.41L0.00 -0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail1" width="8.00" x="0.00" y="0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node2" width="160.00" x="848.00" y="429.00">
+		<svg height="32.00" width="126.00" x="17.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L115.00 2.00 C119.97 2.00 124.00 6.03 124.00 11.00 L124.00 21.00 C124.00 25.97 119.97 30.00 115.00 30.00 C115.00 30.00 115.00 30.00 115.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="126.00" x="0.00" y="0.00">
+				<svg height="22.00" width="116.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="58.00" y="11.00">keeps an eye on</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="100.00" id="node3" width="160.00" x="621.00" y="490.50">
+		<svg height="32.00" width="72.00" x="44.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L61.00 2.00 C65.97 2.00 70.00 6.03 70.00 11.00 L70.00 21.00 C70.00 25.97 65.97 30.00 61.00 30.00 C61.00 30.00 61.00 30.00 61.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="32.00" width="72.00" x="0.00" y="0.00">
+				<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L61.00 2.00 C65.97 2.00 70.00 6.03 70.00 11.00 L70.00 21.00 C70.00 25.97 65.97 30.00 61.00 30.00 C61.00 30.00 61.00 30.00 61.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="18.00" width="58.00" x="7.00" y="7.00">
+					<svg height="18.00" width="58.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="29.00" y="9.00">Benefits</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="42.37" id="edgeLine2" width="145.29" x="735.48" y="489.43">
+		<path d="M141.29 4.00L132.74 6.24 C94.56 16.25 45.84 29.02 10.85 38.19 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="7.74" id="edgeHead2" width="10.69" x="0.00" y="34.63">
+			<path d="M9.93 4.84L9.93 4.84 L10.69 7.74 L0.00 6.41 L8.66 0.00 L9.42 2.90 L9.42 2.90 ZM9.93 4.84" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="2.24" id="edgeTail2" width="8.55" x="132.74" y="4.00">
+			<path d="M8.55 -0.00L0.00 2.24 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node4" width="160.00" x="1515.00" y="214.50">
+		<svg height="49.00" width="122.00" x="19.00" y="25.50">
+			<path d="M2.00 24.50L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L111.00 2.00 C115.97 2.00 120.00 6.03 120.00 11.00 L120.00 38.00 C120.00 42.97 115.97 47.00 111.00 47.00 C111.00 47.00 111.00 47.00 111.00 47.00 L11.00 47.00 C6.03 47.00 2.00 42.97 2.00 38.00 ZM2.00 24.50" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="49.00" width="122.00" x="0.00" y="0.00">
+				<path d="M2.00 24.50L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L111.00 2.00 C115.97 2.00 120.00 6.03 120.00 11.00 L120.00 38.00 C120.00 42.97 115.97 47.00 111.00 47.00 C111.00 47.00 111.00 47.00 111.00 47.00 L11.00 47.00 C6.03 47.00 2.00 42.97 2.00 38.00 ZM2.00 24.50" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="35.00" width="108.00" x="7.00" y="7.00">
+					<svg height="35.00" width="108.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="54.00" y="8.75">Structured</text>
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="54.00" y="26.25">Visual Thinking</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="100.00" id="node5" width="160.00" x="1390.00" y="282.50">
+		<svg height="32.00" width="88.00" x="36.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L77.00 2.00 C81.97 2.00 86.00 6.03 86.00 11.00 L86.00 21.00 C86.00 25.97 81.97 30.00 77.00 30.00 C77.00 30.00 77.00 30.00 77.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="88.00" x="0.00" y="0.00">
+				<svg height="22.00" width="78.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="39.00" y="11.00">help clarify</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="36.73" id="edgeLine3" width="62.42" x="1491.42" y="285.34">
+		<path d="M54.18 6.23C40.76 13.32 26.49 20.86 14.01 27.45 L4.00 32.73 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="5.28" id="edgeHead3" width="10.01" x="4.00" y="27.45">
+			<path d="M0.00 5.28L10.01 -0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail3" width="8.00" x="54.42" y="-0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node6" width="160.00" x="1379.00" y="359.00">
+		<svg height="32.00" width="80.00" x="40.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L69.00 2.00 C73.97 2.00 78.00 6.03 78.00 11.00 L78.00 21.00 C78.00 25.97 73.97 30.00 69.00 30.00 C69.00 30.00 69.00 30.00 69.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="32.00" width="80.00" x="0.00" y="0.00">
+				<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L69.00 2.00 C73.97 2.00 78.00 6.03 78.00 11.00 L78.00 21.00 C78.00 25.97 73.97 30.00 69.00 30.00 C69.00 30.00 69.00 30.00 69.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="18.00" width="66.00" x="7.00" y="7.00">
+					<svg height="18.00" width="66.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="33.00" y="9.00">Thoughts</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="51.98" id="edgeLine4" width="13.58" x="1458.45" y="342.82">
+		<path d="M9.58 4.00L8.30 12.68 C7.00 21.46 5.51 31.60 4.17 40.62 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="10.48" id="edgeHead4" width="7.91" x="0.00" y="41.50">
+			<path d="M4.95 0.73L4.95 0.73 L7.91 1.17 L2.50 10.48 L0.00 0.00 L2.97 0.44 L2.97 0.44 ZM4.95 0.73" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.68" id="edgeTail4" width="1.28" x="8.30" y="4.00">
+			<path d="M1.28 0.00L0.00 8.68 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node7" width="160.00" x="1000.00" y="100.00">
+		<svg height="32.00" width="128.00" x="16.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L117.00 2.00 C121.97 2.00 126.00 6.03 126.00 11.00 L126.00 21.00 C126.00 25.97 121.97 30.00 117.00 30.00 C117.00 30.00 117.00 30.00 117.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="32.00" width="128.00" x="0.00" y="0.00">
+				<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L117.00 2.00 C121.97 2.00 126.00 6.03 126.00 11.00 L126.00 21.00 C126.00 25.97 121.97 30.00 117.00 30.00 C117.00 30.00 117.00 30.00 117.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="18.00" width="114.00" x="7.00" y="7.00">
+					<svg height="18.00" width="114.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="57.00" y="9.00">Benefit Mapping</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="100.00" id="node8" width="160.00" x="-14.00" y="490.50">
+		<svg height="45.00" width="106.00" x="27.00" y="27.50">
+			<path d="M2.00 22.50L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L95.00 2.00 C99.97 2.00 104.00 6.03 104.00 11.00 L104.00 34.00 C104.00 38.97 99.97 43.00 95.00 43.00 C95.00 43.00 95.00 43.00 95.00 43.00 L11.00 43.00 C6.03 43.00 2.00 38.97 2.00 34.00 ZM2.00 22.50" fill="#000000" fill-opacity="0.00" />
+			<svg height="45.00" width="106.00" x="0.00" y="0.00">
+				<svg height="35.00" width="96.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="48.00" y="8.75">visualises the</text>
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="48.00" y="26.25">structure of</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="376.57" id="edgeLine5" width="970.57" x="47.00" y="147.27">
+		<path d="M961.82 4.04C728.86 5.96 4.00 19.70 4.00 116.23 C4.00 116.23 4.00 116.23 4.00 262.73 C4.00 296.69 9.15 335.32 13.42 361.49 L15.29 372.57 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="11.08" id="edgeHead5" width="1.88" x="13.42" y="361.49">
+			<path d="M1.88 11.08L0.00 -0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail5" width="8.00" x="962.57" y="-0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="123.15" id="edgeLine6" width="466.08" x="112.93" y="557.43">
+		<path d="M4.00 4.00L12.22 7.11 C75.04 30.75 177.70 67.04 269.07 88.57 C330.78 103.11 402.02 112.99 454.78 119.02 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="7.95" id="edgeHead6" width="10.38" x="455.70" y="115.20">
+			<path d="M0.56 2.98L0.56 2.98 L0.89 -0.00 L10.38 5.09 L0.00 7.95 L0.33 4.97 L0.33 4.97 ZM0.56 2.98" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="3.11" id="edgeTail6" width="8.22" x="4.00" y="4.00">
+			<path d="M0.00 0.00L8.22 3.11 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node11" width="160.00" x="1512.00" y="359.00">
+		<svg height="49.00" width="113.00" x="23.50" y="25.50">
+			<path d="M2.00 24.50L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L102.00 2.00 C106.97 2.00 111.00 6.03 111.00 11.00 L111.00 38.00 C111.00 42.97 106.97 47.00 102.00 47.00 L11.00 47.00 C6.03 47.00 2.00 42.97 2.00 38.00 ZM2.00 24.50" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="49.00" width="113.00" x="0.00" y="0.00">
+				<path d="M2.00 24.50L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L102.00 2.00 C106.97 2.00 111.00 6.03 111.00 11.00 L111.00 38.00 C111.00 42.97 106.97 47.00 102.00 47.00 L11.00 47.00 C6.03 47.00 2.00 42.97 2.00 38.00 ZM2.00 24.50" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="35.00" width="99.00" x="7.00" y="7.00">
+					<svg height="35.00" width="99.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="49.50" y="8.75">Conversation</text>
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="49.50" y="26.25">about Change</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="100.00" id="node12" width="160.00" x="956.00" y="153.00">
+		<svg height="32.00" width="59.00" x="50.50" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L48.00 2.00 C52.97 2.00 57.00 6.03 57.00 11.00 L57.00 21.00 C57.00 25.97 52.97 30.00 48.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="59.00" x="0.00" y="0.00">
+				<svg height="22.00" width="49.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="24.50" y="11.00">lead to</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="29.08" id="edgeLine9" width="26.19" x="1043.64" y="163.43">
+		<path d="M19.09 7.59C16.56 10.52 13.94 13.55 11.38 16.52 L4.00 25.08 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="8.56" id="edgeHead9" width="7.38" x="4.00" y="16.52">
+			<path d="M0.00 8.56L7.38 0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail9" width="8.00" x="18.19" y="-0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="28.71" id="edgeLine10" width="9.71" x="1028.73" y="213.20">
+		<path d="M5.71 4.00L4.67 12.82 C4.48 14.45 4.29 16.10 4.09 17.77 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="10.40" id="edgeHead10" width="7.95" x="0.00" y="18.31">
+			<path d="M4.97 0.59L4.97 0.59 L7.95 0.94 L2.80 10.40 L0.00 0.00 L2.98 0.35 L2.98 0.35 ZM4.97 0.59" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.83" id="edgeTail10" width="1.04" x="4.67" y="4.00">
+			<path d="M1.04 0.00L0.00 8.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node13" width="160.00" x="949.00" y="214.50">
+		<svg height="49.00" width="129.00" x="15.50" y="25.50">
+			<path d="M2.00 24.50L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L118.00 2.00 C122.97 2.00 127.00 6.03 127.00 11.00 L127.00 38.00 C127.00 42.97 122.97 47.00 118.00 47.00 C118.00 47.00 118.00 47.00 118.00 47.00 L11.00 47.00 C6.03 47.00 2.00 42.97 2.00 38.00 ZM2.00 24.50" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="49.00" width="129.00" x="0.00" y="0.00">
+				<path d="M2.00 24.50L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L118.00 2.00 C122.97 2.00 127.00 6.03 127.00 11.00 L127.00 38.00 C127.00 42.97 122.97 47.00 118.00 47.00 C118.00 47.00 118.00 47.00 118.00 47.00 L11.00 47.00 C6.03 47.00 2.00 42.97 2.00 38.00 ZM2.00 24.50" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="35.00" width="115.00" x="7.00" y="7.00">
+					<svg height="35.00" width="115.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="57.50" y="8.75">Pool of</text>
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="57.50" y="26.25">Shared Meaning</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="100.00" id="node14" width="160.00" x="1338.00" y="153.00">
+		<svg height="32.00" width="71.00" x="44.50" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L60.00 2.00 C64.97 2.00 69.00 6.03 69.00 11.00 L69.00 21.00 C69.00 25.97 64.97 30.00 60.00 30.00 C60.00 30.00 60.00 30.00 60.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="71.00" x="0.00" y="0.00">
+				<svg height="22.00" width="61.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="30.50" y="11.00">provides</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="43.37" id="edgeLine11" width="245.81" x="1142.32" y="153.91">
+		<path d="M8.70 4.53C66.34 11.07 149.59 21.63 221.68 35.09 C224.65 35.64 227.69 36.26 230.75 36.90 L241.81 39.37 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="2.47" id="edgeHead11" width="11.05" x="230.75" y="36.90">
+			<path d="M11.05 2.47L0.00 0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail11" width="8.00" x="0.00" y="0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="31.07" id="edgeLine13" width="93.03" x="1129.26" y="161.45">
+		<path d="M8.68 5.27C30.68 11.24 55.78 18.05 78.03 24.08 L89.03 27.07 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="2.98" id="edgeHead13" width="11.00" x="78.03" y="24.08">
+			<path d="M11.00 2.98L0.00 -0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail13" width="8.00" x="0.00" y="0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node16" width="160.00" x="1188.00" y="153.00">
+		<svg height="32.00" width="156.00" x="2.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L145.00 2.00 C149.97 2.00 154.00 6.03 154.00 11.00 L154.00 21.00 C154.00 25.97 149.97 30.00 145.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="156.00" x="0.00" y="0.00">
+				<svg height="22.00" width="146.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="73.00" y="11.00">is visualised through</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="100.00" id="node17" width="160.00" x="1206.00" y="214.50">
+		<svg height="49.00" width="147.00" x="6.50" y="25.50">
+			<path d="M2.00 24.50L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L136.00 2.00 C140.97 2.00 145.00 6.03 145.00 11.00 L145.00 38.00 C145.00 42.97 140.97 47.00 136.00 47.00 C136.00 47.00 136.00 47.00 136.00 47.00 L11.00 47.00 C6.03 47.00 2.00 42.97 2.00 38.00 ZM2.00 24.50" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="49.00" width="147.00" x="0.00" y="0.00">
+				<path d="M2.00 24.50L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L136.00 2.00 C140.97 2.00 145.00 6.03 145.00 11.00 L145.00 38.00 C145.00 42.97 140.97 47.00 136.00 47.00 C136.00 47.00 136.00 47.00 136.00 47.00 L11.00 47.00 C6.03 47.00 2.00 42.97 2.00 38.00 ZM2.00 24.50" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="35.00" width="133.00" x="7.00" y="7.00">
+					<svg height="35.00" width="133.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="66.50" y="8.75">Benefit Breakdown</text>
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="66.50" y="26.25">Structure</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="28.72" id="edgeLine14" width="12.41" x="1267.99" y="213.20">
+		<path d="M4.00 4.01L6.55 12.45 C7.08 14.19 7.62 15.96 8.16 17.76 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="10.73" id="edgeHead14" width="7.66" x="4.75" y="17.99">
+			<path d="M4.79 0.87L4.79 0.87 L7.66 0.00 L6.72 10.73 L0.00 2.32 L2.87 1.45 L2.87 1.45 ZM4.79 0.87" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.44" id="edgeTail14" width="2.55" x="4.00" y="4.01">
+			<path d="M0.00 0.00L2.55 8.44 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node18" width="160.00" x="546.00" y="153.00">
+		<svg height="32.00" width="79.00" x="40.50" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L68.00 2.00 C72.97 2.00 77.00 6.03 77.00 11.00 L77.00 21.00 C77.00 25.97 72.97 30.00 68.00 30.00 C68.00 30.00 68.00 30.00 68.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="79.00" x="0.00" y="0.00">
+				<svg height="22.00" width="69.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="34.50" y="11.00">hinges on</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="47.31" id="edgeLine15" width="357.96" x="659.89" y="154.43">
+		<path d="M349.03 4.55C256.13 14.99 95.82 33.00 15.29 42.04 L4.00 43.31 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="1.27" id="edgeHead15" width="11.29" x="4.00" y="42.04">
+			<path d="M0.00 1.27L11.29 0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail15" width="8.00" x="349.96" y="-0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="457.27" id="edgeLine16" width="563.32" x="650.93" y="213.50">
+		<path d="M4.00 4.01L11.87 7.67 C48.21 24.56 105.37 51.02 155.07 73.51 C160.74 76.08 355.28 160.52 360.07 164.51 C460.18 247.92 532.70 390.90 558.63 446.97 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="10.76" id="edgeHead16" width="7.78" x="555.53" y="446.51">
+			<path d="M4.55 1.24L4.55 1.24 L7.28 0.00 L7.78 10.76 L0.00 3.31 L2.73 2.07 L2.73 2.07 ZM4.55 1.24" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="3.66" id="edgeTail16" width="7.87" x="4.00" y="4.01">
+			<path d="M0.00 -0.00L7.87 3.66 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node19" width="160.00" x="1140.00" y="635.00">
+		<svg height="32.00" width="157.00" x="1.50" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L146.00 2.00 C150.97 2.00 155.00 6.03 155.00 11.00 L155.00 21.00 C155.00 25.97 150.97 30.00 146.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="32.00" width="157.00" x="0.00" y="0.00">
+				<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L146.00 2.00 C150.97 2.00 155.00 6.03 155.00 11.00 L155.00 21.00 C155.00 25.97 150.97 30.00 146.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="18.00" width="143.00" x="7.00" y="7.00">
+					<svg height="18.00" width="143.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="71.50" y="9.00">Strategic Objectives</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="312.83" id="edgeLine18" width="64.89" x="622.00" y="213.40">
+		<path d="M4.00 4.00L4.00 12.84 C4.00 38.29 4.00 81.20 4.00 118.10 C4.00 118.10 4.00 118.10 4.00 196.60 C4.00 239.40 35.07 280.75 57.21 304.79 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="9.99" id="edgeHead18" width="9.80" x="55.09" y="302.84">
+			<path d="M3.62 2.07L3.62 2.07 L5.79 -0.00 L9.80 9.99 L0.00 5.52 L2.17 3.45 L2.17 3.45 ZM3.62 2.07" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.85" id="edgeTail18" width="0.00" x="4.00" y="4.00">
+			<path d="M0.00 0.00L0.00 8.85 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node21" width="160.00" x="368.00" y="359.00">
+		<svg height="32.00" width="142.00" x="9.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L131.00 2.00 C135.97 2.00 140.00 6.03 140.00 11.00 L140.00 21.00 C140.00 25.97 135.97 30.00 131.00 30.00 C131.00 30.00 131.00 30.00 131.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="32.00" width="142.00" x="0.00" y="0.00">
+				<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L131.00 2.00 C135.97 2.00 140.00 6.03 140.00 11.00 L140.00 21.00 C140.00 25.97 135.97 30.00 131.00 30.00 C131.00 30.00 131.00 30.00 131.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="18.00" width="128.00" x="7.00" y="7.00">
+					<svg height="18.00" width="128.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="64.00" y="9.00">Business Changes</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="181.18" id="edgeLine19" width="158.60" x="459.72" y="213.38">
+		<path d="M154.60 4.00L148.81 10.64 C115.28 49.06 42.17 132.85 7.39 172.71 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="10.16" id="edgeHead19" width="9.59" x="0.00" y="171.02">
+			<path d="M7.33 3.28L7.33 3.28 L9.59 5.25 L0.00 10.16 L3.56 -0.00 L5.82 1.97 L5.82 1.97 ZM7.33 3.28" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="6.64" id="edgeTail19" width="5.79" x="148.81" y="4.00">
+			<path d="M5.79 0.00L0.00 6.64 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node22" width="160.00" x="227.00" y="214.50">
+		<svg height="32.00" width="75.00" x="42.50" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L64.00 2.00 C68.97 2.00 73.00 6.03 73.00 11.00 L73.00 21.00 C73.00 25.97 68.97 30.00 64.00 30.00 C64.00 30.00 64.00 30.00 64.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="32.00" width="75.00" x="0.00" y="0.00">
+				<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L64.00 2.00 C68.97 2.00 73.00 6.03 73.00 11.00 L73.00 21.00 C73.00 25.97 68.97 30.00 64.00 30.00 C64.00 30.00 64.00 30.00 64.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="18.00" width="61.00" x="7.00" y="7.00">
+					<svg height="18.00" width="61.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="30.50" y="9.00">Enablers</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="51.86" id="edgeLine20" width="249.32" x="342.84" y="207.06">
+		<path d="M245.32 4.01L236.60 5.63 C176.26 16.88 71.66 36.40 11.13 47.69 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="7.86" id="edgeHead20" width="10.56" x="0.00" y="44.00">
+			<path d="M10.01 4.91L10.01 4.91 L10.56 7.86 L0.00 5.76 L9.10 -0.00 L9.65 2.94 L9.65 2.94 ZM10.01 4.91" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="1.63" id="edgeTail20" width="8.72" x="236.60" y="4.01">
+			<path d="M8.72 0.00L0.00 1.63 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node23" width="160.00" x="1140.00" y="688.00">
+		<svg height="32.00" width="106.00" x="27.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L95.00 2.00 C99.97 2.00 104.00 6.03 104.00 11.00 L104.00 21.00 C104.00 25.97 99.97 30.00 95.00 30.00 C95.00 30.00 95.00 30.00 95.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="106.00" x="0.00" y="0.00">
+				<svg height="22.00" width="96.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="48.00" y="11.00">represent the</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="28.11" id="edgeLine21" width="8.00" x="1216.00" y="699.40">
+		<path d="M4.00 8.93C4.00 10.22 4.00 11.53 4.00 12.83 L4.00 24.11 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="11.28" id="edgeHead21" width="0.00" x="4.00" y="12.83">
+			<path d="M0.00 11.28L0.00 -0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail21" width="8.00" x="0.00" y="-0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="28.11" id="edgeLine22" width="8.00" x="1216.00" y="748.40">
+		<path d="M4.00 4.00L4.00 12.93 C4.00 14.22 4.00 15.53 4.00 16.83 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="10.00" id="edgeHead22" width="8.00" x="0.00" y="18.11">
+			<path d="M5.00 0.00L5.00 0.00 L8.00 0.00 L4.00 10.00 L0.00 0.00 L3.00 0.00 L3.00 0.00 ZM5.00 0.00" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.93" id="edgeTail22" width="0.00" x="4.00" y="4.00">
+			<path d="M0.00 -0.00L0.00 8.93 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node24" width="160.00" x="1140.00" y="741.00">
+		<svg height="32.00" width="136.00" x="12.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L125.00 2.00 C129.97 2.00 134.00 6.03 134.00 11.00 L134.00 21.00 C134.00 25.97 129.97 30.00 125.00 30.00 C125.00 30.00 125.00 30.00 125.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="32.00" width="136.00" x="0.00" y="0.00">
+				<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L125.00 2.00 C129.97 2.00 134.00 6.03 134.00 11.00 L134.00 21.00 C134.00 25.97 129.97 30.00 125.00 30.00 C125.00 30.00 125.00 30.00 125.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="18.00" width="122.00" x="7.00" y="7.00">
+					<svg height="18.00" width="122.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="61.00" y="9.00">Long-term Vision</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="100.00" id="node25" width="160.00" x="1654.00" y="100.00">
+		<svg height="32.00" width="159.00" x="0.50" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L148.00 2.00 C152.97 2.00 157.00 6.03 157.00 11.00 L157.00 21.00 C157.00 25.97 152.97 30.00 148.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="32.00" width="159.00" x="0.00" y="0.00">
+				<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L148.00 2.00 C152.97 2.00 157.00 6.03 157.00 11.00 L157.00 21.00 C157.00 25.97 152.97 30.00 148.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="18.00" width="145.00" x="7.00" y="7.00">
+					<svg height="18.00" width="145.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="12.50" font-weight="normal" text-anchor="middle" x="72.50" y="9.00">Company/Organisation</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="446.06" id="edgeLine23" width="154.61" x="1715.39" y="162.02">
+		<path d="M75.42 5.79C87.62 11.21 99.78 18.16 109.61 26.98 C137.73 52.23 150.61 63.69 150.61 101.48 C150.61 101.48 150.61 101.48 150.61 317.98 C150.61 384.82 73.43 421.04 14.73 438.93 L4.00 442.06 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="3.13" id="edgeHead23" width="10.72" x="4.00" y="438.93">
+			<path d="M0.00 3.13L10.72 0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail23" width="8.00" x="67.12" y="-0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node26" width="160.00" x="1585.00" y="567.00">
+		<svg height="32.00" width="112.00" x="24.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L101.00 2.00 C105.97 2.00 110.00 6.03 110.00 11.00 L110.00 21.00 C110.00 25.97 105.97 30.00 101.00 30.00 C101.00 30.00 101.00 30.00 101.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="112.00" x="0.00" y="0.00">
+				<svg height="22.00" width="102.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="51.00" y="11.00">sets Vision via</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="53.07" id="edgeLine24" width="318.05" x="1296.83" y="622.03">
+		<path d="M314.05 4.00L305.53 5.27 C228.71 16.66 98.04 36.04 11.16 48.92 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="7.91" id="edgeHead24" width="10.48" x="0.00" y="45.16">
+			<path d="M10.04 4.94L10.04 4.94 L10.48 7.91 L0.00 5.42 L9.31 -0.00 L9.75 2.96 L9.75 2.96 ZM10.04 4.94" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="1.26" id="edgeTail24" width="8.53" x="305.53" y="4.00">
+			<path d="M8.53 -0.00L0.00 1.26 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node27" width="160.00" x="830.00" y="153.00">
+		<svg height="32.00" width="68.00" x="46.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L57.00 2.00 C61.97 2.00 66.00 6.03 66.00 11.00 L66.00 21.00 C66.00 25.97 61.97 30.00 57.00 30.00 C57.00 30.00 57.00 30.00 57.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="68.00" x="0.00" y="0.00">
+				<svg height="22.00" width="58.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="29.00" y="11.00">exposes</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="34.77" id="edgeLine25" width="97.22" x="938.28" y="161.55">
+		<path d="M88.63 5.38C64.91 12.50 37.31 20.78 14.88 27.51 L4.00 30.77 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="3.26" id="edgeHead25" width="10.88" x="4.00" y="27.51">
+			<path d="M0.00 3.26L10.88 -0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail25" width="8.00" x="89.22" y="0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="28.71" id="edgeLine26" width="18.12" x="888.33" y="213.20">
+		<path d="M14.12 4.00L9.74 11.66 C8.41 13.99 7.03 16.40 5.65 18.82 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="10.67" id="edgeHead26" width="8.43" x="0.00" y="18.04">
+			<path d="M5.83 2.48L5.83 2.48 L8.43 3.97 L0.00 10.67 L1.49 0.00 L4.09 1.49 L4.09 1.49 ZM5.83 2.48" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="7.67" id="edgeTail26" width="4.38" x="9.74" y="4.00">
+			<path d="M4.38 0.00L0.00 7.67 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node28" width="160.00" x="796.00" y="214.50">
+		<svg height="49.00" width="104.00" x="28.00" y="25.50">
+			<path d="M2.00 24.50L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L93.00 2.00 C97.97 2.00 102.00 6.03 102.00 11.00 L102.00 38.00 C102.00 42.97 97.97 47.00 93.00 47.00 L11.00 47.00 C6.03 47.00 2.00 42.97 2.00 38.00 ZM2.00 24.50" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="49.00" width="104.00" x="0.00" y="0.00">
+				<path d="M2.00 24.50L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L93.00 2.00 C97.97 2.00 102.00 6.03 102.00 11.00 L102.00 38.00 C102.00 42.97 97.97 47.00 93.00 47.00 L11.00 47.00 C6.03 47.00 2.00 42.97 2.00 38.00 ZM2.00 24.50" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="35.00" width="90.00" x="7.00" y="7.00">
+					<svg height="35.00" width="90.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="45.00" y="8.75">Unspoken</text>
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="45.00" y="26.25">Assumptions</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="49.85" id="edgeLine27" width="133.27" x="735.15" y="550.24">
+		<path d="M8.59 5.53C39.74 15.94 82.65 30.27 118.78 42.35 L129.27 45.85 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="3.50" id="edgeHead27" width="10.49" x="118.78" y="42.35">
+			<path d="M10.49 3.50L0.00 -0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail27" width="8.00" x="0.00" y="-0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node29" width="160.00" x="844.00" y="567.00">
+		<svg height="45.00" width="133.00" x="13.50" y="27.50">
+			<path d="M2.00 22.50L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L122.00 2.00 C126.97 2.00 131.00 6.03 131.00 11.00 L131.00 34.00 C131.00 38.97 126.97 43.00 122.00 43.00 C122.00 43.00 122.00 43.00 122.00 43.00 L11.00 43.00 C6.03 43.00 2.00 38.97 2.00 34.00 ZM2.00 22.50" fill="#000000" fill-opacity="0.00" />
+			<svg height="45.00" width="133.00" x="0.00" y="0.00">
+				<svg height="35.00" width="123.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="61.50" y="8.75">measure</text>
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="61.50" y="26.25">progress towards</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="43.81" id="edgeLine28" width="174.77" x="984.96" y="628.48">
+		<path d="M4.00 4.00L12.52 5.90 C58.70 16.20 117.98 29.42 163.74 39.62 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="7.81" id="edgeHead28" width="10.63" x="164.14" y="36.00">
+			<path d="M1.09 2.93L1.09 2.93 L1.74 0.00 L10.63 6.08 L0.00 7.81 L0.65 4.88 L0.65 4.88 ZM1.09 2.93" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="1.90" id="edgeTail28" width="8.52" x="4.00" y="4.00">
+			<path d="M0.00 0.00L8.52 1.90 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node30" width="160.00" x="408.00" y="429.00">
+		<svg height="32.00" width="158.00" x="1.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L147.00 2.00 C151.97 2.00 156.00 6.03 156.00 11.00 L156.00 21.00 C156.00 25.97 151.97 30.00 147.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="158.00" x="0.00" y="0.00">
+				<svg height="22.00" width="148.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="74.00" y="11.00">show how to achieve</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="45.71" id="edgeLine29" width="30.18" x="453.93" y="422.88">
+		<path d="M6.40 8.07C10.83 15.61 15.85 24.15 20.39 31.87 L26.18 41.71 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="9.84" id="edgeHead29" width="5.79" x="20.39" y="31.87">
+			<path d="M5.79 9.84L0.00 -0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail29" width="8.00" x="0.00" y="-0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="41.65" id="edgeLine30" width="134.63" x="532.07" y="489.43">
+		<path d="M4.00 4.00L12.61 6.40 C47.36 16.11 91.25 28.37 123.68 37.43 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="7.71" id="edgeHead30" width="10.71" x="123.93" y="33.94">
+			<path d="M1.35 2.89L1.35 2.89 L2.15 0.00 L10.71 6.55 L0.00 7.71 L0.81 4.82 L0.81 4.82 ZM1.35 2.89" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="2.40" id="edgeTail30" width="8.61" x="4.00" y="4.00">
+			<path d="M0.00 -0.00L8.61 2.40 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node31" width="160.00" x="677.00" y="359.00">
+		<svg height="32.00" width="122.00" x="19.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L111.00 2.00 C115.97 2.00 120.00 6.03 120.00 11.00 L120.00 21.00 C120.00 25.97 115.97 30.00 111.00 30.00 C111.00 30.00 111.00 30.00 111.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="32.00" width="122.00" x="0.00" y="0.00">
+				<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L111.00 2.00 C115.97 2.00 120.00 6.03 120.00 11.00 L120.00 21.00 C120.00 25.97 115.97 30.00 111.00 30.00 C111.00 30.00 111.00 30.00 111.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="18.00" width="108.00" x="7.00" y="7.00">
+					<svg height="18.00" width="108.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="54.00" y="9.00">Benefit Owners</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="100.00" id="node32" width="160.00" x="677.00" y="429.00">
+		<svg height="32.00" width="143.00" x="8.50" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L132.00 2.00 C136.97 2.00 141.00 6.03 141.00 11.00 L141.00 21.00 C141.00 25.97 136.97 30.00 132.00 30.00 C132.00 30.00 132.00 30.00 132.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="143.00" x="0.00" y="0.00">
+				<svg height="22.00" width="133.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="66.50" y="11.00">sign up for specific</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="45.16" id="edgeLine31" width="8.00" x="753.00" y="423.43">
+		<path d="M4.00 8.81C4.00 15.49 4.00 22.86 4.00 29.69 L4.00 41.16 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="11.47" id="edgeHead31" width="0.00" x="4.00" y="29.69">
+			<path d="M0.00 11.47L0.00 0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail31" width="8.00" x="0.00" y="0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="37.13" id="edgeLine32" width="35.18" x="713.39" y="489.20">
+		<path d="M31.18 4.00L25.17 10.39 C19.62 16.29 13.50 22.79 7.84 28.80 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="10.02" id="edgeHead32" width="9.77" x="0.00" y="27.11">
+			<path d="M7.58 3.42L7.58 3.42 L9.77 5.48 L0.00 10.02 L3.94 -0.00 L6.13 2.05 L6.13 2.05 ZM7.58 3.42" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="6.39" id="edgeTail32" width="6.01" x="25.17" y="4.00">
+			<path d="M6.01 0.00L0.00 6.39 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="46.98" id="edgeLine33" width="68.20" x="359.70" y="421.61">
+		<path d="M60.29 6.52C45.91 15.84 28.36 27.20 13.66 36.73 L4.00 42.98 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="6.25" id="edgeHead33" width="9.65" x="4.00" y="36.73">
+			<path d="M0.00 6.25L9.65 -0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail33" width="8.00" x="60.20" y="-0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node33" width="160.00" x="263.00" y="429.00">
+		<svg height="32.00" width="59.00" x="50.50" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L48.00 2.00 C52.97 2.00 57.00 6.03 57.00 11.00 L57.00 21.00 C57.00 25.97 52.97 30.00 48.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="59.00" x="0.00" y="0.00">
+				<svg height="22.00" width="49.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="24.50" y="11.00">modify</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="28.48" id="edgeLine34" width="34.86" x="355.64" y="489.20">
+		<path d="M4.00 4.00L10.72 9.33 C15.62 13.22 20.90 17.40 26.14 21.56 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="9.35" id="edgeHead34" width="10.32" x="24.54" y="19.13">
+			<path d="M3.11 2.35L3.11 2.35 L4.97 0.00 L10.32 9.35 L0.00 6.27 L1.86 3.92 L1.86 3.92 ZM3.11 2.35" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="5.33" id="edgeTail34" width="6.72" x="4.00" y="4.00">
+			<path d="M0.00 -0.00L6.72 5.33 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node34" width="160.00" x="338.00" y="490.50">
+		<svg height="49.00" width="112.00" x="24.00" y="25.50">
+			<path d="M2.00 24.50L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L101.00 2.00 C105.97 2.00 110.00 6.03 110.00 11.00 L110.00 38.00 C110.00 42.97 105.97 47.00 101.00 47.00 L11.00 47.00 C6.03 47.00 2.00 42.97 2.00 38.00 ZM2.00 24.50" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="49.00" width="112.00" x="0.00" y="0.00">
+				<path d="M2.00 24.50L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L101.00 2.00 C105.97 2.00 110.00 6.03 110.00 11.00 L110.00 38.00 C110.00 42.97 105.97 47.00 101.00 47.00 L11.00 47.00 C6.03 47.00 2.00 42.97 2.00 38.00 ZM2.00 24.50" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="35.00" width="98.00" x="7.00" y="7.00">
+					<svg height="35.00" width="98.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="49.00" y="8.75">Organisations</text>
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="49.00" y="26.25">Operations</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="100.00" id="node35" width="160.00" x="354.00" y="282.50">
+		<svg height="32.00" width="71.00" x="44.50" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L60.00 2.00 C64.97 2.00 69.00 6.03 69.00 11.00 L69.00 21.00 C69.00 25.97 64.97 30.00 60.00 30.00 C60.00 30.00 60.00 30.00 60.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="71.00" x="0.00" y="0.00">
+				<svg height="22.00" width="61.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="30.50" y="11.00">facilitate</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="45.46" id="edgeLine35" width="80.09" x="332.25" y="276.70">
+		<path d="M8.28 6.22C26.03 15.45 47.84 26.78 65.93 36.18 L76.09 41.46 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="5.28" id="edgeHead35" width="10.16" x="65.93" y="36.18">
+			<path d="M10.16 5.28L0.00 0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail35" width="8.00" x="0.00" y="-0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="51.98" id="edgeLine36" width="15.10" x="432.50" y="342.82">
+		<path d="M4.00 4.00L5.63 12.68 C7.30 21.56 9.23 31.83 10.94 40.92 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="10.57" id="edgeHead36" width="7.86" x="7.24" y="41.41">
+			<path d="M4.91 0.56L4.91 0.56 L7.86 0.00 L5.78 10.57 L0.00 1.48 L2.95 0.93 L2.95 0.93 ZM4.91 0.56" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.68" id="edgeTail36" width="1.63" x="4.00" y="4.00">
+			<path d="M0.00 0.00L1.63 8.68 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="40.13" id="edgeLine37" width="71.78" x="199.82" y="275.39">
+		<path d="M63.39 5.96C47.10 13.39 29.04 22.43 13.67 30.77 L4.00 36.13 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="5.36" id="edgeHead37" width="9.67" x="4.00" y="30.77">
+			<path d="M0.00 5.36L9.67 0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail37" width="8.00" x="63.78" y="-0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node36" width="160.00" x="99.00" y="282.50">
+		<svg height="45.00" width="137.00" x="11.50" y="27.50">
+			<path d="M2.00 22.50L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L126.00 2.00 C130.97 2.00 135.00 6.03 135.00 11.00 L135.00 34.00 C135.00 38.97 130.97 43.00 126.00 43.00 C126.00 43.00 126.00 43.00 126.00 43.00 L11.00 43.00 C6.03 43.00 2.00 38.97 2.00 34.00 ZM2.00 22.50" fill="#000000" fill-opacity="0.00" />
+			<svg height="45.00" width="137.00" x="0.00" y="0.00">
+				<svg height="35.00" width="127.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="63.50" y="8.75">can be dependent</text>
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="63.50" y="26.25">on other</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="36.67" id="edgeLine38" width="65.78" x="227.65" y="278.86">
+		<path d="M4.00 32.67L12.08 28.80 C27.60 21.25 43.34 13.01 55.89 5.84 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="8.53" id="edgeHead38" width="10.64" x="55.13" y="0.00">
+			<path d="M1.53 4.22L1.53 4.22 L0.00 1.64 L10.64 0.00 L4.07 8.53 L2.54 5.95 L2.54 5.95 ZM1.53 4.22" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="3.87" id="edgeTail38" width="8.08" x="4.00" y="28.80">
+			<path d="M0.00 3.87L8.08 -0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="176.44" id="edgeLine39" width="210.84" x="806.34" y="430.07">
+		<path d="M173.95 6.56C196.86 21.46 215.45 41.36 202.66 62.92 C197.28 71.99 76.54 135.06 14.20 167.19 L4.00 172.44 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="5.25" id="edgeHead39" width="10.20" x="4.00" y="167.19">
+			<path d="M0.00 5.25L10.20 0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail39" width="8.00" x="165.80" y="-0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node37" width="160.00" x="704.00" y="567.00">
+		<svg height="32.00" width="75.00" x="42.50" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L64.00 2.00 C68.97 2.00 73.00 6.03 73.00 11.00 L73.00 21.00 C73.00 25.97 68.97 30.00 64.00 30.00 C64.00 30.00 64.00 30.00 64.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="75.00" x="0.00" y="0.00">
+				<svg height="22.00" width="65.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="32.50" y="11.00">manages</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="100.00" id="node38" width="160.00" x="565.00" y="635.00">
+		<svg height="32.00" width="135.00" x="12.50" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L124.00 2.00 C128.97 2.00 133.00 6.03 133.00 11.00 L133.00 21.00 C133.00 25.97 128.97 30.00 124.00 30.00 C124.00 30.00 124.00 30.00 124.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="32.00" width="135.00" x="0.00" y="0.00">
+				<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L124.00 2.00 C128.97 2.00 133.00 6.03 133.00 11.00 L133.00 21.00 C133.00 25.97 128.97 30.00 124.00 30.00 C124.00 30.00 124.00 30.00 124.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="18.00" width="121.00" x="7.00" y="7.00">
+					<svg height="18.00" width="121.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="60.50" y="9.00">Change Initiative</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="43.12" id="edgeLine40" width="86.62" x="675.48" y="627.49">
+		<path d="M82.62 4.00L74.65 8.05 C67.69 11.57 60.39 15.20 53.52 18.50 C39.49 25.24 24.00 32.34 10.19 38.56 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="7.74" id="edgeHead40" width="10.76" x="0.00" y="35.38">
+			<path d="M9.54 4.57L9.54 4.57 L10.76 7.31 L0.00 7.74 L7.49 0.00 L8.72 2.74 L8.72 2.74 ZM9.54 4.57" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="4.06" id="edgeTail40" width="7.97" x="74.65" y="4.00">
+			<path d="M7.97 0.00L0.00 4.06 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node39" width="160.00" x="565.00" y="688.00">
+		<svg height="32.00" width="58.00" x="51.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L47.00 2.00 C51.97 2.00 56.00 6.03 56.00 11.00 L56.00 21.00 C56.00 25.97 51.97 30.00 47.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="58.00" x="0.00" y="0.00">
+				<svg height="22.00" width="48.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="24.00" y="11.00">can be</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="28.11" id="edgeLine41" width="8.00" x="641.00" y="699.40">
+		<path d="M4.00 8.93C4.00 10.22 4.00 11.53 4.00 12.83 L4.00 24.11 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="11.28" id="edgeHead41" width="0.00" x="4.00" y="12.83">
+			<path d="M0.00 11.28L0.00 -0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail41" width="8.00" x="0.00" y="-0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="28.11" id="edgeLine42" width="33.79" x="598.66" y="748.40">
+		<path d="M29.79 4.00L23.02 9.47 C18.36 13.24 13.45 17.22 8.73 21.04 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="9.40" id="edgeHead42" width="10.29" x="0.00" y="18.71">
+			<path d="M8.40 3.89L8.40 3.89 L10.29 6.22 L0.00 9.40 L5.26 -0.00 L7.14 2.33 L7.14 2.33 ZM8.40 3.89" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="5.48" id="edgeTail42" width="6.77" x="23.02" y="4.00">
+			<path d="M6.77 0.00L0.00 5.48 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node40" width="160.00" x="502.00" y="741.00">
+		<svg height="32.00" width="64.00" x="48.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L53.00 2.00 C57.97 2.00 62.00 6.03 62.00 11.00 L62.00 21.00 C62.00 25.97 57.97 30.00 53.00 30.00 C53.00 30.00 53.00 30.00 53.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="32.00" width="64.00" x="0.00" y="0.00">
+				<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L53.00 2.00 C57.97 2.00 62.00 6.03 62.00 11.00 L62.00 21.00 C62.00 25.97 57.97 30.00 53.00 30.00 C53.00 30.00 53.00 30.00 53.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="18.00" width="50.00" x="7.00" y="7.00">
+					<svg height="18.00" width="50.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="25.00" y="9.00">Project</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="28.11" id="edgeLine43" width="34.26" x="657.82" y="748.40">
+		<path d="M4.00 4.00L10.87 9.47 C15.60 13.24 20.60 17.22 25.39 21.04 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="9.36" id="edgeHead43" width="10.31" x="23.95" y="18.75">
+			<path d="M3.12 2.35L3.12 2.35 L4.99 -0.00 L10.31 9.36 L0.00 6.26 L1.87 3.91 L1.87 3.91 ZM3.12 2.35" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="5.48" id="edgeTail43" width="6.87" x="4.00" y="4.00">
+			<path d="M0.00 0.00L6.87 5.48 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node41" width="160.00" x="629.00" y="741.00">
+		<svg height="32.00" width="117.00" x="21.50" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L106.00 2.00 C110.97 2.00 115.00 6.03 115.00 11.00 L115.00 21.00 C115.00 25.97 110.97 30.00 106.00 30.00 C106.00 30.00 106.00 30.00 106.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="32.00" width="117.00" x="0.00" y="0.00">
+				<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L106.00 2.00 C110.97 2.00 115.00 6.03 115.00 11.00 L115.00 21.00 C115.00 25.97 110.97 30.00 106.00 30.00 C106.00 30.00 106.00 30.00 106.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="18.00" width="103.00" x="7.00" y="7.00">
+					<svg height="18.00" width="103.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="51.50" y="9.00">Agile Initiative</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="100.00" id="node42" width="160.00" x="1460.00" y="-6.00">
+		<svg height="32.00" width="76.00" x="42.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L65.00 2.00 C69.97 2.00 74.00 6.03 74.00 11.00 L74.00 21.00 C74.00 25.97 69.97 30.00 65.00 30.00 C65.00 30.00 65.00 30.00 65.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="32.00" width="76.00" x="0.00" y="0.00">
+				<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L65.00 2.00 C69.97 2.00 74.00 6.03 74.00 11.00 L74.00 21.00 C74.00 25.97 69.97 30.00 65.00 30.00 C65.00 30.00 65.00 30.00 65.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="18.00" width="62.00" x="7.00" y="7.00">
+					<svg height="18.00" width="62.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="31.00" y="9.00">Vithanco</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="100.00" id="node43" width="160.00" x="1405.00" y="47.00">
+		<svg height="32.00" width="75.00" x="42.50" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L64.00 2.00 C68.97 2.00 73.00 6.03 73.00 11.00 L73.00 21.00 C73.00 25.97 68.97 30.00 64.00 30.00 C64.00 30.00 64.00 30.00 64.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="75.00" x="0.00" y="0.00">
+				<svg height="22.00" width="65.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="32.50" y="11.00">can draw</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="29.39" id="edgeLine44" width="31.07" x="1495.55" y="57.12">
+		<path d="M23.69 7.13C20.00 10.56 16.14 14.14 12.39 17.61 L4.00 25.39 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="7.78" id="edgeHead44" width="8.39" x="4.00" y="17.61">
+			<path d="M0.00 7.78L8.39 -0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail44" width="8.00" x="23.07" y="-0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="149.09" id="edgeLine45" width="138.31" x="1357.51" y="107.33">
+		<path d="M130.45 4.00L131.93 12.87 C135.82 39.24 137.73 83.02 114.49 109.67 C100.50 125.70 54.08 137.32 11.12 144.93 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="7.89" id="edgeHead45" width="10.53" x="0.00" y="141.20">
+			<path d="M10.03 4.93L10.03 4.93 L10.53 7.89 L0.00 5.63 L9.18 0.00 L9.69 2.96 L9.69 2.96 ZM10.03 4.93" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.87" id="edgeTail45" width="1.48" x="130.45" y="4.00">
+			<path d="M0.00 0.00L1.48 8.87 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="29.39" id="edgeLine46" width="31.07" x="1553.38" y="57.12">
+		<path d="M7.38 7.13C11.07 10.56 14.93 14.14 18.68 17.61 L27.07 25.39 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="7.78" id="edgeHead46" width="8.39" x="18.68" y="17.61">
+			<path d="M8.39 7.78L0.00 -0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail46" width="8.00" x="0.00" y="-0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node44" width="160.00" x="1515.00" y="47.00">
+		<svg height="32.00" width="72.00" x="44.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L61.00 2.00 C65.97 2.00 70.00 6.03 70.00 11.00 L70.00 21.00 C70.00 25.97 65.97 30.00 61.00 30.00 C61.00 30.00 61.00 30.00 61.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="72.00" x="0.00" y="0.00">
+				<svg height="22.00" width="62.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="31.00" y="11.00">supports</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="47.36" id="edgeLine47" width="422.34" x="1142.25" y="103.12">
+		<path d="M418.34 4.00L409.74 5.86 C406.04 6.61 402.33 7.30 398.75 7.88 C263.02 29.68 102.68 39.31 11.33 43.31 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="7.99" id="edgeHead47" width="10.16" x="0.00" y="39.37">
+			<path d="M10.03 4.99L10.03 4.99 L10.16 7.99 L0.00 4.42 L9.82 -0.00 L9.95 2.99 L9.95 2.99 ZM10.03 4.99" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="1.86" id="edgeTail47" width="8.60" x="409.74" y="4.00">
+			<path d="M8.60 -0.00L0.00 1.86 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node45" width="160.00" x="1652.00" y="153.00">
+		<svg height="32.00" width="149.00" x="5.50" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L138.00 2.00 C142.97 2.00 147.00 6.03 147.00 11.00 L147.00 21.00 C147.00 25.97 142.97 30.00 138.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="149.00" x="0.00" y="0.00">
+				<svg height="22.00" width="139.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="69.50" y="11.00">gain clarity through</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="28.12" id="edgeLine48" width="8.79" x="1728.53" y="164.40">
+		<path d="M4.60 8.94C4.54 10.23 4.49 11.54 4.44 12.84 L4.00 24.12 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="11.28" id="edgeHead48" width="0.44" x="4.00" y="12.84">
+			<path d="M0.00 11.28L0.44 -0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail48" width="8.00" x="0.79" y="0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="28.20" id="edgeLine49" width="59.72" x="1645.54" y="213.35">
+		<path d="M55.72 4.00L47.74 7.47 C36.15 12.50 23.16 18.14 10.51 23.64 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="7.65" id="edgeHead49" width="10.77" x="0.00" y="20.55">
+			<path d="M9.57 4.58L9.57 4.58 L10.77 7.34 L0.00 7.65 L7.58 -0.00 L8.77 2.75 L8.77 2.75 ZM9.57 4.58" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="3.46" id="edgeTail49" width="7.98" x="47.74" y="4.00">
+			<path d="M7.98 -0.00L0.00 3.46 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="305.27" id="edgeLine50" width="59.66" x="1304.34" y="286.48">
+		<path d="M7.07 7.81C28.48 35.11 55.66 78.27 55.66 121.52 C55.66 121.52 55.66 121.52 55.66 193.52 C55.66 228.22 40.71 264.81 26.84 291.29 L21.41 301.27 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="9.98" id="edgeHead50" width="5.43" x="21.41" y="291.29">
+			<path d="M0.00 9.98L5.43 -0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail50" width="8.00" x="0.00" y="-0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node46" width="160.00" x="1228.00" y="567.00">
+		<svg height="62.00" width="129.00" x="15.50" y="19.00">
+			<path d="M2.00 31.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L118.00 2.00 C122.97 2.00 127.00 6.03 127.00 11.00 L127.00 51.00 C127.00 55.97 122.97 60.00 118.00 60.00 C118.00 60.00 118.00 60.00 118.00 60.00 L11.00 60.00 C6.03 60.00 2.00 55.97 2.00 51.00 ZM2.00 31.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="62.00" width="129.00" x="0.00" y="0.00">
+				<svg height="52.00" width="119.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="59.50" y="8.67">ensures that</text>
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="59.50" y="26.00">every step taken</text>
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="59.50" y="43.33">is aligned with</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="28.15" id="edgeLine51" width="36.20" x="1237.97" y="642.37">
+		<path d="M32.20 4.00L25.08 9.34 C19.66 13.40 14.26 17.46 9.20 21.25 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="9.20" id="edgeHead51" width="10.40" x="0.00" y="18.95">
+			<path d="M8.60 4.00L8.60 4.00 L10.40 6.40 L0.00 9.20 L5.60 -0.00 L7.40 2.40 L7.40 2.40 ZM8.60 4.00" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="5.34" id="edgeTail51" width="7.12" x="25.08" y="4.00">
+			<path d="M7.12 0.00L0.00 5.34 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="32.81" id="edgeLine52" width="87.90" x="1447.71" y="211.33">
+		<path d="M4.00 4.00L12.36 6.81 C31.76 13.33 55.31 21.25 77.27 28.63 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="7.58" id="edgeHead52" width="10.75" x="77.15" y="25.23">
+			<path d="M1.59 2.84L1.59 2.84 L2.55 -0.00 L10.75 6.97 L0.00 7.58 L0.96 4.74 L0.96 4.74 ZM1.59 2.84" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="2.81" id="edgeTail52" width="8.36" x="4.00" y="4.00">
+			<path d="M0.00 0.00L8.36 2.81 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="34.80" id="edgeLine53" width="8.00" x="1591.00" y="287.48">
+		<path d="M4.00 8.89C4.00 12.38 4.00 15.91 4.00 19.31 L4.00 30.80 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="11.49" id="edgeHead53" width="0.00" x="4.00" y="19.31">
+			<path d="M0.00 11.49L0.00 -0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail53" width="8.00" x="0.00" y="0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node47" width="160.00" x="1515.00" y="282.50">
+		<svg height="32.00" width="82.00" x="39.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L71.00 2.00 C75.97 2.00 80.00 6.03 80.00 11.00 L80.00 21.00 C80.00 25.97 75.97 30.00 71.00 30.00 C71.00 30.00 71.00 30.00 71.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="82.00" x="0.00" y="0.00">
+				<svg height="22.00" width="72.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="36.00" y="11.00">structures</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="43.22" id="edgeLine54" width="9.17" x="1589.29" y="342.82">
+		<path d="M5.17 4.00L4.81 12.93 C4.57 18.92 4.31 25.52 4.05 31.97 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="10.15" id="edgeHead54" width="7.99" x="0.00" y="33.07">
+			<path d="M5.00 0.20L5.00 0.20 L7.99 0.32 L3.59 10.15 L0.00 -0.00 L3.00 0.12 L3.00 0.12 ZM5.00 0.20" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.93" id="edgeTail54" width="0.36" x="4.81" y="4.00">
+			<path d="M0.36 0.00L0.00 8.93 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node48" width="160.00" x="1657.00" y="282.50">
+		<svg height="32.00" width="113.00" x="23.50" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L102.00 2.00 C106.97 2.00 111.00 6.03 111.00 11.00 L111.00 21.00 C111.00 25.97 106.97 30.00 102.00 30.00 C102.00 30.00 102.00 30.00 102.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="113.00" x="0.00" y="0.00">
+				<svg height="22.00" width="103.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="51.50" y="11.00">helps navigate</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="36.92" id="edgeLine55" width="70.21" x="1641.91" y="285.16">
+		<path d="M8.42 6.06C24.30 13.44 41.28 21.33 55.97 28.16 L66.21 32.92 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="4.76" id="edgeHead55" width="10.24" x="55.97" y="28.16">
+			<path d="M10.24 4.76L0.00 0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail55" width="8.00" x="0.00" y="0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node49" width="160.00" x="1666.00" y="359.00">
+		<svg height="66.00" width="122.00" x="19.00" y="17.00">
+			<path d="M2.00 33.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L111.00 2.00 C115.97 2.00 120.00 6.03 120.00 11.00 L120.00 55.00 C120.00 59.97 115.97 64.00 111.00 64.00 C111.00 64.00 111.00 64.00 111.00 64.00 L11.00 64.00 C6.03 64.00 2.00 59.97 2.00 55.00 ZM2.00 33.00" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="66.00" width="122.00" x="0.00" y="0.00">
+				<path d="M2.00 33.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L111.00 2.00 C115.97 2.00 120.00 6.03 120.00 11.00 L120.00 55.00 C120.00 59.97 115.97 64.00 111.00 64.00 C111.00 64.00 111.00 64.00 111.00 64.00 L11.00 64.00 C6.03 64.00 2.00 59.97 2.00 55.00 ZM2.00 33.00" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="52.00" width="108.00" x="7.00" y="7.00">
+					<svg height="52.00" width="108.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="54.00" y="8.67">Business</text>
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="54.00" y="26.00">Transformation</text>
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="54.00" y="43.33">Complexities</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="34.98" id="edgeLine56" width="10.51" x="1734.61" y="342.82">
+		<path d="M4.00 4.00L5.07 12.84 C5.49 16.31 5.93 19.99 6.38 23.74 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="10.41" id="edgeHead56" width="7.94" x="2.57" y="24.57">
+			<path d="M4.96 0.36L4.96 0.36 L7.94 0.00 L5.17 10.41 L0.00 0.96 L2.98 0.60 L2.98 0.60 ZM4.96 0.36" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.84" id="edgeTail56" width="1.07" x="4.00" y="4.00">
+			<path d="M0.00 0.00L1.07 8.84 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node50" width="160.00" x="565.00" y="567.00">
+		<svg height="32.00" width="131.00" x="14.50" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L120.00 2.00 C124.97 2.00 129.00 6.03 129.00 11.00 L129.00 21.00 C129.00 25.97 124.97 30.00 120.00 30.00 C120.00 30.00 120.00 30.00 120.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="131.00" x="0.00" y="0.00">
+				<svg height="22.00" width="121.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="60.50" y="11.00">are the ends of a</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="52.78" id="edgeLine57" width="41.66" x="650.92" y="554.02">
+		<path d="M34.92 7.64C27.48 17.55 18.48 29.51 10.83 39.69 L4.00 48.78 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="9.09" id="edgeHead57" width="6.83" x="4.00" y="39.69">
+			<path d="M0.00 9.09L6.83 0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail57" width="8.00" x="33.66" y="0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node52" width="160.00" x="174.00" y="490.50">
+		<svg height="32.00" width="144.00" x="8.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L133.00 2.00 C137.97 2.00 142.00 6.03 142.00 11.00 L142.00 21.00 C142.00 25.97 137.97 30.00 133.00 30.00 C133.00 30.00 133.00 30.00 133.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="144.00" x="0.00" y="0.00">
+				<svg height="22.00" width="134.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="67.00" y="11.00">are the means of a</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="251.45" id="edgeLine59" width="55.09" x="252.59" y="278.64">
+		<path d="M50.20 8.60C40.45 59.01 16.36 183.56 6.13 236.46 L4.00 247.45 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="10.99" id="edgeHead59" width="2.13" x="4.00" y="236.46">
+			<path d="M0.00 10.99L2.13 0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail59" width="8.00" x="47.09" y="-0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="119.95" id="edgeLine60" width="321.25" x="286.78" y="550.90">
+		<path d="M4.00 4.00L12.20 6.98 C86.57 34.09 234.47 87.99 310.56 115.72 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="7.52" id="edgeHead60" width="10.77" x="310.48" y="112.43">
+			<path d="M1.71 2.82L1.71 2.82 L2.74 0.00 L10.77 7.19 L0.00 7.52 L1.03 4.70 L1.03 4.70 ZM1.71 2.82" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="2.99" id="edgeTail60" width="8.20" x="4.00" y="4.00">
+			<path d="M0.00 0.00L8.20 2.99 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="43.31" id="edgeLine61" width="8.00" x="641.00" y="627.36">
+		<path d="M4.00 4.00L4.00 12.74 C4.00 18.92 4.00 25.66 4.00 31.97 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="10.00" id="edgeHead61" width="8.00" x="0.00" y="33.31">
+			<path d="M5.00 0.00L5.00 0.00 L8.00 0.00 L4.00 10.00 L0.00 0.00 L3.00 0.00 L3.00 0.00 ZM5.00 0.00" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.74" id="edgeTail61" width="0.00" x="4.00" y="4.00">
+			<path d="M0.00 -0.00L0.00 8.74 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="242.66" id="edgeLine62" width="42.26" x="1243.96" y="287.42">
+		<path d="M37.58 8.62C29.59 63.34 12.99 177.10 5.65 227.33 L4.00 238.66 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="11.33" id="edgeHead62" width="1.65" x="4.00" y="227.33">
+			<path d="M0.00 11.33L1.65 0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail62" width="8.00" x="34.26" y="0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node53" width="160.00" x="1166.00" y="490.50">
+		<svg height="32.00" width="61.00" x="49.50" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L50.00 2.00 C54.97 2.00 59.00 6.03 59.00 11.00 L59.00 21.00 C59.00 25.97 54.97 30.00 50.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="61.00" x="0.00" y="0.00">
+				<svg height="22.00" width="51.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="25.50" y="11.00">depicts</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="135.98" id="edgeLine63" width="515.48" x="710.87" y="550.92">
+		<path d="M511.47 4.00L503.67 8.26 C459.33 32.29 375.25 74.58 298.13 95.07 C201.32 120.79 85.69 129.24 11.15 131.94 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="8.00" id="edgeHead63" width="10.13" x="0.00" y="127.98">
+			<path d="M10.03 5.00L10.03 5.00 L10.13 8.00 L0.00 4.34 L9.86 0.00 L9.96 3.00 L9.96 3.00 ZM10.03 5.00" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="4.26" id="edgeTail63" width="7.81" x="503.67" y="4.00">
+			<path d="M7.81 -0.00L0.00 4.26 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="34.80" id="edgeLine64" width="9.22" x="1022.60" y="287.47">
+		<path d="M5.00 8.89C4.84 12.38 4.68 15.91 4.52 19.31 L4.00 30.80 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="11.49" id="edgeHead64" width="0.52" x="4.00" y="19.31">
+			<path d="M0.00 11.49L0.52 -0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail64" width="8.00" x="1.22" y="-0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node54" width="160.00" x="946.00" y="282.50">
+		<svg height="32.00" width="102.00" x="29.00" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L91.00 2.00 C95.97 2.00 100.00 6.03 100.00 11.00 L100.00 21.00 C100.00 25.97 95.97 30.00 91.00 30.00 C91.00 30.00 91.00 30.00 91.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="102.00" x="0.00" y="0.00">
+				<svg height="22.00" width="92.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="46.00" y="11.00">is vital for all</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="51.62" id="edgeLine65" width="92.84" x="1047.17" y="342.99">
+		<path d="M4.00 4.00L11.74 8.15 C33.19 19.65 61.15 34.63 82.98 46.34 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="8.25" id="edgeHead65" width="10.70" x="82.14" y="43.37">
+			<path d="M2.36 2.64L2.36 2.64 L3.78 0.00 L10.70 8.25 L0.00 7.05 L1.42 4.41 L1.42 4.41 ZM2.36 2.64" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="4.15" id="edgeTail65" width="7.74" x="4.00" y="4.00">
+			<path d="M0.00 0.00L7.74 4.15 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node55" width="160.00" x="1085.00" y="359.00">
+		<svg height="32.00" width="107.00" x="26.50" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L96.00 2.00 C100.97 2.00 105.00 6.03 105.00 11.00 L105.00 21.00 C105.00 25.97 100.97 30.00 96.00 30.00 C96.00 30.00 96.00 30.00 96.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#cfebec" fill-opacity="1.00" />
+			<svg height="32.00" width="107.00" x="0.00" y="0.00">
+				<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L96.00 2.00 C100.97 2.00 105.00 6.03 105.00 11.00 L105.00 21.00 C105.00 25.97 100.97 30.00 96.00 30.00 C96.00 30.00 96.00 30.00 96.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+				<svg height="18.00" width="93.00" x="7.00" y="7.00">
+					<svg height="18.00" width="93.00" x="0.00" y="0.00">
+						<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="46.50" y="9.00">Stakeholders</text>
+					</svg>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="134.43" id="edgeLine66" width="8.00" x="1591.00" y="107.26">
+		<path d="M4.00 4.00L4.00 12.96 C4.00 41.28 4.00 90.47 4.00 123.19 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="10.00" id="edgeHead66" width="8.00" x="0.00" y="124.43">
+			<path d="M5.00 0.00L5.00 0.00 L8.00 0.00 L4.00 10.00 L0.00 0.00 L3.00 0.00 L3.00 0.00 ZM5.00 0.00" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.97" id="edgeTail66" width="0.00" x="4.00" y="4.00">
+			<path d="M0.00 0.00L0.00 8.97 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="36.67" id="edgeLine67" width="60.13" x="1186.40" y="285.40">
+		<path d="M52.17 6.17C39.42 13.19 25.86 20.64 13.97 27.19 L4.00 32.67 " fill="none" stroke="#000000" stroke-opacity="1.00" stroke-width="1.50" />
+		<svg height="5.48" id="edgeHead67" width="9.97" x="4.00" y="27.19">
+			<path d="M0.00 5.48L9.97 -0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="8.00" id="edgeTail67" width="8.00" x="52.13" y="-0.00">
+			<path d="M6.83 6.83C8.39 5.27 8.39 2.73 6.83 1.17 C5.27 -0.39 2.73 -0.39 1.17 1.17 C-0.39 2.73 -0.39 5.27 1.17 6.83 C2.73 8.39 5.27 8.39 6.83 6.83 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+	<svg height="100.00" id="node56" width="160.00" x="1086.00" y="282.50">
+		<svg height="32.00" width="105.00" x="27.50" y="34.00">
+			<path d="M2.00 16.00L2.00 11.00 C2.00 6.03 6.03 2.00 11.00 2.00 L94.00 2.00 C98.97 2.00 103.00 6.03 103.00 11.00 L103.00 21.00 C103.00 25.97 98.97 30.00 94.00 30.00 C94.00 30.00 94.00 30.00 94.00 30.00 L11.00 30.00 C6.03 30.00 2.00 25.97 2.00 21.00 ZM2.00 16.00" fill="#000000" fill-opacity="0.00" />
+			<svg height="32.00" width="105.00" x="0.00" y="0.00">
+				<svg height="22.00" width="95.00" x="5.00" y="5.00">
+					<text dominant-baseline="middle" fill="#000000" fill-opacity="1.00" font-family="Verdana" font-size="14.00" font-weight="normal" text-anchor="middle" x="47.50" y="11.00">is created via</text>
+				</svg>
+			</svg>
+		</svg>
+	</svg>
+	<svg height="157.94" id="edgeLine68" width="77.34" x="1086.32" y="164.27">
+		<path d="M73.34 153.94L69.58 146.04 C53.39 112.05 21.73 45.61 4.87 10.22 " fill="none" stroke="#a41b32" stroke-opacity="1.00" stroke-width="3.00" />
+		<svg height="10.75" id="edgeHead68" width="7.91" x="0.00" y="0.00">
+			<path d="M3.40 9.46L3.40 9.46 L0.69 10.75 L0.00 0.00 L7.91 7.31 L5.20 8.60 L5.20 8.60 ZM3.40 9.46" fill="#000000" fill-opacity="1.00" />
+		</svg>
+		<svg height="7.90" id="edgeTail68" width="3.76" x="69.58" y="146.04">
+			<path d="M3.76 7.90L0.00 -0.00 " fill="#000000" fill-opacity="1.00" />
+		</svg>
+	</svg>
+</svg>
