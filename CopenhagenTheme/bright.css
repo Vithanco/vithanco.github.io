@@ -306,72 +306,52 @@ header {
   color: var(--accent);
 }
 
-.toc-list ul {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  width: 100%;
-}
-
 .toc-list ul li {
   padding: 0.25em;
   background-color: rgba(0, 0, 0, 0.007);
   box-shadow: rgba(0, 0, 0, 0.025) 0px 1px 4px;
   transition: background-color;
   transition-duration: 50ms;
+  border: 1px solid rgba(123, 123, 123, 0.5);
+  border-radius: 10px;
+  margin-left: 0; /* Reset any existing margin */
 }
 
 .toc-list ul li:hover {
   background-color: rgba(0, 0, 0, 0.03);
 }
 
+/* Level 2 items - indented and darker */
 .toc-list ul li ul li {
   font-size: 12px;
   font-weight: lighter;
-  background-color: rgba(0, 0, 0, 0.01);
+  background-color: rgba(0, 0, 0, 0.02); /* Darker than level 1 */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   border-radius: 0.5em;
-  box-shadow: none;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px; /* Slightly more shadow */
+  margin-left: 1.5em; /* Indent from parent */
+  margin-top: 0.25em;
+  border-left: 3px solid var(--accent); /* Add accent border */
+  border: 1px solid rgba(123, 123, 123, 0.3); /* Lighter border */
 }
 
-.toc-list ul li {
-  border: 1px solid rgba(123, 123, 123, 0.5);
-  border-radius: 10px;
+.toc-list ul li ul li:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
-.item-list ul {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4em;
+/* Level 3 items - even more indented and darker */
+.toc-list ul li ul li ul li {
+  background-color: rgba(0, 0, 0, 0.04);
+  margin-left: 2em; /* Further indent */
+  font-size: 11px;
+  border-left: 2px solid rgba(234, 88, 12, 0.7);
 }
 
-.item-list ul li {
-  border: 1px solid rgba(123, 123, 123, 0.25);
-  background-color: rgba(0, 0, 0, 0.0075);
-  border-radius: 10px;
-  padding: 0.25em;
-  padding-inline: 0.5em;
-  transition: background-color;
-  transition-duration: 50ms;
+.toc-list ul li ul li ul li:hover {
+  background-color: rgba(0, 0, 0, 0.07);
 }
-
-.item-list ul li:hover {
-  background-color: rgba(0, 0, 0, 0.03);
-}
-
-.item-list ul li a p {
-  font-weight: normal;
-  font-size: 15px;
-}
-
-.item-list ul li p {
-  font-weight: lighter;
-  font-size: 10px;
-  user-select: none;
-}
-
 .newsletter {
   padding-top: 0.25em;
 }
