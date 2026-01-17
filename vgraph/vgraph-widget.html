@@ -1,0 +1,332 @@
+<!--
+  VGraph Interactive Widget
+  Version: 1.0.0
+
+  This widget can be embedded in any HTML page to provide an interactive
+  VGL editor and renderer. Perfect for Publish-based websites.
+
+  Usage in Markdown:
+  Simply paste this entire file content into your Markdown or use an iframe.
+-->
+
+<!-- Import map for WASM dependencies -->
+<script type="importmap">
+{
+  "imports": {
+    "@bjorn3/browser_wasi_shim": "https://cdn.jsdelivr.net/npm/@bjorn3/browser_wasi_shim@0.3.0/dist/index.js",
+    "@hpcc-js/wasm": "https://cdn.jsdelivr.net/npm/@hpcc-js/wasm/dist/graphviz.js"
+  }
+}
+</script>
+
+<div class="vgraph-widget" id="vgraph-widget">
+  <style>
+    .vgraph-widget {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      max-width: 100%;
+      margin: 20px 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .vgraph-widget * {
+      box-sizing: border-box;
+    }
+
+    .vgraph-widget-header {
+      background: linear-gradient(135deg, #EA580C 0%, #FF8000 100%);
+      color: white;
+      padding: 15px 20px;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .vgraph-widget-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      min-height: 600px;
+    }
+
+    @media (max-width: 768px) {
+      .vgraph-widget-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .vgraph-editor-panel {
+      border-right: 1px solid #e0e0e0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (max-width: 768px) {
+      .vgraph-editor-panel {
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+      }
+    }
+
+    .vgraph-editor-header {
+      padding: 12px 15px;
+      background: #f8f9fa;
+      border-bottom: 1px solid #e0e0e0;
+      font-weight: 500;
+      font-size: 14px;
+      color: #495057;
+    }
+
+    .vgraph-editor {
+      flex: 1;
+      width: 100%;
+      padding: 15px;
+      border: none;
+      font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      resize: none;
+      outline: none;
+      background: #fafbfc;
+      min-height: 450px;
+    }
+
+    .vgraph-controls {
+      padding: 12px 15px;
+      background: #f8f9fa;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .vgraph-btn {
+      padding: 8px 16px;
+      background: #EA580C;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .vgraph-btn:hover {
+      background: #FF8000;
+    }
+
+    .vgraph-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .vgraph-btn-secondary {
+      background: #6c757d;
+    }
+
+    .vgraph-btn-secondary:hover {
+      background: #5a6268;
+    }
+
+    .vgraph-output-panel {
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+    }
+
+    .vgraph-output {
+      flex: 1;
+      padding: 20px;
+      overflow: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 500px;
+    }
+
+    .vgraph-output svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .vgraph-status {
+      padding: 10px 15px;
+      font-size: 12px;
+      background: #f8f9fa;
+      border-top: 1px solid #e0e0e0;
+      color: #6c757d;
+    }
+
+    .vgraph-status.success {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .vgraph-status.error {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .vgraph-loading {
+      text-align: center;
+      color: #6c757d;
+      font-size: 14px;
+    }
+
+    .vgraph-error {
+      color: #dc3545;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+
+  <div class="vgraph-widget-header">
+    VGraph Interactive Editor
+  </div>
+
+  <div class="vgraph-widget-content">
+    <div class="vgraph-editor-panel">
+      <div class="vgraph-editor-header">
+        VGL Input
+      </div>
+      <textarea class="vgraph-editor" id="vgraph-input" placeholder="Enter your VGL here...">vgraph demo: IBIS "Demo Graph" {
+    node q1: Question "What should we do?";
+    node a1: Answer "Implement feature X";
+    node a2: Answer "Keep current approach";
+    node pro1: Pro "Better performance";
+    node pro2: Pro "Lower cost";
+    node con1: Con "Higher complexity";
+
+    edge q1 -> a1;
+    edge q1 -> a2;
+    edge a1 -> pro1;
+    edge a1 -> con1;
+    edge a2 -> pro2;
+}</textarea>
+      <div class="vgraph-controls">
+        <button class="vgraph-btn" id="vgraph-render-btn">Render</button>
+        <button class="vgraph-btn vgraph-btn-secondary" id="vgraph-clear-btn">Clear</button>
+      </div>
+    </div>
+
+    <div class="vgraph-output-panel">
+      <div class="vgraph-editor-header">
+        Preview
+      </div>
+      <div class="vgraph-output" id="vgraph-output">
+        <div class="vgraph-loading">Click "Render" to visualize your graph</div>
+      </div>
+      <div class="vgraph-status" id="vgraph-status">
+        Ready
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  // Configuration - UPDATE THESE PATHS for your deployment
+  const CONFIG = {
+    // Path to VGraph library (relative to this HTML file)
+    libraryPath: './v1.0.0/vgraph-v1.0.0.js',
+
+    // Path to WASM package directory
+    wasmPath: '/vgraph/Package'
+  };
+
+  let vgraph = null;
+
+  // Initialize VGraph
+  async function initVGraph() {
+    const statusEl = document.getElementById('vgraph-status');
+    const renderBtn = document.getElementById('vgraph-render-btn');
+
+    try {
+      statusEl.textContent = 'Loading VGraph library...';
+      statusEl.className = 'vgraph-status';
+
+      const VGraphLib = (await import(CONFIG.libraryPath)).default;
+      vgraph = new VGraphLib();
+
+      statusEl.textContent = 'Initializing WASM modules...';
+      await vgraph.init({ wasmPath: CONFIG.wasmPath });
+
+      statusEl.textContent = 'Ready';
+      statusEl.className = 'vgraph-status success';
+      renderBtn.disabled = false;
+
+      console.log('VGraph initialized successfully');
+    } catch (error) {
+      console.error('Failed to initialize VGraph:', error);
+      statusEl.textContent = `Error: ${error.message}`;
+      statusEl.className = 'vgraph-status error';
+
+      document.getElementById('vgraph-output').innerHTML =
+        `<div class="vgraph-error">Failed to load VGraph library.<br>Please check the console for details.</div>`;
+    }
+  }
+
+  // Render graph
+  async function renderGraph() {
+    if (!vgraph) {
+      console.error('VGraph not initialized');
+      return;
+    }
+
+    const inputEl = document.getElementById('vgraph-input');
+    const outputEl = document.getElementById('vgraph-output');
+    const statusEl = document.getElementById('vgraph-status');
+
+    const vglText = inputEl.value.trim();
+
+    if (!vglText) {
+      statusEl.textContent = 'Please enter some VGL text';
+      statusEl.className = 'vgraph-status error';
+      return;
+    }
+
+    try {
+      statusEl.textContent = 'Rendering...';
+      statusEl.className = 'vgraph-status';
+
+      const svg = vgraph.render(vglText);
+      outputEl.innerHTML = svg;
+
+      statusEl.textContent = 'Rendered successfully';
+      statusEl.className = 'vgraph-status success';
+    } catch (error) {
+      console.error('Render error:', error);
+      statusEl.textContent = `Error: ${error.message}`;
+      statusEl.className = 'vgraph-status error';
+
+      outputEl.innerHTML =
+        `<div class="vgraph-error">Rendering failed.<br>${error.message}</div>`;
+    }
+  }
+
+  // Clear editor
+  function clearEditor() {
+    document.getElementById('vgraph-input').value = '';
+    document.getElementById('vgraph-output').innerHTML =
+      '<div class="vgraph-loading">Click "Render" to visualize your graph</div>';
+    document.getElementById('vgraph-status').textContent = 'Ready';
+    document.getElementById('vgraph-status').className = 'vgraph-status';
+  }
+
+  // Event listeners
+  document.getElementById('vgraph-render-btn').addEventListener('click', renderGraph);
+  document.getElementById('vgraph-clear-btn').addEventListener('click', clearEditor);
+
+  // Handle Enter key in textarea (Ctrl/Cmd + Enter to render)
+  document.getElementById('vgraph-input').addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      e.preventDefault();
+      renderGraph();
+    }
+  });
+
+  // Initialize on load
+  document.getElementById('vgraph-render-btn').disabled = true;
+  initVGraph();
+</script>
