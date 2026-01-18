@@ -724,6 +724,22 @@ footer div nav ul li a {
 }
 
 /* ---------------------------------------------------------------- */
+/* VGraph Widget - Double Width */
+.content iframe[src*="vgraph-widget"] {
+  width: 1400px;
+  max-width: 1400px;
+  margin-left: -350px;
+}
+
+@media only screen and (max-width: 1400px) {
+  .content iframe[src*="vgraph-widget"] {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+  }
+}
+
+/* ---------------------------------------------------------------- */
 
 @media only screen and (max-width: 1000px) {
   header {
