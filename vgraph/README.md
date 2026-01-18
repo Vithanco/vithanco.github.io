@@ -15,16 +15,19 @@ A JavaScript library for rendering and converting Vithanco Graph Language (VGL) 
 
 ## Quick Start
 
-### Option 1: Use the Pre-built Widget (Easiest for Publish)
+### Option 1: Use the Pre-built Widget (Easiest)
 
-Copy the `vgraph-widget.html` file content into your Markdown file or use it in an iframe:
+Embed the widget in your HTML or Markdown:
 
 ```html
-<iframe src="https://yoursite.com/vgraph/vgraph-widget.html"
-        width="100%"
-        height="600"
-        frameborder="0"></iframe>
+<!-- Basic usage (default demo) -->
+<iframe src="/vgraph/vgraph-widget.html" width="100%" height="750"></iframe>
+
+<!-- With custom VGL via URL parameter -->
+<iframe src="/vgraph/vgraph-widget.html?vgl=ENCODED_VGL" width="100%" height="750"></iframe>
 ```
+
+For custom VGL content, see **WIDGET_INTEGRATION.md** for URL encoding examples and postMessage API usage.
 
 ### Option 2: Use the Library Directly
 
@@ -283,12 +286,15 @@ console.log(info.version); // "1.0.0"
 
 ```
 website/dist/
-├── vgraph-v1.0.0.js          # Main library (ES module)
-├── vgraph-v1.0.0.d.ts        # TypeScript type definitions
-├── vgraph-widget.html        # Pre-built embeddable widget
-└── README.md                 # This file
+├── vgraph-v1.0.0.js              # Main library (ES module)
+├── vgraph-v1.0.0.d.ts            # TypeScript type definitions
+├── vgraph-widget.html            # Embeddable widget (supports URL params & postMessage)
+├── vgraph-widget-helper.js       # Helper library for easier integration
+├── widget-examples.html          # Live examples of all integration methods
+├── README.md                     # This file
+└── WIDGET_INTEGRATION.md         # Widget customization guide
 
-website/Package/              # WASM binaries (built by build.sh)
+website/Package/                  # WASM binaries (built by build.sh)
 ├── index.js
 ├── VGraphWasm.wasm
 └── platforms/
@@ -366,13 +372,39 @@ See the `website/index.html` file for a full working example with:
 
 MIT License - See LICENSE file for details
 
+## Widget Customization
+
+The widget now supports custom VGL content via:
+
+1. **URL parameters** - Pass `?vgl=ENCODED_VGL`
+2. **postMessage API** - Dynamic updates from parent page
+3. **Helper library** - `vgraph-widget-helper.js` for easier integration
+
+See **WIDGET_INTEGRATION.md** for detailed examples and usage patterns.
+
+## VGL Language Reference
+
+For complete VGL syntax, grammar, and examples, see **VGL_GUIDE.md** which includes:
+- VGL concepts (nodes, edges, groups, attributes)
+- Complete grammar specification
+- Node types and edge types for IBIS and BBS notations
+- Comprehensive examples from simple to complex
+- Best practices and error handling
+
 ## Support
 
 For issues and questions:
 - GitHub Issues: https://github.com/Vithanco/VGraph/issues
 - Documentation: https://vithanco.com
+- VGL Language Guide: See VGL_GUIDE.md
 
 ## Changelog
+
+### v1.0.1 (2026-01-18)
+- Added URL parameter support for custom VGL content
+- Added postMessage API for dynamic widget updates
+- Added helper library (vgraph-widget-helper.js)
+- Added comprehensive integration examples
 
 ### v1.0.0 (2026-01-17)
 - Initial stable release

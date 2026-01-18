@@ -1,12 +1,33 @@
 <!--
   VGraph Interactive Widget
-  Version: 1.0.0
+  Version: 1.0.1
 
   This widget can be embedded in any HTML page to provide an interactive
   VGL editor and renderer. Perfect for Publish-based websites.
 
-  Usage in Markdown:
-  Simply paste this entire file content into your Markdown or use an iframe.
+  USAGE OPTIONS:
+
+  1. Basic iframe (uses default demo graph):
+     <iframe src="/vgraph/vgraph-widget.html" width="100%" height="750"></iframe>
+
+  2. With custom VGL via URL parameter:
+     <iframe src="/vgraph/vgraph-widget.html?vgl=YOUR_ENCODED_VGL" width="100%" height="750"></iframe>
+
+     Example with URL-encoded VGL:
+     var myVGL = 'vgraph demo: IBIS "My Graph" { node q1: Question "What?"; }';
+     var encodedVGL = encodeURIComponent(myVGL);
+     iframe.src = '/vgraph/vgraph-widget.html?vgl=' + encodedVGL;
+
+  3. Dynamic VGL via postMessage (for interactive control):
+     // From parent page:
+     var iframe = document.querySelector('iframe');
+     iframe.contentWindow.postMessage({
+       type: 'setVGL',
+       vgl: 'vgraph demo: IBIS "My Graph" { ... }',
+       autoRender: true  // optional, default: true
+     }, '*');
+
+  Note: URL encoding is required for special characters in VGL content.
 -->
 
 <!-- Import map for WASM dependencies -->
@@ -326,7 +347,43 @@
     }
   });
 
+  // Load VGL from URL parameter or postMessage
+  function loadInitialVGL() {
+    const inputEl = document.getElementById('vgraph-input');
+
+    // Check URL parameters (for iframe usage)
+    const urlParams = new URLSearchParams(window.location.search);
+    const vglParam = urlParams.get('vgl');
+
+    if (vglParam) {
+      try {
+        // Decode base64 or URL-encoded VGL
+        const decodedVGL = decodeURIComponent(vglParam);
+        inputEl.value = decodedVGL;
+        // Auto-render if VGL was provided
+        setTimeout(() => renderGraph(), 500);
+      } catch (error) {
+        console.error('Failed to decode VGL parameter:', error);
+      }
+    }
+  }
+
+  // Listen for postMessage from parent (for iframe usage)
+  window.addEventListener('message', (event) => {
+    if (event.data && event.data.type === 'setVGL') {
+      const inputEl = document.getElementById('vgraph-input');
+      inputEl.value = event.data.vgl;
+
+      // Auto-render if requested
+      if (event.data.autoRender !== false) {
+        renderGraph();
+      }
+    }
+  });
+
   // Initialize on load
   document.getElementById('vgraph-render-btn').disabled = true;
-  initVGraph();
+  initVGraph().then(() => {
+    loadInitialVGL();
+  });
 </script>
