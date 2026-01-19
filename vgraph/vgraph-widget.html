@@ -357,13 +357,12 @@
 
     if (vglParam) {
       try {
-        // Decode base64 or URL-encoded VGL
-        const decodedVGL = decodeURIComponent(vglParam);
-        inputEl.value = decodedVGL;
+        // URLSearchParams.get() already decodes the parameter, so no need for decodeURIComponent
+        inputEl.value = vglParam;
         // Auto-render if VGL was provided
         setTimeout(() => renderGraph(), 500);
       } catch (error) {
-        console.error('Failed to decode VGL parameter:', error);
+        console.error('Failed to load VGL parameter:', error);
       }
     }
   }

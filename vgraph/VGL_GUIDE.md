@@ -27,6 +27,7 @@ vgraph <graph_id>: <NOTATION> "<graph_label>" {
 VGL currently supports built-in notations that come with predefined node types and edge types:
 - **IBIS** (Issue-Based Information System) - for decision-making and argumentation
 - **BBS** (Benefit Breakdown Structure) - for benefit analysis
+- **ImpactMapping** - for strategic planning and goal alignment
 
 The notation determines what node types and edge types are available in your graph.
 
@@ -59,7 +60,16 @@ Node types are defined by the chosen notation. Each notation has its own set of 
 - `Con` - An argument opposing an answer (default: red)
 
 **BBS Node Types:**
-(Types vary based on the BBS notation implementation)
+- `InvestmentObjective` - High-level business objective
+- `Benefit` - Expected benefit from the investment
+- `BusinessChange` - Organizational or process change required
+- `Enabler` - Technology or capability enabler
+
+**ImpactMapping Node Types:**
+- `Goal` - Strategic goal or objective (default: dark blue)
+- `Actor` - Person or group who can produce impact (default: blue)
+- `Impact` - Behavioral change or outcome (default: cyan)
+- `Deliverable` - Product feature or capability (default: green)
 
 ### Edges
 
@@ -99,6 +109,18 @@ Edge types are defined by the notation and specify valid connections between nod
 - `objects_to` - Connects Answer → Con
 - `pro_questions_question` - Connects Pro → Question
 - `con_questions_question` - Connects Con → Question
+
+**BBS Edge Types:**
+- `requires_benefit` - Connects Benefit → InvestmentObjective
+- `requires_business_change` - Connects BusinessChange → Benefit
+- `requires_enabler` - Connects Enabler → BusinessChange
+- `change_requires_change` - Connects BusinessChange → BusinessChange
+- `enabler_requires_enabler` - Connects Enabler → Enabler
+
+**ImpactMapping Edge Types:**
+- `goal_to_actor` - Connects Goal → Actor
+- `actor_to_impact` - Connects Actor → Impact
+- `impact_to_deliverable` - Connects Impact → Deliverable
 
 Edge types ensure that connections make semantic sense within the notation's domain.
 
@@ -193,7 +215,7 @@ The VGL grammar is defined as follows (simplified BNF notation):
 document     ::= "vgraph" identifier ":" notation label? "{" statement* "}"
 
 notation     ::= identifier
-                 // Built-in notations: IBIS, BBS
+                 // Built-in notations: IBIS, BBS, ImpactMapping
 
 statement    ::= group | node | edge | attribute
 
@@ -455,6 +477,72 @@ vgraph edge_types: IBIS "Edge Type Examples" {
     edge a1 -> con1: objects_to;
     edge pro1 -> q2: pro_questions_question;
     edge con1 -> q2: con_questions_question;
+}
+```
+
+### Example 8: Impact Mapping
+
+A strategic planning graph showing goals, actors, impacts, and deliverables:
+
+```vgl
+vgraph mobileApp: ImpactMapping "Mobile App Launch" {
+    node g1: Goal "Increase Revenue by 30%";
+    node a1: Actor "New Customers";
+    node a2: Actor "Existing Customers";
+    node i1: Impact "Make First Purchase";
+    node i2: Impact "Increase Purchase Frequency";
+    node i3: Impact "Upgrade to Premium";
+    node d1: Deliverable "Mobile App with Easy Checkout";
+    node d2: Deliverable "Push Notifications for Deals";
+    node d3: Deliverable "Loyalty Rewards Program";
+    node d4: Deliverable "Premium Features Bundle";
+
+    edge g1 -> a1: goal_to_actor;
+    edge g1 -> a2: goal_to_actor;
+    edge a1 -> i1: actor_to_impact;
+    edge a2 -> i2: actor_to_impact;
+    edge a2 -> i3: actor_to_impact;
+    edge i1 -> d1: impact_to_deliverable;
+    edge i2 -> d2: impact_to_deliverable;
+    edge i2 -> d3: impact_to_deliverable;
+    edge i3 -> d4: impact_to_deliverable;
+}
+```
+
+### Example 9: Impact Mapping with Inferred Types
+
+Using type inference for cleaner syntax:
+
+```vgl
+vgraph product_growth: ImpactMapping "Product Growth Strategy" {
+    // Strategic goal
+    node goal: Goal "Double User Engagement";
+
+    // Key actors
+    node power_users: Actor "Power Users";
+    node casual_users: Actor "Casual Users";
+    node new_users: Actor "New Users";
+
+    // Desired impacts
+    node i1: Impact "Share content more frequently";
+    node i2: Impact "Complete onboarding successfully";
+    node i3: Impact "Return within 7 days";
+
+    // Required deliverables
+    node d1: Deliverable "Social sharing features";
+    node d2: Deliverable "Interactive tutorial";
+    node d3: Deliverable "Email reminder system";
+
+    // Connections with inferred types
+    edge goal -> power_users;
+    edge goal -> casual_users;
+    edge goal -> new_users;
+    edge power_users -> i1;
+    edge new_users -> i2;
+    edge casual_users -> i3;
+    edge i1 -> d1;
+    edge i2 -> d2;
+    edge i3 -> d3;
 }
 ```
 

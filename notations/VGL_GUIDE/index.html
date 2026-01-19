@@ -44,18 +44,18 @@
             <article>
                 <h1>Vithanco Graph Language (VGL) Guide</h1>
                 <div class="reading-time">
-                    <p>Estimated reading time: 9 minutes.</p></div>
+                    <p>Estimated reading time: 11 minutes.</p></div>
                 <div class="content"><h1>Vithanco Graph Language (VGL) Guide</h1><h2>Table of Contents</h2><ul><li><a href="#concepts">Concepts</a></li><li><a href="#grammar">Grammar</a></li><li><a href="#examples">Examples</a></li></ul><hr><h2>Concepts</h2><h3>Overview</h3><p>The Vithanco Graph Language (VGL) is a human-readable text format for creating and editing graphs. VGL provides a simple, declarative syntax for defining nodes, edges, groups, and their attributes.</p><h3>Notation</h3><p>Every VGL document must declare a notation, which defines the types of nodes and edges available in the graph.</p><p><strong>Syntax:</strong></p><pre><code>vgraph &lt;graph_id&gt;: &lt;NOTATION&gt; "&lt;graph_label&gt;" {
     ...
 }
-</code></pre><p>VGL currently supports built-in notations that come with predefined node types and edge types:</p><ul><li><strong>IBIS</strong> (Issue-Based Information System) - for decision-making and argumentation</li><li><strong>BBS</strong> (Benefit Breakdown Structure) - for benefit analysis</li></ul><p>The notation determines what node types and edge types are available in your graph.</p><h3>Nodes</h3><p>Nodes represent the primary entities in your graph. Each node has:</p><ul><li><strong>ID</strong>: A unique identifier (required)</li><li><strong>Type</strong>: The kind of node, determined by the notation (required)</li><li><strong>Label</strong>: A human-readable display name (optional)</li><li><strong>Attributes</strong>: Additional properties like color, fontsize, etc. (optional)</li></ul><p><strong>Syntax:</strong></p><pre><code>node &lt;id&gt;: &lt;NodeType&gt; "&lt;label&gt;" [&lt;attributes&gt;];
+</code></pre><p>VGL currently supports built-in notations that come with predefined node types and edge types:</p><ul><li><strong>IBIS</strong> (Issue-Based Information System) - for decision-making and argumentation</li><li><strong>BBS</strong> (Benefit Breakdown Structure) - for benefit analysis</li><li><strong>ImpactMapping</strong> - for strategic planning and goal alignment</li></ul><p>The notation determines what node types and edge types are available in your graph.</p><h3>Nodes</h3><p>Nodes represent the primary entities in your graph. Each node has:</p><ul><li><strong>ID</strong>: A unique identifier (required)</li><li><strong>Type</strong>: The kind of node, determined by the notation (required)</li><li><strong>Label</strong>: A human-readable display name (optional)</li><li><strong>Attributes</strong>: Additional properties like color, fontsize, etc. (optional)</li></ul><p><strong>Syntax:</strong></p><pre><code>node &lt;id&gt;: &lt;NodeType&gt; "&lt;label&gt;" [&lt;attributes&gt;];
 </code></pre><p><strong>Example:</strong></p><pre><code class="language-vgl">node q1: Question "What should we do?" [fontsize: 16; color: red];
-</code></pre><h3>Node Types</h3><p>Node types are defined by the chosen notation. Each notation has its own set of node types with specific purposes and default styling.</p><p><strong>IBIS Node Types:</strong></p><ul><li><code>Question</code> - A question or issue to be resolved (default: blue)</li><li><code>Answer</code> - A proposed answer or solution (default: pink)</li><li><code>Pro</code> - An argument supporting an answer (default: green)</li><li><code>Con</code> - An argument opposing an answer (default: red)</li></ul><p><strong>BBS Node Types:</strong> (Types vary based on the BBS notation implementation)</p><h3>Edges</h3><p>Edges represent connections between nodes. Each edge has:</p><ul><li><strong>From</strong>: Source node ID (required)</li><li><strong>To</strong>: Target node ID (required)</li><li><strong>Type</strong>: The kind of connection (optional, can be inferred)</li><li><strong>Label</strong>: A description of the relationship (optional)</li><li><strong>Attributes</strong>: Additional properties like style, weight, etc. (optional)</li></ul><p><strong>Syntax:</strong></p><pre><code>edge &lt;from_id&gt; -&gt; &lt;to_id&gt;: &lt;EdgeType&gt; "&lt;label&gt;" [&lt;attributes&gt;];
+</code></pre><h3>Node Types</h3><p>Node types are defined by the chosen notation. Each notation has its own set of node types with specific purposes and default styling.</p><p><strong>IBIS Node Types:</strong></p><ul><li><code>Question</code> - A question or issue to be resolved (default: blue)</li><li><code>Answer</code> - A proposed answer or solution (default: pink)</li><li><code>Pro</code> - An argument supporting an answer (default: green)</li><li><code>Con</code> - An argument opposing an answer (default: red)</li></ul><p><strong>BBS Node Types:</strong></p><ul><li><code>InvestmentObjective</code> - High-level business objective</li><li><code>Benefit</code> - Expected benefit from the investment</li><li><code>BusinessChange</code> - Organizational or process change required</li><li><code>Enabler</code> - Technology or capability enabler</li></ul><p><strong>ImpactMapping Node Types:</strong></p><ul><li><code>Goal</code> - Strategic goal or objective (default: dark blue)</li><li><code>Actor</code> - Person or group who can produce impact (default: blue)</li><li><code>Impact</code> - Behavioral change or outcome (default: cyan)</li><li><code>Deliverable</code> - Product feature or capability (default: green)</li></ul><h3>Edges</h3><p>Edges represent connections between nodes. Each edge has:</p><ul><li><strong>From</strong>: Source node ID (required)</li><li><strong>To</strong>: Target node ID (required)</li><li><strong>Type</strong>: The kind of connection (optional, can be inferred)</li><li><strong>Label</strong>: A description of the relationship (optional)</li><li><strong>Attributes</strong>: Additional properties like style, weight, etc. (optional)</li></ul><p><strong>Syntax:</strong></p><pre><code>edge &lt;from_id&gt; -&gt; &lt;to_id&gt;: &lt;EdgeType&gt; "&lt;label&gt;" [&lt;attributes&gt;];
 </code></pre><p><strong>Concise Syntax</strong> (omitting type):</p><pre><code>edge &lt;from_id&gt; -&gt; &lt;to_id&gt;;
 </code></pre><p>When the edge type is omitted, VGL will automatically infer it based on the connected node types, if unambiguous.</p><p><strong>Example:</strong></p><pre><code class="language-vgl">edge q1 -&gt; a1: answered_by "Initial solution";
 edge a1 -&gt; pro1 [style: dashed];
 edge q2 -&gt; a2;  // Type inferred from node types
-</code></pre><h3>Edge Types</h3><p>Edge types are defined by the notation and specify valid connections between node types.</p><p><strong>IBIS Edge Types:</strong></p><ul><li><code>answered_by</code> - Connects Question → Answer</li><li><code>supports</code> - Connects Answer → Pro</li><li><code>objects_to</code> - Connects Answer → Con</li><li><code>pro_questions_question</code> - Connects Pro → Question</li><li><code>con_questions_question</code> - Connects Con → Question</li></ul><p>Edge types ensure that connections make semantic sense within the notation's domain.</p><h3>Groups</h3><p>Groups organize nodes hierarchically and can be nested to create subgroups. Groups help visually organize complex graphs.</p><p><strong>Syntax:</strong></p><pre><code>group &lt;id&gt; "&lt;label&gt;" {
+</code></pre><h3>Edge Types</h3><p>Edge types are defined by the notation and specify valid connections between node types.</p><p><strong>IBIS Edge Types:</strong></p><ul><li><code>answered_by</code> - Connects Question → Answer</li><li><code>supports</code> - Connects Answer → Pro</li><li><code>objects_to</code> - Connects Answer → Con</li><li><code>pro_questions_question</code> - Connects Pro → Question</li><li><code>con_questions_question</code> - Connects Con → Question</li></ul><p><strong>BBS Edge Types:</strong></p><ul><li><code>requires_benefit</code> - Connects Benefit → InvestmentObjective</li><li><code>requires_business_change</code> - Connects BusinessChange → Benefit</li><li><code>requires_enabler</code> - Connects Enabler → BusinessChange</li><li><code>change_requires_change</code> - Connects BusinessChange → BusinessChange</li><li><code>enabler_requires_enabler</code> - Connects Enabler → Enabler</li></ul><p><strong>ImpactMapping Edge Types:</strong></p><ul><li><code>goal_to_actor</code> - Connects Goal → Actor</li><li><code>actor_to_impact</code> - Connects Actor → Impact</li><li><code>impact_to_deliverable</code> - Connects Impact → Deliverable</li></ul><p>Edge types ensure that connections make semantic sense within the notation's domain.</p><h3>Groups</h3><p>Groups organize nodes hierarchically and can be nested to create subgroups. Groups help visually organize complex graphs.</p><p><strong>Syntax:</strong></p><pre><code>group &lt;id&gt; "&lt;label&gt;" {
     &lt;attributes&gt;;
     &lt;nodes&gt;;
     &lt;edges&gt;;
@@ -80,7 +80,7 @@ node q1: Question "Main question";  // This is also a comment
 </code></pre><p>Comments can appear anywhere in the document and are ignored by the parser.</p><hr><h2>Grammar</h2><p>The VGL grammar is defined as follows (simplified BNF notation):</p><pre><code>document     ::= "vgraph" identifier ":" notation label? "{" statement* "}"
 
 notation     ::= identifier
-                 // Built-in notations: IBIS, BBS
+                 // Built-in notations: IBIS, BBS, ImpactMapping
 
 statement    ::= group | node | edge | attribute
 
@@ -278,6 +278,58 @@ comment      ::= "//" [^\n]*
     edge a1 -&gt; con1: objects_to;
     edge pro1 -&gt; q2: pro_questions_question;
     edge con1 -&gt; q2: con_questions_question;
+}
+</code></pre><h3>Example 8: Impact Mapping</h3><p>A strategic planning graph showing goals, actors, impacts, and deliverables:</p><pre><code class="language-vgl">vgraph mobileApp: ImpactMapping "Mobile App Launch" {
+    node g1: Goal "Increase Revenue by 30%";
+    node a1: Actor "New Customers";
+    node a2: Actor "Existing Customers";
+    node i1: Impact "Make First Purchase";
+    node i2: Impact "Increase Purchase Frequency";
+    node i3: Impact "Upgrade to Premium";
+    node d1: Deliverable "Mobile App with Easy Checkout";
+    node d2: Deliverable "Push Notifications for Deals";
+    node d3: Deliverable "Loyalty Rewards Program";
+    node d4: Deliverable "Premium Features Bundle";
+
+    edge g1 -&gt; a1: goal_to_actor;
+    edge g1 -&gt; a2: goal_to_actor;
+    edge a1 -&gt; i1: actor_to_impact;
+    edge a2 -&gt; i2: actor_to_impact;
+    edge a2 -&gt; i3: actor_to_impact;
+    edge i1 -&gt; d1: impact_to_deliverable;
+    edge i2 -&gt; d2: impact_to_deliverable;
+    edge i2 -&gt; d3: impact_to_deliverable;
+    edge i3 -&gt; d4: impact_to_deliverable;
+}
+</code></pre><h3>Example 9: Impact Mapping with Inferred Types</h3><p>Using type inference for cleaner syntax:</p><pre><code class="language-vgl">vgraph product_growth: ImpactMapping "Product Growth Strategy" {
+    // Strategic goal
+    node goal: Goal "Double User Engagement";
+
+    // Key actors
+    node power_users: Actor "Power Users";
+    node casual_users: Actor "Casual Users";
+    node new_users: Actor "New Users";
+
+    // Desired impacts
+    node i1: Impact "Share content more frequently";
+    node i2: Impact "Complete onboarding successfully";
+    node i3: Impact "Return within 7 days";
+
+    // Required deliverables
+    node d1: Deliverable "Social sharing features";
+    node d2: Deliverable "Interactive tutorial";
+    node d3: Deliverable "Email reminder system";
+
+    // Connections with inferred types
+    edge goal -&gt; power_users;
+    edge goal -&gt; casual_users;
+    edge goal -&gt; new_users;
+    edge power_users -&gt; i1;
+    edge new_users -&gt; i2;
+    edge casual_users -&gt; i3;
+    edge i1 -&gt; d1;
+    edge i2 -&gt; d2;
+    edge i3 -&gt; d3;
 }
 </code></pre><hr><h2>Best Practices</h2><ol><li><strong>Use Meaningful IDs</strong>: Choose descriptive node IDs like <code>security_question</code> instead of <code>n1</code></li><li><strong>Organize with Groups</strong>: Use groups to organize related nodes and improve readability</li><li><strong>Leverage Type Inference</strong>: Omit edge types when they can be inferred from node types</li><li><strong>Add Labels</strong>: Always provide labels for better human readability</li><li><strong>Comment Your Graphs</strong>: Use comments to explain complex relationships or decisions</li><li><strong>Keep It Simple</strong>: Start with minimal syntax and add attributes only when needed</li><li><strong>Consistent Naming</strong>: Use a consistent naming convention for IDs (e.g., snake_case or camelCase)</li><li><strong>Hierarchical Organization</strong>: Use nested groups to reflect the natural hierarchy of your domain</li></ol><hr><h2>Error Handling</h2><p>VGL provides clear error messages for common issues:</p><ul><li><strong>Duplicate Node ID</strong>: Each node ID must be unique</li><li><strong>Undefined Node Reference</strong>: Edges can only reference existing nodes</li><li><strong>Invalid Node Type</strong>: Node types must exist in the chosen notation (creates "unknown" type)</li><li><strong>Invalid Edge Type</strong>: Edge types must be valid for the connected node types (creates "unknown" edge type)</li><li><strong>Syntax Errors</strong>: Missing semicolons, braces, or other syntax requirements</li></ul><p>When a node type or edge type is not found in the notation, VGL will create an "unknown" type to allow the graph to be processed, but you should verify that the type names are correct.</p></div></article>
             <aside class="side-content">
