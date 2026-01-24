@@ -28,6 +28,7 @@ VGL currently supports built-in notations that come with predefined node types a
 - **IBIS** (Issue-Based Information System) - for decision-making and argumentation
 - **BBS** (Benefit Breakdown Structure) - for benefit analysis
 - **ImpactMapping** - for strategic planning and goal alignment
+- **ConceptMap** - for visualizing relationships between concepts
 
 The notation determines what node types and edge types are available in your graph.
 
@@ -70,6 +71,11 @@ Node types are defined by the chosen notation. Each notation has its own set of 
 - `Actor` - Person or group who can produce impact (default: blue)
 - `Impact` - Behavioral change or outcome (default: cyan)
 - `Deliverable` - Product feature or capability (default: green)
+
+**ConceptMap Node Types:**
+- `Concept` - A concept or term (default: blue rounded box)
+- `EmphasizedConcept` - An important concept to highlight (default: red rounded box)
+- `Relation` - A relationship verb connecting concepts (default: bare text)
 
 ### Edges
 
@@ -121,6 +127,10 @@ Edge types are defined by the notation and specify valid connections between nod
 - `goal_to_actor` - Connects Goal → Actor
 - `actor_to_impact` - Connects Actor → Impact
 - `impact_to_deliverable` - Connects Impact → Deliverable
+
+**ConceptMap Edge Types:**
+- `concept_to_relation` - Connects Concept → Relation (tail marker only)
+- `relation_to_concept` - Connects Relation → Concept (arrow head only)
 
 Edge types ensure that connections make semantic sense within the notation's domain.
 
@@ -215,7 +225,7 @@ The VGL grammar is defined as follows (simplified BNF notation):
 document     ::= "vgraph" identifier ":" notation label? "{" statement* "}"
 
 notation     ::= identifier
-                 // Built-in notations: IBIS, BBS, ImpactMapping
+                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap
 
 statement    ::= group | node | edge | attribute
 
@@ -545,6 +555,40 @@ vgraph product_growth: ImpactMapping "Product Growth Strategy" {
     edge i3 -> d3;
 }
 ```
+
+### Example 10: Concept Map
+
+Visualizing relationships between concepts using linking verbs:
+
+```vgl
+vgraph learningCM: ConceptMap "How Learning Works" {
+    // Main concepts
+    node c1: Concept "Student";
+    node c2: Concept "Subject";
+    node c3: EmphasizedConcept "Practice";  // Emphasized for importance
+    node c4: Concept "Understanding";
+    node c5: Concept "Resources";
+
+    // Relationship verbs (relations)
+    node r1: Relation "learns";
+    node r2: Relation "requires";
+    node r3: Relation "leads to";
+    node r4: Relation "uses";
+
+    // Concept map connections
+    // Pattern: Concept -> Relation -> Concept
+    edge c1 -> r1: concept_to_relation;
+    edge r1 -> c2: relation_to_concept;
+    edge c2 -> r2: concept_to_relation;
+    edge r2 -> c3: relation_to_concept;
+    edge c3 -> r3: concept_to_relation;
+    edge r3 -> c4: relation_to_concept;
+    edge c2 -> r4: concept_to_relation;
+    edge r4 -> c5: relation_to_concept;
+}
+```
+
+**Note**: In concept maps, relationships are represented as nodes (Relation type) rather than edge labels. This creates readable propositions like "Student learns Subject" and "Subject requires Practice".
 
 ---
 
