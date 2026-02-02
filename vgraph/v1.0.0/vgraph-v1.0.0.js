@@ -5,6 +5,8 @@
  * A JavaScript wrapper for VGraph WASM module that provides graph rendering
  * and conversion capabilities for Vithanco Graph Language (VGL).
  *
+ * Uses BridgeJS-generated bindings for automatic Swift <-> JavaScript type marshalling.
+ *
  * @license MIT
  * @author Vithanco
  */
@@ -12,8 +14,7 @@
 class VGraphLib {
   constructor() {
     this.initialized = false;
-    this.wasmExports = null;
-    this.memory = null;
+    this.exports = null;
     this.graphvizInstance = null;
   }
 
@@ -32,12 +33,12 @@ class VGraphLib {
     const { wasmPath = './Package', loadGraphviz = true } = options;
 
     try {
-      // Load Graphviz if needed
+      // Load Graphviz first (VGraph WASM calls into it)
       if (loadGraphviz) {
         await this._loadGraphviz();
       }
 
-      // Load WASM module
+      // Load WASM module with BridgeJS exports
       await this._loadWasm(wasmPath);
 
       this.initialized = true;
@@ -56,7 +57,7 @@ class VGraphLib {
       const { Graphviz } = await import('https://cdn.jsdelivr.net/npm/@hpcc-js/wasm/dist/graphviz.js');
       this.graphvizInstance = await Graphviz.load();
 
-      // Expose graphviz functions globally for WASM to use
+      // Expose graphviz functions globally for Swift WASM to use
       window.graphvizLayout = (dotSource, engine = 'dot', format = 'svg') => {
         if (!this.graphvizInstance) {
           throw new Error('Graphviz not initialized');
@@ -77,58 +78,39 @@ class VGraphLib {
   }
 
   /**
-   * Load WASM module
+   * Load WASM module with BridgeJS exports
    * @private
    */
   async _loadWasm(wasmPath) {
     try {
       const { init } = await import(`${wasmPath}/index.js`);
-      const initResult = await init({});
+      const result = await init({});
 
-      this.wasmExports = initResult.instance.exports;
-      this.memory = this.wasmExports.memory;
+      // BridgeJS generates exports with proper function bindings
+      this.exports = result.exports;
+
+      // Log what we got for debugging
+      console.log('[VGraphLib] WASM loaded, exports:', Object.keys(this.exports || {}));
+
+      // Verify exports are available
+      if (!this.exports || typeof this.exports.convertToDot !== 'function') {
+        console.warn('[VGraphLib] BridgeJS exports not found or incomplete');
+        console.warn('[VGraphLib] Available exports:', this.exports);
+        throw new Error('BridgeJS exports not available - ensure Package.swift includes BridgeJS plugin and rebuild');
+      }
     } catch (error) {
       throw new Error(`Failed to load WASM module: ${error.message}`);
     }
   }
 
   /**
-   * Call a WASM function with string input and output
+   * Ensure library is initialized
    * @private
    */
-  _callWasmStringFunction(funcName, inputString) {
+  _ensureInitialized() {
     if (!this.initialized) {
       throw new Error('VGraph library not initialized. Call init() first.');
     }
-
-    // Encode string to UTF-8
-    const encoder = new TextEncoder();
-    const utf8Bytes = encoder.encode(inputString);
-
-    // Allocate memory in WASM
-    const ptr = this.wasmExports.wasm_malloc(utf8Bytes.length);
-    let wasmMemory = new Uint8Array(this.memory.buffer);
-    wasmMemory.set(utf8Bytes, ptr);
-
-    // Call the function
-    const resultPtr = this.wasmExports[funcName](ptr, utf8Bytes.length);
-
-    // Free input memory
-    this.wasmExports.wasm_free(ptr);
-
-    // Get fresh view of memory (may have grown during call)
-    wasmMemory = new Uint8Array(this.memory.buffer);
-
-    // Read result string
-    let resultLength = 0;
-    const maxLength = 10 * 1024 * 1024; // 10MB max
-    while (resultLength < maxLength && wasmMemory[resultPtr + resultLength] !== 0) {
-      resultLength++;
-    }
-
-    const resultBytes = wasmMemory.subarray(resultPtr, resultPtr + resultLength);
-    const decoder = new TextDecoder();
-    return decoder.decode(resultBytes);
   }
 
   /**
@@ -138,9 +120,30 @@ class VGraphLib {
    * @throws {Error} If rendering fails
    */
   render(vglText) {
-    const result = this._callWasmStringFunction('renderGraphWithStyles', vglText);
+    this._ensureInitialized();
+
+    const result = this.exports.renderGraphWithStyles(vglText);
 
     // Check for error in result
+    if (result.includes('Error:') && result.includes('<text')) {
+      const match = result.match(/Error:([^<]+)/);
+      throw new Error(match ? match[1].trim() : 'Rendering failed');
+    }
+
+    return result;
+  }
+
+  /**
+   * Render VGL to SVG (basic, without styles)
+   * @param {string} vglText - Vithanco Graph Language text
+   * @returns {string} SVG string
+   * @throws {Error} If rendering fails
+   */
+  renderBasic(vglText) {
+    this._ensureInitialized();
+
+    const result = this.exports.renderGraph(vglText);
+
     if (result.includes('Error:') && result.includes('<text')) {
       const match = result.match(/Error:([^<]+)/);
       throw new Error(match ? match[1].trim() : 'Rendering failed');
@@ -156,7 +159,9 @@ class VGraphLib {
    * @throws {Error} If conversion fails
    */
   toDot(vglText) {
-    const result = this._callWasmStringFunction('convertToDot', vglText);
+    this._ensureInitialized();
+
+    const result = this.exports.convertToDot(vglText);
 
     if (result.startsWith('Error:')) {
       throw new Error(result.substring(7));
@@ -172,7 +177,9 @@ class VGraphLib {
    * @throws {Error} If export fails
    */
   exportVGL(vglText) {
-    const result = this._callWasmStringFunction('exportToVGL', vglText);
+    this._ensureInitialized();
+
+    const result = this.exports.exportToVGL(vglText);
 
     if (result.startsWith('Error:')) {
       throw new Error(result.substring(7));
@@ -187,16 +194,102 @@ class VGraphLib {
    * @returns {string} Debug information
    */
   debug(vglText) {
-    return this._callWasmStringFunction('debugGraph', vglText);
+    this._ensureInitialized();
+    return this.exports.debugGraph(vglText);
   }
 
   /**
-   * Test layout functionality
+   * Layout a graph and get position information
    * @param {string} vglText - Vithanco Graph Language text
-   * @returns {string} Layout test results
+   * @returns {string} Layout results with positions
    */
-  testLayout(vglText) {
-    return this._callWasmStringFunction('testLayout', vglText);
+  layout(vglText) {
+    this._ensureInitialized();
+
+    const result = this.exports.layoutGraph(vglText);
+
+    if (result.startsWith('Error:')) {
+      throw new Error(result.substring(7));
+    }
+
+    return result;
+  }
+
+  /**
+   * Run diagnostics to verify all functions work
+   * @returns {Object} Results of all tests
+   */
+  runDiagnostics() {
+    this._ensureInitialized();
+
+    const results = {};
+    const testGraph = `vgraph test: IBIS "Test" {
+      node q1: Question "Test?";
+      node a1: Answer "Yes";
+      edge q1 -> a1;
+    }`;
+
+    // Test convertToDot
+    try {
+      const dot = this.toDot(testGraph);
+      results.convertToDot = dot.includes('digraph') ? 'PASS' : 'FAIL: Invalid DOT output';
+      console.log('✓ convertToDot:', results.convertToDot);
+    } catch (e) {
+      results.convertToDot = `FAIL: ${e.message}`;
+      console.error('✗ convertToDot:', e);
+    }
+
+    // Test renderGraph
+    try {
+      const svg = this.renderBasic(testGraph);
+      results.renderGraph = svg.includes('<svg') ? 'PASS' : 'FAIL: Invalid SVG output';
+      console.log('✓ renderGraph:', results.renderGraph);
+    } catch (e) {
+      results.renderGraph = `FAIL: ${e.message}`;
+      console.error('✗ renderGraph:', e);
+    }
+
+    // Test renderGraphWithStyles
+    try {
+      const svg = this.render(testGraph);
+      results.renderGraphWithStyles = svg.includes('<svg') ? 'PASS' : 'FAIL: Invalid SVG output';
+      console.log('✓ renderGraphWithStyles:', results.renderGraphWithStyles);
+    } catch (e) {
+      results.renderGraphWithStyles = `FAIL: ${e.message}`;
+      console.error('✗ renderGraphWithStyles:', e);
+    }
+
+    // Test debugGraph
+    try {
+      const debug = this.debug(testGraph);
+      results.debugGraph = debug.length > 0 ? 'PASS' : 'FAIL: Empty output';
+      console.log('✓ debugGraph:', results.debugGraph);
+    } catch (e) {
+      results.debugGraph = `FAIL: ${e.message}`;
+      console.error('✗ debugGraph:', e);
+    }
+
+    // Test layoutGraph
+    try {
+      const layout = this.layout(testGraph);
+      results.layoutGraph = layout.includes('NODE POSITIONS') ? 'PASS' : 'FAIL: Invalid layout output';
+      console.log('✓ layoutGraph:', results.layoutGraph);
+    } catch (e) {
+      results.layoutGraph = `FAIL: ${e.message}`;
+      console.error('✗ layoutGraph:', e);
+    }
+
+    // Test exportToVGL
+    try {
+      const vgl = this.exportVGL(testGraph);
+      results.exportToVGL = vgl.includes('vgraph') ? 'PASS' : 'FAIL: Invalid VGL output';
+      console.log('✓ exportToVGL:', results.exportToVGL);
+    } catch (e) {
+      results.exportToVGL = `FAIL: ${e.message}`;
+      console.error('✗ exportToVGL:', e);
+    }
+
+    return results;
   }
 
   /**
@@ -207,7 +300,8 @@ class VGraphLib {
     return {
       version: '1.0.0',
       wasm: true,
-      features: ['render', 'toDot', 'exportVGL', 'debug', 'testLayout']
+      bridgejs: true,
+      features: ['render', 'renderBasic', 'toDot', 'exportVGL', 'debug', 'layout']
     };
   }
 }

@@ -29,6 +29,7 @@ VGL currently supports built-in notations that come with predefined node types a
 - **BBS** (Benefit Breakdown Structure) - for benefit analysis
 - **ImpactMapping** - for strategic planning and goal alignment
 - **ConceptMap** - for visualizing relationships between concepts
+- **CRT** (Current Reality Tree) - for root cause analysis using Theory of Constraints
 
 The notation determines what node types and edge types are available in your graph.
 
@@ -76,6 +77,15 @@ Node types are defined by the chosen notation. Each notation has its own set of 
 - `Concept` - A concept or term (default: blue rounded box)
 - `EmphasizedConcept` - An important concept to highlight (default: red rounded box)
 - `Relation` - A relationship verb connecting concepts (default: bare text)
+
+**CRT Node Types:**
+- `UndesirableEffect` - An unwanted outcome requiring investigation (default: red)
+- `IntermediateEffect` - A neutral outcome in the causal chain (default: blue)
+- `DesirableEffect` - A wanted outcome caused by other conditions (default: green)
+- `Given` - An unchangeable constant like laws or physics (default: dark purple)
+- `Changeable` - A modifiable condition that can be addressed (default: light purple)
+- `AndJunctor` - Indicates multiple conditions required simultaneously (icon: AND circle)
+- `OrJunctor` - Indicates alternative causes (icon: OR circle)
 
 ### Edges
 
@@ -131,6 +141,22 @@ Edge types are defined by the notation and specify valid connections between nod
 **ConceptMap Edge Types:**
 - `concept_to_relation` - Connects Concept → Relation (tail marker only)
 - `relation_to_concept` - Connects Relation → Concept (arrow head only)
+
+**CRT Edge Types:**
+CRT has many edge types connecting causes to effects. The graph flows bottom-to-top (causes at bottom, effects at top).
+
+*From effects to effects:*
+- `undesirable_causes_undesirable`, `undesirable_causes_intermediate`, `undesirable_causes_desirable`
+- `intermediate_causes_undesirable`, `intermediate_causes_intermediate`, `intermediate_causes_desirable`
+- `desirable_causes_undesirable`, `desirable_causes_intermediate`, `desirable_causes_desirable`
+
+*From Given/Changeable to effects:*
+- `given_causes_undesirable`, `given_causes_intermediate`, `given_causes_desirable`
+- `changeable_causes_undesirable`, `changeable_causes_intermediate`, `changeable_causes_desirable`
+
+*To/From Junctors:*
+- `*_to_and_junctor`, `*_to_or_junctor` - Connect any type to junctors
+- `and_junctor_causes_*`, `or_junctor_causes_*` - Connect junctors to effects
 
 Edge types ensure that connections make semantic sense within the notation's domain.
 
@@ -225,19 +251,19 @@ The VGL grammar is defined as follows (simplified BNF notation):
 document     ::= "vgraph" identifier ":" notation label? "{" statement* "}"
 
 notation     ::= identifier
-                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap
+                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT
 
 statement    ::= group | node | edge | attribute
 
-group        ::= "group" identifier label? "{" statement* "}" ";"
+group        ::= "group" identifier label? "{" statement* "}" ";"?
 
-node         ::= "node" identifier ":" identifier label? attributes? ";"
+node         ::= "node" identifier ":" identifier label? attributes? ";"?
 
-edge         ::= "edge" identifier "->" identifier (":" identifier)? label? attributes? ";"
+edge         ::= "edge" identifier "->" identifier (":" identifier)? label? attributes? ";"?
 
 attribute    ::= identifier ":" value ";"?
 
-attributes   ::= "[" (attribute ";")* "]"
+attributes   ::= "[" (attribute (";" | ",")?)* "]"
 
 label        ::= quoted_string
 
@@ -259,7 +285,7 @@ comment      ::= "//" [^\n]*
 3. **Edge References**: Edges can only reference nodes that have been declared
 4. **Type Validation**: Node types and edge types must be valid for the chosen notation, or will be marked as "unknown"
 5. **Attributes**: Can appear inline with brackets `[]` or as separate statements within groups
-6. **Semicolons**: Required after nodes, edges, groups, and standalone attributes
+6. **Semicolons**: Optional after nodes, edges, groups, and standalone attributes
 7. **Quoted Strings**: Used for labels and string attribute values, support escape sequences (`\"`, `\\`, etc.)
 8. **Comments**: Single-line only, using `//` syntax
 
@@ -589,6 +615,67 @@ vgraph learningCM: ConceptMap "How Learning Works" {
 ```
 
 **Note**: In concept maps, relationships are represented as nodes (Relation type) rather than edge labels. This creates readable propositions like "Student learns Subject" and "Subject requires Practice".
+
+### Example 11: Current Reality Tree (CRT)
+
+A root cause analysis graph showing how causes lead to undesirable effects:
+
+```vgl
+vgraph salesDecline: CRT "Sales Decline Analysis" {
+    // Undesirable Effects (problems at the top)
+    node ude1: UndesirableEffect "Sales revenue declining";
+    node ude2: UndesirableEffect "Customer complaints increasing";
+    node ude3: UndesirableEffect "Market share decreasing";
+
+    // Intermediate Effects (neutral outcomes in the causal chain)
+    node ie1: IntermediateEffect "Customers switching to competitors";
+    node ie2: IntermediateEffect "Product perceived as outdated";
+    node ie3: IntermediateEffect "Support response time is slow";
+
+    // Desirable Effects (things we want to keep)
+    node de1: DesirableEffect "Brand reputation still strong";
+
+    // Given (unchangeable facts at the bottom)
+    node g1: Given "Market is highly competitive";
+    node g2: Given "Customer expectations keep rising";
+
+    // Changeable (root causes we can address)
+    node c1: Changeable "Product development cycle is too long";
+    node c2: Changeable "Support team is understaffed";
+    node c3: Changeable "No customer feedback loop";
+
+    // Junctors for combining conditions
+    node and1: AndJunctor "";
+    node or1: OrJunctor "";
+
+    // Root causes leading to intermediate effects
+    edge c1 -> ie2: changeable_causes_intermediate;
+    edge c3 -> ie2: changeable_causes_intermediate;
+    edge c2 -> ie3: changeable_causes_intermediate;
+
+    // Given facts contributing to situation
+    edge g1 -> ie1: given_causes_intermediate;
+    edge g2 -> and1: given_to_and_junctor;
+    edge ie2 -> and1: intermediate_to_and_junctor;
+
+    // And junctor combining conditions
+    edge and1 -> ie1: and_junctor_causes_intermediate;
+
+    // Or junctor for alternative paths
+    edge ie1 -> or1: intermediate_to_or_junctor;
+    edge ie3 -> or1: intermediate_to_or_junctor;
+
+    // Intermediate effects leading to undesirable effects
+    edge or1 -> ude2: or_junctor_causes_undesirable;
+    edge ie1 -> ude1: intermediate_causes_undesirable;
+    edge ie1 -> ude3: intermediate_causes_undesirable;
+
+    // Brand reputation affected but still positive
+    edge ie2 -> de1: intermediate_causes_desirable;
+}
+```
+
+**Note**: CRT graphs flow bottom-to-top, with root causes (Given and Changeable) at the bottom and Undesirable Effects at the top. The AndJunctor indicates multiple conditions must be true together, while OrJunctor indicates any one of the conditions is sufficient. Labels for junctors are typically empty as the icon conveys the meaning.
 
 ---
 
