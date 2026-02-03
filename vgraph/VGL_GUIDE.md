@@ -32,6 +32,7 @@ VGL currently supports built-in notations that come with predefined node types a
 - **CRT** (Current Reality Tree) - for root cause analysis using Theory of Constraints
 - **FRT** (Future Reality Tree) - for solution validation using Theory of Constraints
 - **PRT** (Prerequisite Tree) - for planning with necessary condition thinking using Theory of Constraints
+- **TRT** (Transition Tree) - for step-by-step implementation planning using Theory of Constraints
 
 The notation determines what node types and edge types are available in your graph.
 
@@ -105,6 +106,15 @@ PRT (Prerequisite Tree) is a planning tool using necessary condition thinking. I
 - `Obstacle` - Barriers preventing objective achievement (default: red)
 - `IntermediateObjective` - A milestone that overcomes a specific obstacle (default: blue)
 - `OR` - Connector allowing optional conditions instead of requiring all predecessors (icon: OR circle)
+
+**TRT Node Types:**
+TRT (Transition Tree) is an implementation planning tool that answers "HOW TO CAUSE the change?" by providing step-by-step actions needed to implement changes. It shares node types with CRT/FRT but focuses on the detailed action sequence.
+- `UndesirableEffect` - Current state problems being addressed (default: red)
+- `IntermediateEffect` - Stepping stone outcomes from actions (default: blue)
+- `DesirableEffect` - Goal outcomes we want to achieve (default: green)
+- `Given` - Unchangeable facts and constraints (default: dark purple)
+- `Changeable` - Actions we can take to cause change (default: light purple)
+- `AndJunctor` - Indicates multiple conditions required together for an effect (icon: AND circle)
 
 ### Edges
 
@@ -207,6 +217,21 @@ PRT uses edges to show how obstacles block objectives and how intermediate objec
 - `obstacle_to_or`, `intermediate_objective_to_or` - Connect to OR junctor
 - `or_to_objective`, `or_to_intermediate_objective`, `or_to_obstacle` - Connect from OR junctor
 
+**TRT Edge Types:**
+TRT shares similar edge types with CRT/FRT but focuses on action planning. The graph flows bottom-to-top (actions at bottom, desired effects at top).
+
+*From Changeable/Given to effects (typical starting points for actions):*
+- `changeable_causes_undesirable`, `changeable_causes_intermediate`, `changeable_causes_desirable`
+- `given_causes_undesirable`, `given_causes_intermediate`, `given_causes_desirable`
+
+*Between effects:*
+- `intermediate_causes_undesirable`, `intermediate_causes_intermediate`, `intermediate_causes_desirable`
+- `desirable_causes_*`, `undesirable_causes_*`
+
+*To/From And Junctor:*
+- `*_to_and_junctor` - Connect any type to And junctor
+- `and_junctor_causes_*` - Connect And junctor to effects (excluding And)
+
 Edge types ensure that connections make semantic sense within the notation's domain.
 
 ### Groups
@@ -300,7 +325,7 @@ The VGL grammar is defined as follows (simplified BNF notation):
 document     ::= "vgraph" identifier ":" notation label? "{" statement* "}"
 
 notation     ::= identifier
-                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, FRT, PRT
+                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, FRT, PRT, TRT
 
 statement    ::= group | node | edge | attribute
 
@@ -846,6 +871,71 @@ vgraph projectLaunch: PRT "New Product Launch Planning" {
 ```
 
 **Note**: PRT graphs flow bottom-to-top like other TOC tools. The main Objective sits at the top, with Obstacles directly below showing what blocks it. IntermediateObjectives below the obstacles show what needs to be achieved to overcome them. The OR junctor indicates alternative paths - only one of the connected intermediate objectives needs to be achieved. PRT embodies "necessary condition thinking" - working backward from the goal to identify all prerequisites.
+
+### Example 14: Transition Tree (TRT)
+
+A step-by-step implementation planning graph showing how actions lead to desired outcomes:
+
+```vgl
+vgraph agileTransition: TRT "Agile Transformation Implementation" {
+    // Given conditions (the context we're working within)
+    node g1: Given "Company has 5 development teams";
+    node g2: Given "Current waterfall process causes delays";
+
+    // Changeable causes (actions we will take)
+    node c1: Changeable "Introduce daily standups";
+    node c2: Changeable "Implement CI/CD pipeline";
+    node c3: Changeable "Create cross-functional teams";
+    node c4: Changeable "Train teams on Scrum practices";
+
+    // Intermediate effects (stepping stones from actions)
+    node ie1: IntermediateEffect "Teams communicate more frequently";
+    node ie2: IntermediateEffect "Code integration happens daily";
+    node ie3: IntermediateEffect "Teams have diverse skillsets";
+    node ie4: IntermediateEffect "Teams follow iterative process";
+    node ie5: IntermediateEffect "Silos are broken down";
+
+    // And junctors for combined conditions
+    node and1: AndJunctor "";
+    node and2: AndJunctor "";
+
+    // Desirable effects (the goals we achieve)
+    node de1: DesirableEffect "Faster time to market";
+    node de2: DesirableEffect "Higher quality releases";
+    node de3: DesirableEffect "Better team collaboration";
+
+    // Actions lead to intermediate effects
+    edge c1 -> ie1: changeable_causes_intermediate;
+    edge c2 -> ie2: changeable_causes_intermediate;
+    edge c3 -> ie3: changeable_causes_intermediate;
+    edge c4 -> ie4: changeable_causes_intermediate;
+
+    // Given context combines with cross-functional teams
+    edge g1 -> and1: given_to_and_junctor;
+    edge ie3 -> and1: intermediate_to_and_junctor;
+    edge and1 -> ie5: and_junctor_causes_intermediate;
+
+    // Breaking silos leads to collaboration
+    edge ie5 -> de3: intermediate_causes_desirable;
+
+    // Communication helps collaboration too
+    edge ie1 -> de3: intermediate_causes_desirable;
+
+    // CI/CD + iterative process combine for quality
+    edge ie2 -> and2: intermediate_to_and_junctor;
+    edge ie4 -> and2: intermediate_to_and_junctor;
+    edge and2 -> de2: and_junctor_causes_desirable;
+
+    // Quality and collaboration lead to speed
+    edge de2 -> de1: desirable_causes_desirable;
+    edge de3 -> de1: desirable_causes_desirable;
+
+    // Given waterfall context is addressed by iterative process
+    edge g2 -> ie4: given_causes_intermediate;
+}
+```
+
+**Note**: TRT graphs flow bottom-to-top like other TOC tools. The focus is on detailed implementation planning - answering "HOW TO CAUSE the change?" Unlike FRT which validates that solutions will work, TRT provides the step-by-step action sequence needed to implement those solutions. Changeable nodes represent the specific actions to take, and the graph shows how those actions combine through intermediate effects to achieve desirable outcomes. The AndJunctor indicates multiple conditions must occur together for an effect.
 
 ---
 
