@@ -31,6 +31,7 @@ VGL currently supports built-in notations that come with predefined node types a
 - **ConceptMap** - for visualizing relationships between concepts
 - **CRT** (Current Reality Tree) - for root cause analysis using Theory of Constraints
 - **FRT** (Future Reality Tree) - for solution validation using Theory of Constraints
+- **PRT** (Prerequisite Tree) - for planning with necessary condition thinking using Theory of Constraints
 
 The notation determines what node types and edge types are available in your graph.
 
@@ -97,6 +98,13 @@ FRT shares the same node types as CRT, as both are Theory of Constraints tools. 
 - `UndesirableEffect` - Potential negative side effects to monitor (default: red)
 - `AndJunctor` - Indicates multiple conditions required simultaneously (icon: AND circle)
 - `OrJunctor` - Indicates alternative paths to outcomes (icon: OR circle)
+
+**PRT Node Types:**
+PRT (Prerequisite Tree) is a planning tool using necessary condition thinking. It starts with the desired objective and works backward to identify obstacles and the intermediate objectives needed to overcome them.
+- `Objective` - The desired goal you aim to achieve (default: green)
+- `Obstacle` - Barriers preventing objective achievement (default: red)
+- `IntermediateObjective` - A milestone that overcomes a specific obstacle (default: blue)
+- `OR` - Connector allowing optional conditions instead of requiring all predecessors (icon: OR circle)
 
 ### Edges
 
@@ -183,6 +191,21 @@ FRT shares the same edge types as CRT. The graph flows bottom-to-top (solutions 
 *To/From Junctors:*
 - `*_to_and_junctor`, `*_to_or_junctor` - Connect any type to junctors
 - `and_junctor_causes_*`, `or_junctor_causes_*` - Connect junctors to effects
+
+**PRT Edge Types:**
+PRT uses edges to show how obstacles block objectives and how intermediate objectives overcome obstacles. The graph flows bottom-to-top (intermediate objectives at bottom, main objective at top).
+
+*Obstacle blocking relationships:*
+- `obstacle_blocks_objective` - Connects Obstacle → Objective
+- `obstacle_blocks_intermediate_objective` - Connects Obstacle → IntermediateObjective
+
+*Intermediate objective relationships:*
+- `intermediate_objective_overcomes_obstacle` - Connects IntermediateObjective → Obstacle
+- `intermediate_objective_to_objective` - Connects IntermediateObjective → Objective (direct path)
+
+*To/From OR Junctor:*
+- `obstacle_to_or`, `intermediate_objective_to_or` - Connect to OR junctor
+- `or_to_objective`, `or_to_intermediate_objective`, `or_to_obstacle` - Connect from OR junctor
 
 Edge types ensure that connections make semantic sense within the notation's domain.
 
@@ -277,7 +300,7 @@ The VGL grammar is defined as follows (simplified BNF notation):
 document     ::= "vgraph" identifier ":" notation label? "{" statement* "}"
 
 notation     ::= identifier
-                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, FRT
+                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, FRT, PRT
 
 statement    ::= group | node | edge | attribute
 
@@ -768,6 +791,61 @@ vgraph salesSolution: FRT "Sales Improvement Plan" {
 ```
 
 **Note**: FRT graphs also flow bottom-to-top like CRT, but with a different focus. While CRT starts with problems (Undesirable Effects) and traces back to root causes, FRT starts with proposed solutions (Changeable/injections) and traces forward to show how they achieve desired outcomes. This makes FRT ideal for validating that proposed changes will actually deliver the expected benefits.
+
+### Example 13: Prerequisite Tree (PRT)
+
+A planning graph showing obstacles blocking objectives and intermediate objectives to overcome them:
+
+```vgl
+vgraph projectLaunch: PRT "New Product Launch Planning" {
+    // The main objective we want to achieve
+    node obj1: Objective "Successfully launch product by Q3";
+
+    // Obstacles blocking the main objective
+    node obs1: Obstacle "Development team lacks required skills";
+    node obs2: Obstacle "Marketing budget not approved";
+    node obs3: Obstacle "No distribution channel established";
+
+    // Intermediate objectives to overcome obstacles
+    node io1: IntermediateObjective "Train team on new technology";
+    node io2: IntermediateObjective "Hire experienced developers";
+    node io3: IntermediateObjective "Present ROI analysis to leadership";
+    node io4: IntermediateObjective "Partner with existing retailer";
+    node io5: IntermediateObjective "Build direct-to-consumer channel";
+
+    // OR junctor for alternative paths
+    node or1: OR;
+    node or2: OR;
+
+    // Further obstacles blocking intermediate objectives
+    node obs4: Obstacle "Training budget limited";
+    node obs5: Obstacle "Talent pool is competitive";
+
+    // Obstacles block the main objective
+    edge obs1 -> obj1: obstacle_blocks_objective;
+    edge obs2 -> obj1: obstacle_blocks_objective;
+    edge obs3 -> obj1: obstacle_blocks_objective;
+
+    // Alternative ways to overcome skill obstacle (via OR)
+    edge io1 -> or1: intermediate_objective_to_or;
+    edge io2 -> or1: intermediate_objective_to_or;
+    edge or1 -> obs1: or_to_obstacle;
+
+    // ROI analysis overcomes budget obstacle
+    edge io3 -> obs2: intermediate_objective_overcomes_obstacle;
+
+    // Alternative distribution solutions
+    edge io4 -> or2: intermediate_objective_to_or;
+    edge io5 -> or2: intermediate_objective_to_or;
+    edge or2 -> obs3: or_to_obstacle;
+
+    // Recursive obstacles blocking intermediate objectives
+    edge obs4 -> io1: obstacle_blocks_intermediate_objective;
+    edge obs5 -> io2: obstacle_blocks_intermediate_objective;
+}
+```
+
+**Note**: PRT graphs flow bottom-to-top like other TOC tools. The main Objective sits at the top, with Obstacles directly below showing what blocks it. IntermediateObjectives below the obstacles show what needs to be achieved to overcome them. The OR junctor indicates alternative paths - only one of the connected intermediate objectives needs to be achieved. PRT embodies "necessary condition thinking" - working backward from the goal to identify all prerequisites.
 
 ---
 
