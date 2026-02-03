@@ -30,6 +30,7 @@ VGL currently supports built-in notations that come with predefined node types a
 - **ImpactMapping** - for strategic planning and goal alignment
 - **ConceptMap** - for visualizing relationships between concepts
 - **CRT** (Current Reality Tree) - for root cause analysis using Theory of Constraints
+- **FRT** (Future Reality Tree) - for solution validation using Theory of Constraints
 
 The notation determines what node types and edge types are available in your graph.
 
@@ -86,6 +87,16 @@ Node types are defined by the chosen notation. Each notation has its own set of 
 - `Changeable` - A modifiable condition that can be addressed (default: light purple)
 - `AndJunctor` - Indicates multiple conditions required simultaneously (icon: AND circle)
 - `OrJunctor` - Indicates alternative causes (icon: OR circle)
+
+**FRT Node Types:**
+FRT shares the same node types as CRT, as both are Theory of Constraints tools. The difference is in usage: FRT starts with solutions (Changeable/injections) and builds upward to show how they lead to desirable effects.
+- `Changeable` - Proposed solutions or injections to implement (default: light purple)
+- `Given` - Unchangeable facts that still apply (default: dark purple)
+- `IntermediateEffect` - Expected intermediate outcomes from solutions (default: blue)
+- `DesirableEffect` - Goals we want to achieve (default: green)
+- `UndesirableEffect` - Potential negative side effects to monitor (default: red)
+- `AndJunctor` - Indicates multiple conditions required simultaneously (icon: AND circle)
+- `OrJunctor` - Indicates alternative paths to outcomes (icon: OR circle)
 
 ### Edges
 
@@ -153,6 +164,21 @@ CRT has many edge types connecting causes to effects. The graph flows bottom-to-
 *From Given/Changeable to effects:*
 - `given_causes_undesirable`, `given_causes_intermediate`, `given_causes_desirable`
 - `changeable_causes_undesirable`, `changeable_causes_intermediate`, `changeable_causes_desirable`
+
+*To/From Junctors:*
+- `*_to_and_junctor`, `*_to_or_junctor` - Connect any type to junctors
+- `and_junctor_causes_*`, `or_junctor_causes_*` - Connect junctors to effects
+
+**FRT Edge Types:**
+FRT shares the same edge types as CRT. The graph flows bottom-to-top (solutions at bottom, desired effects at top).
+
+*From Changeable/Given to effects (typical starting points in FRT):*
+- `changeable_causes_undesirable`, `changeable_causes_intermediate`, `changeable_causes_desirable`
+- `given_causes_undesirable`, `given_causes_intermediate`, `given_causes_desirable`
+
+*Between effects:*
+- `intermediate_causes_undesirable`, `intermediate_causes_intermediate`, `intermediate_causes_desirable`
+- `desirable_causes_*`, `undesirable_causes_*`
 
 *To/From Junctors:*
 - `*_to_and_junctor`, `*_to_or_junctor` - Connect any type to junctors
@@ -251,7 +277,7 @@ The VGL grammar is defined as follows (simplified BNF notation):
 document     ::= "vgraph" identifier ":" notation label? "{" statement* "}"
 
 notation     ::= identifier
-                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT
+                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, FRT
 
 statement    ::= group | node | edge | attribute
 
@@ -676,6 +702,72 @@ vgraph salesDecline: CRT "Sales Decline Analysis" {
 ```
 
 **Note**: CRT graphs flow bottom-to-top, with root causes (Given and Changeable) at the bottom and Undesirable Effects at the top. The AndJunctor indicates multiple conditions must be true together, while OrJunctor indicates any one of the conditions is sufficient. Labels for junctors are typically empty as the icon conveys the meaning.
+
+### Example 12: Future Reality Tree (FRT)
+
+A solution validation graph showing how proposed solutions lead to desired outcomes:
+
+```vgl
+vgraph salesSolution: FRT "Sales Improvement Plan" {
+    // Changeable nodes (injections/solutions we will implement)
+    node c1: Changeable "Implement agile product development";
+    node c2: Changeable "Hire additional support staff";
+    node c3: Changeable "Create customer feedback system";
+
+    // Given (unchangeable facts that still apply)
+    node g1: Given "Market is highly competitive";
+    node g2: Given "Customer expectations keep rising";
+
+    // Intermediate Effects (expected outcomes from our solutions)
+    node ie1: IntermediateEffect "Faster product iterations";
+    node ie2: IntermediateEffect "Products match customer needs";
+    node ie3: IntermediateEffect "Support response time improves";
+    node ie4: IntermediateEffect "Customer feedback drives development";
+
+    // Junctors for combining conditions
+    node and1: AndJunctor "";
+    node or1: OrJunctor "";
+
+    // Desirable Effects (the goals we want to achieve)
+    node de1: DesirableEffect "Sales revenue increasing";
+    node de2: DesirableEffect "Customer satisfaction high";
+    node de3: DesirableEffect "Market share growing";
+
+    // Potential negative side effects (to monitor)
+    node ude1: UndesirableEffect "Initial implementation costs";
+
+    // Solutions leading to intermediate effects
+    edge c1 -> ie1: changeable_causes_intermediate;
+    edge c3 -> ie4: changeable_causes_intermediate;
+    edge c2 -> ie3: changeable_causes_intermediate;
+
+    // Given facts combining with solutions
+    edge g2 -> and1: given_to_and_junctor;
+    edge ie4 -> and1: intermediate_to_and_junctor;
+
+    // And junctor combining conditions
+    edge and1 -> ie2: and_junctor_causes_intermediate;
+
+    // Multiple paths can lead to customer satisfaction
+    edge ie2 -> or1: intermediate_to_or_junctor;
+    edge ie3 -> or1: intermediate_to_or_junctor;
+
+    // Intermediate effects leading to desirable effects
+    edge or1 -> de2: or_junctor_causes_desirable;
+    edge ie1 -> de3: intermediate_causes_desirable;
+    edge ie2 -> de1: intermediate_causes_desirable;
+    edge ie2 -> de3: intermediate_causes_desirable;
+
+    // Acknowledging potential downsides
+    edge c1 -> ude1: changeable_causes_undesirable;
+    edge c2 -> ude1: changeable_causes_undesirable;
+
+    // Given competitive market affects outcomes
+    edge g1 -> ie2: given_causes_intermediate;
+}
+```
+
+**Note**: FRT graphs also flow bottom-to-top like CRT, but with a different focus. While CRT starts with problems (Undesirable Effects) and traces back to root causes, FRT starts with proposed solutions (Changeable/injections) and traces forward to show how they achieve desired outcomes. This makes FRT ideal for validating that proposed changes will actually deliver the expected benefits.
 
 ---
 
