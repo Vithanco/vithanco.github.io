@@ -33,6 +33,7 @@ VGL currently supports built-in notations that come with predefined node types a
 - **FRT** (Future Reality Tree) - for solution validation using Theory of Constraints
 - **PRT** (Prerequisite Tree) - for planning with necessary condition thinking using Theory of Constraints
 - **TRT** (Transition Tree) - for step-by-step implementation planning using Theory of Constraints
+- **ADTree** (Attack-Defense Tree) - for security modelling of attack and defense interactions
 
 The notation determines what node types and edge types are available in your graph.
 
@@ -115,6 +116,13 @@ TRT (Transition Tree) is an implementation planning tool that answers "HOW TO CA
 - `Given` - Unchangeable facts and constraints (default: dark purple)
 - `Changeable` - Actions we can take to cause change (default: light purple)
 - `AndJunctor` - Indicates multiple conditions required together for an effect (icon: AND circle)
+
+**ADTree Node Types:**
+ADTree (Attack-Defense Tree) is a security modelling methodology based on Kordy et al. (2014). It extends classical attack trees by allowing defense nodes at any level, modelling the ongoing arms race between attacker and defender.
+- `Attack` - An attacker's goal or sub-goal (default: red)
+- `Defense` - A defender's countermeasure or protective measure (default: green)
+- `AndJunctor` - Conjunctive refinement: all children must be achieved (icon: AND circle)
+- `OrJunctor` - Disjunctive refinement: at least one child must be achieved (icon: OR circle)
 
 ### Edges
 
@@ -232,6 +240,23 @@ TRT shares similar edge types with CRT/FRT but focuses on action planning. The g
 - `*_to_and_junctor` - Connect any type to And junctor
 - `and_junctor_causes_*` - Connect And junctor to effects (excluding And)
 
+**ADTree Edge Types:**
+ADTree uses two kinds of edges: refinement edges (solid lines) for same-type decomposition, and countermeasure edges (dotted lines) for opposite-type countering. The graph flows top-to-bottom (root goal at top).
+
+*Refinement edges (solid):*
+- `attack_refines_attack` - Decompose an attack into sub-attacks
+- `defense_refines_defense` - Decompose a defense into sub-defenses
+
+*Countermeasure edges (dotted):*
+- `defense_counters_attack` - A defense that mitigates an attack
+- `attack_counters_defense` - An attack that circumvents a defense
+
+*To/From Junctors:*
+- `attack_to_and_junctor`, `defense_to_and_junctor` - Connect to AND junctor
+- `and_junctor_to_attack`, `and_junctor_to_defense` - Connect from AND junctor
+- `attack_to_or_junctor`, `defense_to_or_junctor` - Connect to OR junctor
+- `or_junctor_to_attack`, `or_junctor_to_defense` - Connect from OR junctor
+
 Edge types ensure that connections make semantic sense within the notation's domain.
 
 ### Groups
@@ -325,7 +350,7 @@ The VGL grammar is defined as follows (simplified BNF notation):
 document     ::= "vgraph" identifier ":" notation label? "{" statement* "}"
 
 notation     ::= identifier
-                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, FRT, PRT, TRT
+                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, FRT, PRT, TRT, ADTree
 
 statement    ::= group | node | edge | attribute
 
@@ -936,6 +961,85 @@ vgraph agileTransition: TRT "Agile Transformation Implementation" {
 ```
 
 **Note**: TRT graphs flow bottom-to-top like other TOC tools. The focus is on detailed implementation planning - answering "HOW TO CAUSE the change?" Unlike FRT which validates that solutions will work, TRT provides the step-by-step action sequence needed to implement those solutions. Changeable nodes represent the specific actions to take, and the graph shows how those actions combine through intermediate effects to achieve desirable outcomes. The AndJunctor indicates multiple conditions must occur together for an effect.
+
+### Example 15: Attack-Defense Tree (ADTree)
+
+A security modelling graph showing how defenses protect a system and how attacks can circumvent them. Based on the data confidentiality scenario from Kordy et al. (2014):
+
+```vgl
+vgraph dataConfidentiality: ADTree "Data Confidentiality" {
+    // Defense nodes (defender's goals)
+    node dataConf: Defense "Data Confidentiality";
+    node networkSec: Defense "Network Security";
+    node physicalSec: Defense "Physical Security";
+    node accessControl: Defense "Access Control";
+    node passwords: Defense "Passwords";
+    node strongPasswords: Defense "Strong Passwords";
+    node lock1: Defense "Lock";
+    node screening: Defense "Screening";
+    node securityGuard: Defense "Security Guard";
+    node videoCameras: Defense "Video Cameras";
+
+    // Attack nodes (attacker's goals)
+    node employeeAttack: Attack "Employee Attack";
+    node breakIn: Attack "Break In";
+    node corruption: Attack "Corruption";
+    node socialEngineering: Attack "Social Engineering";
+    node dictionaryAttack: Attack "Dictionary Attack";
+    node backDoor: Attack "Back Door";
+    node defeatLock: Attack "Defeat Lock";
+    node forceOpen: Attack "Force Open";
+    node acquireKeys: Attack "Acquire Keys";
+    node defeatGuard: Attack "Defeat Guard";
+    node bribe: Attack "Bribe";
+    node overpower: Attack "Overpower";
+    node stealKeys: Attack "Steal Keys";
+    node outnumber: Attack "Outnumber";
+    node useWeapons: Attack "Use Weapons";
+
+    // AND junctors for conjunctive refinement
+    node andDataConf: AndJunctor;
+    node andOverpower: AndJunctor;
+
+    // Defense refines into sub-defenses via AND junctor (both required)
+    edge networkSec -> andDataConf: defense_to_and_junctor;
+    edge physicalSec -> andDataConf: defense_to_and_junctor;
+    edge andDataConf -> dataConf: and_junctor_to_defense;
+    edge accessControl -> networkSec: defense_refines_defense;
+    edge passwords -> accessControl: defense_refines_defense;
+
+    // Attack refines into sub-attacks (solid edges)
+    edge corruption -> employeeAttack: attack_refines_attack;
+    edge socialEngineering -> employeeAttack: attack_refines_attack;
+    edge backDoor -> breakIn: attack_refines_attack;
+    edge forceOpen -> defeatLock: attack_refines_attack;
+    edge acquireKeys -> defeatLock: attack_refines_attack;
+    edge bribe -> defeatGuard: attack_refines_attack;
+    edge overpower -> defeatGuard: attack_refines_attack;
+    edge stealKeys -> defeatGuard: attack_refines_attack;
+
+    // Countermeasure: defense counters attack (dotted edges)
+    edge strongPasswords -> dictionaryAttack: defense_counters_attack;
+    edge lock1 -> backDoor: defense_counters_attack;
+    edge screening -> corruption: defense_counters_attack;
+    edge securityGuard -> breakIn: defense_counters_attack;
+    edge videoCameras -> defeatGuard: defense_counters_attack;
+
+    // Countermeasure: attack counters defense (dotted edges)
+    edge employeeAttack -> dataConf: attack_counters_defense;
+    edge breakIn -> physicalSec: attack_counters_defense;
+    edge dictionaryAttack -> passwords: attack_counters_defense;
+    edge defeatLock -> lock1: attack_counters_defense;
+    edge defeatGuard -> securityGuard: attack_counters_defense;
+
+    // AND junctor: conjunctive refinement
+    edge outnumber -> andOverpower: attack_to_and_junctor;
+    edge useWeapons -> andOverpower: attack_to_and_junctor;
+    edge andOverpower -> overpower: and_junctor_to_attack;
+}
+```
+
+**Note**: ADTree graphs flow bottom-to-top with the root goal at the top and leaf actions at the bottom. The key feature is the distinction between refinement edges (solid lines for same-type decomposition) and countermeasure edges (dotted lines for opposite-type countering). This allows modelling the ongoing arms race between attacker and defender at any level of the tree. The root node can be either an Attack or Defense node, determining whether the proponent is the attacker or defender.
 
 ---
 

@@ -201,6 +201,37 @@
       padding: 20px;
       text-align: center;
     }
+
+    .vgraph-output-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .vgraph-save-buttons {
+      display: flex;
+      gap: 6px;
+    }
+
+    .vgraph-save-btn {
+      padding: 4px 10px;
+      font-size: 12px;
+      background: #6c757d;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .vgraph-save-btn:hover {
+      background: #5a6268;
+    }
+
+    .vgraph-save-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
   </style>
 
   <div class="vgraph-widget-header">
@@ -233,8 +264,12 @@
     </div>
 
     <div class="vgraph-output-panel">
-      <div class="vgraph-editor-header">
+      <div class="vgraph-editor-header vgraph-output-header">
         Preview
+        <div class="vgraph-save-buttons">
+          <button class="vgraph-save-btn" id="vgraph-save-svg-btn" disabled>Save SVG</button>
+          <button class="vgraph-save-btn" id="vgraph-save-png-btn" disabled>Save PNG</button>
+        </div>
       </div>
       <div class="vgraph-output" id="vgraph-output">
         <div class="vgraph-loading">Click "Render" to visualize your graph</div>
@@ -316,14 +351,87 @@
 
       statusEl.textContent = 'Rendered successfully';
       statusEl.className = 'vgraph-status success';
+      updateSaveButtons(true);
     } catch (error) {
       console.error('Render error:', error);
       statusEl.textContent = `Error: ${error.message}`;
       statusEl.className = 'vgraph-status error';
+      updateSaveButtons(false);
 
       outputEl.innerHTML =
         `<div class="vgraph-error">Rendering failed.<br>${error.message}</div>`;
     }
+  }
+
+  // Download helpers
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function saveSVG() {
+    const outputEl = document.getElementById('vgraph-output');
+    const svgEl = outputEl.querySelector('svg');
+    if (!svgEl) return;
+
+    const serializer = new XMLSerializer();
+    let svgString = serializer.serializeToString(svgEl);
+    if (!svgString.startsWith('<?xml')) {
+      svgString = '<?xml version="1.0" encoding="UTF-8"?>\n' + svgString;
+    }
+    const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+    downloadBlob(blob, 'vgraph-diagram.svg');
+  }
+
+  function savePNG() {
+    const outputEl = document.getElementById('vgraph-output');
+    const svgEl = outputEl.querySelector('svg');
+    if (!svgEl) return;
+
+    const scale = 2; // high-DPI export
+    const serializer = new XMLSerializer();
+    let svgString = serializer.serializeToString(svgEl);
+    if (!svgString.startsWith('<?xml')) {
+      svgString = '<?xml version="1.0" encoding="UTF-8"?>\n' + svgString;
+    }
+
+    const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(svgBlob);
+    const img = new Image();
+
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.naturalWidth * scale;
+      canvas.height = img.naturalHeight * scale;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.scale(scale, scale);
+      ctx.drawImage(img, 0, 0);
+      URL.revokeObjectURL(url);
+
+      canvas.toBlob((blob) => {
+        downloadBlob(blob, 'vgraph-diagram.png');
+      }, 'image/png');
+    };
+
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      console.error('Failed to render SVG to PNG');
+    };
+
+    img.src = url;
+  }
+
+  function updateSaveButtons(enabled) {
+    document.getElementById('vgraph-save-svg-btn').disabled = !enabled;
+    document.getElementById('vgraph-save-png-btn').disabled = !enabled;
   }
 
   // Clear editor
@@ -333,11 +441,14 @@
       '<div class="vgraph-loading">Click "Render" to visualize your graph</div>';
     document.getElementById('vgraph-status').textContent = 'Ready';
     document.getElementById('vgraph-status').className = 'vgraph-status';
+    updateSaveButtons(false);
   }
 
   // Event listeners
   document.getElementById('vgraph-render-btn').addEventListener('click', renderGraph);
   document.getElementById('vgraph-clear-btn').addEventListener('click', clearEditor);
+  document.getElementById('vgraph-save-svg-btn').addEventListener('click', saveSVG);
+  document.getElementById('vgraph-save-png-btn').addEventListener('click', savePNG);
 
   // Handle Enter key in textarea (Ctrl/Cmd + Enter to render)
   document.getElementById('vgraph-input').addEventListener('keydown', (e) => {

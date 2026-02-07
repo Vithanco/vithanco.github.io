@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta property="og:site_name" content="Vithanco"/>
+        <link rel="canonical" href="https://vithanco.com/tools/VGL_GUIDE"/>
+        <meta name="twitter:url" content="https://vithanco.com/tools/VGL_GUIDE"/>
+        <meta property="og:url" content="https://vithanco.com/tools/VGL_GUIDE"/>
+        <title>Vithanco Graph Language (VGL) Guide | Vithanco</title>
+        <meta name="twitter:title" content="Vithanco Graph Language (VGL) Guide | Vithanco"/>
+        <meta property="og:title" content="Vithanco Graph Language (VGL) Guide | Vithanco"/>
+        <meta name="description" content="Learn the VGL syntax for creating and editing graphs in text format"/>
+        <meta name="twitter:description" content="Learn the VGL syntax for creating and editing graphs in text format"/>
+        <meta property="og:description" content="Learn the VGL syntax for creating and editing graphs in text format"/>
+        <meta name="twitter:card" content="summary"/>
+        <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+        <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
+        <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
+        <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
+    </head>
+    <body class="item-page">
+        <header>
+            <div class="header-wrapper">
+                <a href="/" class="site-name">
+                    <img src="/logo.png" height="20" width="20"/>
+                    <p>Vithanco</p></a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/services">Services</a></li>
+                        <li>
+                            <a href="/methods">Methods</a></li>
+                        <li>
+                            <a href="/notations">Notations</a></li>
+                        <li>
+                            <a href="/tools" class="selected">Tools</a></li>
+                        <li>
+                            <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
+        <div class="index-wrapper">
+            <article>
+                <h1>Vithanco Graph Language (VGL) Guide</h1>
+                <div class="reading-time">
+                    <p>Estimated reading time: 27 minutes.</p></div>
+                <div class="content"><h1>Vithanco Graph Language (VGL) Guide</h1><h2>Table of Contents</h2><ul><li><a href="#concepts">Concepts</a></li><li><a href="#grammar">Grammar</a></li><li><a href="#examples">Examples</a></li></ul><hr><h2>Concepts</h2><h3>Overview</h3><p>The Vithanco Graph Language (VGL) is a human-readable text format for creating and editing graphs. VGL provides a simple, declarative syntax for defining nodes, edges, groups, and their attributes.</p><h3>Notation</h3><p>Every VGL document must declare a notation, which defines the types of nodes and edges available in the graph.</p><p><strong>Syntax:</strong></p><pre><code>vgraph &lt;graph_id&gt;: &lt;NOTATION&gt; "&lt;graph_label&gt;" {
+    ...
+}
+</code></pre><p>VGL currently supports built-in notations that come with predefined node types and edge types:</p><ul><li><strong>IBIS</strong> (Issue-Based Information System) - for decision-making and argumentation</li><li><strong>BBS</strong> (Benefit Breakdown Structure) - for benefit analysis</li><li><strong>ImpactMapping</strong> - for strategic planning and goal alignment</li><li><strong>ConceptMap</strong> - for visualizing relationships between concepts</li><li><strong>CRT</strong> (Current Reality Tree) - for root cause analysis using Theory of Constraints</li><li><strong>FRT</strong> (Future Reality Tree) - for solution validation using Theory of Constraints</li><li><strong>PRT</strong> (Prerequisite Tree) - for planning with necessary condition thinking using Theory of Constraints</li><li><strong>TRT</strong> (Transition Tree) - for step-by-step implementation planning using Theory of Constraints</li><li><strong>ADTree</strong> (Attack-Defense Tree) - for security modelling of attack and defense interactions</li></ul><p>The notation determines what node types and edge types are available in your graph.</p><h3>Nodes</h3><p>Nodes represent the primary entities in your graph. Each node has:</p><ul><li><strong>ID</strong>: A unique identifier (required)</li><li><strong>Type</strong>: The kind of node, determined by the notation (required)</li><li><strong>Label</strong>: A human-readable display name (optional)</li><li><strong>Attributes</strong>: Additional properties like color, fontsize, etc. (optional)</li></ul><p><strong>Syntax:</strong></p><pre><code>node &lt;id&gt;: &lt;NodeType&gt; "&lt;label&gt;" [&lt;attributes&gt;];
+</code></pre><p><strong>Example:</strong></p><pre><code class="language-vgl">node q1: Question "What should we do?" [fontsize: 16; color: red];
+</code></pre><h3>Node Types</h3><p>Node types are defined by the chosen notation. Each notation has its own set of node types with specific purposes and default styling.</p><p><strong>IBIS Node Types:</strong></p><ul><li><code>Question</code> - A question or issue to be resolved (default: blue)</li><li><code>Answer</code> - A proposed answer or solution (default: pink)</li><li><code>Pro</code> - An argument supporting an answer (default: green)</li><li><code>Con</code> - An argument opposing an answer (default: red)</li></ul><p><strong>BBS Node Types:</strong></p><ul><li><code>InvestmentObjective</code> - High-level business objective</li><li><code>Benefit</code> - Expected benefit from the investment</li><li><code>BusinessChange</code> - Organizational or process change required</li><li><code>Enabler</code> - Technology or capability enabler</li></ul><p><strong>ImpactMapping Node Types:</strong></p><ul><li><code>Goal</code> - Strategic goal or objective (default: dark blue)</li><li><code>Actor</code> - Person or group who can produce impact (default: blue)</li><li><code>Impact</code> - Behavioral change or outcome (default: cyan)</li><li><code>Deliverable</code> - Product feature or capability (default: green)</li></ul><p><strong>ConceptMap Node Types:</strong></p><ul><li><code>Concept</code> - A concept or term (default: blue rounded box)</li><li><code>EmphasizedConcept</code> - An important concept to highlight (default: red rounded box)</li><li><code>Relation</code> - A relationship verb connecting concepts (default: bare text)</li></ul><p><strong>CRT Node Types:</strong></p><ul><li><code>UndesirableEffect</code> - An unwanted outcome requiring investigation (default: red)</li><li><code>IntermediateEffect</code> - A neutral outcome in the causal chain (default: blue)</li><li><code>DesirableEffect</code> - A wanted outcome caused by other conditions (default: green)</li><li><code>Given</code> - An unchangeable constant like laws or physics (default: dark purple)</li><li><code>Changeable</code> - A modifiable condition that can be addressed (default: light purple)</li><li><code>AndJunctor</code> - Indicates multiple conditions required simultaneously (icon: AND circle)</li><li><code>OrJunctor</code> - Indicates alternative causes (icon: OR circle)</li></ul><p><strong>FRT Node Types:</strong> FRT shares the same node types as CRT, as both are Theory of Constraints tools. The difference is in usage: FRT starts with solutions (Changeable/injections) and builds upward to show how they lead to desirable effects.</p><ul><li><code>Changeable</code> - Proposed solutions or injections to implement (default: light purple)</li><li><code>Given</code> - Unchangeable facts that still apply (default: dark purple)</li><li><code>IntermediateEffect</code> - Expected intermediate outcomes from solutions (default: blue)</li><li><code>DesirableEffect</code> - Goals we want to achieve (default: green)</li><li><code>UndesirableEffect</code> - Potential negative side effects to monitor (default: red)</li><li><code>AndJunctor</code> - Indicates multiple conditions required simultaneously (icon: AND circle)</li><li><code>OrJunctor</code> - Indicates alternative paths to outcomes (icon: OR circle)</li></ul><p><strong>PRT Node Types:</strong> PRT (Prerequisite Tree) is a planning tool using necessary condition thinking. It starts with the desired objective and works backward to identify obstacles and the intermediate objectives needed to overcome them.</p><ul><li><code>Objective</code> - The desired goal you aim to achieve (default: green)</li><li><code>Obstacle</code> - Barriers preventing objective achievement (default: red)</li><li><code>IntermediateObjective</code> - A milestone that overcomes a specific obstacle (default: blue)</li><li><code>OR</code> - Connector allowing optional conditions instead of requiring all predecessors (icon: OR circle)</li></ul><p><strong>TRT Node Types:</strong> TRT (Transition Tree) is an implementation planning tool that answers "HOW TO CAUSE the change?" by providing step-by-step actions needed to implement changes. It shares node types with CRT/FRT but focuses on the detailed action sequence.</p><ul><li><code>UndesirableEffect</code> - Current state problems being addressed (default: red)</li><li><code>IntermediateEffect</code> - Stepping stone outcomes from actions (default: blue)</li><li><code>DesirableEffect</code> - Goal outcomes we want to achieve (default: green)</li><li><code>Given</code> - Unchangeable facts and constraints (default: dark purple)</li><li><code>Changeable</code> - Actions we can take to cause change (default: light purple)</li><li><code>AndJunctor</code> - Indicates multiple conditions required together for an effect (icon: AND circle)</li></ul><p><strong>ADTree Node Types:</strong> ADTree (Attack-Defense Tree) is a security modelling methodology based on Kordy et al. (2014). It extends classical attack trees by allowing defense nodes at any level, modelling the ongoing arms race between attacker and defender.</p><ul><li><code>Attack</code> - An attacker's goal or sub-goal (default: red)</li><li><code>Defense</code> - A defender's countermeasure or protective measure (default: green)</li><li><code>AndJunctor</code> - Conjunctive refinement: all children must be achieved (icon: AND circle)</li><li><code>OrJunctor</code> - Disjunctive refinement: at least one child must be achieved (icon: OR circle)</li></ul><h3>Edges</h3><p>Edges represent connections between nodes. Each edge has:</p><ul><li><strong>From</strong>: Source node ID (required)</li><li><strong>To</strong>: Target node ID (required)</li><li><strong>Type</strong>: The kind of connection (optional, can be inferred)</li><li><strong>Label</strong>: A description of the relationship (optional)</li><li><strong>Attributes</strong>: Additional properties like style, weight, etc. (optional)</li></ul><p><strong>Syntax:</strong></p><pre><code>edge &lt;from_id&gt; -&gt; &lt;to_id&gt;: &lt;EdgeType&gt; "&lt;label&gt;" [&lt;attributes&gt;];
+</code></pre><p><strong>Concise Syntax</strong> (omitting type):</p><pre><code>edge &lt;from_id&gt; -&gt; &lt;to_id&gt;;
+</code></pre><p>When the edge type is omitted, VGL will automatically infer it based on the connected node types, if unambiguous.</p><p><strong>Example:</strong></p><pre><code class="language-vgl">edge q1 -&gt; a1: answered_by "Initial solution";
+edge a1 -&gt; pro1 [style: dashed];
+edge q2 -&gt; a2;  // Type inferred from node types
+</code></pre><h3>Edge Types</h3><p>Edge types are defined by the notation and specify valid connections between node types.</p><p><strong>IBIS Edge Types:</strong></p><ul><li><code>answered_by</code> - Connects Question → Answer</li><li><code>supports</code> - Connects Answer → Pro</li><li><code>objects_to</code> - Connects Answer → Con</li><li><code>pro_questions_question</code> - Connects Pro → Question</li><li><code>con_questions_question</code> - Connects Con → Question</li></ul><p><strong>BBS Edge Types:</strong></p><ul><li><code>requires_benefit</code> - Connects Benefit → InvestmentObjective</li><li><code>requires_business_change</code> - Connects BusinessChange → Benefit</li><li><code>requires_enabler</code> - Connects Enabler → BusinessChange</li><li><code>change_requires_change</code> - Connects BusinessChange → BusinessChange</li><li><code>enabler_requires_enabler</code> - Connects Enabler → Enabler</li></ul><p><strong>ImpactMapping Edge Types:</strong></p><ul><li><code>goal_to_actor</code> - Connects Goal → Actor</li><li><code>actor_to_impact</code> - Connects Actor → Impact</li><li><code>impact_to_deliverable</code> - Connects Impact → Deliverable</li></ul><p><strong>ConceptMap Edge Types:</strong></p><ul><li><code>concept_to_relation</code> - Connects Concept → Relation (tail marker only)</li><li><code>relation_to_concept</code> - Connects Relation → Concept (arrow head only)</li></ul><p><strong>CRT Edge Types:</strong> CRT has many edge types connecting causes to effects. The graph flows bottom-to-top (causes at bottom, effects at top).</p><p><em>From effects to effects:</em></p><ul><li><code>undesirable_causes_undesirable</code>, <code>undesirable_causes_intermediate</code>, <code>undesirable_causes_desirable</code></li><li><code>intermediate_causes_undesirable</code>, <code>intermediate_causes_intermediate</code>, <code>intermediate_causes_desirable</code></li><li><code>desirable_causes_undesirable</code>, <code>desirable_causes_intermediate</code>, <code>desirable_causes_desirable</code></li></ul><p><em>From Given/Changeable to effects:</em></p><ul><li><code>given_causes_undesirable</code>, <code>given_causes_intermediate</code>, <code>given_causes_desirable</code></li><li><code>changeable_causes_undesirable</code>, <code>changeable_causes_intermediate</code>, <code>changeable_causes_desirable</code></li></ul><p><em>To/From Junctors:</em></p><ul><li><code>*_to_and_junctor</code>, <code>*_to_or_junctor</code> - Connect any type to junctors</li><li><code>and_junctor_causes_*</code>, <code>or_junctor_causes_*</code> - Connect junctors to effects</li></ul><p><strong>FRT Edge Types:</strong> FRT shares the same edge types as CRT. The graph flows bottom-to-top (solutions at bottom, desired effects at top).</p><p><em>From Changeable/Given to effects (typical starting points in FRT):</em></p><ul><li><code>changeable_causes_undesirable</code>, <code>changeable_causes_intermediate</code>, <code>changeable_causes_desirable</code></li><li><code>given_causes_undesirable</code>, <code>given_causes_intermediate</code>, <code>given_causes_desirable</code></li></ul><p><em>Between effects:</em></p><ul><li><code>intermediate_causes_undesirable</code>, <code>intermediate_causes_intermediate</code>, <code>intermediate_causes_desirable</code></li><li><code>desirable_causes_*</code>, <code>undesirable_causes_*</code></li></ul><p><em>To/From Junctors:</em></p><ul><li><code>*_to_and_junctor</code>, <code>*_to_or_junctor</code> - Connect any type to junctors</li><li><code>and_junctor_causes_*</code>, <code>or_junctor_causes_*</code> - Connect junctors to effects</li></ul><p><strong>PRT Edge Types:</strong> PRT uses edges to show how obstacles block objectives and how intermediate objectives overcome obstacles. The graph flows bottom-to-top (intermediate objectives at bottom, main objective at top).</p><p><em>Obstacle blocking relationships:</em></p><ul><li><code>obstacle_blocks_objective</code> - Connects Obstacle → Objective</li><li><code>obstacle_blocks_intermediate_objective</code> - Connects Obstacle → IntermediateObjective</li></ul><p><em>Intermediate objective relationships:</em></p><ul><li><code>intermediate_objective_overcomes_obstacle</code> - Connects IntermediateObjective → Obstacle</li><li><code>intermediate_objective_to_objective</code> - Connects IntermediateObjective → Objective (direct path)</li></ul><p><em>To/From OR Junctor:</em></p><ul><li><code>obstacle_to_or</code>, <code>intermediate_objective_to_or</code> - Connect to OR junctor</li><li><code>or_to_objective</code>, <code>or_to_intermediate_objective</code>, <code>or_to_obstacle</code> - Connect from OR junctor</li></ul><p><strong>TRT Edge Types:</strong> TRT shares similar edge types with CRT/FRT but focuses on action planning. The graph flows bottom-to-top (actions at bottom, desired effects at top).</p><p><em>From Changeable/Given to effects (typical starting points for actions):</em></p><ul><li><code>changeable_causes_undesirable</code>, <code>changeable_causes_intermediate</code>, <code>changeable_causes_desirable</code></li><li><code>given_causes_undesirable</code>, <code>given_causes_intermediate</code>, <code>given_causes_desirable</code></li></ul><p><em>Between effects:</em></p><ul><li><code>intermediate_causes_undesirable</code>, <code>intermediate_causes_intermediate</code>, <code>intermediate_causes_desirable</code></li><li><code>desirable_causes_*</code>, <code>undesirable_causes_*</code></li></ul><p><em>To/From And Junctor:</em></p><ul><li><code>*_to_and_junctor</code> - Connect any type to And junctor</li><li><code>and_junctor_causes_*</code> - Connect And junctor to effects (excluding And)</li></ul><p><strong>ADTree Edge Types:</strong> ADTree uses two kinds of edges: refinement edges (solid lines) for same-type decomposition, and countermeasure edges (dotted lines) for opposite-type countering. The graph flows top-to-bottom (root goal at top).</p><p><em>Refinement edges (solid):</em></p><ul><li><code>attack_refines_attack</code> - Decompose an attack into sub-attacks</li><li><code>defense_refines_defense</code> - Decompose a defense into sub-defenses</li></ul><p><em>Countermeasure edges (dotted):</em></p><ul><li><code>defense_counters_attack</code> - A defense that mitigates an attack</li><li><code>attack_counters_defense</code> - An attack that circumvents a defense</li></ul><p><em>To/From Junctors:</em></p><ul><li><code>attack_to_and_junctor</code>, <code>defense_to_and_junctor</code> - Connect to AND junctor</li><li><code>and_junctor_to_attack</code>, <code>and_junctor_to_defense</code> - Connect from AND junctor</li><li><code>attack_to_or_junctor</code>, <code>defense_to_or_junctor</code> - Connect to OR junctor</li><li><code>or_junctor_to_attack</code>, <code>or_junctor_to_defense</code> - Connect from OR junctor</li></ul><p>Edge types ensure that connections make semantic sense within the notation's domain.</p><h3>Groups</h3><p>Groups organize nodes hierarchically and can be nested to create subgroups. Groups help visually organize complex graphs.</p><p><strong>Syntax:</strong></p><pre><code>group &lt;id&gt; "&lt;label&gt;" {
+    &lt;attributes&gt;;
+    &lt;nodes&gt;;
+    &lt;edges&gt;;
+    &lt;nested_groups&gt;;
+};
+</code></pre><p><strong>Features:</strong></p><ul><li>Groups can contain nodes, edges, and other groups</li><li>Groups can have attributes like <code>style</code>, <code>color</code>, <code>label</code></li><li>Groups can be nested to unlimited depth</li><li>Edges can connect nodes across different groups</li></ul><p><strong>Example:</strong></p><pre><code class="language-vgl">group research "Research Phase" {
+    style: filled;
+    color: lightblue;
+
+    node q1: Question "What to research?";
+    node a1: Answer "User interviews";
+
+    group methodology "Methods" {
+        node m1: Pro "Direct feedback";
+    };
+};
+</code></pre><h3>Attributes</h3><p>Attributes customize the appearance and behavior of nodes, edges, and groups.</p><p><strong>Inline Syntax</strong> (brackets):</p><pre><code>[attribute1: value1; attribute2: value2]
+</code></pre><p><strong>Graph-Level Attributes</strong> (inside graph body):</p><pre><code>rankdir: LR;
+fontcolor: darkblue;
+</code></pre><p><strong>Common Node Attributes:</strong></p><ul><li><code>color</code> - Node color (e.g., <code>red</code>, <code>blue</code>, <code>#FF0000</code>)</li><li><code>fontsize</code> - Font size for node label (number)</li><li><code>shape</code> - Node shape (varies by notation)</li></ul><p><strong>Common Edge Attributes:</strong></p><ul><li><code>style</code> - Line style (<code>solid</code>, <code>dashed</code>, <code>dotted</code>)</li><li><code>weight</code> - Edge weight (number)</li><li><code>label</code> - Edge label text</li></ul><p><strong>Common Group Attributes:</strong></p><ul><li><code>style</code> - Group style (<code>filled</code>, <code>dashed</code>, <code>dotted</code>)</li><li><code>color</code> - Group background or border color</li><li><code>label</code> - Group display name</li></ul><p><strong>Common Graph Attributes:</strong></p><ul><li><code>rankdir</code> - Layout direction (<code>LR</code> for left-to-right, <code>TB</code> for top-to-bottom)</li><li><code>fontcolor</code> - Default font color</li><li><code>labeljust</code> - Label justification (<code>l</code> for left, <code>r</code> for right, <code>c</code> for center)</li></ul><h3>Comments</h3><p>VGL supports single-line comments using <code>//</code>:</p><pre><code class="language-vgl">// This is a comment
+node q1: Question "Main question";  // This is also a comment
+</code></pre><p>Comments can appear anywhere in the document and are ignored by the parser.</p><hr><h2>Grammar</h2><p>The VGL grammar is defined as follows (simplified BNF notation):</p><pre><code>document     ::= "vgraph" identifier ":" notation label? "{" statement* "}"
+
+notation     ::= identifier
+                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, FRT, PRT, TRT, ADTree
+
+statement    ::= group | node | edge | attribute
+
+group        ::= "group" identifier label? "{" statement* "}" ";"?
+
+node         ::= "node" identifier ":" identifier label? attributes? ";"?
+
+edge         ::= "edge" identifier "-&gt;" identifier (":" identifier)? label? attributes? ";"?
+
+attribute    ::= identifier ":" value ";"?
+
+attributes   ::= "[" (attribute (";" | ",")?)* "]"
+
+label        ::= quoted_string
+
+value        ::= quoted_string | number | identifier
+
+identifier   ::= [a-zA-Z0-9_\.\,\-]+
+
+number       ::= [-]?[0-9]+(\.[0-9]+)?
+
+quoted_string::= "\"" ([^\"\\] | "\\" .)* "\""
+
+comment      ::= "//" [^\n]*
+</code></pre><p><strong>Key Grammar Rules:</strong></p><ol><li><strong>Document Structure</strong>: Every VGL file must start with a <code>vgraph</code> declaration</li><li><strong>Node IDs</strong>: Must be unique throughout the document</li><li><strong>Edge References</strong>: Edges can only reference nodes that have been declared</li><li><strong>Type Validation</strong>: Node types and edge types must be valid for the chosen notation, or will be marked as "unknown"</li><li><strong>Attributes</strong>: Can appear inline with brackets <code>[]</code> or as separate statements within groups</li><li><strong>Semicolons</strong>: Optional after nodes, edges, groups, and standalone attributes</li><li><strong>Quoted Strings</strong>: Used for labels and string attribute values, support escape sequences (<code>\"</code>, <code>\\</code>, etc.)</li><li><strong>Comments</strong>: Single-line only, using <code>//</code> syntax</li></ol><hr><h2>Examples</h2><h3>Example 1: Simple IBIS Graph</h3><p>A basic decision-making graph with questions and answers:</p><pre><code class="language-vgl">vgraph simple_decision: IBIS "Simple Decision" {
+    node q1: Question "What framework should we use?";
+    node a1: Answer "React";
+    node a2: Answer "Vue";
+
+    edge q1 -&gt; a1;
+    edge q1 -&gt; a2;
+}
+</code></pre><h3>Example 2: IBIS with Arguments</h3><p>A more complete decision graph with pro and con arguments:</p><pre><code class="language-vgl">vgraph tech_decision: IBIS "Technology Decision" {
+    node q1: Question "Which database should we use?";
+    node a1: Answer "PostgreSQL";
+    node a2: Answer "MongoDB";
+
+    node pro1: Pro "ACID compliance";
+    node pro2: Pro "Flexible schema";
+    node con1: Con "More complex setup";
+    node con2: Con "Limited transaction support";
+
+    edge q1 -&gt; a1: answered_by;
+    edge q1 -&gt; a2: answered_by;
+    edge a1 -&gt; pro1: supports;
+    edge a1 -&gt; con1: objects_to;
+    edge a2 -&gt; pro2: supports;
+    edge a2 -&gt; con2: objects_to;
+}
+</code></pre><h3>Example 3: Using Groups</h3><p>Organizing nodes into logical groups:</p><pre><code class="language-vgl">vgraph project_planning: IBIS "Project Planning" {
+    node main_q: Question "How should we structure the project?" [fontsize: 20];
+
+    group architecture "Architecture Decisions" {
+        style: filled;
+        color: lightblue;
+
+        node q1: Question "Which architecture pattern?";
+        node a1: Answer "Microservices";
+        node a2: Answer "Monolithic";
+
+        edge q1 -&gt; a1;
+        edge q1 -&gt; a2;
+    };
+
+    group testing "Testing Strategy" {
+        style: filled;
+        color: lightgreen;
+
+        node q2: Question "What testing approach?";
+        node a3: Answer "TDD";
+        node a4: Answer "BDD";
+
+        edge q2 -&gt; a3;
+        edge q2 -&gt; a4;
+    };
+
+    edge main_q -&gt; q1: answered_by "Consider architecture";
+    edge main_q -&gt; q2: answered_by "Define testing";
+}
+</code></pre><h3>Example 4: Nested Groups with Attributes</h3><p>Complex hierarchical structure with styling:</p><pre><code class="language-vgl">vgraph research_project: IBIS "Research Project" {
+    rankdir: LR;
+
+    group phase1 "Discovery Phase" {
+        style: filled;
+        color: lightyellow;
+
+        node q1: Question "What should we research?" [fontsize: 16];
+        node a1: Answer "User behavior" [fontsize: 14];
+        node a2: Answer "Market trends" [fontsize: 14];
+
+        group methods "Research Methods" {
+            style: dashed;
+            color: orange;
+
+            node pro1: Pro "Interviews provide depth" [fontsize: 12];
+            node pro2: Pro "Surveys give breadth" [fontsize: 12];
+            node con1: Con "Time consuming" [fontsize: 12];
+        };
+
+        edge q1 -&gt; a1;
+        edge q1 -&gt; a2;
+        edge a1 -&gt; pro1: supports;
+        edge a1 -&gt; con1: objects_to;
+    };
+
+    group phase2 "Analysis Phase" {
+        style: filled;
+        color: lightblue;
+
+        node q2: Question "How to analyze data?" [fontsize: 16];
+        node a3: Answer "Quantitative analysis" [fontsize: 14];
+    };
+}
+</code></pre><h3>Example 5: Minimal Syntax</h3><p>Using the most concise syntax available:</p><pre><code class="language-vgl">vgraph minimal: IBIS "Minimal Example" {
+    // Questions and answers
+    node q1: Question "Question 1";
+    node a1: Answer "Answer 1";
+    node a2: Answer "Answer 2";
+
+    // Arguments
+    node p1: Pro "Pro argument";
+    node c1: Con "Con argument";
+
+    // Edges with inferred types
+    edge q1 -&gt; a1;
+    edge q1 -&gt; a2;
+    edge a1 -&gt; p1;
+    edge a1 -&gt; c1;
+}
+</code></pre><h3>Example 6: Complex Graph with All Features</h3><p>A comprehensive example demonstrating all VGL features:</p><pre><code class="language-vgl">vgraph comprehensive: IBIS "Comprehensive Example" {
+    // Graph-level properties
+    rankdir: LR;
+    fontcolor: darkblue;
+    labeljust: l;
+
+    // Root-level nodes
+    node root: Question "Main Question" [fontsize: 20; color: navy];
+    node ans1: Answer "Primary Solution" [fontsize: 16];
+    node ans2: Answer "Alternative Solution" [fontsize: 16];
+
+    // Detailed analysis group
+    group analysis "Detailed Analysis" {
+        style: filled;
+        color: lightgray;
+
+        node q_perf: Question "What about performance?";
+        node a_fast: Answer "Optimize critical paths" [color: green];
+        node pro_perf: Pro "40% faster response time" [fontsize: 12];
+
+        // Nested considerations
+        group tradeoffs "Trade-offs" {
+            style: dashed;
+            color: yellow;
+
+            node con_complex: Con "Increased code complexity" [fontsize: 10];
+            node q_maint: Question "Can we maintain this?" [fontsize: 11];
+        };
+
+        edge q_perf -&gt; a_fast: answered_by;
+        edge a_fast -&gt; pro_perf: supports;
+        edge a_fast -&gt; con_complex: objects_to;
+        edge con_complex -&gt; q_maint: con_questions_question "Raises concern";
+    };
+
+    // Implementation group
+    group implementation "Implementation Plan" {
+        style: filled;
+        color: lightblue;
+
+        node q_when: Question "When to implement?" [fontsize: 14];
+        node a_phase: Answer "Phased rollout" [fontsize: 13];
+        node pro_safe: Pro "Reduces risk" [fontsize: 11];
+
+        edge q_when -&gt; a_phase;
+        edge a_phase -&gt; pro_safe;
+    };
+
+    // Cross-group connections
+    edge root -&gt; ans1: answered_by "Main path";
+    edge root -&gt; ans2: answered_by "Backup option";
+    edge ans1 -&gt; q_perf: answered_by [style: dashed; weight: 5];
+    edge ans2 -&gt; q_when: answered_by;
+}
+</code></pre><h3>Example 7: Using Explicit Edge Types</h3><p>Demonstrating all IBIS edge types:</p><pre><code class="language-vgl">vgraph edge_types: IBIS "Edge Type Examples" {
+    // Setup nodes
+    node q1: Question "Should we proceed?";
+    node a1: Answer "Yes, with caution";
+    node pro1: Pro "Market opportunity";
+    node con1: Con "Technical debt";
+    node q2: Question "How to mitigate risks?";
+
+    // Demonstrate each edge type
+    edge q1 -&gt; a1: answered_by;
+    edge a1 -&gt; pro1: supports;
+    edge a1 -&gt; con1: objects_to;
+    edge pro1 -&gt; q2: pro_questions_question;
+    edge con1 -&gt; q2: con_questions_question;
+}
+</code></pre><h3>Example 8: Impact Mapping</h3><p>A strategic planning graph showing goals, actors, impacts, and deliverables:</p><pre><code class="language-vgl">vgraph mobileApp: ImpactMapping "Mobile App Launch" {
+    node g1: Goal "Increase Revenue by 30%";
+    node a1: Actor "New Customers";
+    node a2: Actor "Existing Customers";
+    node i1: Impact "Make First Purchase";
+    node i2: Impact "Increase Purchase Frequency";
+    node i3: Impact "Upgrade to Premium";
+    node d1: Deliverable "Mobile App with Easy Checkout";
+    node d2: Deliverable "Push Notifications for Deals";
+    node d3: Deliverable "Loyalty Rewards Program";
+    node d4: Deliverable "Premium Features Bundle";
+
+    edge g1 -&gt; a1: goal_to_actor;
+    edge g1 -&gt; a2: goal_to_actor;
+    edge a1 -&gt; i1: actor_to_impact;
+    edge a2 -&gt; i2: actor_to_impact;
+    edge a2 -&gt; i3: actor_to_impact;
+    edge i1 -&gt; d1: impact_to_deliverable;
+    edge i2 -&gt; d2: impact_to_deliverable;
+    edge i2 -&gt; d3: impact_to_deliverable;
+    edge i3 -&gt; d4: impact_to_deliverable;
+}
+</code></pre><h3>Example 9: Impact Mapping with Inferred Types</h3><p>Using type inference for cleaner syntax:</p><pre><code class="language-vgl">vgraph product_growth: ImpactMapping "Product Growth Strategy" {
+    // Strategic goal
+    node goal: Goal "Double User Engagement";
+
+    // Key actors
+    node power_users: Actor "Power Users";
+    node casual_users: Actor "Casual Users";
+    node new_users: Actor "New Users";
+
+    // Desired impacts
+    node i1: Impact "Share content more frequently";
+    node i2: Impact "Complete onboarding successfully";
+    node i3: Impact "Return within 7 days";
+
+    // Required deliverables
+    node d1: Deliverable "Social sharing features";
+    node d2: Deliverable "Interactive tutorial";
+    node d3: Deliverable "Email reminder system";
+
+    // Connections with inferred types
+    edge goal -&gt; power_users;
+    edge goal -&gt; casual_users;
+    edge goal -&gt; new_users;
+    edge power_users -&gt; i1;
+    edge new_users -&gt; i2;
+    edge casual_users -&gt; i3;
+    edge i1 -&gt; d1;
+    edge i2 -&gt; d2;
+    edge i3 -&gt; d3;
+}
+</code></pre><h3>Example 10: Concept Map</h3><p>Visualizing relationships between concepts using linking verbs:</p><pre><code class="language-vgl">vgraph learningCM: ConceptMap "How Learning Works" {
+    // Main concepts
+    node c1: Concept "Student";
+    node c2: Concept "Subject";
+    node c3: EmphasizedConcept "Practice";  // Emphasized for importance
+    node c4: Concept "Understanding";
+    node c5: Concept "Resources";
+
+    // Relationship verbs (relations)
+    node r1: Relation "learns";
+    node r2: Relation "requires";
+    node r3: Relation "leads to";
+    node r4: Relation "uses";
+
+    // Concept map connections
+    // Pattern: Concept -&gt; Relation -&gt; Concept
+    edge c1 -&gt; r1: concept_to_relation;
+    edge r1 -&gt; c2: relation_to_concept;
+    edge c2 -&gt; r2: concept_to_relation;
+    edge r2 -&gt; c3: relation_to_concept;
+    edge c3 -&gt; r3: concept_to_relation;
+    edge r3 -&gt; c4: relation_to_concept;
+    edge c2 -&gt; r4: concept_to_relation;
+    edge r4 -&gt; c5: relation_to_concept;
+}
+</code></pre><p><strong>Note</strong>: In concept maps, relationships are represented as nodes (Relation type) rather than edge labels. This creates readable propositions like "Student learns Subject" and "Subject requires Practice".</p><h3>Example 11: Current Reality Tree (CRT)</h3><p>A root cause analysis graph showing how causes lead to undesirable effects:</p><pre><code class="language-vgl">vgraph salesDecline: CRT "Sales Decline Analysis" {
+    // Undesirable Effects (problems at the top)
+    node ude1: UndesirableEffect "Sales revenue declining";
+    node ude2: UndesirableEffect "Customer complaints increasing";
+    node ude3: UndesirableEffect "Market share decreasing";
+
+    // Intermediate Effects (neutral outcomes in the causal chain)
+    node ie1: IntermediateEffect "Customers switching to competitors";
+    node ie2: IntermediateEffect "Product perceived as outdated";
+    node ie3: IntermediateEffect "Support response time is slow";
+
+    // Desirable Effects (things we want to keep)
+    node de1: DesirableEffect "Brand reputation still strong";
+
+    // Given (unchangeable facts at the bottom)
+    node g1: Given "Market is highly competitive";
+    node g2: Given "Customer expectations keep rising";
+
+    // Changeable (root causes we can address)
+    node c1: Changeable "Product development cycle is too long";
+    node c2: Changeable "Support team is understaffed";
+    node c3: Changeable "No customer feedback loop";
+
+    // Junctors for combining conditions
+    node and1: AndJunctor "";
+    node or1: OrJunctor "";
+
+    // Root causes leading to intermediate effects
+    edge c1 -&gt; ie2: changeable_causes_intermediate;
+    edge c3 -&gt; ie2: changeable_causes_intermediate;
+    edge c2 -&gt; ie3: changeable_causes_intermediate;
+
+    // Given facts contributing to situation
+    edge g1 -&gt; ie1: given_causes_intermediate;
+    edge g2 -&gt; and1: given_to_and_junctor;
+    edge ie2 -&gt; and1: intermediate_to_and_junctor;
+
+    // And junctor combining conditions
+    edge and1 -&gt; ie1: and_junctor_causes_intermediate;
+
+    // Or junctor for alternative paths
+    edge ie1 -&gt; or1: intermediate_to_or_junctor;
+    edge ie3 -&gt; or1: intermediate_to_or_junctor;
+
+    // Intermediate effects leading to undesirable effects
+    edge or1 -&gt; ude2: or_junctor_causes_undesirable;
+    edge ie1 -&gt; ude1: intermediate_causes_undesirable;
+    edge ie1 -&gt; ude3: intermediate_causes_undesirable;
+
+    // Brand reputation affected but still positive
+    edge ie2 -&gt; de1: intermediate_causes_desirable;
+}
+</code></pre><p><strong>Note</strong>: CRT graphs flow bottom-to-top, with root causes (Given and Changeable) at the bottom and Undesirable Effects at the top. The AndJunctor indicates multiple conditions must be true together, while OrJunctor indicates any one of the conditions is sufficient. Labels for junctors are typically empty as the icon conveys the meaning.</p><h3>Example 12: Future Reality Tree (FRT)</h3><p>A solution validation graph showing how proposed solutions lead to desired outcomes:</p><pre><code class="language-vgl">vgraph salesSolution: FRT "Sales Improvement Plan" {
+    // Changeable nodes (injections/solutions we will implement)
+    node c1: Changeable "Implement agile product development";
+    node c2: Changeable "Hire additional support staff";
+    node c3: Changeable "Create customer feedback system";
+
+    // Given (unchangeable facts that still apply)
+    node g1: Given "Market is highly competitive";
+    node g2: Given "Customer expectations keep rising";
+
+    // Intermediate Effects (expected outcomes from our solutions)
+    node ie1: IntermediateEffect "Faster product iterations";
+    node ie2: IntermediateEffect "Products match customer needs";
+    node ie3: IntermediateEffect "Support response time improves";
+    node ie4: IntermediateEffect "Customer feedback drives development";
+
+    // Junctors for combining conditions
+    node and1: AndJunctor "";
+    node or1: OrJunctor "";
+
+    // Desirable Effects (the goals we want to achieve)
+    node de1: DesirableEffect "Sales revenue increasing";
+    node de2: DesirableEffect "Customer satisfaction high";
+    node de3: DesirableEffect "Market share growing";
+
+    // Potential negative side effects (to monitor)
+    node ude1: UndesirableEffect "Initial implementation costs";
+
+    // Solutions leading to intermediate effects
+    edge c1 -&gt; ie1: changeable_causes_intermediate;
+    edge c3 -&gt; ie4: changeable_causes_intermediate;
+    edge c2 -&gt; ie3: changeable_causes_intermediate;
+
+    // Given facts combining with solutions
+    edge g2 -&gt; and1: given_to_and_junctor;
+    edge ie4 -&gt; and1: intermediate_to_and_junctor;
+
+    // And junctor combining conditions
+    edge and1 -&gt; ie2: and_junctor_causes_intermediate;
+
+    // Multiple paths can lead to customer satisfaction
+    edge ie2 -&gt; or1: intermediate_to_or_junctor;
+    edge ie3 -&gt; or1: intermediate_to_or_junctor;
+
+    // Intermediate effects leading to desirable effects
+    edge or1 -&gt; de2: or_junctor_causes_desirable;
+    edge ie1 -&gt; de3: intermediate_causes_desirable;
+    edge ie2 -&gt; de1: intermediate_causes_desirable;
+    edge ie2 -&gt; de3: intermediate_causes_desirable;
+
+    // Acknowledging potential downsides
+    edge c1 -&gt; ude1: changeable_causes_undesirable;
+    edge c2 -&gt; ude1: changeable_causes_undesirable;
+
+    // Given competitive market affects outcomes
+    edge g1 -&gt; ie2: given_causes_intermediate;
+}
+</code></pre><p><strong>Note</strong>: FRT graphs also flow bottom-to-top like CRT, but with a different focus. While CRT starts with problems (Undesirable Effects) and traces back to root causes, FRT starts with proposed solutions (Changeable/injections) and traces forward to show how they achieve desired outcomes. This makes FRT ideal for validating that proposed changes will actually deliver the expected benefits.</p><h3>Example 13: Prerequisite Tree (PRT)</h3><p>A planning graph showing obstacles blocking objectives and intermediate objectives to overcome them:</p><pre><code class="language-vgl">vgraph projectLaunch: PRT "New Product Launch Planning" {
+    // The main objective we want to achieve
+    node obj1: Objective "Successfully launch product by Q3";
+
+    // Obstacles blocking the main objective
+    node obs1: Obstacle "Development team lacks required skills";
+    node obs2: Obstacle "Marketing budget not approved";
+    node obs3: Obstacle "No distribution channel established";
+
+    // Intermediate objectives to overcome obstacles
+    node io1: IntermediateObjective "Train team on new technology";
+    node io2: IntermediateObjective "Hire experienced developers";
+    node io3: IntermediateObjective "Present ROI analysis to leadership";
+    node io4: IntermediateObjective "Partner with existing retailer";
+    node io5: IntermediateObjective "Build direct-to-consumer channel";
+
+    // OR junctor for alternative paths
+    node or1: OR;
+    node or2: OR;
+
+    // Further obstacles blocking intermediate objectives
+    node obs4: Obstacle "Training budget limited";
+    node obs5: Obstacle "Talent pool is competitive";
+
+    // Obstacles block the main objective
+    edge obs1 -&gt; obj1: obstacle_blocks_objective;
+    edge obs2 -&gt; obj1: obstacle_blocks_objective;
+    edge obs3 -&gt; obj1: obstacle_blocks_objective;
+
+    // Alternative ways to overcome skill obstacle (via OR)
+    edge io1 -&gt; or1: intermediate_objective_to_or;
+    edge io2 -&gt; or1: intermediate_objective_to_or;
+    edge or1 -&gt; obs1: or_to_obstacle;
+
+    // ROI analysis overcomes budget obstacle
+    edge io3 -&gt; obs2: intermediate_objective_overcomes_obstacle;
+
+    // Alternative distribution solutions
+    edge io4 -&gt; or2: intermediate_objective_to_or;
+    edge io5 -&gt; or2: intermediate_objective_to_or;
+    edge or2 -&gt; obs3: or_to_obstacle;
+
+    // Recursive obstacles blocking intermediate objectives
+    edge obs4 -&gt; io1: obstacle_blocks_intermediate_objective;
+    edge obs5 -&gt; io2: obstacle_blocks_intermediate_objective;
+}
+</code></pre><p><strong>Note</strong>: PRT graphs flow bottom-to-top like other TOC tools. The main Objective sits at the top, with Obstacles directly below showing what blocks it. IntermediateObjectives below the obstacles show what needs to be achieved to overcome them. The OR junctor indicates alternative paths - only one of the connected intermediate objectives needs to be achieved. PRT embodies "necessary condition thinking" - working backward from the goal to identify all prerequisites.</p><h3>Example 14: Transition Tree (TRT)</h3><p>A step-by-step implementation planning graph showing how actions lead to desired outcomes:</p><pre><code class="language-vgl">vgraph agileTransition: TRT "Agile Transformation Implementation" {
+    // Given conditions (the context we're working within)
+    node g1: Given "Company has 5 development teams";
+    node g2: Given "Current waterfall process causes delays";
+
+    // Changeable causes (actions we will take)
+    node c1: Changeable "Introduce daily standups";
+    node c2: Changeable "Implement CI/CD pipeline";
+    node c3: Changeable "Create cross-functional teams";
+    node c4: Changeable "Train teams on Scrum practices";
+
+    // Intermediate effects (stepping stones from actions)
+    node ie1: IntermediateEffect "Teams communicate more frequently";
+    node ie2: IntermediateEffect "Code integration happens daily";
+    node ie3: IntermediateEffect "Teams have diverse skillsets";
+    node ie4: IntermediateEffect "Teams follow iterative process";
+    node ie5: IntermediateEffect "Silos are broken down";
+
+    // And junctors for combined conditions
+    node and1: AndJunctor "";
+    node and2: AndJunctor "";
+
+    // Desirable effects (the goals we achieve)
+    node de1: DesirableEffect "Faster time to market";
+    node de2: DesirableEffect "Higher quality releases";
+    node de3: DesirableEffect "Better team collaboration";
+
+    // Actions lead to intermediate effects
+    edge c1 -&gt; ie1: changeable_causes_intermediate;
+    edge c2 -&gt; ie2: changeable_causes_intermediate;
+    edge c3 -&gt; ie3: changeable_causes_intermediate;
+    edge c4 -&gt; ie4: changeable_causes_intermediate;
+
+    // Given context combines with cross-functional teams
+    edge g1 -&gt; and1: given_to_and_junctor;
+    edge ie3 -&gt; and1: intermediate_to_and_junctor;
+    edge and1 -&gt; ie5: and_junctor_causes_intermediate;
+
+    // Breaking silos leads to collaboration
+    edge ie5 -&gt; de3: intermediate_causes_desirable;
+
+    // Communication helps collaboration too
+    edge ie1 -&gt; de3: intermediate_causes_desirable;
+
+    // CI/CD + iterative process combine for quality
+    edge ie2 -&gt; and2: intermediate_to_and_junctor;
+    edge ie4 -&gt; and2: intermediate_to_and_junctor;
+    edge and2 -&gt; de2: and_junctor_causes_desirable;
+
+    // Quality and collaboration lead to speed
+    edge de2 -&gt; de1: desirable_causes_desirable;
+    edge de3 -&gt; de1: desirable_causes_desirable;
+
+    // Given waterfall context is addressed by iterative process
+    edge g2 -&gt; ie4: given_causes_intermediate;
+}
+</code></pre><p><strong>Note</strong>: TRT graphs flow bottom-to-top like other TOC tools. The focus is on detailed implementation planning - answering "HOW TO CAUSE the change?" Unlike FRT which validates that solutions will work, TRT provides the step-by-step action sequence needed to implement those solutions. Changeable nodes represent the specific actions to take, and the graph shows how those actions combine through intermediate effects to achieve desirable outcomes. The AndJunctor indicates multiple conditions must occur together for an effect.</p><h3>Example 15: Attack-Defense Tree (ADTree)</h3><p>A security modelling graph showing how defenses protect a system and how attacks can circumvent them. Based on the data confidentiality scenario from Kordy et al. (2014):</p><pre><code class="language-vgl">vgraph dataConfidentiality: ADTree "Data Confidentiality" {
+    // Defense nodes (defender's goals)
+    node dataConf: Defense "Data Confidentiality";
+    node networkSec: Defense "Network Security";
+    node physicalSec: Defense "Physical Security";
+    node accessControl: Defense "Access Control";
+    node passwords: Defense "Passwords";
+    node strongPasswords: Defense "Strong Passwords";
+    node lock1: Defense "Lock";
+    node screening: Defense "Screening";
+    node securityGuard: Defense "Security Guard";
+    node videoCameras: Defense "Video Cameras";
+
+    // Attack nodes (attacker's goals)
+    node employeeAttack: Attack "Employee Attack";
+    node breakIn: Attack "Break In";
+    node corruption: Attack "Corruption";
+    node socialEngineering: Attack "Social Engineering";
+    node dictionaryAttack: Attack "Dictionary Attack";
+    node backDoor: Attack "Back Door";
+    node defeatLock: Attack "Defeat Lock";
+    node forceOpen: Attack "Force Open";
+    node acquireKeys: Attack "Acquire Keys";
+    node defeatGuard: Attack "Defeat Guard";
+    node bribe: Attack "Bribe";
+    node overpower: Attack "Overpower";
+    node stealKeys: Attack "Steal Keys";
+    node outnumber: Attack "Outnumber";
+    node useWeapons: Attack "Use Weapons";
+
+    // AND junctors for conjunctive refinement
+    node andDataConf: AndJunctor;
+    node andOverpower: AndJunctor;
+
+    // Defense refines into sub-defenses via AND junctor (both required)
+    edge networkSec -&gt; andDataConf: defense_to_and_junctor;
+    edge physicalSec -&gt; andDataConf: defense_to_and_junctor;
+    edge andDataConf -&gt; dataConf: and_junctor_to_defense;
+    edge accessControl -&gt; networkSec: defense_refines_defense;
+    edge passwords -&gt; accessControl: defense_refines_defense;
+
+    // Attack refines into sub-attacks (solid edges)
+    edge corruption -&gt; employeeAttack: attack_refines_attack;
+    edge socialEngineering -&gt; employeeAttack: attack_refines_attack;
+    edge backDoor -&gt; breakIn: attack_refines_attack;
+    edge forceOpen -&gt; defeatLock: attack_refines_attack;
+    edge acquireKeys -&gt; defeatLock: attack_refines_attack;
+    edge bribe -&gt; defeatGuard: attack_refines_attack;
+    edge overpower -&gt; defeatGuard: attack_refines_attack;
+    edge stealKeys -&gt; defeatGuard: attack_refines_attack;
+
+    // Countermeasure: defense counters attack (dotted edges)
+    edge strongPasswords -&gt; dictionaryAttack: defense_counters_attack;
+    edge lock1 -&gt; backDoor: defense_counters_attack;
+    edge screening -&gt; corruption: defense_counters_attack;
+    edge securityGuard -&gt; breakIn: defense_counters_attack;
+    edge videoCameras -&gt; defeatGuard: defense_counters_attack;
+
+    // Countermeasure: attack counters defense (dotted edges)
+    edge employeeAttack -&gt; dataConf: attack_counters_defense;
+    edge breakIn -&gt; physicalSec: attack_counters_defense;
+    edge dictionaryAttack -&gt; passwords: attack_counters_defense;
+    edge defeatLock -&gt; lock1: attack_counters_defense;
+    edge defeatGuard -&gt; securityGuard: attack_counters_defense;
+
+    // AND junctor: conjunctive refinement
+    edge outnumber -&gt; andOverpower: attack_to_and_junctor;
+    edge useWeapons -&gt; andOverpower: attack_to_and_junctor;
+    edge andOverpower -&gt; overpower: and_junctor_to_attack;
+}
+</code></pre><p><strong>Note</strong>: ADTree graphs flow bottom-to-top with the root goal at the top and leaf actions at the bottom. The key feature is the distinction between refinement edges (solid lines for same-type decomposition) and countermeasure edges (dotted lines for opposite-type countering). This allows modelling the ongoing arms race between attacker and defender at any level of the tree. The root node can be either an Attack or Defense node, determining whether the proponent is the attacker or defender.</p><hr><h2>Best Practices</h2><ol><li><strong>Use Meaningful IDs</strong>: Choose descriptive node IDs like <code>security_question</code> instead of <code>n1</code></li><li><strong>Organize with Groups</strong>: Use groups to organize related nodes and improve readability</li><li><strong>Leverage Type Inference</strong>: Omit edge types when they can be inferred from node types</li><li><strong>Add Labels</strong>: Always provide labels for better human readability</li><li><strong>Comment Your Graphs</strong>: Use comments to explain complex relationships or decisions</li><li><strong>Keep It Simple</strong>: Start with minimal syntax and add attributes only when needed</li><li><strong>Consistent Naming</strong>: Use a consistent naming convention for IDs (e.g., snake_case or camelCase)</li><li><strong>Hierarchical Organization</strong>: Use nested groups to reflect the natural hierarchy of your domain</li></ol><hr><h2>Error Handling</h2><p>VGL provides clear error messages for common issues:</p><ul><li><strong>Duplicate Node ID</strong>: Each node ID must be unique</li><li><strong>Undefined Node Reference</strong>: Edges can only reference existing nodes</li><li><strong>Invalid Node Type</strong>: Node types must exist in the chosen notation (creates "unknown" type)</li><li><strong>Invalid Edge Type</strong>: Edge types must be valid for the connected node types (creates "unknown" edge type)</li><li><strong>Syntax Errors</strong>: Missing semicolons, braces, or other syntax requirements</li></ul><p>When a node type or edge type is not found in the notation, VGL will create an "unknown" type to allow the graph to be processed, but you should verify that the type names are correct.</p></div></article>
+            <aside class="side-content">
+                <div class="preview__article-details">
+                    <p class="tag-list-title">Tagged with:</p>
+                    <ul class="preview__article-tags">
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/vgl">VGL</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/graph-language">Graph Language</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/notation">Notation</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/documentation">Documentation</a></div></li></ul></div>
+                <div class="newsletter" height="350" width="250">
+                    <img src="/images/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <p>See how you can combine your brain power with structured visual and achieve better results.</p>
+                    <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
+                <div></div></aside></div>
+        <footer>
+            <div>
+                <p class="footer-title">                    <img src="/logo.png" width="16px" class="content_logo"/>
+Vithanco Home </p>
+                <nav>
+                    <p>Dr. Ing. Klaus Kneupner, MBA</p>
+                    <ul>
+                        <li>
+                            <a href="https://linkedIn.com/in/Kneupner">
+                                <img src="/images/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bsky.app/profile/vithanco.bsky.social">
+                                <img src="/images/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://mastodon.social/@vithanco">
+                                <img src="/images/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/feed.rss">
+                                <img src="/images/socialmedia-icons/rss.svg" alt="RSS"/>
+                            </a>
+                        </li>
+                    </ul></nav></div></footer></body>
+</html>
