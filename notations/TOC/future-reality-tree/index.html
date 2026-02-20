@@ -19,6 +19,38 @@
         <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
         <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
         <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
         <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
     </head>
@@ -47,7 +79,74 @@
                 <h1>The Future Reality Tree (FRT) Notation</h1>
                 <div class="reading-time">
                     <p>Estimated reading time: 2 minutes.</p></div>
-                <div class="content"><p><strong>Why use Future Reality Trees (FRTs)?</strong></p><p>FRTs lay out a sequence of cause-and-effect relationships that connect proposed solutions to desired effects (DEs). FRTs use 'If... Then...' logic to answer the question, 'TO WHAT should we change?'</p><p>In contrast with a Current Reality Tree (CRT):</p><ul><li>A CRT starts with a set of Undesirable Effects (UDEs), leading down to the Core Driver, from which we invent Solutions.</li><li>An FRT begins with a potential Solution and builds upward to a set of Desirable Effects (DEs).</li></ul><p>FRTs can be constructed not only from a previously conceived solution but also from other parts of previously created CRTs and Clouds.</p><h2>FRT Notation Description</h2><p>The diagram below outlines the notation's structure. FRTs start with proposed solutions (Changeable nodes) and build upward to show how those solutions lead to Desirable Effects.</p><p>From there, we follow sufficient cause logic to trace the effects. Each cause itself becomes an effect (desirable, undesirable, or intermediate). "Given" causes (things that cannot be changed) may also contribute to the chain. The goal is to validate that the proposed solutions will indeed achieve the desired outcomes.</p><img src="/images/notations/FRT/FutureRealityTree.svg"/><p>The Node Types in detail:</p><table><thead><tr><th>Node Type</th><th>Description</th><th>Is Starting Point</th><th>Successors</th></tr></thead><tbody><tr><td>Desirable Effect</td><td>A wanted effect. These are the goals we aim to achieve through our solutions. They are caused by other effects or causes.</td><td>No</td><td>All Effects incl. 'And'</td></tr><tr><td>Intermediate Effect</td><td>Effects that are neither negative nor positive on their own. They are caused by other effects or causes.</td><td>No</td><td>All Effects incl. 'And'</td></tr><tr><td>Undesirable Effect</td><td>Potential negative side effects to monitor. In FRT, these help identify risks of the proposed solutions.</td><td>No</td><td>All Effects incl. 'And'</td></tr><tr><td>Given</td><td>Given entities are beyond your sphere of influence. They are sometimes called Preconditions. These always enter the tree without predecessors. E.g. Gravity is a given force unless you leave Earth.</td><td>No</td><td>All Effects incl. 'And'</td></tr><tr><td>Changeable</td><td>These are the proposed solutions or "injections" - the changes we plan to implement to achieve desirable effects.</td><td>No</td><td>All Effects incl. 'And'</td></tr><tr><td>And Junctor</td><td>In a sufficient cause diagram, each cause alone creates connected effects. The 'And' Junctor connects two causes, expressing that an event only happens if both causes are present.</td><td>No</td><td>All Effects (excl. 'And')</td></tr></tbody></table><h2>Background Information on FRT Notation</h2><p>FRT diagrams were developed as part of the Theory of Constraints by E. Goldratt. More on the Theory of Constraints can be found <a href="/notations/TOC">here</a>.</p><h2>Try FRT Yourself</h2><p>Create and visualize your own Future Reality Tree diagram right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p><iframe src="/vgraph/vgraph-widget.html?vgl=vgraph%20solution%3A%20FRT%20%22Sales%20Improvement%20Plan%22%20%7B%0A%20%20%20%20node%20c1%3A%20Changeable%20%22Implement%20agile%20development%22%3B%0A%20%20%20%20node%20c2%3A%20Changeable%20%22Hire%20support%20staff%22%3B%0A%20%20%20%20node%20c3%3A%20Changeable%20%22Create%20feedback%20system%22%3B%0A%0A%20%20%20%20node%20g1%3A%20Given%20%22Market%20is%20competitive%22%3B%0A%0A%20%20%20%20node%20ie1%3A%20IntermediateEffect%20%22Faster%20product%20iterations%22%3B%0A%20%20%20%20node%20ie2%3A%20IntermediateEffect%20%22Products%20match%20customer%20needs%22%3B%0A%20%20%20%20node%20ie3%3A%20IntermediateEffect%20%22Support%20response%20improves%22%3B%0A%0A%20%20%20%20node%20and1%3A%20AndJunctor%3B%0A%0A%20%20%20%20node%20de1%3A%20DesirableEffect%20%22Sales%20revenue%20increasing%22%3B%0A%20%20%20%20node%20de2%3A%20DesirableEffect%20%22Customer%20satisfaction%20high%22%3B%0A%0A%20%20%20%20edge%20c1%20-%3E%20ie1%0A%20%20%20%20edge%20c2%20-%3E%20ie3%0A%20%20%20%20edge%20c3%20-%3E%20and1%0A%20%20%20%20edge%20g1%20-%3E%20and1%0A%20%20%20%20edge%20and1%20-%3E%20ie2%0A%20%20%20%20edge%20ie1%20-%3E%20de1%0A%20%20%20%20edge%20ie2%20-%3E%20de1%0A%20%20%20%20edge%20ie3%20-%3E%20de2%0A%7D" width="100%" height="750" style="border: 1px solid #e0e0e0; border-radius: 8px; margin: 20px 0;" title="VGraph Interactive FRT Editor"></iframe><p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p><p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="/tools/VGL_GUIDE">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.</p></div></article>
+                <div class="content"><p><strong>Why use Future Reality Trees (FRTs)?</strong></p>
+<p>FRTs lay out a sequence of cause-and-effect relationships that connect proposed solutions to desired effects (DEs). FRTs use 'If... Then...' logic to answer the question, 'TO WHAT should we change?'</p>
+<p>In contrast with a Current Reality Tree (CRT):</p>
+<ul>
+ <li>A CRT starts with a set of Undesirable Effects (UDEs), leading down to the Core Driver, from which we invent Solutions.</li>
+ <li>An FRT begins with a potential Solution and builds upward to a set of Desirable Effects (DEs).</li>
+</ul>
+<p>FRTs can be constructed not only from a previously conceived solution but also from other parts of previously created CRTs and Clouds.</p>
+<h2 id="frt-notation-description">FRT Notation Description</h2>
+<p>The diagram below outlines the notation's structure. FRTs start with proposed solutions (Changeable nodes) and build upward to show how those solutions lead to Desirable Effects.</p>
+<p>From there, we follow sufficient cause logic to trace the effects. Each cause itself becomes an effect (desirable, undesirable, or intermediate). "Given" causes (things that cannot be changed) may also contribute to the chain. The goal is to validate that the proposed solutions will indeed achieve the desired outcomes.</p>
+<img src="/Notations/TOC/future-reality-tree/FutureRealityTree.svg" alt="" onclick="openLightbox(this)" />
+<p>The Node Types in detail:</p>
+<table>
+ <thead>
+  <tr>
+   <th>Node Type</th>
+   <th>Description</th>
+   <th>Is Starting Point</th>
+   <th>Successors</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Desirable Effect</td>
+   <td>A wanted effect. These are the goals we aim to achieve through our solutions. They are caused by other effects or causes.</td>
+   <td>No</td>
+   <td>All Effects incl. 'And'</td>
+  </tr>
+  <tr>
+   <td>Intermediate Effect</td>
+   <td>Effects that are neither negative nor positive on their own. They are caused by other effects or causes.</td>
+   <td>No</td>
+   <td>All Effects incl. 'And'</td>
+  </tr>
+  <tr>
+   <td>Undesirable Effect</td>
+   <td>Potential negative side effects to monitor. In FRT, these help identify risks of the proposed solutions.</td>
+   <td>No</td>
+   <td>All Effects incl. 'And'</td>
+  </tr>
+  <tr>
+   <td>Given</td>
+   <td>Given entities are beyond your sphere of influence. They are sometimes called Preconditions. These always enter the tree without predecessors. E.g. Gravity is a given force unless you leave Earth.</td>
+   <td>No</td>
+   <td>All Effects incl. 'And'</td>
+  </tr>
+  <tr>
+   <td>Changeable</td>
+   <td>These are the proposed solutions or "injections" - the changes we plan to implement to achieve desirable effects.</td>
+   <td>No</td>
+   <td>All Effects incl. 'And'</td>
+  </tr>
+  <tr>
+   <td>And Junctor</td>
+   <td>In a sufficient cause diagram, each cause alone creates connected effects. The 'And' Junctor connects two causes, expressing that an event only happens if both causes are present.</td>
+   <td>No</td>
+   <td>All Effects (excl. 'And')</td>
+  </tr>
+ </tbody>
+</table>
+<h2 id="background-information-on-frt-notation">Background Information on FRT Notation</h2>
+<p>FRT diagrams were developed as part of the Theory of Constraints by E. Goldratt. More on the Theory of Constraints can be found <a href="/notations/TOC">here</a>.</p>
+<h2 id="try-frt-yourself">Try FRT Yourself</h2>
+<p>Create and visualize your own Future Reality Tree diagram right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p>
+<iframe src="/vgraph/vgraph-widget.html?vgl=vgraph%20solution%3A%20FRT%20%22Sales%20Improvement%20Plan%22%20%7B%0A%20%20%20%20node%20c1%3A%20Changeable%20%22Implement%20agile%20development%22%3B%0A%20%20%20%20node%20c2%3A%20Changeable%20%22Hire%20support%20staff%22%3B%0A%20%20%20%20node%20c3%3A%20Changeable%20%22Create%20feedback%20system%22%3B%0A%0A%20%20%20%20node%20g1%3A%20Given%20%22Market%20is%20competitive%22%3B%0A%0A%20%20%20%20node%20ie1%3A%20IntermediateEffect%20%22Faster%20product%20iterations%22%3B%0A%20%20%20%20node%20ie2%3A%20IntermediateEffect%20%22Products%20match%20customer%20needs%22%3B%0A%20%20%20%20node%20ie3%3A%20IntermediateEffect%20%22Support%20response%20improves%22%3B%0A%0A%20%20%20%20node%20and1%3A%20AndJunctor%3B%0A%0A%20%20%20%20node%20de1%3A%20DesirableEffect%20%22Sales%20revenue%20increasing%22%3B%0A%20%20%20%20node%20de2%3A%20DesirableEffect%20%22Customer%20satisfaction%20high%22%3B%0A%0A%20%20%20%20edge%20c1%20-%3E%20ie1%0A%20%20%20%20edge%20c2%20-%3E%20ie3%0A%20%20%20%20edge%20c3%20-%3E%20and1%0A%20%20%20%20edge%20g1%20-%3E%20and1%0A%20%20%20%20edge%20and1%20-%3E%20ie2%0A%20%20%20%20edge%20ie1%20-%3E%20de1%0A%20%20%20%20edge%20ie2%20-%3E%20de1%0A%20%20%20%20edge%20ie3%20-%3E%20de2%0A%7D" width="100%" height="750" style="border: 1px solid #e0e0e0; border-radius: 8px; margin: 20px 0;" title="VGraph Interactive FRT Editor"></iframe>
+<p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p>
+<p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="/tools/VGL_GUIDE">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.</p></div></article>
             <aside class="side-content">
                 <div class="preview__article-details">
                     <p class="tag-list-title">Tagged with:</p>
@@ -62,7 +161,7 @@
                             <div class="tag-preview">
                                 <a href="/tags/theory-of-constraints">Theory of Constraints</a></div></li></ul></div>
                 <div class="newsletter" height="350" width="250">
-                    <img src="/images/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
                     <p>See how you can combine your brain power with structured visual and achieve better results.</p>
                     <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
                 <div></div></aside></div>
@@ -75,22 +174,22 @@ Vithanco Home </p>
                     <ul>
                         <li>
                             <a href="https://linkedIn.com/in/Kneupner">
-                                <img src="/images/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://bsky.app/profile/vithanco.bsky.social">
-                                <img src="/images/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://mastodon.social/@vithanco">
-                                <img src="/images/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
                             </a>
                         </li>
                         <li>
                             <a href="/feed.rss">
-                                <img src="/images/socialmedia-icons/rss.svg" alt="RSS"/>
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
                             </a>
                         </li>
                     </ul></nav></div></footer></body>

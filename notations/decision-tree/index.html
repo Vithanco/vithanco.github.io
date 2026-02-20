@@ -19,6 +19,38 @@
         <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
         <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
         <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
         <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
     </head>
@@ -45,7 +77,63 @@
                 <h1>Decision Tree (DT) Notation</h1>
                 <div class="reading-time">
                     <p>Estimated reading time: 1 minutes.</p></div>
-                <div class="content"><h2>Why use Decision Trees (DTs)?</h2><p>A Decision Tree in Vithanco allows you to store the set of questions that you need to ask to come to a decision. Decision Trees are very useful to write down the decision points of a business process.</p><p>Vithanco allows to execute the DTs. If you hover over a question Choice Node a "Play" symbol is shown in the middle of the node which will run through the DT from the node used for start.</p><h2>DT Notation Description</h2><p>The diagram below shows the simple structure of DTs. The starting point is always a question. Each question can have 2 or more choices, each with either questions or an outcome.</p><img src="/images/DT-Domain.jpg"/><p class="caption"> <em>The DT Notation</em></p><p>The Node Types in detail.</p><table><thead><tr><th>Node Type</th><th>Description</th><th>Is Starting Point</th><th>Successors</th></tr></thead><tbody><tr><td>Decision Point</td><td>A question describing a decision point</td><td>Yes</td><td>Choice</td></tr><tr><td>Choice</td><td>Choices representing potential paths from a question. Each choice leads either to another Decision Point or to an Outcome.</td><td>No</td><td>Outcome or Decision Point</td></tr><tr><td>Outcome</td><td>A result of the Decision Tree</td><td>No</td><td>None</td></tr></tbody></table><h2>Evaluating the Decision Tree</h2><p>Decision Trees come with an extra feature. They can be executed. As an example here is a DT.</p><img src="/images/Decision-Tree.jpg"/><p class="caption"> <em>A Decision Tree to decide on your next Vithanco Diagram (March 2019)</em></p><p>Hoover the mouse over the top node will reveal in the middle of the node a little "play" icon. Pressing that icon will Vithanco present this dialogue.</p><img src="/images/2019-03-23_15-35-06.png"/><p>Please note that the Choice in the middle has an annotation which is added as an explanation.</p><p>Pressing the "Start and plan a project" Choice will lead to the second dialogue.</p><img src="/images/2019-03-23_15-39-37.png"/><p>Pressing "Clarify Terminology" will then present the Decision Outcome.</p><img src="/images/2019-03-23_15-42-16.png"/></div></article>
+                <div class="content"><h2 id="why-use-decision-trees-dts">Why use Decision Trees (DTs)?</h2>
+<p>A Decision Tree in Vithanco allows you to store the set of questions that you need to ask to come to a decision. Decision Trees are very useful to write down the decision points of a business process.</p>
+<p>Vithanco allows to execute the DTs. If you hover over a question Choice Node a "Play" symbol is shown in the middle of the node which will run through the DT from the node used for start.</p>
+<h2 id="dt-notation-description">DT Notation Description</h2>
+<p>The diagram below shows the simple structure of DTs. The starting point is always a question. Each question can have 2 or more choices, each with either questions or an outcome.</p>
+<figure class="img-std"> 
+ <img src="/Notations/decision-tree/DT-Domain.jpg" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  The DT Notation
+ </figcaption> 
+</figure>
+<p>The Node Types in detail.</p>
+<table>
+ <thead>
+  <tr>
+   <th>Node Type</th>
+   <th>Description</th>
+   <th>Is Starting Point</th>
+   <th>Successors</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Decision Point</td>
+   <td>A question describing a decision point</td>
+   <td>Yes</td>
+   <td>Choice</td>
+  </tr>
+  <tr>
+   <td>Choice</td>
+   <td>Choices representing potential paths from a question. Each choice leads either to another Decision Point or to an Outcome.</td>
+   <td>No</td>
+   <td>Outcome or Decision Point</td>
+  </tr>
+  <tr>
+   <td>Outcome</td>
+   <td>A result of the Decision Tree</td>
+   <td>No</td>
+   <td>None</td>
+  </tr>
+ </tbody>
+</table>
+<h2 id="evaluating-the-decision-tree">Evaluating the Decision Tree</h2>
+<p>Decision Trees come with an extra feature. They can be executed. As an example here is a DT.</p>
+<figure class="img-std"> 
+ <img src="/Notations/decision-tree/Decision-Tree.jpg" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  A Decision Tree to decide on your next Vithanco Diagram (March 2019)
+ </figcaption> 
+</figure>
+<p>Hoover the mouse over the top node will reveal in the middle of the node a little "play" icon. Pressing that icon will Vithanco present this dialogue.</p>
+<img src="/Notations/decision-tree/2019-03-23_15-35-06.png" alt="" onclick="openLightbox(this)" />
+<p>Please note that the Choice in the middle has an annotation which is added as an explanation.</p>
+<p>Pressing the "Start and plan a project" Choice will lead to the second dialogue.</p>
+<img src="/Notations/decision-tree/2019-03-23_15-39-37.png" alt="" onclick="openLightbox(this)" />
+<p>Pressing "Clarify Terminology" will then present the Decision Outcome.</p>
+<img src="/Notations/decision-tree/2019-03-23_15-42-16.png" alt="" onclick="openLightbox(this)" /></div></article>
             <aside class="side-content">
                 <div class="preview__article-details">
                     <p class="tag-list-title">Tagged with:</p>
@@ -57,7 +145,7 @@
                             <div class="tag-preview">
                                 <a href="/tags/notation">Notation</a></div></li></ul></div>
                 <div class="newsletter" height="350" width="250">
-                    <img src="/images/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
                     <p>See how you can combine your brain power with structured visual and achieve better results.</p>
                     <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
                 <div></div></aside></div>
@@ -70,22 +158,22 @@ Vithanco Home </p>
                     <ul>
                         <li>
                             <a href="https://linkedIn.com/in/Kneupner">
-                                <img src="/images/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://bsky.app/profile/vithanco.bsky.social">
-                                <img src="/images/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://mastodon.social/@vithanco">
-                                <img src="/images/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
                             </a>
                         </li>
                         <li>
                             <a href="/feed.rss">
-                                <img src="/images/socialmedia-icons/rss.svg" alt="RSS"/>
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
                             </a>
                         </li>
                     </ul></nav></div></footer></body>

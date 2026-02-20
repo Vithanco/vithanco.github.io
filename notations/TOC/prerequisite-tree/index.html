@@ -19,6 +19,38 @@
         <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
         <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
         <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
         <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
     </head>
@@ -47,7 +79,56 @@
                 <h1>The Prerequisite Tree (PRT) Notation</h1>
                 <div class="reading-time">
                     <p>Estimated reading time: 2 minutes.</p></div>
-                <div class="content"><h2>Why use Prerequisite Trees (PRTs)?</h2><p>PRTs are a planning tool to achieve a known goal/objective. It is a breakdown of the steps to get you where you want to be. Each step is based on an identified "Obstacle" that you will overcome by a "state" which is again nothing else as an (intermediate) objective.</p><p>PRTs are useful because of their simplicity and because they embody a simple principle from Stephen Cowley: "<a href="https://discovery-adr.com/begin-end-mind-7-habits-highly-effective-people-explained/">Start with the End in Mind</a>".</p><h2>PRT Notation Description</h2><p>The diagram below describes the Notation. One starts with the Objective and uses <a href="/tools/Help/Expert_Concepts/diagram-logic/index.html">necessary condition thinking</a> to define all known immediate obstacles that one sees from achieving that particular objective. Then for each obstacle, one considers the intermediate objectives that would help you to overcome the obstacle. Then you consider what obstacles are keeping you from achieving each of the intermediate objectives. And so forth, until each step from now to the Objective is identified.</p><img src="/images/Notation-PRT-1.jpg"/><p>The PRT Notation</p><table><thead><tr><th>Node Type</th><th>Description</th><th>Is Starting Point</th><th>Successors</th></tr></thead><tbody><tr><td>Objective</td><td>The Objective that you really care about</td><td>Yes</td><td>-</td></tr><tr><td>Obstacle</td><td>One of potentially many obstacles that you need to overcome to meet an Objective</td><td>No</td><td>Objective, Intermediate Objective, (OR)</td></tr><tr><td>Intermediate Objective</td><td>An objective that if achieved will overcome the following Obstacle</td><td>No</td><td>Obstacle (OR)</td></tr><tr><td>OR</td><td>As a necessary condition all incoming arrows normally mean that all are necessary. You can change this with an OR</td><td>No</td><td>all other Nodes Types</td></tr></tbody></table><h2>Background Information on PRT Notation</h2><p>PRT diagrams were developed as part of the Theory of Constraints by E. Goldratt. More on the Theory of Constraints can be found <a href="/notations/TOC">here</a>.</p><h2>Try PRT Yourself</h2><p>Create and visualize your own Prerequisite Tree diagram right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p><iframe src="/vgraph/vgraph-widget.html?vgl=vgraph%20launch%3A%20PRT%20%22Product%20Launch%20Planning%22%20%7B%0A%20%20%20%20node%20obj1%3A%20Objective%20%22Launch%20product%20by%20Q3%22%3B%0A%0A%20%20%20%20node%20obs1%3A%20Obstacle%20%22Team%20lacks%20skills%22%3B%0A%20%20%20%20node%20obs2%3A%20Obstacle%20%22Budget%20not%20approved%22%3B%0A%20%20%20%20node%20obs3%3A%20Obstacle%20%22No%20distribution%20channel%22%3B%0A%0A%20%20%20%20node%20io1%3A%20IntermediateObjective%20%22Train%20team%22%3B%0A%20%20%20%20node%20io2%3A%20IntermediateObjective%20%22Hire%20developers%22%3B%0A%20%20%20%20node%20io3%3A%20IntermediateObjective%20%22Present%20ROI%20analysis%22%3B%0A%20%20%20%20node%20io4%3A%20IntermediateObjective%20%22Partner%20with%20retailer%22%3B%0A%0A%20%20%20%20node%20or1%3A%20OR%3B%0A%0A%20%20%20%20edge%20obs1%20-%3E%20obj1%0A%20%20%20%20edge%20obs2%20-%3E%20obj1%0A%20%20%20%20edge%20obs3%20-%3E%20obj1%0A%20%20%20%20edge%20io1%20-%3E%20or1%0A%20%20%20%20edge%20io2%20-%3E%20or1%0A%20%20%20%20edge%20or1%20-%3E%20obs1%0A%20%20%20%20edge%20io3%20-%3E%20obs2%0A%20%20%20%20edge%20io4%20-%3E%20obs3%0A%7D" width="100%" height="750" style="border: 1px solid #e0e0e0; border-radius: 8px; margin: 20px 0;" title="VGraph Interactive PRT Editor"></iframe><p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p><p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="/tools/VGL_GUIDE">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.</p></div></article>
+                <div class="content"><h2 id="why-use-prerequisite-trees-prts">Why use Prerequisite Trees (PRTs)?</h2>
+<p>PRTs are a planning tool to achieve a known goal/objective. It is a breakdown of the steps to get you where you want to be. Each step is based on an identified "Obstacle" that you will overcome by a "state" which is again nothing else as an (intermediate) objective.</p>
+<p>PRTs are useful because of their simplicity and because they embody a simple principle from Stephen Cowley: "<a href="https://discovery-adr.com/begin-end-mind-7-habits-highly-effective-people-explained/">Start with the End in Mind</a>".</p>
+<h2 id="prt-notation-description">PRT Notation Description</h2>
+<p>The diagram below describes the Notation. One starts with the Objective and uses <a href="/tools/Help/Expert_Concepts/diagram-logic/index.html">necessary condition thinking</a> to define all known immediate obstacles that one sees from achieving that particular objective. Then for each obstacle, one considers the intermediate objectives that would help you to overcome the obstacle. Then you consider what obstacles are keeping you from achieving each of the intermediate objectives. And so forth, until each step from now to the Objective is identified.</p>
+<img src="/Notations/TOC/prerequisite-tree/Notation-PRT-1.jpg" alt="" onclick="openLightbox(this)" />
+<p>The PRT Notation</p>
+<table>
+ <thead>
+  <tr>
+   <th>Node Type</th>
+   <th>Description</th>
+   <th>Is Starting Point</th>
+   <th>Successors</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Objective</td>
+   <td>The Objective that you really care about</td>
+   <td>Yes</td>
+   <td>-</td>
+  </tr>
+  <tr>
+   <td>Obstacle</td>
+   <td>One of potentially many obstacles that you need to overcome to meet an Objective</td>
+   <td>No</td>
+   <td>Objective, Intermediate Objective, (OR)</td>
+  </tr>
+  <tr>
+   <td>Intermediate Objective</td>
+   <td>An objective that if achieved will overcome the following Obstacle</td>
+   <td>No</td>
+   <td>Obstacle (OR)</td>
+  </tr>
+  <tr>
+   <td>OR</td>
+   <td>As a necessary condition all incoming arrows normally mean that all are necessary. You can change this with an OR</td>
+   <td>No</td>
+   <td>all other Nodes Types</td>
+  </tr>
+ </tbody>
+</table>
+<h2 id="background-information-on-prt-notation">Background Information on PRT Notation</h2>
+<p>PRT diagrams were developed as part of the Theory of Constraints by E. Goldratt. More on the Theory of Constraints can be found <a href="/notations/TOC">here</a>.</p>
+<h2 id="try-prt-yourself">Try PRT Yourself</h2>
+<p>Create and visualize your own Prerequisite Tree diagram right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p>
+<iframe src="/vgraph/vgraph-widget.html?vgl=vgraph%20launch%3A%20PRT%20%22Product%20Launch%20Planning%22%20%7B%0A%20%20%20%20node%20obj1%3A%20Objective%20%22Launch%20product%20by%20Q3%22%3B%0A%0A%20%20%20%20node%20obs1%3A%20Obstacle%20%22Team%20lacks%20skills%22%3B%0A%20%20%20%20node%20obs2%3A%20Obstacle%20%22Budget%20not%20approved%22%3B%0A%20%20%20%20node%20obs3%3A%20Obstacle%20%22No%20distribution%20channel%22%3B%0A%0A%20%20%20%20node%20io1%3A%20IntermediateObjective%20%22Train%20team%22%3B%0A%20%20%20%20node%20io2%3A%20IntermediateObjective%20%22Hire%20developers%22%3B%0A%20%20%20%20node%20io3%3A%20IntermediateObjective%20%22Present%20ROI%20analysis%22%3B%0A%20%20%20%20node%20io4%3A%20IntermediateObjective%20%22Partner%20with%20retailer%22%3B%0A%0A%20%20%20%20node%20or1%3A%20OR%3B%0A%0A%20%20%20%20edge%20obs1%20-%3E%20obj1%0A%20%20%20%20edge%20obs2%20-%3E%20obj1%0A%20%20%20%20edge%20obs3%20-%3E%20obj1%0A%20%20%20%20edge%20io1%20-%3E%20or1%0A%20%20%20%20edge%20io2%20-%3E%20or1%0A%20%20%20%20edge%20or1%20-%3E%20obs1%0A%20%20%20%20edge%20io3%20-%3E%20obs2%0A%20%20%20%20edge%20io4%20-%3E%20obs3%0A%7D" width="100%" height="750" style="border: 1px solid #e0e0e0; border-radius: 8px; margin: 20px 0;" title="VGraph Interactive PRT Editor"></iframe>
+<p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p>
+<p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="/tools/VGL_GUIDE">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.</p></div></article>
             <aside class="side-content">
                 <div class="preview__article-details">
                     <p class="tag-list-title">Tagged with:</p>
@@ -62,7 +143,7 @@
                             <div class="tag-preview">
                                 <a href="/tags/theory-of-constraints">Theory of Constraints</a></div></li></ul></div>
                 <div class="newsletter" height="350" width="250">
-                    <img src="/images/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
                     <p>See how you can combine your brain power with structured visual and achieve better results.</p>
                     <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
                 <div></div></aside></div>
@@ -75,22 +156,22 @@ Vithanco Home </p>
                     <ul>
                         <li>
                             <a href="https://linkedIn.com/in/Kneupner">
-                                <img src="/images/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://bsky.app/profile/vithanco.bsky.social">
-                                <img src="/images/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://mastodon.social/@vithanco">
-                                <img src="/images/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
                             </a>
                         </li>
                         <li>
                             <a href="/feed.rss">
-                                <img src="/images/socialmedia-icons/rss.svg" alt="RSS"/>
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
                             </a>
                         </li>
                     </ul></nav></div></footer></body>

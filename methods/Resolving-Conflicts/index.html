@@ -19,6 +19,38 @@
         <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
         <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
         <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
         <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
     </head>
@@ -45,7 +77,50 @@
                 <h1>Define the Problem Before Solving It: How to Resolve Conflicts Constructively</h1>
                 <div class="reading-time">
                     <p>Estimated reading time: 6 minutes.</p></div>
-                <div class="content"><p>In this article, we will learn how to constructively resolve conflicts so that they don't resurface in a slightly different form shortly after.</p><p>The great Einstein was asked: "If you have one hour to save the world, how would you spend that hour?" According to legend, he responded, "I would spend 55 minutes defining the problem and then five minutes solving it." While there is much doubt whether Einstein said this, defining the problem before solving it is widely accepted as sound advice. A quick Google search for "define the problem before solving it" yields over 485 million results, indicating that this principle is crucial in problem-solving.</p><h2>Why define the Problem first?</h2><p>So, why define the problem first? Defining the problem allows us to focus our efforts, resources, and time in the right direction. With a clear understanding of the problem, we can save resources on irrelevant solutions or even worsen the problem.</p><p>By defining the problem, we can clarify the goal, identify constraints, gather relevant information, and develop a plan of action. Defining the problem ensures that we focus our resources, time, and energy in the right direction, leading to more effective solutions and better outcomes.</p><h2>Define the problem in case of a Conflict</h2><p>Now, let's talk about conflicts. Conflicts can be found everywhere, whether it's at home or work. It's fair to say that conflicts are worth solving, but how do we solve them? We can solve conflicts by adding a step of first defining the underlying problem of the conflict.</p><p>We must look beyond the current actions and understand the underlying motives to do them. The visual Evaporating Cloud is a tool that helps us do just that. The Evaporating Cloud is part of the <a href="/notations/TOC/index">Theory of Constraints (TOC) Thinking Processes</a> and is also known as the Conflict Diagram. It resolves conflicts by stating both sides of the problem and reviewing the underlying assumptions that create the conflict.</p><p>The idea behind the Evaporating Cloud is that as long as everyone has a shared goal, there cannot be an unresolvable conflict—instead, every perceived problem results from at least one faulty assumption. Therefore, if all conflicts are founded on false assumptions, removing the conflict requires identifying assumptions which are too often not voiced. Once we find the wrong assumptions, we can readily identify and permanently mend problems.</p><p>To define the problem of the conflict between two parties, we define the problem as follows. First, we start by identifying the shared objective. This sounds more difficult as it is: companies want to be profitable, couples want to be happy together, etc. If we cannot identify a shared objective, inventing one that both sides can agree is normally possible. Next, describe each party’s specific goals (or “needs”). Then we map out the specific actions of each side in the diagram ("wants"). The outcome will look similar to the diagram below.</p><img src="/images/methods/EvaporatingCloud.png"/><p class="caption"> <em>The basic structure of the Evaporating Cloud</em></p><h2>Solve the Conflict</h2><p>Based on this graph, we can identify the underlying assumptions that led to the conflict. Once we have identified the assumptions, we can challenge them and find a solution that satisfies both parties. The result is a win-win solution that is better than any compromise.</p><p>The visual model we've established serves as a tool to expose underlying assumptions. Therefore, it’s crucial to identify and examine these assumptions individually since each can guide the solution in a different direction.</p><p>If done correctly, both parties will endorse the solution, and the problem won't resurface in a slightly different form shortly after.</p><h2>Example Conflict</h2><p>To give it more meat, let's look at an example. Let's look at a mid-sized specialised production business. A worker with special skills (let's say quality assurance of melding via X-ray) is sick for a few weeks and needs a short-time replacement. Imagine a finance department that needs to reduce costs and an operations (=production) department that needs to maintain quality. One side wants to pay less for the staffing, and the other wants the take the first good enough candidate. The conflict diagram would look like this:</p><img src="/images/methods/EvaporatingCloudFinanceVsOperations.png"/><p class="caption"> <em>An example conflict</em></p><p>We can see how the two departments want opposing actions and that they both want it for good reasons. So we could now start to compromise and agree on numbers, like: "We will interview five candidates, shortlist two and take the cheapest”, or "After one week of unsuccessful searching for cheap temp workers, Operations has free hands".</p><p>But there are better solutions than this. The best solution is to find the underlying assumptions. In this case, some underlying assumptions are: <em> <strong>Delaying onboarding can be absorbed by Operations.</strong> Just because it worked out in the past doesn't mean it will work out in the future. Even more so, there might be a hidden cost for paying overtime or losing a customer. </em> <strong>We can only find temp staff members after we need them.</strong> The formal contract with the right temp agency can solve this, or at least make it someone else’s problem. * <strong>Finding more Candidates takes longer.</strong> This is not necessarily true. We can use a temp agency or a headhunter to find more candidates in parallel. The only extra time it would cost is the time to interview the candidates. In most cases, this is a good investment.</p><p>The Diagram with the underlying assumptions would look like this: <img src="/images/methods/EvaporatingCloudFinanceVsOperations2.png"/><p class="caption"> <em>An example conflict with some underlying assumptions</em></p></p><p>These assumptions can resolve the conflict and fix the situation without compromise. Often they can be combined and create an even better solution. For example, we could agree to use two temp agencies we will ask in case of need and create a framework contract allowing us to onboard a temp worker within 48 hours, which is acceptable to Operations. This would solve the problem without compromise and be cheaper than the original solution.</p><h2>Conclusion</h2><p>We started with the idea that defining the problem before solving it is good. We then examined how to define the problem in case of a conflict. We saw that the Evaporating Cloud is a tool that helps us do just that. An Evaporating Could diagram represents the problem in a visual, condensed manner. The diagram supports resolving conflicts by stating both sides of the problem and allows reviewing the underlying assumptions that create the conflict. We then looked at an example conflict and saw how to use the Evaporating Cloud to resolve it.</p><p>We saw that the Evaporating Cloud is a powerful tool to constructively resolve conflicts so that they don't resurface in a slightly different form shortly after. Moreover, it is a tool that can be used in many situations, not only in conflicts.</p><h2>Additional Information</h2><p>You can find more about the Evaporating Cloud and other structured visual thinking methods on <a href="https://www.vithanco.com">www.vithanco.com</a>. All diagrams in this article were created with the <a href="https://apps.apple.com/dk/app/vithanco/id1441915970">Vithanco Visual Thinking Tool</a>.</p></div></article>
+                <div class="content"><p>In this article, we will learn how to constructively resolve conflicts so that they don't resurface in a slightly different form shortly after.</p>
+<p>The great Einstein was asked: "If you have one hour to save the world, how would you spend that hour?" According to legend, he responded, "I would spend 55 minutes defining the problem and then five minutes solving it." While there is much doubt whether Einstein said this, defining the problem before solving it is widely accepted as sound advice. A quick Google search for "define the problem before solving it" yields over 485 million results, indicating that this principle is crucial in problem-solving.</p>
+<h2 id="why-define-the-problem-first">Why define the Problem first?</h2>
+<p>So, why define the problem first? Defining the problem allows us to focus our efforts, resources, and time in the right direction. With a clear understanding of the problem, we can save resources on irrelevant solutions or even worsen the problem.</p>
+<p>By defining the problem, we can clarify the goal, identify constraints, gather relevant information, and develop a plan of action. Defining the problem ensures that we focus our resources, time, and energy in the right direction, leading to more effective solutions and better outcomes.</p>
+<h2 id="define-the-problem-in-case-of-a-conflict">Define the problem in case of a Conflict</h2>
+<p>Now, let's talk about conflicts. Conflicts can be found everywhere, whether it's at home or work. It's fair to say that conflicts are worth solving, but how do we solve them? We can solve conflicts by adding a step of first defining the underlying problem of the conflict.</p>
+<p>We must look beyond the current actions and understand the underlying motives to do them. The visual Evaporating Cloud is a tool that helps us do just that. The Evaporating Cloud is part of the <a href="/notations/TOC/index">Theory of Constraints (TOC) Thinking Processes</a> and is also known as the Conflict Diagram. It resolves conflicts by stating both sides of the problem and reviewing the underlying assumptions that create the conflict.</p>
+<p>The idea behind the Evaporating Cloud is that as long as everyone has a shared goal, there cannot be an unresolvable conflict—instead, every perceived problem results from at least one faulty assumption. Therefore, if all conflicts are founded on false assumptions, removing the conflict requires identifying assumptions which are too often not voiced. Once we find the wrong assumptions, we can readily identify and permanently mend problems.</p>
+<p>To define the problem of the conflict between two parties, we define the problem as follows. First, we start by identifying the shared objective. This sounds more difficult as it is: companies want to be profitable, couples want to be happy together, etc. If we cannot identify a shared objective, inventing one that both sides can agree is normally possible. Next, describe each party’s specific goals (or “needs”). Then we map out the specific actions of each side in the diagram ("wants"). The outcome will look similar to the diagram below.</p>
+<figure class="img-std"> 
+ <img src="/Methods/Resolving-Conflicts/EvaporatingCloud.png" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  The basic structure of the Evaporating Cloud
+ </figcaption> 
+</figure>
+<h2 id="solve-the-conflict">Solve the Conflict</h2>
+<p>Based on this graph, we can identify the underlying assumptions that led to the conflict. Once we have identified the assumptions, we can challenge them and find a solution that satisfies both parties. The result is a win-win solution that is better than any compromise.</p>
+<p>The visual model we've established serves as a tool to expose underlying assumptions. Therefore, it’s crucial to identify and examine these assumptions individually since each can guide the solution in a different direction.</p>
+<p>If done correctly, both parties will endorse the solution, and the problem won't resurface in a slightly different form shortly after.</p>
+<h2 id="example-conflict">Example Conflict</h2>
+<p>To give it more meat, let's look at an example. Let's look at a mid-sized specialised production business. A worker with special skills (let's say quality assurance of melding via X-ray) is sick for a few weeks and needs a short-time replacement. Imagine a finance department that needs to reduce costs and an operations (=production) department that needs to maintain quality. One side wants to pay less for the staffing, and the other wants the take the first good enough candidate. The conflict diagram would look like this:</p>
+<figure class="img-std"> 
+ <img src="/Methods/Resolving-Conflicts/EvaporatingCloudFinanceVsOperations.png" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  An example conflict
+ </figcaption> 
+</figure>
+<p>We can see how the two departments want opposing actions and that they both want it for good reasons. So we could now start to compromise and agree on numbers, like: "We will interview five candidates, shortlist two and take the cheapest”, or "After one week of unsuccessful searching for cheap temp workers, Operations has free hands".</p>
+<p>But there are better solutions than this. The best solution is to find the underlying assumptions. In this case, some underlying assumptions are: <em> <strong>Delaying onboarding can be absorbed by Operations.</strong> Just because it worked out in the past doesn't mean it will work out in the future. Even more so, there might be a hidden cost for paying overtime or losing a customer. </em> <strong>We can only find temp staff members after we need them.</strong> The formal contract with the right temp agency can solve this, or at least make it someone else’s problem. * <strong>Finding more Candidates takes longer.</strong> This is not necessarily true. We can use a temp agency or a headhunter to find more candidates in parallel. The only extra time it would cost is the time to interview the candidates. In most cases, this is a good investment.</p>
+<p>The Diagram with the underlying assumptions would look like this: </p>
+<figure class="img-std"> 
+ <img src="/Methods/Resolving-Conflicts/EvaporatingCloudFinanceVsOperations2.png" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  An example conflict with some underlying assumptions
+ </figcaption> 
+</figure>
+<p></p>
+<p>These assumptions can resolve the conflict and fix the situation without compromise. Often they can be combined and create an even better solution. For example, we could agree to use two temp agencies we will ask in case of need and create a framework contract allowing us to onboard a temp worker within 48 hours, which is acceptable to Operations. This would solve the problem without compromise and be cheaper than the original solution.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>We started with the idea that defining the problem before solving it is good. We then examined how to define the problem in case of a conflict. We saw that the Evaporating Cloud is a tool that helps us do just that. An Evaporating Could diagram represents the problem in a visual, condensed manner. The diagram supports resolving conflicts by stating both sides of the problem and allows reviewing the underlying assumptions that create the conflict. We then looked at an example conflict and saw how to use the Evaporating Cloud to resolve it.</p>
+<p>We saw that the Evaporating Cloud is a powerful tool to constructively resolve conflicts so that they don't resurface in a slightly different form shortly after. Moreover, it is a tool that can be used in many situations, not only in conflicts.</p>
+<h2 id="additional-information">Additional Information</h2>
+<p>You can find more about the Evaporating Cloud and other structured visual thinking methods on <a href="https://www.vithanco.com">www.vithanco.com</a>. All diagrams in this article were created with the <a href="https://apps.apple.com/dk/app/vithanco/id1441915970">Vithanco Visual Thinking Tool</a>.</p></div></article>
             <aside class="side-content">
                 <div class="preview__article-details">
                     <p class="tag-list-title">Tagged with:</p>
@@ -63,7 +138,7 @@
                             <div class="tag-preview">
                                 <a href="/tags/latest">Latest</a></div></li></ul></div>
                 <div class="newsletter" height="350" width="250">
-                    <img src="/images/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
                     <p>See how you can combine your brain power with structured visual and achieve better results.</p>
                     <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
                 <div></div></aside></div>
@@ -76,22 +151,22 @@ Vithanco Home </p>
                     <ul>
                         <li>
                             <a href="https://linkedIn.com/in/Kneupner">
-                                <img src="/images/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://bsky.app/profile/vithanco.bsky.social">
-                                <img src="/images/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://mastodon.social/@vithanco">
-                                <img src="/images/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
                             </a>
                         </li>
                         <li>
                             <a href="/feed.rss">
-                                <img src="/images/socialmedia-icons/rss.svg" alt="RSS"/>
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
                             </a>
                         </li>
                     </ul></nav></div></footer></body>

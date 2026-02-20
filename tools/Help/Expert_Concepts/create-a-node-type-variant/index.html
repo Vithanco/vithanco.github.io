@@ -19,6 +19,38 @@
         <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
         <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
         <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
         <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
     </head>
@@ -49,7 +81,36 @@
                 <h1>Create a Node Type Variant</h1>
                 <div class="reading-time">
                     <p>Estimated reading time: 1 minutes.</p></div>
-                <div class="content"><h2>The Problem</h2><p>Sometimes you want to create a slight variant of an existing Node Type. For example, the Concept Maps Domain has a simple variant. The Emphasised Concept is a variant of the "normal" concept. It uses a different colour to look slightly different but has otherwise the same rules regarding predecessors, successors and multiplicity.</p><h2>The Solution</h2><p>Whenever you want to do this, just press "Create Duplicate" in the Node Type Editor.</p><p>This will create a second Node Type which copies the predecessors, successors and multiplicities. You can use nodes of this type wherever you could use nodes of the original node type. And, of course, you can change the visual representation independently of the original Node Type.</p><h2>Limitations</h2><p>Be careful to review the name of the new type, and the colour of the new Node Type and double-check whether you want to allow the new type can be a predecessor or successor of the original type.</p><h2>Example</h2><p>Assuming you want to create a special enabler "IT-Enabler" in the <a href="/notations/Change/benefit-breakdown-structure">Benefit Breakdown Structure Domain</a>. Press the button for the settings dialogue.</p><img src="/images/2019-03-19_14-35-29.png"/><p class="caption"> <em>Setting Button in Toolbar</em></p><p>Then select the Benefit Breakdown Domain and in there the Enabler Node Type.</p><img src="/images/2019-03-19_14-37-41.png"/><p class="caption"> <em>Select the Enabler Node Type within the Benefit Breakdown Domain</em></p><p>Now press the Create Duplicate Button.</p><img src="/images/2019-03-19_14-23-25.png"/><p class="caption"> <em>Duplicate a Node Type</em></p><p>After that rename the Node Type and assign a new colour.</p></div></article>
+                <div class="content"><h2 id="the-problem">The Problem</h2>
+<p>Sometimes you want to create a slight variant of an existing Node Type. For example, the Concept Maps Domain has a simple variant. The Emphasised Concept is a variant of the "normal" concept. It uses a different colour to look slightly different but has otherwise the same rules regarding predecessors, successors and multiplicity.</p>
+<h2 id="the-solution">The Solution</h2>
+<p>Whenever you want to do this, just press "Create Duplicate" in the Node Type Editor.</p>
+<p>This will create a second Node Type which copies the predecessors, successors and multiplicities. You can use nodes of this type wherever you could use nodes of the original node type. And, of course, you can change the visual representation independently of the original Node Type.</p>
+<h2 id="limitations">Limitations</h2>
+<p>Be careful to review the name of the new type, and the colour of the new Node Type and double-check whether you want to allow the new type can be a predecessor or successor of the original type.</p>
+<h2 id="example">Example</h2>
+<p>Assuming you want to create a special enabler "IT-Enabler" in the <a href="/notations/Change/benefit-breakdown-structure">Benefit Breakdown Structure Domain</a>. Press the button for the settings dialogue.</p>
+<figure class="img-std"> 
+ <img src="/Tools/Help/Expert_Concepts/create-a-node-type-variant/2019-03-19_14-35-29.png" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  Setting Button in Toolbar
+ </figcaption> 
+</figure>
+<p>Then select the Benefit Breakdown Domain and in there the Enabler Node Type.</p>
+<figure class="img-std"> 
+ <img src="/Tools/Help/Expert_Concepts/create-a-node-type-variant/2019-03-19_14-37-41.png" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  Select the Enabler Node Type within the Benefit Breakdown Domain
+ </figcaption> 
+</figure>
+<p>Now press the Create Duplicate Button.</p>
+<figure class="img-std"> 
+ <img src="/Tools/Help/Expert_Concepts/create-a-node-type-variant/2019-03-19_14-23-25.png" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  Duplicate a Node Type
+ </figcaption> 
+</figure>
+<p>After that rename the Node Type and assign a new colour.</p></div></article>
             <aside class="side-content">
                 <div class="preview__article-details">
                     <p class="tag-list-title">Tagged with:</p>
@@ -64,7 +125,7 @@
                             <div class="tag-preview">
                                 <a href="/tags/node-type">Node Type</a></div></li></ul></div>
                 <div class="newsletter" height="350" width="250">
-                    <img src="/images/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
                     <p>See how you can combine your brain power with structured visual and achieve better results.</p>
                     <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
                 <div></div></aside></div>
@@ -77,22 +138,22 @@ Vithanco Home </p>
                     <ul>
                         <li>
                             <a href="https://linkedIn.com/in/Kneupner">
-                                <img src="/images/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://bsky.app/profile/vithanco.bsky.social">
-                                <img src="/images/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://mastodon.social/@vithanco">
-                                <img src="/images/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
                             </a>
                         </li>
                         <li>
                             <a href="/feed.rss">
-                                <img src="/images/socialmedia-icons/rss.svg" alt="RSS"/>
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
                             </a>
                         </li>
                     </ul></nav></div></footer></body>

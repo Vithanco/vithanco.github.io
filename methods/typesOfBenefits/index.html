@@ -19,6 +19,38 @@
         <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
         <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
         <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
         <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
     </head>
@@ -45,7 +77,52 @@
                 <h1>The Different Types of Benefits</h1>
                 <div class="reading-time">
                     <p>Estimated reading time: 6 minutes.</p></div>
-                <div class="content"><p>Are all benefits created equal? No! There is a difference whether you can say that you will make one million USD or whether you expect that customers like you better. Not saying that the latter can be even more valuable, but it needs to be clarified what you will get out of this.</p><p>But is it even a benefit to say that customers like you better? The answer is a clear “It depends". It might be all that matters for a small café at the corner of a residential area. But it will be difficult to say how much a customer will like you better if you decorate the café differently. And it will also be challenging to say how your turnover will move by a different decoration.</p><p>But if I were a decorator, then I would happily sell the "benefit" of better-liking customers to the café owner, knowing that I would improve the turnover (and hence profit) with a nice decoration. Conversely, the company’s turnover might not change if you decorate a back office. But maybe the workers feel better? Is that a benefit? Possibly there would be beneficial knock-on effects.</p><h2>What is a benefit?</h2><p>Our definition is quite simple: it is a benefit if you find somebody willing to stand up and say, “This is a benefit", and is ready to spend his money (or reputation, or KPI, or... ) on it. It doesn't mean you have to deliver the benefit just because you have identified it, but there is a benefit, and you have a benefit owner.</p><p>Why is a benefit owner important? If you continue thinking about the café, imagine the decoration includes flowers or other plants. Someone will need to water them. Someone will need to take ownership of the delivered solution ("decoration") and start working with the delivered solution and realise the benefit (improved customer impression).</p><p>It is a typical situation that a solution delivered will not automatically create benefits. Instead, it will require some change in how the business is run ("care for plants") that will lead to the benefit. And the benefit owner needs to be the person who executes these changed behaviours/processes directly or via others.</p><p>By the way, it works as well in the other direction: if you go to the team lead and tell her that she can save 10min in a process by making a change to the team's processes, and she ("benefit owner") says no, then we don't consider it a benefit. She won't be willing to push for the changes needed, and the benefit will not materialise, at least not to the expected amount. She might have good reasons for her opinion, and it is worth listening to her argumentation. Was a similar approach already attempted three years ago and failed? Well, what could be done differently this time? And if she thinks that only 5min can be saved with the changes discussed, then the benefit is a 5-minute saving, not 10 minutes. If the benefit owner won't commit, then the project has no benefit. Ultimately, the benefit owner needs to feel responsible for the benefit if the project starts.</p><h2>Structure to the help</h2><p>It helps to think about the different kinds of benefits in a more structured way. The structure allows us to ask the right questions. There is a "hierarchy of benefits". The different benefits are described in the table below.</p><table><thead><tr><th>Degree of Explicitness</th><th>Description</th></tr></thead><tbody><tr><td>Observable Benefits</td><td>Using agreed criteria, specific individuals/groups will decide, based on their experience or judgement, to what extent the benefit has been realised.</td></tr><tr><td>Measurable Benefits</td><td>This performance aspect is currently being measured, or an appropriate measure could be implemented. But it needs to be determined by how much performance will improve when the changes are completed.</td></tr><tr><td>Quantifiable Benefits</td><td>Sufficient evidence exists to forecast how much improvement/benefit should result from the changes.</td></tr><tr><td>Financial Benefits</td><td>A financial value can be calculated by applying a cost/price or other valid financial formula to a quantifiable benefit.</td></tr></tbody></table><p>A measurable benefit is also observable, a quantifiable benefit is measurable, and a financial benefit is quantifiable. We all want to have well-defined financial benefits for every project. But actually, that is rarely sometimes the case.</p><p>We have seen a business case based on a clear financial benefit. The story was similar to this: The project team promised to shorten the time to do X from 20 minutes to 4 minutes. We have Y people working on doing X. The expectation was that the workforce could be reduced by 80%, amounting to a large annual sum of Z. The project was "successful" in delivering the change, shortening the execution time of X from 20 minutes to 4 minutes, which summed up to a vast sum of minutes saved by the hundreds of executions per day. However, the financial benefit didn't materialise. Due to the reduced time to execute and the resulting faster turnaround, more people requested the work from the team in question (a <a href="https://fs.blog/second-order-thinking/">2nd order effect</a>). Ultimately, the team needed to grow to fulfil the significantly increased demand. Therefore, key stakeholders considered the project a big failure as the benefit wasn't delivered. But the project did exactly what it was supposed to do. It would have succeeded based on a quantifiable benefit of execution time(20 minutes down to 4 minutes). Financially (within the agreed measure, team size), it failed. Unfortunately, the project team couldn’t pinpoint a financial benefit steaming from a faster execution rate. And those weren’t part of the KPIs anyway.</p><p>A lesson from the story, always include a measure of the executions of X, not just whatever you measure about X. And you should consider whether a change of X might lead to a change in the number of executions.</p><h2>What is the task of the benefit owner during the project?</h2><p>Ultimately, our benefit owners must stand up for the project and its impact on their respective benefits. The project cannot change a team size; that can only be the person responsible for delivery who should therefore be our benefit owner. Hence, they have a unique role in project success and should be treated as such.</p><p>Projects often take months or years. I have seen a project being silent for over a year and then presenting a "solution” to an unprepared benefit owner. The solution didn't match its expectations, and the benefit disappeared whilst looking at it.</p><p>What to do? Turn it around! If you identified the benefit owners early on, you must work with them throughout the project. Keep the benefits owners informed during the process and double-check whether the proposed solution fits the problems. Make changes to the solution if needed. Adjust benefit size if required. But ensure throughout the process that you have the goodwill of the benefit owner (and still a viable project). Without them, the benefit will not be realised. You will need the full buy-in at the time the solution is ready. Or you could provide them with more but more minor changes, already testing the impact of later steps. This will provide you with significant insights for the rest of the project.</p><p>So, as project manager, just set up regular meetings with your benefit owners and discuss where you are. We suggest a minimum of every three months. It doesn't have to be a long meeting, but they need to know what the project will bring. And the project manager will need to adjust the project to the needs of the benefit.</p><h2>Read More</h2><p>You can read more about benefit realisation in this <a href="https://www.researchgate.net/publication/42795451_Managing_the_realization_of_business_benefits_from_IT_investments">article</a>.</p></div></article>
+                <div class="content"><p>Are all benefits created equal? No! There is a difference whether you can say that you will make one million USD or whether you expect that customers like you better. Not saying that the latter can be even more valuable, but it needs to be clarified what you will get out of this.</p>
+<p>But is it even a benefit to say that customers like you better? The answer is a clear “It depends". It might be all that matters for a small café at the corner of a residential area. But it will be difficult to say how much a customer will like you better if you decorate the café differently. And it will also be challenging to say how your turnover will move by a different decoration.</p>
+<p>But if I were a decorator, then I would happily sell the "benefit" of better-liking customers to the café owner, knowing that I would improve the turnover (and hence profit) with a nice decoration. Conversely, the company’s turnover might not change if you decorate a back office. But maybe the workers feel better? Is that a benefit? Possibly there would be beneficial knock-on effects.</p>
+<h2 id="what-is-a-benefit">What is a benefit?</h2>
+<p>Our definition is quite simple: it is a benefit if you find somebody willing to stand up and say, “This is a benefit", and is ready to spend his money (or reputation, or KPI, or... ) on it. It doesn't mean you have to deliver the benefit just because you have identified it, but there is a benefit, and you have a benefit owner.</p>
+<p>Why is a benefit owner important? If you continue thinking about the café, imagine the decoration includes flowers or other plants. Someone will need to water them. Someone will need to take ownership of the delivered solution ("decoration") and start working with the delivered solution and realise the benefit (improved customer impression).</p>
+<p>It is a typical situation that a solution delivered will not automatically create benefits. Instead, it will require some change in how the business is run ("care for plants") that will lead to the benefit. And the benefit owner needs to be the person who executes these changed behaviours/processes directly or via others.</p>
+<p>By the way, it works as well in the other direction: if you go to the team lead and tell her that she can save 10min in a process by making a change to the team's processes, and she ("benefit owner") says no, then we don't consider it a benefit. She won't be willing to push for the changes needed, and the benefit will not materialise, at least not to the expected amount. She might have good reasons for her opinion, and it is worth listening to her argumentation. Was a similar approach already attempted three years ago and failed? Well, what could be done differently this time? And if she thinks that only 5min can be saved with the changes discussed, then the benefit is a 5-minute saving, not 10 minutes. If the benefit owner won't commit, then the project has no benefit. Ultimately, the benefit owner needs to feel responsible for the benefit if the project starts.</p>
+<h2 id="structure-to-the-help">Structure to the help</h2>
+<p>It helps to think about the different kinds of benefits in a more structured way. The structure allows us to ask the right questions. There is a "hierarchy of benefits". The different benefits are described in the table below.</p>
+<table>
+ <thead>
+  <tr>
+   <th>Degree of Explicitness</th>
+   <th>Description</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Observable Benefits</td>
+   <td>Using agreed criteria, specific individuals/groups will decide, based on their experience or judgement, to what extent the benefit has been realised.</td>
+  </tr>
+  <tr>
+   <td>Measurable Benefits</td>
+   <td>This performance aspect is currently being measured, or an appropriate measure could be implemented. But it needs to be determined by how much performance will improve when the changes are completed.</td>
+  </tr>
+  <tr>
+   <td>Quantifiable Benefits</td>
+   <td>Sufficient evidence exists to forecast how much improvement/benefit should result from the changes.</td>
+  </tr>
+  <tr>
+   <td>Financial Benefits</td>
+   <td>A financial value can be calculated by applying a cost/price or other valid financial formula to a quantifiable benefit.</td>
+  </tr>
+ </tbody>
+</table>
+<p>A measurable benefit is also observable, a quantifiable benefit is measurable, and a financial benefit is quantifiable. We all want to have well-defined financial benefits for every project. But actually, that is rarely sometimes the case.</p>
+<p>We have seen a business case based on a clear financial benefit. The story was similar to this: The project team promised to shorten the time to do X from 20 minutes to 4 minutes. We have Y people working on doing X. The expectation was that the workforce could be reduced by 80%, amounting to a large annual sum of Z. The project was "successful" in delivering the change, shortening the execution time of X from 20 minutes to 4 minutes, which summed up to a vast sum of minutes saved by the hundreds of executions per day. However, the financial benefit didn't materialise. Due to the reduced time to execute and the resulting faster turnaround, more people requested the work from the team in question (a <a href="https://fs.blog/second-order-thinking/">2nd order effect</a>). Ultimately, the team needed to grow to fulfil the significantly increased demand. Therefore, key stakeholders considered the project a big failure as the benefit wasn't delivered. But the project did exactly what it was supposed to do. It would have succeeded based on a quantifiable benefit of execution time(20 minutes down to 4 minutes). Financially (within the agreed measure, team size), it failed. Unfortunately, the project team couldn’t pinpoint a financial benefit steaming from a faster execution rate. And those weren’t part of the KPIs anyway.</p>
+<p>A lesson from the story, always include a measure of the executions of X, not just whatever you measure about X. And you should consider whether a change of X might lead to a change in the number of executions.</p>
+<h2 id="what-is-the-task-of-the-benefit-owner-during-the-project">What is the task of the benefit owner during the project?</h2>
+<p>Ultimately, our benefit owners must stand up for the project and its impact on their respective benefits. The project cannot change a team size; that can only be the person responsible for delivery who should therefore be our benefit owner. Hence, they have a unique role in project success and should be treated as such.</p>
+<p>Projects often take months or years. I have seen a project being silent for over a year and then presenting a "solution” to an unprepared benefit owner. The solution didn't match its expectations, and the benefit disappeared whilst looking at it.</p>
+<p>What to do? Turn it around! If you identified the benefit owners early on, you must work with them throughout the project. Keep the benefits owners informed during the process and double-check whether the proposed solution fits the problems. Make changes to the solution if needed. Adjust benefit size if required. But ensure throughout the process that you have the goodwill of the benefit owner (and still a viable project). Without them, the benefit will not be realised. You will need the full buy-in at the time the solution is ready. Or you could provide them with more but more minor changes, already testing the impact of later steps. This will provide you with significant insights for the rest of the project.</p>
+<p>So, as project manager, just set up regular meetings with your benefit owners and discuss where you are. We suggest a minimum of every three months. It doesn't have to be a long meeting, but they need to know what the project will bring. And the project manager will need to adjust the project to the needs of the benefit.</p>
+<h2 id="read-more">Read More</h2>
+<p>You can read more about benefit realisation in this <a href="https://www.researchgate.net/publication/42795451_Managing_the_realization_of_business_benefits_from_IT_investments">article</a>.</p></div></article>
             <aside class="side-content">
                 <div class="preview__article-details">
                     <p class="tag-list-title">Tagged with:</p>
@@ -63,7 +140,7 @@
                             <div class="tag-preview">
                                 <a href="/tags/latest">Latest</a></div></li></ul></div>
                 <div class="newsletter" height="350" width="250">
-                    <img src="/images/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
                     <p>See how you can combine your brain power with structured visual and achieve better results.</p>
                     <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
                 <div></div></aside></div>
@@ -76,22 +153,22 @@ Vithanco Home </p>
                     <ul>
                         <li>
                             <a href="https://linkedIn.com/in/Kneupner">
-                                <img src="/images/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://bsky.app/profile/vithanco.bsky.social">
-                                <img src="/images/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://mastodon.social/@vithanco">
-                                <img src="/images/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
                             </a>
                         </li>
                         <li>
                             <a href="/feed.rss">
-                                <img src="/images/socialmedia-icons/rss.svg" alt="RSS"/>
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
                             </a>
                         </li>
                     </ul></nav></div></footer></body>

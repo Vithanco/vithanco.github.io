@@ -53,7 +53,31 @@ li {
 
 img {
   margin-top: 0.75em;
-  width: 400px;
+  max-width: 100%;
+  height: auto;
+}
+
+.img-small {
+  width: 300px;
+  max-width: 100%;
+  margin: 1em auto;
+}
+
+.img-medium {
+  width: 500px;
+  max-width: 100%;
+  margin: 1em auto;
+}
+
+.img-full {
+  width: 100%;
+  margin: 1em 0;
+}
+
+.img-std {
+  width: 80%;
+  max-width: 100%;
+  margin: 1em auto;
 }
 
 table {
@@ -93,10 +117,25 @@ blockquote {
   color: #333;
 }
 
-.caption {
+figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1em 0;
+  width: 100%;
+}
+
+figcaption {
   align-self: center;
-  width: 400px;
-  font-size: 15px;
+  width: 80%;
+  font-size: 0.9em;
+  font-style: italic;
+  text-align: center;
+  color: #666;
+  margin-top: 0.5em;
+  padding: 0.5em;
+  background-color: #f9f9f9;
+  border-radius: 4px;
 }
 
 /* ---------------------------------------------------------------- */
@@ -163,11 +202,9 @@ header {
 
 .header-wrapper nav ul li a.selected {
   background: rgb(234, 88, 12);
-  background: linear-gradient(
-    297deg,
-    rgba(234, 88, 12, 1) 0%,
-    rgba(255, 128, 0, 1) 100%
-  );
+  background: linear-gradient(297deg,
+      rgba(234, 88, 12, 1) 0%,
+      rgba(255, 128, 0, 1) 100%);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   border-radius: 2px;
   padding: 0.5em;
@@ -314,7 +351,8 @@ header {
   transition-duration: 50ms;
   border: 1px solid rgba(123, 123, 123, 0.5);
   border-radius: 10px;
-  margin-left: 0; /* Reset any existing margin */
+  margin-left: 0;
+  /* Reset any existing margin */
 }
 
 .toc-list ul li:hover {
@@ -325,16 +363,21 @@ header {
 .toc-list ul li ul li {
   font-size: 12px;
   font-weight: lighter;
-  background-color: rgba(0, 0, 0, 0.02); /* Darker than level 1 */
+  background-color: rgba(0, 0, 0, 0.02);
+  /* Darker than level 1 */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   border-radius: 0.5em;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px; /* Slightly more shadow */
-  margin-left: 1.5em; /* Indent from parent */
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
+  /* Slightly more shadow */
+  margin-left: 1.5em;
+  /* Indent from parent */
   margin-top: 0.25em;
-  border-left: 3px solid var(--accent); /* Add accent border */
-  border: 1px solid rgba(123, 123, 123, 0.3); /* Lighter border */
+  border-left: 3px solid var(--accent);
+  /* Add accent border */
+  border: 1px solid rgba(123, 123, 123, 0.3);
+  /* Lighter border */
 }
 
 .toc-list ul li ul li:hover {
@@ -344,7 +387,8 @@ header {
 /* Level 3 items - even more indented and darker */
 .toc-list ul li ul li ul li {
   background-color: rgba(0, 0, 0, 0.04);
-  margin-left: 2em; /* Further indent */
+  margin-left: 2em;
+  /* Further indent */
   font-size: 11px;
   border-left: 2px solid rgba(234, 88, 12, 0.7);
 }
@@ -352,6 +396,7 @@ header {
 .toc-list ul li ul li ul li:hover {
   background-color: rgba(0, 0, 0, 0.07);
 }
+
 .newsletter {
   padding-top: 0.25em;
 }
@@ -475,8 +520,7 @@ footer div nav ul {
 footer div nav ul img {
   height: 30px;
   width: 30px;
-  filter: invert(96%) sepia(1%) saturate(44%) hue-rotate(354deg)
-    brightness(118%) contrast(100%);
+  filter: invert(96%) sepia(1%) saturate(44%) hue-rotate(354deg) brightness(118%) contrast(100%);
   margin: 0;
   transition: all;
   transition-duration: 0.25s;
@@ -651,7 +695,7 @@ footer div nav ul li a {
   left: initial;
 }
 
-.rating-factor__rating input:checked ~ input::before,
+.rating-factor__rating input:checked~input::before,
 .rating-factor__rating input:checked::before {
   color: #eebe64;
 }
@@ -783,6 +827,7 @@ footer div nav ul li a {
 /* ---------------------------------------------------------------- */
 
 @media only screen and (max-width: 768px) {
+
   .section-wrapper article,
   .index-wrapper article {
     width: 100%;

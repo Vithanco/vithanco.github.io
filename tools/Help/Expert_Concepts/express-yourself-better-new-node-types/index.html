@@ -19,6 +19,38 @@
         <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
         <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
         <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
         <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
     </head>
@@ -49,7 +81,84 @@
                 <h1>Express Yourself Better - New Node Types</h1>
                 <div class="reading-time">
                     <p>Estimated reading time: 5 minutes.</p></div>
-                <div class="content"><p>There is a simple feature that helps me a lot. I adjust the standard domains for variations whenever it helps me to express myself better. A typical scenario for me is during <a href="/notations/concept-maps">Concept Maps</a> when I want to show that I am unsure whether I understand a Concept well enough. I simply know that I need more input from someone and I want to show this in the diagram with a different Node Type.</p><h2>The Node Type Editor</h2><p>It's simple. I start by viewing the Node Type of a Concept. For this, you open the normal Node Editor. Further down comes a button with "View Node Type".</p><img src="/images/viewNodeType-1.jpg" alt="first button to click"/><p class="caption"> <em>View Node Type Button in Node Editor</em></p><p>Once clicked, the Node Type Editor for the Node Type is opened. In this case, it is for the "Concept" Node Type.</p><img src="/images/Node-Type-Editor.jpg" alt="Changing a Node Type"/><p class="caption"> <em>The Node Type Editor</em></p><p>This Editor is only useable in the full version of Vithanco. Let me explain a bit its design.</p><ol><li>Here are all the <a href="/notations">Notations</a> for the document listed. In this case, there are two, with the Basic Domain as the first one. The Basic Domain has AND, OR Node Types, as well as notes and problem Node Types.</li><li>The 2nd Domain is Concept Mapping.</li><li>The Concept is a Node Type that belongs to the Concept Mapping domain. The remaining dialogue shows details of the Concept Node Type.</li><li>A few points are worth noting about this type. Firstly, there is a tickbox to indicate whether this node can be the first one on the canvas. This controls whether you start an empty diagram with this node or not.</li><li>The starting node setting is in this diagram displayed via the Power On/Off symbol. From the symbol, an arrow leads to the Node Type. This symbol wouldn't be shown if the node wouldn't be a starting node.</li><li>The rest of this diagram shows the suggested predecessors and successors for this Node Type. The Concept Nodes are always alternating with Relationship Nodes. This is expressed on the Node Type level through predecessors and successor Node Types. Change the predecessors and/or successors and the suggestions (or recommendations) during modelling will change. The diagram here at 6 simply shows these relationships.</li><li>You can change the predecessors and successors here in the editor. (Scroll down a bit).</li><li>If you want to change the looks of the Node Type, select another Type. Concepts are simple rounded boxes with Text in the middle.</li><li>Change Colors in this part. As you can see, the Concept Node Type uses the colour with the RGB code 208,236,237. Click and change.</li></ol><h2>The New Node Type</h2><p>I said I wanted to show that I am not sure about a concept. I am going to show this through a yellowish Node Type. Hence, I press the button in the lower part of the middle scroll box.</p><img src="/images/Create-Duplicate.jpg"/><p class="caption"> <em>Create a Duplicate of this Node Type</em></p><p>What does this do? It creates a new Node Type with the same settings as the original. I can adjust only the parts that I would like.</p><img src="/images/2022-06-02_22-17.jpg"/><p class="caption"> <em>The new Unconfirmed Node Type</em></p><p>What did Change?</p><ol><li>The new Node Type "Unconfirmed Concept" was added to the same Domain "Concept Maps".</li><li>I changed the name to "Unconfirmed Concept" here - which triggered the change under 1.</li><li>I changed the background colour here towards a light yellow.</li><li>The Node Type diagram shows the new Node Type. It has duplicated the predecessors and successors of the Concept Node Type. I can therefore use the new type wherever I used the original.</li></ol><h2>The changed Domain</h2><p>In case you wonder about what changed on the Domain level, have a look at the Domain Diagram.</p><img src="/images/2022-06-02_22-23.jpeg"/><p class="caption"> <em>The changed Concept Maps Domain Diagram</em></p><p>Please note that many arrows are bidirectional. You start (bottom symbol) with one of the three Concept Nodes, and from there there is only an arrow to Relation. From Relation, you can access any of the (now) three Concept Node Types, after which I "return" to a Relation. Hence, I can use the new Node Type where I previously used the other Concepts Nodes.</p><p>I could as well create a new Relation Node Type similarly.</p><h2>Other Domain Hacks</h2><p>I use this feature regularly for Concept Maps. I might add the third Node Type to the standard in the future.</p><p>Other Domains can benefit similarly. For example, the <a href="/notations/Change/benefit-breakdown-structure">Benefit Breakdown Structure</a> was extended by Disbenefits, HR Enablers, IT Enablers, etc.</p><p>Causal Loop diagrams can as well benefit from different colours if you want to show areas of different departments or similar.</p><p>Finally, the explanations above should encourage you to create a completely new Domain from scratch. Just try it out. Ask, if something is unclear.</p><h2>How to use the new Node Type</h2><p>Now, I can close the Node Type Editor and change the Node Type of the node that triggered my addition to the standard model.</p><img src="/images/Change-Node-Type.jpg"/><p><em>The </em>signpost<em> lets you</em> change the Node Type*</p><p>Press the button in the middle, on the left side with the signpost to change the type. You will only get "valid" replacements according to the Domain model. As the help text says, you can override this behaviour by keep pressing CTRL before clicking on the button and you can choose any Node Type, even if that means that your Concept Map is no longer easy to read.</p><p>The outcome for this example diagram is like this:</p><img src="/images/2022-06-02_22-35.jpeg"/><p class="caption"> <em>Example Diagram with a new Node Type</em></p><p>Please note, that I am not sure whether Darth Vader is an evil character, which I make clear through the yellow background. No flame war, please.</p></div></article>
+                <div class="content"><p>There is a simple feature that helps me a lot. I adjust the standard domains for variations whenever it helps me to express myself better. A typical scenario for me is during <a href="/notations/concept-maps">Concept Maps</a> when I want to show that I am unsure whether I understand a Concept well enough. I simply know that I need more input from someone and I want to show this in the diagram with a different Node Type.</p>
+<h2 id="the-node-type-editor">The Node Type Editor</h2>
+<p>It's simple. I start by viewing the Node Type of a Concept. For this, you open the normal Node Editor. Further down comes a button with "View Node Type".</p>
+<figure class="img-std"> 
+ <img src="/Tools/Help/Expert_Concepts/express-yourself-better-new-node-types/viewNodeType-1.jpg" alt="first button to click" onclick="openLightbox(this)" /> 
+ <figcaption>
+  View Node Type Button in Node Editor
+ </figcaption> 
+</figure>
+<p>Once clicked, the Node Type Editor for the Node Type is opened. In this case, it is for the "Concept" Node Type.</p>
+<figure class="img-std"> 
+ <img src="/Tools/Help/Expert_Concepts/express-yourself-better-new-node-types/Node-Type-Editor.jpg" alt="Changing a Node Type" onclick="openLightbox(this)" /> 
+ <figcaption>
+  The Node Type Editor
+ </figcaption> 
+</figure>
+<p>This Editor is only useable in the full version of Vithanco. Let me explain a bit its design.</p>
+<ol>
+ <li>Here are all the <a href="/notations">Notations</a> for the document listed. In this case, there are two, with the Basic Domain as the first one. The Basic Domain has AND, OR Node Types, as well as notes and problem Node Types.</li>
+ <li>The 2nd Domain is Concept Mapping.</li>
+ <li>The Concept is a Node Type that belongs to the Concept Mapping domain. The remaining dialogue shows details of the Concept Node Type.</li>
+ <li>A few points are worth noting about this type. Firstly, there is a tickbox to indicate whether this node can be the first one on the canvas. This controls whether you start an empty diagram with this node or not.</li>
+ <li>The starting node setting is in this diagram displayed via the Power On/Off symbol. From the symbol, an arrow leads to the Node Type. This symbol wouldn't be shown if the node wouldn't be a starting node.</li>
+ <li>The rest of this diagram shows the suggested predecessors and successors for this Node Type. The Concept Nodes are always alternating with Relationship Nodes. This is expressed on the Node Type level through predecessors and successor Node Types. Change the predecessors and/or successors and the suggestions (or recommendations) during modelling will change. The diagram here at 6 simply shows these relationships.</li>
+ <li>You can change the predecessors and successors here in the editor. (Scroll down a bit).</li>
+ <li>If you want to change the looks of the Node Type, select another Type. Concepts are simple rounded boxes with Text in the middle.</li>
+ <li>Change Colors in this part. As you can see, the Concept Node Type uses the colour with the RGB code 208,236,237. Click and change.</li>
+</ol>
+<h2 id="the-new-node-type">The New Node Type</h2>
+<p>I said I wanted to show that I am not sure about a concept. I am going to show this through a yellowish Node Type. Hence, I press the button in the lower part of the middle scroll box.</p>
+<figure class="img-std"> 
+ <img src="/Tools/Help/Expert_Concepts/express-yourself-better-new-node-types/Create-Duplicate.jpg" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  Create a Duplicate of this Node Type
+ </figcaption> 
+</figure>
+<p>What does this do? It creates a new Node Type with the same settings as the original. I can adjust only the parts that I would like.</p>
+<figure class="img-std"> 
+ <img src="/Tools/Help/Expert_Concepts/express-yourself-better-new-node-types/2022-06-02_22-17.jpg" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  The new Unconfirmed Node Type
+ </figcaption> 
+</figure>
+<p>What did Change?</p>
+<ol>
+ <li>The new Node Type "Unconfirmed Concept" was added to the same Domain "Concept Maps".</li>
+ <li>I changed the name to "Unconfirmed Concept" here - which triggered the change under 1.</li>
+ <li>I changed the background colour here towards a light yellow.</li>
+ <li>The Node Type diagram shows the new Node Type. It has duplicated the predecessors and successors of the Concept Node Type. I can therefore use the new type wherever I used the original.</li>
+</ol>
+<h2 id="the-changed-domain">The changed Domain</h2>
+<p>In case you wonder about what changed on the Domain level, have a look at the Domain Diagram.</p>
+<figure class="img-std"> 
+ <img src="/Tools/Help/Expert_Concepts/express-yourself-better-new-node-types/2022-06-02_22-23.jpeg" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  The changed Concept Maps Domain Diagram
+ </figcaption> 
+</figure>
+<p>Please note that many arrows are bidirectional. You start (bottom symbol) with one of the three Concept Nodes, and from there there is only an arrow to Relation. From Relation, you can access any of the (now) three Concept Node Types, after which I "return" to a Relation. Hence, I can use the new Node Type where I previously used the other Concepts Nodes.</p>
+<p>I could as well create a new Relation Node Type similarly.</p>
+<h2 id="other-domain-hacks">Other Domain Hacks</h2>
+<p>I use this feature regularly for Concept Maps. I might add the third Node Type to the standard in the future.</p>
+<p>Other Domains can benefit similarly. For example, the <a href="/notations/Change/benefit-breakdown-structure">Benefit Breakdown Structure</a> was extended by Disbenefits, HR Enablers, IT Enablers, etc.</p>
+<p>Causal Loop diagrams can as well benefit from different colours if you want to show areas of different departments or similar.</p>
+<p>Finally, the explanations above should encourage you to create a completely new Domain from scratch. Just try it out. Ask, if something is unclear.</p>
+<h2 id="how-to-use-the-new-node-type">How to use the new Node Type</h2>
+<p>Now, I can close the Node Type Editor and change the Node Type of the node that triggered my addition to the standard model.</p>
+<img src="/Tools/Help/Expert_Concepts/express-yourself-better-new-node-types/Change-Node-Type.jpg" alt="" onclick="openLightbox(this)" />
+<p><em>The </em>signpost<em> lets you</em> change the Node Type*</p>
+<p>Press the button in the middle, on the left side with the signpost to change the type. You will only get "valid" replacements according to the Domain model. As the help text says, you can override this behaviour by keep pressing CTRL before clicking on the button and you can choose any Node Type, even if that means that your Concept Map is no longer easy to read.</p>
+<p>The outcome for this example diagram is like this:</p>
+<figure class="img-std"> 
+ <img src="/Tools/Help/Expert_Concepts/express-yourself-better-new-node-types/2022-06-02_22-35.jpeg" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  Example Diagram with a new Node Type
+ </figcaption> 
+</figure>
+<p>Please note, that I am not sure whether Darth Vader is an evil character, which I make clear through the yellow background. No flame war, please.</p></div></article>
             <aside class="side-content">
                 <div class="preview__article-details">
                     <p class="tag-list-title">Tagged with:</p>
@@ -64,7 +173,7 @@
                             <div class="tag-preview">
                                 <a href="/tags/help">Help</a></div></li></ul></div>
                 <div class="newsletter" height="350" width="250">
-                    <img src="/images/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
                     <p>See how you can combine your brain power with structured visual and achieve better results.</p>
                     <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
                 <div></div></aside></div>
@@ -77,22 +186,22 @@ Vithanco Home </p>
                     <ul>
                         <li>
                             <a href="https://linkedIn.com/in/Kneupner">
-                                <img src="/images/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://bsky.app/profile/vithanco.bsky.social">
-                                <img src="/images/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://mastodon.social/@vithanco">
-                                <img src="/images/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
                             </a>
                         </li>
                         <li>
                             <a href="/feed.rss">
-                                <img src="/images/socialmedia-icons/rss.svg" alt="RSS"/>
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
                             </a>
                         </li>
                     </ul></nav></div></footer></body>

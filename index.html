@@ -19,6 +19,38 @@
         <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
         <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
         <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
         <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
     </head>
@@ -44,7 +76,43 @@
             <article>
                 <h1>Welcome to Vithanco, the Home of Structured Visual Thinking Methods, Tools and Services</h1>
                 <p class="description">Use Visual Thinking to Improve Your Decision Making and Problem Solving Skills.</p>
-                <div class="content"><h2>Transform Your Thinking</h2><p>Feeling stuck? Structured Visual Thinking can change that.</p><h3>Why Choose It?</h3><ul><li><strong>Clear Your Mind:</strong> Turn confusion into clarity.</li><li><strong>Better Decisions:</strong> Uncover hidden solutions.</li><li><strong>Feel and Think:</strong> Engage both heart and mind.</li></ul><h3>Join Us</h3><p>Many have already transformed their lives—now it's your turn.</p><p>Get started. Find clarity. Transform challenges into opportunities.</p><img src="/Zen.webp" alt="Your goal, clear thoughts"/><h2>Find Clarity of Thought</h2><p>What are you looking for?</p><ul><li>Are you looking for Facilitation? Then go to <a href="/services">Services</a>.</li><li>Are you looking for information on the Vithanco Mac Application? Then look at <a href="/tools">Tools</a>.</li><li>Are you trying to learn more about Structured Visual Thinking? Then look at <a href="/methods">Methods</a>.</li><li>Are you looking for a specific Notation? Then look at <a href="/notations">Notations</a>.</li></ul><h2>How can Structured Visual Thinking Help You to find Clarity of Thought?</h2><p><strong>Visual Thinking</strong> combines more senses by including the visual sense.</p><p><strong>Structured Visual Thinking</strong> doesn't require any artistic ability. Instead, you draw relationships between ideas/thoughts and therefore create meaning.</p><p><strong>Structured Visual Thinking Methods</strong> guides you towards meaningful diagrams that allow you to achieve outcomes. Sometimes the thought process to create the diagram with clarity of mind is the outcome. Sometimes the diagram is the blueprint for the next steps.</p><h2>From Confusion to Clarity of Thought</h2><p>We categorise the work in two brought categories:</p><ul><li><strong>Listen &amp; Learn</strong> is all about understanding the situation</li><li><strong>Think &amp; Triumph</strong> is all about reaching conclusions</li></ul><p>Each of these two categories has different Notations, different Methods and different outcomes.</p><img src="images/overview/ClassifyVithancoNotations.svg"/><p class="caption"> <em>A classification of Vithanco Notations</em></p></div>
+                <div class="content"><h2 id="transform-your-thinking">Transform Your Thinking</h2>
+<p>Feeling stuck? Structured Visual Thinking can change that.</p>
+<h3 id="why-choose-it">Why Choose It?</h3>
+<ul>
+ <li><strong>Clear Your Mind:</strong> Turn confusion into clarity.</li>
+ <li><strong>Better Decisions:</strong> Uncover hidden solutions.</li>
+ <li><strong>Feel and Think:</strong> Engage both heart and mind.</li>
+</ul>
+<h3 id="join-us">Join Us</h3>
+<p>Many have already transformed their lives—now it's your turn.</p>
+<p>Get started. Find clarity. Transform challenges into opportunities.</p>
+<img src="/Zen.webp" alt="Your goal, clear thoughts" onclick="openLightbox(this)" />
+<h2 id="find-clarity-of-thought">Find Clarity of Thought</h2>
+<p>What are you looking for?</p>
+<ul>
+ <li>Are you looking for Facilitation? Then go to <a href="/services">Services</a>.</li>
+ <li>Are you looking for information on the Vithanco Mac Application? Then look at <a href="/tools">Tools</a>.</li>
+ <li>Are you trying to learn more about Structured Visual Thinking? Then look at <a href="/methods">Methods</a>.</li>
+ <li>Are you looking for a specific Notation? Then look at <a href="/notations">Notations</a>.</li>
+</ul>
+<h2 id="how-can-structured-visual-thinking-help-you-to-find-clarity-of-thought">How can Structured Visual Thinking Help You to find Clarity of Thought?</h2>
+<p><strong>Visual Thinking</strong> combines more senses by including the visual sense.</p>
+<p><strong>Structured Visual Thinking</strong> doesn't require any artistic ability. Instead, you draw relationships between ideas/thoughts and therefore create meaning.</p>
+<p><strong>Structured Visual Thinking Methods</strong> guides you towards meaningful diagrams that allow you to achieve outcomes. Sometimes the thought process to create the diagram with clarity of mind is the outcome. Sometimes the diagram is the blueprint for the next steps.</p>
+<h2 id="from-confusion-to-clarity-of-thought">From Confusion to Clarity of Thought</h2>
+<p>We categorise the work in two brought categories:</p>
+<ul>
+ <li><strong>Listen &amp; Learn</strong> is all about understanding the situation</li>
+ <li><strong>Think &amp; Triumph</strong> is all about reaching conclusions</li>
+</ul>
+<p>Each of these two categories has different Notations, different Methods and different outcomes.</p>
+<figure class="img-std"> 
+ <img src="/index/ClassifyVithancoNotations.svg" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  A classification of Vithanco Notations
+ </figcaption> 
+</figure></div>
  
                 <br/>
                 <div class="item-list">
@@ -52,14 +120,9 @@
                     <ul class="previews">
                         <li>
                             <div class="preview">
-                                <a href="/methods/why-consultants-should-use-concept-maps">
-                                    <p>Fast-Track to Understanding Your Clients: The Freelancer's Secret</p></a>
-                                <p>Dive into the world of Concept Mapping - a secret weapon for freelancers and knowledge workers to swiftly understand clients and get a head start on new engagements. This article illustrates the power and simplicity of Concept Maps in cutting through jargon, aligning perspectives, and fast-tracking your productivity, all while showcasing your value from day one.</p></div></li>
-                        <li>
-                            <div class="preview">
-                                <a href="/methods/typesOfBenefits">
-                                    <p>The Different Types of Benefits</p></a>
-                                <p>Understanding the different types of benefits is essential for driving project success.</p></div></li>
+                                <a href="/methods/Plan-Features-with-Impact-Mapping">
+                                    <p>Plan Features with Impact Mapping: A Visual Method for Product Development</p></a>
+                                <p>Use an Impact Map to focus on the next features you want to create for your product.</p></div></li>
                         <li>
                             <div class="preview">
                                 <a href="/methods/self-coaching-with-ibis">
@@ -67,14 +130,9 @@
                                 <p></p></div></li>
                         <li>
                             <div class="preview">
-                                <a href="/methods/Resolving-Conflicts">
-                                    <p>Define the Problem Before Solving It: How to Resolve Conflicts Constructively</p></a>
-                                <p></p></div></li>
-                        <li>
-                            <div class="preview">
-                                <a href="/methods/Plan-Features-with-Impact-Mapping">
-                                    <p>Plan Features with Impact Mapping: A Visual Method for Product Development</p></a>
-                                <p>Use an Impact Map to focus on the next features you want to create for your product.</p></div></li>
+                                <a href="/methods/why-consultants-should-use-concept-maps">
+                                    <p>Fast-Track to Understanding Your Clients: The Freelancer's Secret</p></a>
+                                <p>Dive into the world of Concept Mapping - a secret weapon for freelancers and knowledge workers to swiftly understand clients and get a head start on new engagements. This article illustrates the power and simplicity of Concept Maps in cutting through jargon, aligning perspectives, and fast-tracking your productivity, all while showcasing your value from day one.</p></div></li>
                         <li>
                             <div class="preview">
                                 <a href="/methods/Find-your-Leverage-Point">
@@ -87,17 +145,27 @@
                                 <p>Understanding the different types of benefits is essential for driving project success.</p></div></li>
                         <li>
                             <div class="preview">
-                                <a href="/methods/8clrs">
-                                    <p>Review Logical Reasoning with the Eight Categories of Legitimate Reservation</p></a>
-                                <p>The 8 categories of legitimate reservation, as suggested by Dr. Eliyahu Goldratt</p></div></li>
+                                <a href="/methods/Resolving-Conflicts">
+                                    <p>Define the Problem Before Solving It: How to Resolve Conflicts Constructively</p></a>
+                                <p></p></div></li>
                         <li>
                             <div class="preview">
                                 <a href="/methods/5Whys">
                                     <p>The Power of Perseverance: Unleashing the 5 Whys Method</p></a>
-                                <p>How to use the 5 Whys method</p></div></li></ul></div></article>
+                                <p>How to use the 5 Whys method</p></div></li>
+                        <li>
+                            <div class="preview">
+                                <a href="/methods/typesOfBenefits">
+                                    <p>The Different Types of Benefits</p></a>
+                                <p>Understanding the different types of benefits is essential for driving project success.</p></div></li>
+                        <li>
+                            <div class="preview">
+                                <a href="/methods/8clrs">
+                                    <p>Review Logical Reasoning with the Eight Categories of Legitimate Reservation</p></a>
+                                <p>The 8 categories of legitimate reservation, as suggested by Dr. Eliyahu Goldratt</p></div></li></ul></div></article>
             <aside class="side-content">
                 <div class="newsletter" height="350" width="250">
-                    <img src="/images/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
                     <p>See how you can combine your brain power with structured visual and achieve better results.</p>
                     <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
                 <div></div>
@@ -113,22 +181,22 @@ Vithanco Home </p>
                     <ul>
                         <li>
                             <a href="https://linkedIn.com/in/Kneupner">
-                                <img src="/images/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://bsky.app/profile/vithanco.bsky.social">
-                                <img src="/images/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://mastodon.social/@vithanco">
-                                <img src="/images/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
                             </a>
                         </li>
                         <li>
                             <a href="/feed.rss">
-                                <img src="/images/socialmedia-icons/rss.svg" alt="RSS"/>
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
                             </a>
                         </li>
                     </ul></nav></div></footer></body>

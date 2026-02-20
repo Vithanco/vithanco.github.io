@@ -19,6 +19,38 @@
         <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
         <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
         <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
         <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
     </head>
@@ -47,7 +79,13 @@
                 <h1>Dictionary</h1>
                 <div class="reading-time">
                     <p>Estimated reading time: 1 minutes.</p></div>
-                <div class="content"><ul><li><strong>Dark Mode:</strong> "Dark Mode" or "Dark Appearance" is a feature introduced with macOS 10.14 Mojave, a bright dark appearance for the whole of macOS. As a result, you can export any diagram in dark or bright mode (except PDF - which only knows bright mode) <img src="/images/Project-Model-Current-Reality-Tree-CRT-bright.jpg" alt="A small Current Reality Tree. Left side with normal appearance, and the right side with a dark appearance"/><p class="caption"> <em>A small Current Reality Tree. Left side with normal appearance, and the right side with a dark appearance</em></p></li></ul><ul><li><strong>Notation Structure View:</strong> <a id="NotationStructureView"></a>Notation structure views are showing schematically the <a href="/notations">Notation</a>. Each node represents a Node Type. The On/Off symbol represents the starting point. Edges going from their point to the Starting Node Types. From there the Edges show suggested predecessors and successors. So if a Concept Node Type has an edge pointing at the Relation Node Type then Concept is a suggested predecessor for a Relation. If the Edge has arrows at both sides is each Node Type a suggested predecessor (and successor) of the other? If there is an Edge that points with both sides to the same Node Type, then the Node Type can be its own predecessor (and successor). <img src="/images/domain-Concept-Maps.jpg" alt="Notation Concept Maps"/><p class="caption"> <em>The Notation Structure View for Concept Maps</em></p></li></ul><ul><li><strong>Starting Node Type</strong> <a id="StartingNodeType"></a>(previously named Starting Point): Notations' starting Node Types will be suggested when you create the first node in a Graph. Any Node Type can be a starting Node Node Type. In a <a href="#NotationStructureView">Notation Structure View</a> you can see the Power On/Off symbol at the bottom. Edges are pointing from the On/Off symbol towards the Starting Node Types.</li></ul></div></article>
+                <div class="content"><ul><li><strong>Dark Mode:</strong> "Dark Mode" or "Dark Appearance" is a feature introduced with macOS 10.14 Mojave, a bright dark appearance for the whole of macOS. As a result, you can export any diagram in dark or bright mode (except PDF - which only knows bright mode) <figure class="img-std">
+    <img src="/Tools/Help/dictionary/Project-Model-Current-Reality-Tree-CRT-bright.jpg" alt="A small Current Reality Tree. Left side with normal appearance, and the right side with a dark appearance" onclick="openLightbox(this)" />
+    <figcaption>A small Current Reality Tree. Left side with normal appearance, and the right side with a dark appearance</figcaption>
+</figure></li></ul><ul><li><strong>Notation Structure View:</strong> <a id="NotationStructureView"></a>Notation structure views are showing schematically the <a href="/notations">Notation</a>. Each node represents a Node Type. The On/Off symbol represents the starting point. Edges going from their point to the Starting Node Types. From there the Edges show suggested predecessors and successors. So if a Concept Node Type has an edge pointing at the Relation Node Type then Concept is a suggested predecessor for a Relation. If the Edge has arrows at both sides is each Node Type a suggested predecessor (and successor) of the other? If there is an Edge that points with both sides to the same Node Type, then the Node Type can be its own predecessor (and successor). <figure class="img-std">
+    <img src="/Tools/Help/dictionary/domain-Concept-Maps.jpg" alt="Notation Concept Maps" onclick="openLightbox(this)" />
+    <figcaption>The Notation Structure View for Concept Maps</figcaption>
+</figure></li></ul><ul><li><strong>Starting Node Type</strong> <a id="StartingNodeType"></a>(previously named Starting Point): Notations' starting Node Types will be suggested when you create the first node in a Graph. Any Node Type can be a starting Node Node Type. In a <a href="#NotationStructureView">Notation Structure View</a> you can see the Power On/Off symbol at the bottom. Edges are pointing from the On/Off symbol towards the Starting Node Types.</li></ul></div></article>
             <aside class="side-content">
                 <div class="preview__article-details">
                     <p class="tag-list-title">Tagged with:</p>
@@ -56,7 +94,7 @@
                             <div class="tag-preview">
                                 <a href="/tags/help">Help</a></div></li></ul></div>
                 <div class="newsletter" height="350" width="250">
-                    <img src="/images/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
                     <p>See how you can combine your brain power with structured visual and achieve better results.</p>
                     <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
                 <div></div></aside></div>
@@ -69,22 +107,22 @@ Vithanco Home </p>
                     <ul>
                         <li>
                             <a href="https://linkedIn.com/in/Kneupner">
-                                <img src="/images/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://bsky.app/profile/vithanco.bsky.social">
-                                <img src="/images/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://mastodon.social/@vithanco">
-                                <img src="/images/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
                             </a>
                         </li>
                         <li>
                             <a href="/feed.rss">
-                                <img src="/images/socialmedia-icons/rss.svg" alt="RSS"/>
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
                             </a>
                         </li>
                     </ul></nav></div></footer></body>

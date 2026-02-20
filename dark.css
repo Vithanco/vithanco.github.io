@@ -53,7 +53,31 @@ li {
 
 img {
   margin-top: 0.75em;
-  width: 400px;
+  max-width: 100%;
+  height: auto;
+}
+
+.img-small {
+  width: 300px;
+  max-width: 100%;
+  margin: 1em auto;
+}
+
+.img-medium {
+  width: 500px;
+  max-width: 100%;
+  margin: 1em auto;
+}
+
+.img-full {
+  width: 100%;
+  margin: 1em 0;
+}
+
+.img-std {
+  width: 80%;
+  max-width: 100%;
+  margin: 1em auto;
 }
 
 table {
@@ -91,6 +115,27 @@ blockquote {
   font-style: italic;
   text-align: center;
   color: #333;
+}
+
+figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1em 0;
+  width: 100%;
+}
+
+figcaption {
+  align-self: center;
+  width: 80%;
+  font-size: 0.9em;
+  font-style: italic;
+  text-align: center;
+  color: #999;
+  margin-top: 0.5em;
+  padding: 0.5em;
+  background-color: #1a1a1a;
+  border-radius: 4px;
 }
 
 /* ---------------------------------------------------------------- */
@@ -157,11 +202,9 @@ header {
 
 .header-wrapper nav ul li a.selected {
   background: rgb(234, 88, 12);
-  background: linear-gradient(
-    297deg,
-    rgba(234, 88, 12, 1) 0%,
-    rgba(255, 128, 0, 1) 100%
-  );
+  background: linear-gradient(297deg,
+      rgba(234, 88, 12, 1) 0%,
+      rgba(255, 128, 0, 1) 100%);
   box-shadow: rgba(85, 85, 85, 0.2) 0px 8px 24px;
   border-radius: 2px;
   padding: 0.5em;
@@ -352,6 +395,7 @@ header {
 .toc-list ul li ul li ul li:hover {
   background-color: rgba(255, 255, 255, 0.15);
 }
+
 .newsletter {
   padding-top: 0.25em;
 }
@@ -477,8 +521,7 @@ footer div nav ul {
 footer div nav ul img {
   height: 30px;
   width: 30px;
-  filter: invert(96%) sepia(1%) saturate(44%) hue-rotate(354deg)
-    brightness(118%) contrast(100%);
+  filter: invert(96%) sepia(1%) saturate(44%) hue-rotate(354deg) brightness(118%) contrast(100%);
   margin: 0;
   transition: all;
   transition-duration: 0.25s;
@@ -559,6 +602,7 @@ footer div nav ul li a {
   font-size: 23px;
   font-weight: bold;
 }
+
 /* ---------------------------------------------------------------- */
 
 .user-feedback {
@@ -652,7 +696,7 @@ footer div nav ul li a {
   left: initial;
 }
 
-.rating-factor__rating input:checked ~ input::before,
+.rating-factor__rating input:checked~input::before,
 .rating-factor__rating input:checked::before {
   color: #ea9c0c;
 }
@@ -785,6 +829,7 @@ footer div nav ul li a {
 /* ---------------------------------------------------------------- */
 
 @media only screen and (max-width: 768px) {
+
   .section-wrapper article,
   .index-wrapper article {
     width: 100%;

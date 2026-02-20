@@ -19,6 +19,38 @@
         <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
         <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
         <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
         <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
     </head>
@@ -47,7 +79,79 @@
                 <h1>The Benefit Breakdown Structure (BBS) Notation</h1>
                 <div class="reading-time">
                     <p>Estimated reading time: 4 minutes.</p></div>
-                <div class="content"><h2>Why use the BBS Notation?</h2><p>Benefit Breakdown Structure diagrams are useful to plan and execute projects. A BBS diagram follows the <a href="https://www.stephencovey.com/7habits/7habits-habit2.php">Start with the end in mind idea:</a> We should start by analysing the intended benefits and then simply plan backwards:</p><ol><li>What is the strategic intent or investment objective? Why are we looking at planning a project? This should be a linkage to the overall company strategy. I am particularly fond of the idea of calling a project an investment.</li><li>What are the associated benefits? By looking at the project proposal and matching the investment objective, what benefits can we aim at?</li><li>Which (business) processes will need to change for realising each benefit? Please note that a benefit is not created during the project. Instead a changed process will create the benefits each time it is executed. So, which process is creating the benefit? It doesn't have to be a formal process, it doesn't even need to be executed twice. But both are often enough the case.</li><li>What one-off changes are enabling the changed processes? This is ultimately the task of the project.</li></ol><p>Often enough we plan a project the other way around: one starts with an idea of a new technology/system/product idea and then tries to find the benefits for that. I believe that here is one of the root causes of many failed projects. Someone fell in love with an idea, not with a benefit.</p><img src="/images/BBS-Schema.jpg"/><p>An example of a BBS diagram that explains some of the key concepts.</p><p>The diagram above is created with this Notation. It shows how the structure of a (rather small) project could look like. The clusters are used to explain how the diagram translates into a project environment.</p><p>A better understanding of the underlying ideas of benefit realisation through a BBS can be found on the <a href="https://kneupner.de/thoughts/benefit-realisation">author</a>'s website](https://kneupner.de/thoughts/benefit-realisation).</p><h2>Notation Definition</h2><p>The Notation contains a Node Type for each of the questions raised earlier.</p><img src="/images/Domain-BBS.jpg"/><p>The Benefit Breakdown Structure Notation</p><p>There are a few notes to make:</p><ul><li>You will never define the whole structure from the objective to the enablers. It is absolutely fine to include as well planning in the other direction. You even need to identify dis-benefits which normally always happen.</li><li>I was considering providing many similar nodes, like "IT Enablers", "HR Enablers", "Financial Benefit", etc. but didn't do so. Simply create a Node Type duplicate and adapt it to your needs.</li><li>If you follow the planning as suggested will you realise that the shape of the diagram should be a triangle, as there will be more and more entries the further you are away from the investment objectives. If this is not the case for your diagram then you might overlook something.</li><li>This approach is easily aligned with Agile approaches. You can create a rough Business Case for each benefit and then compare each in-project business case. Focus on the best benefit and change the process. Once you are done you can re-evaluate the BBS and select the next benefit. Looking from this angle, a benefit becomes a feature.</li><li>Keep the BBS updated throughout the project. It will guide you. E.g. when you learn that a benefit is smaller than expected and you consider the benefit as no longer worth enabling then the BBS will allow you easily to de-scope those enablers that were in the plan only for this benefit.</li></ul><table><thead><tr><th>Node Type</th><th>Description</th><th>Is <a href="/tools/Help/dictionary/index.html#StartingNodeType">Starting Node Type</a>?</th><th>Successors</th></tr></thead><tbody><tr><td>Investment Objective</td><td>Investment Objectives are the goal of the initiative. They should be linked into the organisation's strategy.</td><td>Yes</td><td>-</td></tr><tr><td>Benefit</td><td>A benefit is an advantage on behalf of a stakeholder. What are the benefits associated with the investment objective? What benefits can we achieve that support the investment objective?</td><td>No</td><td>Investment Objective</td></tr><tr><td>Business Change</td><td>Business Changes are changed processes that create the expected benefit by execution. Please note that a benefit is not created during the project. Instead, a changed process will create the benefits each time it is executed. Which process(es) is (are) creating the benefit? It doesn't have to be a formal process, it doesn't even need to be executed twice.</td><td>No</td><td>Benefit</td></tr><tr><td>Enabler</td><td>Enabler are what a project is delivering. Enablers are one-off changes that enable the business processes to be executed in a better way. They are therefore prerequisites to the Business Changes</td><td>No</td><td>Business Change</td></tr></tbody></table><p>BBS uses <a href="/tools/Help/Expert_Concepts/diagram-logic/index.html">Necessary Condition Logic</a>.</p><h2>Try BBS Yourself</h2><p>Create and visualize your own Benefit Breakdown Structure diagram right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p><iframe src="/vgraph/vgraph-widget.html?vgl=vgraph%20project%3A%20BBS%20%22Sample%20Project%22%20%7B%0A%20%20%20%20node%20obj1%3A%20InvestmentObjective%20%22Increase%20Revenue%22%3B%0A%20%20%20%20node%20ben1%3A%20Benefit%20%22Faster%20Customer%20Onboarding%22%3B%0A%20%20%20%20node%20ben2%3A%20Benefit%20%22Improved%20Customer%20Satisfaction%22%3B%0A%20%20%20%20node%20bc1%3A%20BusinessChange%20%22Automated%20Registration%20Process%22%3B%0A%20%20%20%20node%20bc2%3A%20BusinessChange%20%22Self-Service%20Portal%22%3B%0A%20%20%20%20node%20en1%3A%20Enabler%20%22Implement%20Online%20Forms%22%3B%0A%20%20%20%20node%20en2%3A%20Enabler%20%22Deploy%20Customer%20Portal%22%3B%0A%20%20%20%20node%20en3%3A%20Enabler%20%22Train%20Support%20Team%22%3B%0A%0A%20%20%20%20edge%20ben1%20-%3E%20obj1%3B%0A%20%20%20%20edge%20ben2%20-%3E%20obj1%3B%0A%20%20%20%20edge%20bc1%20-%3E%20ben1%3B%0A%20%20%20%20edge%20bc2%20-%3E%20ben2%3B%0A%20%20%20%20edge%20en1%20-%3E%20bc1%3B%0A%20%20%20%20edge%20en2%20-%3E%20bc2%3B%0A%20%20%20%20edge%20en3%20-%3E%20bc2%3B%0A%7D" width="100%" height="750" style="border: 1px solid #e0e0e0; border-radius: 8px; margin: 20px 0;" title="VGraph Interactive BBS Editor"></iframe><p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p><p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="/tools/VGL_GUIDE">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.</p><h2>Further Information</h2><ul><li>You can read more about benefit realisation in this <a href="https://www.researchgate.net/publication/42795451_Managing_the_realization_of_business_benefits_from_IT_investments">article</a>.</li><li>For more information on Benefits, please see <a href="/methods/typesOfBenefits">Types of Benefits</a></li><li>Benefits are discussed in my <a href="https://newsletter.vithanco.com/t/benefit-realisation">newsletter</a></li></ul></div></article>
+                <div class="content"><h2 id="why-use-the-bbs-notation">Why use the BBS Notation?</h2>
+<p>Benefit Breakdown Structure diagrams are useful to plan and execute projects. A BBS diagram follows the <a href="https://www.franklincovey.com/courses/the-7-habits/habit-2/">Start with the end in mind idea:</a> We should start by analysing the intended benefits and then simply plan backwards:</p>
+<ol>
+ <li>What is the strategic intent or investment objective? Why are we looking at planning a project? This should be a linkage to the overall company strategy. I am particularly fond of the idea of calling a project an investment.</li>
+ <li>What are the associated benefits? By looking at the project proposal and matching the investment objective, what benefits can we aim at?</li>
+ <li>Which (business) processes will need to change for realising each benefit? Please note that a benefit is not created during the project. Instead a changed process will create the benefits each time it is executed. So, which process is creating the benefit? It doesn't have to be a formal process, it doesn't even need to be executed twice. But both are often enough the case.</li>
+ <li>What one-off changes are enabling the changed processes? This is ultimately the task of the project.</li>
+</ol>
+<p>Often enough we plan a project the other way around: one starts with an idea of a new technology/system/product idea and then tries to find the benefits for that. I believe that here is one of the root causes of many failed projects. Someone fell in love with an idea, not with a benefit.</p>
+<img src="/Notations/Change/benefit-breakdown-structure/BBS-Schema.jpg" alt="" onclick="openLightbox(this)" />
+<p>An example of a BBS diagram that explains some of the key concepts.</p>
+<p>The diagram above is created with this Notation. It shows how the structure of a (rather small) project could look like. The clusters are used to explain how the diagram translates into a project environment.</p>
+<p>A better understanding of the underlying ideas of benefit realisation through a BBS can be found on the <a href="https://kneupner.de/thoughts/benefit-realisation">author</a>'s website](https://kneupner.de/thoughts/benefit-realisation).</p>
+<h2 id="notation-definition">Notation Definition</h2>
+<p>The Notation contains a Node Type for each of the questions raised earlier.</p>
+<img src="/Notations/Change/benefit-breakdown-structure/Domain-BBS.jpg" alt="" onclick="openLightbox(this)" />
+<p>The Benefit Breakdown Structure Notation</p>
+<p>There are a few notes to make:</p>
+<ul>
+ <li>You will never define the whole structure from the objective to the enablers. It is absolutely fine to include as well planning in the other direction. You even need to identify dis-benefits which normally always happen.</li>
+ <li>I was considering providing many similar nodes, like "IT Enablers", "HR Enablers", "Financial Benefit", etc. but didn't do so. Simply create a Node Type duplicate and adapt it to your needs.</li>
+ <li>If you follow the planning as suggested will you realise that the shape of the diagram should be a triangle, as there will be more and more entries the further you are away from the investment objectives. If this is not the case for your diagram then you might overlook something.</li>
+ <li>This approach is easily aligned with Agile approaches. You can create a rough Business Case for each benefit and then compare each in-project business case. Focus on the best benefit and change the process. Once you are done you can re-evaluate the BBS and select the next benefit. Looking from this angle, a benefit becomes a feature.</li>
+ <li>Keep the BBS updated throughout the project. It will guide you. E.g. when you learn that a benefit is smaller than expected and you consider the benefit as no longer worth enabling then the BBS will allow you easily to de-scope those enablers that were in the plan only for this benefit.</li>
+</ul>
+<table>
+ <thead>
+  <tr>
+   <th>Node Type</th>
+   <th>Description</th>
+   <th>Is <a href="/tools/Help/dictionary/index.html#StartingNodeType">Starting Node Type</a>?</th>
+   <th>Successors</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Investment Objective</td>
+   <td>Investment Objectives are the goal of the initiative. They should be linked into the organisation's strategy.</td>
+   <td>Yes</td>
+   <td>-</td>
+  </tr>
+  <tr>
+   <td>Benefit</td>
+   <td>A benefit is an advantage on behalf of a stakeholder. What are the benefits associated with the investment objective? What benefits can we achieve that support the investment objective?</td>
+   <td>No</td>
+   <td>Investment Objective</td>
+  </tr>
+  <tr>
+   <td>Business Change</td>
+   <td>Business Changes are changed processes that create the expected benefit by execution. Please note that a benefit is not created during the project. Instead, a changed process will create the benefits each time it is executed. Which process(es) is (are) creating the benefit? It doesn't have to be a formal process, it doesn't even need to be executed twice.</td>
+   <td>No</td>
+   <td>Benefit</td>
+  </tr>
+  <tr>
+   <td>Enabler</td>
+   <td>Enabler are what a project is delivering. Enablers are one-off changes that enable the business processes to be executed in a better way. They are therefore prerequisites to the Business Changes</td>
+   <td>No</td>
+   <td>Business Change</td>
+  </tr>
+ </tbody>
+</table>
+<p>BBS uses <a href="/tools/Help/Expert_Concepts/diagram-logic/index.html">Necessary Condition Logic</a>.</p>
+<h2 id="try-bbs-yourself">Try BBS Yourself</h2>
+<p>Create and visualize your own Benefit Breakdown Structure diagram right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p>
+<iframe src="/vgraph/vgraph-widget.html?vgl=vgraph%20project%3A%20BBS%20%22Sample%20Project%22%20%7B%0A%20%20%20%20node%20obj1%3A%20InvestmentObjective%20%22Increase%20Revenue%22%3B%0A%20%20%20%20node%20ben1%3A%20Benefit%20%22Faster%20Customer%20Onboarding%22%3B%0A%20%20%20%20node%20ben2%3A%20Benefit%20%22Improved%20Customer%20Satisfaction%22%3B%0A%20%20%20%20node%20bc1%3A%20BusinessChange%20%22Automated%20Registration%20Process%22%3B%0A%20%20%20%20node%20bc2%3A%20BusinessChange%20%22Self-Service%20Portal%22%3B%0A%20%20%20%20node%20en1%3A%20Enabler%20%22Implement%20Online%20Forms%22%3B%0A%20%20%20%20node%20en2%3A%20Enabler%20%22Deploy%20Customer%20Portal%22%3B%0A%20%20%20%20node%20en3%3A%20Enabler%20%22Train%20Support%20Team%22%3B%0A%0A%20%20%20%20edge%20ben1%20-%3E%20obj1%3B%0A%20%20%20%20edge%20ben2%20-%3E%20obj1%3B%0A%20%20%20%20edge%20bc1%20-%3E%20ben1%3B%0A%20%20%20%20edge%20bc2%20-%3E%20ben2%3B%0A%20%20%20%20edge%20en1%20-%3E%20bc1%3B%0A%20%20%20%20edge%20en2%20-%3E%20bc2%3B%0A%20%20%20%20edge%20en3%20-%3E%20bc2%3B%0A%7D" width="100%" height="750" style="border: 1px solid #e0e0e0; border-radius: 8px; margin: 20px 0;" title="VGraph Interactive BBS Editor"></iframe>
+<p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p>
+<p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="/tools/VGL_GUIDE">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.</p>
+<h2 id="further-information">Further Information</h2>
+<ul>
+ <li>You can read more about benefit realisation in this <a href="https://www.researchgate.net/publication/42795451_Managing_the_realization_of_business_benefits_from_IT_investments">article</a>.</li>
+ <li>For more information on Benefits, please see <a href="/methods/typesOfBenefits">Types of Benefits</a></li>
+ <li>Benefits are discussed in my <a href="https://newsletter.vithanco.com/t/benefit-realisation">newsletter</a></li>
+</ul></div></article>
             <aside class="side-content">
                 <div class="preview__article-details">
                     <p class="tag-list-title">Tagged with:</p>
@@ -62,7 +166,7 @@
                             <div class="tag-preview">
                                 <a href="/tags/change-management">change management</a></div></li></ul></div>
                 <div class="newsletter" height="350" width="250">
-                    <img src="/images/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
                     <p>See how you can combine your brain power with structured visual and achieve better results.</p>
                     <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
                 <div></div></aside></div>
@@ -75,22 +179,22 @@ Vithanco Home </p>
                     <ul>
                         <li>
                             <a href="https://linkedIn.com/in/Kneupner">
-                                <img src="/images/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://bsky.app/profile/vithanco.bsky.social">
-                                <img src="/images/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://mastodon.social/@vithanco">
-                                <img src="/images/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
                             </a>
                         </li>
                         <li>
                             <a href="/feed.rss">
-                                <img src="/images/socialmedia-icons/rss.svg" alt="RSS"/>
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
                             </a>
                         </li>
                     </ul></nav></div></footer></body>

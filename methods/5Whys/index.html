@@ -19,6 +19,38 @@
         <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
         <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
         <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
         <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
     </head>
@@ -45,7 +77,37 @@
                 <h1>The Power of Perseverance: Unleashing the 5 Whys Method</h1>
                 <div class="reading-time">
                     <p>Estimated reading time: 3 minutes.</p></div>
-                <div class="content"><p>Today, we're diving into an intriguing strategy for untangling complex issues, a natural extension of our previous discourse on the IBIS self-coaching approach.</p><h2>Story Time: The Case of the Dead Car Battery</h2><p>Let me introduce you to a practical tool called <a href="https://en.wikipedia.org/wiki/Five_whys">5 Whys</a>. Picture yourself as Sherlock Holmes, but you’re hunting down elusive root causes instead of solving high-profile crimes. Like any good detective, you will need more than the initial explanation. Let's face it; the first layer is often just a smokescreen for the real culprits lurking beneath. Your weapon of choice? The disarmingly simple question: "Why?"</p><p>Imagine your car, a trusty old gas guzzler, refuses to start one fine morning. Ask, "Why?" The answer: a dead battery. Now, you could stop there, rope in a mechanic, and get it fixed, but would that truly resolve the issue?</p><p>Let's probe deeper. "Why is the battery dead?" A defective alternator is to blame. But wait, what led to the alternator's downfall? "Why isn't the alternator working?" Ah, the alternator belt is broken.</p><p>We're getting somewhere now, but hold on! Have we indeed unearthed the root cause? Replacing the broken belt could give your car a new lease on life, but that's akin to treating a symptom, not the disease. What we're after is a behaviour change that we have control over and can be addressed to prevent future issues.</p><p>"Why did the alternator belt break?" you ask. The belt had served beyond its expected lifespan and hadn't been replaced. So now we're onto something. "Why wasn't it replaced?" Because, in truth, the vehicle has yet to be maintained as per the recommended schedule. Bingo! We've struck gold.</p><p>Regular vehicle maintenance is a behaviour we can alter. The earlier stages in our line of questioning led us to uncontrollable variables, but by persevering with our "whys," we found a point of intervention. Maintenance might cost a pretty penny, but isn't it better than footing the bill for an emergency repair?</p><h2>Unveiling the Method</h2><p>This root cause analysis unfolds beautifully when depicted visually, and the <a href="/notations/IBIS/index">IBIS notation</a> serves as an ideal framework. Our detective journey can be traced in a simple, structured graph, bringing clarity and order to problem-solving. <img src="/images/methods/5Whys.svg" alt="5Whys example"/><p class="caption"> <em>Our investigative journey from issue to the root cause, presented visually</em></p></p><p>So, why the <strong>5</strong> in 5 Whys? It's a heuristic, a general rule that reminds us to dig deeper than our instincts suggest. You might strike root cause gold on your third "why," or perhaps you'll have to excavate to the eighth. The magic number five encourages you not to settle for an easy answer. Keep digging until you unearth a changeable behaviour which allows you to barricade the path to recurring issues.</p><p>Interestingly, the 5 Whys method has its roots in the Toyota Production System, a brainchild of Sakichi Toyoda, founder of Toyota Industries. It has since been embraced by various businesses and industries worldwide, offering a simple, accessible, and practical approach to problem-solving.</p><p>Despite its straightforwardness, it's crucial to acknowledge the 5 Whys method's potential limitations. It hinges on the people’s knowledge and insight in the process. If they comprehensively understand the problem or the knack for discerning root causes, the method may uncover the underlying issue. In such cases, more sophisticated problem-solving tools might be worth exploring.</p><h2>Bringing it All Together</h2><p>A <strong>root cause</strong> is a behavioural origin of the problem that you can rectify.</p><p>The 5 Whys method is all about:</p><ol><li>Identifying the problem.</li><li>Asking "why" the problem happened.</li><li>Probing deeper with each informative response by asking "why" again.</li><li>Persist with the "whys" until you discover a root cause or have exhausted your lines of inquiry (in which case, seek more perspectives or try a different method).</li><li>Upon hitting the root cause, devise strategies to avert the problem's recurrence.</li></ol><p>In conclusion, the 5 Whys method is more than a problem-solving technique; it's a journey into the heart of issues, unmasking behavioural culprits and empowering us to take effective action.</p></div></article>
+                <div class="content"><p>Today, we're diving into an intriguing strategy for untangling complex issues, a natural extension of our previous discourse on the IBIS self-coaching approach.</p>
+<h2 id="story-time-the-case-of-the-dead-car-battery">Story Time: The Case of the Dead Car Battery</h2>
+<p>Let me introduce you to a practical tool called <a href="https://en.wikipedia.org/wiki/Five_whys">5 Whys</a>. Picture yourself as Sherlock Holmes, but you’re hunting down elusive root causes instead of solving high-profile crimes. Like any good detective, you will need more than the initial explanation. Let's face it; the first layer is often just a smokescreen for the real culprits lurking beneath. Your weapon of choice? The disarmingly simple question: "Why?"</p>
+<p>Imagine your car, a trusty old gas guzzler, refuses to start one fine morning. Ask, "Why?" The answer: a dead battery. Now, you could stop there, rope in a mechanic, and get it fixed, but would that truly resolve the issue?</p>
+<p>Let's probe deeper. "Why is the battery dead?" A defective alternator is to blame. But wait, what led to the alternator's downfall? "Why isn't the alternator working?" Ah, the alternator belt is broken.</p>
+<p>We're getting somewhere now, but hold on! Have we indeed unearthed the root cause? Replacing the broken belt could give your car a new lease on life, but that's akin to treating a symptom, not the disease. What we're after is a behaviour change that we have control over and can be addressed to prevent future issues.</p>
+<p>"Why did the alternator belt break?" you ask. The belt had served beyond its expected lifespan and hadn't been replaced. So now we're onto something. "Why wasn't it replaced?" Because, in truth, the vehicle has yet to be maintained as per the recommended schedule. Bingo! We've struck gold.</p>
+<p>Regular vehicle maintenance is a behaviour we can alter. The earlier stages in our line of questioning led us to uncontrollable variables, but by persevering with our "whys," we found a point of intervention. Maintenance might cost a pretty penny, but isn't it better than footing the bill for an emergency repair?</p>
+<h2 id="unveiling-the-method">Unveiling the Method</h2>
+<p>This root cause analysis unfolds beautifully when depicted visually, and the <a href="/notations/IBIS/index">IBIS notation</a> serves as an ideal framework. Our detective journey can be traced in a simple, structured graph, bringing clarity and order to problem-solving. </p>
+<figure class="img-std"> 
+ <img src="/Methods/5Whys/5Whys.svg" alt="5Whys example" onclick="openLightbox(this)" /> 
+ <figcaption>
+  Our investigative journey from issue to the root cause, presented visually
+ </figcaption> 
+</figure>
+<p></p>
+<p>So, why the <strong>5</strong> in 5 Whys? It's a heuristic, a general rule that reminds us to dig deeper than our instincts suggest. You might strike root cause gold on your third "why," or perhaps you'll have to excavate to the eighth. The magic number five encourages you not to settle for an easy answer. Keep digging until you unearth a changeable behaviour which allows you to barricade the path to recurring issues.</p>
+<p>Interestingly, the 5 Whys method has its roots in the Toyota Production System, a brainchild of Sakichi Toyoda, founder of Toyota Industries. It has since been embraced by various businesses and industries worldwide, offering a simple, accessible, and practical approach to problem-solving.</p>
+<p>Despite its straightforwardness, it's crucial to acknowledge the 5 Whys method's potential limitations. It hinges on the people’s knowledge and insight in the process. If they comprehensively understand the problem or the knack for discerning root causes, the method may uncover the underlying issue. In such cases, more sophisticated problem-solving tools might be worth exploring.</p>
+<h2 id="bringing-it-all-together">Bringing it All Together</h2>
+<p>A <strong>root cause</strong> is a behavioural origin of the problem that you can rectify.</p>
+<p>The 5 Whys method is all about:</p>
+<ol>
+ <li>Identifying the problem.</li>
+ <li>Asking "why" the problem happened.</li>
+ <li>Probing deeper with each informative response by asking "why" again.</li>
+ <li>Persist with the "whys" until you discover a root cause or have exhausted your lines of inquiry (in which case, seek more perspectives or try a different method).</li>
+ <li>Upon hitting the root cause, devise strategies to avert the problem's recurrence.</li>
+</ol>
+<p>In conclusion, the 5 Whys method is more than a problem-solving technique; it's a journey into the heart of issues, unmasking behavioural culprits and empowering us to take effective action.</p></div></article>
             <aside class="side-content">
                 <div class="preview__article-details">
                     <p class="tag-list-title">Tagged with:</p>
@@ -60,7 +122,7 @@
                             <div class="tag-preview">
                                 <a href="/tags/root-cause-analysis">Root Cause Analysis</a></div></li></ul></div>
                 <div class="newsletter" height="350" width="250">
-                    <img src="/images/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
                     <p>See how you can combine your brain power with structured visual and achieve better results.</p>
                     <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
                 <div></div></aside></div>
@@ -73,22 +135,22 @@ Vithanco Home </p>
                     <ul>
                         <li>
                             <a href="https://linkedIn.com/in/Kneupner">
-                                <img src="/images/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://bsky.app/profile/vithanco.bsky.social">
-                                <img src="/images/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://mastodon.social/@vithanco">
-                                <img src="/images/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
                             </a>
                         </li>
                         <li>
                             <a href="/feed.rss">
-                                <img src="/images/socialmedia-icons/rss.svg" alt="RSS"/>
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
                             </a>
                         </li>
                     </ul></nav></div></footer></body>

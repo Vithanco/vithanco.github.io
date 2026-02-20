@@ -19,6 +19,38 @@
         <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
         <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
         <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
         <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
     </head>
@@ -45,7 +77,79 @@
                 <h1>The Concept Map Notation</h1>
                 <div class="reading-time">
                     <p>Estimated reading time: 2 minutes.</p></div>
-                <div class="content"><h2>Why use Concept Maps?</h2><p>Concept Maps are one of my standard artefacts of projects or whenever I need to understand a new area. They help to define the vocabulary by setting all relevant terms in relation to each other.</p><img src="/images/Concept-Mapping.jpg"/><p class="caption"> <em>What is a Concept Map?</em></p><p>Such a way of defining a vocabulary is (in my experience) superior to a traditional dictionary where you find a paragraph regarding the meaning of a word. Why? Simply because I have never seen anyone reading a 10-page document of definitions without the mind wandering off. A Concept Map in contrast is something that everyone can concentrate on. And by creating verifiable sentences you can double-check each relationship simply and constructively. Just create a set of concept maps and take every new project member through each relationship. You will be able to align the meaning of the terms. What if the other person disagrees with a sentence? Great! You just hit a misalignment that might become problematic at a later stage. Align on how to use the terms. As I said, it’s a communication tool.</p><img src="/images/Jedi.png"/><p class="caption"> <em>An outdated annotated Screenshot</em></p><h2>Notation Definition</h2><p>The Graph below describes the Concept Map Notation. Concept Maps have only two Node Types:</p><ol><li>Concepts</li><li>Relations</li></ol><p>You normally start with one or more concepts and then start expanding the map by adding more relations between concepts and by adding more relevant concepts. To emphasise a few concepts the Notation has a second Concept node: the Emphasised Concept. It comes in a different colour. If you use it sparingly you will be able to highlight the most relevant concepts.</p><img src="/images/domain-Concept-Maps.jpg"/><p class="caption"> <em>The Concept Map Notation</em></p><table><thead><tr><th>Node Type</th><th>Description</th><th>Is Starting Point</th><th>Successors</th></tr></thead><tbody><tr><td>Concept</td><td>Concepts (or Terms) are nouns. They are explained in a concept map by putting them in relation to each other.</td><td>Yes</td><td>Relation</td></tr><tr><td>Relation</td><td>A verb, connecting a Concept with another. The Relation creates with the source and destination Nodes a sentence that can easily be validated.</td><td>No</td><td>Concept, Emphasised Concept</td></tr><tr><td>Emphasised Concept</td><td>This is a second Concept Node in order to highlight some important concepts. Use this type sparingly.</td><td>Yes</td><td>Relation</td></tr></tbody></table><h2>Try Concept Map Yourself</h2><p>Create and visualize your own Concept Map right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p><iframe src="/vgraph/vgraph-widget.html?vgl=vgraph%20learningCM%3A%20ConceptMap%20%22How%20Learning%20Works%22%20%7B%0A%20%20%20%20node%20c1%3A%20Concept%20%22Student%22%3B%0A%20%20%20%20node%20r1%3A%20Relation%20%22learns%22%3B%0A%20%20%20%20node%20c2%3A%20Concept%20%22Subject%22%3B%0A%20%20%20%20node%20r2%3A%20Relation%20%22requires%22%3B%0A%20%20%20%20node%20c3%3A%20EmphasizedConcept%20%22Practice%22%3B%0A%20%20%20%20node%20r3%3A%20Relation%20%22leads%20to%22%3B%0A%20%20%20%20node%20c4%3A%20Concept%20%22Understanding%22%3B%0A%20%20%20%20node%20r4%3A%20Relation%20%22uses%22%3B%0A%20%20%20%20node%20c5%3A%20Concept%20%22Resources%22%3B%0A%0A%20%20%20%20edge%20c1%20-%3E%20r1%3B%0A%20%20%20%20edge%20r1%20-%3E%20c2%3B%0A%20%20%20%20edge%20c2%20-%3E%20r2%3B%0A%20%20%20%20edge%20r2%20-%3E%20c3%3B%0A%20%20%20%20edge%20c3%20-%3E%20r3%3B%0A%20%20%20%20edge%20r3%20-%3E%20c4%3B%0A%20%20%20%20edge%20c1%20-%3E%20r4%3B%0A%20%20%20%20edge%20r4%20-%3E%20c5%3B%0A%7D" width="100%" height="750" style="border: 1px solid #e0e0e0; border-radius: 8px; margin: 20px 0;" title="VGraph Interactive Concept Map Editor"></iframe><p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p><p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="/tools/VGL_GUIDE">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.</p></div></article>
+                <div class="content"><h2 id="why-use-concept-maps">Why use Concept Maps?</h2>
+<p>Concept Maps are one of my standard artefacts of projects or whenever I need to understand a new area. They help to define the vocabulary by setting all relevant terms in relation to each other. NotebookLM helped me to create this infographic to explain Concept Maps:</p>
+<figure class="img-std"> 
+ <img src="/Notations/concept-maps/conceptMapsByNLM.png" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  What is a Concept Map? Based on 
+  <a href="https://www.academia.edu/688215/The_theory_underlying_concept_maps_and_how_to_construct_and_use_them">this article</a>
+ </figcaption> 
+</figure>
+<p>Or let us use a Concept Map to explain Concept Maps.</p>
+<figure class="img-std"> 
+ <img src="/Notations/concept-maps/Concept-Mapping.jpg" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  What is a Concept Map? Explained via a Concept Map
+ </figcaption> 
+</figure>
+<p>Such a way of defining a vocabulary is (in my experience) superior to a traditional dictionary where you find a paragraph regarding the meaning of a word. Why? Simply because I have never seen anyone reading a 10-page document of definitions without the mind wandering off. A Concept Map in contrast is something that everyone can concentrate on. And by creating verifiable sentences you can double-check each relationship simply and constructively. Just create a set of concept maps and take every new project member through each relationship. You will be able to align the meaning of the terms. What if the other person disagrees with a sentence? Great! You just hit a misalignment that might become problematic at a later stage. Align on how to use the terms. As I said, it’s a communication tool.</p>
+<figure class="img-std"> 
+ <img src="/Notations/concept-maps/Jedi.png" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  An outdated annotated Screenshot
+ </figcaption> 
+</figure>
+<h2 id="notation-definition">Notation Definition</h2>
+<p>The Graph below describes the Concept Map Notation. Concept Maps have only two Node Types:</p>
+<ol>
+ <li>Concepts</li>
+ <li>Relations</li>
+</ol>
+<p>You normally start with one or more concepts and then start expanding the map by adding more relations between concepts and by adding more relevant concepts. To emphasise a few concepts the Notation has a second Concept node: the Emphasised Concept. It comes in a different colour. If you use it sparingly you will be able to highlight the most relevant concepts.</p>
+<figure class="img-std"> 
+ <img src="/Notations/concept-maps/domain-Concept-Maps.jpg" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  The Concept Map Notation
+ </figcaption> 
+</figure>
+<table>
+ <thead>
+  <tr>
+   <th>Node Type</th>
+   <th>Description</th>
+   <th>Is Starting Point</th>
+   <th>Successors</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Concept</td>
+   <td>Concepts (or Terms) are nouns. They are explained in a concept map by putting them in relation to each other.</td>
+   <td>Yes</td>
+   <td>Relation</td>
+  </tr>
+  <tr>
+   <td>Relation</td>
+   <td>A verb, connecting a Concept with another. The Relation creates with the source and destination Nodes a sentence that can easily be validated.</td>
+   <td>No</td>
+   <td>Concept, Emphasised Concept</td>
+  </tr>
+  <tr>
+   <td>Emphasised Concept</td>
+   <td>This is a second Concept Node in order to highlight some important concepts. Use this type sparingly.</td>
+   <td>Yes</td>
+   <td>Relation</td>
+  </tr>
+ </tbody>
+</table>
+<h2 id="try-concept-map-yourself">Try Concept Map Yourself</h2>
+<p>Create and visualize your own Concept Map right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p>
+<iframe src="/vgraph/vgraph-widget.html?vgl=vgraph%20learningCM%3A%20ConceptMap%20%22How%20Learning%20Works%22%20%7B%0A%20%20%20%20node%20c1%3A%20Concept%20%22Student%22%3B%0A%20%20%20%20node%20r1%3A%20Relation%20%22learns%22%3B%0A%20%20%20%20node%20c2%3A%20Concept%20%22Subject%22%3B%0A%20%20%20%20node%20r2%3A%20Relation%20%22requires%22%3B%0A%20%20%20%20node%20c3%3A%20EmphasizedConcept%20%22Practice%22%3B%0A%20%20%20%20node%20r3%3A%20Relation%20%22leads%20to%22%3B%0A%20%20%20%20node%20c4%3A%20Concept%20%22Understanding%22%3B%0A%20%20%20%20node%20r4%3A%20Relation%20%22uses%22%3B%0A%20%20%20%20node%20c5%3A%20Concept%20%22Resources%22%3B%0A%0A%20%20%20%20edge%20c1%20-%3E%20r1%3B%0A%20%20%20%20edge%20r1%20-%3E%20c2%3B%0A%20%20%20%20edge%20c2%20-%3E%20r2%3B%0A%20%20%20%20edge%20r2%20-%3E%20c3%3B%0A%20%20%20%20edge%20c3%20-%3E%20r3%3B%0A%20%20%20%20edge%20r3%20-%3E%20c4%3B%0A%20%20%20%20edge%20c1%20-%3E%20r4%3B%0A%20%20%20%20edge%20r4%20-%3E%20c5%3B%0A%7D" width="100%" height="750" style="border: 1px solid #e0e0e0; border-radius: 8px; margin: 20px 0;" title="VGraph Interactive Concept Map Editor"></iframe>
+<p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p>
+<p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="/tools/VGL_GUIDE">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.</p>
+<h2 id="history">History</h2>
+<p>Concept Maps were developed by Joseph D. Novak. See for example <a href="https://www.academia.edu/688215/The_theory_underlying_concept_maps_and_how_to_construct_and_use_them">this article</a></p></div></article>
             <aside class="side-content">
                 <div class="preview__article-details">
                     <p class="tag-list-title">Tagged with:</p>
@@ -57,7 +161,7 @@
                             <div class="tag-preview">
                                 <a href="/tags/notation">Notation</a></div></li></ul></div>
                 <div class="newsletter" height="350" width="250">
-                    <img src="/images/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
                     <p>See how you can combine your brain power with structured visual and achieve better results.</p>
                     <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
                 <div></div></aside></div>
@@ -70,22 +174,22 @@ Vithanco Home </p>
                     <ul>
                         <li>
                             <a href="https://linkedIn.com/in/Kneupner">
-                                <img src="/images/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://bsky.app/profile/vithanco.bsky.social">
-                                <img src="/images/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://mastodon.social/@vithanco">
-                                <img src="/images/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
                             </a>
                         </li>
                         <li>
                             <a href="/feed.rss">
-                                <img src="/images/socialmedia-icons/rss.svg" alt="RSS"/>
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
                             </a>
                         </li>
                     </ul></nav></div></footer></body>

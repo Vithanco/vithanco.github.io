@@ -19,6 +19,38 @@
         <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
         <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
         <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
         <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
     </head>
@@ -49,7 +81,33 @@
                 <h1>Changing Node Order in Vithanco</h1>
                 <div class="reading-time">
                     <p>Estimated reading time: 2 minutes.</p></div>
-                <div class="content"><h1>The Problem</h1><p>Laying out a graph depends on node order. The nodes are created in an order and this is the first order used. By maintaining that order Vithanco ensures that the nodes are located where they are and that small changes in the input lead to only small changes in the output. That means that in most cases the leftmost node stays leftmost. The layout algorithms are stable in the sense that they produce the same outcome for the same input. And the order of nodes is part of the input.</p><p>And sometimes the original order is not the order you like. You would like the nodes presented in a different order, exchanging two nodes that are located next to each other, or similar.</p><h1>The Solution</h1><p>You can change the order of nodes and thus can influence the resulting diagram by using the [TAB] key. Simply select two nodes and press [TAB] and the two nodes exchange their place in the order of nodes. If you select more than 2 nodes and press [TAB] they are rotating their position in the order. Finally, press the [ALT] (or [OPTION]) key at the same time as [TAB] and the order is shuffled.</p><p>You can use [TAB] in all diagram types.</p><h1>Limitations</h1><p>Sometimes the algorithm will not be influenced by a change of order. 'Good reasons' might keep the layout algorithm from changing the diagram if the order of nodes changes. Examples of these 'good reasons' may:</p><ul><li>to avoid long edges (aka connection)</li><li>to avoid crossing edges, or</li><li>to place nodes within a cluster next to each other,</li><li>to balance a tree based on the next layer (layered view only),</li></ul><p>or similar. The above list is not complete and the used algorithms are quite sophisticated.</p><p>There are more ways to influence a diagram but these will be captured in another post.</p><h1>An Example</h1><p>The following is an example with a "<a href="/notations/causal-loop-diagram">Causal Loop Diagram</a>" or "CLD" in short. Causal loop diagrams are used to analyse systems and their behaviour.</p><p>CLDs aren't layered as they are normally full of cycles ("loops"), meaning they have a lot of connections that would point from the bottom to the top. Hence CLDs use a star layout.</p><p>The example is based on the "<a href="http://www.systems-thinking.org/theWay/ssb/sb.htm">Shifting the Burden</a>" archetype. The first version looked like this:</p><img src="/images/2019-03-09_17-17-40.png"/><p>The structure of this CLD archetype is not very obvious. Edges are overlapping, making understanding unnecessarily difficult.</p><p>Using the above, select the top and the right node:</p><img src="/images/2019-03-09_17-18-51.png"/><p>Now press [TAB] and the order of the two selected nodes is exchanged, resulting in a different positioning of these nodes in the internal order. In this example, they simply exchanged their location as well.</p><img src="/images/2019-03-09_17-19-13.png"/><p>Now the structure becomes clear. The edges are no longer overlapping and the three loops become visible.</p></div></article>
+                <div class="content"><h1 id="the-problem">The Problem</h1>
+<p>Laying out a graph depends on node order. The nodes are created in an order and this is the first order used. By maintaining that order Vithanco ensures that the nodes are located where they are and that small changes in the input lead to only small changes in the output. That means that in most cases the leftmost node stays leftmost. The layout algorithms are stable in the sense that they produce the same outcome for the same input. And the order of nodes is part of the input.</p>
+<p>And sometimes the original order is not the order you like. You would like the nodes presented in a different order, exchanging two nodes that are located next to each other, or similar.</p>
+<h1 id="the-solution">The Solution</h1>
+<p>You can change the order of nodes and thus can influence the resulting diagram by using the [TAB] key. Simply select two nodes and press [TAB] and the two nodes exchange their place in the order of nodes. If you select more than 2 nodes and press [TAB] they are rotating their position in the order. Finally, press the [ALT] (or [OPTION]) key at the same time as [TAB] and the order is shuffled.</p>
+<p>You can use [TAB] in all diagram types.</p>
+<h1 id="limitations">Limitations</h1>
+<p>Sometimes the algorithm will not be influenced by a change of order. 'Good reasons' might keep the layout algorithm from changing the diagram if the order of nodes changes. Examples of these 'good reasons' may:</p>
+<ul>
+ <li>to avoid long edges (aka connection)</li>
+ <li>to avoid crossing edges, or</li>
+ <li>to place nodes within a cluster next to each other,</li>
+ <li>to balance a tree based on the next layer (layered view only),</li>
+</ul>
+<p>or similar. The above list is not complete and the used algorithms are quite sophisticated.</p>
+<p>There are more ways to influence a diagram but these will be captured in another post.</p>
+<h1 id="an-example">An Example</h1>
+<p>The following is an example with a "<a href="/notations/causal-loop-diagram">Causal Loop Diagram</a>" or "CLD" in short. Causal loop diagrams are used to analyse systems and their behaviour.</p>
+<p>CLDs aren't layered as they are normally full of cycles ("loops"), meaning they have a lot of connections that would point from the bottom to the top. Hence CLDs use a star layout.</p>
+<p>The example is based on the "<a href="http://www.systems-thinking.org/theWay/ssb/sb.htm">Shifting the Burden</a>" archetype. The first version looked like this:</p>
+<img src="/Tools/Help/Appearance/changing-node-order-in-vithanco/2019-03-09_17-17-40.png" alt="" onclick="openLightbox(this)" />
+<p>The structure of this CLD archetype is not very obvious. Edges are overlapping, making understanding unnecessarily difficult.</p>
+<p>Using the above, select the top and the right node:</p>
+<img src="/Tools/Help/Appearance/changing-node-order-in-vithanco/2019-03-09_17-18-51.png" alt="" onclick="openLightbox(this)" />
+<p>Now press [TAB] and the order of the two selected nodes is exchanged, resulting in a different positioning of these nodes in the internal order. In this example, they simply exchanged their location as well.</p>
+<img src="/Tools/Help/Appearance/changing-node-order-in-vithanco/2019-03-09_17-19-13.png" alt="" onclick="openLightbox(this)" />
+<p>Now the structure becomes clear. The edges are no longer overlapping and the three loops become visible.</p></div></article>
             <aside class="side-content">
                 <div class="preview__article-details">
                     <p class="tag-list-title">Tagged with:</p>
@@ -61,7 +119,7 @@
                             <div class="tag-preview">
                                 <a href="/tags/help">Help</a></div></li></ul></div>
                 <div class="newsletter" height="350" width="250">
-                    <img src="/images/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
                     <p>See how you can combine your brain power with structured visual and achieve better results.</p>
                     <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
                 <div></div></aside></div>
@@ -74,22 +132,22 @@ Vithanco Home </p>
                     <ul>
                         <li>
                             <a href="https://linkedIn.com/in/Kneupner">
-                                <img src="/images/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://bsky.app/profile/vithanco.bsky.social">
-                                <img src="/images/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://mastodon.social/@vithanco">
-                                <img src="/images/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
                             </a>
                         </li>
                         <li>
                             <a href="/feed.rss">
-                                <img src="/images/socialmedia-icons/rss.svg" alt="RSS"/>
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
                             </a>
                         </li>
                     </ul></nav></div></footer></body>

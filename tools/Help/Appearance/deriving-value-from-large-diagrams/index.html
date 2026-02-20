@@ -19,6 +19,38 @@
         <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
         <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
         <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
         <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
     </head>
@@ -49,7 +81,60 @@
                 <h1>Deriving Value from Large Diagrams</h1>
                 <div class="reading-time">
                     <p>Estimated reading time: 5 minutes.</p></div>
-                <div class="content"><p>We at Vithanco love drawing diagrams to understand. However, one of the main obstacles with diagrams can be its size. It is not uncommon for us to have diagrams with wy over 100 nodes and 150 edges. If you plan a project with the <a href="/notations/Change/benefit-breakdown-structure/index.html">Benefit Breakdown Structure (BBS) Notation</a> then this represents only a small project. The resulting BBS is quickly becoming messy to look at and the overlapping of edges means that the main diagram is rather confusing.</p><img src="/images/big-diagram.png"/><p><em>A large Diagram (modified BBS model)</em></p><p>Generally speaking, size can be a limitation to a graph's usefulness by making it difficult to understand the structure. If the graph is too complex and the connections are going crossing many times then the structure is difficult to understand. And if the diagram is not suitable for meaningful communication then it is rather useless. If one large diagram isn't explaining the full story, then we need to provide ways in which to show relevant parts.</p><p>How can one manage the full big picture and can still zoom into aspects in Vithanco? Or to ask metaphorically: How can one see the forest/woods and the trees? This post provides some answers.</p><h2>Cluster and Cluster Folding</h2><p>The first approach includes an element of diagrams that are sometimes overlooked: Clusters. A Cluster is a part of the diagram (a subgraph) that is drawn together, is visually emphasised with a different background and has a name.</p><img src="/images/BBS-Schema.jpg" alt="BBS Example"/><p class="caption"> <em>A diagram with three "open"/"unfolded" clusters</em></p><p>The above diagram has 3 clusters, each one drawn around the different node types. However, if you fold each cluster (and ensure that you use a strict graph) then you get something similar to the one below. The nodes within each cluster are "hidden" away, but can easily be retrieved by a mouse click (use the folding map symbol button).</p><img src="/images/BBS-schema-folded.jpg" alt="BBS-schema-folded"/><p class="caption"> <em>A diagram with three "folded" clusters</em></p><p>So, the first way to keep the overview: create folders and hide some areas that you currently don't need. Clusters are generally a good idea to make a diagram better understandable.</p><h2>Focus View</h2><p>Working on a diagram requires changing perspective. Sometimes you need to see the whole and sometimes you need to see only a small part and focus on it. It can be a few nodes, it can be a predecessor Tree. And it is simple with Vithanco to switch perspectives. Select the nodes that you need and click the "Focus on Selection" toolbar button. The main diagram will be replaced with the subgraph that contains only the selected nodes. In the top right corner will be a "return to full graph" button. You can manipulate the subgraph in the same way as the full graph and changes to the subgraph will be applied to the full graph too.</p><p>Within the Focus on Selection View is it easy to review a specific part. Nodes that otherwise might be spread across a big diagram will be located together and the structure can be reviewed. This became such a standard way of graph manipulation that we added shortcuts for selecting nodes easier.</p><ul><li>mouse click: select/deselect clicked node</li><li>[Shift] + mouse click: select predecessor tree</li><li>[Shift] + [Opt/Alt] + mouse click: select successor tree</li><li>[Opt/Alt] + mouse click in Node Statistics: select/deselect all Nodes of the clicked Node Type</li></ul><p>Especially the last one allows us to quickly create views with the right content. Thinking of the BBS structure mentioned above. Clicking on "Investment Objectives" and "Benefits", and then choosing "Focus on Selection" allows us to see the value proposition of an initiative even if the diagram itself became big.</p><p>The second way of keeping the overview: whenever you need to look at some parts in more detail use the focus view.</p><h2>Reports</h2><p>Reporting is another way of digesting a large diagram. Reporting allows us to slice and dice the information and make it digestible. The right report depends on notation and the use and Vithanco's reporting is accordingly flexible. This is how it works.</p><img src="/images/reportMenu.png" alt="reportMenu"/><p>For a <a href="/notations/Change/benefit-breakdown-structure">BBS</a> diagram, we normally look at the benefits of a project/change initiative and how to enable each benefit. It is often the right way to deliver one benefit after the other instead of delivering many at once. So, the natural way is to select a benefit and its predecessor tree and to enable the benefit through the delivery of benefits. But how to choose the next benefit? Here, the report becomes useful. <img src="/images/reportSettings.png" alt="reportSettings"/></p><p>Choose the Report Menu and select "Detailed Report By Node Types". In the following dialog choose "Benefit" as the Node Types and choose "Node Itself" and "Predecessor Tree". Clicking Ok will create the report. That is a document that contains a dedicated diagram for each benefit. Each benefit diagram will contain the predecessor tree for that benefit alone.</p><p>The resulting Report will be created as a <a href="https://en.wikipedia.org/wiki/Markdown">Markdown (.md) document</a>. Choose an appropriate tool to convert Markdown to other formats if needed. Share the document with everyone interested. They won't need Vithanco to digest the report.</p><p>The third way of working with large diagrams: create useful reports to see each facet.</p><h2>Table View</h2><p>Another useful way to handle complexity is to use a different way to present the information. Vithanco offers a table view to ignore the edges and focus on the nodes alone. Each Node becomes a row in a table. Use this tool to quickly change node texts, etc.</p><p>The Table View will present the selected nodes only. If no node is selected then it will present all nodes. As the selection of specific Node Types can happen quickly through the Node Statistics (see above, [Opt/Alt] + mouse click selects/deselects all Nodes of the clicked Node Type) the Table View can be used to quickly review all nodes of particular Node Types.</p><p>The fourth way to switch between the whole and details is a different presentation of the diagram: a table.</p><h2>Bonus: Automatic Highlighting of Connected Nodes</h2><p>Especially when the <a href="https://en.wikipedia.org/wiki/Degree_(graph_theory)">degree</a> of the Nodes (vertexes) is high the resulting diagram will have overlapping edges. Vithanco highlights the connected Nodes for each Node/Edge when you move the mouse, allowing you to follow the particular edges easily.</p><h2>Conclusion</h2><p>Vithanco provides tools that make it possible to "zoom" into details and out again.</p><ul><li>Cluster Folding</li><li>Focus View</li><li>Reports</li><li>Table View</li></ul><p>Use these tools to deal with large diagrams.</p></div></article>
+                <div class="content"><p>We at Vithanco love drawing diagrams to understand. However, one of the main obstacles with diagrams can be its size. It is not uncommon for us to have diagrams with wy over 100 nodes and 150 edges. If you plan a project with the <a href="/notations/Change/benefit-breakdown-structure/index.html">Benefit Breakdown Structure (BBS) Notation</a> then this represents only a small project. The resulting BBS is quickly becoming messy to look at and the overlapping of edges means that the main diagram is rather confusing.</p>
+<img src="/Tools/Help/Appearance/deriving-value-from-large-diagrams/big-diagram.png" alt="" onclick="openLightbox(this)" />
+<p><em>A large Diagram (modified BBS model)</em></p>
+<p>Generally speaking, size can be a limitation to a graph's usefulness by making it difficult to understand the structure. If the graph is too complex and the connections are going crossing many times then the structure is difficult to understand. And if the diagram is not suitable for meaningful communication then it is rather useless. If one large diagram isn't explaining the full story, then we need to provide ways in which to show relevant parts.</p>
+<p>How can one manage the full big picture and can still zoom into aspects in Vithanco? Or to ask metaphorically: How can one see the forest/woods and the trees? This post provides some answers.</p>
+<h2 id="cluster-and-cluster-folding">Cluster and Cluster Folding</h2>
+<p>The first approach includes an element of diagrams that are sometimes overlooked: Clusters. A Cluster is a part of the diagram (a subgraph) that is drawn together, is visually emphasised with a different background and has a name.</p>
+<figure class=""> 
+ <img src="/Tools/Help/Appearance/deriving-value-from-large-diagrams/BBS-Schema.jpg" alt="BBS Example" onclick="openLightbox(this)" /> 
+ <figcaption>
+  A diagram with three
+ </figcaption> 
+</figure>
+<p>The above diagram has 3 clusters, each one drawn around the different node types. However, if you fold each cluster (and ensure that you use a strict graph) then you get something similar to the one below. The nodes within each cluster are "hidden" away, but can easily be retrieved by a mouse click (use the folding map symbol button).</p>
+<figure class=""> 
+ <img src="/Tools/Help/Appearance/deriving-value-from-large-diagrams/BBS-schema-folded.jpg" alt="BBS-schema-folded" onclick="openLightbox(this)" /> 
+ <figcaption>
+  A diagram with three
+ </figcaption> 
+</figure>
+<p>So, the first way to keep the overview: create folders and hide some areas that you currently don't need. Clusters are generally a good idea to make a diagram better understandable.</p>
+<h2 id="focus-view">Focus View</h2>
+<p>Working on a diagram requires changing perspective. Sometimes you need to see the whole and sometimes you need to see only a small part and focus on it. It can be a few nodes, it can be a predecessor Tree. And it is simple with Vithanco to switch perspectives. Select the nodes that you need and click the "Focus on Selection" toolbar button. The main diagram will be replaced with the subgraph that contains only the selected nodes. In the top right corner will be a "return to full graph" button. You can manipulate the subgraph in the same way as the full graph and changes to the subgraph will be applied to the full graph too.</p>
+<p>Within the Focus on Selection View is it easy to review a specific part. Nodes that otherwise might be spread across a big diagram will be located together and the structure can be reviewed. This became such a standard way of graph manipulation that we added shortcuts for selecting nodes easier.</p>
+<ul>
+ <li>mouse click: select/deselect clicked node</li>
+ <li>[Shift] + mouse click: select predecessor tree</li>
+ <li>[Shift] + [Opt/Alt] + mouse click: select successor tree</li>
+ <li>[Opt/Alt] + mouse click in Node Statistics: select/deselect all Nodes of the clicked Node Type</li>
+</ul>
+<p>Especially the last one allows us to quickly create views with the right content. Thinking of the BBS structure mentioned above. Clicking on "Investment Objectives" and "Benefits", and then choosing "Focus on Selection" allows us to see the value proposition of an initiative even if the diagram itself became big.</p>
+<p>The second way of keeping the overview: whenever you need to look at some parts in more detail use the focus view.</p>
+<h2 id="reports">Reports</h2>
+<p>Reporting is another way of digesting a large diagram. Reporting allows us to slice and dice the information and make it digestible. The right report depends on notation and the use and Vithanco's reporting is accordingly flexible. This is how it works.</p>
+<img src="/Tools/Help/Appearance/deriving-value-from-large-diagrams/reportMenu.png" alt="reportMenu" onclick="openLightbox(this)" />
+<p>For a <a href="/notations/Change/benefit-breakdown-structure">BBS</a> diagram, we normally look at the benefits of a project/change initiative and how to enable each benefit. It is often the right way to deliver one benefit after the other instead of delivering many at once. So, the natural way is to select a benefit and its predecessor tree and to enable the benefit through the delivery of benefits. But how to choose the next benefit? Here, the report becomes useful. <img src="/Tools/Help/Appearance/deriving-value-from-large-diagrams/reportSettings.png" alt="reportSettings" onclick="openLightbox(this)" /></p>
+<p>Choose the Report Menu and select "Detailed Report By Node Types". In the following dialog choose "Benefit" as the Node Types and choose "Node Itself" and "Predecessor Tree". Clicking Ok will create the report. That is a document that contains a dedicated diagram for each benefit. Each benefit diagram will contain the predecessor tree for that benefit alone.</p>
+<p>The resulting Report will be created as a <a href="https://en.wikipedia.org/wiki/Markdown">Markdown (.md) document</a>. Choose an appropriate tool to convert Markdown to other formats if needed. Share the document with everyone interested. They won't need Vithanco to digest the report.</p>
+<p>The third way of working with large diagrams: create useful reports to see each facet.</p>
+<h2 id="table-view">Table View</h2>
+<p>Another useful way to handle complexity is to use a different way to present the information. Vithanco offers a table view to ignore the edges and focus on the nodes alone. Each Node becomes a row in a table. Use this tool to quickly change node texts, etc.</p>
+<p>The Table View will present the selected nodes only. If no node is selected then it will present all nodes. As the selection of specific Node Types can happen quickly through the Node Statistics (see above, [Opt/Alt] + mouse click selects/deselects all Nodes of the clicked Node Type) the Table View can be used to quickly review all nodes of particular Node Types.</p>
+<p>The fourth way to switch between the whole and details is a different presentation of the diagram: a table.</p>
+<h2 id="bonus-automatic-highlighting-of-connected-nodes">Bonus: Automatic Highlighting of Connected Nodes</h2>
+<p>Especially when the <a href="https://en.wikipedia.org/wiki/Degree_(graph_theory)">degree</a> of the Nodes (vertexes) is high the resulting diagram will have overlapping edges. Vithanco highlights the connected Nodes for each Node/Edge when you move the mouse, allowing you to follow the particular edges easily.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Vithanco provides tools that make it possible to "zoom" into details and out again.</p>
+<ul>
+ <li>Cluster Folding</li>
+ <li>Focus View</li>
+ <li>Reports</li>
+ <li>Table View</li>
+</ul>
+<p>Use these tools to deal with large diagrams.</p></div></article>
             <aside class="side-content">
                 <div class="preview__article-details">
                     <p class="tag-list-title">Tagged with:</p>
@@ -61,7 +146,7 @@
                             <div class="tag-preview">
                                 <a href="/tags/help">Help</a></div></li></ul></div>
                 <div class="newsletter" height="350" width="250">
-                    <img src="/images/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
                     <p>See how you can combine your brain power with structured visual and achieve better results.</p>
                     <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
                 <div></div></aside></div>
@@ -74,22 +159,22 @@ Vithanco Home </p>
                     <ul>
                         <li>
                             <a href="https://linkedIn.com/in/Kneupner">
-                                <img src="/images/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://bsky.app/profile/vithanco.bsky.social">
-                                <img src="/images/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://mastodon.social/@vithanco">
-                                <img src="/images/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
                             </a>
                         </li>
                         <li>
                             <a href="/feed.rss">
-                                <img src="/images/socialmedia-icons/rss.svg" alt="RSS"/>
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
                             </a>
                         </li>
                     </ul></nav></div></footer></body>

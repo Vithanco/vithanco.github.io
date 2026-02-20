@@ -19,6 +19,38 @@
         <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
         <meta name="twitter:image" content="https://vithanco.com/%22Notations-e1535142488705.jpg%22"/>
         <meta property="og:image" content="https://vithanco.com/%22Notations-e1535142488705.jpg%22"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
         <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
     </head>
@@ -43,7 +75,13 @@
         <div class="section-wrapper">
             <article>
                 <h1>Explore Vithanco's Rich Library of Notations</h1>
-                <div class="content"><p>At the heart of Vithanco's capabilities is its diverse and versatile library of Notations. Each Notation serves as a unique graphical language, complete with its own set of Node Types. The real strength of these Node Types lies in their ability to establish connections through Edges, enabling you to build structured and meaningful diagrams. Vithanco supports an array of Notations right out of the box, ready to streamline your processes and enhance your problem-solving capabilities.</p><p>You can use these Notations as you like but we recommend that you use the <a href="/methods">Methods</a> whenever possible.</p><p>Choosing the right Notation for your particular use case is like selecting the right language to express your thoughts most effectively. We differentiate the inbuilt notations based on a two-stage approach. We as knowledge workers must in most cases understand where we are operating and then we can plan and execute. Hence we differentiate between <strong>Listen &amp; Learn Notations</strong> and <strong>Think &amp; Triumph Notations</strong>. More on this classification later.</p><img src="images/overview/ClassifyVithancoNotations.svg"/><p class="caption"> <em>A classification of Vithanco Notations</em></p><p>Here is a glimpse into the various Notations you'll have at your fingertips with Vithanco (navigate via the menu to the right):</p><ul><li><strong><a href="/notations/TOC/index">Theory of Constraints (TOC) Thinking Processes</a>:</strong> These Notations are powerful tools to guide you in answering pivotal questions:<ul><li><em>What needs to be changed?</em></li><li><em>What should it change into?</em></li><li><em>How can we facilitate this change?</em></li></ul></li></ul><ul><li><strong><a href="/notations/Change/Index">Change Management Notations</a>:</strong> Perfect for project-centric applications, our Project Management Notations include the Benefit Breakdown Structure and Impact Mapping. The former supports project analysis by initiating with the project's objective and benefits in mind, subsequently thinking backwards to identify necessary changes and enablers. The latter facilitates brainstorming of potential features.</li></ul><p>In addition, we have other Notations like</p><ul><li><strong><a href="/notations/attack-defense-tree">Attack-Defense Tree</a></strong>: Model security scenarios with attack and defense interactions</li><li><strong><a href="/notations/concept-maps">Concept Maps</a></strong>: Define Terminology</li><li><strong><a href="/notations/IBIS/index">IBIS Diagrams</a></strong>: Capture thoughts and conversations</li><li><strong><a href="/notations/causal-loop-diagram">Causal Loop Diagrams</a></strong>: Analyse Complex Systems</li><li><strong><a href="/notations/decision-tree">Decision Tree</a></strong>: Document re-occurring decisions</li><li><strong><a href="/notations/mind-mapping">Mind Mapping</a></strong>: Create standard Mind Maps</li></ul><p>As a Vithanco user, you're not limited to our pre-established Notations. Did you know that you can create your own Notations? The graph at the top of this page is a prime example of a custom Notation that I created for that specific diagram.</p><h2>What are Notations?</h2><img src="/images/Tools/VithancoOverview.svg" alt="Notations define the Meta Model of a graph"/><p class="caption"> <em>Notations define the Meta Model of a graph, providing structure to your thoughts and ideas.</em></p><h2>Vithanco Graph Language (VGL)</h2><p>Behind all of Vithanco's visual Notations is the <strong><a href="/tools/VGL_GUIDE">Vithanco Graph Language (VGL)</a></strong> - a powerful, human-readable text format for creating and editing graphs. VGL provides a simple, declarative syntax that allows you to:</p><ul><li>Define nodes, edges, groups, and their attributes in plain text</li><li>Work with any Vithanco Notation (IBIS, BBS, TOC, etc.)</li><li>Create and modify graphs programmatically</li><li>Enable version control and collaborative editing of diagrams</li></ul><p>Whether you prefer visual or text-based editing, VGL gives you the flexibility to work the way you want. Explore the <strong><a href="/tools/VGL_GUIDE">VGL Guide</a></strong> to learn the syntax and see examples of how to express your diagrams as code.</p><p>Ready to dive deeper? Explore our range of <a href="/notations/Change/Index">Change Management Notations</a> and discover the perfect graphical language for your needs.</p></div></article>
+                <div class="content"><p>At the heart of Vithanco's capabilities is its diverse and versatile library of Notations. Each Notation serves as a unique graphical language, complete with its own set of Node Types. The real strength of these Node Types lies in their ability to establish connections through Edges, enabling you to build structured and meaningful diagrams. Vithanco supports an array of Notations right out of the box, ready to streamline your processes and enhance your problem-solving capabilities.</p><p>You can use these Notations as you like but we recommend that you use the <a href="/methods">Methods</a> whenever possible.</p><p>Choosing the right Notation for your particular use case is like selecting the right language to express your thoughts most effectively. We differentiate the inbuilt notations based on a two-stage approach. We as knowledge workers must in most cases understand where we are operating and then we can plan and execute. Hence we differentiate between <strong>Listen &amp; Learn Notations</strong> and <strong>Think &amp; Triumph Notations</strong>. More on this classification later.</p><figure class="img-std">
+    <img src="/Notations/index/ClassifyVithancoNotations.svg" alt="" onclick="openLightbox(this)" />
+    <figcaption>A classification of Vithanco Notations</figcaption>
+</figure><p>Here is a glimpse into the various Notations you'll have at your fingertips with Vithanco (navigate via the menu to the right):</p><ul><li><strong><a href="/notations/TOC/index">Theory of Constraints (TOC) Thinking Processes</a>:</strong> These Notations are powerful tools to guide you in answering pivotal questions:<ul><li><em>What needs to be changed?</em></li><li><em>What should it change into?</em></li><li><em>How can we facilitate this change?</em></li></ul></li></ul><ul><li><strong><a href="/notations/Change/Index">Change Management Notations</a>:</strong> Perfect for project-centric applications, our Project Management Notations include the Benefit Breakdown Structure and Impact Mapping. The former supports project analysis by initiating with the project's objective and benefits in mind, subsequently thinking backwards to identify necessary changes and enablers. The latter facilitates brainstorming of potential features.</li></ul><p>In addition, we have other Notations like</p><ul><li><strong><a href="/notations/attack-defense-tree">Attack-Defense Tree</a></strong>: Model security scenarios with attack and defense interactions</li><li><strong><a href="/notations/concept-maps">Concept Maps</a></strong>: Define Terminology</li><li><strong><a href="/notations/IBIS/index">IBIS Diagrams</a></strong>: Capture thoughts and conversations</li><li><strong><a href="/notations/causal-loop-diagram">Causal Loop Diagrams</a></strong>: Analyse Complex Systems</li><li><strong><a href="/notations/decision-tree">Decision Tree</a></strong>: Document re-occurring decisions</li><li><strong><a href="/notations/mind-mapping">Mind Mapping</a></strong>: Create standard Mind Maps</li></ul><p>As a Vithanco user, you're not limited to our pre-established Notations. Did you know that you can create your own Notations? The graph at the top of this page is a prime example of a custom Notation that I created for that specific diagram.</p><h2>What are Notations?</h2><figure class="img-std">
+    <img src="/Notations/index/VithancoOverview.svg" alt="Notations define the Meta Model of a graph" onclick="openLightbox(this)" />
+    <figcaption>Notations define the Meta Model of a graph, providing structure to your thoughts and ideas.</figcaption>
+</figure><h2>Vithanco Graph Language (VGL)</h2><p>Behind all of Vithanco's visual Notations is the <strong><a href="/tools/VGL_GUIDE">Vithanco Graph Language (VGL)</a></strong> - a powerful, human-readable text format for creating and editing graphs. VGL provides a simple, declarative syntax that allows you to:</p><ul><li>Define nodes, edges, groups, and their attributes in plain text</li><li>Work with any Vithanco Notation (IBIS, BBS, TOC, etc.)</li><li>Create and modify graphs programmatically</li><li>Enable version control and collaborative editing of diagrams</li></ul><p>Whether you prefer visual or text-based editing, VGL gives you the flexibility to work the way you want. Explore the <strong><a href="/tools/VGL_GUIDE">VGL Guide</a></strong> to learn the syntax and see examples of how to express your diagrams as code.</p><p>Ready to dive deeper? Explore our range of <a href="/notations/Change/Index">Change Management Notations</a> and discover the perfect graphical language for your needs.</p></div></article>
             <aside class="side-content">
                 <div class="toc-list">
                     <p class="aside-title">Table of Contents</p>
@@ -142,7 +180,7 @@
                     </ul></div>
 
                 <div class="newsletter" height="350" width="250">
-                    <img src="/images/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
                     <p>See how you can combine your brain power with structured visual and achieve better results.</p>
                     <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
                 <div></div></aside></div>
@@ -155,22 +193,22 @@ Vithanco Home </p>
                     <ul>
                         <li>
                             <a href="https://linkedIn.com/in/Kneupner">
-                                <img src="/images/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://bsky.app/profile/vithanco.bsky.social">
-                                <img src="/images/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
                             </a>
                         </li>
                         <li>
                             <a href="https://mastodon.social/@vithanco">
-                                <img src="/images/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
                             </a>
                         </li>
                         <li>
                             <a href="/feed.rss">
-                                <img src="/images/socialmedia-icons/rss.svg" alt="RSS"/>
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
                             </a>
                         </li>
                     </ul></nav></div></footer></body>
