@@ -7,7 +7,6 @@
 export type Exports = {
     convertToDot(graph: string): string;
     renderGraph(graph: string): string;
-    renderGraphWithStyles(graph: string): string;
     debugGraph(graph: string): string;
     layoutGraph(graph: string): string;
     exportToVGL(graph: string): string;

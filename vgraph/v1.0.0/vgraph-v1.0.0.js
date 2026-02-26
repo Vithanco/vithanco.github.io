@@ -122,7 +122,7 @@ class VGraphLib {
   render(vglText) {
     this._ensureInitialized();
 
-    const result = this.exports.renderGraphWithStyles(vglText);
+    const result = this.exports.renderGraph(vglText);
 
     // Check for error in result
     if (result.includes('Error:') && result.includes('<text')) {

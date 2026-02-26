@@ -221,15 +221,6 @@ export async function createInstantiator(options, swift) {
                     swift.memory.release(graphId);
                     return ret;
                 },
-                renderGraphWithStyles: function bjs_renderGraphWithStyles(graph) {
-                    const graphBytes = textEncoder.encode(graph);
-                    const graphId = swift.memory.retain(graphBytes);
-                    instance.exports.bjs_renderGraphWithStyles(graphId, graphBytes.length);
-                    const ret = tmpRetString;
-                    tmpRetString = undefined;
-                    swift.memory.release(graphId);
-                    return ret;
-                },
                 debugGraph: function bjs_debugGraph(graph) {
                     const graphBytes = textEncoder.encode(graph);
                     const graphId = swift.memory.retain(graphBytes);

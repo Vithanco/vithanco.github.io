@@ -28,8 +28,9 @@ VGL currently supports built-in notations that come with predefined node types a
 - **IBIS** (Issue-Based Information System) - for decision-making and argumentation
 - **BBS** (Benefit Breakdown Structure) - for benefit analysis
 - **ImpactMapping** - for strategic planning and goal alignment
-- **ConceptMap** - for visualizing relationships between concepts
+- **ConceptMap** - for defining domain vocabulary through falsifiable propositions that help people align on shared understanding
 - **CRT** (Current Reality Tree) - for root cause analysis using Theory of Constraints
+- **EC** (Evaporating Cloud) - for conflict resolution using Theory of Constraints necessary condition logic
 - **FRT** (Future Reality Tree) - for solution validation using Theory of Constraints
 - **PRT** (Prerequisite Tree) - for planning with necessary condition thinking using Theory of Constraints
 - **TRT** (Transition Tree) - for step-by-step implementation planning using Theory of Constraints
@@ -78,9 +79,9 @@ Node types are defined by the chosen notation. Each notation has its own set of 
 - `Deliverable` - Product feature or capability (default: green)
 
 **ConceptMap Node Types:**
-- `Concept` - A concept or term (default: blue rounded box)
-- `EmphasizedConcept` - An important concept to highlight (default: red rounded box)
-- `Relation` - A relationship verb connecting concepts (default: bare text)
+- `Concept` - A concept or term
+- `EmphasizedConcept` - An important concept to highlight
+- `Relation` - A linking verb or phrase connecting concepts (forms propositions: Concept → Relation → Concept)
 
 **CRT Node Types:**
 - `UndesirableEffect` - An unwanted outcome requiring investigation (default: red)
@@ -100,6 +101,16 @@ FRT shares the same node types as CRT, as both are Theory of Constraints tools. 
 - `UndesirableEffect` - Potential negative side effects to monitor (default: red)
 - `AndJunctor` - Indicates multiple conditions required simultaneously (icon: AND circle)
 - `OrJunctor` - Indicates alternative paths to outcomes (icon: OR circle)
+
+**EC Node Types:**
+EC (Evaporating Cloud) is a conflict resolution tool using necessary condition thinking. It surfaces the assumptions behind a conflict and finds breakthrough solutions. The graph flows left-to-right from Common Objective to Conflict.
+- `CommonObjective` - The shared objective valid for both sides of the conflict (default: green)
+- `Need` - A perceived need that must be met (default: blue)
+- `Want` - A perceived want derived from a need (default: orange)
+- `Conflict` - The perceived conflict expressed as mutually exclusive wants (icon: lightning bolt circle, no text)
+- `AndJunctor` - Combines elements that are necessary in combination (icon: AND circle)
+- `Assumption` - Exposes the underlying assumptions behind the conflict (default: purple)
+- `Solution` - Marks the final solution that breaks the conflict (default: teal)
 
 **PRT Node Types:**
 PRT (Prerequisite Tree) is a planning tool using necessary condition thinking. It starts with the desired objective and works backward to identify obstacles and the intermediate objectives needed to overcome them.
@@ -209,6 +220,33 @@ FRT shares the same edge types as CRT. The graph flows bottom-to-top (solutions 
 *To/From Junctors:*
 - `*_to_and_junctor`, `*_to_or_junctor` - Connect any type to junctors
 - `and_junctor_causes_*`, `or_junctor_causes_*` - Connect junctors to effects
+
+**EC Edge Types:**
+EC uses edges to show necessary condition relationships flowing from shared objective through needs and wants to the conflict. The graph flows left-to-right (Common Objective on left, Conflict on right).
+
+*From Common Objective:*
+- `objective_to_need` - Connects CommonObjective → Need
+- `objective_to_and` - Connects CommonObjective → AndJunctor
+
+*From Need:*
+- `need_to_want` - Connects Need → Want
+- `need_to_and` - Connects Need → AndJunctor
+- `need_to_assumption` - Connects Need → Assumption
+- `need_to_solution` - Connects Need → Solution
+
+*From Want:*
+- `want_to_conflict` - Connects Want → Conflict
+- `want_to_and` - Connects Want → AndJunctor
+- `want_to_assumption` - Connects Want → Assumption
+
+*From Conflict:*
+- `conflict_to_and` - Connects Conflict → AndJunctor
+- `conflict_to_assumption` - Connects Conflict → Assumption
+
+*From AndJunctor:*
+- `and_to_want` - Connects AndJunctor → Want
+- `and_to_conflict` - Connects AndJunctor → Conflict
+- `and_to_and` - Connects AndJunctor → AndJunctor
 
 **PRT Edge Types:**
 PRT uses edges to show how obstacles block objectives and how intermediate objectives overcome obstacles. The graph flows bottom-to-top (intermediate objectives at bottom, main objective at top).
@@ -350,7 +388,7 @@ The VGL grammar is defined as follows (simplified BNF notation):
 document     ::= "vgraph" identifier ":" notation label? "{" statement* "}"
 
 notation     ::= identifier
-                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, FRT, PRT, TRT, ADTree
+                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree
 
 statement    ::= group | node | edge | attribute
 
@@ -683,37 +721,33 @@ vgraph product_growth: ImpactMapping "Product Growth Strategy" {
 
 ### Example 10: Concept Map
 
-Visualizing relationships between concepts using linking verbs:
+Defining domain vocabulary through falsifiable propositions. The title is a **Guiding Question** that determines what belongs on the map. Every Concept → Relation → Concept chain ALWAYS forms a readable, falsifiable sentence. Relations can be reused when multiple concepts share the same relationship.
 
 ```vgl
-vgraph learningCM: ConceptMap "How Learning Works" {
-    // Main concepts
-    node c1: Concept "Student";
-    node c2: Concept "Subject";
-    node c3: EmphasizedConcept "Practice";  // Emphasized for importance
-    node c4: Concept "Understanding";
-    node c5: Concept "Resources";
+vgraph learningCM: ConceptMap "What is Learning?" {
+    node student: Concept "Student";
+    node subject: Concept "Subject";
+    node practice: EmphasizedConcept "Practice";
+    node understanding: Concept "Understanding";
+    node resources: Concept "Resources";
 
-    // Relationship verbs (relations)
-    node r1: Relation "learns";
-    node r2: Relation "requires";
-    node r3: Relation "leads to";
-    node r4: Relation "uses";
+    node learns: Relation "learns";
+    node requires: Relation "requires";
+    node leads_to: Relation "leads to";
+    node uses: Relation "uses";
 
-    // Concept map connections
-    // Pattern: Concept -> Relation -> Concept
-    edge c1 -> r1: concept_to_relation;
-    edge r1 -> c2: relation_to_concept;
-    edge c2 -> r2: concept_to_relation;
-    edge r2 -> c3: relation_to_concept;
-    edge c3 -> r3: concept_to_relation;
-    edge r3 -> c4: relation_to_concept;
-    edge c2 -> r4: concept_to_relation;
-    edge r4 -> c5: relation_to_concept;
+    edge student -> learns;
+    edge learns -> subject;
+    edge subject -> requires;
+    edge requires -> practice;
+    edge practice -> leads_to;
+    edge leads_to -> understanding;
+    edge subject -> uses;
+    edge uses -> resources;
 }
 ```
 
-**Note**: In concept maps, relationships are represented as nodes (Relation type) rather than edge labels. This creates readable propositions like "Student learns Subject" and "Subject requires Practice".
+**Note**: In concept maps, relationships are represented as nodes (Relation type) rather than edge labels. This ALWAYS creates readable propositions like "Student learns Subject" and "Subject requires Practice". Every concept must be connected to at least one relation — never leave a concept unconnected. When multiple concepts share the same relationship (e.g. "Dog is a Mammal" and "Cat is a Mammal"), reuse a single Relation node. **CRITICAL**: When a relation has BOTH multiple inbound AND multiple outbound edges, ALL inbound concepts must make sense as propositions with ALL outbound concepts (n × m propositions, all must be valid). If any combination is invalid (circular, meaningless), use specific relations or restructure the graph.
 
 ### Example 11: Current Reality Tree (CRT)
 
@@ -842,7 +876,59 @@ vgraph salesSolution: FRT "Sales Improvement Plan" {
 
 **Note**: FRT graphs also flow bottom-to-top like CRT, but with a different focus. While CRT starts with problems (Undesirable Effects) and traces back to root causes, FRT starts with proposed solutions (Changeable/injections) and traces forward to show how they achieve desired outcomes. This makes FRT ideal for validating that proposed changes will actually deliver the expected benefits.
 
-### Example 13: Prerequisite Tree (PRT)
+### Example 13: Evaporating Cloud (EC)
+
+A conflict resolution graph showing how assumptions behind a conflict can be surfaced and resolved:
+
+```vgl
+vgraph projectConflict: EC "Project Delivery vs Quality" {
+    // The shared objective both sides agree on
+    node obj: CommonObjective "Deliver a successful software product";
+
+    // The two competing needs
+    node needA: Need "Meet the market window deadline";
+    node needB: Need "Ensure product quality and reliability";
+
+    // The specific wants derived from each need
+    node wantA: Want "Release with current feature set now";
+    node wantB: Want "Extend timeline for thorough testing";
+
+    // The conflict between the two wants
+    node conf: Conflict;
+
+    // Assumptions underlying the conflict
+    node assA: Assumption "Testing always requires calendar time";
+    node assB: Assumption "Features cannot be descoped";
+    node assC: Assumption "Quality requires full manual testing";
+
+    // Solution that breaks the conflict
+    node sol: Solution "Implement automated testing pipeline";
+
+    // Objective requires both needs (necessary condition)
+    edge obj -> needA: objective_to_need;
+    edge obj -> needB: objective_to_need;
+
+    // Needs lead to wants
+    edge needA -> wantA: need_to_want;
+    edge needB -> wantB: need_to_want;
+
+    // Wants create the conflict
+    edge wantA -> conf: want_to_conflict;
+    edge wantB -> conf: want_to_conflict;
+
+    // Assumptions exposed
+    edge needA -> assA: need_to_assumption;
+    edge needB -> assC: need_to_assumption;
+    edge conf -> assB: conflict_to_assumption;
+
+    // Solution resolves by breaking assumption
+    edge needB -> sol: need_to_solution;
+}
+```
+
+**Note**: EC graphs flow left-to-right, with the Common Objective on the far left and the Conflict on the far right. The two branches represent competing Needs and Wants that create the conflict. Assumptions are surfaced on each edge to identify which assumption can be challenged. The Solution breaks the conflict by invalidating one or more assumptions. EC uses necessary condition logic — "In order to [Objective] we must provide [Need]". The Conflict node has no text label; it is rendered as a lightning bolt icon.
+
+### Example 14: Prerequisite Tree (PRT)
 
 A planning graph showing obstacles blocking objectives and intermediate objectives to overcome them:
 
@@ -897,7 +983,7 @@ vgraph projectLaunch: PRT "New Product Launch Planning" {
 
 **Note**: PRT graphs flow bottom-to-top like other TOC tools. The main Objective sits at the top, with Obstacles directly below showing what blocks it. IntermediateObjectives below the obstacles show what needs to be achieved to overcome them. The OR junctor indicates alternative paths - only one of the connected intermediate objectives needs to be achieved. PRT embodies "necessary condition thinking" - working backward from the goal to identify all prerequisites.
 
-### Example 14: Transition Tree (TRT)
+### Example 15: Transition Tree (TRT)
 
 A step-by-step implementation planning graph showing how actions lead to desired outcomes:
 
@@ -962,7 +1048,7 @@ vgraph agileTransition: TRT "Agile Transformation Implementation" {
 
 **Note**: TRT graphs flow bottom-to-top like other TOC tools. The focus is on detailed implementation planning - answering "HOW TO CAUSE the change?" Unlike FRT which validates that solutions will work, TRT provides the step-by-step action sequence needed to implement those solutions. Changeable nodes represent the specific actions to take, and the graph shows how those actions combine through intermediate effects to achieve desirable outcomes. The AndJunctor indicates multiple conditions must occur together for an effect.
 
-### Example 15: Attack-Defense Tree (ADTree)
+### Example 16: Attack-Defense Tree (ADTree)
 
 A security modelling graph showing how defenses protect a system and how attacks can circumvent them. Based on the data confidentiality scenario from Kordy et al. (2014):
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Vithanco</title><description>Use Visual Thinking to Improve Your Decision Making and Problem Solving Skills.</description><link>https://vithanco.com</link><language>en</language><lastBuildDate>Fri, 20 Feb 2026 13:39:00 +0100</lastBuildDate><pubDate>Fri, 20 Feb 2026 13:39:00 +0100</pubDate><ttl>250</ttl><atom:link href="https://vithanco.com/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://vithanco.com/tools/VGL_GUIDE</guid><title>Vithanco Graph Language (VGL) Guide</title><description>Learn the VGL syntax for creating and editing graphs in text format</description><link>https://vithanco.com/tools/VGL_GUIDE</link><pubDate>Fri, 20 Feb 2026 13:39:00 +0100</pubDate><content:encoded><![CDATA[<h1 id="vithanco-graph-language-vgl-guide">Vithanco Graph Language (VGL) Guide</h1>
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Vithanco</title><description>Use Visual Thinking to Improve Your Decision Making and Problem Solving Skills.</description><link>https://vithanco.com</link><language>en</language><lastBuildDate>Thu, 26 Feb 2026 18:29:25 +0100</lastBuildDate><pubDate>Thu, 26 Feb 2026 18:29:25 +0100</pubDate><ttl>250</ttl><atom:link href="https://vithanco.com/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://vithanco.com/tools/VGL_GUIDE</guid><title>Vithanco Graph Language (VGL) Guide</title><description>Learn the VGL syntax for creating and editing graphs in text format</description><link>https://vithanco.com/tools/VGL_GUIDE</link><pubDate>Thu, 26 Feb 2026 18:29:25 +0100</pubDate><content:encoded><![CDATA[<h1 id="vithanco-graph-language-vgl-guide">Vithanco Graph Language (VGL) Guide</h1>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
  <li><a href="#concepts">Concepts</a></li>
@@ -21,8 +21,9 @@
  <li><strong>IBIS</strong> (Issue-Based Information System) - for decision-making and argumentation</li>
  <li><strong>BBS</strong> (Benefit Breakdown Structure) - for benefit analysis</li>
  <li><strong>ImpactMapping</strong> - for strategic planning and goal alignment</li>
- <li><strong>ConceptMap</strong> - for visualizing relationships between concepts</li>
+ <li><strong>ConceptMap</strong> - for defining domain vocabulary through falsifiable propositions that help people align on shared understanding</li>
  <li><strong>CRT</strong> (Current Reality Tree) - for root cause analysis using Theory of Constraints</li>
+ <li><strong>EC</strong> (Evaporating Cloud) - for conflict resolution using Theory of Constraints necessary condition logic</li>
  <li><strong>FRT</strong> (Future Reality Tree) - for solution validation using Theory of Constraints</li>
  <li><strong>PRT</strong> (Prerequisite Tree) - for planning with necessary condition thinking using Theory of Constraints</li>
  <li><strong>TRT</strong> (Transition Tree) - for step-by-step implementation planning using Theory of Constraints</li>
@@ -68,9 +69,9 @@
 </ul>
 <p><strong>ConceptMap Node Types:</strong></p>
 <ul>
- <li><code>Concept</code> - A concept or term (default: blue rounded box)</li>
- <li><code>EmphasizedConcept</code> - An important concept to highlight (default: red rounded box)</li>
- <li><code>Relation</code> - A relationship verb connecting concepts (default: bare text)</li>
+ <li><code>Concept</code> - A concept or term</li>
+ <li><code>EmphasizedConcept</code> - An important concept to highlight</li>
+ <li><code>Relation</code> - A linking verb or phrase connecting concepts (forms propositions: Concept → Relation → Concept)</li>
 </ul>
 <p><strong>CRT Node Types:</strong></p>
 <ul>
@@ -91,6 +92,16 @@
  <li><code>UndesirableEffect</code> - Potential negative side effects to monitor (default: red)</li>
  <li><code>AndJunctor</code> - Indicates multiple conditions required simultaneously (icon: AND circle)</li>
  <li><code>OrJunctor</code> - Indicates alternative paths to outcomes (icon: OR circle)</li>
+</ul>
+<p><strong>EC Node Types:</strong> EC (Evaporating Cloud) is a conflict resolution tool using necessary condition thinking. It surfaces the assumptions behind a conflict and finds breakthrough solutions. The graph flows left-to-right from Common Objective to Conflict.</p>
+<ul>
+ <li><code>CommonObjective</code> - The shared objective valid for both sides of the conflict (default: green)</li>
+ <li><code>Need</code> - A perceived need that must be met (default: blue)</li>
+ <li><code>Want</code> - A perceived want derived from a need (default: orange)</li>
+ <li><code>Conflict</code> - The perceived conflict expressed as mutually exclusive wants (icon: lightning bolt circle, no text)</li>
+ <li><code>AndJunctor</code> - Combines elements that are necessary in combination (icon: AND circle)</li>
+ <li><code>Assumption</code> - Exposes the underlying assumptions behind the conflict (default: purple)</li>
+ <li><code>Solution</code> - Marks the final solution that breaks the conflict (default: teal)</li>
 </ul>
 <p><strong>PRT Node Types:</strong> PRT (Prerequisite Tree) is a planning tool using necessary condition thinking. It starts with the desired objective and works backward to identify obstacles and the intermediate objectives needed to overcome them.</p>
 <ul>
@@ -197,6 +208,36 @@ edge q2 -&gt; a2;  // Type inferred from node types
 <ul>
  <li><code>*_to_and_junctor</code>, <code>*_to_or_junctor</code> - Connect any type to junctors</li>
  <li><code>and_junctor_causes_*</code>, <code>or_junctor_causes_*</code> - Connect junctors to effects</li>
+</ul>
+<p><strong>EC Edge Types:</strong> EC uses edges to show necessary condition relationships flowing from shared objective through needs and wants to the conflict. The graph flows left-to-right (Common Objective on left, Conflict on right).</p>
+<p><em>From Common Objective:</em></p>
+<ul>
+ <li><code>objective_to_need</code> - Connects CommonObjective → Need</li>
+ <li><code>objective_to_and</code> - Connects CommonObjective → AndJunctor</li>
+</ul>
+<p><em>From Need:</em></p>
+<ul>
+ <li><code>need_to_want</code> - Connects Need → Want</li>
+ <li><code>need_to_and</code> - Connects Need → AndJunctor</li>
+ <li><code>need_to_assumption</code> - Connects Need → Assumption</li>
+ <li><code>need_to_solution</code> - Connects Need → Solution</li>
+</ul>
+<p><em>From Want:</em></p>
+<ul>
+ <li><code>want_to_conflict</code> - Connects Want → Conflict</li>
+ <li><code>want_to_and</code> - Connects Want → AndJunctor</li>
+ <li><code>want_to_assumption</code> - Connects Want → Assumption</li>
+</ul>
+<p><em>From Conflict:</em></p>
+<ul>
+ <li><code>conflict_to_and</code> - Connects Conflict → AndJunctor</li>
+ <li><code>conflict_to_assumption</code> - Connects Conflict → Assumption</li>
+</ul>
+<p><em>From AndJunctor:</em></p>
+<ul>
+ <li><code>and_to_want</code> - Connects AndJunctor → Want</li>
+ <li><code>and_to_conflict</code> - Connects AndJunctor → Conflict</li>
+ <li><code>and_to_and</code> - Connects AndJunctor → AndJunctor</li>
 </ul>
 <p><strong>PRT Edge Types:</strong> PRT uses edges to show how obstacles block objectives and how intermediate objectives overcome obstacles. The graph flows bottom-to-top (intermediate objectives at bottom, main objective at top).</p>
 <p><em>Obstacle blocking relationships:</em></p>
@@ -324,7 +365,7 @@ node q1: Question "Main question";  // This is also a comment
 <pre><code>document     ::= "vgraph" identifier ":" notation label? "{" statement* "}"
 
 notation     ::= identifier
-                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, FRT, PRT, TRT, ADTree
+                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree
 
 statement    ::= group | node | edge | attribute
 
@@ -617,34 +658,30 @@ comment      ::= "//" [^\n]*
 }
 </code></pre>
 <h3 id="example-10-concept-map">Example 10: Concept Map</h3>
-<p>Visualizing relationships between concepts using linking verbs:</p>
-<pre><code class="language-vgl">vgraph learningCM: ConceptMap "How Learning Works" {
-    // Main concepts
-    node c1: Concept "Student";
-    node c2: Concept "Subject";
-    node c3: EmphasizedConcept "Practice";  // Emphasized for importance
-    node c4: Concept "Understanding";
-    node c5: Concept "Resources";
+<p>Defining domain vocabulary through falsifiable propositions. The title is a <strong>Guiding Question</strong> that determines what belongs on the map. Every Concept → Relation → Concept chain ALWAYS forms a readable, falsifiable sentence. Relations can be reused when multiple concepts share the same relationship.</p>
+<pre><code class="language-vgl">vgraph learningCM: ConceptMap "What is Learning?" {
+    node student: Concept "Student";
+    node subject: Concept "Subject";
+    node practice: EmphasizedConcept "Practice";
+    node understanding: Concept "Understanding";
+    node resources: Concept "Resources";
 
-    // Relationship verbs (relations)
-    node r1: Relation "learns";
-    node r2: Relation "requires";
-    node r3: Relation "leads to";
-    node r4: Relation "uses";
+    node learns: Relation "learns";
+    node requires: Relation "requires";
+    node leads_to: Relation "leads to";
+    node uses: Relation "uses";
 
-    // Concept map connections
-    // Pattern: Concept -&gt; Relation -&gt; Concept
-    edge c1 -&gt; r1: concept_to_relation;
-    edge r1 -&gt; c2: relation_to_concept;
-    edge c2 -&gt; r2: concept_to_relation;
-    edge r2 -&gt; c3: relation_to_concept;
-    edge c3 -&gt; r3: concept_to_relation;
-    edge r3 -&gt; c4: relation_to_concept;
-    edge c2 -&gt; r4: concept_to_relation;
-    edge r4 -&gt; c5: relation_to_concept;
+    edge student -&gt; learns;
+    edge learns -&gt; subject;
+    edge subject -&gt; requires;
+    edge requires -&gt; practice;
+    edge practice -&gt; leads_to;
+    edge leads_to -&gt; understanding;
+    edge subject -&gt; uses;
+    edge uses -&gt; resources;
 }
 </code></pre>
-<p><strong>Note</strong>: In concept maps, relationships are represented as nodes (Relation type) rather than edge labels. This creates readable propositions like "Student learns Subject" and "Subject requires Practice".</p>
+<p><strong>Note</strong>: In concept maps, relationships are represented as nodes (Relation type) rather than edge labels. This ALWAYS creates readable propositions like "Student learns Subject" and "Subject requires Practice". Every concept must be connected to at least one relation — never leave a concept unconnected. When multiple concepts share the same relationship (e.g. "Dog is a Mammal" and "Cat is a Mammal"), reuse a single Relation node. <strong>CRITICAL</strong>: When a relation has BOTH multiple inbound AND multiple outbound edges, ALL inbound concepts must make sense as propositions with ALL outbound concepts (n × m propositions, all must be valid). If any combination is invalid (circular, meaningless), use specific relations or restructure the graph.</p>
 <h3 id="example-11-current-reality-tree-crt">Example 11: Current Reality Tree (CRT)</h3>
 <p>A root cause analysis graph showing how causes lead to undesirable effects:</p>
 <pre><code class="language-vgl">vgraph salesDecline: CRT "Sales Decline Analysis" {
@@ -762,7 +799,54 @@ comment      ::= "//" [^\n]*
 }
 </code></pre>
 <p><strong>Note</strong>: FRT graphs also flow bottom-to-top like CRT, but with a different focus. While CRT starts with problems (Undesirable Effects) and traces back to root causes, FRT starts with proposed solutions (Changeable/injections) and traces forward to show how they achieve desired outcomes. This makes FRT ideal for validating that proposed changes will actually deliver the expected benefits.</p>
-<h3 id="example-13-prerequisite-tree-prt">Example 13: Prerequisite Tree (PRT)</h3>
+<h3 id="example-13-evaporating-cloud-ec">Example 13: Evaporating Cloud (EC)</h3>
+<p>A conflict resolution graph showing how assumptions behind a conflict can be surfaced and resolved:</p>
+<pre><code class="language-vgl">vgraph projectConflict: EC "Project Delivery vs Quality" {
+    // The shared objective both sides agree on
+    node obj: CommonObjective "Deliver a successful software product";
+
+    // The two competing needs
+    node needA: Need "Meet the market window deadline";
+    node needB: Need "Ensure product quality and reliability";
+
+    // The specific wants derived from each need
+    node wantA: Want "Release with current feature set now";
+    node wantB: Want "Extend timeline for thorough testing";
+
+    // The conflict between the two wants
+    node conf: Conflict;
+
+    // Assumptions underlying the conflict
+    node assA: Assumption "Testing always requires calendar time";
+    node assB: Assumption "Features cannot be descoped";
+    node assC: Assumption "Quality requires full manual testing";
+
+    // Solution that breaks the conflict
+    node sol: Solution "Implement automated testing pipeline";
+
+    // Objective requires both needs (necessary condition)
+    edge obj -&gt; needA: objective_to_need;
+    edge obj -&gt; needB: objective_to_need;
+
+    // Needs lead to wants
+    edge needA -&gt; wantA: need_to_want;
+    edge needB -&gt; wantB: need_to_want;
+
+    // Wants create the conflict
+    edge wantA -&gt; conf: want_to_conflict;
+    edge wantB -&gt; conf: want_to_conflict;
+
+    // Assumptions exposed
+    edge needA -&gt; assA: need_to_assumption;
+    edge needB -&gt; assC: need_to_assumption;
+    edge conf -&gt; assB: conflict_to_assumption;
+
+    // Solution resolves by breaking assumption
+    edge needB -&gt; sol: need_to_solution;
+}
+</code></pre>
+<p><strong>Note</strong>: EC graphs flow left-to-right, with the Common Objective on the far left and the Conflict on the far right. The two branches represent competing Needs and Wants that create the conflict. Assumptions are surfaced on each edge to identify which assumption can be challenged. The Solution breaks the conflict by invalidating one or more assumptions. EC uses necessary condition logic — "In order to [Objective] we must provide [Need]". The Conflict node has no text label; it is rendered as a lightning bolt icon.</p>
+<h3 id="example-14-prerequisite-tree-prt">Example 14: Prerequisite Tree (PRT)</h3>
 <p>A planning graph showing obstacles blocking objectives and intermediate objectives to overcome them:</p>
 <pre><code class="language-vgl">vgraph projectLaunch: PRT "New Product Launch Planning" {
     // The main objective we want to achieve
@@ -812,7 +896,7 @@ comment      ::= "//" [^\n]*
 }
 </code></pre>
 <p><strong>Note</strong>: PRT graphs flow bottom-to-top like other TOC tools. The main Objective sits at the top, with Obstacles directly below showing what blocks it. IntermediateObjectives below the obstacles show what needs to be achieved to overcome them. The OR junctor indicates alternative paths - only one of the connected intermediate objectives needs to be achieved. PRT embodies "necessary condition thinking" - working backward from the goal to identify all prerequisites.</p>
-<h3 id="example-14-transition-tree-trt">Example 14: Transition Tree (TRT)</h3>
+<h3 id="example-15-transition-tree-trt">Example 15: Transition Tree (TRT)</h3>
 <p>A step-by-step implementation planning graph showing how actions lead to desired outcomes:</p>
 <pre><code class="language-vgl">vgraph agileTransition: TRT "Agile Transformation Implementation" {
     // Given conditions (the context we're working within)
@@ -872,7 +956,7 @@ comment      ::= "//" [^\n]*
 }
 </code></pre>
 <p><strong>Note</strong>: TRT graphs flow bottom-to-top like other TOC tools. The focus is on detailed implementation planning - answering "HOW TO CAUSE the change?" Unlike FRT which validates that solutions will work, TRT provides the step-by-step action sequence needed to implement those solutions. Changeable nodes represent the specific actions to take, and the graph shows how those actions combine through intermediate effects to achieve desirable outcomes. The AndJunctor indicates multiple conditions must occur together for an effect.</p>
-<h3 id="example-15-attack-defense-tree-adtree">Example 15: Attack-Defense Tree (ADTree)</h3>
+<h3 id="example-16-attack-defense-tree-adtree">Example 16: Attack-Defense Tree (ADTree)</h3>
 <p>A security modelling graph showing how defenses protect a system and how attacks can circumvent them. Based on the data confidentiality scenario from Kordy et al. (2014):</p>
 <pre><code class="language-vgl">vgraph dataConfidentiality: ADTree "Data Confidentiality" {
     // Defense nodes (defender's goals)
@@ -968,43 +1052,29 @@ comment      ::= "//" [^\n]*
  <li><strong>Invalid Edge Type</strong>: Edge types must be valid for the connected node types (creates "unknown" edge type)</li>
  <li><strong>Syntax Errors</strong>: Missing semicolons, braces, or other syntax requirements</li>
 </ul>
-<p>When a node type or edge type is not found in the notation, VGL will create an "unknown" type to allow the graph to be processed, but you should verify that the type names are correct.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/Help/Expert_Concepts/connect-your-diagram</guid><title>Connect your Diagram</title><description></description><link>https://vithanco.com/tools/Help/Expert_Concepts/connect-your-diagram</link><pubDate>Fri, 20 Feb 2026 13:12:08 +0100</pubDate><content:encoded><![CDATA[<p>Vithanco allows you to connect your diagram easily with other relevant resources as long as it can be referenced via a URL.</p>
-<h2 id="how-to-add-urls">How to add URLs?</h2>
-<p>Just add a URL to a Node in your diagram in the Node Editor.</p>
-<img src="https://vithanco.com/Tools/Help/Expert_Concepts/connect-your-diagram/2019-05-05_07-05-27.png" alt="" onclick="openLightbox(this)" />
-<h2 id="how-to-use-urls">How to use URLs?</h2>
-<p>Hoover over the node. Notice the new link icon in the middle on the top of the node. Just click that button and the system browser will be called with the URL provided.</p>
-<img src="https://vithanco.com/Tools/Help/Expert_Concepts/connect-your-diagram/2019-05-05_12-45-10.png" alt="" onclick="openLightbox(this)" />
-<h2 id="what-can-i-do-with-this">What can I do with this?</h2>
-<p>Obviously, the use cases for this feature are as versatile as Vithanco itself.</p>
-<ul>
- <li>Use URLs as an example in a <a href="https://vithanco.com/notations/concept-maps">Concept Map</a> for additional information. Link to the corresponding Wiki page, or to a company internal page that is of relevance to the reader.</li>
- <li>Create <a href="https://vithanco.com/notations/decision-tree">Decision Tree</a> Diagrams with URLs for each outcome. This way you not only document each decision point but you can trigger the next action.</li>
- <li>Connect each Business Change in aThe <a href="../../../../Notations/Change/benefit-breakdown-structure">Benefit Breakdown Structure</a> is a good example of this. It uses the <code>BusinessChange</code> and <code>Enabler</code> node types. But what if you want to use those node types in a <code>ConceptMap</code>? You can't. The <code>ConceptMap</code> notation doesn't know about <code>BusinessChange</code> nodes.ct).</li>
- <li>Reference background articles etc. from within your <a href="https://vithanco.com/notations/IBIS/index/index.html">IBIS</a> diagram on a topic to make it simple for others to understand your thinking.</li>
-</ul>
-<p>And so on.</p>
-<h2 id="can-i-export-these-urls-and-hence-create-a-clickable-image">Can I export these URLs and hence create a clickable Image?</h2>
-<p>Unfortunately, common picture formats don’t offer such functionality. However, HTML does. Vithanco therefore allows “Export Browsable” and "Export Browsable" exports the diagram as a .jpg file and a corresponding .html page that overlays the exported diagrams with links.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/TOC/evaporating-cloud</guid><title>The Evaporating Cloud (EC) Notation</title><description></description><link>https://vithanco.com/notations/TOC/evaporating-cloud</link><pubDate>Fri, 20 Feb 2026 13:06:41 +0100</pubDate><content:encoded><![CDATA[<h2 id="why-use-evaporating-clouds">Why use Evaporating Clouds?</h2>
-<p>EC resolves a conflict by stating both sides of the problem and reviewing the underlying assumptions that create the conflict. Please note that the one requirement is that both sides share the same goal. If needed, refer to the goals behind the current plan.</p>
-<p>ECs allow a precise Problem description. ECs define a problem as a 'Common Objective', two separate 'Needs' and two different 'Wants' that conflict.</p>
+<p>When a node type or edge type is not found in the notation, VGL will create an "unknown" type to allow the graph to be processed, but you should verify that the type names are correct.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/TOC/evaporating-cloud</guid><title>The Evaporating Cloud (EC) Notation</title><description>Evaporating Clouds resolve conflicts by exposing and challenging the underlying assumptions that create them.</description><link>https://vithanco.com/notations/TOC/evaporating-cloud</link><pubDate>Thu, 26 Feb 2026 18:26:44 +0100</pubDate><content:encoded><![CDATA[<h2 id="why-use-evaporating-clouds-ecs">Why Use Evaporating Clouds (ECs)?</h2>
+<p>ECs resolve a conflict by stating both sides of the problem and reviewing the underlying assumptions that create the conflict. The one requirement is that both sides share the same goal. If needed, refer to the goals behind the current plan.</p>
+<p>ECs allow a precise problem description. They define a problem as a 'Common Objective', two separate 'Needs' and two different 'Wants' that conflict.</p>
 <figure class="img-std"> 
  <img src="https://vithanco.com/Notations/TOC/evaporating-cloud/EC-start.png" alt="" onclick="openLightbox(this)" /> 
  <figcaption>
   The Evaporating Cloud's basic structure
  </figcaption> 
 </figure>
-<p>Use ECs whenever you have a problem.</p>
-<p>ECs are methodically used in TOC thinking processes when defining a Future Reality Tree (FTRs). First, FTRs are created by injecting solutions from Current Reality Trees (CRT). Then, those solutions are formulated through ECs.</p>
-<h2 id="example-ec">Example EC</h2>
-<p>Goldratt developed TOC based on production inefficiencies. One of his most often used examples is batch sizes and the perceived conflict between cost-saving large batch sizes and throughput-improving small batch sizes. The resulting EC with some false assumptions is shown below.</p>
-<figure class="img-std"> 
- <img src="https://vithanco.com/Notations/TOC/evaporating-cloud/Goldratts-EC.png" alt="" onclick="openLightbox(this)" /> 
- <figcaption>
-  Goldratt's EC example
- </figcaption> 
-</figure>
-<p>These assumptions are easier to find when the diagram is verbalised by stating each connection even aloud by constructing “In order to... we must ...". So, the assumptions here violate the phrase “In order to reduce setup cost per unit, we must run <em>large</em> batches." Notice the wording "we must". It invites critics.</p>
+<p>ECs are methodically used in TOC thinking processes when defining a Future Reality Tree (FRT). First, FRTs are created by injecting solutions from Current Reality Trees (CRT). Then, those solutions are formulated through ECs.</p>
+<h3 id="when-to-use-ecs">When to Use ECs</h3>
+<ul>
+ <li><strong>You have a conflict between two parties or approaches that share the same goal.</strong> ECs are designed for situations where both sides agree on the objective but disagree on how to achieve it.</li>
+ <li><strong>You want to avoid compromise.</strong> Rather than splitting the difference (where both sides lose), ECs help you find a solution that satisfies both needs by challenging the assumptions that create the apparent conflict.</li>
+ <li><strong>You need a precise problem definition.</strong> A well-constructed EC is a structured problem statement. As Einstein (supposedly) said: spend most of the time defining the problem, and the solution becomes easier.</li>
+ <li><strong>You are working through TOC thinking processes.</strong> ECs are the standard tool for formulating injections (solutions) that feed into Future Reality Trees.</li>
+</ul>
+<h3 id="when-not-to-use-ecs">When NOT to Use ECs</h3>
+<ul>
+ <li>If the two sides do not share a common goal, an EC cannot be constructed — first find a shared objective at a higher level.</li>
+ <li>If you are doing root cause analysis, use a <a href="https://vithanco.com/notations/TOC/current-reality-tree">CRT</a> instead.</li>
+ <li>If you need to plan how to overcome obstacles on the way to a goal, use a <a href="https://vithanco.com/notations/TOC/prerequisite-tree">PRT</a> instead.</li>
+</ul>
 <h2 id="ec-notation-description">EC Notation Description</h2>
 <p>The diagram below describes the Notation.</p>
 <figure class="img-std"> 
@@ -1060,17 +1130,48 @@ comment      ::= "//" [^\n]*
   </tr>
  </tbody>
 </table>
-<p>The Evaporating Cloud uses <a href="https://vithanco.com/tools/Help/Expert_Concepts/diagram-logic/index.html">Necessary Condition</a>, which can be expressed by statements like “To achieve ... we must provide ...".</p>
+<p>The Evaporating Cloud uses <a href="https://vithanco.com/tools/Help/Expert_Concepts/diagram-logic/index.html">Necessary Condition</a>, which can be expressed by statements like "To achieve ... we must provide ...".</p>
 <h2 id="background-on-evaporating-clouds">Background on Evaporating Clouds</h2>
-<p>Evaporating is the most controversial and most powerful of the thinking processes. You should listen to the audio recording of Eli Goldratt in <a href="https://www.goodreads.com/book/show/172800.Beyond_the_Goal">Beyond the Goal.</a> He explains his thinking and the background. My understanding of the EC goes along these lines:</p>
+<p>Evaporating Clouds are the most controversial and most powerful of the thinking processes. You should listen to the audio recording of Eli Goldratt in <a href="https://www.goodreads.com/book/show/172800.Beyond_the_Goal">Beyond the Goal.</a> He explains his thinking and the background. My understanding of the EC goes along these lines:</p>
 <ul>
- <li>As long as two people/groups have the same goal, there cannot be a situation where an unresolvable conflict occurs. If you do not share the same purpose, a dispute will typically not be resolved. However, in most cases, it will be possible to find a shared goal if you look at the goals beyond the goal. So, instead of "Marketing needs a budget of XUSD", you go to the next level and agree that you want the best for the Marketing department (the budget was only a way to achieve this goal), or even what is the best for the company as a whole.</li>
- <li>A conflict in this sense is a situation where two people/groups think their course of action or ideas are incompatible. So group A might think we should do "step 27" in the governance process "Vienna”, and group B believes not.</li>
+ <li>As long as two people/groups have the same goal, there cannot be a situation where an unresolvable conflict occurs. If you do not share the same purpose, a dispute will typically not be resolved. However, in most cases, it will be possible to find a shared goal if you look at the goals beyond the goal. So, instead of "Marketing needs a budget of XUSD", you go to the next level and agree that you want the best for the Marketing department (the budget was only a way to achieve this goal), or even what is the best for the company as a whole.</li>
+ <li>A conflict in this sense is a situation where two people/groups think their course of action or ideas are incompatible. So group A might think we should do "step 27" in the governance process "Vienna", and group B believes not.</li>
  <li>Whenever a conflict is identified, don't compromise because in a compromise, both sides lose, and (see above) it's optional. It would be like having two scales, with varying measures for the same item, and you start compromising (4kg or 2kg? Let's say it weighs 3kg). Goldratt suggests instead looking at what scale is misfunction or if both work and whether the concept of weight is right in this situation. Do whatever is needed but resolve the conflict. The item has only one weight and won't be found by compromises.</li>
  <li>Goldratt's theory is that conflicts occur due to implicit assumptions. If you can identify the underlying assumptions, will you be able to find the flaws in one or both opposing approaches?</li>
 </ul>
-<p>From my perspective, I see ECs following [Einstein's (supposed?) approach to fixing a problem in <a href="https://www.goodreads.com/quotes/60780-if-i-had-an-hour-to-solve-a-problem-i-d">one hour</a> spending the most time (first 55 minutes) on defining the problem and then using the rest on solving the issue. This might be extreme time distribution, and the quote most likely doesn’t even come from Einstein, but I believe the idea is correct. Define the problem first and do it well; any solution will be much easier. And that is ultimately what one does with ECs. A well-constructed EC is a precise problem description. Try it for yourself.</p>
-<p>Find more information on ECs <a href="https://en.wikipedia.org/wiki/Evaporating_Cloud">here</a>.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/attack-defense-tree</guid><title>The Attack-Defense Tree (ADTree) Notation</title><description>Attack-Defense Trees model security scenarios as a two-player game between attacker and defender.</description><link>https://vithanco.com/notations/attack-defense-tree</link><pubDate>Fri, 20 Feb 2026 11:31:48 +0100</pubDate><content:encoded><![CDATA[<h2 id="why-use-attack-defense-trees-adtrees">Why Use Attack-Defense Trees (ADTrees)?</h2>
+<p>Find more information on ECs <a href="https://en.wikipedia.org/wiki/Evaporating_Cloud">here</a>.</p>
+<h2 id="try-ec-yourself">Try EC Yourself</h2>
+<p>Create and visualise your own Evaporating Cloud diagram right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p>
+<iframe src="https://vithanco.com/vgraph/vgraph-widget.html%3Fvgl=vgraph%2520projectConflict%253A%2520EC%2520%2522Project%2520Delivery%2520vs%2520Quality%2522%2520%257B%250A%2520%2520%2520%2520node%2520obj%253A%2520CommonObjective%2520%2522Deliver%2520a%2520successful%2520software%2520product%2522%253B%250A%2520%2520%2520%2520node%2520needA%253A%2520Need%2520%2522Meet%2520the%2520market%2520window%2520deadline%2522%253B%250A%2520%2520%2520%2520node%2520needB%253A%2520Need%2520%2522Ensure%2520product%2520quality%2520and%2520reliability%2522%253B%250A%2520%2520%2520%2520node%2520wantA%253A%2520Want%2520%2522Release%2520with%2520current%2520feature%2520set%2520now%2522%253B%250A%2520%2520%2520%2520node%2520wantB%253A%2520Want%2520%2522Extend%2520timeline%2520for%2520thorough%2520testing%2522%253B%250A%2520%2520%2520%2520node%2520conf%253A%2520Conflict%253B%250A%2520%2520%2520%2520node%2520assA%253A%2520Assumption%2520%2522Testing%2520always%2520requires%2520calendar%2520time%2522%253B%250A%2520%2520%2520%2520node%2520assB%253A%2520Assumption%2520%2522Features%2520cannot%2520be%2520descoped%2522%253B%250A%2520%2520%2520%2520node%2520assC%253A%2520Assumption%2520%2522Quality%2520requires%2520full%2520manual%2520testing%2522%253B%250A%2520%2520%2520%2520node%2520sol%253A%2520Solution%2520%2522Implement%2520automated%2520testing%2520pipeline%2522%253B%250A%2520%2520%2520%2520edge%2520obj%2520-%253E%2520needA%253A%2520objective_to_need%253B%250A%2520%2520%2520%2520edge%2520obj%2520-%253E%2520needB%253A%2520objective_to_need%253B%250A%2520%2520%2520%2520edge%2520needA%2520-%253E%2520wantA%253A%2520need_to_want%253B%250A%2520%2520%2520%2520edge%2520needB%2520-%253E%2520wantB%253A%2520need_to_want%253B%250A%2520%2520%2520%2520edge%2520wantA%2520-%253E%2520conf%253A%2520want_to_conflict%253B%250A%2520%2520%2520%2520edge%2520wantB%2520-%253E%2520conf%253A%2520want_to_conflict%253B%250A%2520%2520%2520%2520edge%2520needA%2520-%253E%2520assA%253A%2520need_to_assumption%253B%250A%2520%2520%2520%2520edge%2520needB%2520-%253E%2520assC%253A%2520need_to_assumption%253B%250A%2520%2520%2520%2520edge%2520conf%2520-%253E%2520assB%253A%2520conflict_to_assumption%253B%250A%2520%2520%2520%2520edge%2520needB%2520-%253E%2520sol%253A%2520need_to_solution%253B%250A%257D" width="100%" height="750" style="border: 1px solid #e0e0e0; border-radius: 8px; margin: 20px 0;" title="VGraph Interactive EC Editor"></iframe>
+<p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p>
+<p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="https://vithanco.com/tools/VGL_GUIDE">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.</p>
+<h2 id="example">Example</h2>
+<a name="Example"></a>
+<p>Goldratt developed TOC based on production inefficiencies. One of his most often used examples is batch sizes and the perceived conflict between cost-saving large batch sizes and throughput-improving small batch sizes. The resulting EC with some false assumptions is shown below.</p>
+<figure class="img-std"> 
+ <img src="https://vithanco.com/Notations/TOC/evaporating-cloud/Goldratts-EC.png" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  Goldratt's EC example
+ </figcaption> 
+</figure>
+<p>These assumptions are easier to find when the diagram is verbalised by stating each connection even aloud by constructing "In order to... we must ...". So, the assumptions here violate the phrase "In order to reduce setup cost per unit, we must run <em>large</em> batches." Notice the wording "we must". It invites critics.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/Help/Expert_Concepts/connect-your-diagram</guid><title>Connect your Diagram</title><description></description><link>https://vithanco.com/tools/Help/Expert_Concepts/connect-your-diagram</link><pubDate>Fri, 20 Feb 2026 13:12:08 +0100</pubDate><content:encoded><![CDATA[<p>Vithanco allows you to connect your diagram easily with other relevant resources as long as it can be referenced via a URL.</p>
+<h2 id="how-to-add-urls">How to add URLs?</h2>
+<p>Just add a URL to a Node in your diagram in the Node Editor.</p>
+<img src="https://vithanco.com/Tools/Help/Expert_Concepts/connect-your-diagram/2019-05-05_07-05-27.png" alt="" onclick="openLightbox(this)" />
+<h2 id="how-to-use-urls">How to use URLs?</h2>
+<p>Hoover over the node. Notice the new link icon in the middle on the top of the node. Just click that button and the system browser will be called with the URL provided.</p>
+<img src="https://vithanco.com/Tools/Help/Expert_Concepts/connect-your-diagram/2019-05-05_12-45-10.png" alt="" onclick="openLightbox(this)" />
+<h2 id="what-can-i-do-with-this">What can I do with this?</h2>
+<p>Obviously, the use cases for this feature are as versatile as Vithanco itself.</p>
+<ul>
+ <li>Use URLs as an example in a <a href="https://vithanco.com/notations/concept-maps">Concept Map</a> for additional information. Link to the corresponding Wiki page, or to a company internal page that is of relevance to the reader.</li>
+ <li>Create <a href="https://vithanco.com/notations/decision-tree">Decision Tree</a> Diagrams with URLs for each outcome. This way you not only document each decision point but you can trigger the next action.</li>
+ <li>Connect each Business Change in aThe <a href="../../../../Notations/Change/benefit-breakdown-structure">Benefit Breakdown Structure</a> is a good example of this. It uses the <code>BusinessChange</code> and <code>Enabler</code> node types. But what if you want to use those node types in a <code>ConceptMap</code>? You can't. The <code>ConceptMap</code> notation doesn't know about <code>BusinessChange</code> nodes.ct).</li>
+ <li>Reference background articles etc. from within your <a href="https://vithanco.com/notations/IBIS/index/index.html">IBIS</a> diagram on a topic to make it simple for others to understand your thinking.</li>
+</ul>
+<p>And so on.</p>
+<h2 id="can-i-export-these-urls-and-hence-create-a-clickable-image">Can I export these URLs and hence create a clickable Image?</h2>
+<p>Unfortunately, common picture formats don’t offer such functionality. However, HTML does. Vithanco therefore allows “Export Browsable” and "Export Browsable" exports the diagram as a .jpg file and a corresponding .html page that overlays the exported diagrams with links.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/attack-defense-tree</guid><title>The Attack-Defense Tree (ADTree) Notation</title><description>Attack-Defense Trees model security scenarios as a two-player game between attacker and defender.</description><link>https://vithanco.com/notations/attack-defense-tree</link><pubDate>Fri, 20 Feb 2026 11:31:48 +0100</pubDate><content:encoded><![CDATA[<h2 id="why-use-attack-defense-trees-adtrees">Why Use Attack-Defense Trees (ADTrees)?</h2>
 <p>Attack-Defence Trees (ADTrees) model security scenarios as a two-player game: an attacker trying to compromise a system and a defender trying to protect it, with their strategies and countermeasures interacting at every level of the tree.</p>
 <p>Classic attack trees, popularised by Bruce Schneier in 1999, model attack scenarios as tree-like structures where the root represents an attacker's goal and the leaves are the individual actions to achieve it. However, attack trees cannot capture the interplay between attacks and defenses. ADTrees overcome this limitation by introducing defense nodes as countermeasures to attacks, allowing you to model the arms race between attacker and defender in a single diagram.</p>
 <p>ADTrees have two key structural features:</p>
