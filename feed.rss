@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Vithanco</title><description>Use Visual Thinking to Improve Your Decision Making and Problem Solving Skills.</description><link>https://vithanco.com</link><language>en</language><lastBuildDate>Thu, 26 Feb 2026 18:29:25 +0100</lastBuildDate><pubDate>Thu, 26 Feb 2026 18:29:25 +0100</pubDate><ttl>250</ttl><atom:link href="https://vithanco.com/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://vithanco.com/tools/VGL_GUIDE</guid><title>Vithanco Graph Language (VGL) Guide</title><description>Learn the VGL syntax for creating and editing graphs in text format</description><link>https://vithanco.com/tools/VGL_GUIDE</link><pubDate>Thu, 26 Feb 2026 18:29:25 +0100</pubDate><content:encoded><![CDATA[<h1 id="vithanco-graph-language-vgl-guide">Vithanco Graph Language (VGL) Guide</h1>
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Vithanco</title><description>Use Visual Thinking to Improve Your Decision Making and Problem Solving Skills.</description><link>https://vithanco.com</link><language>en</language><lastBuildDate>Sat, 28 Feb 2026 23:11:14 +0100</lastBuildDate><pubDate>Sat, 28 Feb 2026 23:11:14 +0100</pubDate><ttl>250</ttl><atom:link href="https://vithanco.com/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://vithanco.com/tools/VGL_GUIDE</guid><title>Vithanco Graph Language (VGL) Guide</title><description>Learn the VGL syntax for creating and editing graphs in text format</description><link>https://vithanco.com/tools/VGL_GUIDE</link><pubDate>Sat, 28 Feb 2026 23:11:14 +0100</pubDate><content:encoded><![CDATA[<h1 id="vithanco-graph-language-vgl-guide">Vithanco Graph Language (VGL) Guide</h1>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
  <li><a href="#concepts">Concepts</a></li>
@@ -28,6 +28,7 @@
  <li><strong>PRT</strong> (Prerequisite Tree) - for planning with necessary condition thinking using Theory of Constraints</li>
  <li><strong>TRT</strong> (Transition Tree) - for step-by-step implementation planning using Theory of Constraints</li>
  <li><strong>ADTree</strong> (Attack-Defense Tree) - for security modelling of attack and defense interactions</li>
+ <li><strong>GoalTree</strong> (Goal Tree) - for strategic planning using Theory of Constraints necessity logic</li>
 </ul>
 <p>The notation determines what node types and edge types are available in your graph.</p>
 <h3 id="nodes">Nodes</h3>
@@ -125,6 +126,12 @@
  <li><code>Defense</code> - A defender's countermeasure or protective measure (default: green)</li>
  <li><code>AndJunctor</code> - Conjunctive refinement: all children must be achieved (icon: AND circle)</li>
  <li><code>OrJunctor</code> - Disjunctive refinement: at least one child must be achieved (icon: OR circle)</li>
+</ul>
+<p><strong>GoalTree Node Types:</strong> GoalTree (Goal Tree) is a strategic planning tool using necessity condition logic from Theory of Constraints. It defines what a system must achieve through a hierarchy of Goal, Critical Success Factors, and Necessary Conditions. Invented by H. William Dettmer, it is the foundation of the Logical Thinking Process.</p>
+<ul>
+ <li><code>Goal</code> - The single top-level objective — the ultimate purpose for which the system exists (default: cyan/teal)</li>
+ <li><code>CriticalSuccessFactor</code> - High-level terminal outcomes (3-5 maximum) without which the Goal cannot be achieved (default: light blue)</li>
+ <li><code>NecessaryCondition</code> - Indispensable prerequisite tasks that support CSFs; can cascade into sub-NCs becoming more specific at lower levels (default: amber/yellow)</li>
 </ul>
 <h3 id="edges">Edges</h3>
 <p>Edges represent connections between nodes. Each edge has:</p>
@@ -289,6 +296,12 @@ edge q2 -&gt; a2;  // Type inferred from node types
  <li><code>attack_to_or_junctor</code>, <code>defense_to_or_junctor</code> - Connect to OR junctor</li>
  <li><code>or_junctor_to_attack</code>, <code>or_junctor_to_defense</code> - Connect from OR junctor</li>
 </ul>
+<p><strong>GoalTree Edge Types:</strong> GoalTree uses edges to show necessity relationships. The graph flows top-to-bottom (Goal at top, Necessary Conditions expand downward). The necessity logic reads: "In order to achieve [upper], we must have [lower]."</p>
+<ul>
+ <li><code>csf_to_goal</code> - Connects CriticalSuccessFactor → Goal (CSF is necessary for Goal)</li>
+ <li><code>nc_to_csf</code> - Connects NecessaryCondition → CriticalSuccessFactor (NC is necessary for CSF)</li>
+ <li><code>nc_to_nc</code> - Connects NecessaryCondition → NecessaryCondition (sub-NC supports parent NC)</li>
+</ul>
 <p>Edge types ensure that connections make semantic sense within the notation's domain.</p>
 <h3 id="groups">Groups</h3>
 <p>Groups organize nodes hierarchically and can be nested to create subgroups. Groups help visually organize complex graphs.</p>
@@ -365,7 +378,7 @@ node q1: Question "Main question";  // This is also a comment
 <pre><code>document     ::= "vgraph" identifier ":" notation label? "{" statement* "}"
 
 notation     ::= identifier
-                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree
+                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree, GoalTree
 
 statement    ::= group | node | edge | attribute
 
@@ -1030,6 +1043,54 @@ comment      ::= "//" [^\n]*
 }
 </code></pre>
 <p><strong>Note</strong>: ADTree graphs flow bottom-to-top with the root goal at the top and leaf actions at the bottom. The key feature is the distinction between refinement edges (solid lines for same-type decomposition) and countermeasure edges (dotted lines for opposite-type countering). This allows modelling the ongoing arms race between attacker and defender at any level of the tree. The root node can be either an Attack or Defense node, determining whether the proponent is the attacker or defender.</p>
+<h3 id="example-17-goal-tree-goaltree">Example 17: Goal Tree (GoalTree)</h3>
+<p>A strategic planning graph using Theory of Constraints necessity logic. The Goal Tree defines what an organization must achieve through a hierarchy of a single Goal, Critical Success Factors (CSFs), and Necessary Conditions (NCs). Based on H. William Dettmer's Logical Thinking Process:</p>
+<pre><code class="language-vgl">vgraph companyStrategy: GoalTree "Increase Profitability" {
+    // The single system goal
+    node goal: Goal "Make more money, now and in the future";
+
+    // Critical Success Factors (3-5 high-level terminal outcomes)
+    node csf1: CriticalSuccessFactor "Maximize Throughput";
+    node csf2: CriticalSuccessFactor "Control Operating Expense";
+    node csf3: CriticalSuccessFactor "Minimize Inventory and Investment";
+
+    // Necessary Conditions supporting CSF1
+    node nc1: NecessaryCondition "Maximize sales volume";
+    node nc2: NecessaryCondition "Minimize variable costs";
+    node nc3: NecessaryCondition "Highly appealing products";
+
+    // Necessary Conditions supporting CSF2
+    node nc4: NecessaryCondition "Minimize scrap and rework";
+    node nc5: NecessaryCondition "Optimize overhead";
+
+    // Necessary Conditions supporting CSF3
+    node nc6: NecessaryCondition "Optimize outgoing supply chain";
+    node nc7: NecessaryCondition "Optimize incoming supply chain";
+
+    // Sub-NCs becoming more specific
+    node nc8: NecessaryCondition "Effective market research";
+    node nc9: NecessaryCondition "High-quality products";
+
+    // CSFs support the Goal (necessity logic: "In order to achieve Goal, we must achieve CSFs")
+    edge csf1 -&gt; goal: csf_to_goal;
+    edge csf2 -&gt; goal: csf_to_goal;
+    edge csf3 -&gt; goal: csf_to_goal;
+
+    // NCs support CSFs
+    edge nc1 -&gt; csf1: nc_to_csf;
+    edge nc2 -&gt; csf1: nc_to_csf;
+    edge nc3 -&gt; csf1: nc_to_csf;
+    edge nc4 -&gt; csf2: nc_to_csf;
+    edge nc5 -&gt; csf2: nc_to_csf;
+    edge nc6 -&gt; csf3: nc_to_csf;
+    edge nc7 -&gt; csf3: nc_to_csf;
+
+    // Sub-NCs support higher NCs
+    edge nc8 -&gt; nc1: nc_to_nc;
+    edge nc9 -&gt; nc3: nc_to_nc;
+}
+</code></pre>
+<p><strong>Note</strong>: GoalTree graphs flow top-to-bottom with the single Goal at the top, Critical Success Factors directly below it, and Necessary Conditions expanding downward. NCs become progressively more detailed, specific, and functional at lower levels. The vertical placement implies nothing about importance — due to necessity logic, the lowest NC is equally important as a CSF because if you fail to accomplish it, nothing above it will happen. There are usually no more than 3-5 CSFs, and NCs can have lateral cross-connections between branches.</p>
 <hr />
 <h2 id="best-practices">Best Practices</h2>
 <ol>
@@ -1052,7 +1113,160 @@ comment      ::= "//" [^\n]*
  <li><strong>Invalid Edge Type</strong>: Edge types must be valid for the connected node types (creates "unknown" edge type)</li>
  <li><strong>Syntax Errors</strong>: Missing semicolons, braces, or other syntax requirements</li>
 </ul>
-<p>When a node type or edge type is not found in the notation, VGL will create an "unknown" type to allow the graph to be processed, but you should verify that the type names are correct.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/TOC/evaporating-cloud</guid><title>The Evaporating Cloud (EC) Notation</title><description>Evaporating Clouds resolve conflicts by exposing and challenging the underlying assumptions that create them.</description><link>https://vithanco.com/notations/TOC/evaporating-cloud</link><pubDate>Thu, 26 Feb 2026 18:26:44 +0100</pubDate><content:encoded><![CDATA[<h2 id="why-use-evaporating-clouds-ecs">Why Use Evaporating Clouds (ECs)?</h2>
+<p>When a node type or edge type is not found in the notation, VGL will create an "unknown" type to allow the graph to be processed, but you should verify that the type names are correct.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/TOC/index</guid><title>The Theory of Constraints (TOC) Thinking Processes</title><description>An overview of the Theory of Constraints (TOC) Thinking Processes and how they can be used.</description><link>https://vithanco.com/notations/TOC/index</link><pubDate>Sat, 28 Feb 2026 20:10:10 +0100</pubDate><content:encoded><![CDATA[<p>The Theory of Constraints (TOC) is a management paradigm that views any manageable system as being limited in achieving more of its goals by a very small number of constraints. There is always at least one constraint, and TOC uses a focusing process to identify the constraint and restructure the rest of the organization around it. TOC adopts the common idiom "a chain is no stronger than its weakest link". That means that organizations and processes are vulnerable because the weakest person or part can always damage or break them, or at least adversely affect the outcome.</p>
+<p>TOC was developed by Dr Eliyahu M. Goldratt, an Israeli physicist, and is based on the idea that every system has at least one constraint that limits its performance. The goal of TOC is to identify and manage these constraints to improve system performance.</p>
+<p>TOC is a powerful tool for improving the performance of any system, from a small business to a large organization. It has been used successfully in a wide variety of industries, including manufacturing, healthcare, and service industries.</p>
+<p>The five steps of TOC are:</p>
+<ol>
+ <li>Identify the system's goal.</li>
+ <li>Identify the system's constraints.</li>
+ <li>Decide how to exploit the system's constraints.</li>
+ <li>Subordinate everything else to the decision in step 3.</li>
+ <li>Elevate the system's constraints. TOC is a proven methodology for improving the performance of any system. If you are looking for a way to improve your organization's performance, then TOC is a great option.</li>
+</ol>
+<p>Here are some of the benefits of using TOC:</p>
+<ul>
+ <li>It can help you to identify the root causes of problems.</li>
+ <li>It can help you to develop solutions that address the root causes of problems.</li>
+ <li>It can help you to improve the performance of systems.</li>
+ <li>It can help you to think more systemically.</li>
+ <li>It can help you to communicate your ideas more effectively. If you are looking for a powerful tool for problem-solving, then TOC is a great option. It is a simple tool to use, but it can be very effective in helping you to identify and address the root causes of problems.</li>
+</ul>
+<h2 id="the-thinking-processes">The Thinking Processes</h2>
+<p>The <strong>thinking processes</strong> in <a href="https://en.wikipedia.org/wiki/Eliyahu_M._Goldratt">Eliyahu M. Goldratt</a>'s <a href="https://en.wikipedia.org/wiki/Theory_of_constraints">theory of constraints</a> are the five methods to enable the <a href="https://en.wikipedia.org/wiki/Focused_improvement">focused improvement</a> of any cognitive <a href="https://en.wikipedia.org/wiki/System">system</a> (especially <a href="https://en.wikipedia.org/wiki/Business">business</a> systems). The purpose of the thinking processes is to help answer questions essential to achieving focused improvement.</p>
+<table>
+ <thead>
+  <tr>
+   <th>Question</th>
+   <th>Sufficient Cause (<em>If ... then ...</em>)</th>
+   <th>Necessary Condition (<em>In order to ... we must ...</em>)</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>What to change?</td>
+   <td><a href="https://vithanco.com/notations/TOC/current-reality-tree">Current Reality Tree (CRT)</a></td>
+   <td></td>
+  </tr>
+  <tr>
+   <td>What to change to?</td>
+   <td><a href="https://vithanco.com/notations/TOC/future-reality-tree">Future Reality Tree (CRT)</a></td>
+   <td><a href="https://vithanco.com/notations/TOC/evaporating-cloud">Evaporating Cloud (EC)</a></td>
+  </tr>
+  <tr>
+   <td>How to change?</td>
+   <td><a href="https://vithanco.com/notations/TOC/transition-tree">Transition Tree (TRT)</a></td>
+   <td><a href="https://vithanco.com/notations/TOC/prerequisite-tree">Prerequisite Tree (PRT)</a></td>
+  </tr>
+ </tbody>
+</table>
+<p>Each of these five thinking processes is supported in Vithanco by a dedicated <a href="https://vithanco.com/notations">Notation</a>.</p>
+<p>In addition to Goldratt's original five tools, H. William Dettmer developed the <a href="https://vithanco.com/notations/TOC/goal-tree">Goal Tree (GT)</a> as a foundational complement. The Goal Tree defines a system's purpose, Critical Success Factors, and Necessary Conditions before any diagnostic or change-planning work begins. It serves as the aspirational reference point that informs every other thinking process — Undesirable Effects in a CRT are failures to satisfy elements of the Goal Tree, and injections in an FRT are validated against it.</p>
+<p>The thinking processes were described by Goldratt as a sequel to the first TOC novel ("<a href="https://en.wikipedia.org/wiki/The_Goal_(novel)">The Goal</a>") by the Name "<a href="https://en.wikipedia.org/wiki/It%27s_Not_Luck">It's not luck</a>". Lisa Scheinkopf refers to the development process of the thinking processes in the first chapters of her "<a href="https://www.goodreads.com/book/show/732158.Thinking_for_a_Change">Thinking for a Change</a>" book.</p>
+<p>A more thorough rationale is presented in <em><a href="https://www.goodreads.com/book/show/582174.Theory_of_Constraints">What is this thing called Theory of Constraints and how should it be implemented</a></em> by Goldratt.</p>
+<p>There is a multitude of material regarding the TOC TP. I will add some better examples here over time:</p>
+<ul>
+ <li><a href="https://www.youtube.com/@TOCICO/videos">TOCICO YouTube Channel (including Prof. Vicky Mabin)</a></li>
+ <li>www.lomag-man.org/normes/normes_isa/documents/2002-05-ISAD12.ppt</li>
+</ul>
+<h2 id="theory-of-constraints-in-simple-terms">Theory of Constraints in simple terms</h2>
+<p>The Theory of Constraints (TOC) was developed by <a href="https://en.wikipedia.org/wiki/Eliyahu_M._Goldratt">Eliyahu Goldratt</a>. The basic idea of TOC is that in a production the slowest work step will determine the overall output. If you want to increase the overall output then you need to increase the throughput on the slowest work step, which is ultimately constraining the whole production. If you produce too many goods before the constraint, that is the slowest work step, then you will just have more work in progress but not more output. Managing the work in progress will eventually even decrease your output. You should therefore adjust your workload before the constraint to the amount of the constraint, even if that means that the machine utilisation will go down. Please note, that if you increase the throughput at the constraint then another work step might become the constraint. But by definition, there is always at least one constraint.</p>
+<p>If you improve a step that is not the constraint then you won't impact overall output. If the work step is before the constraint then you increase work in progress (WIP) creating a problem of ever more WIP that might need to get stored etc. If the improvement was behind the constraint then the work step will do the same amount of work in a shorter time - but there won't be more work to do. Machine utilisation might fall - after you invested in that step. Many production processes are not plain linear, with many variations and different stations for the same work step, etc. Hence it is not always obvious where the constraint is at any given time and it might be that for different products different work steps become the constraint, in which case the product mix has an impact on production output. Eliyahu Goldratt wrote a business novel on the above to explain it in much more detail, called <a href="https://en.wikipedia.org/wiki/The_Goal_(novel)">The Goal</a>.</p>
+<p>Now, forget about production and think of any work, whether it is blue or white-collar. Nowadays, most people are working together with others, each person doing a few work steps. By definition, there will be a constraining step that holds back the rest of the work. If you could identify that constraint and improve it then the overall throughput will increase to the point of the next constraint.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/TOC/goal-tree</guid><title>The Goal Tree (GT) Notation</title><description>The Goal Tree defines what a system must achieve by articulating a single Goal, a handful of Critical Success Factors, and the network of Necessary Conditions that support them.</description><link>https://vithanco.com/notations/TOC/goal-tree</link><pubDate>Sat, 28 Feb 2026 16:42:45 +0100</pubDate><content:encoded><![CDATA[<h2 id="why-use-goal-trees-gts">Why Use Goal Trees (GTs)?</h2>
+<p>The Goal Tree is a strategic planning tool that defines what a system (typically an organization) must achieve in order to fulfill its purpose. It answers the fundamental question: <strong>"What must we achieve to reach our Goal?"</strong></p>
+<p>Unlike the other TOC Thinking Process tools which diagnose problems or plan changes, the Goal Tree establishes the aspirational foundation. It captures what "good" looks like for the system by articulating a single overarching Goal, the handful of Critical Success Factors required to achieve it, and the network of Necessary Conditions that support those factors. Once defined, the Goal Tree serves as a constant reference point — a strategic beacon — keeping day-to-day decisions aligned with long-term purpose.</p>
+<p>The Goal Tree is the core of the Logical Thinking Process. It informs every other logic tree: the <a href="https://vithanco.com/notations/TOC/current-reality-tree">Current Reality Tree (CRT)</a> identifies where the organization is falling short of its Goal Tree, the <a href="https://vithanco.com/notations/TOC/evaporating-cloud">Evaporating Cloud (EC)</a> resolves conflicts between competing Necessary Conditions, the <a href="https://vithanco.com/notations/TOC/future-reality-tree">Future Reality Tree (FRT)</a> validates proposed changes against the Goal Tree, and the <a href="https://vithanco.com/notations/TOC/prerequisite-tree">Prerequisite Tree (PRT)</a> plans the implementation path.</p>
+<h3 id="when-to-use-goal-trees">When to Use Goal Trees</h3>
+<ul>
+ <li><strong>You need to align an organization around its purpose.</strong> The Goal Tree forces a group to reach consensus on what the system exists to achieve. Even executives who have worked together for years often discover they hold different assumptions about the goal.</li>
+ <li><strong>You want to establish success criteria before diagnosing problems.</strong> A Goal Tree defines the benchmark. Without it, a CRT has no reference for what "should be" — Undesirable Effects are simply failures to satisfy elements of the Goal Tree.</li>
+ <li><strong>You are starting a strategic planning process.</strong> The Goal Tree is the natural first step. It identifies what must go right before you examine what is going wrong.</li>
+ <li><strong>You need to connect daily operations to long-term purpose.</strong> Because NCs cascade from abstract to concrete, the Goal Tree bridges the gap between senior leadership's vision and the functional tasks performed by individuals.</li>
+</ul>
+<h3 id="when-not-to-use-goal-trees">When NOT to Use Goal Trees</h3>
+<ul>
+ <li>If you already have a validated Goal Tree and need to diagnose current problems, use a <a href="https://vithanco.com/notations/TOC/current-reality-tree">CRT</a> instead.</li>
+ <li>If you need to resolve a specific conflict between two approaches, use an <a href="https://vithanco.com/notations/TOC/evaporating-cloud">EC</a> instead.</li>
+ <li>If you need to plan how to overcome obstacles on the way to a known objective, use a <a href="https://vithanco.com/notations/TOC/prerequisite-tree">PRT</a> instead.</li>
+</ul>
+<h2 id="gt-notation-description">GT Notation Description</h2>
+<p>The Goal Tree uses <a href="https://vithanco.com/tools/Help/Expert_Concepts/diagram-logic/index.html">necessity-based logic</a> (necessary condition thinking). Every connection in the tree reads as: <strong>"In order to achieve [upper node], we must have [lower node]."</strong> This logic gives the tree its distinctive property: every element at every level is equally important, because a failure at any level prevents the Goal from being reached.</p>
+<p>The diagram is laid out top-to-bottom, with the single Goal at the top, Critical Success Factors in the next layer, and Necessary Conditions cascading downward into increasing levels of detail.</p>
+<table>
+ <thead>
+  <tr>
+   <th>Node Type</th>
+   <th>Description</th>
+   <th>Is Starting Point</th>
+   <th>Successors</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Goal</td>
+   <td>The ultimate purpose for which the system exists. There is always exactly one Goal, placed at the top of the tree. It states the end to which the system's collective efforts are directed.</td>
+   <td>Yes</td>
+   <td>-</td>
+  </tr>
+  <tr>
+   <td>Critical Success Factor</td>
+   <td>A high-level terminal outcome without which the Goal cannot be achieved. Typically 3 to 5 CSFs sit directly below the Goal. They represent the last things that must happen before the Goal is realized, each summarizing the outcome of many subordinate activities.</td>
+   <td>No</td>
+   <td>Goal</td>
+  </tr>
+  <tr>
+   <td>Necessary Condition</td>
+   <td>An indispensable functional task or prerequisite that supports either a CSF or another NC. NCs can cascade into multiple levels, becoming more detailed, specific, and operational at lower tiers. They may also have lateral cross-connections between branches when a condition supports elements in different parts of the tree.</td>
+   <td>No</td>
+   <td>Critical Success Factor, Necessary Condition</td>
+  </tr>
+ </tbody>
+</table>
+<h3 id="key-properties-of-the-goal-tree">Key Properties of the Goal Tree</h3>
+<ul>
+ <li><strong>Single Goal</strong>: Every Goal Tree has exactly one Goal at its apex. If the system has more than one apparent goal, the tree-building process forces clarification of which is the true purpose and which are supporting conditions.</li>
+ <li><strong>Limited CSFs</strong>: The number of Critical Success Factors is deliberately small (usually 3 to 5). They represent the broadest categories of achievement necessary for the Goal.</li>
+ <li><strong>Cascading NCs</strong>: Necessary Conditions form the bulk of the tree. At the highest level they are still relatively abstract; at lower levels they become concrete and actionable. There is no inherent limit to the depth of NC layers.</li>
+ <li><strong>Equal importance at every level</strong>: Because the logic is necessity-based, vertical placement says nothing about relative importance. A low-level NC is just as critical as a CSF — if any necessary element is missing, the Goal cannot be achieved.</li>
+</ul>
+<h3 id="constructing-a-goal-tree">Constructing a Goal Tree</h3>
+<p>Building a Goal Tree is a top-down process:</p>
+<ol>
+ <li><strong>Define the Goal.</strong> Write a concise statement of the system's ultimate purpose. This often takes longer than expected — Dettmer reports that even senior leadership teams may need an hour or more to reach consensus on a single sentence.</li>
+ <li><strong>Identify the Critical Success Factors.</strong> Ask: "What are the few high-level outcomes that must all be achieved for the Goal to be realized?" Limit these to 3–5. Each CSF should be a terminal outcome, not an activity.</li>
+ <li><strong>Expand into Necessary Conditions.</strong> For each CSF, ask: "What must be true for this CSF to be satisfied?" These become the first layer of NCs. Repeat the question for each NC to build deeper layers.</li>
+ <li><strong>Identify lateral connections.</strong> Some NCs support elements in multiple branches. Draw these cross-connections to reveal dependencies that might otherwise be overlooked.</li>
+ <li><strong>Validate with necessity logic.</strong> Read every connection aloud: "In order to achieve [upper], we must have [lower]." If the statement does not hold, restructure.</li>
+</ol>
+<h3 id="three-organizational-archetypes">Three Organizational Archetypes</h3>
+<p>Dettmer observed that the Goal and CSFs are remarkably similar across organizations of the same type. He identified three archetypes:</p>
+<ul>
+ <li><strong>Commercial / for-profit</strong>: The Goal is typically financial (e.g. to increase profitability). CSFs cluster around maximizing throughput (revenue), controlling operating expense, and minimizing inventory/investment.</li>
+ <li><strong>Non-governmental / not-for-profit</strong>: The Goal is non-financial (e.g. a social mission). CSFs include successful mission delivery plus three financially oriented factors similar to for-profit organizations: generating income, controlling costs, and managing investment.</li>
+ <li><strong>Government agencies</strong>: The Goal is mission accomplishment (e.g. public service delivery). CSFs focus on increasing service levels, minimizing investment, and controlling overhead. Budget appears as a supporting Necessary Condition rather than a CSF.</li>
+</ul>
+<p>Recognizing your organization's archetype provides a valuable starting template. The upper layers (Goal + CSFs) can often be reused; the lower-level NCs then reflect the specific, functional details unique to each organization.</p>
+<h3 id="nested-goal-trees">Nested Goal Trees</h3>
+<p>Large organizations often contain sub-systems (divisions, departments) that each have their own Goal Tree. In such cases, the sub-system's Goal becomes a Necessary Condition in the parent system's tree. Similarly, the sub-system's CSFs may correspond to NCs of the parent tree's CSFs. This nesting creates a traceable chain from the daily tasks of individual contributors all the way up to the organization's strategic purpose.</p>
+<h2 id="background-information-on-gt-notation">Background Information on GT Notation</h2>
+<p>The Goal Tree was created by H. William Dettmer around 2001–2002, originally under the name "Strategic Intermediate Objectives Map" (S-IO Map). It was subsequently named "Goal Tree" by Martin Burns of Deloitte Consulting, a name that became widely adopted. Dettmer developed it as an extension and refinement of the TOC Thinking Processes originally conceived by Eliyahu Goldratt. More on the Theory of Constraints can be found <a href="https://vithanco.com/notations/TOC">here</a>.</p>
+<p>The Goal Tree fills a role that Goldratt's original five thinking processes left implicit: explicitly defining the system's purpose and success criteria before analyzing what is going wrong (<a href="https://vithanco.com/notations/TOC/current-reality-tree">CRT</a>) or deciding what to change (<a href="https://vithanco.com/notations/TOC/evaporating-cloud">EC</a>, <a href="https://vithanco.com/notations/TOC/future-reality-tree">FRT</a>). When used alongside the CRT, Undesirable Effects can be understood as failures to satisfy specific Necessary Conditions, CSFs, or the Goal itself, providing a direct link between the aspirational structure and the diagnostic analysis.</p>
+<p>Structurally, the Goal Tree shares many characteristics with the <a href="https://vithanco.com/notations/TOC/prerequisite-tree">Prerequisite Tree (PRT)</a>: both culminate in a single outcome at the top, both use necessity-based logic, and both consist of a network of conditions arranged in parallel branches that can cross-connect. The key difference is purpose: the PRT is a planning tool for overcoming obstacles on the way to a known objective, while the Goal Tree is a definitional tool that articulates what the objectives should be in the first place.</p>
+<h3 id="references">References</h3>
+<ul>
+ <li>Dettmer, H. William. "The Origin of the Goal Tree." TOCICO, 2022. Available at <a href="https://cdn.ymaws.com/www.tocico.org/resource/resmgr/toc_bok/the_origin_of_the_goal_tree-.pdf">tocico.org</a>.</li>
+ <li>Dettmer, H. William. "Our goal is...What <em>is</em> our goal?" Goal Systems International, 2011. Available at <a href="https://www.readkong.com/page/our-goal-is-what-is-our-goal-goal-systems-international-3345479">readkong.com</a>.</li>
+ <li>Dettmer, H. William. <em>The Logical Thinking Process: A Systems Approach to Complex Problem Solving.</em> ASQ Quality Press, 2007.</li>
+</ul>
+<h2 id="try-gt-yourself">Try GT Yourself</h2>
+<p>Create and visualize your own Goal Tree diagram right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p>
+<iframe src="https://vithanco.com/vgraph/vgraph-widget.html%3Fvgl=vgraph%2520companyStrategy%253A%2520GoalTree%2520%2522Increase%2520Profitability%2522%2520%257B%250A%2520%2520%2520%2520node%2520goal%253A%2520Goal%2520%2522Make%2520more%2520money%252C%2520now%2520and%2520in%2520the%2520future%2522%253B%250A%250A%2520%2520%2520%2520node%2520csf1%253A%2520CriticalSuccessFactor%2520%2522Maximize%2520Throughput%2522%253B%250A%2520%2520%2520%2520node%2520csf2%253A%2520CriticalSuccessFactor%2520%2522Control%2520Operating%2520Expense%2522%253B%250A%2520%2520%2520%2520node%2520csf3%253A%2520CriticalSuccessFactor%2520%2522Minimize%2520Inventory%2522%253B%250A%250A%2520%2520%2520%2520node%2520nc1%253A%2520NecessaryCondition%2520%2522Maximize%2520sales%2520volume%2522%253B%250A%2520%2520%2520%2520node%2520nc2%253A%2520NecessaryCondition%2520%2522Minimize%2520variable%2520costs%2522%253B%250A%2520%2520%2520%2520node%2520nc3%253A%2520NecessaryCondition%2520%2522Highly%2520appealing%2520products%2522%253B%250A%2520%2520%2520%2520node%2520nc4%253A%2520NecessaryCondition%2520%2522Minimize%2520scrap%2520and%2520rework%2522%253B%250A%2520%2520%2520%2520node%2520nc5%253A%2520NecessaryCondition%2520%2522Optimize%2520overhead%2522%253B%250A%2520%2520%2520%2520node%2520nc6%253A%2520NecessaryCondition%2520%2522Optimize%2520supply%2520chain%2522%253B%250A%250A%2520%2520%2520%2520node%2520nc7%253A%2520NecessaryCondition%2520%2522Effective%2520market%2520research%2522%253B%250A%2520%2520%2520%2520node%2520nc8%253A%2520NecessaryCondition%2520%2522High-quality%2520products%2522%253B%250A%250A%2520%2520%2520%2520edge%2520csf1%2520-%253E%2520goal%250A%2520%2520%2520%2520edge%2520csf2%2520-%253E%2520goal%250A%2520%2520%2520%2520edge%2520csf3%2520-%253E%2520goal%250A%250A%2520%2520%2520%2520edge%2520nc1%2520-%253E%2520csf1%250A%2520%2520%2520%2520edge%2520nc2%2520-%253E%2520csf1%250A%2520%2520%2520%2520edge%2520nc3%2520-%253E%2520csf1%250A%2520%2520%2520%2520edge%2520nc4%2520-%253E%2520csf2%250A%2520%2520%2520%2520edge%2520nc5%2520-%253E%2520csf2%250A%2520%2520%2520%2520edge%2520nc6%2520-%253E%2520csf3%250A%250A%2520%2520%2520%2520edge%2520nc7%2520-%253E%2520nc1%250A%2520%2520%2520%2520edge%2520nc8%2520-%253E%2520nc3%250A%257D" width="100%" height="750" style="border: 1px solid #e0e0e0; border-radius: 8px; margin: 20px 0;" title="VGraph Interactive GT Editor"></iframe>
+<p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p>
+<p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="https://vithanco.com/tools/VGL_GUIDE">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.</p>
+<h2 id="example">Example</h2>
+<a name="Example"></a>
+<p>The interactive widget above shows the generic Goal Tree for a commercial, for-profit company — adapted from Dettmer's work. The three CSFs (Maximize Throughput, Control Operating Expense, Minimize Inventory) recur with only minor wording variations across virtually all for-profit organizations, from automobile manufacturers to bakeries. The differences between companies emerge at the NC level, where the specific functional tasks reflect each organization's unique operations.</p>
+<p>This archetype is a practical starting point: identify your organization's type, adopt the corresponding generic Goal + CSFs, then build out the NCs that describe your specific reality. Verbalizing each connection ("In order to maximize throughput, we must maximize sales volume") quickly exposes gaps or incorrect assumptions, making the Goal Tree both a communication tool and a diagnostic instrument.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/TOC/evaporating-cloud</guid><title>The Evaporating Cloud (EC) Notation</title><description>Evaporating Clouds resolve conflicts by exposing and challenging the underlying assumptions that create them.</description><link>https://vithanco.com/notations/TOC/evaporating-cloud</link><pubDate>Thu, 26 Feb 2026 18:26:44 +0100</pubDate><content:encoded><![CDATA[<h2 id="why-use-evaporating-clouds-ecs">Why Use Evaporating Clouds (ECs)?</h2>
 <p>ECs resolve a conflict by stating both sides of the problem and reviewing the underlying assumptions that create the conflict. The one requirement is that both sides share the same goal. If needed, refer to the goals behind the current plan.</p>
 <p>ECs allow a precise problem description. They define a problem as a 'Common Objective', two separate 'Needs' and two different 'Wants' that conflict.</p>
 <figure class="img-std"> 
@@ -1339,65 +1553,7 @@ comment      ::= "//" [^\n]*
  <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Issue-based_information_system">https://en.wikipedia.org/wiki/Issue-based_information_system</a></li>
  <li>Working Paper (1970): <a href="https://www.researchgate.net/publication/246907404_Issues_as_Elements_of_Information_Systems">Issues as Elements of Information Systems</a> by Werner Kunz &amp; Horst Rittel</li>
  <li><a href="https://www.goodreads.com/book/show/19093260-dialogue-mapping?from_search=true">Dialogue Mapping</a> by Jeff Conklin</li>
-</ul>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/TOC/index</guid><title>The Theory of Constraints (TOC) Thinking Processes</title><description>An overview of the Theory of Constraints (TOC) Thinking Processes and how they can be used.</description><link>https://vithanco.com/notations/TOC/index</link><pubDate>Fri, 20 Feb 2026 11:29:52 +0100</pubDate><content:encoded><![CDATA[<p>The Theory of Constraints (TOC) is a management paradigm that views any manageable system as being limited in achieving more of its goals by a very small number of constraints. There is always at least one constraint, and TOC uses a focusing process to identify the constraint and restructure the rest of the organization around it. TOC adopts the common idiom "a chain is no stronger than its weakest link". That means that organizations and processes are vulnerable because the weakest person or part can always damage or break them, or at least adversely affect the outcome.</p>
-<p>TOC was developed by Dr Eliyahu M. Goldratt, an Israeli physicist, and is based on the idea that every system has at least one constraint that limits its performance. The goal of TOC is to identify and manage these constraints to improve system performance.</p>
-<p>TOC is a powerful tool for improving the performance of any system, from a small business to a large organization. It has been used successfully in a wide variety of industries, including manufacturing, healthcare, and service industries.</p>
-<p>The five steps of TOC are:</p>
-<ol>
- <li>Identify the system's goal.</li>
- <li>Identify the system's constraints.</li>
- <li>Decide how to exploit the system's constraints.</li>
- <li>Subordinate everything else to the decision in step 3.</li>
- <li>Elevate the system's constraints. TOC is a proven methodology for improving the performance of any system. If you are looking for a way to improve your organization's performance, then TOC is a great option.</li>
-</ol>
-<p>Here are some of the benefits of using TOC:</p>
-<ul>
- <li>It can help you to identify the root causes of problems.</li>
- <li>It can help you to develop solutions that address the root causes of problems.</li>
- <li>It can help you to improve the performance of systems.</li>
- <li>It can help you to think more systemically.</li>
- <li>It can help you to communicate your ideas more effectively. If you are looking for a powerful tool for problem-solving, then TOC is a great option. It is a simple tool to use, but it can be very effective in helping you to identify and address the root causes of problems.</li>
-</ul>
-<h2 id="the-thinking-processes">The Thinking Processes</h2>
-<p>The <strong>thinking processes</strong> in <a href="https://en.wikipedia.org/wiki/Eliyahu_M._Goldratt">Eliyahu M. Goldratt</a>'s <a href="https://en.wikipedia.org/wiki/Theory_of_constraints">theory of constraints</a> are the five methods to enable the <a href="https://en.wikipedia.org/wiki/Focused_improvement">focused improvement</a> of any cognitive <a href="https://en.wikipedia.org/wiki/System">system</a> (especially <a href="https://en.wikipedia.org/wiki/Business">business</a> systems). The purpose of the thinking processes is to help answer questions essential to achieving focused improvement.</p>
-<table>
- <thead>
-  <tr>
-   <th>Question</th>
-   <th>Sufficient Cause (<em>If ... then ...</em>)</th>
-   <th>Necessary Condition (<em>In order to ... we must ...</em>)</th>
-  </tr>
- </thead>
- <tbody>
-  <tr>
-   <td>What to change?</td>
-   <td><a href="https://vithanco.com/notations/TOC/current-reality-tree">Current Reality Tree (CRT)</a></td>
-   <td></td>
-  </tr>
-  <tr>
-   <td>What to change to?</td>
-   <td><a href="https://vithanco.com/notations/TOC/future-reality-tree">Future Reality Tree (CRT)</a></td>
-   <td><a href="https://vithanco.com/notations/TOC/evaporating-cloud">Evaporating Cloud (EC)</a></td>
-  </tr>
-  <tr>
-   <td>How to change?</td>
-   <td><a href="https://vithanco.com/notations/TOC/transition-tree">Transition Tree (TRT)</a></td>
-   <td><a href="https://vithanco.com/notations/TOC/prerequisite-tree">Prerequisite Tree (PRT)</a></td>
-  </tr>
- </tbody>
-</table>
-<p>Each of these five thinking processes is supported in Vithanco by a dedicated <a href="https://vithanco.com/notations">Notation</a>.</p>
-<p>The thinking processes were described by Goldratt as a sequel to the first TOC novel ("<a href="https://en.wikipedia.org/wiki/The_Goal_(novel)">The Goal</a>") by the Name "<a href="https://en.wikipedia.org/wiki/It%27s_Not_Luck">It's not luck</a>". Lisa Scheinkopf refers to the development process of the thinking processes in the first chapters of her "<a href="https://www.goodreads.com/book/show/732158.Thinking_for_a_Change">Thinking for a Change</a>" book.</p>
-<p>A more thorough rationale is presented in <em><a href="https://www.goodreads.com/book/show/582174.Theory_of_Constraints">What is this thing called Theory of Constraints and how should it be implemented</a></em> by Goldratt.</p>
-<p>There is a multitude of material regarding the TOC TP. I will add some better examples here over time:</p>
-<ul>
- <li><a href="https://www.youtube.com/@TOCICO/videos">TOCICO YouTube Channel (including Prof. Vicky Mabin)</a></li>
- <li>www.lomag-man.org/normes/normes_isa/documents/2002-05-ISAD12.ppt</li>
-</ul>
-<h2 id="theory-of-constraints-in-simple-terms">Theory of Constraints in simple terms</h2>
-<p>The Theory of Constraints (TOC) was developed by <a href="https://en.wikipedia.org/wiki/Eliyahu_M._Goldratt">Eliyahu Goldratt</a>. The basic idea of TOC is that in a production the slowest work step will determine the overall output. If you want to increase the overall output then you need to increase the throughput on the slowest work step, which is ultimately constraining the whole production. If you produce too many goods before the constraint, that is the slowest work step, then you will just have more work in progress but not more output. Managing the work in progress will eventually even decrease your output. You should therefore adjust your workload before the constraint to the amount of the constraint, even if that means that the machine utilisation will go down. Please note, that if you increase the throughput at the constraint then another work step might become the constraint. But by definition, there is always at least one constraint.</p>
-<p>If you improve a step that is not the constraint then you won't impact overall output. If the work step is before the constraint then you increase work in progress (WIP) creating a problem of ever more WIP that might need to get stored etc. If the improvement was behind the constraint then the work step will do the same amount of work in a shorter time - but there won't be more work to do. Machine utilisation might fall - after you invested in that step. Many production processes are not plain linear, with many variations and different stations for the same work step, etc. Hence it is not always obvious where the constraint is at any given time and it might be that for different products different work steps become the constraint, in which case the product mix has an impact on production output. Eliyahu Goldratt wrote a business novel on the above to explain it in much more detail, called <a href="https://en.wikipedia.org/wiki/The_Goal_(novel)">The Goal</a>.</p>
-<p>Now, forget about production and think of any work, whether it is blue or white-collar. Nowadays, most people are working together with others, each person doing a few work steps. By definition, there will be a constraining step that holds back the rest of the work. If you could identify that constraint and improve it then the overall throughput will increase to the point of the next constraint.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/Change/benefit-breakdown-structure</guid><title>The Benefit Breakdown Structure (BBS) Notation</title><description></description><link>https://vithanco.com/notations/Change/benefit-breakdown-structure</link><pubDate>Fri, 20 Feb 2026 11:29:41 +0100</pubDate><content:encoded><![CDATA[<h2 id="why-use-the-bbs-notation">Why use the BBS Notation?</h2>
+</ul>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/Change/benefit-breakdown-structure</guid><title>The Benefit Breakdown Structure (BBS) Notation</title><description></description><link>https://vithanco.com/notations/Change/benefit-breakdown-structure</link><pubDate>Fri, 20 Feb 2026 11:29:41 +0100</pubDate><content:encoded><![CDATA[<h2 id="why-use-the-bbs-notation">Why use the BBS Notation?</h2>
 <p>Benefit Breakdown Structure diagrams are useful to plan and execute projects. A BBS diagram follows the <a href="https://www.franklincovey.com/courses/the-7-habits/habit-2/">Start with the end in mind idea:</a> We should start by analysing the intended benefits and then simply plan backwards:</p>
 <ol>
  <li>What is the strategic intent or investment objective? Why are we looking at planning a project? This should be a linkage to the overall company strategy. I am particularly fond of the idea of calling a project an investment.</li>
@@ -2675,7 +2831,7 @@ comment      ::= "//" [^\n]*
 </figure></li></ul><ul><li><strong>Notation Structure View:</strong> <a id="NotationStructureView"></a>Notation structure views are showing schematically the <a href="https://vithanco.com/notations">Notation</a>. Each node represents a Node Type. The On/Off symbol represents the starting point. Edges going from their point to the Starting Node Types. From there the Edges show suggested predecessors and successors. So if a Concept Node Type has an edge pointing at the Relation Node Type then Concept is a suggested predecessor for a Relation. If the Edge has arrows at both sides is each Node Type a suggested predecessor (and successor) of the other? If there is an Edge that points with both sides to the same Node Type, then the Node Type can be its own predecessor (and successor). <figure class="img-std">
     <img src="https://vithanco.com/Tools/Help/dictionary/domain-Concept-Maps.jpg" alt="Notation Concept Maps" onclick="openLightbox(this)" />
     <figcaption>The Notation Structure View for Concept Maps</figcaption>
-</figure></li></ul><ul><li><strong>Starting Node Type</strong> <a id="StartingNodeType"></a>(previously named Starting Point): Notations' starting Node Types will be suggested when you create the first node in a Graph. Any Node Type can be a starting Node Node Type. In a <a href="#NotationStructureView">Notation Structure View</a> you can see the Power On/Off symbol at the bottom. Edges are pointing from the On/Off symbol towards the Starting Node Types.</li></ul>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/Help/index</guid><title>Help and Explanations</title><description></description><link>https://vithanco.com/tools/Help/index</link><pubDate>Sat, 8 Jun 2024 09:45:35 +0200</pubDate><content:encoded><![CDATA[<p>In case of questions please contact <a href="mailto:support@vithanco.com">support@vithanco.com</a></p><p>Furthermore, please look at this site. Many of the concepts are explained here.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/Help/Expert_Concepts/index</guid><title>Expert Concepts</title><description>Here is some more complex information</description><link>https://vithanco.com/tools/Help/Expert_Concepts/index</link><pubDate>Sat, 8 Jun 2024 09:45:35 +0200</pubDate><content:encoded><![CDATA[<p>Things you don't need to understand on day one. But once you get there you will be happy to find the explanation here. In case of questions please contact <a href="mailto:support@vithanco.com">support@vithanco.com</a></p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/Help/Expert_Concepts/Vithanco-url-schema</guid><title>Vithanco's URL Schema</title><description></description><link>https://vithanco.com/tools/Help/Expert_Concepts/Vithanco-url-schema</link><pubDate>Sat, 8 Jun 2024 09:45:35 +0200</pubDate><content:encoded><![CDATA[<p>Vithanco has a URL schema allowing to create a new document with a specific domain.</p><p><a href="vithanco://?command=newDocument&domainID=com.vithanco.domains.ibis">vithanco://?command=newDocument&amp;domainID=com.vithanco.domains.ibis</a></p><p>On a Mac with Vithanco installed the URL above creates a new document with the IBIS domain. Many other applications have similar features.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/Help/Appearance/index</guid><title>Appearance Related</title><description>How to change the looks of your diagram.</description><link>https://vithanco.com/tools/Help/Appearance/index</link><pubDate>Sat, 8 Jun 2024 09:45:35 +0200</pubDate><content:encoded><![CDATA[<p>How to change the looks of your diagram.</p><p>In case of questions please contact me.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/TOC/goal-tree</guid><title>The Goal Tree (GT) Notation</title><description></description><link>https://vithanco.com/notations/TOC/goal-tree</link><pubDate>Sat, 8 Jun 2024 09:45:35 +0200</pubDate><content:encoded><![CDATA[<p>under construction</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/Change/index</guid><title>Change Management Notations</title><description></description><link>https://vithanco.com/notations/Change/index</link><pubDate>Sat, 8 Jun 2024 09:45:35 +0200</pubDate><content:encoded><![CDATA[<p>Change initiatives, whether agile or more traditionally with methodologies like PRINCE2 or PMI.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/methods/typesOfBenefits</guid><title>The Different Types of Benefits</title><description>Understanding the different types of benefits is essential for driving project success.</description><link>https://vithanco.com/methods/typesOfBenefits</link><pubDate>Sat, 8 Jun 2024 09:45:35 +0200</pubDate><content:encoded><![CDATA[<p>Are all benefits created equal? No! There is a difference whether you can say that you will make one million USD or whether you expect that customers like you better. Not saying that the latter can be even more valuable, but it needs to be clarified what you will get out of this.</p>
+</figure></li></ul><ul><li><strong>Starting Node Type</strong> <a id="StartingNodeType"></a>(previously named Starting Point): Notations' starting Node Types will be suggested when you create the first node in a Graph. Any Node Type can be a starting Node Node Type. In a <a href="#NotationStructureView">Notation Structure View</a> you can see the Power On/Off symbol at the bottom. Edges are pointing from the On/Off symbol towards the Starting Node Types.</li></ul>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/Help/index</guid><title>Help and Explanations</title><description></description><link>https://vithanco.com/tools/Help/index</link><pubDate>Sat, 8 Jun 2024 09:45:35 +0200</pubDate><content:encoded><![CDATA[<p>In case of questions please contact <a href="mailto:support@vithanco.com">support@vithanco.com</a></p><p>Furthermore, please look at this site. Many of the concepts are explained here.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/Help/Expert_Concepts/index</guid><title>Expert Concepts</title><description>Here is some more complex information</description><link>https://vithanco.com/tools/Help/Expert_Concepts/index</link><pubDate>Sat, 8 Jun 2024 09:45:35 +0200</pubDate><content:encoded><![CDATA[<p>Things you don't need to understand on day one. But once you get there you will be happy to find the explanation here. In case of questions please contact <a href="mailto:support@vithanco.com">support@vithanco.com</a></p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/Help/Expert_Concepts/Vithanco-url-schema</guid><title>Vithanco's URL Schema</title><description></description><link>https://vithanco.com/tools/Help/Expert_Concepts/Vithanco-url-schema</link><pubDate>Sat, 8 Jun 2024 09:45:35 +0200</pubDate><content:encoded><![CDATA[<p>Vithanco has a URL schema allowing to create a new document with a specific domain.</p><p><a href="vithanco://?command=newDocument&domainID=com.vithanco.domains.ibis">vithanco://?command=newDocument&amp;domainID=com.vithanco.domains.ibis</a></p><p>On a Mac with Vithanco installed the URL above creates a new document with the IBIS domain. Many other applications have similar features.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/Help/Appearance/index</guid><title>Appearance Related</title><description>How to change the looks of your diagram.</description><link>https://vithanco.com/tools/Help/Appearance/index</link><pubDate>Sat, 8 Jun 2024 09:45:35 +0200</pubDate><content:encoded><![CDATA[<p>How to change the looks of your diagram.</p><p>In case of questions please contact me.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/Change/index</guid><title>Change Management Notations</title><description></description><link>https://vithanco.com/notations/Change/index</link><pubDate>Sat, 8 Jun 2024 09:45:35 +0200</pubDate><content:encoded><![CDATA[<p>Change initiatives, whether agile or more traditionally with methodologies like PRINCE2 or PMI.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/methods/typesOfBenefits</guid><title>The Different Types of Benefits</title><description>Understanding the different types of benefits is essential for driving project success.</description><link>https://vithanco.com/methods/typesOfBenefits</link><pubDate>Sat, 8 Jun 2024 09:45:35 +0200</pubDate><content:encoded><![CDATA[<p>Are all benefits created equal? No! There is a difference whether you can say that you will make one million USD or whether you expect that customers like you better. Not saying that the latter can be even more valuable, but it needs to be clarified what you will get out of this.</p>
 <p>But is it even a benefit to say that customers like you better? The answer is a clear “It depends". It might be all that matters for a small café at the corner of a residential area. But it will be difficult to say how much a customer will like you better if you decorate the café differently. And it will also be challenging to say how your turnover will move by a different decoration.</p>
 <p>But if I were a decorator, then I would happily sell the "benefit" of better-liking customers to the café owner, knowing that I would improve the turnover (and hence profit) with a nice decoration. Conversely, the company’s turnover might not change if you decorate a back office. But maybe the workers feel better? Is that a benefit? Possibly there would be beneficial knock-on effects.</p>
 <h2 id="what-is-a-benefit">What is a benefit?</h2>

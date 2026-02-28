@@ -76,7 +76,7 @@
             <article>
                 <h1>Vithanco Graph Language (VGL) Guide</h1>
                 <div class="reading-time">
-                    <p>Estimated reading time: 30 minutes.</p></div>
+                    <p>Estimated reading time: 33 minutes.</p></div>
                 <div class="content"><h1 id="vithanco-graph-language-vgl-guide">Vithanco Graph Language (VGL) Guide</h1>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
@@ -107,6 +107,7 @@
  <li><strong>PRT</strong> (Prerequisite Tree) - for planning with necessary condition thinking using Theory of Constraints</li>
  <li><strong>TRT</strong> (Transition Tree) - for step-by-step implementation planning using Theory of Constraints</li>
  <li><strong>ADTree</strong> (Attack-Defense Tree) - for security modelling of attack and defense interactions</li>
+ <li><strong>GoalTree</strong> (Goal Tree) - for strategic planning using Theory of Constraints necessity logic</li>
 </ul>
 <p>The notation determines what node types and edge types are available in your graph.</p>
 <h3 id="nodes">Nodes</h3>
@@ -204,6 +205,12 @@
  <li><code>Defense</code> - A defender's countermeasure or protective measure (default: green)</li>
  <li><code>AndJunctor</code> - Conjunctive refinement: all children must be achieved (icon: AND circle)</li>
  <li><code>OrJunctor</code> - Disjunctive refinement: at least one child must be achieved (icon: OR circle)</li>
+</ul>
+<p><strong>GoalTree Node Types:</strong> GoalTree (Goal Tree) is a strategic planning tool using necessity condition logic from Theory of Constraints. It defines what a system must achieve through a hierarchy of Goal, Critical Success Factors, and Necessary Conditions. Invented by H. William Dettmer, it is the foundation of the Logical Thinking Process.</p>
+<ul>
+ <li><code>Goal</code> - The single top-level objective — the ultimate purpose for which the system exists (default: cyan/teal)</li>
+ <li><code>CriticalSuccessFactor</code> - High-level terminal outcomes (3-5 maximum) without which the Goal cannot be achieved (default: light blue)</li>
+ <li><code>NecessaryCondition</code> - Indispensable prerequisite tasks that support CSFs; can cascade into sub-NCs becoming more specific at lower levels (default: amber/yellow)</li>
 </ul>
 <h3 id="edges">Edges</h3>
 <p>Edges represent connections between nodes. Each edge has:</p>
@@ -368,6 +375,12 @@ edge q2 -&gt; a2;  // Type inferred from node types
  <li><code>attack_to_or_junctor</code>, <code>defense_to_or_junctor</code> - Connect to OR junctor</li>
  <li><code>or_junctor_to_attack</code>, <code>or_junctor_to_defense</code> - Connect from OR junctor</li>
 </ul>
+<p><strong>GoalTree Edge Types:</strong> GoalTree uses edges to show necessity relationships. The graph flows top-to-bottom (Goal at top, Necessary Conditions expand downward). The necessity logic reads: "In order to achieve [upper], we must have [lower]."</p>
+<ul>
+ <li><code>csf_to_goal</code> - Connects CriticalSuccessFactor → Goal (CSF is necessary for Goal)</li>
+ <li><code>nc_to_csf</code> - Connects NecessaryCondition → CriticalSuccessFactor (NC is necessary for CSF)</li>
+ <li><code>nc_to_nc</code> - Connects NecessaryCondition → NecessaryCondition (sub-NC supports parent NC)</li>
+</ul>
 <p>Edge types ensure that connections make semantic sense within the notation's domain.</p>
 <h3 id="groups">Groups</h3>
 <p>Groups organize nodes hierarchically and can be nested to create subgroups. Groups help visually organize complex graphs.</p>
@@ -444,7 +457,7 @@ node q1: Question "Main question";  // This is also a comment
 <pre><code>document     ::= "vgraph" identifier ":" notation label? "{" statement* "}"
 
 notation     ::= identifier
-                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree
+                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree, GoalTree
 
 statement    ::= group | node | edge | attribute
 
@@ -1109,6 +1122,54 @@ comment      ::= "//" [^\n]*
 }
 </code></pre>
 <p><strong>Note</strong>: ADTree graphs flow bottom-to-top with the root goal at the top and leaf actions at the bottom. The key feature is the distinction between refinement edges (solid lines for same-type decomposition) and countermeasure edges (dotted lines for opposite-type countering). This allows modelling the ongoing arms race between attacker and defender at any level of the tree. The root node can be either an Attack or Defense node, determining whether the proponent is the attacker or defender.</p>
+<h3 id="example-17-goal-tree-goaltree">Example 17: Goal Tree (GoalTree)</h3>
+<p>A strategic planning graph using Theory of Constraints necessity logic. The Goal Tree defines what an organization must achieve through a hierarchy of a single Goal, Critical Success Factors (CSFs), and Necessary Conditions (NCs). Based on H. William Dettmer's Logical Thinking Process:</p>
+<pre><code class="language-vgl">vgraph companyStrategy: GoalTree "Increase Profitability" {
+    // The single system goal
+    node goal: Goal "Make more money, now and in the future";
+
+    // Critical Success Factors (3-5 high-level terminal outcomes)
+    node csf1: CriticalSuccessFactor "Maximize Throughput";
+    node csf2: CriticalSuccessFactor "Control Operating Expense";
+    node csf3: CriticalSuccessFactor "Minimize Inventory and Investment";
+
+    // Necessary Conditions supporting CSF1
+    node nc1: NecessaryCondition "Maximize sales volume";
+    node nc2: NecessaryCondition "Minimize variable costs";
+    node nc3: NecessaryCondition "Highly appealing products";
+
+    // Necessary Conditions supporting CSF2
+    node nc4: NecessaryCondition "Minimize scrap and rework";
+    node nc5: NecessaryCondition "Optimize overhead";
+
+    // Necessary Conditions supporting CSF3
+    node nc6: NecessaryCondition "Optimize outgoing supply chain";
+    node nc7: NecessaryCondition "Optimize incoming supply chain";
+
+    // Sub-NCs becoming more specific
+    node nc8: NecessaryCondition "Effective market research";
+    node nc9: NecessaryCondition "High-quality products";
+
+    // CSFs support the Goal (necessity logic: "In order to achieve Goal, we must achieve CSFs")
+    edge csf1 -&gt; goal: csf_to_goal;
+    edge csf2 -&gt; goal: csf_to_goal;
+    edge csf3 -&gt; goal: csf_to_goal;
+
+    // NCs support CSFs
+    edge nc1 -&gt; csf1: nc_to_csf;
+    edge nc2 -&gt; csf1: nc_to_csf;
+    edge nc3 -&gt; csf1: nc_to_csf;
+    edge nc4 -&gt; csf2: nc_to_csf;
+    edge nc5 -&gt; csf2: nc_to_csf;
+    edge nc6 -&gt; csf3: nc_to_csf;
+    edge nc7 -&gt; csf3: nc_to_csf;
+
+    // Sub-NCs support higher NCs
+    edge nc8 -&gt; nc1: nc_to_nc;
+    edge nc9 -&gt; nc3: nc_to_nc;
+}
+</code></pre>
+<p><strong>Note</strong>: GoalTree graphs flow top-to-bottom with the single Goal at the top, Critical Success Factors directly below it, and Necessary Conditions expanding downward. NCs become progressively more detailed, specific, and functional at lower levels. The vertical placement implies nothing about importance — due to necessity logic, the lowest NC is equally important as a CSF because if you fail to accomplish it, nothing above it will happen. There are usually no more than 3-5 CSFs, and NCs can have lateral cross-connections between branches.</p>
 <hr />
 <h2 id="best-practices">Best Practices</h2>
 <ol>

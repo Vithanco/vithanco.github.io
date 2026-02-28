@@ -35,6 +35,7 @@ VGL currently supports built-in notations that come with predefined node types a
 - **PRT** (Prerequisite Tree) - for planning with necessary condition thinking using Theory of Constraints
 - **TRT** (Transition Tree) - for step-by-step implementation planning using Theory of Constraints
 - **ADTree** (Attack-Defense Tree) - for security modelling of attack and defense interactions
+- **GoalTree** (Goal Tree) - for strategic planning using Theory of Constraints necessity logic
 
 The notation determines what node types and edge types are available in your graph.
 
@@ -134,6 +135,12 @@ ADTree (Attack-Defense Tree) is a security modelling methodology based on Kordy 
 - `Defense` - A defender's countermeasure or protective measure (default: green)
 - `AndJunctor` - Conjunctive refinement: all children must be achieved (icon: AND circle)
 - `OrJunctor` - Disjunctive refinement: at least one child must be achieved (icon: OR circle)
+
+**GoalTree Node Types:**
+GoalTree (Goal Tree) is a strategic planning tool using necessity condition logic from Theory of Constraints. It defines what a system must achieve through a hierarchy of Goal, Critical Success Factors, and Necessary Conditions. Invented by H. William Dettmer, it is the foundation of the Logical Thinking Process.
+- `Goal` - The single top-level objective — the ultimate purpose for which the system exists (default: cyan/teal)
+- `CriticalSuccessFactor` - High-level terminal outcomes (3-5 maximum) without which the Goal cannot be achieved (default: light blue)
+- `NecessaryCondition` - Indispensable prerequisite tasks that support CSFs; can cascade into sub-NCs becoming more specific at lower levels (default: amber/yellow)
 
 ### Edges
 
@@ -295,6 +302,12 @@ ADTree uses two kinds of edges: refinement edges (solid lines) for same-type dec
 - `attack_to_or_junctor`, `defense_to_or_junctor` - Connect to OR junctor
 - `or_junctor_to_attack`, `or_junctor_to_defense` - Connect from OR junctor
 
+**GoalTree Edge Types:**
+GoalTree uses edges to show necessity relationships. The graph flows top-to-bottom (Goal at top, Necessary Conditions expand downward). The necessity logic reads: "In order to achieve [upper], we must have [lower]."
+- `csf_to_goal` - Connects CriticalSuccessFactor → Goal (CSF is necessary for Goal)
+- `nc_to_csf` - Connects NecessaryCondition → CriticalSuccessFactor (NC is necessary for CSF)
+- `nc_to_nc` - Connects NecessaryCondition → NecessaryCondition (sub-NC supports parent NC)
+
 Edge types ensure that connections make semantic sense within the notation's domain.
 
 ### Groups
@@ -388,7 +401,7 @@ The VGL grammar is defined as follows (simplified BNF notation):
 document     ::= "vgraph" identifier ":" notation label? "{" statement* "}"
 
 notation     ::= identifier
-                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree
+                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree, GoalTree
 
 statement    ::= group | node | edge | attribute
 
@@ -1126,6 +1139,59 @@ vgraph dataConfidentiality: ADTree "Data Confidentiality" {
 ```
 
 **Note**: ADTree graphs flow bottom-to-top with the root goal at the top and leaf actions at the bottom. The key feature is the distinction between refinement edges (solid lines for same-type decomposition) and countermeasure edges (dotted lines for opposite-type countering). This allows modelling the ongoing arms race between attacker and defender at any level of the tree. The root node can be either an Attack or Defense node, determining whether the proponent is the attacker or defender.
+
+### Example 17: Goal Tree (GoalTree)
+
+A strategic planning graph using Theory of Constraints necessity logic. The Goal Tree defines what an organization must achieve through a hierarchy of a single Goal, Critical Success Factors (CSFs), and Necessary Conditions (NCs). Based on H. William Dettmer's Logical Thinking Process:
+
+```vgl
+vgraph companyStrategy: GoalTree "Increase Profitability" {
+    // The single system goal
+    node goal: Goal "Make more money, now and in the future";
+
+    // Critical Success Factors (3-5 high-level terminal outcomes)
+    node csf1: CriticalSuccessFactor "Maximize Throughput";
+    node csf2: CriticalSuccessFactor "Control Operating Expense";
+    node csf3: CriticalSuccessFactor "Minimize Inventory and Investment";
+
+    // Necessary Conditions supporting CSF1
+    node nc1: NecessaryCondition "Maximize sales volume";
+    node nc2: NecessaryCondition "Minimize variable costs";
+    node nc3: NecessaryCondition "Highly appealing products";
+
+    // Necessary Conditions supporting CSF2
+    node nc4: NecessaryCondition "Minimize scrap and rework";
+    node nc5: NecessaryCondition "Optimize overhead";
+
+    // Necessary Conditions supporting CSF3
+    node nc6: NecessaryCondition "Optimize outgoing supply chain";
+    node nc7: NecessaryCondition "Optimize incoming supply chain";
+
+    // Sub-NCs becoming more specific
+    node nc8: NecessaryCondition "Effective market research";
+    node nc9: NecessaryCondition "High-quality products";
+
+    // CSFs support the Goal (necessity logic: "In order to achieve Goal, we must achieve CSFs")
+    edge csf1 -> goal: csf_to_goal;
+    edge csf2 -> goal: csf_to_goal;
+    edge csf3 -> goal: csf_to_goal;
+
+    // NCs support CSFs
+    edge nc1 -> csf1: nc_to_csf;
+    edge nc2 -> csf1: nc_to_csf;
+    edge nc3 -> csf1: nc_to_csf;
+    edge nc4 -> csf2: nc_to_csf;
+    edge nc5 -> csf2: nc_to_csf;
+    edge nc6 -> csf3: nc_to_csf;
+    edge nc7 -> csf3: nc_to_csf;
+
+    // Sub-NCs support higher NCs
+    edge nc8 -> nc1: nc_to_nc;
+    edge nc9 -> nc3: nc_to_nc;
+}
+```
+
+**Note**: GoalTree graphs flow top-to-bottom with the single Goal at the top, Critical Success Factors directly below it, and Necessary Conditions expanding downward. NCs become progressively more detailed, specific, and functional at lower levels. The vertical placement implies nothing about importance — due to necessity logic, the lowest NC is equally important as a CSF because if you fail to accomplish it, nothing above it will happen. There are usually no more than 3-5 CSFs, and NCs can have lateral cross-connections between branches.
 
 ---
 
