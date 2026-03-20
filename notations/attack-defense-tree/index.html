@@ -72,10 +72,17 @@
                             <a href="/tools">Tools</a></li>
                         <li>
                             <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
-        <div class="index-wrapper">
+        <div class="item-wrapper">
             <article>
+                <div class="breadcrumbs">                    <a href="/" class="breadcrumb-home">                        <img src="/logo.png" class="breadcrumb-icon"/>
+Home</a>
+                    <span class="breadcrumb-separator"> / </span>
+                    <a href="/notations">Explore Vithanco's Rich Library of Notations</a>
+                    <span class="breadcrumb-separator"> / </span>
+The Attack-Defense Tree (ADTree) Notation</div>
                 <h1>The Attack-Defense Tree (ADTree) Notation</h1>
-                <div class="reading-time">
+                <div class="reading-time-container">
+                    <span class="fa fa-clock-o"></span>
                     <p>Estimated reading time: 5 minutes.</p></div>
                 <div class="content"><h2 id="why-use-attack-defense-trees-adtrees">Why Use Attack-Defense Trees (ADTrees)?</h2>
 <p>Attack-Defence Trees (ADTrees) model security scenarios as a two-player game: an attacker trying to compromise a system and a defender trying to protect it, with their strategies and countermeasures interacting at every level of the tree.</p>
@@ -149,7 +156,7 @@
 <h2 id="example">Example</h2>
 <p>This example models data confidentiality in a hosting centre, based on the paper by Kordy et al. The root is a Defense node ("Data Confidentiality"), so the diagram tells the story from the defender's perspective.</p>
 <figure class="img-std"> 
- <img src="/Notations/attack-defense-tree/ADTree.svg" alt="" onclick="openLightbox(this)" /> 
+ <img src="/notations/attack-defense-tree/ADTree.svg" alt="" onclick="openLightbox(this)" /> 
  <figcaption>
   An ADTree for protecting data confidentiality (from Kordy et al., 2014)
  </figcaption> 

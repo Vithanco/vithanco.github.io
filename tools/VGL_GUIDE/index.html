@@ -72,11 +72,18 @@
                             <a href="/tools" class="selected">Tools</a></li>
                         <li>
                             <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
-        <div class="index-wrapper">
+        <div class="item-wrapper">
             <article>
+                <div class="breadcrumbs">                    <a href="/" class="breadcrumb-home">                        <img src="/logo.png" class="breadcrumb-icon"/>
+Home</a>
+                    <span class="breadcrumb-separator"> / </span>
+                    <a href="/tools">The best Tools for Structured Visual Thinking</a>
+                    <span class="breadcrumb-separator"> / </span>
+Vithanco Graph Language (VGL) Guide</div>
                 <h1>Vithanco Graph Language (VGL) Guide</h1>
-                <div class="reading-time">
-                    <p>Estimated reading time: 33 minutes.</p></div>
+                <div class="reading-time-container">
+                    <span class="fa fa-clock-o"></span>
+                    <p>Estimated reading time: 37 minutes.</p></div>
                 <div class="content"><h1 id="vithanco-graph-language-vgl-guide">Vithanco Graph Language (VGL) Guide</h1>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
@@ -108,8 +115,35 @@
  <li><strong>TRT</strong> (Transition Tree) - for step-by-step implementation planning using Theory of Constraints</li>
  <li><strong>ADTree</strong> (Attack-Defense Tree) - for security modelling of attack and defense interactions</li>
  <li><strong>GoalTree</strong> (Goal Tree) - for strategic planning using Theory of Constraints necessity logic</li>
+ <li><strong>CLD</strong> (Causal Loop Diagram) - for systems analysis modelling how elements reinforce or balance each other over time</li>
+ <li><strong>DecisionTree</strong> (Decision Tree) - for storing and evaluating decision logic through questions, choices, and outcomes</li>
 </ul>
 <p>The notation determines what node types and edge types are available in your graph.</p>
+<h3 id="extensions">Extensions</h3>
+<p>Extensions add cross-cutting node types to any notation. They are listed after the notation, separated by commas:</p>
+<pre><code>vgraph &lt;graph_id&gt;: &lt;NOTATION&gt;, &lt;EXTENSION&gt; "&lt;graph_label&gt;" {
+    ...
+}
+</code></pre>
+<p>Multiple extensions can be combined:</p>
+<pre><code>vgraph myGraph: ConceptMap, Annotation "My Diagram" { ... }
+</code></pre>
+<p><strong>Available extensions:</strong></p>
+<ul>
+ <li><strong>Annotation</strong> - adds an <code>Annotation</code> node type that can be connected FROM any node in the notation. Use it to attach notes, comments, or clarifications to any element of the diagram.</li>
+</ul>
+<p><strong>Annotation example:</strong></p>
+<pre><code class="language-vgl">vgraph productMap: ConceptMap, Annotation "Product Strategy" {
+    node c1: Concept "Customer Need"
+    node r1: Relation "drives"
+    node c2: Concept "Feature"
+    node a1: Annotation "Validated in user research"
+    edge c1 -&gt; r1
+    edge r1 -&gt; c2
+    edge c1 -&gt; a1
+}
+</code></pre>
+<p>Edge types from notation nodes to <code>Annotation</code> are automatically inferred, so no explicit <code>: annotates__Concept</code> type is needed on annotation edges.</p>
 <h3 id="nodes">Nodes</h3>
 <p>Nodes represent the primary entities in your graph. Each node has:</p>
 <ul>
@@ -211,6 +245,16 @@
  <li><code>Goal</code> - The single top-level objective — the ultimate purpose for which the system exists (default: cyan/teal)</li>
  <li><code>CriticalSuccessFactor</code> - High-level terminal outcomes (3-5 maximum) without which the Goal cannot be achieved (default: light blue)</li>
  <li><code>NecessaryCondition</code> - Indispensable prerequisite tasks that support CSFs; can cascade into sub-NCs becoming more specific at lower levels (default: amber/yellow)</li>
+</ul>
+<p><strong>CLD Node Types:</strong> CLD (Causal Loop Diagram) is a systems analysis tool for modelling how elements interconnect and reinforce or balance each other over time. All elements are represented as Stocks whose amounts can change based on incoming connections.</p>
+<ul>
+ <li><code>Stock</code> - A variable or element in the system whose value changes over time (default: blue)</li>
+</ul>
+<p><strong>DecisionTree Node Types:</strong></p>
+<ul>
+ <li><code>DecisionPoint</code> - A question that determines which path to follow (default: amber)</li>
+ <li><code>Choice</code> - A potential answer or path branching from a question (default: blue)</li>
+ <li><code>Outcome</code> - A terminal result of the decision tree (default: green)</li>
 </ul>
 <h3 id="edges">Edges</h3>
 <p>Edges represent connections between nodes. Each edge has:</p>
@@ -381,6 +425,17 @@ edge q2 -&gt; a2;  // Type inferred from node types
  <li><code>nc_to_csf</code> - Connects NecessaryCondition → CriticalSuccessFactor (NC is necessary for CSF)</li>
  <li><code>nc_to_nc</code> - Connects NecessaryCondition → NecessaryCondition (sub-NC supports parent NC)</li>
 </ul>
+<p><strong>CLD Edge Types:</strong> CLD uses two edge types representing positive and negative causal links between Stocks. Loops with an even number of negative links (including zero) are reinforcing; loops with an odd number are balancing.</p>
+<ul>
+ <li><code>same</code> - Connects Stock → Stock (positive causal link: both change in the same direction, solid line, marked "s")</li>
+ <li><code>opposite</code> - Connects Stock → Stock (negative causal link: nodes change in opposite directions, dashed line, marked "o")</li>
+</ul>
+<p><strong>DecisionTree Edge Types:</strong></p>
+<ul>
+ <li><code>decision_to_choice</code> - Connects DecisionPoint → Choice (the question branches into options)</li>
+ <li><code>choice_to_decision</code> - Connects Choice → DecisionPoint (the option leads to a further question)</li>
+ <li><code>choice_to_outcome</code> - Connects Choice → Outcome (the option terminates at a result)</li>
+</ul>
 <p>Edge types ensure that connections make semantic sense within the notation's domain.</p>
 <h3 id="groups">Groups</h3>
 <p>Groups organize nodes hierarchically and can be nested to create subgroups. Groups help visually organize complex graphs.</p>
@@ -454,10 +509,13 @@ node q1: Question "Main question";  // This is also a comment
 <hr />
 <h2 id="grammar">Grammar</h2>
 <p>The VGL grammar is defined as follows (simplified BNF notation):</p>
-<pre><code>document     ::= "vgraph" identifier ":" notation label? "{" statement* "}"
+<pre><code>document     ::= "vgraph" identifier ":" notation ("," extension)* label? "{" statement* "}"
 
 notation     ::= identifier
-                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree, GoalTree
+                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree, GoalTree, CLD, DecisionTree
+
+extension    ::= identifier
+                 // Available extensions: Annotation
 
 statement    ::= group | node | edge | attribute
 
@@ -1170,6 +1228,70 @@ comment      ::= "//" [^\n]*
 }
 </code></pre>
 <p><strong>Note</strong>: GoalTree graphs flow top-to-bottom with the single Goal at the top, Critical Success Factors directly below it, and Necessary Conditions expanding downward. NCs become progressively more detailed, specific, and functional at lower levels. The vertical placement implies nothing about importance — due to necessity logic, the lowest NC is equally important as a CSF because if you fail to accomplish it, nothing above it will happen. There are usually no more than 3-5 CSFs, and NCs can have lateral cross-connections between branches.</p>
+<h3 id="example-18-causal-loop-diagram-cld">Example 18: Causal Loop Diagram (CLD)</h3>
+<p>A systems analysis diagram modelling population dynamics with reinforcing and balancing feedback loops. Causal Loop Diagrams use "same" links (solid, marked "s") where both variables change in the same direction and "opposite" links (dashed, marked "o") where they change in opposite directions:</p>
+<pre><code class="language-vgl">vgraph populationCLD: CLD "Population Dynamics" {
+    node births: Stock "Births";
+    node population: Stock "Population";
+    node deaths: Stock "Deaths";
+    node foodSupply: Stock "Food Supply";
+    node crowding: Stock "Crowding";
+
+    // Reinforcing loop: more births increase population, larger population increases births
+    edge births -&gt; population: same;
+    edge population -&gt; births: same;
+
+    // Balancing loop: population increases deaths, deaths decrease population
+    edge population -&gt; deaths: same;
+    edge deaths -&gt; population: opposite;
+
+    // Balancing loop: population reduces food supply, less food reduces births
+    edge population -&gt; foodSupply: opposite;
+    edge foodSupply -&gt; births: same;
+
+    // Crowding effects
+    edge population -&gt; crowding: same;
+    edge crowding -&gt; deaths: same;
+}
+</code></pre>
+<p><strong>Note</strong>: CLD graphs model feedback loops in systems. Loops with an even number of "opposite" links (including zero) are reinforcing loops that produce exponential growth or decline. Loops with an odd number of "opposite" links are balancing loops that reach equilibrium. In this example, the births-population loop is reinforcing, while the population-deaths loop and population-food supply-births loop are balancing.</p>
+<hr />
+<h3 id="example-19-decision-tree">Example 19: Decision Tree</h3>
+<p>A decision logic graph for a hiring process showing how a series of questions leads to distinct outcomes:</p>
+<pre><code class="language-vgl">vgraph hiringDecision: DecisionTree "Should We Hire This Candidate?" {
+    // Opening decision point
+    node q1: DecisionPoint "Is the candidate technically qualified?";
+    node c1: Choice "Yes";
+    node c2: Choice "No";
+
+    // Follow-up question for qualified candidates
+    node q2: DecisionPoint "Does the candidate fit the team culture?";
+    node c3: Choice "Yes";
+    node c4: Choice "No";
+
+    // Terminal outcomes
+    node o1: Outcome "Extend offer";
+    node o2: Outcome "Reject — technical skills insufficient";
+    node o3: Outcome "Reject — poor cultural fit";
+
+    // Branch from first question
+    edge q1 -&gt; c1: decision_to_choice;
+    edge q1 -&gt; c2: decision_to_choice;
+
+    // Path for unqualified candidate leads directly to outcome
+    edge c2 -&gt; o2: choice_to_outcome;
+
+    // Qualified candidates proceed to culture question
+    edge c1 -&gt; q2: choice_to_decision;
+    edge q2 -&gt; c3: decision_to_choice;
+    edge q2 -&gt; c4: decision_to_choice;
+
+    // Final outcomes
+    edge c3 -&gt; o1: choice_to_outcome;
+    edge c4 -&gt; o3: choice_to_outcome;
+}
+</code></pre>
+<p><strong>Note</strong>: Decision Trees flow top-to-bottom. Every <code>DecisionPoint</code> branches into one or more <code>Choice</code> nodes. Each <code>Choice</code> leads either to another <code>DecisionPoint</code> (continuing the logic) or to an <code>Outcome</code> (terminal result). Outcomes have no outgoing edges.</p>
 <hr />
 <h2 id="best-practices">Best Practices</h2>
 <ol>

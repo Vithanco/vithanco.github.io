@@ -36,8 +36,45 @@ VGL currently supports built-in notations that come with predefined node types a
 - **TRT** (Transition Tree) - for step-by-step implementation planning using Theory of Constraints
 - **ADTree** (Attack-Defense Tree) - for security modelling of attack and defense interactions
 - **GoalTree** (Goal Tree) - for strategic planning using Theory of Constraints necessity logic
+- **CLD** (Causal Loop Diagram) - for systems analysis modelling how elements reinforce or balance each other over time
+- **DecisionTree** (Decision Tree) - for storing and evaluating decision logic through questions, choices, and outcomes
 
 The notation determines what node types and edge types are available in your graph.
+
+### Extensions
+
+Extensions add cross-cutting node types to any notation. They are listed after the notation, separated by commas:
+
+```
+vgraph <graph_id>: <NOTATION>, <EXTENSION> "<graph_label>" {
+    ...
+}
+```
+
+Multiple extensions can be combined:
+
+```
+vgraph myGraph: ConceptMap, Annotation "My Diagram" { ... }
+```
+
+**Available extensions:**
+- **Annotation** - adds an `Annotation` node type that can be connected FROM any node in the notation. Use it to attach notes, comments, or clarifications to any element of the diagram.
+
+**Annotation example:**
+
+```vgl
+vgraph productMap: ConceptMap, Annotation "Product Strategy" {
+    node c1: Concept "Customer Need"
+    node r1: Relation "drives"
+    node c2: Concept "Feature"
+    node a1: Annotation "Validated in user research"
+    edge c1 -> r1
+    edge r1 -> c2
+    edge c1 -> a1
+}
+```
+
+Edge types from notation nodes to `Annotation` are automatically inferred, so no explicit `: annotates__Concept` type is needed on annotation edges.
 
 ### Nodes
 
@@ -141,6 +178,15 @@ GoalTree (Goal Tree) is a strategic planning tool using necessity condition logi
 - `Goal` - The single top-level objective — the ultimate purpose for which the system exists (default: cyan/teal)
 - `CriticalSuccessFactor` - High-level terminal outcomes (3-5 maximum) without which the Goal cannot be achieved (default: light blue)
 - `NecessaryCondition` - Indispensable prerequisite tasks that support CSFs; can cascade into sub-NCs becoming more specific at lower levels (default: amber/yellow)
+
+**CLD Node Types:**
+CLD (Causal Loop Diagram) is a systems analysis tool for modelling how elements interconnect and reinforce or balance each other over time. All elements are represented as Stocks whose amounts can change based on incoming connections.
+- `Stock` - A variable or element in the system whose value changes over time (default: blue)
+
+**DecisionTree Node Types:**
+- `DecisionPoint` - A question that determines which path to follow (default: amber)
+- `Choice` - A potential answer or path branching from a question (default: blue)
+- `Outcome` - A terminal result of the decision tree (default: green)
 
 ### Edges
 
@@ -308,6 +354,16 @@ GoalTree uses edges to show necessity relationships. The graph flows top-to-bott
 - `nc_to_csf` - Connects NecessaryCondition → CriticalSuccessFactor (NC is necessary for CSF)
 - `nc_to_nc` - Connects NecessaryCondition → NecessaryCondition (sub-NC supports parent NC)
 
+**CLD Edge Types:**
+CLD uses two edge types representing positive and negative causal links between Stocks. Loops with an even number of negative links (including zero) are reinforcing; loops with an odd number are balancing.
+- `same` - Connects Stock → Stock (positive causal link: both change in the same direction, solid line, marked "s")
+- `opposite` - Connects Stock → Stock (negative causal link: nodes change in opposite directions, dashed line, marked "o")
+
+**DecisionTree Edge Types:**
+- `decision_to_choice` - Connects DecisionPoint → Choice (the question branches into options)
+- `choice_to_decision` - Connects Choice → DecisionPoint (the option leads to a further question)
+- `choice_to_outcome` - Connects Choice → Outcome (the option terminates at a result)
+
 Edge types ensure that connections make semantic sense within the notation's domain.
 
 ### Groups
@@ -398,10 +454,13 @@ Comments can appear anywhere in the document and are ignored by the parser.
 The VGL grammar is defined as follows (simplified BNF notation):
 
 ```
-document     ::= "vgraph" identifier ":" notation label? "{" statement* "}"
+document     ::= "vgraph" identifier ":" notation ("," extension)* label? "{" statement* "}"
 
 notation     ::= identifier
-                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree, GoalTree
+                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree, GoalTree, CLD, DecisionTree
+
+extension    ::= identifier
+                 // Available extensions: Annotation
 
 statement    ::= group | node | edge | attribute
 
@@ -1192,6 +1251,81 @@ vgraph companyStrategy: GoalTree "Increase Profitability" {
 ```
 
 **Note**: GoalTree graphs flow top-to-bottom with the single Goal at the top, Critical Success Factors directly below it, and Necessary Conditions expanding downward. NCs become progressively more detailed, specific, and functional at lower levels. The vertical placement implies nothing about importance — due to necessity logic, the lowest NC is equally important as a CSF because if you fail to accomplish it, nothing above it will happen. There are usually no more than 3-5 CSFs, and NCs can have lateral cross-connections between branches.
+
+### Example 18: Causal Loop Diagram (CLD)
+
+A systems analysis diagram modelling population dynamics with reinforcing and balancing feedback loops. Causal Loop Diagrams use "same" links (solid, marked "s") where both variables change in the same direction and "opposite" links (dashed, marked "o") where they change in opposite directions:
+
+```vgl
+vgraph populationCLD: CLD "Population Dynamics" {
+    node births: Stock "Births";
+    node population: Stock "Population";
+    node deaths: Stock "Deaths";
+    node foodSupply: Stock "Food Supply";
+    node crowding: Stock "Crowding";
+
+    // Reinforcing loop: more births increase population, larger population increases births
+    edge births -> population: same;
+    edge population -> births: same;
+
+    // Balancing loop: population increases deaths, deaths decrease population
+    edge population -> deaths: same;
+    edge deaths -> population: opposite;
+
+    // Balancing loop: population reduces food supply, less food reduces births
+    edge population -> foodSupply: opposite;
+    edge foodSupply -> births: same;
+
+    // Crowding effects
+    edge population -> crowding: same;
+    edge crowding -> deaths: same;
+}
+```
+
+**Note**: CLD graphs model feedback loops in systems. Loops with an even number of "opposite" links (including zero) are reinforcing loops that produce exponential growth or decline. Loops with an odd number of "opposite" links are balancing loops that reach equilibrium. In this example, the births-population loop is reinforcing, while the population-deaths loop and population-food supply-births loop are balancing.
+
+---
+
+### Example 19: Decision Tree
+
+A decision logic graph for a hiring process showing how a series of questions leads to distinct outcomes:
+
+```vgl
+vgraph hiringDecision: DecisionTree "Should We Hire This Candidate?" {
+    // Opening decision point
+    node q1: DecisionPoint "Is the candidate technically qualified?";
+    node c1: Choice "Yes";
+    node c2: Choice "No";
+
+    // Follow-up question for qualified candidates
+    node q2: DecisionPoint "Does the candidate fit the team culture?";
+    node c3: Choice "Yes";
+    node c4: Choice "No";
+
+    // Terminal outcomes
+    node o1: Outcome "Extend offer";
+    node o2: Outcome "Reject — technical skills insufficient";
+    node o3: Outcome "Reject — poor cultural fit";
+
+    // Branch from first question
+    edge q1 -> c1: decision_to_choice;
+    edge q1 -> c2: decision_to_choice;
+
+    // Path for unqualified candidate leads directly to outcome
+    edge c2 -> o2: choice_to_outcome;
+
+    // Qualified candidates proceed to culture question
+    edge c1 -> q2: choice_to_decision;
+    edge q2 -> c3: decision_to_choice;
+    edge q2 -> c4: decision_to_choice;
+
+    // Final outcomes
+    edge c3 -> o1: choice_to_outcome;
+    edge c4 -> o3: choice_to_outcome;
+}
+```
+
+**Note**: Decision Trees flow top-to-bottom. Every `DecisionPoint` branches into one or more `Choice` nodes. Each `Choice` leads either to another `DecisionPoint` (continuing the logic) or to an `Outcome` (terminal result). Outcomes have no outgoing edges.
 
 ---
 

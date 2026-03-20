@@ -72,31 +72,34 @@
                             <a href="/tools" class="selected">Tools</a></li>
                         <li>
                             <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
-        <div class="index-wrapper">
+        <div class="item-wrapper">
             <article>
-                <div class="breadcrumbs">
-                    <a href="/tools/Help/index" class="breadcrumb">Help and Explanations</a>
-                    <img src="/images/toc/chevron.svg" alt="breadcrumb separator"/>
-                    <a href="/tools/Help/Appearance/index" class="breadcrumb">Appearance Related</a></div>
+                <div class="breadcrumbs">                    <a href="/" class="breadcrumb-home">                        <img src="/logo.png" class="breadcrumb-icon"/>
+Home</a>
+                    <span class="breadcrumb-separator"> / </span>
+                    <a href="/tools">The best Tools for Structured Visual Thinking</a>
+                    <span class="breadcrumb-separator"> / </span>
+Deriving Value from Large Diagrams</div>
                 <h1>Deriving Value from Large Diagrams</h1>
-                <div class="reading-time">
+                <div class="reading-time-container">
+                    <span class="fa fa-clock-o"></span>
                     <p>Estimated reading time: 5 minutes.</p></div>
                 <div class="content"><p>We at Vithanco love drawing diagrams to understand. However, one of the main obstacles with diagrams can be its size. It is not uncommon for us to have diagrams with wy over 100 nodes and 150 edges. If you plan a project with the <a href="/notations/Change/benefit-breakdown-structure/index.html">Benefit Breakdown Structure (BBS) Notation</a> then this represents only a small project. The resulting BBS is quickly becoming messy to look at and the overlapping of edges means that the main diagram is rather confusing.</p>
-<img src="/Tools/Help/Appearance/deriving-value-from-large-diagrams/big-diagram.png" alt="" onclick="openLightbox(this)" />
+<img src="/tools/Help/Appearance/deriving-value-from-large-diagrams/big-diagram.png" alt="" onclick="openLightbox(this)" />
 <p><em>A large Diagram (modified BBS model)</em></p>
 <p>Generally speaking, size can be a limitation to a graph's usefulness by making it difficult to understand the structure. If the graph is too complex and the connections are going crossing many times then the structure is difficult to understand. And if the diagram is not suitable for meaningful communication then it is rather useless. If one large diagram isn't explaining the full story, then we need to provide ways in which to show relevant parts.</p>
 <p>How can one manage the full big picture and can still zoom into aspects in Vithanco? Or to ask metaphorically: How can one see the forest/woods and the trees? This post provides some answers.</p>
 <h2 id="cluster-and-cluster-folding">Cluster and Cluster Folding</h2>
 <p>The first approach includes an element of diagrams that are sometimes overlooked: Clusters. A Cluster is a part of the diagram (a subgraph) that is drawn together, is visually emphasised with a different background and has a name.</p>
 <figure class=""> 
- <img src="/Tools/Help/Appearance/deriving-value-from-large-diagrams/BBS-Schema.jpg" alt="BBS Example" onclick="openLightbox(this)" /> 
+ <img src="/tools/Help/Appearance/deriving-value-from-large-diagrams/BBS-Schema.jpg" alt="BBS Example" onclick="openLightbox(this)" /> 
  <figcaption>
   A diagram with three
  </figcaption> 
 </figure>
 <p>The above diagram has 3 clusters, each one drawn around the different node types. However, if you fold each cluster (and ensure that you use a strict graph) then you get something similar to the one below. The nodes within each cluster are "hidden" away, but can easily be retrieved by a mouse click (use the folding map symbol button).</p>
 <figure class=""> 
- <img src="/Tools/Help/Appearance/deriving-value-from-large-diagrams/BBS-schema-folded.jpg" alt="BBS-schema-folded" onclick="openLightbox(this)" /> 
+ <img src="/tools/Help/Appearance/deriving-value-from-large-diagrams/BBS-schema-folded.jpg" alt="BBS-schema-folded" onclick="openLightbox(this)" /> 
  <figcaption>
   A diagram with three
  </figcaption> 
@@ -115,8 +118,8 @@
 <p>The second way of keeping the overview: whenever you need to look at some parts in more detail use the focus view.</p>
 <h2 id="reports">Reports</h2>
 <p>Reporting is another way of digesting a large diagram. Reporting allows us to slice and dice the information and make it digestible. The right report depends on notation and the use and Vithanco's reporting is accordingly flexible. This is how it works.</p>
-<img src="/Tools/Help/Appearance/deriving-value-from-large-diagrams/reportMenu.png" alt="reportMenu" onclick="openLightbox(this)" />
-<p>For a <a href="/notations/Change/benefit-breakdown-structure">BBS</a> diagram, we normally look at the benefits of a project/change initiative and how to enable each benefit. It is often the right way to deliver one benefit after the other instead of delivering many at once. So, the natural way is to select a benefit and its predecessor tree and to enable the benefit through the delivery of benefits. But how to choose the next benefit? Here, the report becomes useful. <img src="/Tools/Help/Appearance/deriving-value-from-large-diagrams/reportSettings.png" alt="reportSettings" onclick="openLightbox(this)" /></p>
+<img src="/tools/Help/Appearance/deriving-value-from-large-diagrams/reportMenu.png" alt="reportMenu" onclick="openLightbox(this)" />
+<p>For a <a href="/notations/Change/benefit-breakdown-structure">BBS</a> diagram, we normally look at the benefits of a project/change initiative and how to enable each benefit. It is often the right way to deliver one benefit after the other instead of delivering many at once. So, the natural way is to select a benefit and its predecessor tree and to enable the benefit through the delivery of benefits. But how to choose the next benefit? Here, the report becomes useful. <img src="/tools/Help/Appearance/deriving-value-from-large-diagrams/reportSettings.png" alt="reportSettings" onclick="openLightbox(this)" /></p>
 <p>Choose the Report Menu and select "Detailed Report By Node Types". In the following dialog choose "Benefit" as the Node Types and choose "Node Itself" and "Predecessor Tree". Clicking Ok will create the report. That is a document that contains a dedicated diagram for each benefit. Each benefit diagram will contain the predecessor tree for that benefit alone.</p>
 <p>The resulting Report will be created as a <a href="https://en.wikipedia.org/wiki/Markdown">Markdown (.md) document</a>. Choose an appropriate tool to convert Markdown to other formats if needed. Share the document with everyone interested. They won't need Vithanco to digest the report.</p>
 <p>The third way of working with large diagrams: create useful reports to see each facet.</p>

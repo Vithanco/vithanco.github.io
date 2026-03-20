@@ -18,19 +18,14 @@ export async function createInstantiator(options, swift) {
     let tmpRetOptionalFloat;
     let tmpRetOptionalDouble;
     let tmpRetOptionalHeapObject;
-    let tmpRetTag;
-    let tmpRetStrings = [];
-    let tmpRetInts = [];
-    let tmpRetF32s = [];
-    let tmpRetF64s = [];
-    let tmpParamInts = [];
-    let tmpParamF32s = [];
-    let tmpParamF64s = [];
-    let tmpRetPointers = [];
-    let tmpParamPointers = [];
+    let strStack = [];
+    let i32Stack = [];
+    let f32Stack = [];
+    let f64Stack = [];
+    let ptrStack = [];
     const enumHelpers = {};
     const structHelpers = {};
-    
+
     let _exports = null;
     let bjs = null;
 
@@ -47,6 +42,7 @@ export async function createInstantiator(options, swift) {
             }
             bjs["swift_js_init_memory"] = function(sourceId, bytesPtr) {
                 const source = swift.memory.getObject(sourceId);
+                swift.memory.release(sourceId);
                 const bytes = new Uint8Array(memory.buffer, bytesPtr);
                 bytes.set(source);
             }
@@ -68,37 +64,34 @@ export async function createInstantiator(options, swift) {
             bjs["swift_js_release"] = function(id) {
                 swift.memory.release(id);
             }
-            bjs["swift_js_push_tag"] = function(tag) {
-                tmpRetTag = tag;
-            }
-            bjs["swift_js_push_int"] = function(v) {
-                tmpRetInts.push(v | 0);
+            bjs["swift_js_push_i32"] = function(v) {
+                i32Stack.push(v | 0);
             }
             bjs["swift_js_push_f32"] = function(v) {
-                tmpRetF32s.push(Math.fround(v));
+                f32Stack.push(Math.fround(v));
             }
             bjs["swift_js_push_f64"] = function(v) {
-                tmpRetF64s.push(v);
+                f64Stack.push(v);
             }
             bjs["swift_js_push_string"] = function(ptr, len) {
                 const bytes = new Uint8Array(memory.buffer, ptr, len);
                 const value = textDecoder.decode(bytes);
-                tmpRetStrings.push(value);
+                strStack.push(value);
             }
-            bjs["swift_js_pop_param_int32"] = function() {
-                return tmpParamInts.pop();
+            bjs["swift_js_pop_i32"] = function() {
+                return i32Stack.pop();
             }
-            bjs["swift_js_pop_param_f32"] = function() {
-                return tmpParamF32s.pop();
+            bjs["swift_js_pop_f32"] = function() {
+                return f32Stack.pop();
             }
-            bjs["swift_js_pop_param_f64"] = function() {
-                return tmpParamF64s.pop();
+            bjs["swift_js_pop_f64"] = function() {
+                return f64Stack.pop();
             }
             bjs["swift_js_push_pointer"] = function(pointer) {
-                tmpRetPointers.push(pointer);
+                ptrStack.push(pointer);
             }
-            bjs["swift_js_pop_param_pointer"] = function() {
-                return tmpParamPointers.pop();
+            bjs["swift_js_pop_pointer"] = function() {
+                return ptrStack.pop();
             }
             bjs["swift_js_return_optional_bool"] = function(isSome, value) {
                 if (isSome === 0) {
@@ -190,6 +183,7 @@ export async function createInstantiator(options, swift) {
                 tmpRetOptionalHeapObject = undefined;
                 return pointer || 0;
             }
+            bjs["swift_js_closure_unregister"] = function(funcRef) {}
         },
         setInstance: (i) => {
             instance = i;
@@ -209,7 +203,6 @@ export async function createInstantiator(options, swift) {
                     instance.exports.bjs_convertToDot(graphId, graphBytes.length);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
-                    swift.memory.release(graphId);
                     return ret;
                 },
                 renderGraph: function bjs_renderGraph(graph) {
@@ -218,7 +211,6 @@ export async function createInstantiator(options, swift) {
                     instance.exports.bjs_renderGraph(graphId, graphBytes.length);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
-                    swift.memory.release(graphId);
                     return ret;
                 },
                 debugGraph: function bjs_debugGraph(graph) {
@@ -227,7 +219,6 @@ export async function createInstantiator(options, swift) {
                     instance.exports.bjs_debugGraph(graphId, graphBytes.length);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
-                    swift.memory.release(graphId);
                     return ret;
                 },
                 layoutGraph: function bjs_layoutGraph(graph) {
@@ -236,7 +227,6 @@ export async function createInstantiator(options, swift) {
                     instance.exports.bjs_layoutGraph(graphId, graphBytes.length);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
-                    swift.memory.release(graphId);
                     return ret;
                 },
                 exportToVGL: function bjs_exportToVGL(graph) {
@@ -245,7 +235,6 @@ export async function createInstantiator(options, swift) {
                     instance.exports.bjs_exportToVGL(graphId, graphBytes.length);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
-                    swift.memory.release(graphId);
                     return ret;
                 },
             };
