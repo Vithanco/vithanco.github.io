@@ -83,11 +83,12 @@ Vithanco Graph Language (VGL) Guide</div>
                 <h1>Vithanco Graph Language (VGL) Guide</h1>
                 <div class="reading-time-container">
                     <span class="fa fa-clock-o"></span>
-                    <p>Estimated reading time: 37 minutes.</p></div>
+                    <p>Estimated reading time: 41 minutes.</p></div>
                 <div class="content"><h1 id="vithanco-graph-language-vgl-guide">Vithanco Graph Language (VGL) Guide</h1>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
  <li><a href="#concepts">Concepts</a></li>
+ <li><a href="#user-defined-notations-vnotation">User-Defined Notations (vnotation)</a></li>
  <li><a href="#grammar">Grammar</a></li>
  <li><a href="#examples">Examples</a></li>
 </ul>
@@ -102,7 +103,7 @@ Vithanco Graph Language (VGL) Guide</div>
     ...
 }
 </code></pre>
-<p>VGL currently supports built-in notations that come with predefined node types and edge types:</p>
+<p>VGL supports both built-in notations and user-defined notations declared with <code>vnotation</code> (see <a href="#user-defined-notations-vnotation">User-Defined Notations</a>). Built-in notations come with predefined node types and edge types:</p>
 <ul>
  <li><strong>IBIS</strong> (Issue-Based Information System) - for decision-making and argumentation</li>
  <li><strong>BBS</strong> (Benefit Breakdown Structure) - for benefit analysis</li>
@@ -117,6 +118,7 @@ Vithanco Graph Language (VGL) Guide</div>
  <li><strong>GoalTree</strong> (Goal Tree) - for strategic planning using Theory of Constraints necessity logic</li>
  <li><strong>CLD</strong> (Causal Loop Diagram) - for systems analysis modelling how elements reinforce or balance each other over time</li>
  <li><strong>DecisionTree</strong> (Decision Tree) - for storing and evaluating decision logic through questions, choices, and outcomes</li>
+ <li><strong>Timeline</strong> (Timeline) - for visualizing events across multiple tracks aligned to a shared time axis</li>
 </ul>
 <p>The notation determines what node types and edge types are available in your graph.</p>
 <h3 id="extensions">Extensions</h3>
@@ -255,6 +257,11 @@ Vithanco Graph Language (VGL) Guide</div>
  <li><code>DecisionPoint</code> - A question that determines which path to follow (default: amber)</li>
  <li><code>Choice</code> - A potential answer or path branching from a question (default: blue)</li>
  <li><code>Outcome</code> - A terminal result of the decision tree (default: green)</li>
+</ul>
+<p><strong>Timeline Node Types:</strong></p>
+<ul>
+ <li><code>TimePoint</code> - An axis marker representing a point in time (default: gray, optional)</li>
+ <li><code>Event</code> - A generic event that can be aligned to a time point via <code>alignGroup</code> (default: steel blue)</li>
 </ul>
 <h3 id="edges">Edges</h3>
 <p>Edges represent connections between nodes. Each edge has:</p>
@@ -436,6 +443,11 @@ edge q2 -&gt; a2;  // Type inferred from node types
  <li><code>choice_to_decision</code> - Connects Choice → DecisionPoint (the option leads to a further question)</li>
  <li><code>choice_to_outcome</code> - Connects Choice → Outcome (the option terminates at a result)</li>
 </ul>
+<p><strong>Timeline Edge Types:</strong></p>
+<ul>
+ <li><code>sequence</code> - Connects TimePoint → TimePoint (creates the time axis, thin gray line)</li>
+ <li><code>influence</code> - Connects Event → Event (cross-track or within-track dependency, dashed, constraint=false)</li>
+</ul>
 <p>Edge types ensure that connections make semantic sense within the notation's domain.</p>
 <h3 id="groups">Groups</h3>
 <p>Groups organize nodes hierarchically and can be nested to create subgroups. Groups help visually organize complex graphs.</p>
@@ -481,6 +493,7 @@ fontcolor: darkblue;
  <li><code>color</code> - Node color (e.g., <code>red</code>, <code>blue</code>, <code>#FF0000</code>)</li>
  <li><code>fontsize</code> - Font size for node label (number)</li>
  <li><code>shape</code> - Node shape (varies by notation)</li>
+ <li><code>alignGroup</code> - Alignment group identifier; nodes sharing the same value are placed at the same rank in layout (used by Timeline and available in all notations)</li>
 </ul>
 <p><strong>Common Edge Attributes:</strong></p>
 <ul>
@@ -509,10 +522,21 @@ node q1: Question "Main question";  // This is also a comment
 <hr />
 <h2 id="grammar">Grammar</h2>
 <p>The VGL grammar is defined as follows (simplified BNF notation):</p>
-<pre><code>document     ::= "vgraph" identifier ":" notation ("," extension)* label? "{" statement* "}"
+<pre><code>file         ::= vnotation* document
+
+document     ::= "vgraph" identifier ":" notation ("," extension)* label? "{" statement* "}"
 
 notation     ::= identifier
-                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree, GoalTree, CLD, DecisionTree
+                 // Built-in: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree, GoalTree, CLD, DecisionTree, Timeline
+                 // User-defined: any vnotation declared earlier in the same file
+
+vnotation    ::= "vnotation" identifier ("extends" identifier)? "{" vnotation_body* "}"
+
+vnotation_body ::= ("layout" ":" layout_dir ";"?)
+                 | ("node" "type" ":" identifier attributes? ";"?)
+                 | ("edge" "type" ":" identifier "from" ":" identifier "to" ":" identifier attributes? ";"?)
+
+layout_dir   ::= "topToBottom" | "leftToRight" | "bottomToTop" | "rightToLeft"
 
 extension    ::= identifier
                  // Available extensions: Annotation
@@ -543,7 +567,8 @@ comment      ::= "//" [^\n]*
 </code></pre>
 <p><strong>Key Grammar Rules:</strong></p>
 <ol>
- <li><strong>Document Structure</strong>: Every VGL file must start with a <code>vgraph</code> declaration</li>
+ <li><strong>Document Structure</strong>: A VGL file contains zero or more <code>vnotation</code> blocks followed by a <code>vgraph</code> declaration</li>
+ <li><strong>File ordering</strong>: <code>vnotation</code> blocks must appear before any <code>vgraph</code> that references them</li>
  <li><strong>Node IDs</strong>: Must be unique throughout the document</li>
  <li><strong>Edge References</strong>: Edges can only reference nodes that have been declared</li>
  <li><strong>Type Validation</strong>: Node types and edge types must be valid for the chosen notation, or will be marked as "unknown"</li>
@@ -1292,6 +1317,162 @@ comment      ::= "//" [^\n]*
 }
 </code></pre>
 <p><strong>Note</strong>: Decision Trees flow top-to-bottom. Every <code>DecisionPoint</code> branches into one or more <code>Choice</code> nodes. Each <code>Choice</code> leads either to another <code>DecisionPoint</code> (continuing the logic) or to an <code>Outcome</code> (terminal result). Outcomes have no outgoing edges.</p>
+<hr />
+<h3 id="example-20-timeline">Example 20: Timeline</h3>
+<p>A timeline visualizing events across multiple tracks aligned to a shared time axis:</p>
+<pre><code class="language-vgl">vgraph myTimeline: Timeline "19th Century Europe" {
+    // Time axis
+    node t1800: TimePoint "1800" [alignGroup: "1800"]
+    node t1850: TimePoint "1850" [alignGroup: "1850"]
+    node t1871: TimePoint "1871" [alignGroup: "1871"]
+    edge t1800 -&gt; t1850: sequence
+    edge t1850 -&gt; t1871: sequence
+
+    // Germany track
+    group germany "Germany" {
+        node g1: Event "Napoleon defeats Prussia" [alignGroup: "1800"]
+        node g2: Event "German Unification" [alignGroup: "1871"]
+    }
+
+    // England track
+    group england "England" {
+        node e1: Event "Industrial Revolution peaks" [alignGroup: "1850"]
+        node e2: Event "Franco-Prussian War impact" [alignGroup: "1871"]
+    }
+
+    // Cross-track influences
+    edge g1 -&gt; g2: influence "led to"
+    edge e1 -&gt; e2: influence
+    edge e1 -&gt; g2: influence "industrialization enabled"
+}
+</code></pre>
+<p><strong>Note</strong>: Timelines flow left-to-right. Use <code>alignGroup</code> on nodes to align them at the same rank (same horizontal position). TimePoint nodes are optional — <code>alignGroup</code> alone suffices for alignment. Groups create visual tracks with cluster boxes. Influence edges are dashed and don't affect node positioning (<code>constraint=false</code>). Extend with <code>vnotation</code> for custom event types.</p>
+<hr />
+<h2 id="user-defined-notations-vnotation">User-Defined Notations (<code>vnotation</code>)</h2>
+<p><code>vnotation</code> lets expert users define their own notation schema inline in a VGL file, without requiring any Swift code changes. Everything that built-in notations provide — node types, edge types, layout direction — can be expressed in VGL.</p>
+<h3 id="basic-syntax">Basic Syntax</h3>
+<pre><code>vnotation &lt;Name&gt; [extends &lt;BuiltinNotation&gt;] {
+    layout: &lt;topToBottom | leftToRight | rightToLeft | bottomToTop&gt;
+
+    node type: &lt;TypeName&gt;  [nodeStyle: &lt;name&gt;, color: "#hex", icon: "sf.symbol", ...]
+    ...
+    edge type: &lt;edge_id&gt;   from: &lt;TypeName&gt;  to: &lt;TypeName&gt;  [color: "#hex"]
+    ...
+}
+</code></pre>
+<p>A <code>vgraph</code> then references the vnotation by name, identically to any built-in notation:</p>
+<pre><code>vgraph &lt;id&gt;: &lt;VnotationName&gt; "&lt;label&gt;" [, Extension ...] {
+    // identical syntax — node, edge, group, attribute overrides
+}
+</code></pre>
+<h3 id="file-ordering-rule">File-Ordering Rule</h3>
+<p><code>vnotation</code> blocks <strong>must appear before</strong> any <code>vgraph</code> that references them. This allows single-pass parsing and produces a clear error if violated.</p>
+<h3 id="nodestyle-required-on-every-node-type"><code>nodeStyle:</code> — Required on Every Node Type</h3>
+<p><code>nodeStyle:</code> is required on every <code>node type:</code> declaration. The parser treats the value as an opaque string; the semantic layer validates it against the table below.</p>
+<table>
+ <thead>
+  <tr>
+   <th><code>nodeStyle:</code> value</th>
+   <th>Additional parameters</th>
+   <th>Description</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td><code>iconWithText</code></td>
+   <td><code>color:</code> (required), <code>icon:</code>, <code>iconColor:</code> (opt, default white), <code>iconSize:</code> (opt, default 24)</td>
+   <td>Icon above text, colored background</td>
+  </tr>
+  <tr>
+   <td><code>simpleRoundedText</code></td>
+   <td><code>color:</code></td>
+   <td>Text in a rounded rectangle</td>
+  </tr>
+  <tr>
+   <td><code>roundedBox</code></td>
+   <td><code>color:</code></td>
+   <td>Plain rounded box</td>
+  </tr>
+  <tr>
+   <td><code>withCategory</code></td>
+   <td><code>color:</code>, <code>category:</code> (short header label)</td>
+   <td>Box with a colored category bar at top</td>
+  </tr>
+  <tr>
+   <td><code>withCategoryAndIcon</code></td>
+   <td><code>color:</code>, <code>category:</code>, <code>icon:</code>, <code>iconColor:</code> (opt), <code>iconSize:</code> (opt)</td>
+   <td>Category bar + icon</td>
+  </tr>
+  <tr>
+   <td><code>iconOnly</code></td>
+   <td><code>icon:</code>, <code>iconColor:</code> (opt, default black), <code>iconSize:</code> (opt)</td>
+   <td>Icon without text</td>
+  </tr>
+  <tr>
+   <td><code>circle</code></td>
+   <td><code>color:</code></td>
+   <td>Circular node</td>
+  </tr>
+  <tr>
+   <td><code>bareText</code></td>
+   <td>—</td>
+   <td>Plain text, no decoration</td>
+  </tr>
+  <tr>
+   <td><code>hidden</code></td>
+   <td>—</td>
+   <td>Node is not rendered</td>
+  </tr>
+  <tr>
+   <td><code>custom</code></td>
+   <td>—</td>
+   <td>Falls back to <code>bareText</code> in v1; reserved for future full style expressions</td>
+  </tr>
+ </tbody>
+</table>
+<h3 id="extends-inheriting-a-built-in-notation"><code>extends</code> — Inheriting a Built-In Notation</h3>
+<p>The <code>extends</code> clause adds all node and edge types from a built-in notation, then your vnotation adds further types on top:</p>
+<pre><code class="language-vgl">vnotation RichIBIS extends IBIS {
+    node type: Stakeholder [nodeStyle: withCategory, color: "#884499", category: "S"]
+
+    edge type: stakeholder_raises  from: Stakeholder to: Question
+    edge type: stakeholder_answers from: Stakeholder to: Answer
+}
+</code></pre>
+<p><strong>v1 constraint:</strong> Only built-in notations can be extended. <code>vnotation A extends B</code> where B is itself a vnotation is not supported.</p>
+<h3 id="examples">Examples</h3>
+<p><strong>Pure vnotation — custom risk map:</strong></p>
+<pre><code class="language-vgl">vnotation RiskMap {
+    layout: topToBottom
+
+    node type: Risk    [nodeStyle: iconWithText, color: "#cc3333", icon: "exclamationmark.triangle"]
+    node type: Control [nodeStyle: iconWithText, color: "#339933", icon: "shield"]
+    node type: Owner   [nodeStyle: circle,       color: "#3366cc"]
+
+    edge type: risk_has_control  from: Risk    to: Control
+    edge type: control_owned_by  from: Control to: Owner
+}
+
+vgraph rm1: RiskMap "Project Risk Map" {
+    node r1: Risk    "Schedule overrun"
+    node c1: Control "Weekly reviews"
+    node o1: Owner   "PM"
+    edge r1 -&gt; c1
+    edge c1 -&gt; o1
+}
+</code></pre>
+<p><strong>vnotation + Extension:</strong></p>
+<pre><code class="language-vgl">vnotation SimpleMap {
+    node type: Concept [nodeStyle: simpleRoundedText, color: "#336699"]
+    edge type: related  from: Concept to: Concept
+}
+
+vgraph sm1: SimpleMap, Annotation "Annotated Map" {
+    node c1: Concept    "Main idea"
+    node a1: Annotation "See also: section 3"
+    edge c1 -&gt; a1
+}
+</code></pre>
 <hr />
 <h2 id="best-practices">Best Practices</h2>
 <ol>

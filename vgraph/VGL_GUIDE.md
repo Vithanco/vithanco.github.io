@@ -2,6 +2,7 @@
 
 ## Table of Contents
 - [Concepts](#concepts)
+- [User-Defined Notations (vnotation)](#user-defined-notations-vnotation)
 - [Grammar](#grammar)
 - [Examples](#examples)
 
@@ -24,7 +25,7 @@ vgraph <graph_id>: <NOTATION> "<graph_label>" {
 }
 ```
 
-VGL currently supports built-in notations that come with predefined node types and edge types:
+VGL supports both built-in notations and user-defined notations declared with `vnotation` (see [User-Defined Notations](#user-defined-notations-vnotation)). Built-in notations come with predefined node types and edge types:
 - **IBIS** (Issue-Based Information System) - for decision-making and argumentation
 - **BBS** (Benefit Breakdown Structure) - for benefit analysis
 - **ImpactMapping** - for strategic planning and goal alignment
@@ -38,6 +39,7 @@ VGL currently supports built-in notations that come with predefined node types a
 - **GoalTree** (Goal Tree) - for strategic planning using Theory of Constraints necessity logic
 - **CLD** (Causal Loop Diagram) - for systems analysis modelling how elements reinforce or balance each other over time
 - **DecisionTree** (Decision Tree) - for storing and evaluating decision logic through questions, choices, and outcomes
+- **Timeline** (Timeline) - for visualizing events across multiple tracks aligned to a shared time axis
 
 The notation determines what node types and edge types are available in your graph.
 
@@ -187,6 +189,10 @@ CLD (Causal Loop Diagram) is a systems analysis tool for modelling how elements 
 - `DecisionPoint` - A question that determines which path to follow (default: amber)
 - `Choice` - A potential answer or path branching from a question (default: blue)
 - `Outcome` - A terminal result of the decision tree (default: green)
+
+**Timeline Node Types:**
+- `TimePoint` - An axis marker representing a point in time (default: gray, optional)
+- `Event` - A generic event that can be aligned to a time point via `alignGroup` (default: steel blue)
 
 ### Edges
 
@@ -364,6 +370,10 @@ CLD uses two edge types representing positive and negative causal links between 
 - `choice_to_decision` - Connects Choice → DecisionPoint (the option leads to a further question)
 - `choice_to_outcome` - Connects Choice → Outcome (the option terminates at a result)
 
+**Timeline Edge Types:**
+- `sequence` - Connects TimePoint → TimePoint (creates the time axis, thin gray line)
+- `influence` - Connects Event → Event (cross-track or within-track dependency, dashed, constraint=false)
+
 Edge types ensure that connections make semantic sense within the notation's domain.
 
 ### Groups
@@ -420,6 +430,7 @@ fontcolor: darkblue;
 - `color` - Node color (e.g., `red`, `blue`, `#FF0000`)
 - `fontsize` - Font size for node label (number)
 - `shape` - Node shape (varies by notation)
+- `alignGroup` - Alignment group identifier; nodes sharing the same value are placed at the same rank in layout (used by Timeline and available in all notations)
 
 **Common Edge Attributes:**
 - `style` - Line style (`solid`, `dashed`, `dotted`)
@@ -454,10 +465,21 @@ Comments can appear anywhere in the document and are ignored by the parser.
 The VGL grammar is defined as follows (simplified BNF notation):
 
 ```
+file         ::= vnotation* document
+
 document     ::= "vgraph" identifier ":" notation ("," extension)* label? "{" statement* "}"
 
 notation     ::= identifier
-                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree, GoalTree, CLD, DecisionTree
+                 // Built-in: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree, GoalTree, CLD, DecisionTree, Timeline
+                 // User-defined: any vnotation declared earlier in the same file
+
+vnotation    ::= "vnotation" identifier ("extends" identifier)? "{" vnotation_body* "}"
+
+vnotation_body ::= ("layout" ":" layout_dir ";"?)
+                 | ("node" "type" ":" identifier attributes? ";"?)
+                 | ("edge" "type" ":" identifier "from" ":" identifier "to" ":" identifier attributes? ";"?)
+
+layout_dir   ::= "topToBottom" | "leftToRight" | "bottomToTop" | "rightToLeft"
 
 extension    ::= identifier
                  // Available extensions: Annotation
@@ -489,14 +511,15 @@ comment      ::= "//" [^\n]*
 
 **Key Grammar Rules:**
 
-1. **Document Structure**: Every VGL file must start with a `vgraph` declaration
-2. **Node IDs**: Must be unique throughout the document
-3. **Edge References**: Edges can only reference nodes that have been declared
-4. **Type Validation**: Node types and edge types must be valid for the chosen notation, or will be marked as "unknown"
-5. **Attributes**: Can appear inline with brackets `[]` or as separate statements within groups
-6. **Semicolons**: Optional after nodes, edges, groups, and standalone attributes
-7. **Quoted Strings**: Used for labels and string attribute values, support escape sequences (`\"`, `\\`, etc.)
-8. **Comments**: Single-line only, using `//` syntax
+1. **Document Structure**: A VGL file contains zero or more `vnotation` blocks followed by a `vgraph` declaration
+2. **File ordering**: `vnotation` blocks must appear before any `vgraph` that references them
+3. **Node IDs**: Must be unique throughout the document
+4. **Edge References**: Edges can only reference nodes that have been declared
+5. **Type Validation**: Node types and edge types must be valid for the chosen notation, or will be marked as "unknown"
+6. **Attributes**: Can appear inline with brackets `[]` or as separate statements within groups
+7. **Semicolons**: Optional after nodes, edges, groups, and standalone attributes
+8. **Quoted Strings**: Used for labels and string attribute values, support escape sequences (`\"`, `\\`, etc.)
+9. **Comments**: Single-line only, using `//` syntax
 
 ---
 
@@ -1326,6 +1349,145 @@ vgraph hiringDecision: DecisionTree "Should We Hire This Candidate?" {
 ```
 
 **Note**: Decision Trees flow top-to-bottom. Every `DecisionPoint` branches into one or more `Choice` nodes. Each `Choice` leads either to another `DecisionPoint` (continuing the logic) or to an `Outcome` (terminal result). Outcomes have no outgoing edges.
+
+---
+
+### Example 20: Timeline
+
+A timeline visualizing events across multiple tracks aligned to a shared time axis:
+
+```vgl
+vgraph myTimeline: Timeline "19th Century Europe" {
+    // Time axis
+    node t1800: TimePoint "1800" [alignGroup: "1800"]
+    node t1850: TimePoint "1850" [alignGroup: "1850"]
+    node t1871: TimePoint "1871" [alignGroup: "1871"]
+    edge t1800 -> t1850: sequence
+    edge t1850 -> t1871: sequence
+
+    // Germany track
+    group germany "Germany" {
+        node g1: Event "Napoleon defeats Prussia" [alignGroup: "1800"]
+        node g2: Event "German Unification" [alignGroup: "1871"]
+    }
+
+    // England track
+    group england "England" {
+        node e1: Event "Industrial Revolution peaks" [alignGroup: "1850"]
+        node e2: Event "Franco-Prussian War impact" [alignGroup: "1871"]
+    }
+
+    // Cross-track influences
+    edge g1 -> g2: influence "led to"
+    edge e1 -> e2: influence
+    edge e1 -> g2: influence "industrialization enabled"
+}
+```
+
+**Note**: Timelines flow left-to-right. Use `alignGroup` on nodes to align them at the same rank (same horizontal position). TimePoint nodes are optional — `alignGroup` alone suffices for alignment. Groups create visual tracks with cluster boxes. Influence edges are dashed and don't affect node positioning (`constraint=false`). Extend with `vnotation` for custom event types.
+
+---
+
+## User-Defined Notations (`vnotation`)
+
+`vnotation` lets expert users define their own notation schema inline in a VGL file, without requiring any Swift code changes. Everything that built-in notations provide — node types, edge types, layout direction — can be expressed in VGL.
+
+### Basic Syntax
+
+```
+vnotation <Name> [extends <BuiltinNotation>] {
+    layout: <topToBottom | leftToRight | rightToLeft | bottomToTop>
+
+    node type: <TypeName>  [nodeStyle: <name>, color: "#hex", icon: "sf.symbol", ...]
+    ...
+    edge type: <edge_id>   from: <TypeName>  to: <TypeName>  [color: "#hex"]
+    ...
+}
+```
+
+A `vgraph` then references the vnotation by name, identically to any built-in notation:
+
+```
+vgraph <id>: <VnotationName> "<label>" [, Extension ...] {
+    // identical syntax — node, edge, group, attribute overrides
+}
+```
+
+### File-Ordering Rule
+
+`vnotation` blocks **must appear before** any `vgraph` that references them. This allows single-pass parsing and produces a clear error if violated.
+
+### `nodeStyle:` — Required on Every Node Type
+
+`nodeStyle:` is required on every `node type:` declaration. The parser treats the value as an opaque string; the semantic layer validates it against the table below.
+
+| `nodeStyle:` value | Additional parameters | Description |
+|---|---|---|
+| `iconWithText` | `color:` (required), `icon:`, `iconColor:` (opt, default white), `iconSize:` (opt, default 24) | Icon above text, colored background |
+| `simpleRoundedText` | `color:` | Text in a rounded rectangle |
+| `roundedBox` | `color:` | Plain rounded box |
+| `withCategory` | `color:`, `category:` (short header label) | Box with a colored category bar at top |
+| `withCategoryAndIcon` | `color:`, `category:`, `icon:`, `iconColor:` (opt), `iconSize:` (opt) | Category bar + icon |
+| `iconOnly` | `icon:`, `iconColor:` (opt, default black), `iconSize:` (opt) | Icon without text |
+| `circle` | `color:` | Circular node |
+| `bareText` | — | Plain text, no decoration |
+| `hidden` | — | Node is not rendered |
+| `custom` | — | Falls back to `bareText` in v1; reserved for future full style expressions |
+
+### `extends` — Inheriting a Built-In Notation
+
+The `extends` clause adds all node and edge types from a built-in notation, then your vnotation adds further types on top:
+
+```vgl
+vnotation RichIBIS extends IBIS {
+    node type: Stakeholder [nodeStyle: withCategory, color: "#884499", category: "S"]
+
+    edge type: stakeholder_raises  from: Stakeholder to: Question
+    edge type: stakeholder_answers from: Stakeholder to: Answer
+}
+```
+
+**v1 constraint:** Only built-in notations can be extended. `vnotation A extends B` where B is itself a vnotation is not supported.
+
+### Examples
+
+**Pure vnotation — custom risk map:**
+
+```vgl
+vnotation RiskMap {
+    layout: topToBottom
+
+    node type: Risk    [nodeStyle: iconWithText, color: "#cc3333", icon: "exclamationmark.triangle"]
+    node type: Control [nodeStyle: iconWithText, color: "#339933", icon: "shield"]
+    node type: Owner   [nodeStyle: circle,       color: "#3366cc"]
+
+    edge type: risk_has_control  from: Risk    to: Control
+    edge type: control_owned_by  from: Control to: Owner
+}
+
+vgraph rm1: RiskMap "Project Risk Map" {
+    node r1: Risk    "Schedule overrun"
+    node c1: Control "Weekly reviews"
+    node o1: Owner   "PM"
+    edge r1 -> c1
+    edge c1 -> o1
+}
+```
+
+**vnotation + Extension:**
+
+```vgl
+vnotation SimpleMap {
+    node type: Concept [nodeStyle: simpleRoundedText, color: "#336699"]
+    edge type: related  from: Concept to: Concept
+}
+
+vgraph sm1: SimpleMap, Annotation "Annotated Map" {
+    node c1: Concept    "Main idea"
+    node a1: Annotation "See also: section 3"
+    edge c1 -> a1
+}
+```
 
 ---
 

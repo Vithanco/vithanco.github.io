@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Vithanco</title><description>Use Visual Thinking to Improve Your Decision Making and Problem Solving Skills.</description><link>https://vithanco.com</link><language>en</language><lastBuildDate>Sat, 21 Mar 2026 16:39:27 +0100</lastBuildDate><pubDate>Sat, 21 Mar 2026 16:39:27 +0100</pubDate><ttl>250</ttl><atom:link href="https://vithanco.com/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://vithanco.com/tools/VGL_GUIDE</guid><title>Vithanco Graph Language (VGL) Guide</title><description>Learn the VGL syntax for creating and editing graphs in text format</description><link>https://vithanco.com/tools/VGL_GUIDE</link><pubDate>Sat, 21 Mar 2026 16:39:27 +0100</pubDate><content:encoded><![CDATA[<h1 id="vithanco-graph-language-vgl-guide">Vithanco Graph Language (VGL) Guide</h1>
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Vithanco</title><description>Use Visual Thinking to Improve Your Decision Making and Problem Solving Skills.</description><link>https://vithanco.com</link><language>en</language><lastBuildDate>Sun, 22 Mar 2026 07:34:47 +0100</lastBuildDate><pubDate>Sun, 22 Mar 2026 07:34:47 +0100</pubDate><ttl>250</ttl><atom:link href="https://vithanco.com/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://vithanco.com/tools/VGL_GUIDE</guid><title>Vithanco Graph Language (VGL) Guide</title><description>Learn the VGL syntax for creating and editing graphs in text format</description><link>https://vithanco.com/tools/VGL_GUIDE</link><pubDate>Sun, 22 Mar 2026 07:34:47 +0100</pubDate><content:encoded><![CDATA[<h1 id="vithanco-graph-language-vgl-guide">Vithanco Graph Language (VGL) Guide</h1>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
  <li><a href="#concepts">Concepts</a></li>
+ <li><a href="#user-defined-notations-vnotation">User-Defined Notations (vnotation)</a></li>
  <li><a href="#grammar">Grammar</a></li>
  <li><a href="#examples">Examples</a></li>
 </ul>
@@ -16,7 +17,7 @@
     ...
 }
 </code></pre>
-<p>VGL currently supports built-in notations that come with predefined node types and edge types:</p>
+<p>VGL supports both built-in notations and user-defined notations declared with <code>vnotation</code> (see <a href="#user-defined-notations-vnotation">User-Defined Notations</a>). Built-in notations come with predefined node types and edge types:</p>
 <ul>
  <li><strong>IBIS</strong> (Issue-Based Information System) - for decision-making and argumentation</li>
  <li><strong>BBS</strong> (Benefit Breakdown Structure) - for benefit analysis</li>
@@ -31,6 +32,7 @@
  <li><strong>GoalTree</strong> (Goal Tree) - for strategic planning using Theory of Constraints necessity logic</li>
  <li><strong>CLD</strong> (Causal Loop Diagram) - for systems analysis modelling how elements reinforce or balance each other over time</li>
  <li><strong>DecisionTree</strong> (Decision Tree) - for storing and evaluating decision logic through questions, choices, and outcomes</li>
+ <li><strong>Timeline</strong> (Timeline) - for visualizing events across multiple tracks aligned to a shared time axis</li>
 </ul>
 <p>The notation determines what node types and edge types are available in your graph.</p>
 <h3 id="extensions">Extensions</h3>
@@ -169,6 +171,11 @@
  <li><code>DecisionPoint</code> - A question that determines which path to follow (default: amber)</li>
  <li><code>Choice</code> - A potential answer or path branching from a question (default: blue)</li>
  <li><code>Outcome</code> - A terminal result of the decision tree (default: green)</li>
+</ul>
+<p><strong>Timeline Node Types:</strong></p>
+<ul>
+ <li><code>TimePoint</code> - An axis marker representing a point in time (default: gray, optional)</li>
+ <li><code>Event</code> - A generic event that can be aligned to a time point via <code>alignGroup</code> (default: steel blue)</li>
 </ul>
 <h3 id="edges">Edges</h3>
 <p>Edges represent connections between nodes. Each edge has:</p>
@@ -350,6 +357,11 @@ edge q2 -&gt; a2;  // Type inferred from node types
  <li><code>choice_to_decision</code> - Connects Choice → DecisionPoint (the option leads to a further question)</li>
  <li><code>choice_to_outcome</code> - Connects Choice → Outcome (the option terminates at a result)</li>
 </ul>
+<p><strong>Timeline Edge Types:</strong></p>
+<ul>
+ <li><code>sequence</code> - Connects TimePoint → TimePoint (creates the time axis, thin gray line)</li>
+ <li><code>influence</code> - Connects Event → Event (cross-track or within-track dependency, dashed, constraint=false)</li>
+</ul>
 <p>Edge types ensure that connections make semantic sense within the notation's domain.</p>
 <h3 id="groups">Groups</h3>
 <p>Groups organize nodes hierarchically and can be nested to create subgroups. Groups help visually organize complex graphs.</p>
@@ -395,6 +407,7 @@ fontcolor: darkblue;
  <li><code>color</code> - Node color (e.g., <code>red</code>, <code>blue</code>, <code>#FF0000</code>)</li>
  <li><code>fontsize</code> - Font size for node label (number)</li>
  <li><code>shape</code> - Node shape (varies by notation)</li>
+ <li><code>alignGroup</code> - Alignment group identifier; nodes sharing the same value are placed at the same rank in layout (used by Timeline and available in all notations)</li>
 </ul>
 <p><strong>Common Edge Attributes:</strong></p>
 <ul>
@@ -423,10 +436,21 @@ node q1: Question "Main question";  // This is also a comment
 <hr />
 <h2 id="grammar">Grammar</h2>
 <p>The VGL grammar is defined as follows (simplified BNF notation):</p>
-<pre><code>document     ::= "vgraph" identifier ":" notation ("," extension)* label? "{" statement* "}"
+<pre><code>file         ::= vnotation* document
+
+document     ::= "vgraph" identifier ":" notation ("," extension)* label? "{" statement* "}"
 
 notation     ::= identifier
-                 // Built-in notations: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree, GoalTree, CLD, DecisionTree
+                 // Built-in: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree, GoalTree, CLD, DecisionTree, Timeline
+                 // User-defined: any vnotation declared earlier in the same file
+
+vnotation    ::= "vnotation" identifier ("extends" identifier)? "{" vnotation_body* "}"
+
+vnotation_body ::= ("layout" ":" layout_dir ";"?)
+                 | ("node" "type" ":" identifier attributes? ";"?)
+                 | ("edge" "type" ":" identifier "from" ":" identifier "to" ":" identifier attributes? ";"?)
+
+layout_dir   ::= "topToBottom" | "leftToRight" | "bottomToTop" | "rightToLeft"
 
 extension    ::= identifier
                  // Available extensions: Annotation
@@ -457,7 +481,8 @@ comment      ::= "//" [^\n]*
 </code></pre>
 <p><strong>Key Grammar Rules:</strong></p>
 <ol>
- <li><strong>Document Structure</strong>: Every VGL file must start with a <code>vgraph</code> declaration</li>
+ <li><strong>Document Structure</strong>: A VGL file contains zero or more <code>vnotation</code> blocks followed by a <code>vgraph</code> declaration</li>
+ <li><strong>File ordering</strong>: <code>vnotation</code> blocks must appear before any <code>vgraph</code> that references them</li>
  <li><strong>Node IDs</strong>: Must be unique throughout the document</li>
  <li><strong>Edge References</strong>: Edges can only reference nodes that have been declared</li>
  <li><strong>Type Validation</strong>: Node types and edge types must be valid for the chosen notation, or will be marked as "unknown"</li>
@@ -1207,6 +1232,162 @@ comment      ::= "//" [^\n]*
 </code></pre>
 <p><strong>Note</strong>: Decision Trees flow top-to-bottom. Every <code>DecisionPoint</code> branches into one or more <code>Choice</code> nodes. Each <code>Choice</code> leads either to another <code>DecisionPoint</code> (continuing the logic) or to an <code>Outcome</code> (terminal result). Outcomes have no outgoing edges.</p>
 <hr />
+<h3 id="example-20-timeline">Example 20: Timeline</h3>
+<p>A timeline visualizing events across multiple tracks aligned to a shared time axis:</p>
+<pre><code class="language-vgl">vgraph myTimeline: Timeline "19th Century Europe" {
+    // Time axis
+    node t1800: TimePoint "1800" [alignGroup: "1800"]
+    node t1850: TimePoint "1850" [alignGroup: "1850"]
+    node t1871: TimePoint "1871" [alignGroup: "1871"]
+    edge t1800 -&gt; t1850: sequence
+    edge t1850 -&gt; t1871: sequence
+
+    // Germany track
+    group germany "Germany" {
+        node g1: Event "Napoleon defeats Prussia" [alignGroup: "1800"]
+        node g2: Event "German Unification" [alignGroup: "1871"]
+    }
+
+    // England track
+    group england "England" {
+        node e1: Event "Industrial Revolution peaks" [alignGroup: "1850"]
+        node e2: Event "Franco-Prussian War impact" [alignGroup: "1871"]
+    }
+
+    // Cross-track influences
+    edge g1 -&gt; g2: influence "led to"
+    edge e1 -&gt; e2: influence
+    edge e1 -&gt; g2: influence "industrialization enabled"
+}
+</code></pre>
+<p><strong>Note</strong>: Timelines flow left-to-right. Use <code>alignGroup</code> on nodes to align them at the same rank (same horizontal position). TimePoint nodes are optional — <code>alignGroup</code> alone suffices for alignment. Groups create visual tracks with cluster boxes. Influence edges are dashed and don't affect node positioning (<code>constraint=false</code>). Extend with <code>vnotation</code> for custom event types.</p>
+<hr />
+<h2 id="user-defined-notations-vnotation">User-Defined Notations (<code>vnotation</code>)</h2>
+<p><code>vnotation</code> lets expert users define their own notation schema inline in a VGL file, without requiring any Swift code changes. Everything that built-in notations provide — node types, edge types, layout direction — can be expressed in VGL.</p>
+<h3 id="basic-syntax">Basic Syntax</h3>
+<pre><code>vnotation &lt;Name&gt; [extends &lt;BuiltinNotation&gt;] {
+    layout: &lt;topToBottom | leftToRight | rightToLeft | bottomToTop&gt;
+
+    node type: &lt;TypeName&gt;  [nodeStyle: &lt;name&gt;, color: "#hex", icon: "sf.symbol", ...]
+    ...
+    edge type: &lt;edge_id&gt;   from: &lt;TypeName&gt;  to: &lt;TypeName&gt;  [color: "#hex"]
+    ...
+}
+</code></pre>
+<p>A <code>vgraph</code> then references the vnotation by name, identically to any built-in notation:</p>
+<pre><code>vgraph &lt;id&gt;: &lt;VnotationName&gt; "&lt;label&gt;" [, Extension ...] {
+    // identical syntax — node, edge, group, attribute overrides
+}
+</code></pre>
+<h3 id="file-ordering-rule">File-Ordering Rule</h3>
+<p><code>vnotation</code> blocks <strong>must appear before</strong> any <code>vgraph</code> that references them. This allows single-pass parsing and produces a clear error if violated.</p>
+<h3 id="nodestyle-required-on-every-node-type"><code>nodeStyle:</code> — Required on Every Node Type</h3>
+<p><code>nodeStyle:</code> is required on every <code>node type:</code> declaration. The parser treats the value as an opaque string; the semantic layer validates it against the table below.</p>
+<table>
+ <thead>
+  <tr>
+   <th><code>nodeStyle:</code> value</th>
+   <th>Additional parameters</th>
+   <th>Description</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td><code>iconWithText</code></td>
+   <td><code>color:</code> (required), <code>icon:</code>, <code>iconColor:</code> (opt, default white), <code>iconSize:</code> (opt, default 24)</td>
+   <td>Icon above text, colored background</td>
+  </tr>
+  <tr>
+   <td><code>simpleRoundedText</code></td>
+   <td><code>color:</code></td>
+   <td>Text in a rounded rectangle</td>
+  </tr>
+  <tr>
+   <td><code>roundedBox</code></td>
+   <td><code>color:</code></td>
+   <td>Plain rounded box</td>
+  </tr>
+  <tr>
+   <td><code>withCategory</code></td>
+   <td><code>color:</code>, <code>category:</code> (short header label)</td>
+   <td>Box with a colored category bar at top</td>
+  </tr>
+  <tr>
+   <td><code>withCategoryAndIcon</code></td>
+   <td><code>color:</code>, <code>category:</code>, <code>icon:</code>, <code>iconColor:</code> (opt), <code>iconSize:</code> (opt)</td>
+   <td>Category bar + icon</td>
+  </tr>
+  <tr>
+   <td><code>iconOnly</code></td>
+   <td><code>icon:</code>, <code>iconColor:</code> (opt, default black), <code>iconSize:</code> (opt)</td>
+   <td>Icon without text</td>
+  </tr>
+  <tr>
+   <td><code>circle</code></td>
+   <td><code>color:</code></td>
+   <td>Circular node</td>
+  </tr>
+  <tr>
+   <td><code>bareText</code></td>
+   <td>—</td>
+   <td>Plain text, no decoration</td>
+  </tr>
+  <tr>
+   <td><code>hidden</code></td>
+   <td>—</td>
+   <td>Node is not rendered</td>
+  </tr>
+  <tr>
+   <td><code>custom</code></td>
+   <td>—</td>
+   <td>Falls back to <code>bareText</code> in v1; reserved for future full style expressions</td>
+  </tr>
+ </tbody>
+</table>
+<h3 id="extends-inheriting-a-built-in-notation"><code>extends</code> — Inheriting a Built-In Notation</h3>
+<p>The <code>extends</code> clause adds all node and edge types from a built-in notation, then your vnotation adds further types on top:</p>
+<pre><code class="language-vgl">vnotation RichIBIS extends IBIS {
+    node type: Stakeholder [nodeStyle: withCategory, color: "#884499", category: "S"]
+
+    edge type: stakeholder_raises  from: Stakeholder to: Question
+    edge type: stakeholder_answers from: Stakeholder to: Answer
+}
+</code></pre>
+<p><strong>v1 constraint:</strong> Only built-in notations can be extended. <code>vnotation A extends B</code> where B is itself a vnotation is not supported.</p>
+<h3 id="examples">Examples</h3>
+<p><strong>Pure vnotation — custom risk map:</strong></p>
+<pre><code class="language-vgl">vnotation RiskMap {
+    layout: topToBottom
+
+    node type: Risk    [nodeStyle: iconWithText, color: "#cc3333", icon: "exclamationmark.triangle"]
+    node type: Control [nodeStyle: iconWithText, color: "#339933", icon: "shield"]
+    node type: Owner   [nodeStyle: circle,       color: "#3366cc"]
+
+    edge type: risk_has_control  from: Risk    to: Control
+    edge type: control_owned_by  from: Control to: Owner
+}
+
+vgraph rm1: RiskMap "Project Risk Map" {
+    node r1: Risk    "Schedule overrun"
+    node c1: Control "Weekly reviews"
+    node o1: Owner   "PM"
+    edge r1 -&gt; c1
+    edge c1 -&gt; o1
+}
+</code></pre>
+<p><strong>vnotation + Extension:</strong></p>
+<pre><code class="language-vgl">vnotation SimpleMap {
+    node type: Concept [nodeStyle: simpleRoundedText, color: "#336699"]
+    edge type: related  from: Concept to: Concept
+}
+
+vgraph sm1: SimpleMap, Annotation "Annotated Map" {
+    node c1: Concept    "Main idea"
+    node a1: Annotation "See also: section 3"
+    edge c1 -&gt; a1
+}
+</code></pre>
+<hr />
 <h2 id="best-practices">Best Practices</h2>
 <ol>
  <li><strong>Use Meaningful IDs</strong>: Choose descriptive node IDs like <code>security_question</code> instead of <code>n1</code></li>
@@ -1228,7 +1409,146 @@ comment      ::= "//" [^\n]*
  <li><strong>Invalid Edge Type</strong>: Edge types must be valid for the connected node types (creates "unknown" edge type)</li>
  <li><strong>Syntax Errors</strong>: Missing semicolons, braces, or other syntax requirements</li>
 </ul>
-<p>When a node type or edge type is not found in the notation, VGL will create an "unknown" type to allow the graph to be processed, but you should verify that the type names are correct.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/Help/dictionary</guid><title>Dictionary</title><description></description><link>https://vithanco.com/tools/Help/dictionary</link><pubDate>Sat, 21 Mar 2026 14:29:15 +0100</pubDate><content:encoded><![CDATA[<ul><li><strong>Dark Mode:</strong> "Dark Mode" or "Dark Appearance" is a feature introduced with macOS 10.14 Mojave, a bright dark appearance for the whole of macOS. As a result, you can export any diagram in dark or bright mode (except PDF - which only knows bright mode) <figure class="img-std">
+<p>When a node type or edge type is not found in the notation, VGL will create an "unknown" type to allow the graph to be processed, but you should verify that the type names are correct.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/timeline</guid><title>Timeline Notation</title><description>Visualizing events across multiple tracks aligned to a shared time axis</description><link>https://vithanco.com/notations/timeline</link><pubDate>Sat, 21 Mar 2026 17:47:44 +0100</pubDate><content:encoded><![CDATA[<h2 id="why-use-timelines">Why use Timelines?</h2>
+<p>Timelines allow you to visualize events across multiple tracks (e.g., countries, teams, departments) aligned to a shared time axis. They are useful for understanding how events in different domains relate to each other chronologically and causally.</p>
+<p>Common use cases include:</p>
+<ul>
+ <li>Historical analysis across multiple countries or regions</li>
+ <li>Project management with parallel workstreams</li>
+ <li>Product roadmaps with multiple feature tracks</li>
+ <li>Incident timelines showing events across different systems</li>
+</ul>
+<h2 id="timeline-notation-description">Timeline Notation Description</h2>
+<p>The Timeline notation uses a left-to-right layout where time flows horizontally. Events are aligned vertically using the <code>alignGroup</code> attribute, which ensures that events happening at the same time appear at the same horizontal position.</p>
+<h3 id="node-types">Node Types</h3>
+<table>
+ <thead>
+  <tr>
+   <th>Node Type</th>
+   <th>Description</th>
+   <th>Is Starting Point</th>
+   <th>Successors</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>TimePoint</td>
+   <td>An axis marker representing a point in time (e.g., a year, date, or phase). TimePoints are optional — alignment can be achieved with <code>alignGroup</code> alone.</td>
+   <td>Yes</td>
+   <td>TimePoint</td>
+  </tr>
+  <tr>
+   <td>Event</td>
+   <td>A generic event that can be aligned to a time point. Extend with <code>vnotation</code> for custom event types (e.g., Battle, Treaty, Release).</td>
+   <td>No</td>
+   <td>Event</td>
+  </tr>
+ </tbody>
+</table>
+<h3 id="edge-types">Edge Types</h3>
+<table>
+ <thead>
+  <tr>
+   <th>Edge Type</th>
+   <th>Description</th>
+   <th>From</th>
+   <th>To</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>sequence</td>
+   <td>Creates the time axis by connecting TimePoints in chronological order. Rendered as a thin gray line.</td>
+   <td>TimePoint</td>
+   <td>TimePoint</td>
+  </tr>
+  <tr>
+   <td>influence</td>
+   <td>Shows dependencies or causal relationships between events, within or across tracks. Rendered as a dashed line with <code>constraint=false</code> so it does not distort time alignment.</td>
+   <td>Event</td>
+   <td>Event</td>
+  </tr>
+ </tbody>
+</table>
+<h3 id="tracks-with-groups">Tracks with Groups</h3>
+<p>Use groups to create parallel tracks. Each group renders as a labeled cluster box containing its events. Groups are optional — simple timelines work without them.</p>
+<h2 id="try-timeline-yourself">Try Timeline Yourself</h2>
+<p>Create and visualise your own Timeline diagram right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p>
+<iframe src="https://vithanco.com/vgraph/vgraph-widget.html%3Fvgl=vgraph%2520myTimeline%253A%2520Timeline%2520%252219th%2520Century%2520Europe%2522%2520%257B%250A%2520%2520%2520%2520node%2520t1800%253A%2520TimePoint%2520%25221800%2522%2520%255BalignGroup%253A%2520%25221800%2522%255D%250A%2520%2520%2520%2520node%2520t1850%253A%2520TimePoint%2520%25221850%2522%2520%255BalignGroup%253A%2520%25221850%2522%255D%250A%2520%2520%2520%2520node%2520t1871%253A%2520TimePoint%2520%25221871%2522%2520%255BalignGroup%253A%2520%25221871%2522%255D%250A%2520%2520%2520%2520edge%2520t1800%2520-%253E%2520t1850%253A%2520sequence%250A%2520%2520%2520%2520edge%2520t1850%2520-%253E%2520t1871%253A%2520sequence%250A%250A%2520%2520%2520%2520group%2520germany%2520%2522Germany%2522%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520node%2520g1%253A%2520Event%2520%2522Napoleon%2520defeats%2520Prussia%2522%2520%255BalignGroup%253A%2520%25221800%2522%255D%250A%2520%2520%2520%2520%2520%2520%2520%2520node%2520g2%253A%2520Event%2520%2522German%2520Unification%2522%2520%255BalignGroup%253A%2520%25221871%2522%255D%250A%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520group%2520england%2520%2522England%2522%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520node%2520e1%253A%2520Event%2520%2522Industrial%2520Revolution%2520peaks%2522%2520%255BalignGroup%253A%2520%25221850%2522%255D%250A%2520%2520%2520%2520%2520%2520%2520%2520node%2520e2%253A%2520Event%2520%2522Franco-Prussian%2520War%2520impact%2522%2520%255BalignGroup%253A%2520%25221871%2522%255D%250A%2520%2520%2520%2520%257D%250A%250A%2520%2520%2520%2520edge%2520g1%2520-%253E%2520g2%253A%2520influence%2520%2522led%2520to%2522%250A%2520%2520%2520%2520edge%2520e1%2520-%253E%2520e2%253A%2520influence%250A%2520%2520%2520%2520edge%2520e1%2520-%253E%2520g2%253A%2520influence%2520%2522industrialization%2520enabled%2522%250A%257D" width="100%" height="750" style="border: 1px solid #e0e0e0; border-radius: 8px; margin: 20px 0;" title="VGraph Interactive Timeline Editor"></iframe>
+<p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p>
+<p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="https://vithanco.com/tools/VGL_GUIDE">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.</p>
+<h2 id="example">Example</h2>
+<p>This example models 19th century European events across two country tracks:</p>
+<figure class="img-std"> 
+ <img src="https://vithanco.com/notations/timeline/Timeline.svg" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  A Timeline showing 19th Century European events
+ </figcaption> 
+</figure>
+<pre><code>vgraph myTimeline: Timeline "19th Century Europe" {
+    node t1800: TimePoint "1800" [alignGroup: "1800"]
+    node t1850: TimePoint "1850" [alignGroup: "1850"]
+    node t1871: TimePoint "1871" [alignGroup: "1871"]
+    edge t1800 -&gt; t1850: sequence
+    edge t1850 -&gt; t1871: sequence
+
+    group germany "Germany" {
+        node g1: Event "Napoleon defeats Prussia" [alignGroup: "1800"]
+        node g2: Event "German Unification" [alignGroup: "1871"]
+    }
+    group england "England" {
+        node e1: Event "Industrial Revolution peaks" [alignGroup: "1850"]
+        node e2: Event "Franco-Prussian War impact" [alignGroup: "1871"]
+    }
+
+    edge g1 -&gt; g2: influence "led to"
+    edge e1 -&gt; e2: influence
+    edge e1 -&gt; g2: influence "industrialization enabled"
+}
+</code></pre>
+<h2 id="changing-layout-direction">Changing Layout Direction</h2>
+<p>The default Timeline layout is left-to-right, with time flowing horizontally. You can switch to a top-to-bottom layout using the <code>layout</code> directive in a <code>vnotation</code> block. In top-to-bottom mode, time flows vertically downward, and <code>alignGroup</code> aligns nodes at the same vertical position instead.</p>
+<pre><code>vnotation VerticalTimeline extends Timeline {
+    layout: topToBottom
+}
+</code></pre>
+<p>All four layout directions are supported: <code>topToBottom</code>, <code>bottomToTop</code>, <code>leftToRight</code>, <code>rightToLeft</code>.</p>
+<h2 id="extending-with-vnotation">Extending with vnotation</h2>
+<p>The base Timeline notation provides generic TimePoint and Event types. Use <code>vnotation extends Timeline</code> to define domain-specific event types with custom colors, icons, and categories. You can also change the layout direction in the same <code>vnotation</code> block.</p>
+<p>Here is an example that defines a <code>WarTimeline</code> with Battle and Treaty event types, custom edge types (<code>resolved_by</code> and <code>influenced</code>), and a top-to-bottom layout:</p>
+<pre><code>vnotation WarTimeline extends Timeline {
+    layout: topToBottom
+    node type: Battle [nodeStyle: withCategory, color: "#883333", category: "Battle"]
+    node type: Treaty [nodeStyle: withCategory, color: "#339933", category: "Treaty"]
+    edge type: resolved_by from: Battle to: Treaty
+    edge type: influenced from: Battle to: Battle
+}
+vgraph napoleonicWars: WarTimeline "Napoleonic Wars" {
+    node t1805: TimePoint "1805" [alignGroup: "1805"]
+    node t1812: TimePoint "1812" [alignGroup: "1812"]
+    node t1815: TimePoint "1815" [alignGroup: "1815"]
+    edge t1805 -&gt; t1812: sequence
+    edge t1812 -&gt; t1815: sequence
+        node f1: Battle "Battle of Austerlitz" [alignGroup: "1805"]
+        node f2: Battle "Invasion of Russia" [alignGroup: "1812"]
+        node f3: Battle "Battle of Waterloo" [alignGroup: "1815"]
+        node e1: Treaty "Treaty of Pressburg" [alignGroup: "1805"]
+        node e2: Treaty "Congress of Vienna" [alignGroup: "1815"]
+    edge f1 -&gt; e1: resolved_by
+    edge f3 -&gt; e2: resolved_by
+    edge f1 -&gt; f2: influenced "overconfidence"
+    edge f2 -&gt; f3: influenced "weakened army"
+}
+</code></pre>
+<figure class="img-std"> 
+ <img src="https://vithanco.com/notations/timeline/WarTimeline.svg" alt="" onclick="openLightbox(this)" /> 
+ <figcaption>
+  A WarTimeline showing the Napoleonic Wars with custom Battle and Treaty types in top-to-bottom layout
+ </figcaption> 
+</figure>
+<iframe src="https://vithanco.com/vgraph/vgraph-widget.html%3Fvgl=vnotation%2520WarTimeline%2520extends%2520Timeline%2520%257B%250A%2520%2520%2520%2520layout%253A%2520topToBottom%250A%2520%2520%2520%2520node%2520type%253A%2520Battle%2520%255BnodeStyle%253A%2520withCategory%252C%2520color%253A%2520%2522%2523883333%2522%252C%2520category%253A%2520%2522Battle%2522%255D%250A%2520%2520%2520%2520node%2520type%253A%2520Treaty%2520%255BnodeStyle%253A%2520withCategory%252C%2520color%253A%2520%2522%2523339933%2522%252C%2520category%253A%2520%2522Treaty%2522%255D%250A%2520%2520%2520%2520edge%2520type%253A%2520resolved_by%2520from%253A%2520Battle%2520to%253A%2520Treaty%250A%2520%2520%2520%2520edge%2520type%253A%2520influenced%2520from%253A%2520Battle%2520to%253A%2520Battle%250A%257D%250Avgraph%2520napoleonicWars%253A%2520WarTimeline%2520%2522Napoleonic%2520Wars%2522%2520%257B%250A%2520%2520%2520%2520node%2520t1805%253A%2520TimePoint%2520%25221805%2522%2520%255BalignGroup%253A%2520%25221805%2522%255D%250A%2520%2520%2520%2520node%2520t1812%253A%2520TimePoint%2520%25221812%2522%2520%255BalignGroup%253A%2520%25221812%2522%255D%250A%2520%2520%2520%2520node%2520t1815%253A%2520TimePoint%2520%25221815%2522%2520%255BalignGroup%253A%2520%25221815%2522%255D%250A%2520%2520%2520%2520edge%2520t1805%2520-%253E%2520t1812%253A%2520sequence%250A%2520%2520%2520%2520edge%2520t1812%2520-%253E%2520t1815%253A%2520sequence%250A%2520%2520%2520%2520%2520%2520%2520%2520node%2520f1%253A%2520Battle%2520%2522Battle%2520of%2520Austerlitz%2522%2520%255BalignGroup%253A%2520%25221805%2522%255D%250A%2520%2520%2520%2520%2520%2520%2520%2520node%2520f2%253A%2520Battle%2520%2522Invasion%2520of%2520Russia%2522%2520%255BalignGroup%253A%2520%25221812%2522%255D%250A%2520%2520%2520%2520%2520%2520%2520%2520node%2520f3%253A%2520Battle%2520%2522Battle%2520of%2520Waterloo%2522%2520%255BalignGroup%253A%2520%25221815%2522%255D%250A%2520%2520%2520%2520%2520%2520%2520%2520node%2520e1%253A%2520Treaty%2520%2522Treaty%2520of%2520Pressburg%2522%2520%255BalignGroup%253A%2520%25221805%2522%255D%250A%2520%2520%2520%2520%2520%2520%2520%2520node%2520e2%253A%2520Treaty%2520%2522Congress%2520of%2520Vienna%2522%2520%255BalignGroup%253A%2520%25221815%2522%255D%250A%2520%2520%2520%2520edge%2520f1%2520-%253E%2520e1%253A%2520resolved_by%250A%2520%2520%2520%2520edge%2520f3%2520-%253E%2520e2%253A%2520resolved_by%250A%2520%2520%2520%2520edge%2520f1%2520-%253E%2520f2%253A%2520influenced%2520%2522overconfidence%2522%250A%2520%2520%2520%2520edge%2520f2%2520-%253E%2520f3%253A%2520influenced%2520%2522weakened%2520army%2522%250A%257D%250A" width="100%" height="750" style="border: 1px solid #e0e0e0; border-radius: 8px; margin: 20px 0;" title="VGraph Interactive WarTimeline Editor"></iframe>
+<h2 id="the-aligngroup-attribute">The alignGroup Attribute</h2>
+<p>The <code>alignGroup</code> attribute is the key mechanism for time alignment. Nodes with the same <code>alignGroup</code> value are placed at the same rank (same horizontal position in a left-to-right layout, or same vertical position in a top-to-bottom layout). This attribute is generic and available in all notations, not just Timeline.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/Help/dictionary</guid><title>Dictionary</title><description></description><link>https://vithanco.com/tools/Help/dictionary</link><pubDate>Sat, 21 Mar 2026 14:29:15 +0100</pubDate><content:encoded><![CDATA[<ul><li><strong>Dark Mode:</strong> "Dark Mode" or "Dark Appearance" is a feature introduced with macOS 10.14 Mojave, a bright dark appearance for the whole of macOS. As a result, you can export any diagram in dark or bright mode (except PDF - which only knows bright mode) <figure class="img-std">
     <img src="https://vithanco.com/tools/Help/dictionary/Project-Model-Current-Reality-Tree-CRT-bright.jpg" alt="A small Current Reality Tree. Left side with normal appearance, and the right side with a dark appearance" onclick="openLightbox(this)" />
     <figcaption>A small Current Reality Tree. Left side with normal appearance, and the right side with a dark appearance</figcaption>
 </figure></li></ul><ul><li><strong>Notation Structure View:</strong> <a id="NotationStructureView"></a>Notation structure views are showing schematically the <a href="https://vithanco.com/notations">Notation</a>. Each node represents a Node Type. The On/Off symbol represents the starting point. Edges going from their point to the Starting Node Types. From there the Edges show suggested predecessors and successors. So if a Concept Node Type has an edge pointing at the Relation Node Type then Concept is a suggested predecessor for a Relation. If the Edge has arrows at both sides is each Node Type a suggested predecessor (and successor) of the other? If there is an Edge that points with both sides to the same Node Type, then the Node Type can be its own predecessor (and successor). <figure class="img-std">
