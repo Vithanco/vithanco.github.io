@@ -137,7 +137,6 @@ The Transition Tree (TRT) Notation</div>
   <tr>
    <th>Node Type</th>
    <th>Description</th>
-   <th>Is Starting Point</th>
    <th>Successors</th>
   </tr>
  </thead>
@@ -145,37 +144,31 @@ The Transition Tree (TRT) Notation</div>
   <tr>
    <td>Desirable Effect</td>
    <td>Goal outcomes we want to achieve. These are the target states that our actions aim to produce.</td>
-   <td>No</td>
    <td>All Effects incl. 'And'</td>
   </tr>
   <tr>
    <td>Intermediate Effect</td>
    <td>Stepping stone outcomes from actions. Neither positive nor negative on their own, they connect actions to final effects.</td>
-   <td>No</td>
    <td>All Effects incl. 'And'</td>
   </tr>
   <tr>
    <td>Undesirable Effect</td>
    <td>Current state problems being addressed. In TRT, these help track what we're trying to eliminate.</td>
-   <td>Yes</td>
    <td>All Effects incl. 'And'</td>
   </tr>
   <tr>
    <td>Given</td>
    <td>Unchangeable facts and constraints. These are preconditions beyond your sphere of influence.</td>
-   <td>No</td>
    <td>All Effects incl. 'And'</td>
   </tr>
   <tr>
    <td>Changeable</td>
    <td>Actions we can take to cause change. These are the specific steps we will implement.</td>
-   <td>No</td>
    <td>All Effects incl. 'And'</td>
   </tr>
   <tr>
    <td>And Junctor</td>
    <td>Indicates multiple conditions required together for an effect. Connects two causes that must both be present.</td>
-   <td>No</td>
    <td>All Effects (excl. 'And')</td>
   </tr>
  </tbody>

@@ -104,12 +104,17 @@ The Goal Tree (GT) Notation</div>
 <h2 id="gt-notation-description">GT Notation Description</h2>
 <p>The Goal Tree uses <a href="/tools/Help/Expert_Concepts/diagram-logic/index.html">necessity-based logic</a> (necessary condition thinking). Every connection in the tree reads as: <strong>"In order to achieve [upper node], we must have [lower node]."</strong> This logic gives the tree its distinctive property: every element at every level is equally important, because a failure at any level prevents the Goal from being reached.</p>
 <p>The diagram is laid out top-to-bottom, with the single Goal at the top, Critical Success Factors in the next layer, and Necessary Conditions cascading downward into increasing levels of detail.</p>
+<figure class="img-std"> 
+ <img src="/notations/TOC/goal-tree/domain-GoalTree.svg" alt="The GT Notation Structure" onclick="openLightbox(this)" /> 
+ <figcaption>
+  The Goal Tree Notation Structure
+ </figcaption> 
+</figure>
 <table>
  <thead>
   <tr>
    <th>Node Type</th>
    <th>Description</th>
-   <th>Is Starting Point</th>
    <th>Successors</th>
   </tr>
  </thead>
@@ -117,19 +122,16 @@ The Goal Tree (GT) Notation</div>
   <tr>
    <td>Goal</td>
    <td>The ultimate purpose for which the system exists. There is always exactly one Goal, placed at the top of the tree. It states the end to which the system's collective efforts are directed.</td>
-   <td>Yes</td>
    <td>-</td>
   </tr>
   <tr>
    <td>Critical Success Factor</td>
    <td>A high-level terminal outcome without which the Goal cannot be achieved. Typically 3 to 5 CSFs sit directly below the Goal. They represent the last things that must happen before the Goal is realized, each summarizing the outcome of many subordinate activities.</td>
-   <td>No</td>
    <td>Goal</td>
   </tr>
   <tr>
    <td>Necessary Condition</td>
    <td>An indispensable functional task or prerequisite that supports either a CSF or another NC. NCs can cascade into multiple levels, becoming more detailed, specific, and operational at lower tiers. They may also have lateral cross-connections between branches when a condition supports elements in different parts of the tree.</td>
-   <td>No</td>
    <td>Critical Success Factor, Necessary Condition</td>
   </tr>
  </tbody>

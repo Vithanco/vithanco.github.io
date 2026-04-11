@@ -96,7 +96,7 @@ The IBIS Notation</div>
 <h2 id="ibis-notation-definition">IBIS Notation Definition</h2>
 <p>The graph below describes the IBIS Notation. The Question Node Type is the starting point (hence the edge from the start symbol). From the question, you can create a successor Idea. Pro and Con Nodes can follow ideas. Questions can be successors to all Node Types.</p>
 <figure class="img-std"> 
- <img src="/notations/IBIS/index/IBIS-Domain.jpg" alt="The IBIS Notation structure showing Questions, Ideas, Pros, and Cons" onclick="openLightbox(this)" /> 
+ <img src="/notations/IBIS/index/IBIS-Domain.svg" alt="The IBIS Notation structure showing Questions, Ideas, Pros, and Cons" onclick="openLightbox(this)" /> 
  <figcaption>
   The IBIS Notation structure
  </figcaption> 
@@ -106,7 +106,6 @@ The IBIS Notation</div>
   <tr>
    <th>Node Type</th>
    <th>Description</th>
-   <th>Is Starting Point</th>
    <th>Successors</th>
   </tr>
  </thead>
@@ -114,37 +113,31 @@ The IBIS Notation</div>
   <tr>
    <td>Question</td>
    <td>Questions are the key driver of IBIS. They are the starting point and the one item that can be connected to all other nodes.</td>
-   <td>Yes</td>
    <td>Idea, Question</td>
   </tr>
   <tr>
    <td>Idea</td>
    <td>An idea (depending on the context, you can call it as well as an answer) for a question. Ideas are used to answer your questions.</td>
-   <td>No</td>
    <td>Pro, Con, Question</td>
   </tr>
   <tr>
    <td>Pro</td>
    <td>Arguments in favour of an idea. Add anything that you think is relevant to a given idea or answer. The Pros will later help you make a decision.</td>
-   <td>No</td>
    <td>Question</td>
   </tr>
   <tr>
    <td>Con</td>
    <td>Arguments against an idea. Add anything that you think is relevant to a given idea or answer. The Cons will later help you make a decision.</td>
-   <td>No</td>
    <td>Question</td>
   </tr>
   <tr>
    <td>Decision</td>
    <td>When the IBIS map is finalised, you often want to evaluate the map and decide on your next step. Attach this Node Type to an Idea to depict your chosen idea/answer.</td>
-   <td>No</td>
    <td>(None)</td>
   </tr>
   <tr>
    <td>Best Idea</td>
    <td>(not depicted in the diagram above) Instead of using the decision, you can highlight one idea as the "best idea".</td>
-   <td>No</td>
    <td>(same as Idea)</td>
   </tr>
  </tbody>

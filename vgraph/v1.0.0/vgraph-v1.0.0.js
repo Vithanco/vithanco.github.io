@@ -54,7 +54,7 @@ class VGraphLib {
    */
   async _loadGraphviz() {
     try {
-      const { Graphviz } = await import('https://cdn.jsdelivr.net/npm/@hpcc-js/wasm/dist/graphviz.js');
+      const { Graphviz } = await import('https://cdn.jsdelivr.net/npm/@hpcc-js/wasm@2.33.2/dist/graphviz.js');
       this.graphvizInstance = await Graphviz.load();
 
       // Expose graphviz functions globally for Swift WASM to use

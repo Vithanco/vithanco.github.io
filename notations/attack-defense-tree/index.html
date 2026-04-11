@@ -109,13 +109,18 @@ The Attack-Defense Tree (ADTree) Notation</div>
 </ul>
 <h2 id="adtree-notation-description">ADTree Notation Description</h2>
 <p>ADTrees use two primary node types — Attack and Defense — plus an And Junctor for conjunctive refinement. Edges between nodes of the same type represent refinement (breaking a goal into sub-goals), while edges between nodes of opposite types represent countermeasures.</p>
+<figure class="img-std"> 
+ <img src="/notations/attack-defense-tree/domain-ADTree.svg" alt="The ADTree Notation Structure" onclick="openLightbox(this)" /> 
+ <figcaption>
+  The ADTree Notation Structure
+ </figcaption> 
+</figure>
 <p>The Node Types in detail:</p>
 <table>
  <thead>
   <tr>
    <th>Node Type</th>
    <th>Description</th>
-   <th>Is Starting Point</th>
    <th>Successors</th>
   </tr>
  </thead>
@@ -123,19 +128,16 @@ The Attack-Defense Tree (ADTree) Notation</div>
   <tr>
    <td>Attack</td>
    <td>Represents an attacker's goal or action. Attack nodes can be refined into sub-goals (other attacks) and countered by defense nodes.</td>
-   <td>Yes (when root is an attack)</td>
    <td>Attack, Defense, And Junctor</td>
   </tr>
   <tr>
    <td>Defense</td>
    <td>Represents a defender's goal or countermeasure. Defense nodes can be refined into sub-goals (other defenses) and challenged by attack nodes.</td>
-   <td>Yes (when root is a defense)</td>
    <td>Attack, Defense, And Junctor</td>
   </tr>
   <tr>
    <td>And Junctor</td>
    <td>Indicates conjunctive refinement — all connected child conditions must be met for the parent goal to be achieved. Without an And Junctor, children are disjunctive (any one child suffices).</td>
-   <td>No</td>
    <td>Attack, Defense</td>
   </tr>
  </tbody>

@@ -90,7 +90,7 @@ Decision Tree (DT) Notation</div>
 <h2 id="dt-notation-description">DT Notation Description</h2>
 <p>The diagram below shows the simple structure of DTs. The starting point is always a question. Each question can have 2 or more choices, each with either questions or an outcome.</p>
 <figure class="img-std"> 
- <img src="/notations/decision-tree/DT-Domain.jpg" alt="The DT Notation" onclick="openLightbox(this)" /> 
+ <img src="/notations/decision-tree/DT-Domain.svg" alt="The DT Notation" onclick="openLightbox(this)" /> 
  <figcaption>
   The DT Notation
  </figcaption> 
@@ -101,7 +101,6 @@ Decision Tree (DT) Notation</div>
   <tr>
    <th>Node Type</th>
    <th>Description</th>
-   <th>Is Starting Point</th>
    <th>Successors</th>
   </tr>
  </thead>
@@ -109,19 +108,16 @@ Decision Tree (DT) Notation</div>
   <tr>
    <td>Decision Point</td>
    <td>A question describing a decision point</td>
-   <td>Yes</td>
    <td>Choice</td>
   </tr>
   <tr>
    <td>Choice</td>
    <td>Choices representing potential paths from a question. Each choice leads either to another Decision Point or to an Outcome.</td>
-   <td>No</td>
    <td>Outcome or Decision Point</td>
   </tr>
   <tr>
    <td>Outcome</td>
    <td>A result of the Decision Tree</td>
-   <td>No</td>
    <td>None</td>
   </tr>
  </tbody>

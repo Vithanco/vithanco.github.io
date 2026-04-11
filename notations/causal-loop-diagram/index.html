@@ -124,19 +124,25 @@ Causal Loop Diagram Notation</div>
 </table>
 <h2 id="cld-notation-description">CLD Notation Description</h2>
 <p>CLDs have only one single node type. Add more node types if you want to differentiate further. The easiest way is described <a href="/tools/Help/Expert_Concepts/create-a-node-type-variant">here</a>.</p>
+<figure class="img-std"> 
+ <img src="/notations/causal-loop-diagram/domain-CLD.svg" alt="The CLD Notation Structure" onclick="openLightbox(this)" /> 
+ <figcaption>
+  The CLD Notation Structure
+ </figcaption> 
+</figure>
 <table>
  <thead>
   <tr>
    <th>Node Type</th>
    <th>Description</th>
-   <th>Is Starting Point / Successors</th>
+   <th>Successors</th>
   </tr>
  </thead>
  <tbody>
   <tr>
    <td>Stock</td>
    <td>Everything is a stock in a CLD. Stock amounts can change over time, based on incoming connections. Currently this is not evaluated/simulated by Vithanco.</td>
-   <td>Yes / Stock</td>
+   <td>Stock</td>
   </tr>
  </tbody>
 </table>
