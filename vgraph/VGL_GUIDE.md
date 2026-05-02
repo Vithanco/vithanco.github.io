@@ -3,6 +3,7 @@
 ## Table of Contents
 - [Concepts](#concepts)
 - [User-Defined Notations (vnotation)](#user-defined-notations-vnotation)
+- [Metagraph (visualizing a notation)](#metagraph-visualizing-a-notation)
 - [Grammar](#grammar)
 - [Examples](#examples)
 
@@ -78,6 +79,20 @@ vgraph productMap: ConceptMap, Annotation "Product Strategy" {
 
 Edge types from notation nodes to `Annotation` are automatically inferred, so no explicit `: annotates__Concept` type is needed on annotation edges.
 
+### Diagram Logic and Junctors
+
+Each notation has a **diagram logic**: `noLogic`, `sufficientCause`, or `necessaryCondition`. The logic determines how multiple arrows pointing into the same node are read, and which junctor (AND, OR) needs to be an explicit node.
+
+| Diagram logic | Multiple unjoined arrows mean… | Explicit junctor needed | Implicit (don't add as a node) |
+|---|---|---|---|
+| `sufficientCause` | OR — any one arrow is enough | **AND** — all inputs required together | OR |
+| `necessaryCondition` | AND — all arrows are required | **OR** — alternative paths | AND |
+| `noLogic` | Notation-defined | — | — |
+
+**Rule of thumb:** add only the *exception* junctor for your logic. For sufficient-cause notations (CRT, FRT, ADTree, TRT) declare an `AndJunctor` only when you need "all of these together." For necessary-condition notations (EC, PRT, GoalTree) declare an `OrJunctor` only when you need "any one of these alternatives." Adding the implicit junctor produces a `redundantJunctor` quality warning, since direct edges already express the same semantics with less visual noise.
+
+This applies equally to user-defined notations declared with `vnotation` — match the junctor you expose to the diagram logic you choose.
+
 ### Nodes
 
 Nodes represent the primary entities in your graph. Each node has:
@@ -124,31 +139,31 @@ Node types are defined by the chosen notation. Each notation has its own set of 
 - `Relation` - A linking verb or phrase connecting concepts (forms propositions: Concept → Relation → Concept)
 
 **CRT Node Types:**
+
+CRT uses sufficient-cause logic, so multiple unjoined causes feeding the same effect are implicitly OR (any one is sufficient). Only AND is an explicit junctor.
 - `UndesirableEffect` - An unwanted outcome requiring investigation (default: red)
 - `IntermediateEffect` - A neutral outcome in the causal chain (default: blue)
 - `DesirableEffect` - A wanted outcome caused by other conditions (default: green)
 - `Given` - An unchangeable constant like laws or physics (default: dark purple)
 - `Changeable` - A modifiable condition that can be addressed (default: light purple)
-- `AndJunctor` - Indicates multiple conditions required simultaneously (icon: AND circle)
-- `OrJunctor` - Indicates alternative causes (icon: OR circle)
+- `AndJunctor` - Indicates multiple conditions required together to produce the downstream effect (icon: AND circle)
 
 **FRT Node Types:**
-FRT shares the same node types as CRT, as both are Theory of Constraints tools. The difference is in usage: FRT starts with solutions (Changeable/injections) and builds upward to show how they lead to desirable effects.
+FRT shares the same node types as CRT, as both are Theory of Constraints tools that use sufficient-cause logic. The difference is in usage: FRT starts with solutions (Changeable/injections) and builds upward to show how they lead to desirable effects. Multiple unjoined inputs into one effect are implicitly OR.
 - `Changeable` - Proposed solutions or injections to implement (default: light purple)
 - `Given` - Unchangeable facts that still apply (default: dark purple)
 - `IntermediateEffect` - Expected intermediate outcomes from solutions (default: blue)
 - `DesirableEffect` - Goals we want to achieve (default: green)
 - `UndesirableEffect` - Potential negative side effects to monitor (default: red)
-- `AndJunctor` - Indicates multiple conditions required simultaneously (icon: AND circle)
-- `OrJunctor` - Indicates alternative paths to outcomes (icon: OR circle)
+- `AndJunctor` - Indicates multiple conditions required together to produce the downstream effect (icon: AND circle)
 
 **EC Node Types:**
-EC (Evaporating Cloud) is a conflict resolution tool using necessary condition thinking. It surfaces the assumptions behind a conflict and finds breakthrough solutions. The graph flows left-to-right from Common Objective to Conflict.
+EC (Evaporating Cloud) is a conflict resolution tool using necessary-condition logic. It surfaces the assumptions behind a conflict and finds breakthrough solutions. The graph flows left-to-right from Common Objective to Conflict. Multiple necessary inputs are implicitly AND; OR is the explicit junctor for alternative paths.
 - `CommonObjective` - The shared objective valid for both sides of the conflict (default: green)
 - `Need` - A perceived need that must be met (default: blue)
 - `Want` - A perceived want derived from a need (default: orange)
 - `Conflict` - The perceived conflict expressed as mutually exclusive wants (icon: lightning bolt circle, no text)
-- `AndJunctor` - Combines elements that are necessary in combination (icon: AND circle)
+- `OrJunctor` - Marks alternative necessary inputs — any one of them suffices for the downstream condition (icon: OR circle)
 - `Assumption` - Exposes the underlying assumptions behind the conflict (default: purple)
 - `Solution` - Marks the final solution that breaks the conflict (default: teal)
 
@@ -169,11 +184,10 @@ TRT (Transition Tree) is an implementation planning tool that answers "HOW TO CA
 - `AndJunctor` - Indicates multiple conditions required together for an effect (icon: AND circle)
 
 **ADTree Node Types:**
-ADTree (Attack-Defense Tree) is a security modelling methodology based on Kordy et al. (2014). It extends classical attack trees by allowing defense nodes at any level, modelling the ongoing arms race between attacker and defender.
+ADTree (Attack-Defense Tree) is a security modelling methodology based on Kordy et al. (2014). It extends classical attack trees by allowing defense nodes at any level, modelling the ongoing arms race between attacker and defender. ADTree uses sufficient-cause logic — multiple unjoined children are implicitly OR (any one suffices); only AND is an explicit junctor.
 - `Attack` - An attacker's goal or sub-goal (default: red)
 - `Defense` - A defender's countermeasure or protective measure (default: green)
-- `AndJunctor` - Conjunctive refinement: all children must be achieved (icon: AND circle)
-- `OrJunctor` - Disjunctive refinement: at least one child must be achieved (icon: OR circle)
+- `AndJunctor` - Conjunctive refinement: all children must be achieved together (icon: AND circle)
 
 **GoalTree Node Types:**
 GoalTree (Goal Tree) is a strategic planning tool using necessity condition logic from Theory of Constraints. It defines what a system must achieve through a hierarchy of Goal, Critical Success Factors, and Necessary Conditions. Invented by H. William Dettmer, it is the foundation of the Logical Thinking Process.
@@ -261,9 +275,9 @@ CRT has many edge types connecting causes to effects. The graph flows bottom-to-
 - `given_causes_undesirable`, `given_causes_intermediate`, `given_causes_desirable`
 - `changeable_causes_undesirable`, `changeable_causes_intermediate`, `changeable_causes_desirable`
 
-*To/From Junctors:*
-- `*_to_and_junctor`, `*_to_or_junctor` - Connect any type to junctors
-- `and_junctor_causes_*`, `or_junctor_causes_*` - Connect junctors to effects
+*To/From AndJunctor:*
+- `*_to_and_junctor` - Connect any type to AndJunctor
+- `and_junctor_causes_*` - Connect AndJunctor to effects
 
 **FRT Edge Types:**
 FRT shares the same edge types as CRT. The graph flows bottom-to-top (solutions at bottom, desired effects at top).
@@ -276,36 +290,36 @@ FRT shares the same edge types as CRT. The graph flows bottom-to-top (solutions 
 - `intermediate_causes_undesirable`, `intermediate_causes_intermediate`, `intermediate_causes_desirable`
 - `desirable_causes_*`, `undesirable_causes_*`
 
-*To/From Junctors:*
-- `*_to_and_junctor`, `*_to_or_junctor` - Connect any type to junctors
-- `and_junctor_causes_*`, `or_junctor_causes_*` - Connect junctors to effects
+*To/From AndJunctor:*
+- `*_to_and_junctor` - Connect any type to AndJunctor
+- `and_junctor_causes_*` - Connect AndJunctor to effects
 
 **EC Edge Types:**
 EC uses edges to show necessary condition relationships flowing from shared objective through needs and wants to the conflict. The graph flows left-to-right (Common Objective on left, Conflict on right).
 
 *From Common Objective:*
 - `objective_to_need` - Connects CommonObjective → Need
-- `objective_to_and` - Connects CommonObjective → AndJunctor
+- `objective_to_or` - Connects CommonObjective → OrJunctor
 
 *From Need:*
 - `need_to_want` - Connects Need → Want
-- `need_to_and` - Connects Need → AndJunctor
+- `need_to_or` - Connects Need → OrJunctor
 - `need_to_assumption` - Connects Need → Assumption
 - `need_to_solution` - Connects Need → Solution
 
 *From Want:*
 - `want_to_conflict` - Connects Want → Conflict
-- `want_to_and` - Connects Want → AndJunctor
+- `want_to_or` - Connects Want → OrJunctor
 - `want_to_assumption` - Connects Want → Assumption
 
 *From Conflict:*
-- `conflict_to_and` - Connects Conflict → AndJunctor
+- `conflict_to_or` - Connects Conflict → OrJunctor
 - `conflict_to_assumption` - Connects Conflict → Assumption
 
-*From AndJunctor:*
-- `and_to_want` - Connects AndJunctor → Want
-- `and_to_conflict` - Connects AndJunctor → Conflict
-- `and_to_and` - Connects AndJunctor → AndJunctor
+*From OrJunctor:*
+- `or_to_want` - Connects OrJunctor → Want
+- `or_to_conflict` - Connects OrJunctor → Conflict
+- `or_to_or` - Connects OrJunctor → OrJunctor
 
 **PRT Edge Types:**
 PRT uses edges to show how obstacles block objectives and how intermediate objectives overcome obstacles. The graph flows bottom-to-top (intermediate objectives at bottom, main objective at top).
@@ -348,11 +362,9 @@ ADTree uses two kinds of edges: refinement edges (solid lines) for same-type dec
 - `defense_counters_attack` - A defense that mitigates an attack
 - `attack_counters_defense` - An attack that circumvents a defense
 
-*To/From Junctors:*
+*To/From AND Junctor:*
 - `attack_to_and_junctor`, `defense_to_and_junctor` - Connect to AND junctor
 - `and_junctor_to_attack`, `and_junctor_to_defense` - Connect from AND junctor
-- `attack_to_or_junctor`, `defense_to_or_junctor` - Connect to OR junctor
-- `or_junctor_to_attack`, `or_junctor_to_defense` - Connect from OR junctor
 
 **GoalTree Edge Types:**
 GoalTree uses edges to show necessity relationships. The graph flows top-to-bottom (Goal at top, Necessary Conditions expand downward). The necessity logic reads: "In order to achieve [upper], we must have [lower]."
@@ -465,9 +477,14 @@ Comments can appear anywhere in the document and are ignored by the parser.
 The VGL grammar is defined as follows (simplified BNF notation):
 
 ```
-file         ::= vnotation* document
+file         ::= vnotation* (document | metagraph)
 
 document     ::= "vgraph" identifier ":" notation ("," extension)* label? "{" statement* "}"
+
+metagraph    ::= "metagraph" notation label? ";"?
+                 // Renders the notation itself as a diagram: each NodeType becomes a node,
+                 // each EdgeType becomes an edge, styled per the notation. No body, no id.
+                 // If label is omitted, it defaults to "<NotationName> Meta Model".
 
 notation     ::= identifier
                  // Built-in: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree, GoalTree, CLD, DecisionTree, Timeline
@@ -511,8 +528,8 @@ comment      ::= "//" [^\n]*
 
 **Key Grammar Rules:**
 
-1. **Document Structure**: A VGL file contains zero or more `vnotation` blocks followed by a `vgraph` declaration
-2. **File ordering**: `vnotation` blocks must appear before any `vgraph` that references them
+1. **Document Structure**: A VGL file contains zero or more `vnotation` blocks followed by either one `vgraph` or one `metagraph` declaration
+2. **File ordering**: `vnotation` blocks must appear before any `vgraph` or `metagraph` that references them
 3. **Node IDs**: Must be unique throughout the document
 4. **Edge References**: Edges can only reference nodes that have been declared
 5. **Type Validation**: Node types and edge types must be valid for the chosen notation, or will be marked as "unknown"
@@ -872,9 +889,8 @@ vgraph salesDecline: CRT "Sales Decline Analysis" {
     node c2: Changeable "Support team is understaffed";
     node c3: Changeable "No customer feedback loop";
 
-    // Junctors for combining conditions
+    // Junctor for combining conditions
     node and1: AndJunctor "";
-    node or1: OrJunctor "";
 
     // Root causes leading to intermediate effects
     edge c1 -> ie2: changeable_causes_intermediate;
@@ -889,12 +905,11 @@ vgraph salesDecline: CRT "Sales Decline Analysis" {
     // And junctor combining conditions
     edge and1 -> ie1: and_junctor_causes_intermediate;
 
-    // Or junctor for alternative paths
-    edge ie1 -> or1: intermediate_to_or_junctor;
-    edge ie3 -> or1: intermediate_to_or_junctor;
+    // Alternative causes (implicit OR — any single arrow into ude2 is sufficient)
+    edge ie1 -> ude2: intermediate_causes_undesirable;
+    edge ie3 -> ude2: intermediate_causes_undesirable;
 
     // Intermediate effects leading to undesirable effects
-    edge or1 -> ude2: or_junctor_causes_undesirable;
     edge ie1 -> ude1: intermediate_causes_undesirable;
     edge ie1 -> ude3: intermediate_causes_undesirable;
 
@@ -903,7 +918,7 @@ vgraph salesDecline: CRT "Sales Decline Analysis" {
 }
 ```
 
-**Note**: CRT graphs flow bottom-to-top, with root causes (Given and Changeable) at the bottom and Undesirable Effects at the top. The AndJunctor indicates multiple conditions must be true together, while OrJunctor indicates any one of the conditions is sufficient. Labels for junctors are typically empty as the icon conveys the meaning.
+**Note**: CRT graphs flow bottom-to-top, with root causes (Given and Changeable) at the bottom and Undesirable Effects at the top. CRT uses sufficient-cause logic: multiple unjoined arrows into the same effect are read as OR (any one is sufficient). The AndJunctor is the explicit exception, indicating multiple conditions that must be true together. Labels for junctors are typically empty as the icon conveys the meaning.
 
 ### Example 12: Future Reality Tree (FRT)
 
@@ -926,9 +941,8 @@ vgraph salesSolution: FRT "Sales Improvement Plan" {
     node ie3: IntermediateEffect "Support response time improves";
     node ie4: IntermediateEffect "Customer feedback drives development";
 
-    // Junctors for combining conditions
+    // Junctor for combining conditions
     node and1: AndJunctor "";
-    node or1: OrJunctor "";
 
     // Desirable Effects (the goals we want to achieve)
     node de1: DesirableEffect "Sales revenue increasing";
@@ -950,12 +964,11 @@ vgraph salesSolution: FRT "Sales Improvement Plan" {
     // And junctor combining conditions
     edge and1 -> ie2: and_junctor_causes_intermediate;
 
-    // Multiple paths can lead to customer satisfaction
-    edge ie2 -> or1: intermediate_to_or_junctor;
-    edge ie3 -> or1: intermediate_to_or_junctor;
+    // Multiple alternative paths to customer satisfaction (implicit OR)
+    edge ie2 -> de2: intermediate_causes_desirable;
+    edge ie3 -> de2: intermediate_causes_desirable;
 
     // Intermediate effects leading to desirable effects
-    edge or1 -> de2: or_junctor_causes_desirable;
     edge ie1 -> de3: intermediate_causes_desirable;
     edge ie2 -> de1: intermediate_causes_desirable;
     edge ie2 -> de3: intermediate_causes_desirable;
@@ -1488,6 +1501,44 @@ vgraph sm1: SimpleMap, Annotation "Annotated Map" {
     edge c1 -> a1
 }
 ```
+
+---
+
+## Metagraph (visualizing a notation)
+
+A `metagraph` declaration renders the **structure of a notation itself** as a diagram. Because a notation is a graph (its NodeTypes are vertices and its EdgeTypes are edges), it can be visualized directly — useful for documentation, teaching, and seeing how a `vnotation` you just defined will actually look.
+
+**Syntax:**
+```
+metagraph <NotationName> ["<optional_label>"]
+```
+
+- No id, no body — just the notation name and an optional label.
+- If the label is omitted, it defaults to `"<NotationName> Meta Model"`.
+- A file contains either one `vgraph` or one `metagraph` (not both).
+- `vnotation` blocks may precede a `metagraph`, so you can declare and visualize a custom notation in one file.
+- Each node in the result is styled **exactly** as it would appear in a real diagram using that notation — the metagraph is self-documenting.
+
+**Example — built-in notation:**
+```vgl
+metagraph Timeline
+```
+Renders the Timeline notation's structure: `TimePoint` and `Event` nodes connected by `sequence` and `influence` edges, styled as Timeline styles them.
+
+**Example — custom label:**
+```vgl
+metagraph ConceptMap "How ConceptMaps are built"
+```
+
+**Example — user-defined notation:**
+```vgl
+vnotation MyNotation extends ConceptMap {
+    node type: Hypothesis [nodeStyle: iconWithText; icon: lightbulb.fill]
+    edge type: supports from: Hypothesis to: Concept
+}
+metagraph MyNotation
+```
+Renders the full structure of `MyNotation` — inherited ConceptMap types plus the new `Hypothesis` node type and `supports` edge type.
 
 ---
 

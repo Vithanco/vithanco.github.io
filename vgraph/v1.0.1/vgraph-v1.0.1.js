@@ -1,6 +1,6 @@
 /**
  * VGraph JavaScript Library
- * Version: 1.0.0
+ * Version: 1.0.1
  *
  * A JavaScript wrapper for VGraph WASM module that provides graph rendering
  * and conversion capabilities for Vithanco Graph Language (VGL).
@@ -10,6 +10,50 @@
  * @license MIT
  * @author Vithanco
  */
+
+// ---------------------------------------------------------------------------
+// DOT sanitization helpers (module-level so they can be unit-tested)
+// ---------------------------------------------------------------------------
+
+/**
+ * Strip fontname attributes from a DOT string.
+ * Graphviz WASM has no system fonts; a missing font lookup causes a null
+ * dereference that corrupts the WASM function table. All VGraph nodes use
+ * fixedsize=true so Swift pre-computes dimensions — Graphviz doesn't need
+ * the font for layout.
+ * Two passes handle all positions: middle/end first (preceded by comma),
+ * then start-of-list (followed by optional comma).
+ */
+function stripFontnames(dot) {
+  return dot
+    .replace(/,\s*fontname\s*=\s*"[^"]*"/g, '')
+    .replace(/\bfontname\s*=\s*"[^"]*"\s*,?\s*/g, '');
+}
+
+/**
+ * Strip subgraph cluster_* wrappers from a DOT string, keeping node and
+ * edge declarations inside them. Cluster-level attributes (label=, etc.)
+ * are dropped. Iterates to handle nested clusters (innermost first).
+ *
+ * Used as a fallback when Graphviz WASM traps on a cluster topology
+ * ("table index is out of bounds"). Cluster bounding boxes are lost,
+ * but the layout still produces valid node/edge positions.
+ */
+function stripClusters(dot) {
+  const clusterAttrs = /^\s*(label|rankdir|style|color|fillcolor|penwidth|fontsize|bgcolor)\s*=/;
+  let result = dot;
+  let prev;
+  do {
+    prev = result;
+    result = result.replace(
+      /\bsubgraph\s+cluster_\w+\s*\{([^{}]*)\}/gs,
+      (_, inner) => inner.split('\n').filter(line => !clusterAttrs.test(line)).join('\n')
+    );
+  } while (result !== prev);
+  return result;
+}
+
+// ---------------------------------------------------------------------------
 
 class VGraphLib {
   constructor() {
@@ -53,24 +97,37 @@ class VGraphLib {
    * @private
    */
   async _loadGraphviz() {
+    // Library choice: @hpcc-js/wasm (not @viz-js/viz). hpcc-js handles
+    // cross-cluster edges and rank=same blocks correctly with json0 format,
+    // and — critically — its WASM instance survives a layout trap, so a
+    // catch-and-retry-with-strip fallback works in the same call. viz-js
+    // corrupts its instance on any trap, requiring an instance pool.
     try {
       const { Graphviz } = await import('https://cdn.jsdelivr.net/npm/@hpcc-js/wasm@2.33.2/dist/graphviz.js');
       this.graphvizInstance = await Graphviz.load();
 
-      // Expose graphviz functions globally for Swift WASM to use
       window.graphvizLayout = (dotSource, engine = 'dot', format = 'svg') => {
-        if (!this.graphvizInstance) {
-          throw new Error('Graphviz not initialized');
-        }
-        return this.graphvizInstance.layout(dotSource, format, engine);
+        const sanitized = stripFontnames(dotSource);
+        return this.graphvizInstance.layout(sanitized, format, engine);
       };
 
       window.graphvizLayoutJSON = (dotSource, engine = 'dot') => {
-        if (!this.graphvizInstance) {
-          throw new Error('Graphviz not initialized');
+        // Cluster graphs use json0 (preserves bounding boxes); plain graphs
+        // use json. Some cluster topologies — empirically, edges crossing
+        // between cluster and root scope — still trap Graphviz WASM with
+        // "table index is out of bounds". When that happens, retry with
+        // clusters stripped. Cluster boxes are lost in that fallback, but
+        // node/edge positions are correct.
+        const sanitized = stripFontnames(dotSource);
+        const hasCluster = /\bsubgraph\s+cluster_/i.test(sanitized);
+        const format = hasCluster ? 'json0' : 'json';
+        try {
+          return JSON.parse(this.graphvizInstance.layout(sanitized, format, engine));
+        } catch (e) {
+          if (!hasCluster) throw e;
+          console.warn('[VGraph] Graphviz WASM trap on cluster graph, retrying with clusters stripped:', e.message);
+          return JSON.parse(this.graphvizInstance.layout(stripClusters(sanitized), 'json', engine));
         }
-        const jsonStr = this.graphvizInstance.layout(dotSource, 'json', engine);
-        return JSON.parse(jsonStr);
       };
     } catch (error) {
       throw new Error(`Failed to load Graphviz: ${error.message}`);
@@ -298,7 +355,7 @@ class VGraphLib {
    */
   static getVersion() {
     return {
-      version: '1.0.0',
+      version: '1.0.1',
       wasm: true,
       bridgejs: true,
       features: ['render', 'renderBasic', 'toDot', 'exportVGL', 'debug', 'layout']

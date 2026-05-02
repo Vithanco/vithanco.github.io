@@ -24,10 +24,15 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 112.5%;
+}
+
 body {
   font-family: Poppins, sans-serif;
   color: var(--filler);
   background-color: var(--background);
+  line-height: 1.6;
 
   display: flex;
   flex-direction: column;
