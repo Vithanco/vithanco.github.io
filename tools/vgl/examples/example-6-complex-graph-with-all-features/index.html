@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta property="og:site_name" content="Vithanco"/>
+        <link rel="canonical" href="https://vithanco.com/tools/vgl/examples/example-6-complex-graph-with-all-features"/>
+        <meta name="twitter:url" content="https://vithanco.com/tools/vgl/examples/example-6-complex-graph-with-all-features"/>
+        <meta property="og:url" content="https://vithanco.com/tools/vgl/examples/example-6-complex-graph-with-all-features"/>
+        <title>"VGL Guide — Example 6: Complex Graph with All Features" | Vithanco</title>
+        <meta name="twitter:title" content=""VGL Guide — Example 6: Complex Graph with All Features" | Vithanco"/>
+        <meta property="og:title" content=""VGL Guide — Example 6: Complex Graph with All Features" | Vithanco"/>
+        <meta name="description" content=""A comprehensive example demonstrating all VGL features:""/>
+        <meta name="twitter:description" content=""A comprehensive example demonstrating all VGL features:""/>
+        <meta property="og:description" content=""A comprehensive example demonstrating all VGL features:""/>
+        <meta name="twitter:card" content="summary"/>
+        <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+        <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
+        <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
+        <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
+        <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
+    </head>
+    <body class="item-page">
+        <header>
+            <div class="header-wrapper">
+                <a href="/" class="site-name">
+                    <img src="/logo.png" height="20" width="20"/>
+                    <p>Vithanco</p></a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/services">Services</a></li>
+                        <li>
+                            <a href="/methods">Methods</a></li>
+                        <li>
+                            <a href="/notations">Notations</a></li>
+                        <li>
+                            <a href="/tools" class="selected">Tools</a></li>
+                        <li>
+                            <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
+        <div class="item-wrapper">
+            <article>
+                <div class="breadcrumbs">                    <a href="/" class="breadcrumb-home">                        <img src="/logo.png" class="breadcrumb-icon"/>
+Home</a>
+                    <span class="breadcrumb-separator"> / </span>
+                    <a href="/tools">The best Tools for Structured Visual Thinking</a>
+                    <span class="breadcrumb-separator"> / </span>
+"VGL Guide — Example 6: Complex Graph with All Features"</div>
+                <h1>"VGL Guide — Example 6: Complex Graph with All Features"</h1>
+                <div class="reading-time-container">
+                    <span class="fa fa-clock-o"></span>
+                    <p>Estimated reading time: 1 minutes.</p></div>
+                <div class="content"><h1 id="example-6-complex-graph-with-all-features">Example 6: Complex Graph with All Features</h1>
+<p>A comprehensive example demonstrating all VGL features:</p>
+<pre><code class="language-vgl">vgraph comprehensive: IBIS "Comprehensive Example" {
+    // Graph-level properties
+    rankdir: LR;
+    fontcolor: darkblue;
+    labeljust: l;
+
+    // Root-level nodes
+    node root: Question "Main Question" [fontsize: 20; color: navy];
+    node ans1: Answer "Primary Solution" [fontsize: 16];
+    node ans2: Answer "Alternative Solution" [fontsize: 16];
+
+    // Detailed analysis group
+    group analysis "Detailed Analysis" {
+        style: filled;
+        color: lightgray;
+
+        node q_perf: Question "What about performance?";
+        node a_fast: Answer "Optimize critical paths" [color: green];
+        node pro_perf: Pro "40% faster response time" [fontsize: 12];
+
+        // Nested considerations
+        group tradeoffs "Trade-offs" {
+            style: dashed;
+            color: yellow;
+
+            node con_complex: Con "Increased code complexity" [fontsize: 10];
+            node q_maint: Question "Can we maintain this?" [fontsize: 11];
+        };
+
+        edge q_perf -&gt; a_fast: answered_by;
+        edge a_fast -&gt; pro_perf: supports;
+        edge a_fast -&gt; con_complex: objects_to;
+        edge con_complex -&gt; q_maint: con_questions_question "Raises concern";
+    };
+
+    // Implementation group
+    group implementation "Implementation Plan" {
+        style: filled;
+        color: lightblue;
+
+        node q_when: Question "When to implement?" [fontsize: 14];
+        node a_phase: Answer "Phased rollout" [fontsize: 13];
+        node pro_safe: Pro "Reduces risk" [fontsize: 11];
+
+        edge q_when -&gt; a_phase;
+        edge a_phase -&gt; pro_safe;
+    };
+
+    // Cross-group connections
+    edge root -&gt; ans1: answered_by "Main path";
+    edge root -&gt; ans2: answered_by "Backup option";
+    edge ans1 -&gt; q_perf: answered_by [style: dashed; weight: 5];
+    edge ans2 -&gt; q_when: answered_by;
+}
+</code></pre></div></article>
+            <aside class="side-content">
+                <div class="relationships-section"></div>
+                <div class="preview__article-details">
+                    <p class="tag-list-title">Tagged with:</p>
+                    <ul class="preview__article-tags">
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/vgl">VGL</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/graph-language">Graph Language</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/notation">Notation</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/documentation">Documentation</a></div></li></ul></div>
+                <div class="newsletter" height="350" width="250">
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <p>See how you can combine your brain power with structured visual and achieve better results.</p>
+                    <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
+                <div></div></aside></div>
+        <footer>
+            <div>
+                <p class="footer-title">                    <img src="/logo.png" width="16px" class="content_logo"/>
+Vithanco Home </p>
+                <nav>
+                    <p>Dr. Ing. Klaus Kneupner, MBA</p>
+                    <ul>
+                        <li>
+                            <a href="https://linkedIn.com/in/Kneupner">
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bsky.app/profile/vithanco.bsky.social">
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://mastodon.social/@vithanco">
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/feed.rss">
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
+                            </a>
+                        </li>
+                    </ul></nav></div></footer></body>
+</html>

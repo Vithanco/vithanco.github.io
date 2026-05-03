@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta property="og:site_name" content="Vithanco"/>
+        <link rel="canonical" href="https://vithanco.com/tools/vgl/examples/example-10-concept-map"/>
+        <meta name="twitter:url" content="https://vithanco.com/tools/vgl/examples/example-10-concept-map"/>
+        <meta property="og:url" content="https://vithanco.com/tools/vgl/examples/example-10-concept-map"/>
+        <title>"VGL Guide — Example 10: Concept Map" | Vithanco</title>
+        <meta name="twitter:title" content=""VGL Guide — Example 10: Concept Map" | Vithanco"/>
+        <meta property="og:title" content=""VGL Guide — Example 10: Concept Map" | Vithanco"/>
+        <meta name="description" content="Defining domain vocabulary through falsifiable propositions. The title is a Guiding Question that determines what belongs on the map. Every Concept → Relation → Concept chain ALWAYS forms a readabl..."/>
+        <meta name="twitter:description" content="Defining domain vocabulary through falsifiable propositions. The title is a Guiding Question that determines what belongs on the map. Every Concept → Relation → Concept chain ALWAYS forms a readabl..."/>
+        <meta property="og:description" content="Defining domain vocabulary through falsifiable propositions. The title is a Guiding Question that determines what belongs on the map. Every Concept → Relation → Concept chain ALWAYS forms a readabl..."/>
+        <meta name="twitter:card" content="summary"/>
+        <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+        <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
+        <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
+        <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
+        <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
+    </head>
+    <body class="item-page">
+        <header>
+            <div class="header-wrapper">
+                <a href="/" class="site-name">
+                    <img src="/logo.png" height="20" width="20"/>
+                    <p>Vithanco</p></a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/services">Services</a></li>
+                        <li>
+                            <a href="/methods">Methods</a></li>
+                        <li>
+                            <a href="/notations">Notations</a></li>
+                        <li>
+                            <a href="/tools" class="selected">Tools</a></li>
+                        <li>
+                            <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
+        <div class="item-wrapper">
+            <article>
+                <div class="breadcrumbs">                    <a href="/" class="breadcrumb-home">                        <img src="/logo.png" class="breadcrumb-icon"/>
+Home</a>
+                    <span class="breadcrumb-separator"> / </span>
+                    <a href="/tools">The best Tools for Structured Visual Thinking</a>
+                    <span class="breadcrumb-separator"> / </span>
+"VGL Guide — Example 10: Concept Map"</div>
+                <h1>"VGL Guide — Example 10: Concept Map"</h1>
+                <div class="reading-time-container">
+                    <span class="fa fa-clock-o"></span>
+                    <p>Estimated reading time: 1 minutes.</p></div>
+                <div class="content"><h1 id="example-10-concept-map">Example 10: Concept Map</h1>
+<p>Defining domain vocabulary through falsifiable propositions. The title is a <strong>Guiding Question</strong> that determines what belongs on the map. Every Concept → Relation → Concept chain ALWAYS forms a readable, falsifiable sentence. Relations can be reused when multiple concepts share the same relationship.</p>
+<pre><code class="language-vgl">vgraph learningCM: ConceptMap "What is Learning?" {
+    node student: Concept "Student";
+    node subject: Concept "Subject";
+    node practice: EmphasizedConcept "Practice";
+    node understanding: Concept "Understanding";
+    node resources: Concept "Resources";
+
+    node learns: Relation "learns";
+    node requires: Relation "requires";
+    node leads_to: Relation "leads to";
+    node uses: Relation "uses";
+
+    edge student -&gt; learns;
+    edge learns -&gt; subject;
+    edge subject -&gt; requires;
+    edge requires -&gt; practice;
+    edge practice -&gt; leads_to;
+    edge leads_to -&gt; understanding;
+    edge subject -&gt; uses;
+    edge uses -&gt; resources;
+}
+</code></pre>
+<p><strong>Note</strong>: In concept maps, relationships are represented as nodes (Relation type) rather than edge labels. This ALWAYS creates readable propositions like "Student learns Subject" and "Subject requires Practice". Every concept must be connected to at least one relation — never leave a concept unconnected. When multiple concepts share the same relationship (e.g. "Dog is a Mammal" and "Cat is a Mammal"), reuse a single Relation node. <strong>CRITICAL</strong>: When a relation has BOTH multiple inbound AND multiple outbound edges, ALL inbound concepts must make sense as propositions with ALL outbound concepts (n × m propositions, all must be valid). If any combination is invalid (circular, meaningless), use specific relations or restructure the graph.</p></div></article>
+            <aside class="side-content">
+                <div class="relationships-section"></div>
+                <div class="preview__article-details">
+                    <p class="tag-list-title">Tagged with:</p>
+                    <ul class="preview__article-tags">
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/vgl">VGL</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/graph-language">Graph Language</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/notation">Notation</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/documentation">Documentation</a></div></li></ul></div>
+                <div class="newsletter" height="350" width="250">
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <p>See how you can combine your brain power with structured visual and achieve better results.</p>
+                    <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
+                <div></div></aside></div>
+        <footer>
+            <div>
+                <p class="footer-title">                    <img src="/logo.png" width="16px" class="content_logo"/>
+Vithanco Home </p>
+                <nav>
+                    <p>Dr. Ing. Klaus Kneupner, MBA</p>
+                    <ul>
+                        <li>
+                            <a href="https://linkedIn.com/in/Kneupner">
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bsky.app/profile/vithanco.bsky.social">
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://mastodon.social/@vithanco">
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/feed.rss">
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
+                            </a>
+                        </li>
+                    </ul></nav></div></footer></body>
+</html>

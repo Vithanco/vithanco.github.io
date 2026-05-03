@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta property="og:site_name" content="Vithanco"/>
+        <link rel="canonical" href="https://vithanco.com/tools/vgl/examples/example-16-attack-defense-tree-adtree"/>
+        <meta name="twitter:url" content="https://vithanco.com/tools/vgl/examples/example-16-attack-defense-tree-adtree"/>
+        <meta property="og:url" content="https://vithanco.com/tools/vgl/examples/example-16-attack-defense-tree-adtree"/>
+        <title>"VGL Guide — Example 16: Attack-Defense Tree (ADTree)" | Vithanco</title>
+        <meta name="twitter:title" content=""VGL Guide — Example 16: Attack-Defense Tree (ADTree)" | Vithanco"/>
+        <meta property="og:title" content=""VGL Guide — Example 16: Attack-Defense Tree (ADTree)" | Vithanco"/>
+        <meta name="description" content=""A security modelling graph showing how defenses protect a system and how attacks can circumvent them. Based on the data confidentiality scenario from Kordy et al. (2014):""/>
+        <meta name="twitter:description" content=""A security modelling graph showing how defenses protect a system and how attacks can circumvent them. Based on the data confidentiality scenario from Kordy et al. (2014):""/>
+        <meta property="og:description" content=""A security modelling graph showing how defenses protect a system and how attacks can circumvent them. Based on the data confidentiality scenario from Kordy et al. (2014):""/>
+        <meta name="twitter:card" content="summary"/>
+        <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+        <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
+        <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
+        <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
+        <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
+    </head>
+    <body class="item-page">
+        <header>
+            <div class="header-wrapper">
+                <a href="/" class="site-name">
+                    <img src="/logo.png" height="20" width="20"/>
+                    <p>Vithanco</p></a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/services">Services</a></li>
+                        <li>
+                            <a href="/methods">Methods</a></li>
+                        <li>
+                            <a href="/notations">Notations</a></li>
+                        <li>
+                            <a href="/tools" class="selected">Tools</a></li>
+                        <li>
+                            <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
+        <div class="item-wrapper">
+            <article>
+                <div class="breadcrumbs">                    <a href="/" class="breadcrumb-home">                        <img src="/logo.png" class="breadcrumb-icon"/>
+Home</a>
+                    <span class="breadcrumb-separator"> / </span>
+                    <a href="/tools">The best Tools for Structured Visual Thinking</a>
+                    <span class="breadcrumb-separator"> / </span>
+"VGL Guide — Example 16: Attack-Defense Tree (ADTree)"</div>
+                <h1>"VGL Guide — Example 16: Attack-Defense Tree (ADTree)"</h1>
+                <div class="reading-time-container">
+                    <span class="fa fa-clock-o"></span>
+                    <p>Estimated reading time: 2 minutes.</p></div>
+                <div class="content"><h1 id="example-16-attack-defense-tree-adtree">Example 16: Attack-Defense Tree (ADTree)</h1>
+<p>A security modelling graph showing how defenses protect a system and how attacks can circumvent them. Based on the data confidentiality scenario from Kordy et al. (2014):</p>
+<pre><code class="language-vgl">vgraph dataConfidentiality: ADTree "Data Confidentiality" {
+    // Defense nodes (defender's goals)
+    node dataConf: Defense "Data Confidentiality";
+    node networkSec: Defense "Network Security";
+    node physicalSec: Defense "Physical Security";
+    node accessControl: Defense "Access Control";
+    node passwords: Defense "Passwords";
+    node strongPasswords: Defense "Strong Passwords";
+    node lock1: Defense "Lock";
+    node screening: Defense "Screening";
+    node securityGuard: Defense "Security Guard";
+    node videoCameras: Defense "Video Cameras";
+
+    // Attack nodes (attacker's goals)
+    node employeeAttack: Attack "Employee Attack";
+    node breakIn: Attack "Break In";
+    node corruption: Attack "Corruption";
+    node socialEngineering: Attack "Social Engineering";
+    node dictionaryAttack: Attack "Dictionary Attack";
+    node backDoor: Attack "Back Door";
+    node defeatLock: Attack "Defeat Lock";
+    node forceOpen: Attack "Force Open";
+    node acquireKeys: Attack "Acquire Keys";
+    node defeatGuard: Attack "Defeat Guard";
+    node bribe: Attack "Bribe";
+    node overpower: Attack "Overpower";
+    node stealKeys: Attack "Steal Keys";
+    node outnumber: Attack "Outnumber";
+    node useWeapons: Attack "Use Weapons";
+
+    // AND junctors for conjunctive refinement
+    node andDataConf: AndJunctor;
+    node andOverpower: AndJunctor;
+
+    // Defense refines into sub-defenses via AND junctor (both required)
+    edge networkSec -&gt; andDataConf: defense_to_and_junctor;
+    edge physicalSec -&gt; andDataConf: defense_to_and_junctor;
+    edge andDataConf -&gt; dataConf: and_junctor_to_defense;
+    edge accessControl -&gt; networkSec: defense_refines_defense;
+    edge passwords -&gt; accessControl: defense_refines_defense;
+
+    // Attack refines into sub-attacks (solid edges)
+    edge corruption -&gt; employeeAttack: attack_refines_attack;
+    edge socialEngineering -&gt; employeeAttack: attack_refines_attack;
+    edge backDoor -&gt; breakIn: attack_refines_attack;
+    edge forceOpen -&gt; defeatLock: attack_refines_attack;
+    edge acquireKeys -&gt; defeatLock: attack_refines_attack;
+    edge bribe -&gt; defeatGuard: attack_refines_attack;
+    edge overpower -&gt; defeatGuard: attack_refines_attack;
+    edge stealKeys -&gt; defeatGuard: attack_refines_attack;
+
+    // Countermeasure: defense counters attack (dotted edges)
+    edge strongPasswords -&gt; dictionaryAttack: defense_counters_attack;
+    edge lock1 -&gt; backDoor: defense_counters_attack;
+    edge screening -&gt; corruption: defense_counters_attack;
+    edge securityGuard -&gt; breakIn: defense_counters_attack;
+    edge videoCameras -&gt; defeatGuard: defense_counters_attack;
+
+    // Countermeasure: attack counters defense (dotted edges)
+    edge employeeAttack -&gt; dataConf: attack_counters_defense;
+    edge breakIn -&gt; physicalSec: attack_counters_defense;
+    edge dictionaryAttack -&gt; passwords: attack_counters_defense;
+    edge defeatLock -&gt; lock1: attack_counters_defense;
+    edge defeatGuard -&gt; securityGuard: attack_counters_defense;
+
+    // AND junctor: conjunctive refinement
+    edge outnumber -&gt; andOverpower: attack_to_and_junctor;
+    edge useWeapons -&gt; andOverpower: attack_to_and_junctor;
+    edge andOverpower -&gt; overpower: and_junctor_to_attack;
+}
+</code></pre>
+<p><strong>Note</strong>: ADTree graphs flow bottom-to-top with the root goal at the top and leaf actions at the bottom. The key feature is the distinction between refinement edges (solid lines for same-type decomposition) and countermeasure edges (dotted lines for opposite-type countering). This allows modelling the ongoing arms race between attacker and defender at any level of the tree. The root node can be either an Attack or Defense node, determining whether the proponent is the attacker or defender.</p></div></article>
+            <aside class="side-content">
+                <div class="relationships-section"></div>
+                <div class="preview__article-details">
+                    <p class="tag-list-title">Tagged with:</p>
+                    <ul class="preview__article-tags">
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/vgl">VGL</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/graph-language">Graph Language</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/notation">Notation</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/documentation">Documentation</a></div></li></ul></div>
+                <div class="newsletter" height="350" width="250">
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <p>See how you can combine your brain power with structured visual and achieve better results.</p>
+                    <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
+                <div></div></aside></div>
+        <footer>
+            <div>
+                <p class="footer-title">                    <img src="/logo.png" width="16px" class="content_logo"/>
+Vithanco Home </p>
+                <nav>
+                    <p>Dr. Ing. Klaus Kneupner, MBA</p>
+                    <ul>
+                        <li>
+                            <a href="https://linkedIn.com/in/Kneupner">
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bsky.app/profile/vithanco.bsky.social">
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://mastodon.social/@vithanco">
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/feed.rss">
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
+                            </a>
+                        </li>
+                    </ul></nav></div></footer></body>
+</html>

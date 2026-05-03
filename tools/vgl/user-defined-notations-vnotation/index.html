@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta property="og:site_name" content="Vithanco"/>
+        <link rel="canonical" href="https://vithanco.com/tools/vgl/user-defined-notations-vnotation"/>
+        <meta name="twitter:url" content="https://vithanco.com/tools/vgl/user-defined-notations-vnotation"/>
+        <meta property="og:url" content="https://vithanco.com/tools/vgl/user-defined-notations-vnotation"/>
+        <title>VGL Guide — User-Defined Notations (`vnotation`) | Vithanco</title>
+        <meta name="twitter:title" content="VGL Guide — User-Defined Notations (`vnotation`) | Vithanco"/>
+        <meta property="og:title" content="VGL Guide — User-Defined Notations (`vnotation`) | Vithanco"/>
+        <meta name="description" content="vnotation lets expert users define their own notation schema inline in a VGL file, without requiring any Swift code changes. Everything that built-in notations provide — node types, edge types, lay..."/>
+        <meta name="twitter:description" content="vnotation lets expert users define their own notation schema inline in a VGL file, without requiring any Swift code changes. Everything that built-in notations provide — node types, edge types, lay..."/>
+        <meta property="og:description" content="vnotation lets expert users define their own notation schema inline in a VGL file, without requiring any Swift code changes. Everything that built-in notations provide — node types, edge types, lay..."/>
+        <meta name="twitter:card" content="summary"/>
+        <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+        <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
+        <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
+        <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
+        <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
+    </head>
+    <body class="item-page">
+        <header>
+            <div class="header-wrapper">
+                <a href="/" class="site-name">
+                    <img src="/logo.png" height="20" width="20"/>
+                    <p>Vithanco</p></a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/services">Services</a></li>
+                        <li>
+                            <a href="/methods">Methods</a></li>
+                        <li>
+                            <a href="/notations">Notations</a></li>
+                        <li>
+                            <a href="/tools" class="selected">Tools</a></li>
+                        <li>
+                            <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
+        <div class="item-wrapper">
+            <article>
+                <div class="breadcrumbs">                    <a href="/" class="breadcrumb-home">                        <img src="/logo.png" class="breadcrumb-icon"/>
+Home</a>
+                    <span class="breadcrumb-separator"> / </span>
+                    <a href="/tools">The best Tools for Structured Visual Thinking</a>
+                    <span class="breadcrumb-separator"> / </span>
+VGL Guide — User-Defined Notations (`vnotation`)</div>
+                <h1>VGL Guide — User-Defined Notations (`vnotation`)</h1>
+                <div class="reading-time-container">
+                    <span class="fa fa-clock-o"></span>
+                    <p>Estimated reading time: 2 minutes.</p></div>
+                <div class="content"><h1 id="user-defined-notations-vnotation">User-Defined Notations (<code>vnotation</code>)</h1>
+<p><code>vnotation</code> lets expert users define their own notation schema inline in a VGL file, without requiring any Swift code changes. Everything that built-in notations provide — node types, edge types, layout direction — can be expressed in VGL.</p>
+<h3 id="basic-syntax">Basic Syntax</h3>
+<pre><code>vnotation &lt;Name&gt; [extends &lt;BuiltinNotation&gt;] {
+    layout: &lt;topToBottom | leftToRight | rightToLeft | bottomToTop&gt;
+
+    node type: &lt;TypeName&gt;  [nodeStyle: &lt;name&gt;, color: "#hex", icon: "sf.symbol", ...]
+    ...
+    edge type: &lt;edge_id&gt;   from: &lt;TypeName&gt;  to: &lt;TypeName&gt;  [color: "#hex"]
+    ...
+}
+</code></pre>
+<p>A <code>vgraph</code> then references the vnotation by name, identically to any built-in notation:</p>
+<pre><code>vgraph &lt;id&gt;: &lt;VnotationName&gt; "&lt;label&gt;" [, Extension ...] {
+    // identical syntax — node, edge, group, attribute overrides
+}
+</code></pre>
+<h3 id="file-ordering-rule">File-Ordering Rule</h3>
+<p><code>vnotation</code> blocks <strong>must appear before</strong> any <code>vgraph</code> that references them. This allows single-pass parsing and produces a clear error if violated.</p>
+<h3 id="nodestyle-required-on-every-node-type"><code>nodeStyle:</code> — Required on Every Node Type</h3>
+<p><code>nodeStyle:</code> is required on every <code>node type:</code> declaration. The parser treats the value as an opaque string; the semantic layer validates it against the table below.</p>
+<table>
+ <thead>
+  <tr>
+   <th><code>nodeStyle:</code> value</th>
+   <th>Additional parameters</th>
+   <th>Description</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td><code>iconWithText</code></td>
+   <td><code>color:</code> (required), <code>icon:</code>, <code>iconColor:</code> (opt, default white), <code>iconSize:</code> (opt, default 24)</td>
+   <td>Icon above text, colored background</td>
+  </tr>
+  <tr>
+   <td><code>simpleRoundedText</code></td>
+   <td><code>color:</code></td>
+   <td>Text in a rounded rectangle</td>
+  </tr>
+  <tr>
+   <td><code>roundedBox</code></td>
+   <td><code>color:</code></td>
+   <td>Plain rounded box</td>
+  </tr>
+  <tr>
+   <td><code>withCategory</code></td>
+   <td><code>color:</code>, <code>category:</code> (short header label)</td>
+   <td>Box with a colored category bar at top</td>
+  </tr>
+  <tr>
+   <td><code>withCategoryAndIcon</code></td>
+   <td><code>color:</code>, <code>category:</code>, <code>icon:</code>, <code>iconColor:</code> (opt), <code>iconSize:</code> (opt)</td>
+   <td>Category bar + icon</td>
+  </tr>
+  <tr>
+   <td><code>iconOnly</code></td>
+   <td><code>icon:</code>, <code>iconColor:</code> (opt, default black), <code>iconSize:</code> (opt)</td>
+   <td>Icon without text</td>
+  </tr>
+  <tr>
+   <td><code>circle</code></td>
+   <td><code>color:</code></td>
+   <td>Circular node</td>
+  </tr>
+  <tr>
+   <td><code>bareText</code></td>
+   <td>—</td>
+   <td>Plain text, no decoration</td>
+  </tr>
+  <tr>
+   <td><code>hidden</code></td>
+   <td>—</td>
+   <td>Node is not rendered</td>
+  </tr>
+  <tr>
+   <td><code>custom</code></td>
+   <td>—</td>
+   <td>Falls back to <code>bareText</code> in v1; reserved for future full style expressions</td>
+  </tr>
+ </tbody>
+</table>
+<h3 id="extends-inheriting-a-built-in-notation"><code>extends</code> — Inheriting a Built-In Notation</h3>
+<p>The <code>extends</code> clause adds all node and edge types from a built-in notation, then your vnotation adds further types on top:</p>
+<pre><code class="language-vgl">vnotation RichIBIS extends IBIS {
+    node type: Stakeholder [nodeStyle: withCategory, color: "#884499", category: "S"]
+
+    edge type: stakeholder_raises  from: Stakeholder to: Question
+    edge type: stakeholder_answers from: Stakeholder to: Answer
+}
+</code></pre>
+<p><strong>v1 constraint:</strong> Only built-in notations can be extended. <code>vnotation A extends B</code> where B is itself a vnotation is not supported.</p>
+<h3 id="examples">Examples</h3>
+<p><strong>Pure vnotation — custom risk map:</strong></p>
+<pre><code class="language-vgl">vnotation RiskMap {
+    layout: topToBottom
+
+    node type: Risk    [nodeStyle: iconWithText, color: "#cc3333", icon: "exclamationmark.triangle"]
+    node type: Control [nodeStyle: iconWithText, color: "#339933", icon: "shield"]
+    node type: Owner   [nodeStyle: circle,       color: "#3366cc"]
+
+    edge type: risk_has_control  from: Risk    to: Control
+    edge type: control_owned_by  from: Control to: Owner
+}
+
+vgraph rm1: RiskMap "Project Risk Map" {
+    node r1: Risk    "Schedule overrun"
+    node c1: Control "Weekly reviews"
+    node o1: Owner   "PM"
+    edge r1 -&gt; c1
+    edge c1 -&gt; o1
+}
+</code></pre>
+<p><strong>vnotation + Extension:</strong></p>
+<pre><code class="language-vgl">vnotation SimpleMap {
+    node type: Concept [nodeStyle: simpleRoundedText, color: "#336699"]
+    edge type: related  from: Concept to: Concept
+}
+
+vgraph sm1: SimpleMap, Annotation "Annotated Map" {
+    node c1: Concept    "Main idea"
+    node a1: Annotation "See also: section 3"
+    edge c1 -&gt; a1
+}
+</code></pre>
+<hr /></div></article>
+            <aside class="side-content">
+                <div class="relationships-section"></div>
+                <div class="preview__article-details">
+                    <p class="tag-list-title">Tagged with:</p>
+                    <ul class="preview__article-tags">
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/vgl">VGL</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/graph-language">Graph Language</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/notation">Notation</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/documentation">Documentation</a></div></li></ul></div>
+                <div class="newsletter" height="350" width="250">
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <p>See how you can combine your brain power with structured visual and achieve better results.</p>
+                    <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
+                <div></div></aside></div>
+        <footer>
+            <div>
+                <p class="footer-title">                    <img src="/logo.png" width="16px" class="content_logo"/>
+Vithanco Home </p>
+                <nav>
+                    <p>Dr. Ing. Klaus Kneupner, MBA</p>
+                    <ul>
+                        <li>
+                            <a href="https://linkedIn.com/in/Kneupner">
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bsky.app/profile/vithanco.bsky.social">
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://mastodon.social/@vithanco">
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/feed.rss">
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
+                            </a>
+                        </li>
+                    </ul></nav></div></footer></body>
+</html>
