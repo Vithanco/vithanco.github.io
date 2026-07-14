@@ -135,6 +135,9 @@ class ITCInterface {
         const transfer = transferringObjects.map((ref) => this.memory.getObject(ref));
         return { object: objects, sendingContext, transfer };
     }
+    invokeRemoteJSObjectBody(invocationContext) {
+        return { object: undefined, transfer: [] };
+    }
     release(objectRef) {
         this.memory.release(objectRef);
         return { object: undefined, transfer: [] };
@@ -238,44 +241,91 @@ function deserializeError(error) {
 
 const globalVariable = globalThis;
 
+const SLOT_BITS = 24;
+const SLOT_MASK = (1 << SLOT_BITS) - 1;
+const GEN_MASK = (1 << (32 - SLOT_BITS)) - 1;
 class JSObjectSpace {
     constructor() {
-        this._heapValueById = new Map();
-        this._heapValueById.set(1, globalVariable);
-        this._heapEntryByValue = new Map();
-        this._heapEntryByValue.set(globalVariable, { id: 1, rc: 1 });
+        this._slotByValue = new Map();
+        this._values = [];
+        this._stateBySlot = [];
+        this._freeSlotStack = [];
         // Note: 0 is preserved for invalid references, 1 is preserved for globalThis
-        this._heapNextKey = 2;
+        this._values[0] = undefined;
+        this._values[1] = globalVariable;
+        this._slotByValue.set(globalVariable, 1);
+        this._stateBySlot[1] = 1; // gen=0, rc=1
     }
     retain(value) {
-        const entry = this._heapEntryByValue.get(value);
-        if (entry) {
-            entry.rc++;
-            return entry.id;
+        const slot = this._slotByValue.get(value);
+        if (slot !== undefined) {
+            const state = this._stateBySlot[slot];
+            const nextState = (state + 1) >>> 0;
+            if ((nextState & SLOT_MASK) === 0) {
+                throw new RangeError(`Reference count overflow at slot ${slot}`);
+            }
+            this._stateBySlot[slot] = nextState;
+            return ((nextState & ~SLOT_MASK) | slot) >>> 0;
         }
-        const id = this._heapNextKey++;
-        this._heapValueById.set(id, value);
-        this._heapEntryByValue.set(value, { id: id, rc: 1 });
-        return id;
+        let newSlot;
+        let state;
+        if (this._freeSlotStack.length > 0) {
+            newSlot = this._freeSlotStack.pop();
+            const gen = this._stateBySlot[newSlot] >>> SLOT_BITS;
+            state = ((gen << SLOT_BITS) | 1) >>> 0;
+        }
+        else {
+            newSlot = this._values.length;
+            if (newSlot > SLOT_MASK) {
+                throw new RangeError(`Reference slot overflow: ${newSlot} exceeds ${SLOT_MASK}`);
+            }
+            state = 1;
+        }
+        this._stateBySlot[newSlot] = state;
+        this._values[newSlot] = value;
+        this._slotByValue.set(value, newSlot);
+        return ((state & ~SLOT_MASK) | newSlot) >>> 0;
     }
-    retainByRef(ref) {
-        return this.retain(this.getObject(ref));
+    retainByRef(reference) {
+        const state = this._getValidatedSlotState(reference);
+        const slot = reference & SLOT_MASK;
+        const nextState = (state + 1) >>> 0;
+        if ((nextState & SLOT_MASK) === 0) {
+            throw new RangeError(`Reference count overflow at slot ${slot}`);
+        }
+        this._stateBySlot[slot] = nextState;
+        return reference;
     }
-    release(ref) {
-        const value = this._heapValueById.get(ref);
-        const entry = this._heapEntryByValue.get(value);
-        entry.rc--;
-        if (entry.rc != 0)
+    release(reference) {
+        const state = this._getValidatedSlotState(reference);
+        const slot = reference & SLOT_MASK;
+        if ((state & SLOT_MASK) > 1) {
+            this._stateBySlot[slot] = (state - 1) >>> 0;
             return;
-        this._heapEntryByValue.delete(value);
-        this._heapValueById.delete(ref);
-    }
-    getObject(ref) {
-        const value = this._heapValueById.get(ref);
-        if (value === undefined) {
-            throw new ReferenceError("Attempted to read invalid reference " + ref);
         }
-        return value;
+        this._slotByValue.delete(this._values[slot]);
+        this._values[slot] = undefined;
+        const nextGen = ((state >>> SLOT_BITS) + 1) & GEN_MASK;
+        this._stateBySlot[slot] = (nextGen << SLOT_BITS) >>> 0;
+        this._freeSlotStack.push(slot);
+    }
+    getObject(reference) {
+        this._getValidatedSlotState(reference);
+        return this._values[reference & SLOT_MASK];
+    }
+    // Returns the packed state for the slot, after validating the reference.
+    _getValidatedSlotState(reference) {
+        const slot = reference & SLOT_MASK;
+        if (slot === 0)
+            throw new ReferenceError(`Attempted to use invalid reference ${reference}`);
+        const state = this._stateBySlot[slot];
+        if (state === undefined || (state & SLOT_MASK) === 0) {
+            throw new ReferenceError(`Attempted to use invalid reference ${reference}`);
+        }
+        if (state >>> SLOT_BITS !== reference >>> SLOT_BITS) {
+            throw new ReferenceError(`Attempted to use stale reference ${reference}`);
+        }
+        return state;
     }
 }
 
@@ -455,13 +505,51 @@ class SwiftRuntime {
             if (broker)
                 return broker;
             const itcInterface = new ITCInterface(this.memory);
+            const defaultRequestHandler = (message) => {
+                const request = message.data.request;
+                // @ts-ignore dynamic dispatch by method name
+                const result = itcInterface[request.method].apply(itcInterface, request.parameters);
+                return { ok: true, value: result };
+            };
+            const requestHandlers = {
+                invokeRemoteJSObjectBody: (message) => {
+                    const invocationContext = message.data.request
+                        .parameters[0];
+                    const hasError = this.exports.swjs_invoke_remote_jsobject_body(invocationContext);
+                    return {
+                        ok: true,
+                        value: {
+                            object: hasError,
+                            sendingContext: message.data.context,
+                            transfer: [],
+                        },
+                    };
+                },
+            };
+            const defaultResponseHandler = (message) => {
+                if (message.data.response.ok) {
+                    const object = this.memory.retain(message.data.response.value.object);
+                    this.exports.swjs_receive_response(object, message.data.context);
+                }
+                else {
+                    const error = deserializeError(message.data.response.error);
+                    const errorObject = this.memory.retain(error);
+                    this.exports.swjs_receive_error(errorObject, message.data.context);
+                }
+            };
+            const responseHandlers = {
+                invokeRemoteJSObjectBody: (_message) => {
+                    // Swift continuation is resumed on the owner thread.
+                },
+            };
             const newBroker = new MessageBroker((_a = this.tid) !== null && _a !== void 0 ? _a : -1, threadChannel, {
                 onRequest: (message) => {
+                    var _a;
                     let returnValue;
                     try {
-                        // @ts-ignore
-                        const result = itcInterface[message.data.request.method](...message.data.request.parameters);
-                        returnValue = { ok: true, value: result };
+                        const method = message.data.request.method;
+                        const handler = (_a = requestHandlers[method]) !== null && _a !== void 0 ? _a : defaultRequestHandler;
+                        returnValue = handler(message);
                     }
                     catch (error) {
                         returnValue = {
@@ -474,6 +562,7 @@ class SwiftRuntime {
                         data: {
                             sourceTid: message.data.sourceTid,
                             context: message.data.context,
+                            requestMethod: message.data.request.method,
                             response: returnValue,
                         },
                     };
@@ -489,15 +578,10 @@ class SwiftRuntime {
                     }
                 },
                 onResponse: (message) => {
-                    if (message.data.response.ok) {
-                        const object = this.memory.retain(message.data.response.value.object);
-                        this.exports.swjs_receive_response(object, message.data.context);
-                    }
-                    else {
-                        const error = deserializeError(message.data.response.error);
-                        const errorObject = this.memory.retain(error);
-                        this.exports.swjs_receive_error(errorObject, message.data.context);
-                    }
+                    var _a;
+                    const method = message.data.requestMethod;
+                    const handler = (_a = responseHandlers[method]) !== null && _a !== void 0 ? _a : defaultResponseHandler;
+                    handler(message);
                 },
             });
             broker = newBroker;
@@ -838,6 +922,25 @@ class SwiftRuntime {
                                 transferringObjects,
                                 sending_context,
                             ],
+                        },
+                    },
+                });
+            },
+            swjs_request_remote_jsobject_body: (object_source_tid, invocation_context) => {
+                var _a;
+                if (!this.options.threadChannel) {
+                    throw new Error("threadChannel is not set in options given to SwiftRuntime. Please set it to request remote JSObject access.");
+                }
+                const broker = getMessageBroker(this.options.threadChannel);
+                broker.request({
+                    type: "request",
+                    data: {
+                        sourceTid: (_a = this.tid) !== null && _a !== void 0 ? _a : MAIN_THREAD_TID,
+                        targetTid: object_source_tid,
+                        context: invocation_context,
+                        request: {
+                            method: "invokeRemoteJSObjectBody",
+                            parameters: [invocation_context],
                         },
                     },
                 });

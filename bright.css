@@ -286,6 +286,9 @@ header {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  /* Allow a wide child (the full-width VGraph editor iframe) to overflow the
+     850px article without forcing this flex item wider and shoving the aside. */
+  min-width: 0;
 }
 
 .index-wrapper article p,

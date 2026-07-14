@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VGraph Editor</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "@bjorn3/browser_wasi_shim": "https://cdn.jsdelivr.net/npm/@bjorn3/browser_wasi_shim@0.3.0/dist/index.js"
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      padding: 12px 20px;
+      background: linear-gradient(135deg, #EA580C 0%, #FF8000 100%);
+      color: #fff;
+      flex: 0 0 auto;
+    }
+    header h1 { margin: 0; font-size: 18px; font-weight: 600; }
+    main {
+      padding: 16px 20px;
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    #editor-root { flex: 1 1 auto; min-height: 0; }
+    #status-boot { color: #888; font-size: 13px; }
+    svg { max-width: 100%; height: auto; }
+  </style>
+</head>
+<body>
+  <header><h1>VGraph Editor</h1></header>
+  <main>
+    <p id="status-boot">Loading…</p>
+    <div id="editor-root"></div>
+  </main>
+
+  <script type="module">
+    const boot = document.getElementById('status-boot');
+    try {
+      const { init } = await import('./Package/index.js');
+      const { exports } = await init({});
+
+      if (typeof exports.mountEditor !== 'function') {
+        throw new Error('VGraph engine loaded but mountEditor export is missing.');
+      }
+
+      // Debounced render lives in the host: the editor's `.onInput` calls this
+      // named global (an ordinary JS call, not a Swift JSClosure), and the
+      // setTimeout callback — pure JS, so it actually fires — calls back into
+      // the `editorRenderNow` export once the user pauses typing.
+      let renderTimer = null;
+      window.vgraphScheduleRender = () => {
+        if (renderTimer !== null) clearTimeout(renderTimer);
+        renderTimer = setTimeout(() => {
+          renderTimer = null;
+          exports.editorRenderNow();
+        }, 400);
+      };
+
+      // Save SVG: the editor holds the SVG string and calls this with it; the
+      // browser-only Blob download lives here (no WASM file/DOM-download glue).
+      window.vgraphSaveSVG = (svg) => {
+        const blob = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'vgraph-diagram.svg';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      };
+
+      exports.mountEditor('editor-root');
+
+      // Embedding contract: `?vgl=<encoded VGL>` seeds the editor. Decoded by
+      // URLSearchParams; pushed in via the inbound setEditorVGL entry point.
+      const vgl = new URLSearchParams(location.search).get('vgl');
+      if (vgl) exports.setEditorVGL(vgl);
+
+      boot.remove();
+    } catch (e) {
+      boot.textContent = 'Failed to load the VGraph editor: ' + (e && e.message ? e.message : e);
+      boot.style.color = '#b00020';
+      console.error('[vgraph] boot failed', e);
+    }
+  </script>
+</body>
+</html>

@@ -205,8 +205,8 @@ CLD (Causal Loop Diagram) is a systems analysis tool for modelling how elements 
 - `Outcome` - A terminal result of the decision tree (default: green)
 
 **Timeline Node Types:**
-- `TimePoint` - An axis marker representing a point in time (default: gray, optional)
-- `Event` - A generic event that can be aligned to a time point via `alignGroup` (default: steel blue)
+- `TimePoint` - A coordinate on the time axis. Rendered by the Timeline overlay as an anchor dot on a horizontal baseline plus a year label centered below the dot. A dashed vertical guide descends from each TimePoint through the diagram, visually anchoring Events that share its `alignGroup`. TimePoints are **not** rendered as boxed nodes.
+- `Event` - A thing that happened at a point in time (boxed node, default: steel blue). Use `alignGroup` to pin the Event to a TimePoint's column.
 
 ### Edges
 
@@ -383,8 +383,8 @@ CLD uses two edge types representing positive and negative causal links between 
 - `choice_to_outcome` - Connects Choice → Outcome (the option terminates at a result)
 
 **Timeline Edge Types:**
-- `sequence` - Connects TimePoint → TimePoint (creates the time axis, thin gray line)
-- `influence` - Connects Event → Event (cross-track or within-track dependency, dashed, constraint=false)
+- `sequence` - Connects TimePoint → TimePoint. Used by Graphviz for rank ordering, but **not drawn**: the Timeline overlay's horizontal baseline replaces the inter-TimePoint arrows visually.
+- `influence` - Connects Event → Event (cross-track or within-track dependency, dashed, constraint=false). Drawn normally.
 
 Edge types ensure that connections make semantic sense within the notation's domain.
 
@@ -1398,6 +1398,8 @@ vgraph myTimeline: Timeline "19th Century Europe" {
 ```
 
 **Note**: Timelines flow left-to-right. Use `alignGroup` on nodes to align them at the same rank (same horizontal position). TimePoint nodes are optional — `alignGroup` alone suffices for alignment. Groups create visual tracks with cluster boxes. Influence edges are dashed and don't affect node positioning (`constraint=false`). Extend with `vnotation` for custom event types.
+
+**Visual treatment**: Each TimePoint renders as a small filled dot on a horizontal axis baseline, with the year label centered below the dot. A dashed vertical guide descends from each TimePoint to the bottom of the diagram, making the `alignGroup` mechanic visible — readers can trace from a year label down to every Event in that column. The standard `sequence` arrows between TimePoints are suppressed; the axis baseline conveys order. Custom notations declared as `vnotation MyTimeline extends Timeline` automatically inherit this rendering via the notation→extensions resolution chain.
 
 ---
 

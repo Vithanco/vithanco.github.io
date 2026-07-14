@@ -2,14 +2,16 @@ type ref = number;
 type pointer = number;
 
 declare class JSObjectSpace {
-    private _heapValueById;
-    private _heapEntryByValue;
-    private _heapNextKey;
+    private _slotByValue;
+    private _values;
+    private _stateBySlot;
+    private _freeSlotStack;
     constructor();
     retain(value: any): number;
-    retainByRef(ref: ref): number;
-    release(ref: ref): void;
-    getObject(ref: ref): any;
+    retainByRef(reference: ref): number;
+    release(reference: ref): void;
+    getObject(reference: ref): any;
+    private _getValidatedSlotState;
 }
 
 /**
@@ -97,6 +99,10 @@ declare class ITCInterface {
         sendingContext: pointer;
         transfer: Transferable[];
     };
+    invokeRemoteJSObjectBody(invocationContext: pointer): {
+        object: undefined;
+        transfer: Transferable[];
+    };
     release(objectRef: ref): {
         object: undefined;
         transfer: Transferable[];
@@ -140,6 +146,8 @@ type ResponseMessage = {
         sourceTid: number;
         /** The context pointer of the request */
         context: pointer;
+        /** The request method this response corresponds to */
+        requestMethod: keyof ITCInterface;
         /** The response content */
         response: {
             ok: true;

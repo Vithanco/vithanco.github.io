@@ -283,8 +283,8 @@ VGL Guide — Concepts</div>
 </ul>
 <p><strong>Timeline Node Types:</strong></p>
 <ul>
- <li><code>TimePoint</code> - An axis marker representing a point in time (default: gray, optional)</li>
- <li><code>Event</code> - A generic event that can be aligned to a time point via <code>alignGroup</code> (default: steel blue)</li>
+ <li><code>TimePoint</code> - A coordinate on the time axis. Rendered by the Timeline overlay as an anchor dot on a horizontal baseline plus a year label centered below the dot. A dashed vertical guide descends from each TimePoint through the diagram, visually anchoring Events that share its <code>alignGroup</code>. TimePoints are <strong>not</strong> rendered as boxed nodes.</li>
+ <li><code>Event</code> - A thing that happened at a point in time (boxed node, default: steel blue). Use <code>alignGroup</code> to pin the Event to a TimePoint's column.</li>
 </ul>
 <h3 id="edges">Edges</h3>
 <p>Edges represent connections between nodes. Each edge has:</p>
@@ -466,8 +466,8 @@ edge q2 -&gt; a2;  // Type inferred from node types
 </ul>
 <p><strong>Timeline Edge Types:</strong></p>
 <ul>
- <li><code>sequence</code> - Connects TimePoint → TimePoint (creates the time axis, thin gray line)</li>
- <li><code>influence</code> - Connects Event → Event (cross-track or within-track dependency, dashed, constraint=false)</li>
+ <li><code>sequence</code> - Connects TimePoint → TimePoint. Used by Graphviz for rank ordering, but <strong>not drawn</strong>: the Timeline overlay's horizontal baseline replaces the inter-TimePoint arrows visually.</li>
+ <li><code>influence</code> - Connects Event → Event (cross-track or within-track dependency, dashed, constraint=false). Drawn normally.</li>
 </ul>
 <p>Edge types ensure that connections make semantic sense within the notation's domain.</p>
 <h3 id="groups">Groups</h3>

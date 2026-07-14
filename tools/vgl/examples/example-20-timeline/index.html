@@ -113,6 +113,7 @@ Home</a>
 }
 </code></pre>
 <p><strong>Note</strong>: Timelines flow left-to-right. Use <code>alignGroup</code> on nodes to align them at the same rank (same horizontal position). TimePoint nodes are optional — <code>alignGroup</code> alone suffices for alignment. Groups create visual tracks with cluster boxes. Influence edges are dashed and don't affect node positioning (<code>constraint=false</code>). Extend with <code>vnotation</code> for custom event types.</p>
+<p><strong>Visual treatment</strong>: Each TimePoint renders as a small filled dot on a horizontal axis baseline, with the year label centered below the dot. A dashed vertical guide descends from each TimePoint to the bottom of the diagram, making the <code>alignGroup</code> mechanic visible — readers can trace from a year label down to every Event in that column. The standard <code>sequence</code> arrows between TimePoints are suppressed; the axis baseline conveys order. Custom notations declared as <code>vnotation MyTimeline extends Timeline</code> automatically inherit this rendering via the notation→extensions resolution chain.</p>
 <hr /></div></article>
             <aside class="side-content">
                 <div class="relationships-section"></div>
