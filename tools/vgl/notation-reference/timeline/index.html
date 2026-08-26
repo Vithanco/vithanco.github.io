@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta property="og:site_name" content="Vithanco"/>
+        <link rel="canonical" href="https://vithanco.com/tools/vgl/notation-reference/timeline"/>
+        <meta name="twitter:url" content="https://vithanco.com/tools/vgl/notation-reference/timeline"/>
+        <meta property="og:url" content="https://vithanco.com/tools/vgl/notation-reference/timeline"/>
+        <title>VGL Guide — Timeline | Vithanco</title>
+        <meta name="twitter:title" content="VGL Guide — Timeline | Vithanco"/>
+        <meta property="og:title" content="VGL Guide — Timeline | Vithanco"/>
+        <meta name="description" content="Events across multiple tracks on a shared time axis, aligned by column."/>
+        <meta name="twitter:description" content="Events across multiple tracks on a shared time axis, aligned by column."/>
+        <meta property="og:description" content="Events across multiple tracks on a shared time axis, aligned by column."/>
+        <meta name="twitter:card" content="summary"/>
+        <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+        <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
+        <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
+        <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
+        <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
+    </head>
+    <body class="item-page">
+        <header>
+            <div class="header-wrapper">
+                <a href="/" class="site-name">
+                    <img src="/logo.png" height="20" width="20"/>
+                    <p>Vithanco</p></a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/services">Services</a></li>
+                        <li>
+                            <a href="/methods">Methods</a></li>
+                        <li>
+                            <a href="/notations">Notations</a></li>
+                        <li>
+                            <a href="/tools" class="selected">Tools</a></li>
+                        <li>
+                            <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
+        <div class="item-wrapper">
+            <article>
+                <div class="breadcrumbs">                    <a href="/" class="breadcrumb-home">                        <img src="/logo.png" class="breadcrumb-icon"/>
+Home</a>
+                    <span class="breadcrumb-separator"> / </span>
+                    <a href="/tools">The best Tools for Structured Visual Thinking</a>
+                    <span class="breadcrumb-separator"> / </span>
+VGL Guide — Timeline</div>
+                <h1>VGL Guide — Timeline</h1>
+                <div class="reading-time-container">
+                    <span class="fa fa-clock-o"></span>
+                    <p>Estimated reading time: 1 minutes.</p></div>
+                <div class="content"><h1 id="timeline">Timeline</h1>
+<p>Events across multiple tracks on a shared time axis, aligned by column.</p>
+<p><strong>Node types</strong></p>
+<ul>
+ <li><code>TimePoint</code> — a coordinate on the time axis, rendered as an anchor dot on a horizontal baseline with the year centred below it, and a dashed vertical guide descending through the diagram to anchor Events sharing its <code>alignGroup</code>. TimePoints are <strong>not</strong> drawn as boxed nodes.</li>
+ <li><code>Event</code> — a thing that happened at a point in time (boxed, default: steel blue). Use <code>alignGroup</code> to pin it to a TimePoint's column.</li>
+</ul>
+<p><strong>Edge types</strong></p>
+<ul>
+ <li><code>sequence</code> — TimePoint → TimePoint. Used by Graphviz for rank ordering but <strong>not drawn</strong>: the overlay's horizontal baseline replaces the arrows visually.</li>
+ <li><code>influence</code> — Event → Event, a cross-track or within-track dependency (dashed, <code>constraint=false</code>). Drawn normally.</li>
+</ul>
+<pre><code class="language-vgl">vgraph myTimeline: Timeline "19th Century Europe" {
+    // Time axis
+    node t1800: TimePoint "1800" [alignGroup: "1800"]
+    node t1850: TimePoint "1850" [alignGroup: "1850"]
+    node t1871: TimePoint "1871" [alignGroup: "1871"]
+    edge t1800 -&gt; t1850: sequence
+    edge t1850 -&gt; t1871: sequence
+
+    group germany "Germany" {
+        node g1: Event "Napoleon defeats Prussia" [alignGroup: "1800"]
+        node g2: Event "German Unification" [alignGroup: "1871"]
+    }
+
+    group england "England" {
+        node e1: Event "Industrial Revolution peaks" [alignGroup: "1850"]
+        node e2: Event "Franco-Prussian War impact" [alignGroup: "1871"]
+    }
+
+    edge g1 -&gt; g2: influence "led to"
+    edge e1 -&gt; g2: influence "industrialization enabled"
+}
+</code></pre>
+<p>Timelines flow left to right, and groups become visual tracks. <code>alignGroup</code> is what puts nodes in the same column — TimePoints are optional, and <code>alignGroup</code> alone suffices for alignment.</p>
+<p>Each TimePoint renders as a filled dot on a horizontal baseline with its label centred below, and a dashed vertical guide descends through the diagram so a reader can trace from a year down to every Event in that column. The <code>sequence</code> arrows are suppressed, because the baseline already conveys order. A</p>
+<p><code>vnotation … extends Timeline</code> inherits this rendering.</p></div></article>
+            <aside class="side-content">
+                <div class="relationships-section"></div>
+                <div class="preview__article-details">
+                    <p class="tag-list-title">Tagged with:</p>
+                    <ul class="preview__article-tags">
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/vgl">VGL</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/graph-language">Graph Language</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/notation">Notation</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/documentation">Documentation</a></div></li></ul></div>
+                <div class="newsletter" height="350" width="250">
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <p>See how you can combine your brain power with structured visual and achieve better results.</p>
+                    <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
+                <div></div></aside></div>
+        <footer>
+            <div>
+                <p class="footer-title">                    <img src="/logo.png" width="16px" class="content_logo"/>
+Vithanco Home </p>
+                <nav>
+                    <p>Dr. Ing. Klaus Kneupner, MBA</p>
+                    <ul>
+                        <li>
+                            <a href="https://linkedIn.com/in/Kneupner">
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bsky.app/profile/vithanco.bsky.social">
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://mastodon.social/@vithanco">
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/feed.rss">
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
+                            </a>
+                        </li>
+                    </ul></nav></div></footer></body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta property="og:site_name" content="Vithanco"/>
+        <link rel="canonical" href="https://vithanco.com/tools/vgl/notation-reference"/>
+        <meta name="twitter:url" content="https://vithanco.com/tools/vgl/notation-reference"/>
+        <meta property="og:url" content="https://vithanco.com/tools/vgl/notation-reference"/>
+        <title>VGL Guide — Notation reference | Vithanco</title>
+        <meta name="twitter:title" content="VGL Guide — Notation reference | Vithanco"/>
+        <meta property="og:title" content="VGL Guide — Notation reference | Vithanco"/>
+        <meta name="description" content=""One section per built-in notation: its node types, its edge types, and a""/>
+        <meta name="twitter:description" content=""One section per built-in notation: its node types, its edge types, and a""/>
+        <meta property="og:description" content=""One section per built-in notation: its node types, its edge types, and a""/>
+        <meta name="twitter:card" content="summary"/>
+        <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+        <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
+        <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
+        <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
+        <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
+    </head>
+    <body class="item-page">
+        <header>
+            <div class="header-wrapper">
+                <a href="/" class="site-name">
+                    <img src="/logo.png" height="20" width="20"/>
+                    <p>Vithanco</p></a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/services">Services</a></li>
+                        <li>
+                            <a href="/methods">Methods</a></li>
+                        <li>
+                            <a href="/notations">Notations</a></li>
+                        <li>
+                            <a href="/tools" class="selected">Tools</a></li>
+                        <li>
+                            <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
+        <div class="item-wrapper">
+            <article>
+                <div class="breadcrumbs">                    <a href="/" class="breadcrumb-home">                        <img src="/logo.png" class="breadcrumb-icon"/>
+Home</a>
+                    <span class="breadcrumb-separator"> / </span>
+                    <a href="/tools">The best Tools for Structured Visual Thinking</a>
+                    <span class="breadcrumb-separator"> / </span>
+VGL Guide — Notation reference</div>
+                <h1>VGL Guide — Notation reference</h1>
+                <div class="reading-time-container">
+                    <span class="fa fa-clock-o"></span>
+                    <p>Estimated reading time: 2 minutes.</p></div>
+                <div class="content"><p>One section per built-in notation: its node types, its edge types, and a complete worked example. Edge types constrain which connections make sense in the notation's domain, and most are inferred from the node types, so you rarely name one explicitly.</p>
+<p>The editor's <strong>Examples…</strong> picker loads any of seventeen graphs straight into the text area, and most of the examples below are the same graph. Where the guide's version is the simpler one, the note under the example says so — the editor carries a fuller variant worth opening. Four of the editor's examples have no counterpart here at all: two further IBIS graphs (<em>Complex System Architecture Decision</em>, <em>Software Project Planning</em>), one showing folded groups (<em>System Architecture with Folded Modules</em>), and the BBS graph reproduced below. The two syntax examples in <a href="/tools/vgl/concepts/#type-inference-and-minimal-syntax">Concepts</a> are guide-only.</p>
+<h2 id="in-this-section">In this section</h2>
+<ul>
+ <li><a href="/tools/vgl/notation-reference/ibis/">IBIS</a> — Decision-making and argumentation.</li>
+ <li><a href="/tools/vgl/notation-reference/bbs/">BBS</a> — Benefit breakdown and analysis.</li>
+ <li><a href="/tools/vgl/notation-reference/impact-mapping/">Impact Mapping</a> — A strategic planning graph showing goals, actors, impacts, and deliverables.</li>
+ <li><a href="/tools/vgl/notation-reference/concept-map/">Concept Map</a> — Domain vocabulary as falsifiable propositions. The title is a Guiding</li>
+ <li><a href="/tools/vgl/notation-reference/current-reality-tree-crt/">Current Reality Tree (CRT)</a> — Root cause analysis (Theory of Constraints), showing how causes lead to</li>
+ <li><a href="/tools/vgl/notation-reference/future-reality-tree-frt/">Future Reality Tree (FRT)</a> — Solution validation (ToC), showing how proposed solutions lead to desired</li>
+ <li><a href="/tools/vgl/notation-reference/transition-tree-trt/">Transition Tree (TRT)</a> — Step-by-step implementation planning (ToC). Shares CRT/FRT's node types but</li>
+ <li><a href="/tools/vgl/notation-reference/prerequisite-tree-prt/">Prerequisite Tree (PRT)</a> — Planning with necessary-condition thinking, starting from the objective and</li>
+ <li><a href="/tools/vgl/notation-reference/evaporating-cloud-ec/">Evaporating Cloud (EC)</a> — A conflict-resolution tool using necessary-condition logic, flowing</li>
+ <li><a href="/tools/vgl/notation-reference/goal-tree/">Goal Tree</a> — Strategic planning with Theory of Constraints necessity logic (H. William</li>
+ <li><a href="/tools/vgl/notation-reference/attack-defense-tree-adtree/">Attack-Defense Tree (ADTree)</a> — Security modelling after Kordy et al. (2014), extending classical attack trees</li>
+ <li><a href="/tools/vgl/notation-reference/causal-loop-diagram-cld/">Causal Loop Diagram (CLD)</a> — Systems analysis: what reinforces or balances what over time. Every element is a</li>
+ <li><a href="/tools/vgl/notation-reference/decision-tree/">Decision Tree</a> — Decision logic as questions, choices and outcomes.</li>
+ <li><a href="/tools/vgl/notation-reference/timeline/">Timeline</a> — Events across multiple tracks on a shared time axis, aligned by column.</li>
+ <li><a href="/tools/vgl/notation-reference/c4/">C4</a> — Software-architecture diagrams in Simon Brown's C4 model: people, software</li>
+</ul></div></article>
+            <aside class="side-content">
+                <div class="toc-list">
+                    <p class="aside-title">Table of Contents</p>
+                    <ul>
+                        <li>
+                            <a href="/tools/vgl/notation-reference/ibis/index.html">
+                                <p>IBIS</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/vgl/notation-reference/bbs/index.html">
+                                <p>BBS</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/vgl/notation-reference/impact-mapping/index.html">
+                                <p>Impact Mapping</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/vgl/notation-reference/concept-map/index.html">
+                                <p>Concept Map</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/vgl/notation-reference/current-reality-tree-crt/index.html">
+                                <p>Current Reality Tree (CRT)</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/vgl/notation-reference/future-reality-tree-frt/index.html">
+                                <p>Future Reality Tree (FRT)</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/vgl/notation-reference/transition-tree-trt/index.html">
+                                <p>Transition Tree (TRT)</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/vgl/notation-reference/prerequisite-tree-prt/index.html">
+                                <p>Prerequisite Tree (PRT)</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/vgl/notation-reference/evaporating-cloud-ec/index.html">
+                                <p>Evaporating Cloud (EC)</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/vgl/notation-reference/goal-tree/index.html">
+                                <p>Goal Tree</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/vgl/notation-reference/attack-defense-tree-adtree/index.html">
+                                <p>Attack-Defense Tree (ADTree)</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/vgl/notation-reference/causal-loop-diagram-cld/index.html">
+                                <p>Causal Loop Diagram (CLD)</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/vgl/notation-reference/decision-tree/index.html">
+                                <p>Decision Tree</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/vgl/notation-reference/timeline/index.html">
+                                <p>Timeline</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/vgl/notation-reference/c4/index.html">
+                                <p>C4</p>
+                            </a>
+                        </li>
+                    </ul></div>
+                <div class="relationships-section"></div>
+                <div class="preview__article-details">
+                    <p class="tag-list-title">Tagged with:</p>
+                    <ul class="preview__article-tags">
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/vgl">VGL</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/graph-language">Graph Language</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/notation">Notation</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/documentation">Documentation</a></div></li></ul></div>
+                <div class="newsletter" height="350" width="250">
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <p>See how you can combine your brain power with structured visual and achieve better results.</p>
+                    <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
+                <div></div></aside></div>
+        <footer>
+            <div>
+                <p class="footer-title">                    <img src="/logo.png" width="16px" class="content_logo"/>
+Vithanco Home </p>
+                <nav>
+                    <p>Dr. Ing. Klaus Kneupner, MBA</p>
+                    <ul>
+                        <li>
+                            <a href="https://linkedIn.com/in/Kneupner">
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bsky.app/profile/vithanco.bsky.social">
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://mastodon.social/@vithanco">
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/feed.rss">
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
+                            </a>
+                        </li>
+                    </ul></nav></div></footer></body>
+</html>

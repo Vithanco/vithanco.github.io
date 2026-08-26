@@ -9,9 +9,9 @@
         <title>VGL Guide — Concepts | Vithanco</title>
         <meta name="twitter:title" content="VGL Guide — Concepts | Vithanco"/>
         <meta property="og:title" content="VGL Guide — Concepts | Vithanco"/>
-        <meta name="description" content="The Vithanco Graph Language (VGL) is a human-readable text format for creating and editing graphs. VGL provides a simple, declarative syntax for defining nodes, edges, groups, and their attributes."/>
-        <meta name="twitter:description" content="The Vithanco Graph Language (VGL) is a human-readable text format for creating and editing graphs. VGL provides a simple, declarative syntax for defining nodes, edges, groups, and their attributes."/>
-        <meta property="og:description" content="The Vithanco Graph Language (VGL) is a human-readable text format for creating and editing graphs. VGL provides a simple, declarative syntax for defining nodes, edges, groups, and their attributes."/>
+        <meta name="description" content="Every VGL document declares a notation, which fixes the node and edge types"/>
+        <meta name="twitter:description" content="Every VGL document declares a notation, which fixes the node and edge types"/>
+        <meta property="og:description" content="Every VGL document declares a notation, which fixes the node and edge types"/>
         <meta name="twitter:card" content="summary"/>
         <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -83,411 +83,30 @@ VGL Guide — Concepts</div>
                 <h1>VGL Guide — Concepts</h1>
                 <div class="reading-time-container">
                     <span class="fa fa-clock-o"></span>
-                    <p>Estimated reading time: 15 minutes.</p></div>
+                    <p>Estimated reading time: 5 minutes.</p></div>
                 <div class="content"><h1 id="concepts">Concepts</h1>
-<h3 id="overview">Overview</h3>
-<p>The Vithanco Graph Language (VGL) is a human-readable text format for creating and editing graphs. VGL provides a simple, declarative syntax for defining nodes, edges, groups, and their attributes.</p>
-<h3 id="notation">Notation</h3>
-<p>Every VGL document must declare a notation, which defines the types of nodes and edges available in the graph.</p>
-<p><strong>Syntax:</strong></p>
+<h3 id="the-document">The document</h3>
+<p>Every VGL document declares a notation, which fixes the node and edge types available:</p>
 <pre><code>vgraph &lt;graph_id&gt;: &lt;NOTATION&gt; "&lt;graph_label&gt;" {
     ...
 }
 </code></pre>
-<p>VGL supports both built-in notations and user-defined notations declared with <code>vnotation</code> (see <a href="/tools/vgl/user-defined-notations-vnotation/">User-Defined Notations</a>). Built-in notations come with predefined node types and edge types:</p>
-<ul>
- <li><strong>IBIS</strong> (Issue-Based Information System) - for decision-making and argumentation</li>
- <li><strong>BBS</strong> (Benefit Breakdown Structure) - for benefit analysis</li>
- <li><strong>ImpactMapping</strong> - for strategic planning and goal alignment</li>
- <li><strong>ConceptMap</strong> - for defining domain vocabulary through falsifiable propositions that help people align on shared understanding</li>
- <li><strong>CRT</strong> (Current Reality Tree) - for root cause analysis using Theory of Constraints</li>
- <li><strong>EC</strong> (Evaporating Cloud) - for conflict resolution using Theory of Constraints necessary condition logic</li>
- <li><strong>FRT</strong> (Future Reality Tree) - for solution validation using Theory of Constraints</li>
- <li><strong>PRT</strong> (Prerequisite Tree) - for planning with necessary condition thinking using Theory of Constraints</li>
- <li><strong>TRT</strong> (Transition Tree) - for step-by-step implementation planning using Theory of Constraints</li>
- <li><strong>ADTree</strong> (Attack-Defense Tree) - for security modelling of attack and defense interactions</li>
- <li><strong>GoalTree</strong> (Goal Tree) - for strategic planning using Theory of Constraints necessity logic</li>
- <li><strong>CLD</strong> (Causal Loop Diagram) - for systems analysis modelling how elements reinforce or balance each other over time</li>
- <li><strong>DecisionTree</strong> (Decision Tree) - for storing and evaluating decision logic through questions, choices, and outcomes</li>
- <li><strong>Timeline</strong> (Timeline) - for visualizing events across multiple tracks aligned to a shared time axis</li>
-</ul>
-<p>The notation determines what node types and edge types are available in your graph.</p>
-<h3 id="extensions">Extensions</h3>
-<p>Extensions add cross-cutting node types to any notation. They are listed after the notation, separated by commas:</p>
-<pre><code>vgraph &lt;graph_id&gt;: &lt;NOTATION&gt;, &lt;EXTENSION&gt; "&lt;graph_label&gt;" {
-    ...
-}
-</code></pre>
-<p>Multiple extensions can be combined:</p>
-<pre><code>vgraph myGraph: ConceptMap, Annotation "My Diagram" { ... }
-</code></pre>
-<p><strong>Available extensions:</strong></p>
-<ul>
- <li><strong>Annotation</strong> - adds an <code>Annotation</code> node type that can be connected FROM any node in the notation. Use it to attach notes, comments, or clarifications to any element of the diagram.</li>
-</ul>
-<p><strong>Annotation example:</strong></p>
-<pre><code class="language-vgl">vgraph productMap: ConceptMap, Annotation "Product Strategy" {
-    node c1: Concept "Customer Need"
-    node r1: Relation "drives"
-    node c2: Concept "Feature"
-    node a1: Annotation "Validated in user research"
-    edge c1 -&gt; r1
-    edge r1 -&gt; c2
-    edge c1 -&gt; a1
-}
-</code></pre>
-<p>Edge types from notation nodes to <code>Annotation</code> are automatically inferred, so no explicit <code>: annotates__Concept</code> type is needed on annotation edges.</p>
-<h3 id="diagram-logic-and-junctors">Diagram Logic and Junctors</h3>
-<p>Each notation has a <strong>diagram logic</strong>: <code>noLogic</code>, <code>sufficientCause</code>, or <code>necessaryCondition</code>. The logic determines how multiple arrows pointing into the same node are read, and which junctor (AND, OR) needs to be an explicit node.</p>
-<table>
- <thead>
-  <tr>
-   <th>Diagram logic</th>
-   <th>Multiple unjoined arrows mean…</th>
-   <th>Explicit junctor needed</th>
-   <th>Implicit (don't add as a node)</th>
-  </tr>
- </thead>
- <tbody>
-  <tr>
-   <td><code>sufficientCause</code></td>
-   <td>OR — any one arrow is enough</td>
-   <td><strong>AND</strong> — all inputs required together</td>
-   <td>OR</td>
-  </tr>
-  <tr>
-   <td><code>necessaryCondition</code></td>
-   <td>AND — all arrows are required</td>
-   <td><strong>OR</strong> — alternative paths</td>
-   <td>AND</td>
-  </tr>
-  <tr>
-   <td><code>noLogic</code></td>
-   <td>Notation-defined</td>
-   <td>—</td>
-   <td>—</td>
-  </tr>
- </tbody>
-</table>
-<p><strong>Rule of thumb:</strong> add only the <em>exception</em> junctor for your logic. For sufficient-cause notations (CRT, FRT, ADTree, TRT) declare an <code>AndJunctor</code> only when you need "all of these together." For necessary-condition notations (EC, PRT, GoalTree) declare an <code>OrJunctor</code> only when you need "any one of these alternatives." Adding the implicit junctor produces a <code>redundantJunctor</code> quality warning, since direct edges already express the same semantics with less visual noise.</p>
-<p>This applies equally to user-defined notations declared with <code>vnotation</code> — match the junctor you expose to the diagram logic you choose.</p>
 <h3 id="nodes">Nodes</h3>
-<p>Nodes represent the primary entities in your graph. Each node has:</p>
-<ul>
- <li><strong>ID</strong>: A unique identifier (required)</li>
- <li><strong>Type</strong>: The kind of node, determined by the notation (required)</li>
- <li><strong>Label</strong>: A human-readable display name (optional)</li>
- <li><strong>Attributes</strong>: Additional properties like color, fontsize, etc. (optional)</li>
-</ul>
-<p><strong>Syntax:</strong></p>
 <pre><code>node &lt;id&gt;: &lt;NodeType&gt; "&lt;label&gt;" [&lt;attributes&gt;];
 </code></pre>
-<p><strong>Example:</strong></p>
+<p>The id must be unique in the document; the label and attributes are optional.</p>
 <pre><code class="language-vgl">node q1: Question "What should we do?" [fontsize: 16; color: red];
 </code></pre>
-<h3 id="node-types">Node Types</h3>
-<p>Node types are defined by the chosen notation. Each notation has its own set of node types with specific purposes and default styling.</p>
-<p><strong>IBIS Node Types:</strong></p>
-<ul>
- <li><code>Question</code> - A question or issue to be resolved (default: blue)</li>
- <li><code>Answer</code> - A proposed answer or solution (default: pink)</li>
- <li><code>Pro</code> - An argument supporting an answer (default: green)</li>
- <li><code>Con</code> - An argument opposing an answer (default: red)</li>
-</ul>
-<p><strong>BBS Node Types:</strong></p>
-<ul>
- <li><code>InvestmentObjective</code> - High-level business objective</li>
- <li><code>Benefit</code> - Expected benefit from the investment</li>
- <li><code>BusinessChange</code> - Organizational or process change required</li>
- <li><code>Enabler</code> - Technology or capability enabler</li>
-</ul>
-<p><strong>ImpactMapping Node Types:</strong></p>
-<ul>
- <li><code>Goal</code> - Strategic goal or objective (default: dark blue)</li>
- <li><code>Actor</code> - Person or group who can produce impact (default: blue)</li>
- <li><code>Impact</code> - Behavioral change or outcome (default: cyan)</li>
- <li><code>Deliverable</code> - Product feature or capability (default: green)</li>
-</ul>
-<p><strong>ConceptMap Node Types:</strong></p>
-<ul>
- <li><code>Concept</code> - A concept or term</li>
- <li><code>EmphasizedConcept</code> - An important concept to highlight</li>
- <li><code>Relation</code> - A linking verb or phrase connecting concepts (forms propositions: Concept → Relation → Concept)</li>
-</ul>
-<p><strong>CRT Node Types:</strong></p>
-<p>CRT uses sufficient-cause logic, so multiple unjoined causes feeding the same effect are implicitly OR (any one is sufficient). Only AND is an explicit junctor.</p>
-<ul>
- <li><code>UndesirableEffect</code> - An unwanted outcome requiring investigation (default: red)</li>
- <li><code>IntermediateEffect</code> - A neutral outcome in the causal chain (default: blue)</li>
- <li><code>DesirableEffect</code> - A wanted outcome caused by other conditions (default: green)</li>
- <li><code>Given</code> - An unchangeable constant like laws or physics (default: dark purple)</li>
- <li><code>Changeable</code> - A modifiable condition that can be addressed (default: light purple)</li>
- <li><code>AndJunctor</code> - Indicates multiple conditions required together to produce the downstream effect (icon: AND circle)</li>
-</ul>
-<p><strong>FRT Node Types:</strong> FRT shares the same node types as CRT, as both are Theory of Constraints tools that use sufficient-cause logic. The difference is in usage: FRT starts with solutions (Changeable/injections) and builds upward to show how they lead to desirable effects. Multiple unjoined inputs into one effect are implicitly OR.</p>
-<ul>
- <li><code>Changeable</code> - Proposed solutions or injections to implement (default: light purple)</li>
- <li><code>Given</code> - Unchangeable facts that still apply (default: dark purple)</li>
- <li><code>IntermediateEffect</code> - Expected intermediate outcomes from solutions (default: blue)</li>
- <li><code>DesirableEffect</code> - Goals we want to achieve (default: green)</li>
- <li><code>UndesirableEffect</code> - Potential negative side effects to monitor (default: red)</li>
- <li><code>AndJunctor</code> - Indicates multiple conditions required together to produce the downstream effect (icon: AND circle)</li>
-</ul>
-<p><strong>EC Node Types:</strong> EC (Evaporating Cloud) is a conflict resolution tool using necessary-condition logic. It surfaces the assumptions behind a conflict and finds breakthrough solutions. The graph flows left-to-right from Common Objective to Conflict. Multiple necessary inputs are implicitly AND; OR is the explicit junctor for alternative paths.</p>
-<ul>
- <li><code>CommonObjective</code> - The shared objective valid for both sides of the conflict (default: green)</li>
- <li><code>Need</code> - A perceived need that must be met (default: blue)</li>
- <li><code>Want</code> - A perceived want derived from a need (default: orange)</li>
- <li><code>Conflict</code> - The perceived conflict expressed as mutually exclusive wants (icon: lightning bolt circle, no text)</li>
- <li><code>OrJunctor</code> - Marks alternative necessary inputs — any one of them suffices for the downstream condition (icon: OR circle)</li>
- <li><code>Assumption</code> - Exposes the underlying assumptions behind the conflict (default: purple)</li>
- <li><code>Solution</code> - Marks the final solution that breaks the conflict (default: teal)</li>
-</ul>
-<p><strong>PRT Node Types:</strong> PRT (Prerequisite Tree) is a planning tool using necessary condition thinking. It starts with the desired objective and works backward to identify obstacles and the intermediate objectives needed to overcome them.</p>
-<ul>
- <li><code>Objective</code> - The desired goal you aim to achieve (default: green)</li>
- <li><code>Obstacle</code> - Barriers preventing objective achievement (default: red)</li>
- <li><code>IntermediateObjective</code> - A milestone that overcomes a specific obstacle (default: blue)</li>
- <li><code>OR</code> - Connector allowing optional conditions instead of requiring all predecessors (icon: OR circle)</li>
-</ul>
-<p><strong>TRT Node Types:</strong> TRT (Transition Tree) is an implementation planning tool that answers "HOW TO CAUSE the change?" by providing step-by-step actions needed to implement changes. It shares node types with CRT/FRT but focuses on the detailed action sequence.</p>
-<ul>
- <li><code>UndesirableEffect</code> - Current state problems being addressed (default: red)</li>
- <li><code>IntermediateEffect</code> - Stepping stone outcomes from actions (default: blue)</li>
- <li><code>DesirableEffect</code> - Goal outcomes we want to achieve (default: green)</li>
- <li><code>Given</code> - Unchangeable facts and constraints (default: dark purple)</li>
- <li><code>Changeable</code> - Actions we can take to cause change (default: light purple)</li>
- <li><code>AndJunctor</code> - Indicates multiple conditions required together for an effect (icon: AND circle)</li>
-</ul>
-<p><strong>ADTree Node Types:</strong> ADTree (Attack-Defense Tree) is a security modelling methodology based on Kordy et al. (2014). It extends classical attack trees by allowing defense nodes at any level, modelling the ongoing arms race between attacker and defender. ADTree uses sufficient-cause logic — multiple unjoined children are implicitly OR (any one suffices); only AND is an explicit junctor.</p>
-<ul>
- <li><code>Attack</code> - An attacker's goal or sub-goal (default: red)</li>
- <li><code>Defense</code> - A defender's countermeasure or protective measure (default: green)</li>
- <li><code>AndJunctor</code> - Conjunctive refinement: all children must be achieved together (icon: AND circle)</li>
-</ul>
-<p><strong>GoalTree Node Types:</strong> GoalTree (Goal Tree) is a strategic planning tool using necessity condition logic from Theory of Constraints. It defines what a system must achieve through a hierarchy of Goal, Critical Success Factors, and Necessary Conditions. Invented by H. William Dettmer, it is the foundation of the Logical Thinking Process.</p>
-<ul>
- <li><code>Goal</code> - The single top-level objective — the ultimate purpose for which the system exists (default: cyan/teal)</li>
- <li><code>CriticalSuccessFactor</code> - High-level terminal outcomes (3-5 maximum) without which the Goal cannot be achieved (default: light blue)</li>
- <li><code>NecessaryCondition</code> - Indispensable prerequisite tasks that support CSFs; can cascade into sub-NCs becoming more specific at lower levels (default: amber/yellow)</li>
-</ul>
-<p><strong>CLD Node Types:</strong> CLD (Causal Loop Diagram) is a systems analysis tool for modelling how elements interconnect and reinforce or balance each other over time. All elements are represented as Stocks whose amounts can change based on incoming connections.</p>
-<ul>
- <li><code>Stock</code> - A variable or element in the system whose value changes over time (default: blue)</li>
-</ul>
-<p><strong>DecisionTree Node Types:</strong></p>
-<ul>
- <li><code>DecisionPoint</code> - A question that determines which path to follow (default: amber)</li>
- <li><code>Choice</code> - A potential answer or path branching from a question (default: blue)</li>
- <li><code>Outcome</code> - A terminal result of the decision tree (default: green)</li>
-</ul>
-<p><strong>Timeline Node Types:</strong></p>
-<ul>
- <li><code>TimePoint</code> - A coordinate on the time axis. Rendered by the Timeline overlay as an anchor dot on a horizontal baseline plus a year label centered below the dot. A dashed vertical guide descends from each TimePoint through the diagram, visually anchoring Events that share its <code>alignGroup</code>. TimePoints are <strong>not</strong> rendered as boxed nodes.</li>
- <li><code>Event</code> - A thing that happened at a point in time (boxed node, default: steel blue). Use <code>alignGroup</code> to pin the Event to a TimePoint's column.</li>
-</ul>
 <h3 id="edges">Edges</h3>
-<p>Edges represent connections between nodes. Each edge has:</p>
-<ul>
- <li><strong>From</strong>: Source node ID (required)</li>
- <li><strong>To</strong>: Target node ID (required)</li>
- <li><strong>Type</strong>: The kind of connection (optional, can be inferred)</li>
- <li><strong>Label</strong>: A description of the relationship (optional)</li>
- <li><strong>Attributes</strong>: Additional properties like style, weight, etc. (optional)</li>
-</ul>
-<p><strong>Syntax:</strong></p>
 <pre><code>edge &lt;from_id&gt; -&gt; &lt;to_id&gt;: &lt;EdgeType&gt; "&lt;label&gt;" [&lt;attributes&gt;];
 </code></pre>
-<p><strong>Concise Syntax</strong> (omitting type):</p>
-<pre><code>edge &lt;from_id&gt; -&gt; &lt;to_id&gt;;
-</code></pre>
-<p>When the edge type is omitted, VGL will automatically infer it based on the connected node types, if unambiguous.</p>
-<p><strong>Example:</strong></p>
+<p>Both endpoints must be declared. <strong>Omit the edge type and VGL infers it</strong> from the node types, whenever that is unambiguous — which is most of the time, so most documents never name an edge type at all.</p>
 <pre><code class="language-vgl">edge q1 -&gt; a1: answered_by "Initial solution";
 edge a1 -&gt; pro1 [style: dashed];
-edge q2 -&gt; a2;  // Type inferred from node types
+edge q2 -&gt; a2;                              // type inferred
 </code></pre>
-<h3 id="edge-types">Edge Types</h3>
-<p>Edge types are defined by the notation and specify valid connections between node types.</p>
-<p><strong>IBIS Edge Types:</strong></p>
-<ul>
- <li><code>answered_by</code> - Connects Question → Answer</li>
- <li><code>supports</code> - Connects Answer → Pro</li>
- <li><code>objects_to</code> - Connects Answer → Con</li>
- <li><code>pro_questions_question</code> - Connects Pro → Question</li>
- <li><code>con_questions_question</code> - Connects Con → Question</li>
-</ul>
-<p><strong>BBS Edge Types:</strong></p>
-<ul>
- <li><code>requires_benefit</code> - Connects Benefit → InvestmentObjective</li>
- <li><code>requires_business_change</code> - Connects BusinessChange → Benefit</li>
- <li><code>requires_enabler</code> - Connects Enabler → BusinessChange</li>
- <li><code>change_requires_change</code> - Connects BusinessChange → BusinessChange</li>
- <li><code>enabler_requires_enabler</code> - Connects Enabler → Enabler</li>
-</ul>
-<p><strong>ImpactMapping Edge Types:</strong></p>
-<ul>
- <li><code>goal_to_actor</code> - Connects Goal → Actor</li>
- <li><code>actor_to_impact</code> - Connects Actor → Impact</li>
- <li><code>impact_to_deliverable</code> - Connects Impact → Deliverable</li>
-</ul>
-<p><strong>ConceptMap Edge Types:</strong></p>
-<ul>
- <li><code>concept_to_relation</code> - Connects Concept → Relation (tail marker only)</li>
- <li><code>relation_to_concept</code> - Connects Relation → Concept (arrow head only)</li>
-</ul>
-<p><strong>CRT Edge Types:</strong> CRT has many edge types connecting causes to effects. The graph flows bottom-to-top (causes at bottom, effects at top).</p>
-<p><em>From effects to effects:</em></p>
-<ul>
- <li><code>undesirable_causes_undesirable</code>, <code>undesirable_causes_intermediate</code>, <code>undesirable_causes_desirable</code></li>
- <li><code>intermediate_causes_undesirable</code>, <code>intermediate_causes_intermediate</code>, <code>intermediate_causes_desirable</code></li>
- <li><code>desirable_causes_undesirable</code>, <code>desirable_causes_intermediate</code>, <code>desirable_causes_desirable</code></li>
-</ul>
-<p><em>From Given/Changeable to effects:</em></p>
-<ul>
- <li><code>given_causes_undesirable</code>, <code>given_causes_intermediate</code>, <code>given_causes_desirable</code></li>
- <li><code>changeable_causes_undesirable</code>, <code>changeable_causes_intermediate</code>, <code>changeable_causes_desirable</code></li>
-</ul>
-<p><em>To/From AndJunctor:</em></p>
-<ul>
- <li><code>*_to_and_junctor</code> - Connect any type to AndJunctor</li>
- <li><code>and_junctor_causes_*</code> - Connect AndJunctor to effects</li>
-</ul>
-<p><strong>FRT Edge Types:</strong> FRT shares the same edge types as CRT. The graph flows bottom-to-top (solutions at bottom, desired effects at top).</p>
-<p><em>From Changeable/Given to effects (typical starting points in FRT):</em></p>
-<ul>
- <li><code>changeable_causes_undesirable</code>, <code>changeable_causes_intermediate</code>, <code>changeable_causes_desirable</code></li>
- <li><code>given_causes_undesirable</code>, <code>given_causes_intermediate</code>, <code>given_causes_desirable</code></li>
-</ul>
-<p><em>Between effects:</em></p>
-<ul>
- <li><code>intermediate_causes_undesirable</code>, <code>intermediate_causes_intermediate</code>, <code>intermediate_causes_desirable</code></li>
- <li><code>desirable_causes_*</code>, <code>undesirable_causes_*</code></li>
-</ul>
-<p><em>To/From AndJunctor:</em></p>
-<ul>
- <li><code>*_to_and_junctor</code> - Connect any type to AndJunctor</li>
- <li><code>and_junctor_causes_*</code> - Connect AndJunctor to effects</li>
-</ul>
-<p><strong>EC Edge Types:</strong> EC uses edges to show necessary condition relationships flowing from shared objective through needs and wants to the conflict. The graph flows left-to-right (Common Objective on left, Conflict on right).</p>
-<p><em>From Common Objective:</em></p>
-<ul>
- <li><code>objective_to_need</code> - Connects CommonObjective → Need</li>
- <li><code>objective_to_or</code> - Connects CommonObjective → OrJunctor</li>
-</ul>
-<p><em>From Need:</em></p>
-<ul>
- <li><code>need_to_want</code> - Connects Need → Want</li>
- <li><code>need_to_or</code> - Connects Need → OrJunctor</li>
- <li><code>need_to_assumption</code> - Connects Need → Assumption</li>
- <li><code>need_to_solution</code> - Connects Need → Solution</li>
-</ul>
-<p><em>From Want:</em></p>
-<ul>
- <li><code>want_to_conflict</code> - Connects Want → Conflict</li>
- <li><code>want_to_or</code> - Connects Want → OrJunctor</li>
- <li><code>want_to_assumption</code> - Connects Want → Assumption</li>
-</ul>
-<p><em>From Conflict:</em></p>
-<ul>
- <li><code>conflict_to_or</code> - Connects Conflict → OrJunctor</li>
- <li><code>conflict_to_assumption</code> - Connects Conflict → Assumption</li>
-</ul>
-<p><em>From OrJunctor:</em></p>
-<ul>
- <li><code>or_to_want</code> - Connects OrJunctor → Want</li>
- <li><code>or_to_conflict</code> - Connects OrJunctor → Conflict</li>
- <li><code>or_to_or</code> - Connects OrJunctor → OrJunctor</li>
-</ul>
-<p><strong>PRT Edge Types:</strong> PRT uses edges to show how obstacles block objectives and how intermediate objectives overcome obstacles. The graph flows bottom-to-top (intermediate objectives at bottom, main objective at top).</p>
-<p><em>Obstacle blocking relationships:</em></p>
-<ul>
- <li><code>obstacle_blocks_objective</code> - Connects Obstacle → Objective</li>
- <li><code>obstacle_blocks_intermediate_objective</code> - Connects Obstacle → IntermediateObjective</li>
-</ul>
-<p><em>Intermediate objective relationships:</em></p>
-<ul>
- <li><code>intermediate_objective_overcomes_obstacle</code> - Connects IntermediateObjective → Obstacle</li>
- <li><code>intermediate_objective_to_objective</code> - Connects IntermediateObjective → Objective (direct path)</li>
-</ul>
-<p><em>To/From OR Junctor:</em></p>
-<ul>
- <li><code>obstacle_to_or</code>, <code>intermediate_objective_to_or</code> - Connect to OR junctor</li>
- <li><code>or_to_objective</code>, <code>or_to_intermediate_objective</code>, <code>or_to_obstacle</code> - Connect from OR junctor</li>
-</ul>
-<p><strong>TRT Edge Types:</strong> TRT shares similar edge types with CRT/FRT but focuses on action planning. The graph flows bottom-to-top (actions at bottom, desired effects at top).</p>
-<p><em>From Changeable/Given to effects (typical starting points for actions):</em></p>
-<ul>
- <li><code>changeable_causes_undesirable</code>, <code>changeable_causes_intermediate</code>, <code>changeable_causes_desirable</code></li>
- <li><code>given_causes_undesirable</code>, <code>given_causes_intermediate</code>, <code>given_causes_desirable</code></li>
-</ul>
-<p><em>Between effects:</em></p>
-<ul>
- <li><code>intermediate_causes_undesirable</code>, <code>intermediate_causes_intermediate</code>, <code>intermediate_causes_desirable</code></li>
- <li><code>desirable_causes_*</code>, <code>undesirable_causes_*</code></li>
-</ul>
-<p><em>To/From And Junctor:</em></p>
-<ul>
- <li><code>*_to_and_junctor</code> - Connect any type to And junctor</li>
- <li><code>and_junctor_causes_*</code> - Connect And junctor to effects (excluding And)</li>
-</ul>
-<p><strong>ADTree Edge Types:</strong> ADTree uses two kinds of edges: refinement edges (solid lines) for same-type decomposition, and countermeasure edges (dotted lines) for opposite-type countering. The graph flows top-to-bottom (root goal at top).</p>
-<p><em>Refinement edges (solid):</em></p>
-<ul>
- <li><code>attack_refines_attack</code> - Decompose an attack into sub-attacks</li>
- <li><code>defense_refines_defense</code> - Decompose a defense into sub-defenses</li>
-</ul>
-<p><em>Countermeasure edges (dotted):</em></p>
-<ul>
- <li><code>defense_counters_attack</code> - A defense that mitigates an attack</li>
- <li><code>attack_counters_defense</code> - An attack that circumvents a defense</li>
-</ul>
-<p><em>To/From AND Junctor:</em></p>
-<ul>
- <li><code>attack_to_and_junctor</code>, <code>defense_to_and_junctor</code> - Connect to AND junctor</li>
- <li><code>and_junctor_to_attack</code>, <code>and_junctor_to_defense</code> - Connect from AND junctor</li>
-</ul>
-<p><strong>GoalTree Edge Types:</strong> GoalTree uses edges to show necessity relationships. The graph flows top-to-bottom (Goal at top, Necessary Conditions expand downward). The necessity logic reads: "In order to achieve [upper], we must have [lower]."</p>
-<ul>
- <li><code>csf_to_goal</code> - Connects CriticalSuccessFactor → Goal (CSF is necessary for Goal)</li>
- <li><code>nc_to_csf</code> - Connects NecessaryCondition → CriticalSuccessFactor (NC is necessary for CSF)</li>
- <li><code>nc_to_nc</code> - Connects NecessaryCondition → NecessaryCondition (sub-NC supports parent NC)</li>
-</ul>
-<p><strong>CLD Edge Types:</strong> CLD uses two edge types representing positive and negative causal links between Stocks. Loops with an even number of negative links (including zero) are reinforcing; loops with an odd number are balancing.</p>
-<ul>
- <li><code>same</code> - Connects Stock → Stock (positive causal link: both change in the same direction, solid line, marked "s")</li>
- <li><code>opposite</code> - Connects Stock → Stock (negative causal link: nodes change in opposite directions, dashed line, marked "o")</li>
-</ul>
-<p><strong>DecisionTree Edge Types:</strong></p>
-<ul>
- <li><code>decision_to_choice</code> - Connects DecisionPoint → Choice (the question branches into options)</li>
- <li><code>choice_to_decision</code> - Connects Choice → DecisionPoint (the option leads to a further question)</li>
- <li><code>choice_to_outcome</code> - Connects Choice → Outcome (the option terminates at a result)</li>
-</ul>
-<p><strong>Timeline Edge Types:</strong></p>
-<ul>
- <li><code>sequence</code> - Connects TimePoint → TimePoint. Used by Graphviz for rank ordering, but <strong>not drawn</strong>: the Timeline overlay's horizontal baseline replaces the inter-TimePoint arrows visually.</li>
- <li><code>influence</code> - Connects Event → Event (cross-track or within-track dependency, dashed, constraint=false). Drawn normally.</li>
-</ul>
-<p>Edge types ensure that connections make semantic sense within the notation's domain.</p>
 <h3 id="groups">Groups</h3>
-<p>Groups organize nodes hierarchically and can be nested to create subgroups. Groups help visually organize complex graphs.</p>
-<p><strong>Syntax:</strong></p>
-<pre><code>group &lt;id&gt; "&lt;label&gt;" {
-    &lt;attributes&gt;;
-    &lt;nodes&gt;;
-    &lt;edges&gt;;
-    &lt;nested_groups&gt;;
-};
-</code></pre>
-<p><strong>Features:</strong></p>
-<ul>
- <li>Groups can contain nodes, edges, and other groups</li>
- <li>Groups can have attributes like <code>style</code>, <code>color</code>, <code>label</code></li>
- <li>Groups can be nested to unlimited depth</li>
- <li>Edges can connect nodes across different groups</li>
-</ul>
-<p><strong>Example:</strong></p>
+<p>Groups organise nodes hierarchically, nest to any depth, and may carry attributes. Edges may cross group boundaries freely.</p>
 <pre><code class="language-vgl">group research "Research Phase" {
     style: filled;
     color: lightblue;
@@ -500,47 +119,79 @@ edge q2 -&gt; a2;  // Type inferred from node types
     };
 };
 </code></pre>
+<p><strong>Folded groups.</strong> Prefix a group with <code>folded</code> to render it collapsed into a single box. Folding auto-redirects any edges that crossed the boundary to the collapsed box, and the editor can fold and unfold in place.</p>
+<pre><code class="language-vgl">folded group methodology "Methods" { … };
+</code></pre>
+<p><strong>Typed groups (boundaries).</strong> A group can carry a type after its id, mirroring node typing — <code>group &lt;id&gt;: &lt;GroupType&gt; "&lt;label&gt;" { … }</code>. The type selects its appearance: a C4 <code>SystemBoundary</code> draws a dashed boundary when unfolded and its element card when folded. See <a href="/tools/vgl/notation-reference/c4/">C4</a>.</p>
 <h3 id="attributes">Attributes</h3>
-<p>Attributes customize the appearance and behavior of nodes, edges, and groups.</p>
-<p><strong>Inline Syntax</strong> (brackets):</p>
-<pre><code>[attribute1: value1; attribute2: value2]
+<p>Inline in brackets, <code>[a: 1; b: 2]</code>, or as bare statements inside a graph or group body.</p>
+<table>
+ <thead>
+  <tr>
+   <th>Applies to</th>
+   <th>Attributes</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Node</td>
+   <td><code>color</code>, <code>fontColor</code>, <code>fontsize</code>, <code>shape</code>, <code>url</code>, <code>alignGroup</code> (nodes sharing a value are placed at the same rank)</td>
+  </tr>
+  <tr>
+   <td>Edge</td>
+   <td><code>style</code> (<code>solid</code>/<code>dashed</code>/<code>dotted</code>), <code>color</code>, <code>weight</code>, <code>label</code>, <code>url</code></td>
+  </tr>
+  <tr>
+   <td>Group</td>
+   <td><code>style</code> (<code>filled</code>/<code>dashed</code>/<code>dotted</code>), <code>color</code>, <code>label</code>, <code>url</code></td>
+  </tr>
+  <tr>
+   <td>Graph</td>
+   <td><code>rankdir</code> (<code>LR</code>/<code>TB</code>), <code>fontcolor</code>, <code>labeljust</code> (<code>l</code>/<code>r</code>/<code>c</code>)</td>
+  </tr>
+ </tbody>
+</table>
+<p><strong>Colouring one node.</strong> <code>color</code> sets a node's fill, overriding whatever its type says. <code>fontColor</code> sets the text on it; leave it out and the text is set to black or white for contrast, but only where it would otherwise stop being legible.</p>
+<pre><code class="language-vgl">node epBackend: Container "Equipment Pooling Backend" [color: "#b6e6bd"];
+node onApp: Container "ON App" [color: "#ffe08a"; fontColor: "#5c3d00"];
 </code></pre>
-<p><strong>Graph-Level Attributes</strong> (inside graph body):</p>
-<pre><code>rankdir: LR;
-fontcolor: darkblue;
+<p>This is a per-node exception, not a second axis: the node keeps its type, so its shape, its stereotype line and every quality check still apply. Use it to mark what is new or changed in an otherwise ordinary diagram, and say what the colours mean somewhere the reader can see.</p>
+<p>Every colour in VGL — a node's, an edge's, a group's, a graph's <code>fontcolor</code> — is a hex value or one of the 147 <strong>SVG colour keywords</strong> (<code>red</code>, <code>cornflowerblue</code>,</p>
+<p><code>whitesmoke</code>). Graphviz's larger X11 set is not accepted: <code>chartreuse3</code> is an error, not a silent no-op. A name you write is kept as you wrote it when the document is exported; it is never derived back from a colour, since <code>grey</code> and <code>gray</code> are the same value.</p>
+<h3 id="links">Links</h3>
+<p>Any node, edge or group may carry a <code>url</code> pointing at whatever the element stands for — a ticket, a repository, a wiki page:</p>
+<pre><code class="language-vgl">node q1: Question "Which datastore?" [url: "https://issues.example.com/ARCH-14"];
 </code></pre>
-<p><strong>Common Node Attributes:</strong></p>
-<ul>
- <li><code>color</code> - Node color (e.g., <code>red</code>, <code>blue</code>, <code>#FF0000</code>)</li>
- <li><code>fontsize</code> - Font size for node label (number)</li>
- <li><code>shape</code> - Node shape (varies by notation)</li>
- <li><code>alignGroup</code> - Alignment group identifier; nodes sharing the same value are placed at the same rank in layout (used by Timeline and available in all notations)</li>
-</ul>
-<p><strong>Common Edge Attributes:</strong></p>
-<ul>
- <li><code>style</code> - Line style (<code>solid</code>, <code>dashed</code>, <code>dotted</code>)</li>
- <li><code>weight</code> - Edge weight (number)</li>
- <li><code>label</code> - Edge label text</li>
-</ul>
-<p><strong>Common Group Attributes:</strong></p>
-<ul>
- <li><code>style</code> - Group style (<code>filled</code>, <code>dashed</code>, <code>dotted</code>)</li>
- <li><code>color</code> - Group background or border color</li>
- <li><code>label</code> - Group display name</li>
-</ul>
-<p><strong>Common Graph Attributes:</strong></p>
-<ul>
- <li><code>rankdir</code> - Layout direction (<code>LR</code> for left-to-right, <code>TB</code> for top-to-bottom)</li>
- <li><code>fontcolor</code> - Default font color</li>
- <li><code>labeljust</code> - Label justification (<code>l</code> for left, <code>r</code> for right, <code>c</code> for center)</li>
-</ul>
+<p>A linked element wears a small badge, clipped to its corner or sitting on the line for an edge. Clicking it follows the link in a new tab; hovering shows the destination first. The right-click menu carries <strong>Add URL…</strong> / <strong>Change URL…</strong>, <strong>Open URL</strong> and <strong>Remove URL</strong>.</p>
+<p>Only <code>http</code>, <code>https</code> and <code>mailto</code> are accepted, and anything without a scheme is read as <code>https://</code>. Other schemes — <code>javascript:</code> above all, which would otherwise run as the page displaying the diagram — are refused. The check runs again at render time, so hand-written VGL cannot smuggle one into a published SVG either.</p>
+<p>The badge is a real SVG link, so an exported SVG stays clickable wherever it is embedded (inline or via <code>&lt;object&gt;</code>; an SVG inside an <code>&lt;img&gt;</code> is inert by browser design).</p>
 <h3 id="comments">Comments</h3>
-<p>VGL supports single-line comments using <code>//</code>:</p>
-<pre><code class="language-vgl">// This is a comment
-node q1: Question "Main question";  // This is also a comment
+<p><code>//</code> to end of line, anywhere in the document. Comments are <strong>not discarded</strong>: a comment belongs to the declaration it stands above, or follows on the same line, and is written back on save or export.</p>
+<p>An element's leading comments are the whole block above it, back to the previous declaration — a blank line inside the block does not break it, so a section banner keeps its place:</p>
+<pre><code class="language-vgl">// ==========================================
+// TOP LEVEL - Undesirable Effects
+// ==========================================
+
+// Top row
+node ude1: UndesirableEffect "Suppliers display a less uniform front";
 </code></pre>
-<p>Comments can appear anywhere in the document and are ignored by the parser.</p>
-<hr /></div></article>
+<p>A comment with nothing to belong to <em>is</em> dropped: before a closing brace, inside a <code>vnotation</code> block, or after the final <code>}</code>.</p>
+<p><code>comment</code> is reserved as an attribute name. <code>[comment: "text"]</code> is an equivalent way to attach one — useful when generating VGL programmatically — and it re-exports as a <code>// text</code> line.</p>
+<h3 id="type-inference-and-minimal-syntax">Type inference and minimal syntax</h3>
+<p>Everything optional, omitted:</p>
+<pre><code class="language-vgl">vgraph minimal: IBIS "Minimal Example" {
+    node q1: Question "Which database should we use?";
+    node a1: Answer "PostgreSQL";
+    node a2: Answer "MongoDB";
+    node p1: Pro "ACID compliance";
+    node c1: Con "More complex setup";
+
+    edge q1 -&gt; a1;      // inferred: answered_by
+    edge q1 -&gt; a2;
+    edge a1 -&gt; p1;      // inferred: supports
+    edge a1 -&gt; c1;      // inferred: objects_to
+}
+</code></pre></div></article>
             <aside class="side-content">
                 <div class="relationships-section"></div>
                 <div class="preview__article-details">

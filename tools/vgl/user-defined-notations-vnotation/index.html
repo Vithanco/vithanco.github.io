@@ -6,12 +6,12 @@
         <link rel="canonical" href="https://vithanco.com/tools/vgl/user-defined-notations-vnotation"/>
         <meta name="twitter:url" content="https://vithanco.com/tools/vgl/user-defined-notations-vnotation"/>
         <meta property="og:url" content="https://vithanco.com/tools/vgl/user-defined-notations-vnotation"/>
-        <title>VGL Guide — User-Defined Notations (`vnotation`) | Vithanco</title>
-        <meta name="twitter:title" content="VGL Guide — User-Defined Notations (`vnotation`) | Vithanco"/>
-        <meta property="og:title" content="VGL Guide — User-Defined Notations (`vnotation`) | Vithanco"/>
-        <meta name="description" content="vnotation lets expert users define their own notation schema inline in a VGL file, without requiring any Swift code changes. Everything that built-in notations provide — node types, edge types, lay..."/>
-        <meta name="twitter:description" content="vnotation lets expert users define their own notation schema inline in a VGL file, without requiring any Swift code changes. Everything that built-in notations provide — node types, edge types, lay..."/>
-        <meta property="og:description" content="vnotation lets expert users define their own notation schema inline in a VGL file, without requiring any Swift code changes. Everything that built-in notations provide — node types, edge types, lay..."/>
+        <title>VGL Guide — User-defined notations (`vnotation`) | Vithanco</title>
+        <meta name="twitter:title" content="VGL Guide — User-defined notations (`vnotation`) | Vithanco"/>
+        <meta property="og:title" content="VGL Guide — User-defined notations (`vnotation`) | Vithanco"/>
+        <meta name="description" content="vnotation defines a notation schema inline in a VGL file, with no Swift"/>
+        <meta name="twitter:description" content="vnotation defines a notation schema inline in a VGL file, with no Swift"/>
+        <meta property="og:description" content="vnotation defines a notation schema inline in a VGL file, with no Swift"/>
         <meta name="twitter:card" content="summary"/>
         <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -79,36 +79,28 @@ Home</a>
                     <span class="breadcrumb-separator"> / </span>
                     <a href="/tools">The best Tools for Structured Visual Thinking</a>
                     <span class="breadcrumb-separator"> / </span>
-VGL Guide — User-Defined Notations (`vnotation`)</div>
-                <h1>VGL Guide — User-Defined Notations (`vnotation`)</h1>
+VGL Guide — User-defined notations (`vnotation`)</div>
+                <h1>VGL Guide — User-defined notations (`vnotation`)</h1>
                 <div class="reading-time-container">
                     <span class="fa fa-clock-o"></span>
                     <p>Estimated reading time: 2 minutes.</p></div>
-                <div class="content"><h1 id="user-defined-notations-vnotation">User-Defined Notations (<code>vnotation</code>)</h1>
-<p><code>vnotation</code> lets expert users define their own notation schema inline in a VGL file, without requiring any Swift code changes. Everything that built-in notations provide — node types, edge types, layout direction — can be expressed in VGL.</p>
-<h3 id="basic-syntax">Basic Syntax</h3>
+                <div class="content"><h1 id="user-defined-notations-vnotation">User-defined notations (<code>vnotation</code>)</h1>
+<p><code>vnotation</code> defines a notation schema inline in a VGL file, with no Swift changes. Everything a built-in notation provides — node types, edge types, layout direction — can be expressed this way.</p>
 <pre><code>vnotation &lt;Name&gt; [extends &lt;BuiltinNotation&gt;] {
     layout: &lt;topToBottom | leftToRight | rightToLeft | bottomToTop&gt;
 
-    node type: &lt;TypeName&gt;  [nodeStyle: &lt;name&gt;, color: "#hex", icon: "sf.symbol", ...]
-    ...
+    node type: &lt;TypeName&gt;  [nodeStyle: &lt;name&gt;, backgroundColor: "#hex", icon: "sf.symbol", ...]
     edge type: &lt;edge_id&gt;   from: &lt;TypeName&gt;  to: &lt;TypeName&gt;  [color: "#hex"]
-    ...
 }
 </code></pre>
-<p>A <code>vgraph</code> then references the vnotation by name, identically to any built-in notation:</p>
-<pre><code>vgraph &lt;id&gt;: &lt;VnotationName&gt; "&lt;label&gt;" [, Extension ...] {
-    // identical syntax — node, edge, group, attribute overrides
-}
-</code></pre>
-<h3 id="file-ordering-rule">File-Ordering Rule</h3>
-<p><code>vnotation</code> blocks <strong>must appear before</strong> any <code>vgraph</code> that references them. This allows single-pass parsing and produces a clear error if violated.</p>
-<h3 id="nodestyle-required-on-every-node-type"><code>nodeStyle:</code> — Required on Every Node Type</h3>
-<p><code>nodeStyle:</code> is required on every <code>node type:</code> declaration. The parser treats the value as an opaque string; the semantic layer validates it against the table below.</p>
+<p>A <code>vgraph</code> then references it by name exactly like a built-in notation. <strong><code>vnotation</code> blocks must appear before any <code>vgraph</code> or <code>metagraph</code> that references them</strong>, which allows single-pass parsing.</p>
+<p><code>backgroundColor:</code> is the fill. <code>color:</code> is accepted as an older spelling of it on input, but <code>backgroundColor</code> is what a document exports — the same name a node instance stores it under, so the two surfaces agree.</p>
+<h3 id="nodestyle-required-on-every-node-type"><code>nodeStyle:</code> — required on every node type</h3>
+<p>The parser treats the value as an opaque string; the semantic layer validates it against this table.</p>
 <table>
  <thead>
   <tr>
-   <th><code>nodeStyle:</code> value</th>
+   <th><code>nodeStyle:</code></th>
    <th>Additional parameters</th>
    <th>Description</th>
   </tr>
@@ -116,37 +108,37 @@ VGL Guide — User-Defined Notations (`vnotation`)</div>
  <tbody>
   <tr>
    <td><code>iconWithText</code></td>
-   <td><code>color:</code> (required), <code>icon:</code>, <code>iconColor:</code> (opt, default white), <code>iconSize:</code> (opt, default 24)</td>
-   <td>Icon above text, colored background</td>
+   <td><code>backgroundColor:</code> (required), <code>icon:</code>, <code>iconColor:</code> (default white), <code>iconSize:</code> (default 24)</td>
+   <td>Icon above text, coloured background</td>
   </tr>
   <tr>
    <td><code>simpleRoundedText</code></td>
-   <td><code>color:</code></td>
+   <td><code>backgroundColor:</code></td>
    <td>Text in a rounded rectangle</td>
   </tr>
   <tr>
    <td><code>roundedBox</code></td>
-   <td><code>color:</code></td>
+   <td><code>backgroundColor:</code></td>
    <td>Plain rounded box</td>
   </tr>
   <tr>
    <td><code>withCategory</code></td>
-   <td><code>color:</code>, <code>category:</code> (short header label)</td>
-   <td>Box with a colored category bar at top</td>
+   <td><code>backgroundColor:</code>, <code>category:</code> (short header label)</td>
+   <td>Box with a coloured category bar on top</td>
   </tr>
   <tr>
    <td><code>withCategoryAndIcon</code></td>
-   <td><code>color:</code>, <code>category:</code>, <code>icon:</code>, <code>iconColor:</code> (opt), <code>iconSize:</code> (opt)</td>
-   <td>Category bar + icon</td>
+   <td><code>backgroundColor:</code>, <code>category:</code>, <code>icon:</code>, <code>iconColor:</code>, <code>iconSize:</code></td>
+   <td>Category bar plus icon</td>
   </tr>
   <tr>
    <td><code>iconOnly</code></td>
-   <td><code>icon:</code>, <code>iconColor:</code> (opt, default black), <code>iconSize:</code> (opt)</td>
+   <td><code>icon:</code>, <code>iconColor:</code> (default black), <code>iconSize:</code></td>
    <td>Icon without text</td>
   </tr>
   <tr>
    <td><code>circle</code></td>
-   <td><code>color:</code></td>
+   <td><code>backgroundColor:</code></td>
    <td>Circular node</td>
   </tr>
   <tr>
@@ -157,33 +149,32 @@ VGL Guide — User-Defined Notations (`vnotation`)</div>
   <tr>
    <td><code>hidden</code></td>
    <td>—</td>
-   <td>Node is not rendered</td>
+   <td>Not rendered</td>
   </tr>
   <tr>
    <td><code>custom</code></td>
    <td>—</td>
-   <td>Falls back to <code>bareText</code> in v1; reserved for future full style expressions</td>
+   <td>Falls back to <code>bareText</code>; reserved for future style expressions</td>
   </tr>
  </tbody>
 </table>
-<h3 id="extends-inheriting-a-built-in-notation"><code>extends</code> — Inheriting a Built-In Notation</h3>
-<p>The <code>extends</code> clause adds all node and edge types from a built-in notation, then your vnotation adds further types on top:</p>
+<h3 id="extends"><code>extends</code></h3>
+<p>Adds every node and edge type from a built-in notation, on top of which yours adds more:</p>
 <pre><code class="language-vgl">vnotation RichIBIS extends IBIS {
-    node type: Stakeholder [nodeStyle: withCategory, color: "#884499", category: "S"]
+    node type: Stakeholder [nodeStyle: withCategory, backgroundColor: "#884499", category: "S"]
 
     edge type: stakeholder_raises  from: Stakeholder to: Question
     edge type: stakeholder_answers from: Stakeholder to: Answer
 }
 </code></pre>
-<p><strong>v1 constraint:</strong> Only built-in notations can be extended. <code>vnotation A extends B</code> where B is itself a vnotation is not supported.</p>
-<h3 id="examples">Examples</h3>
-<p><strong>Pure vnotation — custom risk map:</strong></p>
+<p>Only <strong>built-in</strong> notations can be extended — <code>vnotation A extends B</code> where B is itself a vnotation is not supported.</p>
+<h3 id="a-complete-example">A complete example</h3>
 <pre><code class="language-vgl">vnotation RiskMap {
     layout: topToBottom
 
-    node type: Risk    [nodeStyle: iconWithText, color: "#cc3333", icon: "exclamationmark.triangle"]
-    node type: Control [nodeStyle: iconWithText, color: "#339933", icon: "shield"]
-    node type: Owner   [nodeStyle: circle,       color: "#3366cc"]
+    node type: Risk    [nodeStyle: iconWithText, backgroundColor: "#cc3333", icon: "exclamationmark.triangle"]
+    node type: Control [nodeStyle: iconWithText, backgroundColor: "#339933", icon: "shield"]
+    node type: Owner   [nodeStyle: circle,       backgroundColor: "#3366cc"]
 
     edge type: risk_has_control  from: Risk    to: Control
     edge type: control_owned_by  from: Control to: Owner
@@ -197,19 +188,8 @@ vgraph rm1: RiskMap "Project Risk Map" {
     edge c1 -&gt; o1
 }
 </code></pre>
-<p><strong>vnotation + Extension:</strong></p>
-<pre><code class="language-vgl">vnotation SimpleMap {
-    node type: Concept [nodeStyle: simpleRoundedText, color: "#336699"]
-    edge type: related  from: Concept to: Concept
-}
-
-vgraph sm1: SimpleMap, Annotation "Annotated Map" {
-    node c1: Concept    "Main idea"
-    node a1: Annotation "See also: section 3"
-    edge c1 -&gt; a1
-}
-</code></pre>
-<hr /></div></article>
+<p>A vnotation can take extensions like any other notation:</p>
+<p><code>vgraph sm1: SimpleMap, Annotation "Annotated Map" { … }</code>.</p></div></article>
             <aside class="side-content">
                 <div class="relationships-section"></div>
                 <div class="preview__article-details">

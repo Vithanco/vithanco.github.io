@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta property="og:site_name" content="Vithanco"/>
+        <link rel="canonical" href="https://vithanco.com/tools/vgl/notation-reference/causal-loop-diagram-cld"/>
+        <meta name="twitter:url" content="https://vithanco.com/tools/vgl/notation-reference/causal-loop-diagram-cld"/>
+        <meta property="og:url" content="https://vithanco.com/tools/vgl/notation-reference/causal-loop-diagram-cld"/>
+        <title>VGL Guide — Causal Loop Diagram (CLD) | Vithanco</title>
+        <meta name="twitter:title" content="VGL Guide — Causal Loop Diagram (CLD) | Vithanco"/>
+        <meta property="og:title" content="VGL Guide — Causal Loop Diagram (CLD) | Vithanco"/>
+        <meta name="description" content=""Systems analysis: what reinforces or balances what over time. Every element is a""/>
+        <meta name="twitter:description" content=""Systems analysis: what reinforces or balances what over time. Every element is a""/>
+        <meta property="og:description" content=""Systems analysis: what reinforces or balances what over time. Every element is a""/>
+        <meta name="twitter:card" content="summary"/>
+        <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+        <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
+        <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
+        <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
+        <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
+    </head>
+    <body class="item-page">
+        <header>
+            <div class="header-wrapper">
+                <a href="/" class="site-name">
+                    <img src="/logo.png" height="20" width="20"/>
+                    <p>Vithanco</p></a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/services">Services</a></li>
+                        <li>
+                            <a href="/methods">Methods</a></li>
+                        <li>
+                            <a href="/notations">Notations</a></li>
+                        <li>
+                            <a href="/tools" class="selected">Tools</a></li>
+                        <li>
+                            <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
+        <div class="item-wrapper">
+            <article>
+                <div class="breadcrumbs">                    <a href="/" class="breadcrumb-home">                        <img src="/logo.png" class="breadcrumb-icon"/>
+Home</a>
+                    <span class="breadcrumb-separator"> / </span>
+                    <a href="/tools">The best Tools for Structured Visual Thinking</a>
+                    <span class="breadcrumb-separator"> / </span>
+VGL Guide — Causal Loop Diagram (CLD)</div>
+                <h1>VGL Guide — Causal Loop Diagram (CLD)</h1>
+                <div class="reading-time-container">
+                    <span class="fa fa-clock-o"></span>
+                    <p>Estimated reading time: 1 minutes.</p></div>
+                <div class="content"><h1 id="causal-loop-diagram-cld">Causal Loop Diagram (CLD)</h1>
+<p>Systems analysis: what reinforces or balances what over time. Every element is a Stock whose amount changes according to its incoming connections.</p>
+<p><strong>Node types</strong></p>
+<ul>
+ <li><code>Stock</code> — a variable whose value changes over time (default: blue)</li>
+</ul>
+<p><strong>Edge types</strong> — a loop with an even number of <code>opposite</code> links (including zero) is reinforcing; an odd number makes it balancing.</p>
+<ul>
+ <li><code>same</code> — Stock → Stock, a positive causal link: both change in the same direction (solid, marked "+")</li>
+ <li><code>opposite</code> — Stock → Stock, a negative causal link: they change in opposite directions (dashed, marked "−")</li>
+</ul>
+<p>A systems analysis diagram modelling population dynamics with reinforcing and balancing feedback loops:</p>
+<pre><code class="language-vgl">vgraph populationCLD: CLD "Population Dynamics" {
+    node births: Stock "Births";
+    node population: Stock "Population";
+    node deaths: Stock "Deaths";
+    node foodSupply: Stock "Food Supply";
+    node crowding: Stock "Crowding";
+
+    // Reinforcing loop: more births increase population, larger population increases births
+    edge births -&gt; population: same;
+    edge population -&gt; births: same;
+
+    // Balancing loop: population increases deaths, deaths decrease population
+    edge population -&gt; deaths: same;
+    edge deaths -&gt; population: opposite;
+
+    // Balancing loop: population reduces food supply, less food reduces births
+    edge population -&gt; foodSupply: opposite;
+    edge foodSupply -&gt; births: same;
+
+    // Crowding effects
+    edge population -&gt; crowding: same;
+    edge crowding -&gt; deaths: same;
+}
+</code></pre>
+<p><strong>Note</strong>: CLD graphs model feedback loops in systems. Loops with an even number of "opposite" links (including zero) are reinforcing loops that produce exponential growth or decline. Loops with an odd number of "opposite" links are balancing loops that reach equilibrium. In this example, the births-population loop is reinforcing, while the population-deaths loop and population-food supply-births loop are balancing.</p></div></article>
+            <aside class="side-content">
+                <div class="relationships-section"></div>
+                <div class="preview__article-details">
+                    <p class="tag-list-title">Tagged with:</p>
+                    <ul class="preview__article-tags">
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/vgl">VGL</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/graph-language">Graph Language</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/notation">Notation</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/documentation">Documentation</a></div></li></ul></div>
+                <div class="newsletter" height="350" width="250">
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <p>See how you can combine your brain power with structured visual and achieve better results.</p>
+                    <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
+                <div></div></aside></div>
+        <footer>
+            <div>
+                <p class="footer-title">                    <img src="/logo.png" width="16px" class="content_logo"/>
+Vithanco Home </p>
+                <nav>
+                    <p>Dr. Ing. Klaus Kneupner, MBA</p>
+                    <ul>
+                        <li>
+                            <a href="https://linkedIn.com/in/Kneupner">
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bsky.app/profile/vithanco.bsky.social">
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://mastodon.social/@vithanco">
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/feed.rss">
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
+                            </a>
+                        </li>
+                    </ul></nav></div></footer></body>
+</html>

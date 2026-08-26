@@ -11,15 +11,15 @@
     "rootIntro": [
         "**VGL** is a small, declarative text format for describing graphs — diagrams made of nodes, edges, groups, and attributes. A VGL document is plain text that any editor can produce, any reviewer can diff, and any version-control tool can track. The Vithanco app reads VGL and renders it in a chosen *notation* (IBIS, Concept Map, Causal Loop Diagram, Goal Tree, Timeline, and many more), so the same text file can be read as prose by a human and as a typed graph by the tool.",
         "Use VGL when you want the structure of a diagram in source form — for collaboration over pull requests, for embedding diagrams in documentation, for generating diagrams programmatically, or simply for editing complex graphs faster than you could by clicking. Each notation defines its own node and edge types and the rules that connect them, and VGL enforces those rules so you can't draw an invalid diagram.",
-        "If you're new to VGL, start with **[Concepts](/tools/vgl/concepts/)** for the model (nodes, edges, groups, attributes) and **[Grammar](/tools/vgl/grammar/)** for the formal syntax. Then jump to **[Examples](/tools/vgl/examples/)** for one runnable diagram per built-in notation. If you want to define your own notation rather than use a built-in one, see **[User-Defined Notations](/tools/vgl/user-defined-notations-vnotation/)**."
+        "If you're new to VGL, start with **[Concepts](/tools/vgl/concepts/)** for the model (nodes, edges, groups, attributes) and **[Grammar](/tools/vgl/grammar/)** for the formal syntax. Then jump to the **[Notation reference](/tools/vgl/notation-reference/)**, which gives each built-in notation its own page: node types, edge types and a runnable example. If you want to define your own notation rather than use a built-in one, see **[User-Defined Notations](/tools/vgl/user-defined-notations-vnotation/)**."
     ],
     "layout": [
         { "section": "Concepts" },
-        { "section": "Grammar" },
-        { "section": "Examples", "mode": "explode" },
+        { "section": "Notations" },
+        { "section": "Notation reference", "mode": "explode" },
         { "section": "User-Defined Notations (`vnotation`)" },
-        { "section": "Metagraph (visualizing a notation)" },
-        { "section": "Best Practices", "mode": "fold" },
-        { "section": "Error Handling", "mode": "fold" }
+        { "section": "Metagraph (visualising a notation)" },
+        { "section": "Grammar" },
+        { "section": "Best Practices", "mode": "fold" }
     ]
 }

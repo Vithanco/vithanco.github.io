@@ -9,9 +9,9 @@
         <title>VGL Guide — Grammar | Vithanco</title>
         <meta name="twitter:title" content="VGL Guide — Grammar | Vithanco"/>
         <meta property="og:title" content="VGL Guide — Grammar | Vithanco"/>
-        <meta name="description" content=""The VGL grammar is defined as follows (simplified BNF notation):""/>
-        <meta name="twitter:description" content=""The VGL grammar is defined as follows (simplified BNF notation):""/>
-        <meta property="og:description" content=""The VGL grammar is defined as follows (simplified BNF notation):""/>
+        <meta name="description" content=""Simplified BNF:""/>
+        <meta name="twitter:description" content=""Simplified BNF:""/>
+        <meta property="og:description" content=""Simplified BNF:""/>
         <meta name="twitter:card" content="summary"/>
         <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -83,21 +83,17 @@ VGL Guide — Grammar</div>
                 <h1>VGL Guide — Grammar</h1>
                 <div class="reading-time-container">
                     <span class="fa fa-clock-o"></span>
-                    <p>Estimated reading time: 2 minutes.</p></div>
+                    <p>Estimated reading time: 1 minutes.</p></div>
                 <div class="content"><h1 id="grammar">Grammar</h1>
-<p>The VGL grammar is defined as follows (simplified BNF notation):</p>
+<p>Simplified BNF:</p>
 <pre><code>file         ::= vnotation* (document | metagraph)
 
 document     ::= "vgraph" identifier ":" notation ("," extension)* label? "{" statement* "}"
 
 metagraph    ::= "metagraph" notation label? ";"?
-                 // Renders the notation itself as a diagram: each NodeType becomes a node,
-                 // each EdgeType becomes an edge, styled per the notation. No body, no id.
-                 // If label is omitted, it defaults to "&lt;NotationName&gt; Meta Model".
 
 notation     ::= identifier
-                 // Built-in: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree, GoalTree, CLD, DecisionTree, Timeline
-                 // User-defined: any vnotation declared earlier in the same file
+                 // a built-in notation, or a vnotation declared earlier in the file
 
 vnotation    ::= "vnotation" identifier ("extends" identifier)? "{" vnotation_body* "}"
 
@@ -107,8 +103,7 @@ vnotation_body ::= ("layout" ":" layout_dir ";"?)
 
 layout_dir   ::= "topToBottom" | "leftToRight" | "bottomToTop" | "rightToLeft"
 
-extension    ::= identifier
-                 // Available extensions: Annotation
+extension    ::= identifier            // available: Annotation
 
 statement    ::= group | node | edge | attribute
 
@@ -134,19 +129,12 @@ quoted_string::= "\"" ([^\"\\] | "\\" .)* "\""
 
 comment      ::= "//" [^\n]*
 </code></pre>
-<p><strong>Key Grammar Rules:</strong></p>
-<ol>
- <li><strong>Document Structure</strong>: A VGL file contains zero or more <code>vnotation</code> blocks followed by either one <code>vgraph</code> or one <code>metagraph</code> declaration</li>
- <li><strong>File ordering</strong>: <code>vnotation</code> blocks must appear before any <code>vgraph</code> or <code>metagraph</code> that references them</li>
- <li><strong>Node IDs</strong>: Must be unique throughout the document</li>
- <li><strong>Edge References</strong>: Edges can only reference nodes that have been declared</li>
- <li><strong>Type Validation</strong>: Node types and edge types must be valid for the chosen notation, or will be marked as "unknown"</li>
- <li><strong>Attributes</strong>: Can appear inline with brackets <code>[]</code> or as separate statements within groups</li>
- <li><strong>Semicolons</strong>: Optional after nodes, edges, groups, and standalone attributes</li>
- <li><strong>Quoted Strings</strong>: Used for labels and string attribute values, support escape sequences (<code>\"</code>, <code>\\</code>, etc.)</li>
- <li><strong>Comments</strong>: Single-line only, using <code>//</code> syntax</li>
-</ol>
-<hr /></div></article>
+<p>Rules worth stating separately:</p>
+<ul>
+ <li>Node ids must be unique throughout the document, and an edge may only reference nodes already declared.</li>
+ <li>Semicolons are optional after nodes, edges, groups and standalone attributes.</li>
+ <li>A node or edge type that is not valid for the notation is not an error: it becomes an <strong>unknown</strong> type, rendered bold red and reported as a quality warning, so a document always opens. Check the spelling.</li>
+</ul></div></article>
             <aside class="side-content">
                 <div class="relationships-section"></div>
                 <div class="preview__article-details">

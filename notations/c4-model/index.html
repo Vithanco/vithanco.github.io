@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta property="og:site_name" content="Vithanco"/>
+        <link rel="canonical" href="https://vithanco.com/notations/c4-model"/>
+        <meta name="twitter:url" content="https://vithanco.com/notations/c4-model"/>
+        <meta property="og:url" content="https://vithanco.com/notations/c4-model"/>
+        <title>The C4 Model Notation | Vithanco</title>
+        <meta name="twitter:title" content="The C4 Model Notation | Vithanco"/>
+        <meta property="og:title" content="The C4 Model Notation | Vithanco"/>
+        <meta name="description" content="Draw software architecture with Simon Brown's C4 model — and move between System Context, Container and Component views by folding a group, not by drawing four diagrams."/>
+        <meta name="twitter:description" content="Draw software architecture with Simon Brown's C4 model — and move between System Context, Container and Component views by folding a group, not by drawing four diagrams."/>
+        <meta property="og:description" content="Draw software architecture with Simon Brown's C4 model — and move between System Context, Container and Component views by folding a group, not by drawing four diagrams."/>
+        <meta name="twitter:card" content="summary"/>
+        <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+        <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
+        <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
+        <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
+        <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
+    </head>
+    <body class="item-page">
+        <header>
+            <div class="header-wrapper">
+                <a href="/" class="site-name">
+                    <img src="/logo.png" height="20" width="20"/>
+                    <p>Vithanco</p></a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/services">Services</a></li>
+                        <li>
+                            <a href="/methods">Methods</a></li>
+                        <li>
+                            <a href="/notations" class="selected">Notations</a></li>
+                        <li>
+                            <a href="/tools">Tools</a></li>
+                        <li>
+                            <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
+        <div class="item-wrapper">
+            <article>
+                <div class="breadcrumbs">                    <a href="/" class="breadcrumb-home">                        <img src="/logo.png" class="breadcrumb-icon"/>
+Home</a>
+                    <span class="breadcrumb-separator"> / </span>
+                    <a href="/notations">Explore Vithanco's Rich Library of Notations</a>
+                    <span class="breadcrumb-separator"> / </span>
+The C4 Model Notation</div>
+                <h1>The C4 Model Notation</h1>
+                <div class="reading-time-container">
+                    <span class="fa fa-clock-o"></span>
+                    <p>Estimated reading time: 9 minutes.</p></div>
+                <div class="content"><p>The <strong>C4 model</strong> describes a software system at four levels of zoom, so that every audience — executives, architects, developers — sees the same architecture at the level of detail it needs. It is the most widely used way to draw software architecture that isn't UML, and Vithanco supports it as a built-in Notation.</p>
+<p>What Vithanco adds is this: the four levels are not four diagrams. They are <strong>one graph, drawn at different fold states</strong>. Collapse the group around a system and you are looking at the System Context view; open it and you are looking at the Container view. Nothing is duplicated, so nothing can drift out of step.</p>
+<h2 id="why-use-the-c4-model">Why use the C4 Model?</h2>
+<p>C4 answers the question every new joiner, reviewing architect and nervous stakeholder asks — <em>what is this thing, and how does it hang together?</em> — without demanding that they learn a modelling language first. It works because it fixes just two things: a small vocabulary of elements, and four levels of zoom.</p>
+<table>
+ <thead>
+  <tr>
+   <th>Level</th>
+   <th>Question it answers</th>
+   <th>Audience</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>1. System Context</td>
+   <td>What is this system, who uses it, and what does it talk to?</td>
+   <td>Everybody, technical or not</td>
+  </tr>
+  <tr>
+   <td>2. Container</td>
+   <td>What applications and datastores make up the system?</td>
+   <td>Architects, developers, operations</td>
+  </tr>
+  <tr>
+   <td>3. Component</td>
+   <td>What are the major building blocks inside one container?</td>
+   <td>Developers working in that container</td>
+  </tr>
+  <tr>
+   <td>4. Code</td>
+   <td>How is one component implemented?</td>
+   <td>Rarely drawn — see below</td>
+  </tr>
+ </tbody>
+</table>
+<p>Use C4 when you need to explain a system's place in its environment, show the deployable pieces it is built from, or zoom into one of those pieces without losing the reader. It is particularly strong for onboarding, because a single map stays legible from the boardroom to the codebase.</p>
+<h2 id="when-not-to-use-c4">When NOT to use C4</h2>
+<p>C4 shows <strong>what</strong> you built. It never shows <strong>why</strong>. That is by design — and it is why C4 diagrams age badly on their own: a year later, nobody can remember which options were considered, or which constraint forced the odd-looking split between two containers.</p>
+<p>So reach for a different Notation when the question changes:</p>
+<ul>
+ <li><strong>Why is it built this way?</strong> Use an <a href="/notations/IBIS/index">IBIS Diagram</a> to capture the question, the options and the arguments for and against each one. C4 has no vocabulary for a rejected alternative; IBIS is made of them.</li>
+ <li><strong>What do these words mean?</strong> Use a <a href="/notations/concept-maps">Concept Map</a> to pin down the domain vocabulary that the boxes are named after, before the same word ends up meaning three things in three containers.</li>
+ <li><strong>What happens when this fails?</strong> Use a <a href="/notations/causal-loop-diagram">Causal Loop Diagram</a> to reason about how load, retries and queues feed back on each other. C4 is a structural picture, not a behavioural one.</li>
+</ul>
+<p>For the small stuff, you do not have to leave the diagram at all. The <code>Annotation</code> extension works with C4, so you can hang a note on any element:</p>
+<pre><code class="language-vgl">vgraph banking: C4, Annotation "Internet Banking System" {
+    node api: Container "API Application";
+    node note: Annotation "Split from the web app in 2024 — see ADR-14";
+    edge api -&gt; note;
+}
+</code></pre>
+<p>That is the right home for a passing remark. When the remark grows into an argument, move it to IBIS.</p>
+<h2 id="the-c4-notation-in-vithanco">The C4 Notation in Vithanco</h2>
+<p>The diagram below shows every element type at once, with the name you type in <a href="/tools/vgl">VGL</a> as its label. The visual language does most of the work: blue gets lighter as you zoom in, grey means external, a cylinder means datastore, and a notch on top means person.</p>
+<figure class="vgl-render img-std"> 
+ <img src="/vgl-generated/c4-element-key.svg" alt="The element types of the C4 Notation" onclick="openLightbox(this)" /> 
+ <figcaption>
+  Every C4 element type, labelled with the name you type in VGL
+ </figcaption> 
+</figure>
+<p>Unlike the other Notations on this site, there is no meta model picture here. C4 permits relationships between almost any pair of elements, so a drawing of every permitted pair is a wall of arrows that teaches nothing. The table does the job better.</p>
+<table>
+ <thead>
+  <tr>
+   <th>Node Type</th>
+   <th>Description</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td><code>Person</code></td>
+   <td>A human user of the system — a customer, an administrator, a support agent.</td>
+  </tr>
+  <tr>
+   <td><code>SoftwareSystem</code></td>
+   <td>A whole system, drawn as a single box. The unit of the System Context view.</td>
+  </tr>
+  <tr>
+   <td><code>Container</code></td>
+   <td>A separately deployable or runnable thing: a web app, an API, a mobile app, a datastore.</td>
+  </tr>
+  <tr>
+   <td><code>Database</code></td>
+   <td>A <code>Container</code> that stores data, drawn as a cylinder.</td>
+  </tr>
+  <tr>
+   <td><code>Component</code></td>
+   <td>A major structural building block inside one container.</td>
+  </tr>
+  <tr>
+   <td><code>CodeElement</code></td>
+   <td>A class, interface or module inside a component.</td>
+  </tr>
+  <tr>
+   <td><code>External…</code></td>
+   <td>Every type above has an <code>External</code> twin — <code>ExternalPerson</code>, <code>ExternalSoftwareSystem</code>, <code>ExternalContainer</code>, <code>ExternalComponent</code> — rendered grey to mark what you do not own or control.</td>
+  </tr>
+ </tbody>
+</table>
+<p>A note on level 4: C4 itself treats the Code level as optional, and Simon Brown advises against drawing it by hand, since an IDE or a documentation generator produces it more accurately and keeps it current. <code>CodeElement</code> exists for when you want it, but the examples below stop at Component, as most real C4 work does.</p>
+<h3 id="relationships">Relationships</h3>
+<p>A relationship is a directed edge, and its label carries the meaning — <em>"Uses"</em>, <em>"Reads from and writes to"</em>, <em>"Makes API calls to"</em>, <em>"Sends e-mail using"</em>. There is no taxonomy of edge types to memorise; write the phrase that describes how the two elements actually collaborate.</p>
+<pre><code class="language-vgl">edge api -&gt; db "Reads from and writes to";
+</code></pre>
+<p>Read the label together with the direction, and each edge becomes a sentence: <em>the API Application reads from and writes to the Database.</em> If a relationship needs a paragraph rather than a phrase, that is a signal it belongs in an <a href="/notations/IBIS/index">IBIS Diagram</a>, not on the arrow.</p>
+<h2 id="two-words-worth-getting-straight">Two words worth getting straight</h2>
+<p>C4's vocabulary has one trap in it, and the rest of this page depends on avoiding it.</p>
+<ul>
+ <li><strong>Container</strong> is an <em>element</em> — a deployable unit like a web application or a datastore. It is <strong>not</strong> the box drawn around things. This catches people who arrive from the Docker sense of the word, and it catches people who assume the biggest box on the diagram must be the container.</li>
+ <li><strong>Group</strong> is the box around things. In VGL you write <code>group</code>, exactly as in every other Notation. A group can carry a type, and C4 calls its typed groups <em>boundaries</em> — hence <code>SystemBoundary</code>, <code>ContainerBoundary</code> and <code>EnterpriseBoundary</code>. An open one draws as a dashed box with its name in the corner.</li>
+</ul>
+<p>So a <code>ContainerBoundary</code> is the group drawn <em>around</em> the components of one container. The container itself is the thing that boundary represents.</p>
+<h2 id="one-graph-three-levels">One graph, three levels</h2>
+<p>Here is the whole architecture — Simon Brown's Internet Banking System, the canonical C4 example, adapted from <a href="https://c4model.com">c4model.com</a>. Read it once; the next two diagrams are this same source with a single word changed.</p>
+<pre><code class="language-vgl">vgraph banking: C4 "Internet Banking System" {
+    node customer: Person "Personal Banking Customer";
+    node mainframe: ExternalSoftwareSystem "Mainframe Banking System";
+    node email: ExternalSoftwareSystem "E-mail System";
+
+    group ibs: SystemBoundary "Internet Banking System" {
+        node web: Container "Web Application";
+        node spa: Container "Single-Page App";
+        node mobile: Container "Mobile App";
+        node db: Database "Database";
+
+        folded group api: ContainerBoundary "API Application" {
+            node signin: Component "Sign In Controller";
+            node accounts: Component "Accounts Summary Controller";
+            node security: Component "Security Component";
+            node mfFacade: Component "Mainframe Banking System Facade";
+        };
+    };
+
+    edge customer -&gt; web "Uses";
+    edge customer -&gt; spa "Uses";
+    edge customer -&gt; mobile "Uses";
+    edge web -&gt; spa "Delivers";
+
+    edge spa -&gt; signin "Makes API calls to";
+    edge mobile -&gt; accounts "Makes API calls to";
+    edge signin -&gt; security "Uses";
+    edge accounts -&gt; mfFacade "Uses";
+    edge security -&gt; db "Reads from and writes to";
+    edge mfFacade -&gt; mainframe "Makes API calls to";
+    edge signin -&gt; email "Sends e-mail using";
+    edge email -&gt; customer "Sends e-mails to";
+}
+</code></pre>
+<p>Note the <code>folded</code> in front of <code>group api</code>. A folded group collapses into a single box, and any edge that crossed its boundary is redirected to that box automatically. Because the group is typed as a <code>ContainerBoundary</code>, the box it collapses into is a «CONTAINER» card — the API Application, exactly as the Container view should show it.</p>
+<h3 id="level-2-the-container-view">Level 2 — the Container view</h3>
+<p>That source, rendered as written, is the Container view:</p>
+<figure class="vgl-render img-std"> 
+ <img src="/vgl-generated/c4-container-view.svg" alt="The Internet Banking System drawn as a C4 Container view" onclick="openLightbox(this)" /> 
+ <figcaption>
+  Level 2 — the Container view. The API Application is a folded group, so it draws as a single «CONTAINER» card.
+ </figcaption> 
+</figure>
+<h3 id="level-1-zoom-out-to-the-system-context-view">Level 1 — zoom out to the System Context view</h3>
+<p>Fold the outer group as well. One word changes:</p>
+<pre><code class="language-vgl">    folded group ibs: SystemBoundary "Internet Banking System" {
+</code></pre>
+<figure class="vgl-render img-std"> 
+ <img src="/vgl-generated/c4-context-view.svg" alt="The Internet Banking System drawn as a C4 System Context view" onclick="openLightbox(this)" /> 
+ <figcaption>
+  Level 1 — the System Context view. The whole system has folded into one «SOFTWARE SYSTEM» card, and the relationships that crossed its boundary now point at that card.
+ </figcaption> 
+</figure>
+<p>Every container has disappeared into a single «SOFTWARE SYSTEM» card, and the relationships that used to run from individual containers to the mainframe and the e-mail system now run from the system as a whole. This is a proper System Context diagram, and not one line of it was drawn twice.</p>
+<h3 id="level-3-zoom-in-to-the-component-view">Level 3 — zoom in to the Component view</h3>
+<p>Now go the other way and open the API Application, by deleting the <code>folded</code> we started with:</p>
+<pre><code class="language-vgl">        group api: ContainerBoundary "API Application" {
+</code></pre>
+<figure class="vgl-render img-std"> 
+ <img src="/vgl-generated/c4-component-view.svg" alt="The API Application drawn as a C4 Component view" onclick="openLightbox(this)" /> 
+ <figcaption>
+  Level 3 — the Component view. Opening the API Application reveals its components, still inside the system they belong to.
+ </figcaption> 
+</figure>
+<p>The components sit inside their container boundary, inside the system boundary, with the sibling containers still visible around them — which is what makes a Component view readable in the first place. The relationships did not have to be redrawn; they were always between these components, and folding was simply hiding them.</p>
+<p>Three C4 levels, three fold states, one source of truth. Change a container's name once and all three views agree, because there is only one place where the name is written down.</p>
+<h2 id="what-vithanco-checks-for-you">What Vithanco checks for you</h2>
+<p>The C4 Notation carries three quality checks, which run every time the diagram is rendered:</p>
+<ul>
+ <li><strong>A container outside every system boundary.</strong> A <code>Container</code> or <code>Database</code> that sits in no <code>SystemBoundary</code> is almost always a modelling slip — it belongs to <em>some</em> system.</li>
+ <li><strong>An external element inside the enterprise boundary.</strong> External people and systems are by definition outside the enterprise you are drawing.</li>
+ <li><strong>An element with no relationships.</strong> An element that collaborates with nothing is either unfinished or unnecessary.</li>
+</ul>
+<p>You can see this for yourself in the editor below: move the <code>node db: Database "Database";</code> line out of the <code>group ibs</code> block, render, and <code>db</code> is underlined in the source. Hover it, and the warning reads <em>"Container "Database" is not inside any System boundary — a container should live in a system"</em>.</p>
+<h2 id="try-c4-yourself">Try C4 yourself</h2>
+<p>The editor below is seeded with the full Internet Banking source, at the Container view. The most interesting thing you can do is a one-word edit: <strong>delete the word <code>folded</code> in front of <code>group api</code>, press Cmd+Enter, and you have zoomed into the Component view.</strong> Put it back and you are at the Container view again. Add <code>folded</code> in front of <code>group ibs</code> and you are at System Context.</p>
+<iframe src="/vgraph/index.html?vgl=vgraph%20banking%3A%20C4%20%22Internet%20Banking%20System%22%20%7B%0A%20%20%20%20node%20customer%3A%20Person%20%22Personal%20Banking%20Customer%22%3B%0A%20%20%20%20node%20mainframe%3A%20ExternalSoftwareSystem%20%22Mainframe%20Banking%20System%22%3B%0A%20%20%20%20node%20email%3A%20ExternalSoftwareSystem%20%22E-mail%20System%22%3B%0A%0A%20%20%20%20group%20ibs%3A%20SystemBoundary%20%22Internet%20Banking%20System%22%20%7B%0A%20%20%20%20%20%20%20%20node%20web%3A%20Container%20%22Web%20Application%22%3B%0A%20%20%20%20%20%20%20%20node%20spa%3A%20Container%20%22Single-Page%20App%22%3B%0A%20%20%20%20%20%20%20%20node%20mobile%3A%20Container%20%22Mobile%20App%22%3B%0A%20%20%20%20%20%20%20%20node%20db%3A%20Database%20%22Database%22%3B%0A%0A%20%20%20%20%20%20%20%20folded%20group%20api%3A%20ContainerBoundary%20%22API%20Application%22%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20node%20signin%3A%20Component%20%22Sign%20In%20Controller%22%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20node%20accounts%3A%20Component%20%22Accounts%20Summary%20Controller%22%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20node%20security%3A%20Component%20%22Security%20Component%22%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20node%20mfFacade%3A%20Component%20%22Mainframe%20Banking%20System%20Facade%22%3B%0A%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20edge%20customer%20-%3E%20web%20%22Uses%22%3B%0A%20%20%20%20edge%20customer%20-%3E%20spa%20%22Uses%22%3B%0A%20%20%20%20edge%20customer%20-%3E%20mobile%20%22Uses%22%3B%0A%20%20%20%20edge%20web%20-%3E%20spa%20%22Delivers%22%3B%0A%0A%20%20%20%20edge%20spa%20-%3E%20signin%20%22Makes%20API%20calls%20to%22%3B%0A%20%20%20%20edge%20mobile%20-%3E%20accounts%20%22Makes%20API%20calls%20to%22%3B%0A%20%20%20%20edge%20signin%20-%3E%20security%20%22Uses%22%3B%0A%20%20%20%20edge%20accounts%20-%3E%20mfFacade%20%22Uses%22%3B%0A%20%20%20%20edge%20security%20-%3E%20db%20%22Reads%20from%20and%20writes%20to%22%3B%0A%20%20%20%20edge%20mfFacade%20-%3E%20mainframe%20%22Makes%20API%20calls%20to%22%3B%0A%20%20%20%20edge%20signin%20-%3E%20email%20%22Sends%20e-mail%20using%22%3B%0A%20%20%20%20edge%20email%20-%3E%20customer%20%22Sends%20e-mails%20to%22%3B%0A%7D%0A" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive C4 Editor"></iframe>
+<p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p>
+<p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="/tools/vgl">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported Notations.</p>
+<h2 id="background">Background</h2>
+<p>The C4 model was created by <strong>Simon Brown</strong> in the 2010s as a lightweight, notation-independent way to describe software architecture, distilling ideas from UML and Philippe Kruchten's "4+1" architectural view model into four simple levels. The name comes from those levels: <strong>C</strong>ontext, <strong>C</strong>ontainers, <strong>C</strong>omponents, <strong>C</strong>ode.</p>
+<p>The Internet Banking System used throughout this page is Brown's own teaching example, adapted here to VGL.</p>
+<ul>
+ <li><a href="https://c4model.com">The C4 model for visualising software architecture</a> — the official site</li>
+ <li><a href="https://en.wikipedia.org/wiki/C4_model">C4 model</a> on Wikipedia</li>
+</ul></div></article>
+            <aside class="side-content">
+                <div class="relationships-section"></div>
+                <div class="preview__article-details">
+                    <p class="tag-list-title">Tagged with:</p>
+                    <ul class="preview__article-tags">
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/c4">C4</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/software-architecture">Software Architecture</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/notation">Notation</a></div></li></ul></div>
+                <div class="newsletter" height="350" width="250">
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <p>See how you can combine your brain power with structured visual and achieve better results.</p>
+                    <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
+                <div></div></aside></div>
+        <footer>
+            <div>
+                <p class="footer-title">                    <img src="/logo.png" width="16px" class="content_logo"/>
+Vithanco Home </p>
+                <nav>
+                    <p>Dr. Ing. Klaus Kneupner, MBA</p>
+                    <ul>
+                        <li>
+                            <a href="https://linkedIn.com/in/Kneupner">
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bsky.app/profile/vithanco.bsky.social">
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://mastodon.social/@vithanco">
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/feed.rss">
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
+                            </a>
+                        </li>
+                    </ul></nav></div></footer></body>
+</html>

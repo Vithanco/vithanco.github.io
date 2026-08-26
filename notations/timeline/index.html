@@ -163,17 +163,17 @@ Timeline Notation</div>
     edge t1850 -&gt; t1871: sequence
 
     group germany "Germany" {
-        node g1: Event "Napoleon defeats Prussia" [alignGroup: "1800"]
-        node g2: Event "German Unification" [alignGroup: "1871"]
+        node e1: Event "Napoleon defeats Prussia" [alignGroup: "1800"]
+        node e2: Event "German Unification" [alignGroup: "1871"]
     }
     group england "England" {
-        node e1: Event "Industrial Revolution peaks" [alignGroup: "1850"]
-        node e2: Event "Franco-Prussian War impact" [alignGroup: "1871"]
+        node e3: Event "Industrial Revolution peaks" [alignGroup: "1850"]
+        node e4: Event "Franco-Prussian War impact" [alignGroup: "1871"]
     }
 
-    edge g1 -&gt; g2: influence "led to"
-    edge e1 -&gt; e2: influence
-    edge e1 -&gt; g2: influence "industrialization enabled"
+    edge e1 -&gt; e2: influence "led to"
+    edge e3 -&gt; e2: influence "industrialization enabled"
+    edge e3 -&gt; e4: influence
 }
 </code></pre>
 <p>Notice that every event carries <code>[alignGroup: "1800"]</code> (or whichever year). That single attribute is what lines them up with the corresponding TimePoint.</p>
@@ -223,6 +223,7 @@ vgraph napoleonicWars: WarTimeline "Napoleonic Wars" {
  <li><strong>topToBottom layout</strong> makes time flow vertically</li>
  <li><strong>Custom types</strong> (Battle, Treaty) with distinct colours and category labels replace the generic Event</li>
 </ul>
+<p>Note that WarTimeline declares its own <code>influenced</code> edge type rather than reusing the built-in <code>influence</code>. That built-in runs from Event to Event, and Battle is a new node type, not an Event — so once you introduce custom node types you need custom edge types to connect them.</p>
 <h2 id="try-it-yourself">Try it Yourself</h2>
 <p>Edit the VGL below and click "Render" to see your diagram. Try changing the layout, adding new event types, or creating groups for tracks:</p>
 <iframe src="/vgraph/index.html?vgl=vnotation%20WarTimeline%20extends%20Timeline%20%7B%0A%20%20%20%20layout%3A%20topToBottom%0A%20%20%20%20node%20type%3A%20Battle%20%5BnodeStyle%3A%20withCategory%2C%20color%3A%20%22%23883333%22%2C%20category%3A%20%22Battle%22%5D%0A%20%20%20%20node%20type%3A%20Treaty%20%5BnodeStyle%3A%20withCategory%2C%20color%3A%20%22%23339933%22%2C%20category%3A%20%22Treaty%22%5D%0A%20%20%20%20edge%20type%3A%20resolved_by%20from%3A%20Battle%20to%3A%20Treaty%0A%20%20%20%20edge%20type%3A%20influenced%20from%3A%20Battle%20to%3A%20Battle%0A%7D%0Avgraph%20napoleonicWars%3A%20WarTimeline%20%22Napoleonic%20Wars%22%20%7B%0A%20%20%20%20node%20t1805%3A%20TimePoint%20%221805%22%20%5BalignGroup%3A%20%221805%22%5D%0A%20%20%20%20node%20t1812%3A%20TimePoint%20%221812%22%20%5BalignGroup%3A%20%221812%22%5D%0A%20%20%20%20node%20t1815%3A%20TimePoint%20%221815%22%20%5BalignGroup%3A%20%221815%22%5D%0A%20%20%20%20edge%20t1805%20-%3E%20t1812%3A%20sequence%0A%20%20%20%20edge%20t1812%20-%3E%20t1815%3A%20sequence%0A%20%20%20%20%20%20%20%20node%20f1%3A%20Battle%20%22Battle%20of%20Austerlitz%22%20%5BalignGroup%3A%20%221805%22%5D%0A%20%20%20%20%20%20%20%20node%20f2%3A%20Battle%20%22Invasion%20of%20Russia%22%20%5BalignGroup%3A%20%221812%22%5D%0A%20%20%20%20%20%20%20%20node%20f3%3A%20Battle%20%22Battle%20of%20Waterloo%22%20%5BalignGroup%3A%20%221815%22%5D%0A%20%20%20%20%20%20%20%20node%20e1%3A%20Treaty%20%22Treaty%20of%20Pressburg%22%20%5BalignGroup%3A%20%221805%22%5D%0A%20%20%20%20%20%20%20%20node%20e2%3A%20Treaty%20%22Congress%20of%20Vienna%22%20%5BalignGroup%3A%20%221815%22%5D%0A%20%20%20%20edge%20f1%20-%3E%20e1%3A%20resolved_by%0A%20%20%20%20edge%20f3%20-%3E%20e2%3A%20resolved_by%0A%20%20%20%20edge%20f1%20-%3E%20f2%3A%20influenced%20%22overconfidence%22%0A%20%20%20%20edge%20f2%20-%3E%20f3%3A%20influenced%20%22weakened%20army%22%0A%7D%0A" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive Timeline Editor"></iframe>

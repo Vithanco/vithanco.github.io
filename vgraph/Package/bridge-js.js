@@ -368,6 +368,17 @@ export async function createInstantiator(options, swift) {
                     return 0
                 }
             }
+            BrowserInterop["bjs_JSDocument_createElementNS"] = function bjs_JSDocument_createElementNS(self, namespaceURIBytes, namespaceURICount, qualifiedNameBytes, qualifiedNameCount) {
+                try {
+                    const string = decodeString(namespaceURIBytes, namespaceURICount);
+                    const string1 = decodeString(qualifiedNameBytes, qualifiedNameCount);
+                    let ret = swift.memory.getObject(self).createElementNS(string, string1);
+                    return swift.memory.retain(ret);
+                } catch (error) {
+                    setException(error);
+                    return 0
+                }
+            }
             BrowserInterop["bjs_JSDocument_createTextNode"] = function bjs_JSDocument_createTextNode(self, textBytes, textCount) {
                 try {
                     const string = decodeString(textBytes, textCount);
@@ -967,6 +978,9 @@ export async function createInstantiator(options, swift) {
                 },
                 editorRenderNow: function bjs_editorRenderNow() {
                     instance.exports.bjs_editorRenderNow();
+                },
+                editorLongPressFired: function bjs_editorLongPressFired() {
+                    instance.exports.bjs_editorLongPressFired();
                 },
                 setEditorVGL: function bjs_setEditorVGL(text) {
                     const textBytes = textEncoder.encode(text);

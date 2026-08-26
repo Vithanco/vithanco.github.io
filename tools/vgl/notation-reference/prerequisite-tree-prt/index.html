@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta property="og:site_name" content="Vithanco"/>
+        <link rel="canonical" href="https://vithanco.com/tools/vgl/notation-reference/prerequisite-tree-prt"/>
+        <meta name="twitter:url" content="https://vithanco.com/tools/vgl/notation-reference/prerequisite-tree-prt"/>
+        <meta property="og:url" content="https://vithanco.com/tools/vgl/notation-reference/prerequisite-tree-prt"/>
+        <title>VGL Guide — Prerequisite Tree (PRT) | Vithanco</title>
+        <meta name="twitter:title" content="VGL Guide — Prerequisite Tree (PRT) | Vithanco"/>
+        <meta property="og:title" content="VGL Guide — Prerequisite Tree (PRT) | Vithanco"/>
+        <meta name="description" content="Planning with necessary-condition thinking, starting from the objective and"/>
+        <meta name="twitter:description" content="Planning with necessary-condition thinking, starting from the objective and"/>
+        <meta property="og:description" content="Planning with necessary-condition thinking, starting from the objective and"/>
+        <meta name="twitter:card" content="summary"/>
+        <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+        <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
+        <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
+        <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
+        <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
+    </head>
+    <body class="item-page">
+        <header>
+            <div class="header-wrapper">
+                <a href="/" class="site-name">
+                    <img src="/logo.png" height="20" width="20"/>
+                    <p>Vithanco</p></a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/services">Services</a></li>
+                        <li>
+                            <a href="/methods">Methods</a></li>
+                        <li>
+                            <a href="/notations">Notations</a></li>
+                        <li>
+                            <a href="/tools" class="selected">Tools</a></li>
+                        <li>
+                            <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
+        <div class="item-wrapper">
+            <article>
+                <div class="breadcrumbs">                    <a href="/" class="breadcrumb-home">                        <img src="/logo.png" class="breadcrumb-icon"/>
+Home</a>
+                    <span class="breadcrumb-separator"> / </span>
+                    <a href="/tools">The best Tools for Structured Visual Thinking</a>
+                    <span class="breadcrumb-separator"> / </span>
+VGL Guide — Prerequisite Tree (PRT)</div>
+                <h1>VGL Guide — Prerequisite Tree (PRT)</h1>
+                <div class="reading-time-container">
+                    <span class="fa fa-clock-o"></span>
+                    <p>Estimated reading time: 2 minutes.</p></div>
+                <div class="content"><h1 id="prerequisite-tree-prt">Prerequisite Tree (PRT)</h1>
+<p>Planning with necessary-condition thinking, starting from the objective and working back to obstacles.</p>
+<p><strong>Node types</strong></p>
+<ul>
+ <li><code>Objective</code> — the desired goal (default: green)</li>
+ <li><code>Obstacle</code> — a barrier preventing achievement (default: red)</li>
+ <li><code>IntermediateObjective</code> — a milestone overcoming a specific obstacle (default: blue)</li>
+ <li><code>OR</code> — allows optional conditions instead of requiring all predecessors (icon: OR circle)</li>
+</ul>
+<p><strong>Edge types</strong> — flowing bottom-to-top, intermediate objectives at the bottom.</p>
+<ul>
+ <li><code>obstacle_blocks_objective</code> — Obstacle → Objective</li>
+ <li><code>obstacle_blocks_intermediate_objective</code> — Obstacle → IntermediateObjective</li>
+ <li><code>intermediate_objective_overcomes_obstacle</code> — IntermediateObjective → Obstacle</li>
+ <li><code>intermediate_objective_to_objective</code> — the direct path</li>
+ <li>To the OR junctor: <code>obstacle_to_or</code>, <code>intermediate_objective_to_or</code></li>
+ <li>From it: <code>or_to_objective</code>, <code>or_to_intermediate_objective</code>, <code>or_to_obstacle</code></li>
+</ul>
+<p>A planning graph showing obstacles blocking objectives and intermediate objectives to overcome them:</p>
+<pre><code class="language-vgl">vgraph projectLaunch: PRT "New Product Launch Planning" {
+    // The main objective we want to achieve
+    node obj1: Objective "Successfully launch product by Q3";
+
+    // Obstacles blocking the main objective
+    node obs1: Obstacle "Development team lacks required skills";
+    node obs2: Obstacle "Marketing budget not approved";
+    node obs3: Obstacle "No distribution channel established";
+
+    // Intermediate objectives to overcome obstacles
+    node io1: IntermediateObjective "Train team on new technology";
+    node io2: IntermediateObjective "Hire experienced developers";
+    node io3: IntermediateObjective "Present ROI analysis to leadership";
+    node io4: IntermediateObjective "Partner with existing retailer";
+    node io5: IntermediateObjective "Build direct-to-consumer channel";
+
+    // OR junctor for alternative paths
+    node or1: OR;
+    node or2: OR;
+
+    // Further obstacles blocking intermediate objectives
+    node obs4: Obstacle "Training budget limited";
+    node obs5: Obstacle "Talent pool is competitive";
+
+    // Obstacles block the main objective
+    edge obs1 -&gt; obj1: obstacle_blocks_objective;
+    edge obs2 -&gt; obj1: obstacle_blocks_objective;
+    edge obs3 -&gt; obj1: obstacle_blocks_objective;
+
+    // Alternative ways to overcome skill obstacle (via OR)
+    edge io1 -&gt; or1: intermediate_objective_to_or;
+    edge io2 -&gt; or1: intermediate_objective_to_or;
+    edge or1 -&gt; obs1: or_to_obstacle;
+
+    // ROI analysis overcomes budget obstacle
+    edge io3 -&gt; obs2: intermediate_objective_overcomes_obstacle;
+
+    // Alternative distribution solutions
+    edge io4 -&gt; or2: intermediate_objective_to_or;
+    edge io5 -&gt; or2: intermediate_objective_to_or;
+    edge or2 -&gt; obs3: or_to_obstacle;
+
+    // Recursive obstacles blocking intermediate objectives
+    edge obs4 -&gt; io1: obstacle_blocks_intermediate_objective;
+    edge obs5 -&gt; io2: obstacle_blocks_intermediate_objective;
+}
+</code></pre>
+<p><strong>Note</strong>: PRT graphs flow bottom-to-top like other TOC tools. The main Objective sits at the top, with Obstacles directly below showing what blocks it. IntermediateObjectives below the obstacles show what needs to be achieved to overcome them. The OR junctor indicates alternative paths - only one of the connected intermediate objectives needs to be achieved. PRT embodies "necessary condition thinking" - working backward from the goal to identify all prerequisites.</p></div></article>
+            <aside class="side-content">
+                <div class="relationships-section"></div>
+                <div class="preview__article-details">
+                    <p class="tag-list-title">Tagged with:</p>
+                    <ul class="preview__article-tags">
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/vgl">VGL</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/graph-language">Graph Language</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/notation">Notation</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/documentation">Documentation</a></div></li></ul></div>
+                <div class="newsletter" height="350" width="250">
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <p>See how you can combine your brain power with structured visual and achieve better results.</p>
+                    <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
+                <div></div></aside></div>
+        <footer>
+            <div>
+                <p class="footer-title">                    <img src="/logo.png" width="16px" class="content_logo"/>
+Vithanco Home </p>
+                <nav>
+                    <p>Dr. Ing. Klaus Kneupner, MBA</p>
+                    <ul>
+                        <li>
+                            <a href="https://linkedIn.com/in/Kneupner">
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bsky.app/profile/vithanco.bsky.social">
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://mastodon.social/@vithanco">
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/feed.rss">
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
+                            </a>
+                        </li>
+                    </ul></nav></div></footer></body>
+</html>

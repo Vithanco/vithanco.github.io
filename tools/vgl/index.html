@@ -84,39 +84,30 @@ Vithanco Graph Language (VGL) Guide</div>
                 <div class="reading-time-container">
                     <span class="fa fa-clock-o"></span>
                     <p>Estimated reading time: 2 minutes.</p></div>
-                <div class="content"><p><strong>VGL</strong> is a small, declarative text format for describing graphs — diagrams made of nodes, edges, groups, and attributes. A VGL document is plain text that any editor can produce, any reviewer can diff, and any version-control tool can track. The Vithanco app reads VGL and renders it in a chosen <em>notation</em> (IBIS, Concept Map, Causal Loop Diagram, Goal Tree, Timeline, and many more), so the same text file can be read as prose by a human and as a typed graph by the tool.</p>
+                <div class="content"><p>VGL is a human-readable text format for creating and editing graphs — a declarative syntax for nodes, edges, groups and their attributes.</p>
+<ul>
+ <li><a href="/tools/vgl/concepts/">Concepts</a></li>
+ <li><a href="/tools/vgl/notations/">Notations</a></li>
+ <li><a href="/tools/vgl/notation-reference/">Notation reference</a></li>
+ <li><a href="/tools/vgl/user-defined-notations-vnotation/">User-defined notations (vnotation)</a></li>
+ <li><a href="/tools/vgl/metagraph-visualising-a-notation/">Metagraph</a></li>
+ <li><a href="/tools/vgl/grammar/">Grammar</a></li>
+ <li><a href="/tools/vgl/#best-practices">Best practices</a></li>
+</ul>
+<p><strong>VGL</strong> is a small, declarative text format for describing graphs — diagrams made of nodes, edges, groups, and attributes. A VGL document is plain text that any editor can produce, any reviewer can diff, and any version-control tool can track. The Vithanco app reads VGL and renders it in a chosen <em>notation</em> (IBIS, Concept Map, Causal Loop Diagram, Goal Tree, Timeline, and many more), so the same text file can be read as prose by a human and as a typed graph by the tool.</p>
 <p>Use VGL when you want the structure of a diagram in source form — for collaboration over pull requests, for embedding diagrams in documentation, for generating diagrams programmatically, or simply for editing complex graphs faster than you could by clicking. Each notation defines its own node and edge types and the rules that connect them, and VGL enforces those rules so you can't draw an invalid diagram.</p>
-<p>If you're new to VGL, start with <strong><a href="/tools/vgl/concepts/">Concepts</a></strong> for the model (nodes, edges, groups, attributes) and <strong><a href="/tools/vgl/grammar/">Grammar</a></strong> for the formal syntax. Then jump to <strong><a href="/tools/vgl/examples/">Examples</a></strong> for one runnable diagram per built-in notation. If you want to define your own notation rather than use a built-in one, see <strong><a href="/tools/vgl/user-defined-notations-vnotation/">User-Defined Notations</a></strong>.</p>
+<p>If you're new to VGL, start with <strong><a href="/tools/vgl/concepts/">Concepts</a></strong> for the model (nodes, edges, groups, attributes) and <strong><a href="/tools/vgl/grammar/">Grammar</a></strong> for the formal syntax. Then jump to the <strong><a href="/tools/vgl/notation-reference/">Notation reference</a></strong>, which gives each built-in notation its own page: node types, edge types and a runnable example. If you want to define your own notation rather than use a built-in one, see <strong><a href="/tools/vgl/user-defined-notations-vnotation/">User-Defined Notations</a></strong>.</p>
 <h2 id="contents">Contents</h2>
 <ul>
  <li><a href="/tools/vgl/concepts/">Concepts</a></li>
+ <li><a href="/tools/vgl/notations/">Notations</a></li>
+ <li><a href="/tools/vgl/notation-reference/">Notation reference</a></li>
+ <li><a href="/tools/vgl/user-defined-notations-vnotation/">User-defined notations (<code>vnotation</code>)</a></li>
+ <li><a href="/tools/vgl/metagraph-visualising-a-notation/">Metagraph (visualising a notation)</a></li>
  <li><a href="/tools/vgl/grammar/">Grammar</a></li>
- <li><a href="/tools/vgl/examples/">Examples</a></li>
- <li><a href="/tools/vgl/user-defined-notations-vnotation/">User-Defined Notations (<code>vnotation</code>)</a></li>
- <li><a href="/tools/vgl/metagraph-visualizing-a-notation/">Metagraph (visualizing a notation)</a></li>
 </ul>
-<h2 id="best-practices">Best Practices</h2>
-<ol>
- <li><strong>Use Meaningful IDs</strong>: Choose descriptive node IDs like <code>security_question</code> instead of <code>n1</code></li>
- <li><strong>Organize with Groups</strong>: Use groups to organize related nodes and improve readability</li>
- <li><strong>Leverage Type Inference</strong>: Omit edge types when they can be inferred from node types</li>
- <li><strong>Add Labels</strong>: Always provide labels for better human readability</li>
- <li><strong>Comment Your Graphs</strong>: Use comments to explain complex relationships or decisions</li>
- <li><strong>Keep It Simple</strong>: Start with minimal syntax and add attributes only when needed</li>
- <li><strong>Consistent Naming</strong>: Use a consistent naming convention for IDs (e.g., snake_case or camelCase)</li>
- <li><strong>Hierarchical Organization</strong>: Use nested groups to reflect the natural hierarchy of your domain</li>
-</ol>
-<hr />
-<h2 id="error-handling">Error Handling</h2>
-<p>VGL provides clear error messages for common issues:</p>
-<ul>
- <li><strong>Duplicate Node ID</strong>: Each node ID must be unique</li>
- <li><strong>Undefined Node Reference</strong>: Edges can only reference existing nodes</li>
- <li><strong>Invalid Node Type</strong>: Node types must exist in the chosen notation (creates "unknown" type)</li>
- <li><strong>Invalid Edge Type</strong>: Edge types must be valid for the connected node types (creates "unknown" edge type)</li>
- <li><strong>Syntax Errors</strong>: Missing semicolons, braces, or other syntax requirements</li>
-</ul>
-<p>When a node type or edge type is not found in the notation, VGL will create an "unknown" type to allow the graph to be processed, but you should verify that the type names are correct.</p></div></article>
+<h2 id="best-practices">Best practices</h2>
+<p>Choose descriptive ids (<code>security_question</code>, not <code>n1</code>) and name them consistently. Let edge types be inferred. Use groups to reflect the domain's real hierarchy, and comments to explain the relationships that are not obvious. Start minimal and add attributes only where they earn their place.</p></div></article>
             <aside class="side-content">
                 <div class="toc-list">
                     <p class="aside-title">Table of Contents</p>
@@ -127,125 +118,105 @@ Vithanco Graph Language (VGL) Guide</div>
                             </a>
                         </li>
                         <li>
-                            <a href="/tools/vgl/examples/index.html">
-                                <p>Examples</p>
+                            <a href="/tools/vgl/notations/index.html">
+                                <p>Notations</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/vgl/notation-reference/index.html">
+                                <p>Notation reference</p>
                             </a>
                             <ul>
                                 <li>
-                                    <a href="/tools/vgl/examples/example-1-simple-ibis-graph/index.html">
-                                        <p>"Example 1: Simple IBIS Graph"</p>
+                                    <a href="/tools/vgl/notation-reference/ibis/index.html">
+                                        <p>IBIS</p>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/tools/vgl/examples/example-10-concept-map/index.html">
-                                        <p>"Example 10: Concept Map"</p>
+                                    <a href="/tools/vgl/notation-reference/bbs/index.html">
+                                        <p>BBS</p>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/tools/vgl/examples/example-11-current-reality-tree-crt/index.html">
-                                        <p>"Example 11: Current Reality Tree (CRT)"</p>
+                                    <a href="/tools/vgl/notation-reference/impact-mapping/index.html">
+                                        <p>Impact Mapping</p>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/tools/vgl/examples/example-12-future-reality-tree-frt/index.html">
-                                        <p>"Example 12: Future Reality Tree (FRT)"</p>
+                                    <a href="/tools/vgl/notation-reference/concept-map/index.html">
+                                        <p>Concept Map</p>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/tools/vgl/examples/example-13-evaporating-cloud-ec/index.html">
-                                        <p>"Example 13: Evaporating Cloud (EC)"</p>
+                                    <a href="/tools/vgl/notation-reference/current-reality-tree-crt/index.html">
+                                        <p>Current Reality Tree (CRT)</p>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/tools/vgl/examples/example-14-prerequisite-tree-prt/index.html">
-                                        <p>"Example 14: Prerequisite Tree (PRT)"</p>
+                                    <a href="/tools/vgl/notation-reference/future-reality-tree-frt/index.html">
+                                        <p>Future Reality Tree (FRT)</p>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/tools/vgl/examples/example-15-transition-tree-trt/index.html">
-                                        <p>"Example 15: Transition Tree (TRT)"</p>
+                                    <a href="/tools/vgl/notation-reference/transition-tree-trt/index.html">
+                                        <p>Transition Tree (TRT)</p>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/tools/vgl/examples/example-16-attack-defense-tree-adtree/index.html">
-                                        <p>"Example 16: Attack-Defense Tree (ADTree)"</p>
+                                    <a href="/tools/vgl/notation-reference/prerequisite-tree-prt/index.html">
+                                        <p>Prerequisite Tree (PRT)</p>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/tools/vgl/examples/example-17-goal-tree-goaltree/index.html">
-                                        <p>"Example 17: Goal Tree (GoalTree)"</p>
+                                    <a href="/tools/vgl/notation-reference/evaporating-cloud-ec/index.html">
+                                        <p>Evaporating Cloud (EC)</p>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/tools/vgl/examples/example-18-causal-loop-diagram-cld/index.html">
-                                        <p>"Example 18: Causal Loop Diagram (CLD)"</p>
+                                    <a href="/tools/vgl/notation-reference/goal-tree/index.html">
+                                        <p>Goal Tree</p>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/tools/vgl/examples/example-19-decision-tree/index.html">
-                                        <p>"Example 19: Decision Tree"</p>
+                                    <a href="/tools/vgl/notation-reference/attack-defense-tree-adtree/index.html">
+                                        <p>Attack-Defense Tree (ADTree)</p>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/tools/vgl/examples/example-2-ibis-with-arguments/index.html">
-                                        <p>"Example 2: IBIS with Arguments"</p>
+                                    <a href="/tools/vgl/notation-reference/causal-loop-diagram-cld/index.html">
+                                        <p>Causal Loop Diagram (CLD)</p>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/tools/vgl/examples/example-20-timeline/index.html">
-                                        <p>"Example 20: Timeline"</p>
+                                    <a href="/tools/vgl/notation-reference/decision-tree/index.html">
+                                        <p>Decision Tree</p>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/tools/vgl/examples/example-3-using-groups/index.html">
-                                        <p>"Example 3: Using Groups"</p>
+                                    <a href="/tools/vgl/notation-reference/timeline/index.html">
+                                        <p>Timeline</p>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/tools/vgl/examples/example-4-nested-groups-with-attributes/index.html">
-                                        <p>"Example 4: Nested Groups with Attributes"</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/tools/vgl/examples/example-5-minimal-syntax/index.html">
-                                        <p>"Example 5: Minimal Syntax"</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/tools/vgl/examples/example-6-complex-graph-with-all-features/index.html">
-                                        <p>"Example 6: Complex Graph with All Features"</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/tools/vgl/examples/example-7-using-explicit-edge-types/index.html">
-                                        <p>"Example 7: Using Explicit Edge Types"</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/tools/vgl/examples/example-8-impact-mapping/index.html">
-                                        <p>"Example 8: Impact Mapping"</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/tools/vgl/examples/example-9-impact-mapping-with-inferred-types/index.html">
-                                        <p>"Example 9: Impact Mapping with Inferred Types"</p>
+                                    <a href="/tools/vgl/notation-reference/c4/index.html">
+                                        <p>C4</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li>
+                            <a href="/tools/vgl/user-defined-notations-vnotation/index.html">
+                                <p>User-defined notations (`vnotation`)</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/vgl/metagraph-visualising-a-notation/index.html">
+                                <p>Metagraph (visualising a notation)</p>
+                            </a>
+                        </li>
+                        <li>
                             <a href="/tools/vgl/grammar/index.html">
                                 <p>Grammar</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/tools/vgl/metagraph-visualizing-a-notation/index.html">
-                                <p>Metagraph (visualizing a notation)</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/tools/vgl/user-defined-notations-vnotation/index.html">
-                                <p>User-Defined Notations (`vnotation`)</p>
                             </a>
                         </li>
                     </ul></div>

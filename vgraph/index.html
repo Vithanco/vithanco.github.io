@@ -19,27 +19,23 @@
       flex-direction: column;
       height: 100vh;
     }
-    header {
-      padding: 12px 20px;
-      background: linear-gradient(135deg, #EA580C 0%, #FF8000 100%);
-      color: #fff;
-      flex: 0 0 auto;
-    }
-    header h1 { margin: 0; font-size: 18px; font-weight: 600; }
+    /* No chrome here: the editor renders its own title bar, toolbar and all. */
     main {
-      padding: 16px 20px;
       flex: 1 1 auto;
       min-height: 0;
       display: flex;
       flex-direction: column;
     }
     #editor-root { flex: 1 1 auto; min-height: 0; }
-    #status-boot { color: #888; font-size: 13px; }
-    svg { max-width: 100%; height: auto; }
+    #status-boot { color: #888; font-size: 13px; padding: 16px 20px; }
+    /* The diagram renders at its natural size; the preview pane
+       (#vg-editor-preview, overflow:auto) supplies scrollbars whenever the
+       SVG is bigger than the available space. Do NOT constrain the SVG to
+       the container width — that would shrink it and hide the scrollbars. */
+    #vg-editor-preview svg { display: block; }
   </style>
 </head>
 <body>
-  <header><h1>VGraph Editor</h1></header>
   <main>
     <p id="status-boot">Loading…</p>
     <div id="editor-root"></div>
@@ -55,39 +51,22 @@
         throw new Error('VGraph engine loaded but mountEditor export is missing.');
       }
 
-      // Debounced render lives in the host: the editor's `.onInput` calls this
-      // named global (an ordinary JS call, not a Swift JSClosure), and the
-      // setTimeout callback — pure JS, so it actually fires — calls back into
-      // the `editorRenderNow` export once the user pauses typing.
-      let renderTimer = null;
-      window.vgraphScheduleRender = () => {
-        if (renderTimer !== null) clearTimeout(renderTimer);
-        renderTimer = setTimeout(() => {
-          renderTimer = null;
-          exports.editorRenderNow();
-        }, 400);
-      };
-
-      // Save SVG: the editor holds the SVG string and calls this with it; the
-      // browser-only Blob download lives here (no WASM file/DOM-download glue).
-      window.vgraphSaveSVG = (svg) => {
-        const blob = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'vgraph-diagram.svg';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
-      };
+      // The editor's render debounce lives in Swift (VGraphEditor
+      // `scheduleRender`), but the wasm reactor has no clock of its own, so it
+      // borrows the host's time source: we expose the render entry as a named
+      // JS function that its `setTimeout` can invoke directly. This must be a
+      // real JS function reference (not a Swift JSClosure, which can't fire in
+      // this embedded build — see Editor.swift header). The File menu (open /
+      // save VGL, save SVG) and `?vgl=` seeding are likewise fully inside the
+      // editor now, so no other host glue remains and every embedding host
+      // inherits all of it.
+      window.__vgraphRenderNow = exports.editorRenderNow;
+      // Same borrowed clock, for the press-and-hold that stands in for a
+      // right-click on a touch device. A host that omits this binding just has no
+      // long press; the editor checks before arming the timer.
+      window.__vgraphLongPress = exports.editorLongPressFired;
 
       exports.mountEditor('editor-root');
-
-      // Embedding contract: `?vgl=<encoded VGL>` seeds the editor. Decoded by
-      // URLSearchParams; pushed in via the inbound setEditorVGL entry point.
-      const vgl = new URLSearchParams(location.search).get('vgl');
-      if (vgl) exports.setEditorVGL(vgl);
 
       boot.remove();
     } catch (e) {

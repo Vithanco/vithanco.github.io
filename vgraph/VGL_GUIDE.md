@@ -1,414 +1,62 @@
 # Vithanco Graph Language (VGL) Guide
 
-## Table of Contents
-- [Concepts](#concepts)
-- [User-Defined Notations (vnotation)](#user-defined-notations-vnotation)
-- [Metagraph (visualizing a notation)](#metagraph-visualizing-a-notation)
-- [Grammar](#grammar)
-- [Examples](#examples)
+VGL is a human-readable text format for creating and editing graphs — a
+declarative syntax for nodes, edges, groups and their attributes.
 
----
+- [Concepts](#concepts)
+- [Notations](#notations)
+- [Notation reference](#notation-reference)
+- [User-defined notations (vnotation)](#user-defined-notations-vnotation)
+- [Metagraph](#metagraph-visualising-a-notation)
+- [Grammar](#grammar)
+- [Best practices](#best-practices)
 
 ## Concepts
 
-### Overview
+### The document
 
-The Vithanco Graph Language (VGL) is a human-readable text format for creating and editing graphs. VGL provides a simple, declarative syntax for defining nodes, edges, groups, and their attributes.
+Every VGL document declares a notation, which fixes the node and edge types
+available:
 
-### Notation
-
-Every VGL document must declare a notation, which defines the types of nodes and edges available in the graph.
-
-**Syntax:**
 ```
 vgraph <graph_id>: <NOTATION> "<graph_label>" {
     ...
 }
 ```
 
-VGL supports both built-in notations and user-defined notations declared with `vnotation` (see [User-Defined Notations](#user-defined-notations-vnotation)). Built-in notations come with predefined node types and edge types:
-- **IBIS** (Issue-Based Information System) - for decision-making and argumentation
-- **BBS** (Benefit Breakdown Structure) - for benefit analysis
-- **ImpactMapping** - for strategic planning and goal alignment
-- **ConceptMap** - for defining domain vocabulary through falsifiable propositions that help people align on shared understanding
-- **CRT** (Current Reality Tree) - for root cause analysis using Theory of Constraints
-- **EC** (Evaporating Cloud) - for conflict resolution using Theory of Constraints necessary condition logic
-- **FRT** (Future Reality Tree) - for solution validation using Theory of Constraints
-- **PRT** (Prerequisite Tree) - for planning with necessary condition thinking using Theory of Constraints
-- **TRT** (Transition Tree) - for step-by-step implementation planning using Theory of Constraints
-- **ADTree** (Attack-Defense Tree) - for security modelling of attack and defense interactions
-- **GoalTree** (Goal Tree) - for strategic planning using Theory of Constraints necessity logic
-- **CLD** (Causal Loop Diagram) - for systems analysis modelling how elements reinforce or balance each other over time
-- **DecisionTree** (Decision Tree) - for storing and evaluating decision logic through questions, choices, and outcomes
-- **Timeline** (Timeline) - for visualizing events across multiple tracks aligned to a shared time axis
-
-The notation determines what node types and edge types are available in your graph.
-
-### Extensions
-
-Extensions add cross-cutting node types to any notation. They are listed after the notation, separated by commas:
-
-```
-vgraph <graph_id>: <NOTATION>, <EXTENSION> "<graph_label>" {
-    ...
-}
-```
-
-Multiple extensions can be combined:
-
-```
-vgraph myGraph: ConceptMap, Annotation "My Diagram" { ... }
-```
-
-**Available extensions:**
-- **Annotation** - adds an `Annotation` node type that can be connected FROM any node in the notation. Use it to attach notes, comments, or clarifications to any element of the diagram.
-
-**Annotation example:**
-
-```vgl
-vgraph productMap: ConceptMap, Annotation "Product Strategy" {
-    node c1: Concept "Customer Need"
-    node r1: Relation "drives"
-    node c2: Concept "Feature"
-    node a1: Annotation "Validated in user research"
-    edge c1 -> r1
-    edge r1 -> c2
-    edge c1 -> a1
-}
-```
-
-Edge types from notation nodes to `Annotation` are automatically inferred, so no explicit `: annotates__Concept` type is needed on annotation edges.
-
-### Diagram Logic and Junctors
-
-Each notation has a **diagram logic**: `noLogic`, `sufficientCause`, or `necessaryCondition`. The logic determines how multiple arrows pointing into the same node are read, and which junctor (AND, OR) needs to be an explicit node.
-
-| Diagram logic | Multiple unjoined arrows mean… | Explicit junctor needed | Implicit (don't add as a node) |
-|---|---|---|---|
-| `sufficientCause` | OR — any one arrow is enough | **AND** — all inputs required together | OR |
-| `necessaryCondition` | AND — all arrows are required | **OR** — alternative paths | AND |
-| `noLogic` | Notation-defined | — | — |
-
-**Rule of thumb:** add only the *exception* junctor for your logic. For sufficient-cause notations (CRT, FRT, ADTree, TRT) declare an `AndJunctor` only when you need "all of these together." For necessary-condition notations (EC, PRT, GoalTree) declare an `OrJunctor` only when you need "any one of these alternatives." Adding the implicit junctor produces a `redundantJunctor` quality warning, since direct edges already express the same semantics with less visual noise.
-
-This applies equally to user-defined notations declared with `vnotation` — match the junctor you expose to the diagram logic you choose.
-
 ### Nodes
 
-Nodes represent the primary entities in your graph. Each node has:
-- **ID**: A unique identifier (required)
-- **Type**: The kind of node, determined by the notation (required)
-- **Label**: A human-readable display name (optional)
-- **Attributes**: Additional properties like color, fontsize, etc. (optional)
-
-**Syntax:**
 ```
 node <id>: <NodeType> "<label>" [<attributes>];
 ```
 
-**Example:**
+The id must be unique in the document; the label and attributes are optional.
+
 ```vgl
 node q1: Question "What should we do?" [fontsize: 16; color: red];
 ```
 
-### Node Types
-
-Node types are defined by the chosen notation. Each notation has its own set of node types with specific purposes and default styling.
-
-**IBIS Node Types:**
-- `Question` - A question or issue to be resolved (default: blue)
-- `Answer` - A proposed answer or solution (default: pink)
-- `Pro` - An argument supporting an answer (default: green)
-- `Con` - An argument opposing an answer (default: red)
-
-**BBS Node Types:**
-- `InvestmentObjective` - High-level business objective
-- `Benefit` - Expected benefit from the investment
-- `BusinessChange` - Organizational or process change required
-- `Enabler` - Technology or capability enabler
-
-**ImpactMapping Node Types:**
-- `Goal` - Strategic goal or objective (default: dark blue)
-- `Actor` - Person or group who can produce impact (default: blue)
-- `Impact` - Behavioral change or outcome (default: cyan)
-- `Deliverable` - Product feature or capability (default: green)
-
-**ConceptMap Node Types:**
-- `Concept` - A concept or term
-- `EmphasizedConcept` - An important concept to highlight
-- `Relation` - A linking verb or phrase connecting concepts (forms propositions: Concept → Relation → Concept)
-
-**CRT Node Types:**
-
-CRT uses sufficient-cause logic, so multiple unjoined causes feeding the same effect are implicitly OR (any one is sufficient). Only AND is an explicit junctor.
-- `UndesirableEffect` - An unwanted outcome requiring investigation (default: red)
-- `IntermediateEffect` - A neutral outcome in the causal chain (default: blue)
-- `DesirableEffect` - A wanted outcome caused by other conditions (default: green)
-- `Given` - An unchangeable constant like laws or physics (default: dark purple)
-- `Changeable` - A modifiable condition that can be addressed (default: light purple)
-- `AndJunctor` - Indicates multiple conditions required together to produce the downstream effect (icon: AND circle)
-
-**FRT Node Types:**
-FRT shares the same node types as CRT, as both are Theory of Constraints tools that use sufficient-cause logic. The difference is in usage: FRT starts with solutions (Changeable/injections) and builds upward to show how they lead to desirable effects. Multiple unjoined inputs into one effect are implicitly OR.
-- `Changeable` - Proposed solutions or injections to implement (default: light purple)
-- `Given` - Unchangeable facts that still apply (default: dark purple)
-- `IntermediateEffect` - Expected intermediate outcomes from solutions (default: blue)
-- `DesirableEffect` - Goals we want to achieve (default: green)
-- `UndesirableEffect` - Potential negative side effects to monitor (default: red)
-- `AndJunctor` - Indicates multiple conditions required together to produce the downstream effect (icon: AND circle)
-
-**EC Node Types:**
-EC (Evaporating Cloud) is a conflict resolution tool using necessary-condition logic. It surfaces the assumptions behind a conflict and finds breakthrough solutions. The graph flows left-to-right from Common Objective to Conflict. Multiple necessary inputs are implicitly AND; OR is the explicit junctor for alternative paths.
-- `CommonObjective` - The shared objective valid for both sides of the conflict (default: green)
-- `Need` - A perceived need that must be met (default: blue)
-- `Want` - A perceived want derived from a need (default: orange)
-- `Conflict` - The perceived conflict expressed as mutually exclusive wants (icon: lightning bolt circle, no text)
-- `OrJunctor` - Marks alternative necessary inputs — any one of them suffices for the downstream condition (icon: OR circle)
-- `Assumption` - Exposes the underlying assumptions behind the conflict (default: purple)
-- `Solution` - Marks the final solution that breaks the conflict (default: teal)
-
-**PRT Node Types:**
-PRT (Prerequisite Tree) is a planning tool using necessary condition thinking. It starts with the desired objective and works backward to identify obstacles and the intermediate objectives needed to overcome them.
-- `Objective` - The desired goal you aim to achieve (default: green)
-- `Obstacle` - Barriers preventing objective achievement (default: red)
-- `IntermediateObjective` - A milestone that overcomes a specific obstacle (default: blue)
-- `OR` - Connector allowing optional conditions instead of requiring all predecessors (icon: OR circle)
-
-**TRT Node Types:**
-TRT (Transition Tree) is an implementation planning tool that answers "HOW TO CAUSE the change?" by providing step-by-step actions needed to implement changes. It shares node types with CRT/FRT but focuses on the detailed action sequence.
-- `UndesirableEffect` - Current state problems being addressed (default: red)
-- `IntermediateEffect` - Stepping stone outcomes from actions (default: blue)
-- `DesirableEffect` - Goal outcomes we want to achieve (default: green)
-- `Given` - Unchangeable facts and constraints (default: dark purple)
-- `Changeable` - Actions we can take to cause change (default: light purple)
-- `AndJunctor` - Indicates multiple conditions required together for an effect (icon: AND circle)
-
-**ADTree Node Types:**
-ADTree (Attack-Defense Tree) is a security modelling methodology based on Kordy et al. (2014). It extends classical attack trees by allowing defense nodes at any level, modelling the ongoing arms race between attacker and defender. ADTree uses sufficient-cause logic — multiple unjoined children are implicitly OR (any one suffices); only AND is an explicit junctor.
-- `Attack` - An attacker's goal or sub-goal (default: red)
-- `Defense` - A defender's countermeasure or protective measure (default: green)
-- `AndJunctor` - Conjunctive refinement: all children must be achieved together (icon: AND circle)
-
-**GoalTree Node Types:**
-GoalTree (Goal Tree) is a strategic planning tool using necessity condition logic from Theory of Constraints. It defines what a system must achieve through a hierarchy of Goal, Critical Success Factors, and Necessary Conditions. Invented by H. William Dettmer, it is the foundation of the Logical Thinking Process.
-- `Goal` - The single top-level objective — the ultimate purpose for which the system exists (default: cyan/teal)
-- `CriticalSuccessFactor` - High-level terminal outcomes (3-5 maximum) without which the Goal cannot be achieved (default: light blue)
-- `NecessaryCondition` - Indispensable prerequisite tasks that support CSFs; can cascade into sub-NCs becoming more specific at lower levels (default: amber/yellow)
-
-**CLD Node Types:**
-CLD (Causal Loop Diagram) is a systems analysis tool for modelling how elements interconnect and reinforce or balance each other over time. All elements are represented as Stocks whose amounts can change based on incoming connections.
-- `Stock` - A variable or element in the system whose value changes over time (default: blue)
-
-**DecisionTree Node Types:**
-- `DecisionPoint` - A question that determines which path to follow (default: amber)
-- `Choice` - A potential answer or path branching from a question (default: blue)
-- `Outcome` - A terminal result of the decision tree (default: green)
-
-**Timeline Node Types:**
-- `TimePoint` - A coordinate on the time axis. Rendered by the Timeline overlay as an anchor dot on a horizontal baseline plus a year label centered below the dot. A dashed vertical guide descends from each TimePoint through the diagram, visually anchoring Events that share its `alignGroup`. TimePoints are **not** rendered as boxed nodes.
-- `Event` - A thing that happened at a point in time (boxed node, default: steel blue). Use `alignGroup` to pin the Event to a TimePoint's column.
-
 ### Edges
 
-Edges represent connections between nodes. Each edge has:
-- **From**: Source node ID (required)
-- **To**: Target node ID (required)
-- **Type**: The kind of connection (optional, can be inferred)
-- **Label**: A description of the relationship (optional)
-- **Attributes**: Additional properties like style, weight, etc. (optional)
-
-**Syntax:**
 ```
 edge <from_id> -> <to_id>: <EdgeType> "<label>" [<attributes>];
 ```
 
-**Concise Syntax** (omitting type):
-```
-edge <from_id> -> <to_id>;
-```
+Both endpoints must be declared. **Omit the edge type and VGL infers it** from
+the node types, whenever that is unambiguous — which is most of the time, so
+most documents never name an edge type at all.
 
-When the edge type is omitted, VGL will automatically infer it based on the connected node types, if unambiguous.
-
-**Example:**
 ```vgl
 edge q1 -> a1: answered_by "Initial solution";
 edge a1 -> pro1 [style: dashed];
-edge q2 -> a2;  // Type inferred from node types
+edge q2 -> a2;                              // type inferred
 ```
-
-### Edge Types
-
-Edge types are defined by the notation and specify valid connections between node types.
-
-**IBIS Edge Types:**
-- `answered_by` - Connects Question → Answer
-- `supports` - Connects Answer → Pro
-- `objects_to` - Connects Answer → Con
-- `pro_questions_question` - Connects Pro → Question
-- `con_questions_question` - Connects Con → Question
-
-**BBS Edge Types:**
-- `requires_benefit` - Connects Benefit → InvestmentObjective
-- `requires_business_change` - Connects BusinessChange → Benefit
-- `requires_enabler` - Connects Enabler → BusinessChange
-- `change_requires_change` - Connects BusinessChange → BusinessChange
-- `enabler_requires_enabler` - Connects Enabler → Enabler
-
-**ImpactMapping Edge Types:**
-- `goal_to_actor` - Connects Goal → Actor
-- `actor_to_impact` - Connects Actor → Impact
-- `impact_to_deliverable` - Connects Impact → Deliverable
-
-**ConceptMap Edge Types:**
-- `concept_to_relation` - Connects Concept → Relation (tail marker only)
-- `relation_to_concept` - Connects Relation → Concept (arrow head only)
-
-**CRT Edge Types:**
-CRT has many edge types connecting causes to effects. The graph flows bottom-to-top (causes at bottom, effects at top).
-
-*From effects to effects:*
-- `undesirable_causes_undesirable`, `undesirable_causes_intermediate`, `undesirable_causes_desirable`
-- `intermediate_causes_undesirable`, `intermediate_causes_intermediate`, `intermediate_causes_desirable`
-- `desirable_causes_undesirable`, `desirable_causes_intermediate`, `desirable_causes_desirable`
-
-*From Given/Changeable to effects:*
-- `given_causes_undesirable`, `given_causes_intermediate`, `given_causes_desirable`
-- `changeable_causes_undesirable`, `changeable_causes_intermediate`, `changeable_causes_desirable`
-
-*To/From AndJunctor:*
-- `*_to_and_junctor` - Connect any type to AndJunctor
-- `and_junctor_causes_*` - Connect AndJunctor to effects
-
-**FRT Edge Types:**
-FRT shares the same edge types as CRT. The graph flows bottom-to-top (solutions at bottom, desired effects at top).
-
-*From Changeable/Given to effects (typical starting points in FRT):*
-- `changeable_causes_undesirable`, `changeable_causes_intermediate`, `changeable_causes_desirable`
-- `given_causes_undesirable`, `given_causes_intermediate`, `given_causes_desirable`
-
-*Between effects:*
-- `intermediate_causes_undesirable`, `intermediate_causes_intermediate`, `intermediate_causes_desirable`
-- `desirable_causes_*`, `undesirable_causes_*`
-
-*To/From AndJunctor:*
-- `*_to_and_junctor` - Connect any type to AndJunctor
-- `and_junctor_causes_*` - Connect AndJunctor to effects
-
-**EC Edge Types:**
-EC uses edges to show necessary condition relationships flowing from shared objective through needs and wants to the conflict. The graph flows left-to-right (Common Objective on left, Conflict on right).
-
-*From Common Objective:*
-- `objective_to_need` - Connects CommonObjective → Need
-- `objective_to_or` - Connects CommonObjective → OrJunctor
-
-*From Need:*
-- `need_to_want` - Connects Need → Want
-- `need_to_or` - Connects Need → OrJunctor
-- `need_to_assumption` - Connects Need → Assumption
-- `need_to_solution` - Connects Need → Solution
-
-*From Want:*
-- `want_to_conflict` - Connects Want → Conflict
-- `want_to_or` - Connects Want → OrJunctor
-- `want_to_assumption` - Connects Want → Assumption
-
-*From Conflict:*
-- `conflict_to_or` - Connects Conflict → OrJunctor
-- `conflict_to_assumption` - Connects Conflict → Assumption
-
-*From OrJunctor:*
-- `or_to_want` - Connects OrJunctor → Want
-- `or_to_conflict` - Connects OrJunctor → Conflict
-- `or_to_or` - Connects OrJunctor → OrJunctor
-
-**PRT Edge Types:**
-PRT uses edges to show how obstacles block objectives and how intermediate objectives overcome obstacles. The graph flows bottom-to-top (intermediate objectives at bottom, main objective at top).
-
-*Obstacle blocking relationships:*
-- `obstacle_blocks_objective` - Connects Obstacle → Objective
-- `obstacle_blocks_intermediate_objective` - Connects Obstacle → IntermediateObjective
-
-*Intermediate objective relationships:*
-- `intermediate_objective_overcomes_obstacle` - Connects IntermediateObjective → Obstacle
-- `intermediate_objective_to_objective` - Connects IntermediateObjective → Objective (direct path)
-
-*To/From OR Junctor:*
-- `obstacle_to_or`, `intermediate_objective_to_or` - Connect to OR junctor
-- `or_to_objective`, `or_to_intermediate_objective`, `or_to_obstacle` - Connect from OR junctor
-
-**TRT Edge Types:**
-TRT shares similar edge types with CRT/FRT but focuses on action planning. The graph flows bottom-to-top (actions at bottom, desired effects at top).
-
-*From Changeable/Given to effects (typical starting points for actions):*
-- `changeable_causes_undesirable`, `changeable_causes_intermediate`, `changeable_causes_desirable`
-- `given_causes_undesirable`, `given_causes_intermediate`, `given_causes_desirable`
-
-*Between effects:*
-- `intermediate_causes_undesirable`, `intermediate_causes_intermediate`, `intermediate_causes_desirable`
-- `desirable_causes_*`, `undesirable_causes_*`
-
-*To/From And Junctor:*
-- `*_to_and_junctor` - Connect any type to And junctor
-- `and_junctor_causes_*` - Connect And junctor to effects (excluding And)
-
-**ADTree Edge Types:**
-ADTree uses two kinds of edges: refinement edges (solid lines) for same-type decomposition, and countermeasure edges (dotted lines) for opposite-type countering. The graph flows top-to-bottom (root goal at top).
-
-*Refinement edges (solid):*
-- `attack_refines_attack` - Decompose an attack into sub-attacks
-- `defense_refines_defense` - Decompose a defense into sub-defenses
-
-*Countermeasure edges (dotted):*
-- `defense_counters_attack` - A defense that mitigates an attack
-- `attack_counters_defense` - An attack that circumvents a defense
-
-*To/From AND Junctor:*
-- `attack_to_and_junctor`, `defense_to_and_junctor` - Connect to AND junctor
-- `and_junctor_to_attack`, `and_junctor_to_defense` - Connect from AND junctor
-
-**GoalTree Edge Types:**
-GoalTree uses edges to show necessity relationships. The graph flows top-to-bottom (Goal at top, Necessary Conditions expand downward). The necessity logic reads: "In order to achieve [upper], we must have [lower]."
-- `csf_to_goal` - Connects CriticalSuccessFactor → Goal (CSF is necessary for Goal)
-- `nc_to_csf` - Connects NecessaryCondition → CriticalSuccessFactor (NC is necessary for CSF)
-- `nc_to_nc` - Connects NecessaryCondition → NecessaryCondition (sub-NC supports parent NC)
-
-**CLD Edge Types:**
-CLD uses two edge types representing positive and negative causal links between Stocks. Loops with an even number of negative links (including zero) are reinforcing; loops with an odd number are balancing.
-- `same` - Connects Stock → Stock (positive causal link: both change in the same direction, solid line, marked "s")
-- `opposite` - Connects Stock → Stock (negative causal link: nodes change in opposite directions, dashed line, marked "o")
-
-**DecisionTree Edge Types:**
-- `decision_to_choice` - Connects DecisionPoint → Choice (the question branches into options)
-- `choice_to_decision` - Connects Choice → DecisionPoint (the option leads to a further question)
-- `choice_to_outcome` - Connects Choice → Outcome (the option terminates at a result)
-
-**Timeline Edge Types:**
-- `sequence` - Connects TimePoint → TimePoint. Used by Graphviz for rank ordering, but **not drawn**: the Timeline overlay's horizontal baseline replaces the inter-TimePoint arrows visually.
-- `influence` - Connects Event → Event (cross-track or within-track dependency, dashed, constraint=false). Drawn normally.
-
-Edge types ensure that connections make semantic sense within the notation's domain.
 
 ### Groups
 
-Groups organize nodes hierarchically and can be nested to create subgroups. Groups help visually organize complex graphs.
+Groups organise nodes hierarchically, nest to any depth, and may carry
+attributes. Edges may cross group boundaries freely.
 
-**Syntax:**
-```
-group <id> "<label>" {
-    <attributes>;
-    <nodes>;
-    <edges>;
-    <nested_groups>;
-};
-```
-
-**Features:**
-- Groups can contain nodes, edges, and other groups
-- Groups can have attributes like `style`, `color`, `label`
-- Groups can be nested to unlimited depth
-- Edges can connect nodes across different groups
-
-**Example:**
 ```vgl
 group research "Research Phase" {
     style: filled;
@@ -423,297 +71,311 @@ group research "Research Phase" {
 };
 ```
 
+**Folded groups.** Prefix a group with `folded` to render it collapsed into a
+single box. Folding auto-redirects any edges that crossed the boundary to the
+collapsed box, and the editor can fold and unfold in place.
+
+```vgl
+folded group methodology "Methods" { … };
+```
+
+**Typed groups (boundaries).** A group can carry a type after its id, mirroring
+node typing — `group <id>: <GroupType> "<label>" { … }`. The type selects its
+appearance: a C4 `SystemBoundary` draws a dashed boundary when unfolded and its
+element card when folded. See [C4](#c4).
+
 ### Attributes
 
-Attributes customize the appearance and behavior of nodes, edges, and groups.
+Inline in brackets, `[a: 1; b: 2]`, or as bare statements inside a graph or
+group body.
 
-**Inline Syntax** (brackets):
+| Applies to | Attributes |
+|---|---|
+| Node | `color`, `fontColor`, `fontsize`, `shape`, `url`, `alignGroup` (nodes sharing a value are placed at the same rank) |
+| Edge | `style` (`solid`/`dashed`/`dotted`), `color`, `weight`, `label`, `url` |
+| Group | `style` (`filled`/`dashed`/`dotted`), `color`, `label`, `url` |
+| Graph | `rankdir` (`LR`/`TB`), `fontcolor`, `labeljust` (`l`/`r`/`c`) |
+
+**Colouring one node.** `color` sets a node's fill, overriding whatever its type
+says. `fontColor` sets the text on it; leave it out and the text is set to black
+or white for contrast, but only where it would otherwise stop being legible.
+
+```vgl
+node epBackend: Container "Equipment Pooling Backend" [color: "#b6e6bd"];
+node onApp: Container "ON App" [color: "#ffe08a"; fontColor: "#5c3d00"];
 ```
-[attribute1: value1; attribute2: value2]
+
+This is a per-node exception, not a second axis: the node keeps its type, so its
+shape, its stereotype line and every quality check still apply. Use it to mark
+what is new or changed in an otherwise ordinary diagram, and say what the colours
+mean somewhere the reader can see.
+
+Every colour in VGL — a node's, an edge's, a group's, a graph's `fontcolor` — is
+a hex value or one of the 147 **SVG colour keywords** (`red`, `cornflowerblue`,
+`whitesmoke`). Graphviz's larger X11 set is not accepted: `chartreuse3` is an
+error, not a silent no-op. A name you write is kept as you
+wrote it when the document is exported; it is never derived back from a colour,
+since `grey` and `gray` are the same value.
+
+### Links
+
+Any node, edge or group may carry a `url` pointing at whatever the element
+stands for — a ticket, a repository, a wiki page:
+
+```vgl
+node q1: Question "Which datastore?" [url: "https://issues.example.com/ARCH-14"];
 ```
 
-**Graph-Level Attributes** (inside graph body):
-```
-rankdir: LR;
-fontcolor: darkblue;
-```
+A linked element wears a small badge, clipped to its corner or sitting on the
+line for an edge. Clicking it follows the link in a new tab; hovering shows the
+destination first. The right-click menu carries **Add URL…** / **Change URL…**,
+**Open URL** and **Remove URL**.
 
-**Common Node Attributes:**
-- `color` - Node color (e.g., `red`, `blue`, `#FF0000`)
-- `fontsize` - Font size for node label (number)
-- `shape` - Node shape (varies by notation)
-- `alignGroup` - Alignment group identifier; nodes sharing the same value are placed at the same rank in layout (used by Timeline and available in all notations)
+Only `http`, `https` and `mailto` are accepted, and anything without a scheme is
+read as `https://`. Other schemes — `javascript:` above all, which would
+otherwise run as the page displaying the diagram — are refused. The check runs
+again at render time, so hand-written VGL cannot smuggle one into a published
+SVG either.
 
-**Common Edge Attributes:**
-- `style` - Line style (`solid`, `dashed`, `dotted`)
-- `weight` - Edge weight (number)
-- `label` - Edge label text
-
-**Common Group Attributes:**
-- `style` - Group style (`filled`, `dashed`, `dotted`)
-- `color` - Group background or border color
-- `label` - Group display name
-
-**Common Graph Attributes:**
-- `rankdir` - Layout direction (`LR` for left-to-right, `TB` for top-to-bottom)
-- `fontcolor` - Default font color
-- `labeljust` - Label justification (`l` for left, `r` for right, `c` for center)
+The badge is a real SVG link, so an exported SVG stays clickable wherever it is
+embedded (inline or via `<object>`; an SVG inside an `<img>` is inert by browser
+design).
 
 ### Comments
 
-VGL supports single-line comments using `//`:
+`//` to end of line, anywhere in the document. Comments are **not discarded**: a
+comment belongs to the declaration it stands above, or follows on the same line,
+and is written back on save or export.
+
+An element's leading comments are the whole block above it, back to the previous
+declaration — a blank line inside the block does not break it, so a section
+banner keeps its place:
 
 ```vgl
-// This is a comment
-node q1: Question "Main question";  // This is also a comment
+// ==========================================
+// TOP LEVEL - Undesirable Effects
+// ==========================================
+
+// Top row
+node ude1: UndesirableEffect "Suppliers display a less uniform front";
 ```
 
-Comments can appear anywhere in the document and are ignored by the parser.
+A comment with nothing to belong to *is* dropped: before a closing brace, inside
+a `vnotation` block, or after the final `}`.
 
----
+`comment` is reserved as an attribute name. `[comment: "text"]` is an equivalent
+way to attach one — useful when generating VGL programmatically — and it
+re-exports as a `// text` line.
 
-## Grammar
+### Type inference and minimal syntax
 
-The VGL grammar is defined as follows (simplified BNF notation):
-
-```
-file         ::= vnotation* (document | metagraph)
-
-document     ::= "vgraph" identifier ":" notation ("," extension)* label? "{" statement* "}"
-
-metagraph    ::= "metagraph" notation label? ";"?
-                 // Renders the notation itself as a diagram: each NodeType becomes a node,
-                 // each EdgeType becomes an edge, styled per the notation. No body, no id.
-                 // If label is omitted, it defaults to "<NotationName> Meta Model".
-
-notation     ::= identifier
-                 // Built-in: IBIS, BBS, ImpactMapping, ConceptMap, CRT, EC, FRT, PRT, TRT, ADTree, GoalTree, CLD, DecisionTree, Timeline
-                 // User-defined: any vnotation declared earlier in the same file
-
-vnotation    ::= "vnotation" identifier ("extends" identifier)? "{" vnotation_body* "}"
-
-vnotation_body ::= ("layout" ":" layout_dir ";"?)
-                 | ("node" "type" ":" identifier attributes? ";"?)
-                 | ("edge" "type" ":" identifier "from" ":" identifier "to" ":" identifier attributes? ";"?)
-
-layout_dir   ::= "topToBottom" | "leftToRight" | "bottomToTop" | "rightToLeft"
-
-extension    ::= identifier
-                 // Available extensions: Annotation
-
-statement    ::= group | node | edge | attribute
-
-group        ::= "group" identifier label? "{" statement* "}" ";"?
-
-node         ::= "node" identifier ":" identifier label? attributes? ";"?
-
-edge         ::= "edge" identifier "->" identifier (":" identifier)? label? attributes? ";"?
-
-attribute    ::= identifier ":" value ";"?
-
-attributes   ::= "[" (attribute (";" | ",")?)* "]"
-
-label        ::= quoted_string
-
-value        ::= quoted_string | number | identifier
-
-identifier   ::= [a-zA-Z0-9_\.\,\-]+
-
-number       ::= [-]?[0-9]+(\.[0-9]+)?
-
-quoted_string::= "\"" ([^\"\\] | "\\" .)* "\""
-
-comment      ::= "//" [^\n]*
-```
-
-**Key Grammar Rules:**
-
-1. **Document Structure**: A VGL file contains zero or more `vnotation` blocks followed by either one `vgraph` or one `metagraph` declaration
-2. **File ordering**: `vnotation` blocks must appear before any `vgraph` or `metagraph` that references them
-3. **Node IDs**: Must be unique throughout the document
-4. **Edge References**: Edges can only reference nodes that have been declared
-5. **Type Validation**: Node types and edge types must be valid for the chosen notation, or will be marked as "unknown"
-6. **Attributes**: Can appear inline with brackets `[]` or as separate statements within groups
-7. **Semicolons**: Optional after nodes, edges, groups, and standalone attributes
-8. **Quoted Strings**: Used for labels and string attribute values, support escape sequences (`\"`, `\\`, etc.)
-9. **Comments**: Single-line only, using `//` syntax
-
----
-
-## Examples
-
-### Example 1: Simple IBIS Graph
-
-A basic decision-making graph with questions and answers:
-
-```vgl
-vgraph simple_decision: IBIS "Simple Decision" {
-    node q1: Question "What framework should we use?";
-    node a1: Answer "React";
-    node a2: Answer "Vue";
-
-    edge q1 -> a1;
-    edge q1 -> a2;
-}
-```
-
-### Example 2: IBIS with Arguments
-
-A more complete decision graph with pro and con arguments:
-
-```vgl
-vgraph tech_decision: IBIS "Technology Decision" {
-    node q1: Question "Which database should we use?";
-    node a1: Answer "PostgreSQL";
-    node a2: Answer "MongoDB";
-
-    node pro1: Pro "ACID compliance";
-    node pro2: Pro "Flexible schema";
-    node con1: Con "More complex setup";
-    node con2: Con "Limited transaction support";
-
-    edge q1 -> a1: answered_by;
-    edge q1 -> a2: answered_by;
-    edge a1 -> pro1: supports;
-    edge a1 -> con1: objects_to;
-    edge a2 -> pro2: supports;
-    edge a2 -> con2: objects_to;
-}
-```
-
-### Example 3: Using Groups
-
-Organizing nodes into logical groups:
-
-```vgl
-vgraph project_planning: IBIS "Project Planning" {
-    node main_q: Question "How should we structure the project?" [fontsize: 20];
-
-    group architecture "Architecture Decisions" {
-        style: filled;
-        color: lightblue;
-
-        node q1: Question "Which architecture pattern?";
-        node a1: Answer "Microservices";
-        node a2: Answer "Monolithic";
-
-        edge q1 -> a1;
-        edge q1 -> a2;
-    };
-
-    group testing "Testing Strategy" {
-        style: filled;
-        color: lightgreen;
-
-        node q2: Question "What testing approach?";
-        node a3: Answer "TDD";
-        node a4: Answer "BDD";
-
-        edge q2 -> a3;
-        edge q2 -> a4;
-    };
-
-    edge main_q -> q1: answered_by "Consider architecture";
-    edge main_q -> q2: answered_by "Define testing";
-}
-```
-
-### Example 4: Nested Groups with Attributes
-
-Complex hierarchical structure with styling:
-
-```vgl
-vgraph research_project: IBIS "Research Project" {
-    rankdir: LR;
-
-    group phase1 "Discovery Phase" {
-        style: filled;
-        color: lightyellow;
-
-        node q1: Question "What should we research?" [fontsize: 16];
-        node a1: Answer "User behavior" [fontsize: 14];
-        node a2: Answer "Market trends" [fontsize: 14];
-
-        group methods "Research Methods" {
-            style: dashed;
-            color: orange;
-
-            node pro1: Pro "Interviews provide depth" [fontsize: 12];
-            node pro2: Pro "Surveys give breadth" [fontsize: 12];
-            node con1: Con "Time consuming" [fontsize: 12];
-        };
-
-        edge q1 -> a1;
-        edge q1 -> a2;
-        edge a1 -> pro1: supports;
-        edge a1 -> con1: objects_to;
-    };
-
-    group phase2 "Analysis Phase" {
-        style: filled;
-        color: lightblue;
-
-        node q2: Question "How to analyze data?" [fontsize: 16];
-        node a3: Answer "Quantitative analysis" [fontsize: 14];
-    };
-}
-```
-
-### Example 5: Minimal Syntax
-
-Using the most concise syntax available:
+Everything optional, omitted:
 
 ```vgl
 vgraph minimal: IBIS "Minimal Example" {
-    // Questions and answers
-    node q1: Question "Question 1";
-    node a1: Answer "Answer 1";
-    node a2: Answer "Answer 2";
+    node q1: Question "Which database should we use?";
+    node a1: Answer "PostgreSQL";
+    node a2: Answer "MongoDB";
+    node p1: Pro "ACID compliance";
+    node c1: Con "More complex setup";
 
-    // Arguments
-    node p1: Pro "Pro argument";
-    node c1: Con "Con argument";
-
-    // Edges with inferred types
-    edge q1 -> a1;
+    edge q1 -> a1;      // inferred: answered_by
     edge q1 -> a2;
-    edge a1 -> p1;
-    edge a1 -> c1;
+    edge a1 -> p1;      // inferred: supports
+    edge a1 -> c1;      // inferred: objects_to
 }
 ```
 
-### Example 6: Complex Graph with All Features
+## Notations
 
-A comprehensive example demonstrating all VGL features:
+Fifteen notations are built in. Each has its own section in the
+[notation reference](#notation-reference), giving its node types, its edge types
+and a complete worked example.
+
+| Notation | For |
+|---|---|
+| [**IBIS**](#ibis) | decision-making and argumentation |
+| [**BBS**](#bbs) | benefit breakdown and analysis |
+| [**ImpactMapping**](#impact-mapping) | strategic planning and goal alignment |
+| [**ConceptMap**](#concept-map) | domain vocabulary as falsifiable propositions |
+| [**CRT**](#current-reality-tree-crt) | root cause analysis (Theory of Constraints) |
+| [**FRT**](#future-reality-tree-frt) | solution validation (ToC) |
+| [**TRT**](#transition-tree-trt) | step-by-step implementation planning (ToC) |
+| [**PRT**](#prerequisite-tree-prt) | planning with necessary-condition thinking (ToC) |
+| [**EC**](#evaporating-cloud-ec) | conflict resolution (ToC necessary-condition logic) |
+| [**GoalTree**](#goal-tree) | strategic planning through Goal, CSFs and Necessary Conditions |
+| [**ADTree**](#attack-defense-tree-adtree) | security modelling of attack and defense interactions |
+| [**CLD**](#causal-loop-diagram-cld) | systems analysis: what reinforces or balances what over time |
+| [**DecisionTree**](#decision-tree) | decision logic as questions, choices and outcomes |
+| [**Timeline**](#timeline) | events across multiple tracks on a shared time axis |
+| [**C4**](#c4) | software architecture across four levels of zoom |
+
+You can also render a notation's own structure as a diagram with a `metagraph`
+declaration — see [Metagraph](#metagraph-visualising-a-notation).
+
+The rest of this section covers what applies across notations: how multiple
+arrows into one node are read, what the quality checks report, and how
+extensions add cross-cutting types.
+
+### Diagram logic and junctors
+
+Each notation has a **diagram logic** that decides how multiple arrows into one
+node are read, and therefore which junctor has to be an explicit node.
+
+| Diagram logic | Multiple unjoined arrows mean… | Explicit junctor | Implicit |
+|---|---|---|---|
+| `sufficientCause` | OR — any one arrow suffices | **AND** | OR |
+| `necessaryCondition` | AND — all arrows required | **OR** | AND |
+| `noLogic` | notation-defined | — | — |
+
+**Add only the *exception* junctor for your logic.** In sufficient-cause
+notations (CRT, FRT, TRT, ADTree) declare an `AndJunctor` only for "all of these
+together"; in necessary-condition ones (EC, PRT, GoalTree) declare an
+`OrJunctor` only for "any one of these alternatives". Adding the implicit
+junctor raises a `redundantJunctor` warning, since direct edges already say the
+same thing with less noise. The same applies to notations you declare with
+`vnotation`.
+
+### Quality checks
+
+Separately from notation breaks, four notations run **quality checks**: advisory
+analyses of the *shape* of a graph rather than its syntax. Each result carries a
+severity — **info**, **warning** or **error** — but none of them stops a document
+opening, and an error here means "this cannot be read as the notation intends",
+not "this failed to parse". Most are advice you can knowingly ignore; the
+thresholds are fixed, so they are worth knowing before you argue with one.
+
+**IBIS**
+- *warning* — a `Question` with no `Answer`.
+- *warning* — any node with two or more incoming edges. This is a tree-shape
+  check across every node type, so a Question raised by two separate `Pro` nodes
+  trips it even though the map is legitimate.
+
+**ConceptMap** — the largest set, ten diagnostics in all.
+- *info* — the concept and relation counts and their ratio, reported on every
+  map. This one is a statistic, not a complaint.
+- *warning* — fewer than 5 concepts ("consider adding more"), or more than 25
+  ("consider splitting into sub-maps").
+- *warning* — a concept label of 4 words or more; 1–3 is the preferred range.
+- *warning* — a vague relation verb. This matches a fixed list of eleven exact
+  phrases — "relates to", "is related to", "is connected to", "involves", "is
+  involved in", "is associated with", "is linked to", "pertains to", "concerns",
+  "has something to do with", "is about" — case-insensitively, and nothing else.
+  It is a blocklist, not a judgement of your wording.
+- *warning* — a concept connected to no relation.
+- *warning* — more than one disconnected cluster (single stray nodes are left to
+  the check above).
+- *warning* — two concepts linked in both directions; keep the more meaningful one.
+- *warning* — a relation with several concepts on both sides, which asserts every
+  combination: *n* inbound × *m* outbound propositions, all of which must hold.
+- *error* — the same, but where a concept appears on both sides, making a
+  proposition circular.
+- *error* — a relation missing a concept on either side, so it forms no
+  proposition at all.
+
+**GoalTree**
+- *error* — no `Goal`, or more than one. Exactly one is required.
+- *info* — a CSF count outside the recommended 3–5. A partial draft with none yet
+  reports this too.
+
+**C4**
+- *warning* — an external element inside the Enterprise boundary.
+- *warning* — a `Container` or `Database` not inside any System boundary.
+  External containers are exempt: they legitimately live outside one.
+- *warning* — an element with no relationships at all. This one applies to every
+  node type, not just elements that look like they should collaborate.
+
+Two more quality warnings come from elsewhere: a
+[redundant junctor](#diagram-logic-and-junctors), and an
+[unknown node or edge type](#grammar).
+
+### Extensions
+
+Extensions add cross-cutting node types to any notation, listed after it and
+comma-separated:
+
+```vgl
+vgraph myGraph: ConceptMap, Annotation "My Diagram" { ... }
+```
+
+**Annotation** is the available extension: it adds an `Annotation` node type
+that can be connected *from* any node in the notation, for notes and
+clarifications. Edge types to `Annotation` are inferred, so annotation edges
+need no explicit type.
+
+```vgl
+vgraph productMap: ConceptMap, Annotation "Product Strategy" {
+    node c1: Concept "Customer Need"
+    node r1: Relation "drives"
+    node c2: Concept "Feature"
+    node a1: Annotation "Validated in user research"
+    edge c1 -> r1
+    edge r1 -> c2
+    edge c1 -> a1
+}
+```
+
+## Notation reference
+
+One section per built-in notation: its node types, its edge types, and a
+complete worked example. Edge types constrain which connections make sense in
+the notation's domain, and most are inferred from the node types, so you rarely
+name one explicitly.
+
+The editor's **Examples…** picker loads any of seventeen graphs straight into the
+text area, and most of the examples below are the same graph. Where the guide's
+version is the simpler one, the note under the example says so — the editor
+carries a fuller variant worth opening. Four of the editor's examples have no
+counterpart here at all: two further IBIS graphs (*Complex System Architecture
+Decision*, *Software Project Planning*), one showing folded groups (*System
+Architecture with Folded Modules*), and the BBS graph reproduced below. The two
+syntax examples in [Concepts](#type-inference-and-minimal-syntax) are
+guide-only.
+
+### IBIS
+
+Decision-making and argumentation.
+
+**Node types**
+- `Question` — a question or issue to be resolved (default: blue)
+- `Answer` — a proposed answer or solution (default: pink)
+- `Pro` — an argument supporting an answer (default: green)
+- `Con` — an argument opposing an answer (default: red)
+
+**Edge types**
+- `answered_by` — Question → Answer
+- `supports` — Answer → Pro
+- `objects_to` — Answer → Con
+- `pro_questions_question` — Pro → Question
+- `con_questions_question` — Con → Question
+
+The example below also serves as the tour of groups, attributes and cross-group
+edges; for the smallest possible IBIS document see
+[Type inference and minimal syntax](#type-inference-and-minimal-syntax).
 
 ```vgl
 vgraph comprehensive: IBIS "Comprehensive Example" {
-    // Graph-level properties
     rankdir: LR;
     fontcolor: darkblue;
     labeljust: l;
 
-    // Root-level nodes
     node root: Question "Main Question" [fontsize: 20; color: navy];
     node ans1: Answer "Primary Solution" [fontsize: 16];
-    node ans2: Answer "Alternative Solution" [fontsize: 16];
 
-    // Detailed analysis group
     group analysis "Detailed Analysis" {
         style: filled;
         color: lightgray;
 
         node q_perf: Question "What about performance?";
         node a_fast: Answer "Optimize critical paths" [color: green];
-        node pro_perf: Pro "40% faster response time" [fontsize: 12];
+        node pro_perf: Pro "40% faster response time";
 
-        // Nested considerations
         group tradeoffs "Trade-offs" {
             style: dashed;
             color: yellow;
 
-            node con_complex: Con "Increased code complexity" [fontsize: 10];
-            node q_maint: Question "Can we maintain this?" [fontsize: 11];
+            node con_complex: Con "Increased code complexity";
+            node q_maint: Question "Can we maintain this?";
         };
 
         edge q_perf -> a_fast: answered_by;
@@ -722,52 +384,78 @@ vgraph comprehensive: IBIS "Comprehensive Example" {
         edge con_complex -> q_maint: con_questions_question "Raises concern";
     };
 
-    // Implementation group
-    group implementation "Implementation Plan" {
-        style: filled;
-        color: lightblue;
-
-        node q_when: Question "When to implement?" [fontsize: 14];
-        node a_phase: Answer "Phased rollout" [fontsize: 13];
-        node pro_safe: Pro "Reduces risk" [fontsize: 11];
-
-        edge q_when -> a_phase;
-        edge a_phase -> pro_safe;
-    };
-
     // Cross-group connections
     edge root -> ans1: answered_by "Main path";
-    edge root -> ans2: answered_by "Backup option";
     edge ans1 -> q_perf: answered_by [style: dashed; weight: 5];
-    edge ans2 -> q_when: answered_by;
 }
 ```
 
-### Example 7: Using Explicit Edge Types
+### BBS
 
-Demonstrating all IBIS edge types:
+Benefit breakdown and analysis.
+
+**Node types**
+- `InvestmentObjective` — high-level business objective
+- `Benefit` — expected benefit from the investment
+- `BusinessChange` — organisational or process change required
+- `Enabler` — technology or capability enabler
+
+**Edge types**
+- `requires_benefit` — Benefit → InvestmentObjective
+- `requires_business_change` — BusinessChange → Benefit
+- `requires_enabler` — Enabler → BusinessChange
+- `change_requires_change` — BusinessChange → BusinessChange
+- `enabler_requires_enabler` — Enabler → Enabler
+
+A benefit breakdown graph showing what an investment objective requires, read
+bottom-up: enablers make business changes possible, which deliver benefits,
+which satisfy the objective.
 
 ```vgl
-vgraph edge_types: IBIS "Edge Type Examples" {
-    // Setup nodes
-    node q1: Question "Should we proceed?";
-    node a1: Answer "Yes, with caution";
-    node pro1: Pro "Market opportunity";
-    node con1: Con "Technical debt";
-    node q2: Question "How to mitigate risks?";
+vgraph customerSatisfaction: BBS "Customer Satisfaction Initiative" {
+    node obj1: InvestmentObjective "Increase Customer Satisfaction by 25%";
+    node ben1: Benefit "Faster Response Times";
+    node ben2: Benefit "Improved Service Quality";
+    node ben3: Benefit "24/7 Support Availability";
+    node chg1: BusinessChange "Automated Ticket Routing";
+    node chg2: BusinessChange "Self-Service Portal";
+    node chg3: BusinessChange "Staff Training Program";
+    node chg4: BusinessChange "24/7 Shift Coverage";
+    node enb1: Enabler "AI-Powered Ticketing System";
+    node enb2: Enabler "Customer Portal Platform";
+    node enb3: Enabler "Training Materials & LMS";
+    node enb4: Enabler "Staffing & Scheduling System";
 
-    // Demonstrate each edge type
-    edge q1 -> a1: answered_by;
-    edge a1 -> pro1: supports;
-    edge a1 -> con1: objects_to;
-    edge pro1 -> q2: pro_questions_question;
-    edge con1 -> q2: con_questions_question;
+    edge ben1 -> obj1: requires_benefit;
+    edge ben2 -> obj1: requires_benefit;
+    edge ben3 -> obj1: requires_benefit;
+    edge chg1 -> ben1: requires_business_change;
+    edge chg2 -> ben2: requires_business_change;
+    edge chg3 -> ben2: requires_business_change;
+    edge chg4 -> ben3: requires_business_change;
+    edge enb1 -> chg1: requires_enabler;
+    edge enb2 -> chg2: requires_enabler;
+    edge enb3 -> chg3: requires_enabler;
+    edge enb4 -> chg4: requires_enabler;
+    edge chg1 -> chg2: change_requires_change;
+    edge enb1 -> enb2: enabler_requires_enabler;
 }
 ```
 
-### Example 8: Impact Mapping
+### Impact Mapping
 
-A strategic planning graph showing goals, actors, impacts, and deliverables:
+A strategic planning graph showing goals, actors, impacts, and deliverables.
+
+**Node types**
+- `Goal` — strategic goal or objective (default: dark blue)
+- `Actor` — person or group who can produce impact (default: blue)
+- `Impact` — behavioural change or outcome (default: cyan)
+- `Deliverable` — product feature or capability (default: green)
+
+**Edge types**
+- `goal_to_actor` — Goal → Actor
+- `actor_to_impact` — Actor → Impact
+- `impact_to_deliverable` — Impact → Deliverable
 
 ```vgl
 vgraph mobileApp: ImpactMapping "Mobile App Launch" {
@@ -794,46 +482,27 @@ vgraph mobileApp: ImpactMapping "Mobile App Launch" {
 }
 ```
 
-### Example 9: Impact Mapping with Inferred Types
+### Concept Map
 
-Using type inference for cleaner syntax:
+Domain vocabulary as falsifiable propositions. The title is a **Guiding
+Question** that decides what belongs on the map, and every
+`Concept → Relation → Concept` chain must read as a falsifiable sentence.
 
-```vgl
-vgraph product_growth: ImpactMapping "Product Growth Strategy" {
-    // Strategic goal
-    node goal: Goal "Double User Engagement";
+**Node types**
+- `Concept` — a concept or term
+- `EmphasizedConcept` — an important concept to highlight
+- `Relation` — a linking verb or phrase connecting concepts, forming
+  propositions of the shape `Concept → Relation → Concept`
 
-    // Key actors
-    node power_users: Actor "Power Users";
-    node casual_users: Actor "Casual Users";
-    node new_users: Actor "New Users";
+**Edge types**
+- `concept_to_relation` — Concept → Relation (tail marker only)
+- `relation_to_concept` — Relation → Concept (arrow head only)
+- `emphasized_concept_to_relation` — EmphasizedConcept → Relation
+- `relation_to_emphasized_concept` — Relation → EmphasizedConcept
 
-    // Desired impacts
-    node i1: Impact "Share content more frequently";
-    node i2: Impact "Complete onboarding successfully";
-    node i3: Impact "Return within 7 days";
-
-    // Required deliverables
-    node d1: Deliverable "Social sharing features";
-    node d2: Deliverable "Interactive tutorial";
-    node d3: Deliverable "Email reminder system";
-
-    // Connections with inferred types
-    edge goal -> power_users;
-    edge goal -> casual_users;
-    edge goal -> new_users;
-    edge power_users -> i1;
-    edge new_users -> i2;
-    edge casual_users -> i3;
-    edge i1 -> d1;
-    edge i2 -> d2;
-    edge i3 -> d3;
-}
-```
-
-### Example 10: Concept Map
-
-Defining domain vocabulary through falsifiable propositions. The title is a **Guiding Question** that determines what belongs on the map. Every Concept → Relation → Concept chain ALWAYS forms a readable, falsifiable sentence. Relations can be reused when multiple concepts share the same relationship.
+`EmphasizedConcept` takes its own pair, so an emphasized concept in a chain
+needs those rather than the plain ones. Both are inferred, so this only matters
+when naming a type explicitly.
 
 ```vgl
 vgraph learningCM: ConceptMap "What is Learning?" {
@@ -841,12 +510,10 @@ vgraph learningCM: ConceptMap "What is Learning?" {
     node subject: Concept "Subject";
     node practice: EmphasizedConcept "Practice";
     node understanding: Concept "Understanding";
-    node resources: Concept "Resources";
 
     node learns: Relation "learns";
     node requires: Relation "requires";
     node leads_to: Relation "leads to";
-    node uses: Relation "uses";
 
     edge student -> learns;
     edge learns -> subject;
@@ -854,16 +521,55 @@ vgraph learningCM: ConceptMap "What is Learning?" {
     edge requires -> practice;
     edge practice -> leads_to;
     edge leads_to -> understanding;
-    edge subject -> uses;
-    edge uses -> resources;
 }
 ```
 
-**Note**: In concept maps, relationships are represented as nodes (Relation type) rather than edge labels. This ALWAYS creates readable propositions like "Student learns Subject" and "Subject requires Practice". Every concept must be connected to at least one relation — never leave a concept unconnected. When multiple concepts share the same relationship (e.g. "Dog is a Mammal" and "Cat is a Mammal"), reuse a single Relation node. **CRITICAL**: When a relation has BOTH multiple inbound AND multiple outbound edges, ALL inbound concepts must make sense as propositions with ALL outbound concepts (n × m propositions, all must be valid). If any combination is invalid (circular, meaningless), use specific relations or restructure the graph.
+Relationships are nodes rather than edge labels, which is what makes the
+propositions readable: "Student learns Subject", "Subject requires Practice".
+Never leave a concept unconnected. Reuse a single `Relation` node when several
+concepts share it ("Dog is a Mammal", "Cat is a Mammal") — but note that a
+relation with **both** multiple inbound and multiple outbound edges asserts every
+combination: all n × m propositions must be valid. If any is circular or
+meaningless, split the relation.
 
-### Example 11: Current Reality Tree (CRT)
+The editor's *ConceptMap — How Learning Works* is a variant of this map that
+names every edge type explicitly, including the `EmphasizedConcept` pair.
 
-A root cause analysis graph showing how causes lead to undesirable effects:
+### Current Reality Tree (CRT)
+
+Root cause analysis (Theory of Constraints), showing how causes lead to
+undesirable effects. Sufficient-cause logic, so multiple unjoined causes feeding
+one effect are implicitly OR; only AND is explicit.
+
+**Node types**
+- `UndesirableEffect` — an unwanted outcome requiring investigation (default: red)
+- `IntermediateEffect` — a neutral outcome in the causal chain (default: blue)
+- `DesirableEffect` — a wanted outcome caused by other conditions (default: green)
+- `Given` — an unchangeable constant, such as a law or physics (default: dark purple)
+- `Changeable` — a modifiable condition that can be addressed (default: light purple)
+- `AndJunctor` — multiple conditions required together to produce the downstream
+  effect (icon: AND circle)
+
+**Edge types.** CRT, FRT and TRT share one family, flowing bottom-to-top (causes
+and actions at the bottom, effects at the top). Names are mechanical,
+`<source>_causes_<target>`:
+
+*Between effects:* `undesirable_causes_undesirable`,
+`undesirable_causes_intermediate`, `undesirable_causes_desirable`,
+`intermediate_causes_undesirable`, `intermediate_causes_intermediate`,
+`intermediate_causes_desirable`, `desirable_causes_undesirable`,
+`desirable_causes_intermediate`, `desirable_causes_desirable`
+
+*From Given and Changeable:* `given_causes_undesirable`,
+`given_causes_intermediate`, `given_causes_desirable`,
+`changeable_causes_undesirable`, `changeable_causes_intermediate`,
+`changeable_causes_desirable`
+
+*Junctors:* `*_to_and_junctor` connects any type to an AndJunctor;
+`and_junctor_causes_*` connects it onward to an effect.
+
+CRT typically starts from effects and traces down to causes; FRT and TRT
+typically start from `changeable_causes_*` and build upward.
 
 ```vgl
 vgraph salesDecline: CRT "Sales Decline Analysis" {
@@ -920,9 +626,23 @@ vgraph salesDecline: CRT "Sales Decline Analysis" {
 
 **Note**: CRT graphs flow bottom-to-top, with root causes (Given and Changeable) at the bottom and Undesirable Effects at the top. CRT uses sufficient-cause logic: multiple unjoined arrows into the same effect are read as OR (any one is sufficient). The AndJunctor is the explicit exception, indicating multiple conditions that must be true together. Labels for junctors are typically empty as the icon conveys the meaning.
 
-### Example 12: Future Reality Tree (FRT)
+### Future Reality Tree (FRT)
 
-A solution validation graph showing how proposed solutions lead to desired outcomes:
+Solution validation (ToC), showing how proposed solutions lead to desired
+outcomes. The same node types as CRT, both being sufficient-cause Theory of
+Constraints tools. The difference is use: FRT starts from solutions
+(`Changeable` injections) and builds upward to desirable effects.
+
+**Node types**
+- `Changeable` — proposed solutions or injections to implement (default: light purple)
+- `Given` — unchangeable facts that still apply (default: dark purple)
+- `IntermediateEffect` — expected intermediate outcomes (default: blue)
+- `DesirableEffect` — goals we want to achieve (default: green)
+- `UndesirableEffect` — potential negative side effects to monitor (default: red)
+- `AndJunctor` — as in CRT
+
+**Edge types** — the CRT family, shared by CRT, FRT and TRT; see
+[Current Reality Tree](#current-reality-tree-crt).
 
 ```vgl
 vgraph salesSolution: FRT "Sales Improvement Plan" {
@@ -984,116 +704,25 @@ vgraph salesSolution: FRT "Sales Improvement Plan" {
 
 **Note**: FRT graphs also flow bottom-to-top like CRT, but with a different focus. While CRT starts with problems (Undesirable Effects) and traces back to root causes, FRT starts with proposed solutions (Changeable/injections) and traces forward to show how they achieve desired outcomes. This makes FRT ideal for validating that proposed changes will actually deliver the expected benefits.
 
-### Example 13: Evaporating Cloud (EC)
+### Transition Tree (TRT)
 
-A conflict resolution graph showing how assumptions behind a conflict can be surfaced and resolved:
+Step-by-step implementation planning (ToC). Shares CRT/FRT's node types but
+answers "how do we *cause* the change?", giving the step-by-step action
+sequence.
 
-```vgl
-vgraph projectConflict: EC "Project Delivery vs Quality" {
-    // The shared objective both sides agree on
-    node obj: CommonObjective "Deliver a successful software product";
+**Node types**
+- `UndesirableEffect` — current-state problems being addressed (default: red)
+- `IntermediateEffect` — stepping-stone outcomes from actions (default: blue)
+- `DesirableEffect` — goal outcomes (default: green)
+- `Given` — unchangeable facts and constraints (default: dark purple)
+- `Changeable` — actions we can take to cause change (default: light purple)
+- `AndJunctor` — as in CRT
 
-    // The two competing needs
-    node needA: Need "Meet the market window deadline";
-    node needB: Need "Ensure product quality and reliability";
+**Edge types** — the CRT family, shared by CRT, FRT and TRT; see
+[Current Reality Tree](#current-reality-tree-crt).
 
-    // The specific wants derived from each need
-    node wantA: Want "Release with current feature set now";
-    node wantB: Want "Extend timeline for thorough testing";
-
-    // The conflict between the two wants
-    node conf: Conflict;
-
-    // Assumptions underlying the conflict
-    node assA: Assumption "Testing always requires calendar time";
-    node assB: Assumption "Features cannot be descoped";
-    node assC: Assumption "Quality requires full manual testing";
-
-    // Solution that breaks the conflict
-    node sol: Solution "Implement automated testing pipeline";
-
-    // Objective requires both needs (necessary condition)
-    edge obj -> needA: objective_to_need;
-    edge obj -> needB: objective_to_need;
-
-    // Needs lead to wants
-    edge needA -> wantA: need_to_want;
-    edge needB -> wantB: need_to_want;
-
-    // Wants create the conflict
-    edge wantA -> conf: want_to_conflict;
-    edge wantB -> conf: want_to_conflict;
-
-    // Assumptions exposed
-    edge needA -> assA: need_to_assumption;
-    edge needB -> assC: need_to_assumption;
-    edge conf -> assB: conflict_to_assumption;
-
-    // Solution resolves by breaking assumption
-    edge needB -> sol: need_to_solution;
-}
-```
-
-**Note**: EC graphs flow left-to-right, with the Common Objective on the far left and the Conflict on the far right. The two branches represent competing Needs and Wants that create the conflict. Assumptions are surfaced on each edge to identify which assumption can be challenged. The Solution breaks the conflict by invalidating one or more assumptions. EC uses necessary condition logic — "In order to [Objective] we must provide [Need]". The Conflict node has no text label; it is rendered as a lightning bolt icon.
-
-### Example 14: Prerequisite Tree (PRT)
-
-A planning graph showing obstacles blocking objectives and intermediate objectives to overcome them:
-
-```vgl
-vgraph projectLaunch: PRT "New Product Launch Planning" {
-    // The main objective we want to achieve
-    node obj1: Objective "Successfully launch product by Q3";
-
-    // Obstacles blocking the main objective
-    node obs1: Obstacle "Development team lacks required skills";
-    node obs2: Obstacle "Marketing budget not approved";
-    node obs3: Obstacle "No distribution channel established";
-
-    // Intermediate objectives to overcome obstacles
-    node io1: IntermediateObjective "Train team on new technology";
-    node io2: IntermediateObjective "Hire experienced developers";
-    node io3: IntermediateObjective "Present ROI analysis to leadership";
-    node io4: IntermediateObjective "Partner with existing retailer";
-    node io5: IntermediateObjective "Build direct-to-consumer channel";
-
-    // OR junctor for alternative paths
-    node or1: OR;
-    node or2: OR;
-
-    // Further obstacles blocking intermediate objectives
-    node obs4: Obstacle "Training budget limited";
-    node obs5: Obstacle "Talent pool is competitive";
-
-    // Obstacles block the main objective
-    edge obs1 -> obj1: obstacle_blocks_objective;
-    edge obs2 -> obj1: obstacle_blocks_objective;
-    edge obs3 -> obj1: obstacle_blocks_objective;
-
-    // Alternative ways to overcome skill obstacle (via OR)
-    edge io1 -> or1: intermediate_objective_to_or;
-    edge io2 -> or1: intermediate_objective_to_or;
-    edge or1 -> obs1: or_to_obstacle;
-
-    // ROI analysis overcomes budget obstacle
-    edge io3 -> obs2: intermediate_objective_overcomes_obstacle;
-
-    // Alternative distribution solutions
-    edge io4 -> or2: intermediate_objective_to_or;
-    edge io5 -> or2: intermediate_objective_to_or;
-    edge or2 -> obs3: or_to_obstacle;
-
-    // Recursive obstacles blocking intermediate objectives
-    edge obs4 -> io1: obstacle_blocks_intermediate_objective;
-    edge obs5 -> io2: obstacle_blocks_intermediate_objective;
-}
-```
-
-**Note**: PRT graphs flow bottom-to-top like other TOC tools. The main Objective sits at the top, with Obstacles directly below showing what blocks it. IntermediateObjectives below the obstacles show what needs to be achieved to overcome them. The OR junctor indicates alternative paths - only one of the connected intermediate objectives needs to be achieved. PRT embodies "necessary condition thinking" - working backward from the goal to identify all prerequisites.
-
-### Example 15: Transition Tree (TRT)
-
-A step-by-step implementation planning graph showing how actions lead to desired outcomes:
+A step-by-step implementation planning graph showing how actions lead to desired
+outcomes:
 
 ```vgl
 vgraph agileTransition: TRT "Agile Transformation Implementation" {
@@ -1156,9 +785,245 @@ vgraph agileTransition: TRT "Agile Transformation Implementation" {
 
 **Note**: TRT graphs flow bottom-to-top like other TOC tools. The focus is on detailed implementation planning - answering "HOW TO CAUSE the change?" Unlike FRT which validates that solutions will work, TRT provides the step-by-step action sequence needed to implement those solutions. Changeable nodes represent the specific actions to take, and the graph shows how those actions combine through intermediate effects to achieve desirable outcomes. The AndJunctor indicates multiple conditions must occur together for an effect.
 
-### Example 16: Attack-Defense Tree (ADTree)
+### Prerequisite Tree (PRT)
 
-A security modelling graph showing how defenses protect a system and how attacks can circumvent them. Based on the data confidentiality scenario from Kordy et al. (2014):
+Planning with necessary-condition thinking, starting from the objective and
+working back to obstacles.
+
+**Node types**
+- `Objective` — the desired goal (default: green)
+- `Obstacle` — a barrier preventing achievement (default: red)
+- `IntermediateObjective` — a milestone overcoming a specific obstacle (default: blue)
+- `OR` — allows optional conditions instead of requiring all predecessors (icon: OR circle)
+
+**Edge types** — flowing bottom-to-top, intermediate objectives at the bottom.
+- `obstacle_blocks_objective` — Obstacle → Objective
+- `obstacle_blocks_intermediate_objective` — Obstacle → IntermediateObjective
+- `intermediate_objective_overcomes_obstacle` — IntermediateObjective → Obstacle
+- `intermediate_objective_to_objective` — the direct path
+- To the OR junctor: `obstacle_to_or`, `intermediate_objective_to_or`
+- From it: `or_to_objective`, `or_to_intermediate_objective`, `or_to_obstacle`
+
+A planning graph showing obstacles blocking objectives and intermediate
+objectives to overcome them:
+
+```vgl
+vgraph projectLaunch: PRT "New Product Launch Planning" {
+    // The main objective we want to achieve
+    node obj1: Objective "Successfully launch product by Q3";
+
+    // Obstacles blocking the main objective
+    node obs1: Obstacle "Development team lacks required skills";
+    node obs2: Obstacle "Marketing budget not approved";
+    node obs3: Obstacle "No distribution channel established";
+
+    // Intermediate objectives to overcome obstacles
+    node io1: IntermediateObjective "Train team on new technology";
+    node io2: IntermediateObjective "Hire experienced developers";
+    node io3: IntermediateObjective "Present ROI analysis to leadership";
+    node io4: IntermediateObjective "Partner with existing retailer";
+    node io5: IntermediateObjective "Build direct-to-consumer channel";
+
+    // OR junctor for alternative paths
+    node or1: OR;
+    node or2: OR;
+
+    // Further obstacles blocking intermediate objectives
+    node obs4: Obstacle "Training budget limited";
+    node obs5: Obstacle "Talent pool is competitive";
+
+    // Obstacles block the main objective
+    edge obs1 -> obj1: obstacle_blocks_objective;
+    edge obs2 -> obj1: obstacle_blocks_objective;
+    edge obs3 -> obj1: obstacle_blocks_objective;
+
+    // Alternative ways to overcome skill obstacle (via OR)
+    edge io1 -> or1: intermediate_objective_to_or;
+    edge io2 -> or1: intermediate_objective_to_or;
+    edge or1 -> obs1: or_to_obstacle;
+
+    // ROI analysis overcomes budget obstacle
+    edge io3 -> obs2: intermediate_objective_overcomes_obstacle;
+
+    // Alternative distribution solutions
+    edge io4 -> or2: intermediate_objective_to_or;
+    edge io5 -> or2: intermediate_objective_to_or;
+    edge or2 -> obs3: or_to_obstacle;
+
+    // Recursive obstacles blocking intermediate objectives
+    edge obs4 -> io1: obstacle_blocks_intermediate_objective;
+    edge obs5 -> io2: obstacle_blocks_intermediate_objective;
+}
+```
+
+**Note**: PRT graphs flow bottom-to-top like other TOC tools. The main Objective sits at the top, with Obstacles directly below showing what blocks it. IntermediateObjectives below the obstacles show what needs to be achieved to overcome them. The OR junctor indicates alternative paths - only one of the connected intermediate objectives needs to be achieved. PRT embodies "necessary condition thinking" - working backward from the goal to identify all prerequisites.
+
+### Evaporating Cloud (EC)
+
+A conflict-resolution tool using necessary-condition logic, flowing
+left-to-right from Common Objective to Conflict. Multiple necessary inputs are
+implicitly AND; OR is explicit.
+
+**Node types**
+- `CommonObjective` — the shared objective valid for both sides (default: green)
+- `Need` — a perceived need that must be met (default: blue)
+- `Want` — a perceived want derived from a need (default: orange)
+- `Conflict` — the conflict as mutually exclusive wants (lightning-bolt icon, no text)
+- `OrJunctor` — alternative necessary inputs, any one of which suffices (icon: OR circle)
+- `Assumption` — an underlying assumption behind the conflict (default: purple)
+- `Solution` — the solution that breaks the conflict (default: teal)
+
+**Edge types** — necessary-condition relationships flowing left-to-right from the
+shared objective through needs and wants to the conflict.
+- From the objective: `objective_to_need`, `objective_to_or`
+- From a need: `need_to_want`, `need_to_or`, `need_to_assumption`, `need_to_solution`
+- From a want: `want_to_conflict`, `want_to_or`, `want_to_assumption`
+- From the conflict: `conflict_to_or`, `conflict_to_assumption`
+- From an OrJunctor: `or_to_want`, `or_to_conflict`, `or_to_or`
+
+A conflict resolution graph showing how assumptions behind a conflict can be
+surfaced and resolved:
+
+```vgl
+vgraph projectConflict: EC "Project Delivery vs Quality" {
+    // The shared objective both sides agree on
+    node obj: CommonObjective "Deliver a successful software product";
+
+    // The two competing needs
+    node needA: Need "Meet the market window deadline";
+    node needB: Need "Ensure product quality and reliability";
+
+    // The specific wants derived from each need
+    node wantA: Want "Release with current feature set now";
+    node wantB: Want "Extend timeline for thorough testing";
+
+    // The conflict between the two wants
+    node conf: Conflict;
+
+    // Assumptions underlying the conflict
+    node assA: Assumption "Testing always requires calendar time";
+    node assB: Assumption "Features cannot be descoped";
+    node assC: Assumption "Quality requires full manual testing";
+
+    // Solution that breaks the conflict
+    node sol: Solution "Implement automated testing pipeline";
+
+    // Objective requires both needs (necessary condition)
+    edge obj -> needA: objective_to_need;
+    edge obj -> needB: objective_to_need;
+
+    // Needs lead to wants
+    edge needA -> wantA: need_to_want;
+    edge needB -> wantB: need_to_want;
+
+    // Wants create the conflict
+    edge wantA -> conf: want_to_conflict;
+    edge wantB -> conf: want_to_conflict;
+
+    // Assumptions exposed
+    edge needA -> assA: need_to_assumption;
+    edge needB -> assC: need_to_assumption;
+    edge conf -> assB: conflict_to_assumption;
+
+    // Solution resolves by breaking assumption
+    edge needB -> sol: need_to_solution;
+}
+```
+
+**Note**: EC graphs flow left-to-right, with the Common Objective on the far left and the Conflict on the far right. The two branches represent competing Needs and Wants that create the conflict. Assumptions are surfaced on each edge to identify which assumption can be challenged. The Solution breaks the conflict by invalidating one or more assumptions. EC uses necessary condition logic — "In order to [Objective] we must provide [Need]". The Conflict node has no text label; it is rendered as a lightning bolt icon.
+
+### Goal Tree
+
+Strategic planning with Theory of Constraints necessity logic (H. William
+Dettmer's Logical Thinking Process). The Goal Tree defines what an organization
+must achieve through a hierarchy of a single Goal, Critical Success Factors
+(CSFs), and Necessary Conditions (NCs).
+
+**Node types**
+- `Goal` — the single top-level objective the system exists for (default: cyan/teal)
+- `CriticalSuccessFactor` — high-level terminal outcomes, 3–5 maximum, without
+  which the Goal cannot be achieved (default: light blue)
+- `NecessaryCondition` — indispensable prerequisite tasks supporting CSFs, which
+  can cascade into more specific sub-conditions (default: amber/yellow)
+
+**Edge types** — flowing top-to-bottom, each edge reading "in order to achieve
+[upper], we must have [lower]".
+- `csf_to_goal` — CriticalSuccessFactor → Goal
+- `nc_to_csf` — NecessaryCondition → CriticalSuccessFactor
+- `nc_to_nc` — a sub-condition supporting its parent
+
+```vgl
+vgraph companyStrategy: GoalTree "Increase Profitability" {
+    // The single system goal
+    node goal: Goal "Make more money, now and in the future";
+
+    // Critical Success Factors (3-5 high-level terminal outcomes)
+    node csf1: CriticalSuccessFactor "Maximize Throughput";
+    node csf2: CriticalSuccessFactor "Control Operating Expense";
+    node csf3: CriticalSuccessFactor "Minimize Inventory and Investment";
+
+    // Necessary Conditions supporting CSF1
+    node nc1: NecessaryCondition "Maximize sales volume";
+    node nc2: NecessaryCondition "Minimize variable costs";
+    node nc3: NecessaryCondition "Highly appealing products";
+
+    // Necessary Conditions supporting CSF2
+    node nc4: NecessaryCondition "Minimize scrap and rework";
+    node nc5: NecessaryCondition "Optimize overhead";
+
+    // Necessary Conditions supporting CSF3
+    node nc6: NecessaryCondition "Optimize outgoing supply chain";
+    node nc7: NecessaryCondition "Optimize incoming supply chain";
+
+    // Sub-NCs becoming more specific
+    node nc8: NecessaryCondition "Effective market research";
+    node nc9: NecessaryCondition "High-quality products";
+
+    // CSFs support the Goal (necessity logic: "In order to achieve Goal, we must achieve CSFs")
+    edge csf1 -> goal: csf_to_goal;
+    edge csf2 -> goal: csf_to_goal;
+    edge csf3 -> goal: csf_to_goal;
+
+    // NCs support CSFs
+    edge nc1 -> csf1: nc_to_csf;
+    edge nc2 -> csf1: nc_to_csf;
+    edge nc3 -> csf1: nc_to_csf;
+    edge nc4 -> csf2: nc_to_csf;
+    edge nc5 -> csf2: nc_to_csf;
+    edge nc6 -> csf3: nc_to_csf;
+    edge nc7 -> csf3: nc_to_csf;
+
+    // Sub-NCs support higher NCs
+    edge nc8 -> nc1: nc_to_nc;
+    edge nc9 -> nc3: nc_to_nc;
+}
+```
+
+**Note**: GoalTree graphs flow top-to-bottom with the single Goal at the top, Critical Success Factors directly below it, and Necessary Conditions expanding downward. NCs become progressively more detailed, specific, and functional at lower levels. The vertical placement implies nothing about importance — due to necessity logic, the lowest NC is equally important as a CSF because if you fail to accomplish it, nothing above it will happen. There are usually no more than 3-5 CSFs, and NCs can have lateral cross-connections between branches.
+
+### Attack-Defense Tree (ADTree)
+
+Security modelling after Kordy et al. (2014), extending classical attack trees
+with defense nodes at any level. Sufficient-cause logic: unjoined children are
+implicitly OR.
+
+**Node types**
+- `Attack` — an attacker's goal or sub-goal (default: red)
+- `Defense` — a defender's countermeasure (default: green)
+- `AndJunctor` — conjunctive refinement: all children required together
+
+**Edge types** — flowing top-to-bottom from the root goal, with refinement edges
+drawn solid and countermeasure edges dotted.
+- `attack_refines_attack` — decompose an attack into sub-attacks
+- `defense_refines_defense` — decompose a defense into sub-defenses
+- `defense_counters_attack` — a defense mitigating an attack
+- `attack_counters_defense` — an attack circumventing a defense
+- Junctors: `attack_to_and_junctor`, `defense_to_and_junctor`,
+  `and_junctor_to_attack`, `and_junctor_to_defense`
+
+A security modelling graph showing how defenses protect a system and how attacks
+can circumvent them. Based on the data confidentiality scenario from Kordy et
+al. (2014):
 
 ```vgl
 vgraph dataConfidentiality: ADTree "Data Confidentiality" {
@@ -1235,62 +1100,27 @@ vgraph dataConfidentiality: ADTree "Data Confidentiality" {
 
 **Note**: ADTree graphs flow bottom-to-top with the root goal at the top and leaf actions at the bottom. The key feature is the distinction between refinement edges (solid lines for same-type decomposition) and countermeasure edges (dotted lines for opposite-type countering). This allows modelling the ongoing arms race between attacker and defender at any level of the tree. The root node can be either an Attack or Defense node, determining whether the proponent is the attacker or defender.
 
-### Example 17: Goal Tree (GoalTree)
+The editor's *ADTree — Data Confidentiality* is the full Kordy tree, with
+firewalls, sensitivity training, a fire-escape break-in route and a
+strong-password attack subtree — and it leaves every edge type to inference.
 
-A strategic planning graph using Theory of Constraints necessity logic. The Goal Tree defines what an organization must achieve through a hierarchy of a single Goal, Critical Success Factors (CSFs), and Necessary Conditions (NCs). Based on H. William Dettmer's Logical Thinking Process:
+### Causal Loop Diagram (CLD)
 
-```vgl
-vgraph companyStrategy: GoalTree "Increase Profitability" {
-    // The single system goal
-    node goal: Goal "Make more money, now and in the future";
+Systems analysis: what reinforces or balances what over time. Every element is a
+Stock whose amount changes according to its incoming connections.
 
-    // Critical Success Factors (3-5 high-level terminal outcomes)
-    node csf1: CriticalSuccessFactor "Maximize Throughput";
-    node csf2: CriticalSuccessFactor "Control Operating Expense";
-    node csf3: CriticalSuccessFactor "Minimize Inventory and Investment";
+**Node types**
+- `Stock` — a variable whose value changes over time (default: blue)
 
-    // Necessary Conditions supporting CSF1
-    node nc1: NecessaryCondition "Maximize sales volume";
-    node nc2: NecessaryCondition "Minimize variable costs";
-    node nc3: NecessaryCondition "Highly appealing products";
+**Edge types** — a loop with an even number of `opposite` links (including zero)
+is reinforcing; an odd number makes it balancing.
+- `same` — Stock → Stock, a positive causal link: both change in the same
+  direction (solid, marked "+")
+- `opposite` — Stock → Stock, a negative causal link: they change in opposite
+  directions (dashed, marked "−")
 
-    // Necessary Conditions supporting CSF2
-    node nc4: NecessaryCondition "Minimize scrap and rework";
-    node nc5: NecessaryCondition "Optimize overhead";
-
-    // Necessary Conditions supporting CSF3
-    node nc6: NecessaryCondition "Optimize outgoing supply chain";
-    node nc7: NecessaryCondition "Optimize incoming supply chain";
-
-    // Sub-NCs becoming more specific
-    node nc8: NecessaryCondition "Effective market research";
-    node nc9: NecessaryCondition "High-quality products";
-
-    // CSFs support the Goal (necessity logic: "In order to achieve Goal, we must achieve CSFs")
-    edge csf1 -> goal: csf_to_goal;
-    edge csf2 -> goal: csf_to_goal;
-    edge csf3 -> goal: csf_to_goal;
-
-    // NCs support CSFs
-    edge nc1 -> csf1: nc_to_csf;
-    edge nc2 -> csf1: nc_to_csf;
-    edge nc3 -> csf1: nc_to_csf;
-    edge nc4 -> csf2: nc_to_csf;
-    edge nc5 -> csf2: nc_to_csf;
-    edge nc6 -> csf3: nc_to_csf;
-    edge nc7 -> csf3: nc_to_csf;
-
-    // Sub-NCs support higher NCs
-    edge nc8 -> nc1: nc_to_nc;
-    edge nc9 -> nc3: nc_to_nc;
-}
-```
-
-**Note**: GoalTree graphs flow top-to-bottom with the single Goal at the top, Critical Success Factors directly below it, and Necessary Conditions expanding downward. NCs become progressively more detailed, specific, and functional at lower levels. The vertical placement implies nothing about importance — due to necessity logic, the lowest NC is equally important as a CSF because if you fail to accomplish it, nothing above it will happen. There are usually no more than 3-5 CSFs, and NCs can have lateral cross-connections between branches.
-
-### Example 18: Causal Loop Diagram (CLD)
-
-A systems analysis diagram modelling population dynamics with reinforcing and balancing feedback loops. Causal Loop Diagrams use "same" links (solid, marked "s") where both variables change in the same direction and "opposite" links (dashed, marked "o") where they change in opposite directions:
+A systems analysis diagram modelling population dynamics with reinforcing and
+balancing feedback loops:
 
 ```vgl
 vgraph populationCLD: CLD "Population Dynamics" {
@@ -1320,11 +1150,22 @@ vgraph populationCLD: CLD "Population Dynamics" {
 
 **Note**: CLD graphs model feedback loops in systems. Loops with an even number of "opposite" links (including zero) are reinforcing loops that produce exponential growth or decline. Loops with an odd number of "opposite" links are balancing loops that reach equilibrium. In this example, the births-population loop is reinforcing, while the population-deaths loop and population-food supply-births loop are balancing.
 
----
+### Decision Tree
 
-### Example 19: Decision Tree
+Decision logic as questions, choices and outcomes.
 
-A decision logic graph for a hiring process showing how a series of questions leads to distinct outcomes:
+**Node types**
+- `DecisionPoint` — a question determining which path to follow (default: amber)
+- `Choice` — a potential answer branching from a question (default: blue)
+- `Outcome` — a terminal result (default: green)
+
+**Edge types**
+- `decision_to_choice` — DecisionPoint → Choice (the question branches)
+- `choice_to_decision` — Choice → DecisionPoint (the option leads to a further question)
+- `choice_to_outcome` — Choice → Outcome (the option terminates)
+
+A decision logic graph for a hiring process showing how a series of questions
+leads to distinct outcomes:
 
 ```vgl
 vgraph hiringDecision: DecisionTree "Should We Hire This Candidate?" {
@@ -1363,11 +1204,23 @@ vgraph hiringDecision: DecisionTree "Should We Hire This Candidate?" {
 
 **Note**: Decision Trees flow top-to-bottom. Every `DecisionPoint` branches into one or more `Choice` nodes. Each `Choice` leads either to another `DecisionPoint` (continuing the logic) or to an `Outcome` (terminal result). Outcomes have no outgoing edges.
 
----
+### Timeline
 
-### Example 20: Timeline
+Events across multiple tracks on a shared time axis, aligned by column.
 
-A timeline visualizing events across multiple tracks aligned to a shared time axis:
+**Node types**
+- `TimePoint` — a coordinate on the time axis, rendered as an anchor dot on a
+  horizontal baseline with the year centred below it, and a dashed vertical guide
+  descending through the diagram to anchor Events sharing its `alignGroup`.
+  TimePoints are **not** drawn as boxed nodes.
+- `Event` — a thing that happened at a point in time (boxed, default: steel
+  blue). Use `alignGroup` to pin it to a TimePoint's column.
+
+**Edge types**
+- `sequence` — TimePoint → TimePoint. Used by Graphviz for rank ordering but
+  **not drawn**: the overlay's horizontal baseline replaces the arrows visually.
+- `influence` — Event → Event, a cross-track or within-track dependency (dashed,
+  `constraint=false`). Drawn normally.
 
 ```vgl
 vgraph myTimeline: Timeline "19th Century Europe" {
@@ -1378,103 +1231,147 @@ vgraph myTimeline: Timeline "19th Century Europe" {
     edge t1800 -> t1850: sequence
     edge t1850 -> t1871: sequence
 
-    // Germany track
     group germany "Germany" {
         node g1: Event "Napoleon defeats Prussia" [alignGroup: "1800"]
         node g2: Event "German Unification" [alignGroup: "1871"]
     }
 
-    // England track
     group england "England" {
         node e1: Event "Industrial Revolution peaks" [alignGroup: "1850"]
         node e2: Event "Franco-Prussian War impact" [alignGroup: "1871"]
     }
 
-    // Cross-track influences
     edge g1 -> g2: influence "led to"
-    edge e1 -> e2: influence
     edge e1 -> g2: influence "industrialization enabled"
 }
 ```
 
-**Note**: Timelines flow left-to-right. Use `alignGroup` on nodes to align them at the same rank (same horizontal position). TimePoint nodes are optional — `alignGroup` alone suffices for alignment. Groups create visual tracks with cluster boxes. Influence edges are dashed and don't affect node positioning (`constraint=false`). Extend with `vnotation` for custom event types.
+Timelines flow left to right, and groups become visual tracks. `alignGroup` is
+what puts nodes in the same column — TimePoints are optional, and `alignGroup`
+alone suffices for alignment.
 
-**Visual treatment**: Each TimePoint renders as a small filled dot on a horizontal axis baseline, with the year label centered below the dot. A dashed vertical guide descends from each TimePoint to the bottom of the diagram, making the `alignGroup` mechanic visible — readers can trace from a year label down to every Event in that column. The standard `sequence` arrows between TimePoints are suppressed; the axis baseline conveys order. Custom notations declared as `vnotation MyTimeline extends Timeline` automatically inherit this rendering via the notation→extensions resolution chain.
+Each TimePoint renders as a filled dot on a horizontal baseline with its label
+centred below, and a dashed vertical guide descends through the diagram so a
+reader can trace from a year down to every Event in that column. The `sequence`
+arrows are suppressed, because the baseline already conveys order. A
+`vnotation … extends Timeline` inherits this rendering.
 
----
+### C4
 
-## User-Defined Notations (`vnotation`)
+Software-architecture diagrams in Simon Brown's C4 model: people, software
+systems, containers and components inside nested boundaries, across four levels
+of zoom.
 
-`vnotation` lets expert users define their own notation schema inline in a VGL file, without requiring any Swift code changes. Everything that built-in notations provide — node types, edge types, layout direction — can be expressed in VGL.
+**Node types.** `Person`, `SoftwareSystem`, `Container`, `Component`,
+`CodeElement` and `Database` (drawn as a cylinder), each with an `External…`
+variant that renders greyed. Note that a C4 "container" is a separately
+deployable unit — an app, service or datastore — **not** the box drawn around
+things; that is a boundary.
 
-### Basic Syntax
+**Relationships** are directed edges labelled with how the elements collaborate
+("Uses", "Reads from", "Makes API calls to"). Two carry canonical ids — `uses`
+(synchronous) and `sends_data_to` (asynchronous) — and the notation registers
+the common `element → element` pairs so realistic diagrams connect cleanly. A
+pair it does not register is not an error: the edge becomes an unknown type,
+rendered bold red and reported as a quality warning, so the document still
+opens.
+
+**Boundaries are typed groups**: `SystemBoundary`, `ContainerBoundary` and
+`EnterpriseBoundary`. Each draws a dashed boundary when unfolded and the
+corresponding element card when folded — so folding a system boundary is exactly
+zooming out from the Container view to the System Context view.
+
+```vgl
+vgraph banking: C4 "Internet Banking System — Container view" {
+    node customer: Person "Personal Banking Customer";
+    node mainframe: ExternalSoftwareSystem "Mainframe Banking System";
+
+    group ibs: SystemBoundary "Internet Banking System" {
+        node web: Container "Web Application";
+        node api: Container "API Application";
+        node db: Database "Database";
+    };
+
+    edge customer -> web "Uses";
+    edge web -> api "Makes API calls to";
+    edge api -> db "Reads from and writes to";
+    edge api -> mainframe "Makes API calls to";
+}
+```
+
+A full worked example is in
+[`docs/examples/c4-internet-banking.vgl`](examples/c4-internet-banking.vgl), and
+the editor's *C4 — Internet Banking System* carries the same graph: the
+single-page and mobile apps the web application delivers, plus an external
+e-mail system.
+
+## User-defined notations (`vnotation`)
+
+`vnotation` defines a notation schema inline in a VGL file, with no Swift
+changes. Everything a built-in notation provides — node types, edge types,
+layout direction — can be expressed this way.
 
 ```
 vnotation <Name> [extends <BuiltinNotation>] {
     layout: <topToBottom | leftToRight | rightToLeft | bottomToTop>
 
-    node type: <TypeName>  [nodeStyle: <name>, color: "#hex", icon: "sf.symbol", ...]
-    ...
+    node type: <TypeName>  [nodeStyle: <name>, backgroundColor: "#hex", icon: "sf.symbol", ...]
     edge type: <edge_id>   from: <TypeName>  to: <TypeName>  [color: "#hex"]
-    ...
 }
 ```
 
-A `vgraph` then references the vnotation by name, identically to any built-in notation:
+A `vgraph` then references it by name exactly like a built-in notation.
+**`vnotation` blocks must appear before any `vgraph` or `metagraph` that
+references them**, which allows single-pass parsing.
 
-```
-vgraph <id>: <VnotationName> "<label>" [, Extension ...] {
-    // identical syntax — node, edge, group, attribute overrides
-}
-```
+`backgroundColor:` is the fill. `color:` is accepted as an older spelling of it
+on input, but `backgroundColor` is what a document exports — the same name a node
+instance stores it under, so the two surfaces agree.
 
-### File-Ordering Rule
+### `nodeStyle:` — required on every node type
 
-`vnotation` blocks **must appear before** any `vgraph` that references them. This allows single-pass parsing and produces a clear error if violated.
+The parser treats the value as an opaque string; the semantic layer validates it
+against this table.
 
-### `nodeStyle:` — Required on Every Node Type
-
-`nodeStyle:` is required on every `node type:` declaration. The parser treats the value as an opaque string; the semantic layer validates it against the table below.
-
-| `nodeStyle:` value | Additional parameters | Description |
+| `nodeStyle:` | Additional parameters | Description |
 |---|---|---|
-| `iconWithText` | `color:` (required), `icon:`, `iconColor:` (opt, default white), `iconSize:` (opt, default 24) | Icon above text, colored background |
-| `simpleRoundedText` | `color:` | Text in a rounded rectangle |
-| `roundedBox` | `color:` | Plain rounded box |
-| `withCategory` | `color:`, `category:` (short header label) | Box with a colored category bar at top |
-| `withCategoryAndIcon` | `color:`, `category:`, `icon:`, `iconColor:` (opt), `iconSize:` (opt) | Category bar + icon |
-| `iconOnly` | `icon:`, `iconColor:` (opt, default black), `iconSize:` (opt) | Icon without text |
-| `circle` | `color:` | Circular node |
+| `iconWithText` | `backgroundColor:` (required), `icon:`, `iconColor:` (default white), `iconSize:` (default 24) | Icon above text, coloured background |
+| `simpleRoundedText` | `backgroundColor:` | Text in a rounded rectangle |
+| `roundedBox` | `backgroundColor:` | Plain rounded box |
+| `withCategory` | `backgroundColor:`, `category:` (short header label) | Box with a coloured category bar on top |
+| `withCategoryAndIcon` | `backgroundColor:`, `category:`, `icon:`, `iconColor:`, `iconSize:` | Category bar plus icon |
+| `iconOnly` | `icon:`, `iconColor:` (default black), `iconSize:` | Icon without text |
+| `circle` | `backgroundColor:` | Circular node |
 | `bareText` | — | Plain text, no decoration |
-| `hidden` | — | Node is not rendered |
-| `custom` | — | Falls back to `bareText` in v1; reserved for future full style expressions |
+| `hidden` | — | Not rendered |
+| `custom` | — | Falls back to `bareText`; reserved for future style expressions |
 
-### `extends` — Inheriting a Built-In Notation
+### `extends`
 
-The `extends` clause adds all node and edge types from a built-in notation, then your vnotation adds further types on top:
+Adds every node and edge type from a built-in notation, on top of which yours
+adds more:
 
 ```vgl
 vnotation RichIBIS extends IBIS {
-    node type: Stakeholder [nodeStyle: withCategory, color: "#884499", category: "S"]
+    node type: Stakeholder [nodeStyle: withCategory, backgroundColor: "#884499", category: "S"]
 
     edge type: stakeholder_raises  from: Stakeholder to: Question
     edge type: stakeholder_answers from: Stakeholder to: Answer
 }
 ```
 
-**v1 constraint:** Only built-in notations can be extended. `vnotation A extends B` where B is itself a vnotation is not supported.
+Only **built-in** notations can be extended — `vnotation A extends B` where B is
+itself a vnotation is not supported.
 
-### Examples
-
-**Pure vnotation — custom risk map:**
+### A complete example
 
 ```vgl
 vnotation RiskMap {
     layout: topToBottom
 
-    node type: Risk    [nodeStyle: iconWithText, color: "#cc3333", icon: "exclamationmark.triangle"]
-    node type: Control [nodeStyle: iconWithText, color: "#339933", icon: "shield"]
-    node type: Owner   [nodeStyle: circle,       color: "#3366cc"]
+    node type: Risk    [nodeStyle: iconWithText, backgroundColor: "#cc3333", icon: "exclamationmark.triangle"]
+    node type: Control [nodeStyle: iconWithText, backgroundColor: "#339933", icon: "shield"]
+    node type: Owner   [nodeStyle: circle,       backgroundColor: "#3366cc"]
 
     edge type: risk_has_control  from: Risk    to: Control
     edge type: control_owned_by  from: Control to: Owner
@@ -1489,50 +1386,31 @@ vgraph rm1: RiskMap "Project Risk Map" {
 }
 ```
 
-**vnotation + Extension:**
+A vnotation can take extensions like any other notation:
+`vgraph sm1: SimpleMap, Annotation "Annotated Map" { … }`.
 
-```vgl
-vnotation SimpleMap {
-    node type: Concept [nodeStyle: simpleRoundedText, color: "#336699"]
-    edge type: related  from: Concept to: Concept
-}
+## Metagraph (visualising a notation)
 
-vgraph sm1: SimpleMap, Annotation "Annotated Map" {
-    node c1: Concept    "Main idea"
-    node a1: Annotation "See also: section 3"
-    edge c1 -> a1
-}
-```
+A notation *is* a graph — its node types are vertices and its edge types are
+edges — so it can be drawn directly. That is useful for documentation, for
+teaching, and for seeing how a `vnotation` you just wrote will actually look.
 
----
-
-## Metagraph (visualizing a notation)
-
-A `metagraph` declaration renders the **structure of a notation itself** as a diagram. Because a notation is a graph (its NodeTypes are vertices and its EdgeTypes are edges), it can be visualized directly — useful for documentation, teaching, and seeing how a `vnotation` you just defined will actually look.
-
-**Syntax:**
 ```
 metagraph <NotationName> ["<optional_label>"]
 ```
 
-- No id, no body — just the notation name and an optional label.
-- If the label is omitted, it defaults to `"<NotationName> Meta Model"`.
-- A file contains either one `vgraph` or one `metagraph` (not both).
-- `vnotation` blocks may precede a `metagraph`, so you can declare and visualize a custom notation in one file.
-- Each node in the result is styled **exactly** as it would appear in a real diagram using that notation — the metagraph is self-documenting.
+No id and no body. The label defaults to `"<NotationName> Meta Model"`. A file
+contains either one `vgraph` or one `metagraph`, never both, and `vnotation`
+blocks may precede a `metagraph` — so you can declare and visualise a custom
+notation in one file.
 
-**Example — built-in notation:**
+Each node is styled **exactly** as it would appear in a real diagram, which is
+what makes the metagraph self-documenting.
+
 ```vgl
 metagraph Timeline
 ```
-Renders the Timeline notation's structure: `TimePoint` and `Event` nodes connected by `sequence` and `influence` edges, styled as Timeline styles them.
 
-**Example — custom label:**
-```vgl
-metagraph ConceptMap "How ConceptMaps are built"
-```
-
-**Example — user-defined notation:**
 ```vgl
 vnotation MyNotation extends ConceptMap {
     node type: Hypothesis [nodeStyle: iconWithText; icon: lightbulb.fill]
@@ -1540,31 +1418,68 @@ vnotation MyNotation extends ConceptMap {
 }
 metagraph MyNotation
 ```
-Renders the full structure of `MyNotation` — inherited ConceptMap types plus the new `Hypothesis` node type and `supports` edge type.
 
----
+## Grammar
 
-## Best Practices
+Simplified BNF:
 
-1. **Use Meaningful IDs**: Choose descriptive node IDs like `security_question` instead of `n1`
-2. **Organize with Groups**: Use groups to organize related nodes and improve readability
-3. **Leverage Type Inference**: Omit edge types when they can be inferred from node types
-4. **Add Labels**: Always provide labels for better human readability
-5. **Comment Your Graphs**: Use comments to explain complex relationships or decisions
-6. **Keep It Simple**: Start with minimal syntax and add attributes only when needed
-7. **Consistent Naming**: Use a consistent naming convention for IDs (e.g., snake_case or camelCase)
-8. **Hierarchical Organization**: Use nested groups to reflect the natural hierarchy of your domain
+```
+file         ::= vnotation* (document | metagraph)
 
----
+document     ::= "vgraph" identifier ":" notation ("," extension)* label? "{" statement* "}"
 
-## Error Handling
+metagraph    ::= "metagraph" notation label? ";"?
 
-VGL provides clear error messages for common issues:
+notation     ::= identifier
+                 // a built-in notation, or a vnotation declared earlier in the file
 
-- **Duplicate Node ID**: Each node ID must be unique
-- **Undefined Node Reference**: Edges can only reference existing nodes
-- **Invalid Node Type**: Node types must exist in the chosen notation (creates "unknown" type)
-- **Invalid Edge Type**: Edge types must be valid for the connected node types (creates "unknown" edge type)
-- **Syntax Errors**: Missing semicolons, braces, or other syntax requirements
+vnotation    ::= "vnotation" identifier ("extends" identifier)? "{" vnotation_body* "}"
 
-When a node type or edge type is not found in the notation, VGL will create an "unknown" type to allow the graph to be processed, but you should verify that the type names are correct.
+vnotation_body ::= ("layout" ":" layout_dir ";"?)
+                 | ("node" "type" ":" identifier attributes? ";"?)
+                 | ("edge" "type" ":" identifier "from" ":" identifier "to" ":" identifier attributes? ";"?)
+
+layout_dir   ::= "topToBottom" | "leftToRight" | "bottomToTop" | "rightToLeft"
+
+extension    ::= identifier            // available: Annotation
+
+statement    ::= group | node | edge | attribute
+
+group        ::= "group" identifier label? "{" statement* "}" ";"?
+
+node         ::= "node" identifier ":" identifier label? attributes? ";"?
+
+edge         ::= "edge" identifier "->" identifier (":" identifier)? label? attributes? ";"?
+
+attribute    ::= identifier ":" value ";"?
+
+attributes   ::= "[" (attribute (";" | ",")?)* "]"
+
+label        ::= quoted_string
+
+value        ::= quoted_string | number | identifier
+
+identifier   ::= [a-zA-Z0-9_\.\,\-]+
+
+number       ::= [-]?[0-9]+(\.[0-9]+)?
+
+quoted_string::= "\"" ([^\"\\] | "\\" .)* "\""
+
+comment      ::= "//" [^\n]*
+```
+
+Rules worth stating separately:
+
+- Node ids must be unique throughout the document, and an edge may only
+  reference nodes already declared.
+- Semicolons are optional after nodes, edges, groups and standalone attributes.
+- A node or edge type that is not valid for the notation is not an error: it
+  becomes an **unknown** type, rendered bold red and reported as a quality
+  warning, so a document always opens. Check the spelling.
+
+## Best practices
+
+Choose descriptive ids (`security_question`, not `n1`) and name them
+consistently. Let edge types be inferred. Use groups to reflect the domain's
+real hierarchy, and comments to explain the relationships that are not obvious.
+Start minimal and add attributes only where they earn their place.

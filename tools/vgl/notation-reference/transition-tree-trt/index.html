@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta property="og:site_name" content="Vithanco"/>
+        <link rel="canonical" href="https://vithanco.com/tools/vgl/notation-reference/transition-tree-trt"/>
+        <meta name="twitter:url" content="https://vithanco.com/tools/vgl/notation-reference/transition-tree-trt"/>
+        <meta property="og:url" content="https://vithanco.com/tools/vgl/notation-reference/transition-tree-trt"/>
+        <title>VGL Guide — Transition Tree (TRT) | Vithanco</title>
+        <meta name="twitter:title" content="VGL Guide — Transition Tree (TRT) | Vithanco"/>
+        <meta property="og:title" content="VGL Guide — Transition Tree (TRT) | Vithanco"/>
+        <meta name="description" content="Step-by-step implementation planning (ToC). Shares CRT/FRT's node types but"/>
+        <meta name="twitter:description" content="Step-by-step implementation planning (ToC). Shares CRT/FRT's node types but"/>
+        <meta property="og:description" content="Step-by-step implementation planning (ToC). Shares CRT/FRT's node types but"/>
+        <meta name="twitter:card" content="summary"/>
+        <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+        <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
+        <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
+        <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
+        <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
+    </head>
+    <body class="item-page">
+        <header>
+            <div class="header-wrapper">
+                <a href="/" class="site-name">
+                    <img src="/logo.png" height="20" width="20"/>
+                    <p>Vithanco</p></a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/services">Services</a></li>
+                        <li>
+                            <a href="/methods">Methods</a></li>
+                        <li>
+                            <a href="/notations">Notations</a></li>
+                        <li>
+                            <a href="/tools" class="selected">Tools</a></li>
+                        <li>
+                            <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
+        <div class="item-wrapper">
+            <article>
+                <div class="breadcrumbs">                    <a href="/" class="breadcrumb-home">                        <img src="/logo.png" class="breadcrumb-icon"/>
+Home</a>
+                    <span class="breadcrumb-separator"> / </span>
+                    <a href="/tools">The best Tools for Structured Visual Thinking</a>
+                    <span class="breadcrumb-separator"> / </span>
+VGL Guide — Transition Tree (TRT)</div>
+                <h1>VGL Guide — Transition Tree (TRT)</h1>
+                <div class="reading-time-container">
+                    <span class="fa fa-clock-o"></span>
+                    <p>Estimated reading time: 2 minutes.</p></div>
+                <div class="content"><h1 id="transition-tree-trt">Transition Tree (TRT)</h1>
+<p>Step-by-step implementation planning (ToC). Shares CRT/FRT's node types but answers "how do we <em>cause</em> the change?", giving the step-by-step action sequence.</p>
+<p><strong>Node types</strong></p>
+<ul>
+ <li><code>UndesirableEffect</code> — current-state problems being addressed (default: red)</li>
+ <li><code>IntermediateEffect</code> — stepping-stone outcomes from actions (default: blue)</li>
+ <li><code>DesirableEffect</code> — goal outcomes (default: green)</li>
+ <li><code>Given</code> — unchangeable facts and constraints (default: dark purple)</li>
+ <li><code>Changeable</code> — actions we can take to cause change (default: light purple)</li>
+ <li><code>AndJunctor</code> — as in CRT</li>
+</ul>
+<p><strong>Edge types</strong> — the CRT family, shared by CRT, FRT and TRT; see <a href="/tools/vgl/notation-reference/current-reality-tree-crt/">Current Reality Tree</a>.</p>
+<p>A step-by-step implementation planning graph showing how actions lead to desired outcomes:</p>
+<pre><code class="language-vgl">vgraph agileTransition: TRT "Agile Transformation Implementation" {
+    // Given conditions (the context we're working within)
+    node g1: Given "Company has 5 development teams";
+    node g2: Given "Current waterfall process causes delays";
+
+    // Changeable causes (actions we will take)
+    node c1: Changeable "Introduce daily standups";
+    node c2: Changeable "Implement CI/CD pipeline";
+    node c3: Changeable "Create cross-functional teams";
+    node c4: Changeable "Train teams on Scrum practices";
+
+    // Intermediate effects (stepping stones from actions)
+    node ie1: IntermediateEffect "Teams communicate more frequently";
+    node ie2: IntermediateEffect "Code integration happens daily";
+    node ie3: IntermediateEffect "Teams have diverse skillsets";
+    node ie4: IntermediateEffect "Teams follow iterative process";
+    node ie5: IntermediateEffect "Silos are broken down";
+
+    // And junctors for combined conditions
+    node and1: AndJunctor "";
+    node and2: AndJunctor "";
+
+    // Desirable effects (the goals we achieve)
+    node de1: DesirableEffect "Faster time to market";
+    node de2: DesirableEffect "Higher quality releases";
+    node de3: DesirableEffect "Better team collaboration";
+
+    // Actions lead to intermediate effects
+    edge c1 -&gt; ie1: changeable_causes_intermediate;
+    edge c2 -&gt; ie2: changeable_causes_intermediate;
+    edge c3 -&gt; ie3: changeable_causes_intermediate;
+    edge c4 -&gt; ie4: changeable_causes_intermediate;
+
+    // Given context combines with cross-functional teams
+    edge g1 -&gt; and1: given_to_and_junctor;
+    edge ie3 -&gt; and1: intermediate_to_and_junctor;
+    edge and1 -&gt; ie5: and_junctor_causes_intermediate;
+
+    // Breaking silos leads to collaboration
+    edge ie5 -&gt; de3: intermediate_causes_desirable;
+
+    // Communication helps collaboration too
+    edge ie1 -&gt; de3: intermediate_causes_desirable;
+
+    // CI/CD + iterative process combine for quality
+    edge ie2 -&gt; and2: intermediate_to_and_junctor;
+    edge ie4 -&gt; and2: intermediate_to_and_junctor;
+    edge and2 -&gt; de2: and_junctor_causes_desirable;
+
+    // Quality and collaboration lead to speed
+    edge de2 -&gt; de1: desirable_causes_desirable;
+    edge de3 -&gt; de1: desirable_causes_desirable;
+
+    // Given waterfall context is addressed by iterative process
+    edge g2 -&gt; ie4: given_causes_intermediate;
+}
+</code></pre>
+<p><strong>Note</strong>: TRT graphs flow bottom-to-top like other TOC tools. The focus is on detailed implementation planning - answering "HOW TO CAUSE the change?" Unlike FRT which validates that solutions will work, TRT provides the step-by-step action sequence needed to implement those solutions. Changeable nodes represent the specific actions to take, and the graph shows how those actions combine through intermediate effects to achieve desirable outcomes. The AndJunctor indicates multiple conditions must occur together for an effect.</p></div></article>
+            <aside class="side-content">
+                <div class="relationships-section"></div>
+                <div class="preview__article-details">
+                    <p class="tag-list-title">Tagged with:</p>
+                    <ul class="preview__article-tags">
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/vgl">VGL</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/graph-language">Graph Language</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/notation">Notation</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/documentation">Documentation</a></div></li></ul></div>
+                <div class="newsletter" height="350" width="250">
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <p>See how you can combine your brain power with structured visual and achieve better results.</p>
+                    <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
+                <div></div></aside></div>
+        <footer>
+            <div>
+                <p class="footer-title">                    <img src="/logo.png" width="16px" class="content_logo"/>
+Vithanco Home </p>
+                <nav>
+                    <p>Dr. Ing. Klaus Kneupner, MBA</p>
+                    <ul>
+                        <li>
+                            <a href="https://linkedIn.com/in/Kneupner">
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bsky.app/profile/vithanco.bsky.social">
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://mastodon.social/@vithanco">
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/feed.rss">
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
+                            </a>
+                        </li>
+                    </ul></nav></div></footer></body>
+</html>
