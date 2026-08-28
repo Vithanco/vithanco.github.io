@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta property="og:site_name" content="Vithanco"/>
+        <link rel="canonical" href="https://vithanco.com/notations/arithmetic"/>
+        <meta name="twitter:url" content="https://vithanco.com/notations/arithmetic"/>
+        <meta property="og:url" content="https://vithanco.com/notations/arithmetic"/>
+        <title>The Arithmetic Notation | Vithanco</title>
+        <meta name="twitter:title" content="The Arithmetic Notation | Vithanco"/>
+        <meta property="og:title" content="The Arithmetic Notation | Vithanco"/>
+        <meta name="description" content="Draw a simple equation as a graph — numbers, the four operators, and an Equals node that checks the answer and turns green or red"/>
+        <meta name="twitter:description" content="Draw a simple equation as a graph — numbers, the four operators, and an Equals node that checks the answer and turns green or red"/>
+        <meta property="og:description" content="Draw a simple equation as a graph — numbers, the four operators, and an Equals node that checks the answer and turns green or red"/>
+        <meta name="twitter:card" content="summary"/>
+        <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+        <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
+        <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
+        <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
+        <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
+    </head>
+    <body class="item-page">
+        <header>
+            <div class="header-wrapper">
+                <a href="/" class="site-name">
+                    <img src="/logo.png" height="20" width="20"/>
+                    <p>Vithanco</p></a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/services">Services</a></li>
+                        <li>
+                            <a href="/methods">Methods</a></li>
+                        <li>
+                            <a href="/notations" class="selected">Notations</a></li>
+                        <li>
+                            <a href="/tools">Tools</a></li>
+                        <li>
+                            <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
+        <div class="item-wrapper">
+            <article>
+                <div class="breadcrumbs">                    <a href="/" class="breadcrumb-home">                        <img src="/logo.png" class="breadcrumb-icon"/>
+Home</a>
+                    <span class="breadcrumb-separator"> / </span>
+                    <a href="/notations">Explore Vithanco's Rich Library of Notations</a>
+                    <span class="breadcrumb-separator"> / </span>
+The Arithmetic Notation</div>
+                <h1>The Arithmetic Notation</h1>
+                <div class="reading-time-container">
+                    <span class="fa fa-clock-o"></span>
+                    <p>Estimated reading time: 5 minutes.</p></div>
+                <div class="content"><h2 id="why-use-arithmetic">Why use Arithmetic?</h2>
+<p>Most Vithanco Notations help you structure an argument, a plan or a system. Arithmetic is different: it is a <strong>small, complete notation for a single equation</strong>, built for a kids' maths game. Numbers are nodes, the four operators are nodes, and an <code>=</code> node asserts that everything meeting there has the same value — and tells you whether it does.</p>
+<p>It is deliberately tiny. There is no chaining of operators, no brackets and no algebraic variables. Just numbers, one operator at a time, and equality.</p>
+<p>Use it for:</p>
+<ul>
+ <li>Building a simple equation as a diagram: two operands, one operator, one result.</li>
+ <li>A puzzle where one connection is missing and a value must be chosen to complete it correctly.</li>
+ <li>Asserting that two expressions are equal — for example <code>7 − 4 = 2 + 1</code> — without naming which side is "the answer".</li>
+</ul>
+<h2 id="how-it-works">How it Works</h2>
+<p>Arithmetic rests on one idea that is unusual if you are used to writing equations as text: <strong><code>=</code> is a node, not a symbol between two halves.</strong> It works like the AND junctor in an <a href="/notations/attack-defense-tree">Attack-Defense Tree</a> or the OR junctor in a <a href="/notations/TOC/current-reality-tree">Current Reality Tree</a> — a place where several things meet and something is asserted about all of them at once. Here the assertion is <em>these are all the same number</em>.</p>
+<p>That is what lets <code>7 − 4 = 2 + 1</code> be drawn with no answer node at all: two operators, one Equals, nothing privileged as "the result".</p>
+<figure class="vgl-render img-std"> 
+ <img src="/vgl-generated/meta-Arithmetic.svg" alt="The Arithmetic Notation Structure" onclick="openLightbox(this)" /> 
+ <figcaption>
+  The Arithmetic Notation Structure
+ </figcaption> 
+</figure>
+<h3 id="the-building-blocks">The Building Blocks</h3>
+<table>
+ <thead>
+  <tr>
+   <th>Node Type</th>
+   <th>Description</th>
+   <th>Successors</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Number</td>
+   <td>A value — either given, or filled in as a candidate answer. Its label <em>is</em> its value.</td>
+   <td>Plus, Minus, Times, Divide</td>
+  </tr>
+  <tr>
+   <td>Plus</td>
+   <td>Addition: takes two operands, produces their sum.</td>
+   <td>Equals</td>
+  </tr>
+  <tr>
+   <td>Minus</td>
+   <td>Subtraction: takes two operands, produces their difference.</td>
+   <td>Equals</td>
+  </tr>
+  <tr>
+   <td>Times</td>
+   <td>Multiplication: takes two operands, produces their product.</td>
+   <td>Equals</td>
+  </tr>
+  <tr>
+   <td>Divide</td>
+   <td>Division: takes two operands, produces their quotient.</td>
+   <td>Equals</td>
+  </tr>
+  <tr>
+   <td>Equals</td>
+   <td>Asserts that everything connected to it — plus its own typed value, if any — shares the same value.</td>
+   <td>None</td>
+  </tr>
+ </tbody>
+</table>
+<p>The operators are drawn as coloured glyph circles (<code>+</code>, <code>−</code>, <code>×</code>, <code>:</code>) rather than boxes, because there is no prose in them to frame. For the same reason you cannot rename an operator by double-clicking it: it has no user text.</p>
+<p>Each operator has three edge types — a first operand, a second operand, and a result:</p>
+<table>
+ <thead>
+  <tr>
+   <th>Edge Type</th>
+   <th>Description</th>
+   <th>From</th>
+   <th>To</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td><code>plus_first_operand</code> / <code>plus_second_operand</code></td>
+   <td>The two numbers added.</td>
+   <td>Number</td>
+   <td>Plus</td>
+  </tr>
+  <tr>
+   <td><code>plus_result</code></td>
+   <td>The sum, asserted equal at the Equals node.</td>
+   <td>Plus</td>
+   <td>Equals</td>
+  </tr>
+  <tr>
+   <td><code>minus_first_operand</code></td>
+   <td>The number subtracted from.</td>
+   <td>Number</td>
+   <td>Minus</td>
+  </tr>
+  <tr>
+   <td><code>minus_second_operand</code></td>
+   <td>The number subtracted.</td>
+   <td>Number</td>
+   <td>Minus</td>
+  </tr>
+  <tr>
+   <td><code>minus_result</code></td>
+   <td>The difference, asserted equal at the Equals node.</td>
+   <td>Minus</td>
+   <td>Equals</td>
+  </tr>
+  <tr>
+   <td><code>times_first_operand</code> / <code>times_second_operand</code></td>
+   <td>The two factors.</td>
+   <td>Number</td>
+   <td>Times</td>
+  </tr>
+  <tr>
+   <td><code>times_result</code></td>
+   <td>The product, asserted equal at the Equals node.</td>
+   <td>Times</td>
+   <td>Equals</td>
+  </tr>
+  <tr>
+   <td><code>divide_first_operand</code></td>
+   <td>The dividend.</td>
+   <td>Number</td>
+   <td>Divide</td>
+  </tr>
+  <tr>
+   <td><code>divide_second_operand</code></td>
+   <td>The divisor.</td>
+   <td>Number</td>
+   <td>Divide</td>
+  </tr>
+  <tr>
+   <td><code>divide_result</code></td>
+   <td>The quotient, asserted equal at the Equals node.</td>
+   <td>Divide</td>
+   <td>Equals</td>
+  </tr>
+ </tbody>
+</table>
+<p>An operator accepts <strong>at most one</strong> first operand and one second operand, and produces <strong>at most one</strong> result. Nothing bounds what arrives at an Equals node, and nothing is required: an incomplete puzzle is the normal mid-play state, and several results meeting at one Equals is precisely what the node is for.</p>
+<h3 id="naming-the-operand-edges">Naming the Operand Edges</h3>
+<p>Everywhere else in <a href="/tools/vgl">VGL</a> you can usually leave the edge type out and let it be inferred from the node types at each end. Arithmetic is the exception on the operand side: <code>Number → Plus</code> matches <em>two</em> edge types, so VGL cannot tell a first operand from a second one.</p>
+<pre><code>edge two -&gt; plusOp;                       // ambiguous — rejected
+edge two -&gt; plusOp: plus_first_operand;   // explicit — fine
+</code></pre>
+<p>Result edges are unambiguous (<code>Plus → Equals</code> has only one type), so <code>edge plusOp -&gt; eq;</code> works. Writing it out in full is still clearer.</p>
+<h2 id="a-first-equation">A First Equation</h2>
+<p>The <code>Equals</code> node carries the <strong>expected answer as its own label</strong>. Type into it to set the target.</p>
+<figure class="vgl-render img-std"> 
+ <img src="/vgl-generated/arithmetic-first-equation.svg" alt="2 + 5 = 7 drawn in the Arithmetic notation" onclick="openLightbox(this)" /> 
+ <figcaption>
+  2 + 5 = 7 — the operator agrees with the expected answer, so the Equals node is green
+ </figcaption> 
+</figure>
+<pre><code>vgraph arithmeticFirstEquation: Arithmetic "2 + 5 = 7" {
+    node two: Number "2";
+    node five: Number "5";
+    node plusOp: Plus;
+    node eq: Equals "7";
+
+    edge two -&gt; plusOp: plus_first_operand;
+    edge five -&gt; plusOp: plus_second_operand;
+    edge plusOp -&gt; eq: plus_result;
+}
+</code></pre>
+<p>Graphs flow <strong>left to right</strong>, so the diagram reads the way the equation does and ends on the <code>=</code>.</p>
+<h2 id="right-and-wrong">Right and Wrong</h2>
+<p>The Equals node is the feedback mechanism. It has three states:</p>
+<ul>
+ <li><strong>Neutral</strong> (grey) — not enough is connected yet to judge. If it has its own expected value it shows it, as <code>= 7</code>.</li>
+ <li><strong>Correct</strong> (green) — everything meeting there agrees. Shows the agreed value.</li>
+ <li><strong>Incorrect</strong> (red) — they disagree. Shows <code>computed ≠ expected</code>, so the two numbers appear in a fixed, readable order rather than an arbitrary one.</li>
+</ul>
+<p>Here are all four operators, two right and two wrong:</p>
+<figure class="vgl-render img-std"> 
+ <img src="/vgl-generated/arithmetic-right-and-wrong.svg" alt="Four equations in the Arithmetic notation, two correct and two incorrect" onclick="openLightbox(this)" /> 
+ <figcaption>
+  Two correct equations in green, two incorrect ones in red showing computed ≠ expected
+ </figcaption> 
+</figure>
+<p>Note that a Number node can feed more than one operator — <code>three</code> and <code>four</code> are each used twice above.</p>
+<h2 id="equality-without-an-answer">Equality Without an Answer</h2>
+<p>Because <code>=</code> is a junctor rather than a separator, you can assert that two expressions are equal without deciding which one is the answer. Give the Equals node no label at all and connect two results to it:</p>
+<figure class="vgl-render img-std"> 
+ <img src="/vgl-generated/arithmetic-both-sides.svg" alt="7 − 4 = 2 + 1 drawn with two operators meeting at one Equals node" onclick="openLightbox(this)" /> 
+ <figcaption>
+  7 − 4 = 2 + 1 — two operators meet at one Equals node, and neither side is 'the answer'
+ </figcaption> 
+</figure>
+<p>Both sides evaluate to 3, so the node turns green and shows <code>= 3</code>. Had they disagreed, it would have shown the two computed values either side of a <code>≠</code>.</p>
+<h2 id="quality-checks">Quality Checks</h2>
+<p>Arithmetic ships one quality check: <strong>division by zero</strong>. If a Divide node has both operands connected and the divisor is zero, Vithanco reports a warning naming the node. An operator that is simply missing an operand is <em>not</em> flagged — that is a puzzle mid-play, not a mistake.</p>
+<h2 id="try-it-yourself">Try it Yourself</h2>
+<p>Edit the VGL below and click "Render". Try changing an expected answer to see a green node turn red, or delete an operand edge to watch the node go neutral:</p>
+<iframe src="/vgraph/index.html?vgl=vgraph%20arithmeticRightAndWrong%3A%20Arithmetic%20%22Right%20and%20Wrong%22%20%7B%0A%20%20%20%20node%20two%3A%20Number%20%222%22%3B%0A%20%20%20%20node%20five%3A%20Number%20%225%22%3B%0A%20%20%20%20node%20eight%3A%20Number%20%228%22%3B%0A%20%20%20%20node%20three%3A%20Number%20%223%22%3B%0A%20%20%20%20node%20four%3A%20Number%20%224%22%3B%0A%20%20%20%20node%20twelve%3A%20Number%20%2212%22%3B%0A%0A%20%20%20%20node%20plusOp%3A%20Plus%3B%0A%20%20%20%20node%20minusOp%3A%20Minus%3B%0A%20%20%20%20node%20timesOp%3A%20Times%3B%0A%20%20%20%20node%20divideOp%3A%20Divide%3B%0A%0A%20%20%20%20node%20eqPlus%3A%20Equals%20%227%22%3B%0A%20%20%20%20node%20eqMinus%3A%20Equals%20%225%22%3B%0A%20%20%20%20node%20eqTimes%3A%20Equals%20%2211%22%3B%0A%20%20%20%20node%20eqDivide%3A%20Equals%20%224%22%3B%0A%0A%20%20%20%20edge%20two%20-%3E%20plusOp%3A%20plus_first_operand%3B%0A%20%20%20%20edge%20five%20-%3E%20plusOp%3A%20plus_second_operand%3B%0A%20%20%20%20edge%20plusOp%20-%3E%20eqPlus%3A%20plus_result%3B%0A%0A%20%20%20%20edge%20eight%20-%3E%20minusOp%3A%20minus_first_operand%3B%0A%20%20%20%20edge%20three%20-%3E%20minusOp%3A%20minus_second_operand%3B%0A%20%20%20%20edge%20minusOp%20-%3E%20eqMinus%3A%20minus_result%3B%0A%0A%20%20%20%20edge%20three%20-%3E%20timesOp%3A%20times_first_operand%3B%0A%20%20%20%20edge%20four%20-%3E%20timesOp%3A%20times_second_operand%3B%0A%20%20%20%20edge%20timesOp%20-%3E%20eqTimes%3A%20times_result%3B%0A%0A%20%20%20%20edge%20twelve%20-%3E%20divideOp%3A%20divide_first_operand%3B%0A%20%20%20%20edge%20four%20-%3E%20divideOp%3A%20divide_second_operand%3B%0A%20%20%20%20edge%20divideOp%20-%3E%20eqDivide%3A%20divide_result%3B%0A%7D%0A" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive Arithmetic Editor"></iframe>
+<p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p>
+<p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="/tools/vgl">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.</p></div></article>
+            <aside class="side-content">
+                <div class="relationships-section"></div>
+                <div class="preview__article-details">
+                    <p class="tag-list-title">Tagged with:</p>
+                    <ul class="preview__article-tags">
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/arithmetic">Arithmetic</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/notation">Notation</a></div></li></ul></div>
+                <div class="newsletter" height="350" width="250">
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <p>See how you can combine your brain power with structured visual and achieve better results.</p>
+                    <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
+                <div></div></aside></div>
+        <footer>
+            <div>
+                <p class="footer-title">                    <img src="/logo.png" width="16px" class="content_logo"/>
+Vithanco Home </p>
+                <nav>
+                    <p>Dr. Ing. Klaus Kneupner, MBA</p>
+                    <ul>
+                        <li>
+                            <a href="https://linkedIn.com/in/Kneupner">
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bsky.app/profile/vithanco.bsky.social">
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://mastodon.social/@vithanco">
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/feed.rss">
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
+                            </a>
+                        </li>
+                    </ul></nav></div></footer></body>
+</html>

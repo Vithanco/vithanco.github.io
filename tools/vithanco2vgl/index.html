@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta property="og:site_name" content="Vithanco"/>
+        <link rel="canonical" href="https://vithanco.com/tools/vithanco2vgl"/>
+        <meta name="twitter:url" content="https://vithanco.com/tools/vithanco2vgl"/>
+        <meta property="og:url" content="https://vithanco.com/tools/vithanco2vgl"/>
+        <title>Converting Old Vithanco Documents to VGL | Vithanco</title>
+        <meta name="twitter:title" content="Converting Old Vithanco Documents to VGL | Vithanco"/>
+        <meta property="og:title" content="Converting Old Vithanco Documents to VGL | Vithanco"/>
+        <meta name="description" content="A free command line tool that converts documents from the original Vithanco Mac app into VGL text files."/>
+        <meta name="twitter:description" content="A free command line tool that converts documents from the original Vithanco Mac app into VGL text files."/>
+        <meta property="og:description" content="A free command line tool that converts documents from the original Vithanco Mac app into VGL text files."/>
+        <meta name="twitter:card" content="summary"/>
+        <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+        <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
+        <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
+        <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
+        <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
+    </head>
+    <body class="item-page">
+        <header>
+            <div class="header-wrapper">
+                <a href="/" class="site-name">
+                    <img src="/logo.png" height="20" width="20"/>
+                    <p>Vithanco</p></a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/services">Services</a></li>
+                        <li>
+                            <a href="/methods">Methods</a></li>
+                        <li>
+                            <a href="/notations">Notations</a></li>
+                        <li>
+                            <a href="/tools" class="selected">Tools</a></li>
+                        <li>
+                            <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
+        <div class="item-wrapper">
+            <article>
+                <div class="breadcrumbs">                    <a href="/" class="breadcrumb-home">                        <img src="/logo.png" class="breadcrumb-icon"/>
+Home</a>
+                    <span class="breadcrumb-separator"> / </span>
+                    <a href="/tools">The best Tools for Structured Visual Thinking</a>
+                    <span class="breadcrumb-separator"> / </span>
+Converting Old Vithanco Documents to VGL</div>
+                <h1>Converting Old Vithanco Documents to VGL</h1>
+                <div class="reading-time-container">
+                    <span class="fa fa-clock-o"></span>
+                    <p>Estimated reading time: 2 minutes.</p></div>
+                <div class="content"><p>If you have diagrams from the original Vithanco Mac app — files ending in</p>
+<p><code>.vithanco</code>, <code>.ibisVT</code>, <code>.tocVT</code> or <code>.cmapVT</code> — <strong>vithanco2vgl</strong> turns them into <a href="/tools/vgl/">VGL</a>, the text format Vithanco reads today. Your originals are never modified.</p>
+<p><strong><a href="/tools/vithanco2vgl.zip">Download vithanco2vgl</a></strong> — 4.5 MB.</p>
+<p>Free, signed and notarised by Apple, so it runs without a security warning. It needs macOS 15 or later, and works on both Apple Silicon and Intel Macs.</p>
+<h2 id="installing">Installing</h2>
+<p>Unzip it. You get a folder holding two items:</p>
+<pre><code>vithanco2vgl/
+    vithanco2vgl                              the tool
+    VithancoDataModel_VithancoDataModel.bundle  the old document format
+</code></pre>
+<p><strong>Keep them together.</strong> The tool reads the old file format out of that bundle and will not start without it. Move the whole folder somewhere sensible and call the tool by its path, or put both items on your <code>PATH</code>.</p>
+<h2 id="converting">Converting</h2>
+<p>Point it at a document to see the VGL:</p>
+<pre><code>vithanco2vgl "Why Vithanco.vithanco"
+</code></pre>
+<p>Point it at a folder to convert everything in it, writing each <code>.vgl</code> next to its original. Add <code>-r</code> to include subfolders:</p>
+<pre><code>vithanco2vgl -r ~/Documents/Diagrams
+</code></pre>
+<p>Other options: <code>-v</code> lists what each conversion had to change, <code>--force</code> overwrites <code>.vgl</code> files that already exist, and <code>--inspect</code> reports what a document contains — its notation, its node types, and how many nodes use each — without converting anything.</p>
+<h2 id="what-comes-across">What comes across</h2>
+<p>Nodes, edges, labels, links, annotations, groups with their folded state and colour, icons, line widths and document metadata all carry over. Positions do not, and do not need to: neither format stores them, because both lay a diagram out from its structure.</p>
+<p>The notation is read out of the document itself rather than guessed from the file extension, so IBIS, Concept Maps, Benefit Breakdown Structures, Decision Trees, Causal Loop Diagrams, Impact Maps and the Theory of Constraints notations all arrive as themselves. Documents saved by very early versions of the app, which recorded no notation identifier at all, are recognised by name.</p>
+<h2 id="what-it-tells-you">What it tells you</h2>
+<p>Two notations are never quite the same, and where the conversion had to make a judgement it says so — in the terminal with <code>-v</code>, and as a comment at the top of the <code>.vgl</code> it writes. A node type with no counterpart today keeps its own definition in a <code>vnotation</code> block rather than being dropped. A necessary condition that the old app drew pointing one way and VGL draws the other is turned round, and counted. Nothing is discarded quietly.</p>
+<p>If you defined your own notation in the old app, it comes across as a</p>
+<p><code>vnotation</code> block with its node types, colours and icons intact, so the diagram still reads the way you drew it.</p></div></article>
+            <aside class="side-content">
+                <div class="relationships-section"></div>
+                <div class="preview__article-details">
+                    <p class="tag-list-title">Tagged with:</p>
+                    <ul class="preview__article-tags">
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/vgl">VGL</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/tools">Tools</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/migration">Migration</a></div></li></ul></div>
+                <div class="newsletter" height="350" width="250">
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <p>See how you can combine your brain power with structured visual and achieve better results.</p>
+                    <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
+                <div></div></aside></div>
+        <footer>
+            <div>
+                <p class="footer-title">                    <img src="/logo.png" width="16px" class="content_logo"/>
+Vithanco Home </p>
+                <nav>
+                    <p>Dr. Ing. Klaus Kneupner, MBA</p>
+                    <ul>
+                        <li>
+                            <a href="https://linkedIn.com/in/Kneupner">
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bsky.app/profile/vithanco.bsky.social">
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://mastodon.social/@vithanco">
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/feed.rss">
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
+                            </a>
+                        </li>
+                    </ul></nav></div></footer></body>
+</html>

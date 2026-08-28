@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Vithanco</title><description>Use Visual Thinking to Improve Your Decision Making and Problem Solving Skills.</description><link>https://vithanco.com</link><language>en</language><lastBuildDate>Thu, 27 Aug 2026 00:59:03 +0200</lastBuildDate><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><ttl>250</ttl><atom:link href="https://vithanco.com/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/grammar</guid><title>VGL Guide — Grammar</title><description>"Simplified BNF:"</description><link>https://vithanco.com/tools/vgl/grammar</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="grammar">Grammar</h1>
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Vithanco</title><description>Use Visual Thinking to Improve Your Decision Making and Problem Solving Skills.</description><link>https://vithanco.com</link><language>en</language><lastBuildDate>Fri, 28 Aug 2026 18:09:22 +0200</lastBuildDate><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><ttl>250</ttl><atom:link href="https://vithanco.com/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/grammar</guid><title>VGL Guide — Grammar</title><description>"Simplified BNF:"</description><link>https://vithanco.com/tools/vgl/grammar</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="grammar">Grammar</h1>
 <p>Simplified BNF:</p>
 <pre><code>file         ::= vnotation* (document | metagraph)
 
@@ -48,7 +48,7 @@ comment      ::= "//" [^\n]*
  <li>Node ids must be unique throughout the document, and an edge may only reference nodes already declared.</li>
  <li>Semicolons are optional after nodes, edges, groups and standalone attributes.</li>
  <li>A node or edge type that is not valid for the notation is not an error: it becomes an <strong>unknown</strong> type, rendered bold red and reported as a quality warning, so a document always opens. Check the spelling.</li>
-</ul>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/metagraph-visualising-a-notation</guid><title>VGL Guide — Metagraph (visualising a notation)</title><description>A notation is a graph — its node types are vertices and its edge types are</description><link>https://vithanco.com/tools/vgl/metagraph-visualising-a-notation</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="metagraph-visualising-a-notation">Metagraph (visualising a notation)</h1>
+</ul>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/metagraph-visualising-a-notation</guid><title>VGL Guide — Metagraph (visualising a notation)</title><description>A notation is a graph — its node types are vertices and its edge types are</description><link>https://vithanco.com/tools/vgl/metagraph-visualising-a-notation</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="metagraph-visualising-a-notation">Metagraph (visualising a notation)</h1>
 <p>A notation <em>is</em> a graph — its node types are vertices and its edge types are edges — so it can be drawn directly. That is useful for documentation, for teaching, and for seeing how a <code>vnotation</code> you just wrote will actually look.</p>
 <pre><code>metagraph &lt;NotationName&gt; ["&lt;optional_label&gt;"]
 </code></pre>
@@ -61,7 +61,7 @@ comment      ::= "//" [^\n]*
     edge type: supports from: Hypothesis to: Concept
 }
 metagraph MyNotation
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/user-defined-notations-vnotation</guid><title>VGL Guide — User-defined notations (`vnotation`)</title><description>vnotation defines a notation schema inline in a VGL file, with no Swift</description><link>https://vithanco.com/tools/vgl/user-defined-notations-vnotation</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="user-defined-notations-vnotation">User-defined notations (<code>vnotation</code>)</h1>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/user-defined-notations-vnotation</guid><title>VGL Guide — User-defined notations (`vnotation`)</title><description>vnotation defines a notation schema inline in a VGL file, with no Swift</description><link>https://vithanco.com/tools/vgl/user-defined-notations-vnotation</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="user-defined-notations-vnotation">User-defined notations (<code>vnotation</code>)</h1>
 <p><code>vnotation</code> defines a notation schema inline in a VGL file, with no Swift changes. Everything a built-in notation provides — node types, edge types, layout direction — can be expressed this way.</p>
 <pre><code>vnotation &lt;Name&gt; [extends &lt;BuiltinNotation&gt;] {
     layout: &lt;topToBottom | leftToRight | rightToLeft | bottomToTop&gt;
@@ -166,7 +166,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
 }
 </code></pre>
 <p>A vnotation can take extensions like any other notation:</p>
-<p><code>vgraph sm1: SimpleMap, Annotation "Annotated Map" { … }</code>.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/c4</guid><title>VGL Guide — C4</title><description>"Software-architecture diagrams in Simon Brown's C4 model: people, software"</description><link>https://vithanco.com/tools/vgl/notation-reference/c4</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="c4">C4</h1>
+<p><code>vgraph sm1: SimpleMap, Annotation "Annotated Map" { … }</code>.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/c4</guid><title>VGL Guide — C4</title><description>"Software-architecture diagrams in Simon Brown's C4 model: people, software"</description><link>https://vithanco.com/tools/vgl/notation-reference/c4</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="c4">C4</h1>
 <p>Software-architecture diagrams in Simon Brown's C4 model: people, software systems, containers and components inside nested boundaries, across four levels of zoom.</p>
 <p><strong>Node types.</strong> <code>Person</code>, <code>SoftwareSystem</code>, <code>Container</code>, <code>Component</code>,</p>
 <p><code>CodeElement</code> and <code>Database</code> (drawn as a cylinder), each with an <code>External…</code> variant that renders greyed. Note that a C4 "container" is a separately deployable unit — an app, service or datastore — <strong>not</strong> the box drawn around things; that is a boundary.</p>
@@ -189,7 +189,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
     edge api -&gt; mainframe "Makes API calls to";
 }
 </code></pre>
-<p>A full worked example is in <a href="examples/c4-internet-banking.vgl"><code>docs/examples/c4-internet-banking.vgl</code></a>, and the editor's <em>C4 — Internet Banking System</em> carries the same graph: the single-page and mobile apps the web application delivers, plus an external e-mail system.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/timeline</guid><title>VGL Guide — Timeline</title><description>Events across multiple tracks on a shared time axis, aligned by column.</description><link>https://vithanco.com/tools/vgl/notation-reference/timeline</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="timeline">Timeline</h1>
+<p>A full worked example is in <a href="examples/c4-internet-banking.vgl"><code>docs/examples/c4-internet-banking.vgl</code></a>, and the editor's <em>C4 — Internet Banking System</em> carries the same graph: the single-page and mobile apps the web application delivers, plus an external e-mail system.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/timeline</guid><title>VGL Guide — Timeline</title><description>Events across multiple tracks on a shared time axis, aligned by column.</description><link>https://vithanco.com/tools/vgl/notation-reference/timeline</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="timeline">Timeline</h1>
 <p>Events across multiple tracks on a shared time axis, aligned by column.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -225,7 +225,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
 </code></pre>
 <p>Timelines flow left to right, and groups become visual tracks. <code>alignGroup</code> is what puts nodes in the same column — TimePoints are optional, and <code>alignGroup</code> alone suffices for alignment.</p>
 <p>Each TimePoint renders as a filled dot on a horizontal baseline with its label centred below, and a dashed vertical guide descends through the diagram so a reader can trace from a year down to every Event in that column. The <code>sequence</code> arrows are suppressed, because the baseline already conveys order. A</p>
-<p><code>vnotation … extends Timeline</code> inherits this rendering.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/decision-tree</guid><title>VGL Guide — Decision Tree</title><description>Decision logic as questions, choices and outcomes.</description><link>https://vithanco.com/tools/vgl/notation-reference/decision-tree</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="decision-tree">Decision Tree</h1>
+<p><code>vnotation … extends Timeline</code> inherits this rendering.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/decision-tree</guid><title>VGL Guide — Decision Tree</title><description>Decision logic as questions, choices and outcomes.</description><link>https://vithanco.com/tools/vgl/notation-reference/decision-tree</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="decision-tree">Decision Tree</h1>
 <p>Decision logic as questions, choices and outcomes.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -273,7 +273,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
     edge c4 -&gt; o3: choice_to_outcome;
 }
 </code></pre>
-<p><strong>Note</strong>: Decision Trees flow top-to-bottom. Every <code>DecisionPoint</code> branches into one or more <code>Choice</code> nodes. Each <code>Choice</code> leads either to another <code>DecisionPoint</code> (continuing the logic) or to an <code>Outcome</code> (terminal result). Outcomes have no outgoing edges.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/causal-loop-diagram-cld</guid><title>VGL Guide — Causal Loop Diagram (CLD)</title><description>"Systems analysis: what reinforces or balances what over time. Every element is a"</description><link>https://vithanco.com/tools/vgl/notation-reference/causal-loop-diagram-cld</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="causal-loop-diagram-cld">Causal Loop Diagram (CLD)</h1>
+<p><strong>Note</strong>: Decision Trees flow top-to-bottom. Every <code>DecisionPoint</code> branches into one or more <code>Choice</code> nodes. Each <code>Choice</code> leads either to another <code>DecisionPoint</code> (continuing the logic) or to an <code>Outcome</code> (terminal result). Outcomes have no outgoing edges.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/causal-loop-diagram-cld</guid><title>VGL Guide — Causal Loop Diagram (CLD)</title><description>"Systems analysis: what reinforces or balances what over time. Every element is a"</description><link>https://vithanco.com/tools/vgl/notation-reference/causal-loop-diagram-cld</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="causal-loop-diagram-cld">Causal Loop Diagram (CLD)</h1>
 <p>Systems analysis: what reinforces or balances what over time. Every element is a Stock whose amount changes according to its incoming connections.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -309,7 +309,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
     edge crowding -&gt; deaths: same;
 }
 </code></pre>
-<p><strong>Note</strong>: CLD graphs model feedback loops in systems. Loops with an even number of "opposite" links (including zero) are reinforcing loops that produce exponential growth or decline. Loops with an odd number of "opposite" links are balancing loops that reach equilibrium. In this example, the births-population loop is reinforcing, while the population-deaths loop and population-food supply-births loop are balancing.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/attack-defense-tree-adtree</guid><title>VGL Guide — Attack-Defense Tree (ADTree)</title><description>Security modelling after Kordy et al. (2014), extending classical attack trees</description><link>https://vithanco.com/tools/vgl/notation-reference/attack-defense-tree-adtree</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="attack-defense-tree-adtree">Attack-Defense Tree (ADTree)</h1>
+<p><strong>Note</strong>: CLD graphs model feedback loops in systems. Loops with an even number of "opposite" links (including zero) are reinforcing loops that produce exponential growth or decline. Loops with an odd number of "opposite" links are balancing loops that reach equilibrium. In this example, the births-population loop is reinforcing, while the population-deaths loop and population-food supply-births loop are balancing.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/attack-defense-tree-adtree</guid><title>VGL Guide — Attack-Defense Tree (ADTree)</title><description>Security modelling after Kordy et al. (2014), extending classical attack trees</description><link>https://vithanco.com/tools/vgl/notation-reference/attack-defense-tree-adtree</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="attack-defense-tree-adtree">Attack-Defense Tree (ADTree)</h1>
 <p>Security modelling after Kordy et al. (2014), extending classical attack trees with defense nodes at any level. Sufficient-cause logic: unjoined children are implicitly OR.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -398,7 +398,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
 }
 </code></pre>
 <p><strong>Note</strong>: ADTree graphs flow bottom-to-top with the root goal at the top and leaf actions at the bottom. The key feature is the distinction between refinement edges (solid lines for same-type decomposition) and countermeasure edges (dotted lines for opposite-type countering). This allows modelling the ongoing arms race between attacker and defender at any level of the tree. The root node can be either an Attack or Defense node, determining whether the proponent is the attacker or defender.</p>
-<p>The editor's <em>ADTree — Data Confidentiality</em> is the full Kordy tree, with firewalls, sensitivity training, a fire-escape break-in route and a strong-password attack subtree — and it leaves every edge type to inference.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/goal-tree</guid><title>VGL Guide — Goal Tree</title><description>Strategic planning with Theory of Constraints necessity logic (H. William</description><link>https://vithanco.com/tools/vgl/notation-reference/goal-tree</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="goal-tree">Goal Tree</h1>
+<p>The editor's <em>ADTree — Data Confidentiality</em> is the full Kordy tree, with firewalls, sensitivity training, a fire-escape break-in route and a strong-password attack subtree — and it leaves every edge type to inference.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/goal-tree</guid><title>VGL Guide — Goal Tree</title><description>Strategic planning with Theory of Constraints necessity logic (H. William</description><link>https://vithanco.com/tools/vgl/notation-reference/goal-tree</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="goal-tree">Goal Tree</h1>
 <p>Strategic planning with Theory of Constraints necessity logic (H. William Dettmer's Logical Thinking Process). The Goal Tree defines what an organization must achieve through a hierarchy of a single Goal, Critical Success Factors (CSFs), and Necessary Conditions (NCs).</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -457,7 +457,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
     edge nc9 -&gt; nc3: nc_to_nc;
 }
 </code></pre>
-<p><strong>Note</strong>: GoalTree graphs flow top-to-bottom with the single Goal at the top, Critical Success Factors directly below it, and Necessary Conditions expanding downward. NCs become progressively more detailed, specific, and functional at lower levels. The vertical placement implies nothing about importance — due to necessity logic, the lowest NC is equally important as a CSF because if you fail to accomplish it, nothing above it will happen. There are usually no more than 3-5 CSFs, and NCs can have lateral cross-connections between branches.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/evaporating-cloud-ec</guid><title>VGL Guide — Evaporating Cloud (EC)</title><description>A conflict-resolution tool using necessary-condition logic, flowing</description><link>https://vithanco.com/tools/vgl/notation-reference/evaporating-cloud-ec</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="evaporating-cloud-ec">Evaporating Cloud (EC)</h1>
+<p><strong>Note</strong>: GoalTree graphs flow top-to-bottom with the single Goal at the top, Critical Success Factors directly below it, and Necessary Conditions expanding downward. NCs become progressively more detailed, specific, and functional at lower levels. The vertical placement implies nothing about importance — due to necessity logic, the lowest NC is equally important as a CSF because if you fail to accomplish it, nothing above it will happen. There are usually no more than 3-5 CSFs, and NCs can have lateral cross-connections between branches.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/evaporating-cloud-ec</guid><title>VGL Guide — Evaporating Cloud (EC)</title><description>A conflict-resolution tool using necessary-condition logic, flowing</description><link>https://vithanco.com/tools/vgl/notation-reference/evaporating-cloud-ec</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="evaporating-cloud-ec">Evaporating Cloud (EC)</h1>
 <p>A conflict-resolution tool using necessary-condition logic, flowing left-to-right from Common Objective to Conflict. Multiple necessary inputs are implicitly AND; OR is explicit.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -522,7 +522,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
     edge needB -&gt; sol: need_to_solution;
 }
 </code></pre>
-<p><strong>Note</strong>: EC graphs flow left-to-right, with the Common Objective on the far left and the Conflict on the far right. The two branches represent competing Needs and Wants that create the conflict. Assumptions are surfaced on each edge to identify which assumption can be challenged. The Solution breaks the conflict by invalidating one or more assumptions. EC uses necessary condition logic — "In order to [Objective] we must provide [Need]". The Conflict node has no text label; it is rendered as a lightning bolt icon.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/prerequisite-tree-prt</guid><title>VGL Guide — Prerequisite Tree (PRT)</title><description>Planning with necessary-condition thinking, starting from the objective and</description><link>https://vithanco.com/tools/vgl/notation-reference/prerequisite-tree-prt</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="prerequisite-tree-prt">Prerequisite Tree (PRT)</h1>
+<p><strong>Note</strong>: EC graphs flow left-to-right, with the Common Objective on the far left and the Conflict on the far right. The two branches represent competing Needs and Wants that create the conflict. Assumptions are surfaced on each edge to identify which assumption can be challenged. The Solution breaks the conflict by invalidating one or more assumptions. EC uses necessary condition logic — "In order to [Objective] we must provide [Need]". The Conflict node has no text label; it is rendered as a lightning bolt icon.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/prerequisite-tree-prt</guid><title>VGL Guide — Prerequisite Tree (PRT)</title><description>Planning with necessary-condition thinking, starting from the objective and</description><link>https://vithanco.com/tools/vgl/notation-reference/prerequisite-tree-prt</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="prerequisite-tree-prt">Prerequisite Tree (PRT)</h1>
 <p>Planning with necessary-condition thinking, starting from the objective and working back to obstacles.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -588,7 +588,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
     edge obs5 -&gt; io2: obstacle_blocks_intermediate_objective;
 }
 </code></pre>
-<p><strong>Note</strong>: PRT graphs flow bottom-to-top like other TOC tools. The main Objective sits at the top, with Obstacles directly below showing what blocks it. IntermediateObjectives below the obstacles show what needs to be achieved to overcome them. The OR junctor indicates alternative paths - only one of the connected intermediate objectives needs to be achieved. PRT embodies "necessary condition thinking" - working backward from the goal to identify all prerequisites.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/transition-tree-trt</guid><title>VGL Guide — Transition Tree (TRT)</title><description>Step-by-step implementation planning (ToC). Shares CRT/FRT's node types but</description><link>https://vithanco.com/tools/vgl/notation-reference/transition-tree-trt</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="transition-tree-trt">Transition Tree (TRT)</h1>
+<p><strong>Note</strong>: PRT graphs flow bottom-to-top like other TOC tools. The main Objective sits at the top, with Obstacles directly below showing what blocks it. IntermediateObjectives below the obstacles show what needs to be achieved to overcome them. The OR junctor indicates alternative paths - only one of the connected intermediate objectives needs to be achieved. PRT embodies "necessary condition thinking" - working backward from the goal to identify all prerequisites.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/transition-tree-trt</guid><title>VGL Guide — Transition Tree (TRT)</title><description>Step-by-step implementation planning (ToC). Shares CRT/FRT's node types but</description><link>https://vithanco.com/tools/vgl/notation-reference/transition-tree-trt</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="transition-tree-trt">Transition Tree (TRT)</h1>
 <p>Step-by-step implementation planning (ToC). Shares CRT/FRT's node types but answers "how do we <em>cause</em> the change?", giving the step-by-step action sequence.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -658,7 +658,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
     edge g2 -&gt; ie4: given_causes_intermediate;
 }
 </code></pre>
-<p><strong>Note</strong>: TRT graphs flow bottom-to-top like other TOC tools. The focus is on detailed implementation planning - answering "HOW TO CAUSE the change?" Unlike FRT which validates that solutions will work, TRT provides the step-by-step action sequence needed to implement those solutions. Changeable nodes represent the specific actions to take, and the graph shows how those actions combine through intermediate effects to achieve desirable outcomes. The AndJunctor indicates multiple conditions must occur together for an effect.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/future-reality-tree-frt</guid><title>VGL Guide — Future Reality Tree (FRT)</title><description>Solution validation (ToC), showing how proposed solutions lead to desired</description><link>https://vithanco.com/tools/vgl/notation-reference/future-reality-tree-frt</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="future-reality-tree-frt">Future Reality Tree (FRT)</h1>
+<p><strong>Note</strong>: TRT graphs flow bottom-to-top like other TOC tools. The focus is on detailed implementation planning - answering "HOW TO CAUSE the change?" Unlike FRT which validates that solutions will work, TRT provides the step-by-step action sequence needed to implement those solutions. Changeable nodes represent the specific actions to take, and the graph shows how those actions combine through intermediate effects to achieve desirable outcomes. The AndJunctor indicates multiple conditions must occur together for an effect.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/future-reality-tree-frt</guid><title>VGL Guide — Future Reality Tree (FRT)</title><description>Solution validation (ToC), showing how proposed solutions lead to desired</description><link>https://vithanco.com/tools/vgl/notation-reference/future-reality-tree-frt</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="future-reality-tree-frt">Future Reality Tree (FRT)</h1>
 <p>Solution validation (ToC), showing how proposed solutions lead to desired outcomes. The same node types as CRT, both being sufficient-cause Theory of Constraints tools. The difference is use: FRT starts from solutions (<code>Changeable</code> injections) and builds upward to desirable effects.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -726,7 +726,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
     edge g1 -&gt; ie2: given_causes_intermediate;
 }
 </code></pre>
-<p><strong>Note</strong>: FRT graphs also flow bottom-to-top like CRT, but with a different focus. While CRT starts with problems (Undesirable Effects) and traces back to root causes, FRT starts with proposed solutions (Changeable/injections) and traces forward to show how they achieve desired outcomes. This makes FRT ideal for validating that proposed changes will actually deliver the expected benefits.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/current-reality-tree-crt</guid><title>VGL Guide — Current Reality Tree (CRT)</title><description>Root cause analysis (Theory of Constraints), showing how causes lead to</description><link>https://vithanco.com/tools/vgl/notation-reference/current-reality-tree-crt</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="current-reality-tree-crt">Current Reality Tree (CRT)</h1>
+<p><strong>Note</strong>: FRT graphs also flow bottom-to-top like CRT, but with a different focus. While CRT starts with problems (Undesirable Effects) and traces back to root causes, FRT starts with proposed solutions (Changeable/injections) and traces forward to show how they achieve desired outcomes. This makes FRT ideal for validating that proposed changes will actually deliver the expected benefits.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/current-reality-tree-crt</guid><title>VGL Guide — Current Reality Tree (CRT)</title><description>Root cause analysis (Theory of Constraints), showing how causes lead to</description><link>https://vithanco.com/tools/vgl/notation-reference/current-reality-tree-crt</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="current-reality-tree-crt">Current Reality Tree (CRT)</h1>
 <p>Root cause analysis (Theory of Constraints), showing how causes lead to undesirable effects. Sufficient-cause logic, so multiple unjoined causes feeding one effect are implicitly OR; only AND is explicit.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -802,7 +802,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
     edge ie2 -&gt; de1: intermediate_causes_desirable;
 }
 </code></pre>
-<p><strong>Note</strong>: CRT graphs flow bottom-to-top, with root causes (Given and Changeable) at the bottom and Undesirable Effects at the top. CRT uses sufficient-cause logic: multiple unjoined arrows into the same effect are read as OR (any one is sufficient). The AndJunctor is the explicit exception, indicating multiple conditions that must be true together. Labels for junctors are typically empty as the icon conveys the meaning.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/concept-map</guid><title>VGL Guide — Concept Map</title><description>Domain vocabulary as falsifiable propositions. The title is a Guiding</description><link>https://vithanco.com/tools/vgl/notation-reference/concept-map</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="concept-map">Concept Map</h1>
+<p><strong>Note</strong>: CRT graphs flow bottom-to-top, with root causes (Given and Changeable) at the bottom and Undesirable Effects at the top. CRT uses sufficient-cause logic: multiple unjoined arrows into the same effect are read as OR (any one is sufficient). The AndJunctor is the explicit exception, indicating multiple conditions that must be true together. Labels for junctors are typically empty as the icon conveys the meaning.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/concept-map</guid><title>VGL Guide — Concept Map</title><description>Domain vocabulary as falsifiable propositions. The title is a Guiding</description><link>https://vithanco.com/tools/vgl/notation-reference/concept-map</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="concept-map">Concept Map</h1>
 <p>Domain vocabulary as falsifiable propositions. The title is a <strong>Guiding Question</strong> that decides what belongs on the map, and every</p>
 <p><code>Concept → Relation → Concept</code> chain must read as a falsifiable sentence.</p>
 <p><strong>Node types</strong></p>
@@ -838,7 +838,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
 }
 </code></pre>
 <p>Relationships are nodes rather than edge labels, which is what makes the propositions readable: "Student learns Subject", "Subject requires Practice". Never leave a concept unconnected. Reuse a single <code>Relation</code> node when several concepts share it ("Dog is a Mammal", "Cat is a Mammal") — but note that a relation with <strong>both</strong> multiple inbound and multiple outbound edges asserts every combination: all n × m propositions must be valid. If any is circular or meaningless, split the relation.</p>
-<p>The editor's <em>ConceptMap — How Learning Works</em> is a variant of this map that names every edge type explicitly, including the <code>EmphasizedConcept</code> pair.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/impact-mapping</guid><title>VGL Guide — Impact Mapping</title><description>A strategic planning graph showing goals, actors, impacts, and deliverables.</description><link>https://vithanco.com/tools/vgl/notation-reference/impact-mapping</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="impact-mapping">Impact Mapping</h1>
+<p>The editor's <em>ConceptMap — How Learning Works</em> is a variant of this map that names every edge type explicitly, including the <code>EmphasizedConcept</code> pair.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/impact-mapping</guid><title>VGL Guide — Impact Mapping</title><description>A strategic planning graph showing goals, actors, impacts, and deliverables.</description><link>https://vithanco.com/tools/vgl/notation-reference/impact-mapping</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="impact-mapping">Impact Mapping</h1>
 <p>A strategic planning graph showing goals, actors, impacts, and deliverables.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -875,7 +875,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
     edge i2 -&gt; d3: impact_to_deliverable;
     edge i3 -&gt; d4: impact_to_deliverable;
 }
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/bbs</guid><title>VGL Guide — BBS</title><description>Benefit breakdown and analysis.</description><link>https://vithanco.com/tools/vgl/notation-reference/bbs</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="bbs">BBS</h1>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/bbs</guid><title>VGL Guide — BBS</title><description>Benefit breakdown and analysis.</description><link>https://vithanco.com/tools/vgl/notation-reference/bbs</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="bbs">BBS</h1>
 <p>Benefit breakdown and analysis.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -921,7 +921,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
     edge chg1 -&gt; chg2: change_requires_change;
     edge enb1 -&gt; enb2: enabler_requires_enabler;
 }
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/ibis</guid><title>VGL Guide — IBIS</title><description>Decision-making and argumentation.</description><link>https://vithanco.com/tools/vgl/notation-reference/ibis</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="ibis">IBIS</h1>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/ibis</guid><title>VGL Guide — IBIS</title><description>Decision-making and argumentation.</description><link>https://vithanco.com/tools/vgl/notation-reference/ibis</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="ibis">IBIS</h1>
 <p>Decision-making and argumentation.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -973,7 +973,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
     edge root -&gt; ans1: answered_by "Main path";
     edge ans1 -&gt; q_perf: answered_by [style: dashed; weight: 5];
 }
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference</guid><title>VGL Guide — Notation reference</title><description>"One section per built-in notation: its node types, its edge types, and a"</description><link>https://vithanco.com/tools/vgl/notation-reference</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<p>One section per built-in notation: its node types, its edge types, and a complete worked example. Edge types constrain which connections make sense in the notation's domain, and most are inferred from the node types, so you rarely name one explicitly.</p>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference</guid><title>VGL Guide — Notation reference</title><description>"One section per built-in notation: its node types, its edge types, and a"</description><link>https://vithanco.com/tools/vgl/notation-reference</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<p>One section per built-in notation: its node types, its edge types, and a complete worked example. Edge types constrain which connections make sense in the notation's domain, and most are inferred from the node types, so you rarely name one explicitly.</p>
 <p>The editor's <strong>Examples…</strong> picker loads any of seventeen graphs straight into the text area, and most of the examples below are the same graph. Where the guide's version is the simpler one, the note under the example says so — the editor carries a fuller variant worth opening. Four of the editor's examples have no counterpart here at all: two further IBIS graphs (<em>Complex System Architecture Decision</em>, <em>Software Project Planning</em>), one showing folded groups (<em>System Architecture with Folded Modules</em>), and the BBS graph reproduced below. The two syntax examples in <a href="https://vithanco.com/tools/vgl/concepts/%23type-inference-and-minimal-syntax">Concepts</a> are guide-only.</p>
 <h2 id="in-this-section">In this section</h2>
 <ul>
@@ -992,7 +992,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
  <li><a href="https://vithanco.com/tools/vgl/notation-reference/decision-tree/">Decision Tree</a> — Decision logic as questions, choices and outcomes.</li>
  <li><a href="https://vithanco.com/tools/vgl/notation-reference/timeline/">Timeline</a> — Events across multiple tracks on a shared time axis, aligned by column.</li>
  <li><a href="https://vithanco.com/tools/vgl/notation-reference/c4/">C4</a> — Software-architecture diagrams in Simon Brown's C4 model: people, software</li>
-</ul>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notations</guid><title>VGL Guide — Notations</title><description>Fifteen notations are built in. Each has its own section in the</description><link>https://vithanco.com/tools/vgl/notations</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="notations">Notations</h1>
+</ul>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notations</guid><title>VGL Guide — Notations</title><description>Fifteen notations are built in. Each has its own section in the</description><link>https://vithanco.com/tools/vgl/notations</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="notations">Notations</h1>
 <p>Fifteen notations are built in. Each has its own section in the <a href="https://vithanco.com/tools/vgl/notation-reference/">notation reference</a>, giving its node types, its edge types and a complete worked example.</p>
 <table>
  <thead>
@@ -1147,7 +1147,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
     edge r1 -&gt; c2
     edge c1 -&gt; a1
 }
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/concepts</guid><title>VGL Guide — Concepts</title><description>Every VGL document declares a notation, which fixes the node and edge types</description><link>https://vithanco.com/tools/vgl/concepts</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<h1 id="concepts">Concepts</h1>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/concepts</guid><title>VGL Guide — Concepts</title><description>Every VGL document declares a notation, which fixes the node and edge types</description><link>https://vithanco.com/tools/vgl/concepts</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<h1 id="concepts">Concepts</h1>
 <h3 id="the-document">The document</h3>
 <p>Every VGL document declares a notation, which fixes the node and edge types available:</p>
 <pre><code>vgraph &lt;graph_id&gt;: &lt;NOTATION&gt; "&lt;graph_label&gt;" {
@@ -1254,7 +1254,7 @@ node ude1: UndesirableEffect "Suppliers display a less uniform front";
     edge a1 -&gt; p1;      // inferred: supports
     edge a1 -&gt; c1;      // inferred: objects_to
 }
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl</guid><title>Vithanco Graph Language (VGL) Guide</title><description>Learn the VGL syntax for creating and editing graphs in text format</description><link>https://vithanco.com/tools/vgl</link><pubDate>Thu, 27 Aug 2026 00:59:03 +0200</pubDate><content:encoded><![CDATA[<p>VGL is a human-readable text format for creating and editing graphs — a declarative syntax for nodes, edges, groups and their attributes.</p>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl</guid><title>Vithanco Graph Language (VGL) Guide</title><description>Learn the VGL syntax for creating and editing graphs in text format</description><link>https://vithanco.com/tools/vgl</link><pubDate>Fri, 28 Aug 2026 18:09:22 +0200</pubDate><content:encoded><![CDATA[<p>VGL is a human-readable text format for creating and editing graphs — a declarative syntax for nodes, edges, groups and their attributes.</p>
 <ul>
  <li><a href="https://vithanco.com/tools/vgl/concepts/">Concepts</a></li>
  <li><a href="https://vithanco.com/tools/vgl/notations/">Notations</a></li>
@@ -1277,52 +1277,50 @@ node ude1: UndesirableEffect "Suppliers display a less uniform front";
  <li><a href="https://vithanco.com/tools/vgl/grammar/">Grammar</a></li>
 </ul>
 <h2 id="best-practices">Best practices</h2>
-<p>Choose descriptive ids (<code>security_question</code>, not <code>n1</code>) and name them consistently. Let edge types be inferred. Use groups to reflect the domain's real hierarchy, and comments to explain the relationships that are not obvious. Start minimal and add attributes only where they earn their place.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/causal-loop-diagram</guid><title>Causal Loop Diagram Notation</title><description>Understanding complex systems through Feedback Loops and Causal Loop Diagrams</description><link>https://vithanco.com/notations/causal-loop-diagram</link><pubDate>Tue, 18 Aug 2026 19:33:52 +0200</pubDate><content:encoded><![CDATA[<h2 id="why-use-causal-loop-diagrams-clds">Why use Causal Loop Diagrams (CLDs)?</h2>
-<p>Causal Loop Diagrams (CLDs) are a way to capture systems, analyse them and plan to influence them. CLDs explain the long-term behaviour of systems which is otherwise difficult to understand based on if you only look at the current as-is snapshot.</p>
-<p>CLDs describe systems via "stocks" (nodes) and (edges). Much of the day-to-day world can be accurately described as such a system. Let's look at a simple example: A bank account and the interest earned.</p>
-<figure class="vgl-render img-std"> 
- <img src="https://vithanco.com/vgl-generated/cld-bank-account.svg" alt="Banking Account as a Simple Causal Loop Diagram" onclick="openLightbox(this)" /> 
- <figcaption>
-  Banking Account as a Simple Causal Loop Diagram
- </figcaption> 
-</figure>
+<p>Choose descriptive ids (<code>security_question</code>, not <code>n1</code>) and name them consistently. Let edge types be inferred. Use groups to reflect the domain's real hierarchy, and comments to explain the relationships that are not obvious. Start minimal and add attributes only where they earn their place.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vithanco2vgl</guid><title>Converting Old Vithanco Documents to VGL</title><description>A free command line tool that converts documents from the original Vithanco Mac app into VGL text files.</description><link>https://vithanco.com/tools/vithanco2vgl</link><pubDate>Fri, 28 Aug 2026 18:09:19 +0200</pubDate><content:encoded><![CDATA[<p>If you have diagrams from the original Vithanco Mac app — files ending in</p>
+<p><code>.vithanco</code>, <code>.ibisVT</code>, <code>.tocVT</code> or <code>.cmapVT</code> — <strong>vithanco2vgl</strong> turns them into <a href="https://vithanco.com/tools/vgl/">VGL</a>, the text format Vithanco reads today. Your originals are never modified.</p>
+<p><strong><a href="https://vithanco.com/tools/vithanco2vgl.zip">Download vithanco2vgl</a></strong> — 4.5 MB.</p>
+<p>Free, signed and notarised by Apple, so it runs without a security warning. It needs macOS 15 or later, and works on both Apple Silicon and Intel Macs.</p>
+<h2 id="installing">Installing</h2>
+<p>Unzip it. You get a folder holding two items:</p>
+<pre><code>vithanco2vgl/
+    vithanco2vgl                              the tool
+    VithancoDataModel_VithancoDataModel.bundle  the old document format
+</code></pre>
+<p><strong>Keep them together.</strong> The tool reads the old file format out of that bundle and will not start without it. Move the whole folder somewhere sensible and call the tool by its path, or put both items on your <code>PATH</code>.</p>
+<h2 id="converting">Converting</h2>
+<p>Point it at a document to see the VGL:</p>
+<pre><code>vithanco2vgl "Why Vithanco.vithanco"
+</code></pre>
+<p>Point it at a folder to convert everything in it, writing each <code>.vgl</code> next to its original. Add <code>-r</code> to include subfolders:</p>
+<pre><code>vithanco2vgl -r ~/Documents/Diagrams
+</code></pre>
+<p>Other options: <code>-v</code> lists what each conversion had to change, <code>--force</code> overwrites <code>.vgl</code> files that already exist, and <code>--inspect</code> reports what a document contains — its notation, its node types, and how many nodes use each — without converting anything.</p>
+<h2 id="what-comes-across">What comes across</h2>
+<p>Nodes, edges, labels, links, annotations, groups with their folded state and colour, icons, line widths and document metadata all carry over. Positions do not, and do not need to: neither format stores them, because both lay a diagram out from its structure.</p>
+<p>The notation is read out of the document itself rather than guessed from the file extension, so IBIS, Concept Maps, Benefit Breakdown Structures, Decision Trees, Causal Loop Diagrams, Impact Maps and the Theory of Constraints notations all arrive as themselves. Documents saved by very early versions of the app, which recorded no notation identifier at all, are recognised by name.</p>
+<h2 id="what-it-tells-you">What it tells you</h2>
+<p>Two notations are never quite the same, and where the conversion had to make a judgement it says so — in the terminal with <code>-v</code>, and as a comment at the top of the <code>.vgl</code> it writes. A node type with no counterpart today keeps its own definition in a <code>vnotation</code> block rather than being dropped. A necessary condition that the old app drew pointing one way and VGL draws the other is turned round, and counted. Nothing is discarded quietly.</p>
+<p>If you defined your own notation in the old app, it comes across as a</p>
+<p><code>vnotation</code> block with its node types, colours and icons intact, so the diagram still reads the way you drew it.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/arithmetic</guid><title>The Arithmetic Notation</title><description>Draw a simple equation as a graph — numbers, the four operators, and an Equals node that checks the answer and turns green or red</description><link>https://vithanco.com/notations/arithmetic</link><pubDate>Thu, 27 Aug 2026 05:51:37 +0200</pubDate><content:encoded><![CDATA[<h2 id="why-use-arithmetic">Why use Arithmetic?</h2>
+<p>Most Vithanco Notations help you structure an argument, a plan or a system. Arithmetic is different: it is a <strong>small, complete notation for a single equation</strong>, built for a kids' maths game. Numbers are nodes, the four operators are nodes, and an <code>=</code> node asserts that everything meeting there has the same value — and tells you whether it does.</p>
+<p>It is deliberately tiny. There is no chaining of operators, no brackets and no algebraic variables. Just numbers, one operator at a time, and equality.</p>
+<p>Use it for:</p>
 <ul>
- <li>The amount of the Bank Balance (a stock) will affect the amount of the Earned Interest (another stock), as represented by the connection, pointing from Bank Balance to Earned Interest.</li>
- <li>Since an increase in Bank balance increases Earned Interest, this link is of the same kind, meaning more results in more. Interestingly, this even works for a negative amount in your bank account.</li>
- <li>The Earned interest gets added to the Bank balance, also a link of the same kind, represented by the bottom connection.</li>
- <li>The causal effect between these nodes forms a positive <a href="https://en.wikipedia.org/wiki/Reinforcing_loop " reinforcing loop"">reinforcing loop</a>, represented by the icon in the middle containing an "R" and showing the loop direction (clockwise).</li>
+ <li>Building a simple equation as a diagram: two operands, one operator, one result.</li>
+ <li>A puzzle where one connection is missing and a value must be chosen to complete it correctly.</li>
+ <li>Asserting that two expressions are equal — for example <code>7 − 4 = 2 + 1</code> — without naming which side is "the answer".</li>
 </ul>
-<p>This system is only a part of a bigger system that would include salary payments and withdrawals to live. But if left alone, the reinforcing loop points out that this system would lead to an uninterrupted growth of the two stocks involved.</p>
-<p>A CLD is very useful to identify the loops that affect the systems' behaviour. Especially the separation between balancing and reinforcing loops provides meaningful insights into a system's behaviour as shown in the following table.</p>
-<table>
- <thead>
-  <tr>
-   <th>Loop Type</th>
-   <th>Description</th>
-   <th>Behaviour</th>
-  </tr>
- </thead>
- <tbody>
-  <tr>
-   <td>Balancing</td>
-   <td>Balancing loops have an odd number of opposite connections (negative links).</td>
-   <td>Balancing loops are associated with reaching a plateau.</td>
-  </tr>
-  <tr>
-   <td>Reinforcing</td>
-   <td>Reinforcing loops have an even number of opposite connections (negative links,</td>
-   <td>please note that zero also is even). Reinforcing loops are associated with exponential increases/decreases.</td>
-  </tr>
- </tbody>
-</table>
-<h2 id="cld-notation-description">CLD Notation Description</h2>
-<p>CLDs have only one single node type. Add more node types if you want to differentiate further. The easiest way is described <a href="https://vithanco.com/tools/Help/Expert_Concepts/create-a-node-type-variant">here</a>.</p>
+<h2 id="how-it-works">How it Works</h2>
+<p>Arithmetic rests on one idea that is unusual if you are used to writing equations as text: <strong><code>=</code> is a node, not a symbol between two halves.</strong> It works like the AND junctor in an <a href="https://vithanco.com/notations/attack-defense-tree">Attack-Defense Tree</a> or the OR junctor in a <a href="https://vithanco.com/notations/TOC/current-reality-tree">Current Reality Tree</a> — a place where several things meet and something is asserted about all of them at once. Here the assertion is <em>these are all the same number</em>.</p>
+<p>That is what lets <code>7 − 4 = 2 + 1</code> be drawn with no answer node at all: two operators, one Equals, nothing privileged as "the result".</p>
 <figure class="vgl-render img-std"> 
- <img src="https://vithanco.com/vgl-generated/meta-CLD.svg" alt="The CLD Notation Structure" onclick="openLightbox(this)" /> 
+ <img src="https://vithanco.com/vgl-generated/meta-Arithmetic.svg" alt="The Arithmetic Notation Structure" onclick="openLightbox(this)" /> 
  <figcaption>
-  The CLD Notation Structure
+  The Arithmetic Notation Structure
  </figcaption> 
 </figure>
+<h3 id="the-building-blocks">The Building Blocks</h3>
 <table>
  <thead>
   <tr>
@@ -1333,45 +1331,169 @@ node ude1: UndesirableEffect "Suppliers display a less uniform front";
  </thead>
  <tbody>
   <tr>
-   <td>Stock</td>
-   <td>Everything is a stock in a CLD. Stock amounts can change over time, based on incoming connections. Currently this is not evaluated/simulated by Vithanco.</td>
-   <td>Stock</td>
+   <td>Number</td>
+   <td>A value — either given, or filled in as a candidate answer. Its label <em>is</em> its value.</td>
+   <td>Plus, Minus, Times, Divide</td>
+  </tr>
+  <tr>
+   <td>Plus</td>
+   <td>Addition: takes two operands, produces their sum.</td>
+   <td>Equals</td>
+  </tr>
+  <tr>
+   <td>Minus</td>
+   <td>Subtraction: takes two operands, produces their difference.</td>
+   <td>Equals</td>
+  </tr>
+  <tr>
+   <td>Times</td>
+   <td>Multiplication: takes two operands, produces their product.</td>
+   <td>Equals</td>
+  </tr>
+  <tr>
+   <td>Divide</td>
+   <td>Division: takes two operands, produces their quotient.</td>
+   <td>Equals</td>
+  </tr>
+  <tr>
+   <td>Equals</td>
+   <td>Asserts that everything connected to it — plus its own typed value, if any — shares the same value.</td>
+   <td>None</td>
   </tr>
  </tbody>
 </table>
-<p>The CLD Notation has 2 different Edge Types.</p>
+<p>The operators are drawn as coloured glyph circles (<code>+</code>, <code>−</code>, <code>×</code>, <code>:</code>) rather than boxes, because there is no prose in them to frame. For the same reason you cannot rename an operator by double-clicking it: it has no user text.</p>
+<p>Each operator has three edge types — a first operand, a second operand, and a result:</p>
 <table>
  <thead>
   <tr>
    <th>Edge Type</th>
    <th>Description</th>
-   <th>Marked with</th>
+   <th>From</th>
+   <th>To</th>
   </tr>
  </thead>
  <tbody>
   <tr>
-   <td>Systems Thinking - Same (Positive causal Link)</td>
-   <td>Positive causal link means that the two nodes change in the same direction, i.e. if the node in which the link starts decreases, the other node also decreases. Similarly, if the node in which the link starts increases, the other node increases.</td>
-   <td>"+" (positive)</td>
+   <td><code>plus_first_operand</code> / <code>plus_second_operand</code></td>
+   <td>The two numbers added.</td>
+   <td>Number</td>
+   <td>Plus</td>
   </tr>
   <tr>
-   <td>Systems Thinking - Opposite (Negative causal Link)</td>
-   <td>Negative causal link means that the two nodes change in opposite directions, i.e. if the node in which the link starts increases, then the other node decreases, and vice versa.</td>
-   <td>"−" (negative)</td>
+   <td><code>plus_result</code></td>
+   <td>The sum, asserted equal at the Equals node.</td>
+   <td>Plus</td>
+   <td>Equals</td>
+  </tr>
+  <tr>
+   <td><code>minus_first_operand</code></td>
+   <td>The number subtracted from.</td>
+   <td>Number</td>
+   <td>Minus</td>
+  </tr>
+  <tr>
+   <td><code>minus_second_operand</code></td>
+   <td>The number subtracted.</td>
+   <td>Number</td>
+   <td>Minus</td>
+  </tr>
+  <tr>
+   <td><code>minus_result</code></td>
+   <td>The difference, asserted equal at the Equals node.</td>
+   <td>Minus</td>
+   <td>Equals</td>
+  </tr>
+  <tr>
+   <td><code>times_first_operand</code> / <code>times_second_operand</code></td>
+   <td>The two factors.</td>
+   <td>Number</td>
+   <td>Times</td>
+  </tr>
+  <tr>
+   <td><code>times_result</code></td>
+   <td>The product, asserted equal at the Equals node.</td>
+   <td>Times</td>
+   <td>Equals</td>
+  </tr>
+  <tr>
+   <td><code>divide_first_operand</code></td>
+   <td>The dividend.</td>
+   <td>Number</td>
+   <td>Divide</td>
+  </tr>
+  <tr>
+   <td><code>divide_second_operand</code></td>
+   <td>The divisor.</td>
+   <td>Number</td>
+   <td>Divide</td>
+  </tr>
+  <tr>
+   <td><code>divide_result</code></td>
+   <td>The quotient, asserted equal at the Equals node.</td>
+   <td>Divide</td>
+   <td>Equals</td>
   </tr>
  </tbody>
 </table>
-<p>The CLD Notation introduces a new visual element, the loop indicator which is presented for each automatically identified loop.</p>
-<p>A loop can either be clockwise or counter-clockwise. In addition, there exists balancing and reinforcing loops. Together these two types result in one of four different loop indicators.</p>
-<figure class="img-std"> 
- <img src="https://vithanco.com/notations/causal-loop-diagram/4-loop-indicator.jpg" alt="The four different loop indicators" onclick="openLightbox(this)" /> 
+<p>An operator accepts <strong>at most one</strong> first operand and one second operand, and produces <strong>at most one</strong> result. Nothing bounds what arrives at an Equals node, and nothing is required: an incomplete puzzle is the normal mid-play state, and several results meeting at one Equals is precisely what the node is for.</p>
+<h3 id="naming-the-operand-edges">Naming the Operand Edges</h3>
+<p>Everywhere else in <a href="https://vithanco.com/tools/vgl">VGL</a> you can usually leave the edge type out and let it be inferred from the node types at each end. Arithmetic is the exception on the operand side: <code>Number → Plus</code> matches <em>two</em> edge types, so VGL cannot tell a first operand from a second one.</p>
+<pre><code>edge two -&gt; plusOp;                       // ambiguous — rejected
+edge two -&gt; plusOp: plus_first_operand;   // explicit — fine
+</code></pre>
+<p>Result edges are unambiguous (<code>Plus → Equals</code> has only one type), so <code>edge plusOp -&gt; eq;</code> works. Writing it out in full is still clearer.</p>
+<h2 id="a-first-equation">A First Equation</h2>
+<p>The <code>Equals</code> node carries the <strong>expected answer as its own label</strong>. Type into it to set the target.</p>
+<figure class="vgl-render img-std"> 
+ <img src="https://vithanco.com/vgl-generated/arithmetic-first-equation.svg" alt="2 + 5 = 7 drawn in the Arithmetic notation" onclick="openLightbox(this)" /> 
  <figcaption>
-  The four different loop indicators
+  2 + 5 = 7 — the operator agrees with the expected answer, so the Equals node is green
  </figcaption> 
 </figure>
-<p>One of these is created for every new loop. If you move your mouse over the loop indicator then it will be highlighted, together with the corresponding loop.</p>
-<h2 id="background-on-clds"><strong>Background on CLDs</strong></h2>
-<p>Extensive research was done regarding systems (see as a starting point: <a href="https://www.goodreads.com/book/show/3828902-thinking-in-systems">Donella Meadows' Thinking in Systems</a>) as part of a body of knowledge called <a href="https://thesystemsthinker.com/making-the-jump-to-systems-thinking/">systems thinking</a>. One interesting way of accessing systems thinking knowledge is by learning about the so-called <a href="https://en.wikipedia.org/wiki/System_archetype">archetypes</a>.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/timeline</guid><title>Timeline Notation</title><description>Visualise events across parallel tracks aligned to a shared time axis — extensible with custom event types via vnotation</description><link>https://vithanco.com/notations/timeline</link><pubDate>Mon, 17 Aug 2026 16:40:46 +0200</pubDate><content:encoded><![CDATA[<h2 id="why-use-timelines">Why use Timelines?</h2>
+<pre><code>vgraph arithmeticFirstEquation: Arithmetic "2 + 5 = 7" {
+    node two: Number "2";
+    node five: Number "5";
+    node plusOp: Plus;
+    node eq: Equals "7";
+
+    edge two -&gt; plusOp: plus_first_operand;
+    edge five -&gt; plusOp: plus_second_operand;
+    edge plusOp -&gt; eq: plus_result;
+}
+</code></pre>
+<p>Graphs flow <strong>left to right</strong>, so the diagram reads the way the equation does and ends on the <code>=</code>.</p>
+<h2 id="right-and-wrong">Right and Wrong</h2>
+<p>The Equals node is the feedback mechanism. It has three states:</p>
+<ul>
+ <li><strong>Neutral</strong> (grey) — not enough is connected yet to judge. If it has its own expected value it shows it, as <code>= 7</code>.</li>
+ <li><strong>Correct</strong> (green) — everything meeting there agrees. Shows the agreed value.</li>
+ <li><strong>Incorrect</strong> (red) — they disagree. Shows <code>computed ≠ expected</code>, so the two numbers appear in a fixed, readable order rather than an arbitrary one.</li>
+</ul>
+<p>Here are all four operators, two right and two wrong:</p>
+<figure class="vgl-render img-std"> 
+ <img src="https://vithanco.com/vgl-generated/arithmetic-right-and-wrong.svg" alt="Four equations in the Arithmetic notation, two correct and two incorrect" onclick="openLightbox(this)" /> 
+ <figcaption>
+  Two correct equations in green, two incorrect ones in red showing computed ≠ expected
+ </figcaption> 
+</figure>
+<p>Note that a Number node can feed more than one operator — <code>three</code> and <code>four</code> are each used twice above.</p>
+<h2 id="equality-without-an-answer">Equality Without an Answer</h2>
+<p>Because <code>=</code> is a junctor rather than a separator, you can assert that two expressions are equal without deciding which one is the answer. Give the Equals node no label at all and connect two results to it:</p>
+<figure class="vgl-render img-std"> 
+ <img src="https://vithanco.com/vgl-generated/arithmetic-both-sides.svg" alt="7 − 4 = 2 + 1 drawn with two operators meeting at one Equals node" onclick="openLightbox(this)" /> 
+ <figcaption>
+  7 − 4 = 2 + 1 — two operators meet at one Equals node, and neither side is 'the answer'
+ </figcaption> 
+</figure>
+<p>Both sides evaluate to 3, so the node turns green and shows <code>= 3</code>. Had they disagreed, it would have shown the two computed values either side of a <code>≠</code>.</p>
+<h2 id="quality-checks">Quality Checks</h2>
+<p>Arithmetic ships one quality check: <strong>division by zero</strong>. If a Divide node has both operands connected and the divisor is zero, Vithanco reports a warning naming the node. An operator that is simply missing an operand is <em>not</em> flagged — that is a puzzle mid-play, not a mistake.</p>
+<h2 id="try-it-yourself">Try it Yourself</h2>
+<p>Edit the VGL below and click "Render". Try changing an expected answer to see a green node turn red, or delete an operand edge to watch the node go neutral:</p>
+<iframe src="https://vithanco.com/vgraph/index.html%3Fvgl=vgraph%2520arithmeticRightAndWrong%253A%2520Arithmetic%2520%2522Right%2520and%2520Wrong%2522%2520%257B%250A%2520%2520%2520%2520node%2520two%253A%2520Number%2520%25222%2522%253B%250A%2520%2520%2520%2520node%2520five%253A%2520Number%2520%25225%2522%253B%250A%2520%2520%2520%2520node%2520eight%253A%2520Number%2520%25228%2522%253B%250A%2520%2520%2520%2520node%2520three%253A%2520Number%2520%25223%2522%253B%250A%2520%2520%2520%2520node%2520four%253A%2520Number%2520%25224%2522%253B%250A%2520%2520%2520%2520node%2520twelve%253A%2520Number%2520%252212%2522%253B%250A%250A%2520%2520%2520%2520node%2520plusOp%253A%2520Plus%253B%250A%2520%2520%2520%2520node%2520minusOp%253A%2520Minus%253B%250A%2520%2520%2520%2520node%2520timesOp%253A%2520Times%253B%250A%2520%2520%2520%2520node%2520divideOp%253A%2520Divide%253B%250A%250A%2520%2520%2520%2520node%2520eqPlus%253A%2520Equals%2520%25227%2522%253B%250A%2520%2520%2520%2520node%2520eqMinus%253A%2520Equals%2520%25225%2522%253B%250A%2520%2520%2520%2520node%2520eqTimes%253A%2520Equals%2520%252211%2522%253B%250A%2520%2520%2520%2520node%2520eqDivide%253A%2520Equals%2520%25224%2522%253B%250A%250A%2520%2520%2520%2520edge%2520two%2520-%253E%2520plusOp%253A%2520plus_first_operand%253B%250A%2520%2520%2520%2520edge%2520five%2520-%253E%2520plusOp%253A%2520plus_second_operand%253B%250A%2520%2520%2520%2520edge%2520plusOp%2520-%253E%2520eqPlus%253A%2520plus_result%253B%250A%250A%2520%2520%2520%2520edge%2520eight%2520-%253E%2520minusOp%253A%2520minus_first_operand%253B%250A%2520%2520%2520%2520edge%2520three%2520-%253E%2520minusOp%253A%2520minus_second_operand%253B%250A%2520%2520%2520%2520edge%2520minusOp%2520-%253E%2520eqMinus%253A%2520minus_result%253B%250A%250A%2520%2520%2520%2520edge%2520three%2520-%253E%2520timesOp%253A%2520times_first_operand%253B%250A%2520%2520%2520%2520edge%2520four%2520-%253E%2520timesOp%253A%2520times_second_operand%253B%250A%2520%2520%2520%2520edge%2520timesOp%2520-%253E%2520eqTimes%253A%2520times_result%253B%250A%250A%2520%2520%2520%2520edge%2520twelve%2520-%253E%2520divideOp%253A%2520divide_first_operand%253B%250A%2520%2520%2520%2520edge%2520four%2520-%253E%2520divideOp%253A%2520divide_second_operand%253B%250A%2520%2520%2520%2520edge%2520divideOp%2520-%253E%2520eqDivide%253A%2520divide_result%253B%250A%257D%250A" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive Arithmetic Editor"></iframe>
+<p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p>
+<p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="https://vithanco.com/tools/vgl">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/timeline</guid><title>Timeline Notation</title><description>Visualise events across parallel tracks aligned to a shared time axis — extensible with custom event types via vnotation</description><link>https://vithanco.com/notations/timeline</link><pubDate>Thu, 27 Aug 2026 01:04:45 +0200</pubDate><content:encoded><![CDATA[<h2 id="why-use-timelines">Why use Timelines?</h2>
 <p>Timelines visualise how events across different domains relate to each other chronologically and causally. Unlike a simple list of dates, a Timeline diagram lets you lay out parallel tracks — countries, teams, systems — and see at a glance what happened at the same time and what influenced what.</p>
 <p>Common use cases include:</p>
 <ul>
@@ -1515,7 +1637,101 @@ vgraph napoleonicWars: WarTimeline "Napoleonic Wars" {
 <p>Edit the VGL below and click "Render" to see your diagram. Try changing the layout, adding new event types, or creating groups for tracks:</p>
 <iframe src="https://vithanco.com/vgraph/index.html%3Fvgl=vnotation%2520WarTimeline%2520extends%2520Timeline%2520%257B%250A%2520%2520%2520%2520layout%253A%2520topToBottom%250A%2520%2520%2520%2520node%2520type%253A%2520Battle%2520%255BnodeStyle%253A%2520withCategory%252C%2520color%253A%2520%2522%2523883333%2522%252C%2520category%253A%2520%2522Battle%2522%255D%250A%2520%2520%2520%2520node%2520type%253A%2520Treaty%2520%255BnodeStyle%253A%2520withCategory%252C%2520color%253A%2520%2522%2523339933%2522%252C%2520category%253A%2520%2522Treaty%2522%255D%250A%2520%2520%2520%2520edge%2520type%253A%2520resolved_by%2520from%253A%2520Battle%2520to%253A%2520Treaty%250A%2520%2520%2520%2520edge%2520type%253A%2520influenced%2520from%253A%2520Battle%2520to%253A%2520Battle%250A%257D%250Avgraph%2520napoleonicWars%253A%2520WarTimeline%2520%2522Napoleonic%2520Wars%2522%2520%257B%250A%2520%2520%2520%2520node%2520t1805%253A%2520TimePoint%2520%25221805%2522%2520%255BalignGroup%253A%2520%25221805%2522%255D%250A%2520%2520%2520%2520node%2520t1812%253A%2520TimePoint%2520%25221812%2522%2520%255BalignGroup%253A%2520%25221812%2522%255D%250A%2520%2520%2520%2520node%2520t1815%253A%2520TimePoint%2520%25221815%2522%2520%255BalignGroup%253A%2520%25221815%2522%255D%250A%2520%2520%2520%2520edge%2520t1805%2520-%253E%2520t1812%253A%2520sequence%250A%2520%2520%2520%2520edge%2520t1812%2520-%253E%2520t1815%253A%2520sequence%250A%2520%2520%2520%2520%2520%2520%2520%2520node%2520f1%253A%2520Battle%2520%2522Battle%2520of%2520Austerlitz%2522%2520%255BalignGroup%253A%2520%25221805%2522%255D%250A%2520%2520%2520%2520%2520%2520%2520%2520node%2520f2%253A%2520Battle%2520%2522Invasion%2520of%2520Russia%2522%2520%255BalignGroup%253A%2520%25221812%2522%255D%250A%2520%2520%2520%2520%2520%2520%2520%2520node%2520f3%253A%2520Battle%2520%2522Battle%2520of%2520Waterloo%2522%2520%255BalignGroup%253A%2520%25221815%2522%255D%250A%2520%2520%2520%2520%2520%2520%2520%2520node%2520e1%253A%2520Treaty%2520%2522Treaty%2520of%2520Pressburg%2522%2520%255BalignGroup%253A%2520%25221805%2522%255D%250A%2520%2520%2520%2520%2520%2520%2520%2520node%2520e2%253A%2520Treaty%2520%2522Congress%2520of%2520Vienna%2522%2520%255BalignGroup%253A%2520%25221815%2522%255D%250A%2520%2520%2520%2520edge%2520f1%2520-%253E%2520e1%253A%2520resolved_by%250A%2520%2520%2520%2520edge%2520f3%2520-%253E%2520e2%253A%2520resolved_by%250A%2520%2520%2520%2520edge%2520f1%2520-%253E%2520f2%253A%2520influenced%2520%2522overconfidence%2522%250A%2520%2520%2520%2520edge%2520f2%2520-%253E%2520f3%253A%2520influenced%2520%2522weakened%2520army%2522%250A%257D%250A" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive Timeline Editor"></iframe>
 <p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p>
-<p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="https://vithanco.com/tools/vgl">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/c4-model</guid><title>The C4 Model Notation</title><description>Draw software architecture with Simon Brown's C4 model — and move between System Context, Container and Component views by folding a group, not by drawing four diagrams.</description><link>https://vithanco.com/notations/c4-model</link><pubDate>Sun, 16 Aug 2026 21:45:11 +0200</pubDate><content:encoded><![CDATA[<p>The <strong>C4 model</strong> describes a software system at four levels of zoom, so that every audience — executives, architects, developers — sees the same architecture at the level of detail it needs. It is the most widely used way to draw software architecture that isn't UML, and Vithanco supports it as a built-in Notation.</p>
+<p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="https://vithanco.com/tools/vgl">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/causal-loop-diagram</guid><title>Causal Loop Diagram Notation</title><description>Understanding complex systems through Feedback Loops and Causal Loop Diagrams</description><link>https://vithanco.com/notations/causal-loop-diagram</link><pubDate>Thu, 27 Aug 2026 01:04:45 +0200</pubDate><content:encoded><![CDATA[<h2 id="why-use-causal-loop-diagrams-clds">Why use Causal Loop Diagrams (CLDs)?</h2>
+<p>Causal Loop Diagrams (CLDs) are a way to capture systems, analyse them and plan to influence them. CLDs explain the long-term behaviour of systems which is otherwise difficult to understand based on if you only look at the current as-is snapshot.</p>
+<p>CLDs describe systems via "stocks" (nodes) and (edges). Much of the day-to-day world can be accurately described as such a system. Let's look at a simple example: A bank account and the interest earned.</p>
+<figure class="vgl-render img-std"> 
+ <img src="https://vithanco.com/vgl-generated/cld-bank-account.svg" alt="Banking Account as a Simple Causal Loop Diagram" onclick="openLightbox(this)" /> 
+ <figcaption>
+  Banking Account as a Simple Causal Loop Diagram
+ </figcaption> 
+</figure>
+<ul>
+ <li>The amount of the Bank Balance (a stock) will affect the amount of the Earned Interest (another stock), as represented by the connection, pointing from Bank Balance to Earned Interest.</li>
+ <li>Since an increase in Bank balance increases Earned Interest, this link is of the same kind, meaning more results in more. Interestingly, this even works for a negative amount in your bank account.</li>
+ <li>The Earned interest gets added to the Bank balance, also a link of the same kind, represented by the bottom connection.</li>
+ <li>The causal effect between these nodes forms a positive <a href="https://en.wikipedia.org/wiki/Reinforcing_loop " reinforcing loop"">reinforcing loop</a>, represented by the icon in the middle containing an "R" and showing the loop direction (clockwise).</li>
+</ul>
+<p>This system is only a part of a bigger system that would include salary payments and withdrawals to live. But if left alone, the reinforcing loop points out that this system would lead to an uninterrupted growth of the two stocks involved.</p>
+<p>A CLD is very useful to identify the loops that affect the systems' behaviour. Especially the separation between balancing and reinforcing loops provides meaningful insights into a system's behaviour as shown in the following table.</p>
+<table>
+ <thead>
+  <tr>
+   <th>Loop Type</th>
+   <th>Description</th>
+   <th>Behaviour</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Balancing</td>
+   <td>Balancing loops have an odd number of opposite connections (negative links).</td>
+   <td>Balancing loops are associated with reaching a plateau.</td>
+  </tr>
+  <tr>
+   <td>Reinforcing</td>
+   <td>Reinforcing loops have an even number of opposite connections (negative links,</td>
+   <td>please note that zero also is even). Reinforcing loops are associated with exponential increases/decreases.</td>
+  </tr>
+ </tbody>
+</table>
+<h2 id="cld-notation-description">CLD Notation Description</h2>
+<p>CLDs have only one single node type. Add more node types if you want to differentiate further. The easiest way is described <a href="https://vithanco.com/tools/Help/Expert_Concepts/create-a-node-type-variant">here</a>.</p>
+<figure class="vgl-render img-std"> 
+ <img src="https://vithanco.com/vgl-generated/meta-CLD.svg" alt="The CLD Notation Structure" onclick="openLightbox(this)" /> 
+ <figcaption>
+  The CLD Notation Structure
+ </figcaption> 
+</figure>
+<table>
+ <thead>
+  <tr>
+   <th>Node Type</th>
+   <th>Description</th>
+   <th>Successors</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Stock</td>
+   <td>Everything is a stock in a CLD. Stock amounts can change over time, based on incoming connections. Currently this is not evaluated/simulated by Vithanco.</td>
+   <td>Stock</td>
+  </tr>
+ </tbody>
+</table>
+<p>The CLD Notation has 2 different Edge Types.</p>
+<table>
+ <thead>
+  <tr>
+   <th>Edge Type</th>
+   <th>Description</th>
+   <th>Marked with</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Systems Thinking - Same (Positive causal Link)</td>
+   <td>Positive causal link means that the two nodes change in the same direction, i.e. if the node in which the link starts decreases, the other node also decreases. Similarly, if the node in which the link starts increases, the other node increases.</td>
+   <td>"+" (positive)</td>
+  </tr>
+  <tr>
+   <td>Systems Thinking - Opposite (Negative causal Link)</td>
+   <td>Negative causal link means that the two nodes change in opposite directions, i.e. if the node in which the link starts increases, then the other node decreases, and vice versa.</td>
+   <td>"−" (negative)</td>
+  </tr>
+ </tbody>
+</table>
+<p>The CLD Notation introduces a new visual element, the loop indicator which is presented for each automatically identified loop.</p>
+<p>A loop can either be clockwise or counter-clockwise. In addition, there exists balancing and reinforcing loops. Together these two types result in one of four different loop indicators.</p>
+<figure class="img-std"> 
+ <img src="https://vithanco.com/notations/causal-loop-diagram/4-loop-indicator.jpg" alt="The four different loop indicators" onclick="openLightbox(this)" /> 
+ <figcaption>
+  The four different loop indicators
+ </figcaption> 
+</figure>
+<p>One of these is created for every new loop. If you move your mouse over the loop indicator then it will be highlighted, together with the corresponding loop.</p>
+<h2 id="background-on-clds"><strong>Background on CLDs</strong></h2>
+<p>Extensive research was done regarding systems (see as a starting point: <a href="https://www.goodreads.com/book/show/3828902-thinking-in-systems">Donella Meadows' Thinking in Systems</a>) as part of a body of knowledge called <a href="https://thesystemsthinker.com/making-the-jump-to-systems-thinking/">systems thinking</a>. One interesting way of accessing systems thinking knowledge is by learning about the so-called <a href="https://en.wikipedia.org/wiki/System_archetype">archetypes</a>.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/notations/c4-model</guid><title>The C4 Model Notation</title><description>Draw software architecture with Simon Brown's C4 model — and move between System Context, Container and Component views by folding a group, not by drawing four diagrams.</description><link>https://vithanco.com/notations/c4-model</link><pubDate>Sun, 16 Aug 2026 21:45:11 +0200</pubDate><content:encoded><![CDATA[<p>The <strong>C4 model</strong> describes a software system at four levels of zoom, so that every audience — executives, architects, developers — sees the same architecture at the level of detail it needs. It is the most widely used way to draw software architecture that isn't UML, and Vithanco supports it as a built-in Notation.</p>
 <p>What Vithanco adds is this: the four levels are not four diagrams. They are <strong>one graph, drawn at different fold states</strong>. Collapse the group around a system and you are looking at the System Context view; open it and you are looking at the Container view. Nothing is duplicated, so nothing can drift out of step.</p>
 <h2 id="why-use-the-c4-model">Why use the C4 Model?</h2>
 <p>C4 answers the question every new joiner, reviewing architect and nervous stakeholder asks — <em>what is this thing, and how does it hang together?</em> — without demanding that they learn a modelling language first. It works because it fixes just two things: a small vocabulary of elements, and four levels of zoom.</p>
