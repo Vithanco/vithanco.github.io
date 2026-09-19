@@ -1,0 +1,25 @@
+vgraph solution: FRT "Sales Improvement Plan" {
+    node c1: Changeable "Implement agile development";
+    node c2: Changeable "Hire support staff";
+    node c3: Changeable "Create feedback system";
+
+    node g1: Given "Market is competitive";
+
+    node ie1: IntermediateEffect "Faster product iterations";
+    node ie2: IntermediateEffect "Products match customer needs";
+    node ie3: IntermediateEffect "Support response improves";
+
+    node and1: AndJunctor;
+
+    node de1: DesirableEffect "Sales revenue increasing";
+    node de2: DesirableEffect "Customer satisfaction high";
+
+    edge c1 -> ie1
+    edge c2 -> ie3
+    edge c3 -> and1
+    edge g1 -> and1
+    edge and1 -> ie2
+    edge ie1 -> de1
+    edge ie2 -> de1
+    edge ie3 -> de2
+}

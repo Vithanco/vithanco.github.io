@@ -1,0 +1,38 @@
+vgraph arithmeticRightAndWrong: Arithmetic "Right and Wrong" {
+    node two: Number "2";
+    node five: Number "5";
+    node eight: Number "8";
+    node three: Number "3";
+    node four: Number "4";
+    node twelve: Number "12";
+
+    node plusOp: Plus;
+    node minusOp: Minus;
+    node timesOp: Times;
+    node divideOp: Divide;
+
+    node eqPlus: Equals "7";
+    node eqMinus: Equals "5";
+    node eqTimes: Equals "11";
+    node eqDivide: Equals "4";
+
+    // 2 + 5 = 7 — correct, shows "= 7" in green
+    edge two -> plusOp: plus_first_operand;
+    edge five -> plusOp: plus_second_operand;
+    edge plusOp -> eqPlus: plus_result;
+
+    // 8 − 3 = 5 — correct, shows "= 5" in green
+    edge eight -> minusOp: minus_first_operand;
+    edge three -> minusOp: minus_second_operand;
+    edge minusOp -> eqMinus: minus_result;
+
+    // 3 × 4 is 12, but 11 was expected — shows "12 ≠ 11" in red
+    edge three -> timesOp: times_first_operand;
+    edge four -> timesOp: times_second_operand;
+    edge timesOp -> eqTimes: times_result;
+
+    // 12 : 4 is 3, but 4 was expected — shows "3 ≠ 4" in red
+    edge twelve -> divideOp: divide_first_operand;
+    edge four -> divideOp: divide_second_operand;
+    edge divideOp -> eqDivide: divide_result;
+}

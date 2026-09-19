@@ -1,0 +1,20 @@
+vgraph learningCM: ConceptMap "How Learning Works" {
+    node c1: Concept "Student";
+    node r1: Relation "learns";
+    node c2: Concept "Subject";
+    node r2: Relation "requires";
+    node c3: EmphasizedConcept "Practice";
+    node r3: Relation "leads to";
+    node c4: Concept "Understanding";
+    node r4: Relation "uses";
+    node c5: Concept "Resources";
+
+    edge c1 -> r1;
+    edge r1 -> c2;
+    edge c2 -> r2;
+    edge r2 -> c3;
+    edge c3 -> r3;
+    edge r3 -> c4;
+    edge c1 -> r4;
+    edge r4 -> c5;
+}

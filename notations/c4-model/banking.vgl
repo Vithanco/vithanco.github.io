@@ -1,0 +1,33 @@
+vgraph banking: C4 "Internet Banking System" {
+    node customer: Person "Personal Banking Customer";
+    node mainframe: ExternalSoftwareSystem "Mainframe Banking System";
+    node email: ExternalSoftwareSystem "E-mail System";
+
+    group ibs: SystemBoundary "Internet Banking System" {
+        node web: Container "Web Application";
+        node spa: Container "Single-Page App";
+        node mobile: Container "Mobile App";
+        node db: Database "Database";
+
+        folded group api: ContainerBoundary "API Application" {
+            node signin: Component "Sign In Controller";
+            node accounts: Component "Accounts Summary Controller";
+            node security: Component "Security Component";
+            node mfFacade: Component "Mainframe Banking System Facade";
+        };
+    };
+
+    edge customer -> web "Uses";
+    edge customer -> spa "Uses";
+    edge customer -> mobile "Uses";
+    edge web -> spa "Delivers";
+
+    edge spa -> signin "Makes API calls to";
+    edge mobile -> accounts "Makes API calls to";
+    edge signin -> security "Uses";
+    edge accounts -> mfFacade "Uses";
+    edge security -> db "Reads from and writes to";
+    edge mfFacade -> mainframe "Makes API calls to";
+    edge signin -> email "Sends e-mail using";
+    edge email -> customer "Sends e-mails to";
+}

@@ -69,6 +69,8 @@
                         <li>
                             <a href="/notations" class="selected">Notations</a></li>
                         <li>
+                            <a href="/editor">Editor</a></li>
+                        <li>
                             <a href="/tools">Tools</a></li>
                         <li>
                             <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
@@ -143,7 +145,7 @@ The C4 Model Notation</div>
  <figcaption>
   Every C4 element type, labelled with the name you type in VGL
  </figcaption> 
-</figure>
+</figure> 
 <p>Unlike the other Notations on this site, there is no meta model picture here. C4 permits relationships between almost any pair of elements, so a drawing of every permitted pair is a wall of arrows that teaches nothing. The table does the job better.</p>
 <table>
  <thead>
@@ -240,7 +242,7 @@ The C4 Model Notation</div>
  <figcaption>
   Level 2 — the Container view. The API Application is a folded group, so it draws as a single «CONTAINER» card.
  </figcaption> 
-</figure>
+</figure> 
 <h3 id="level-1-zoom-out-to-the-system-context-view">Level 1 — zoom out to the System Context view</h3>
 <p>Fold the outer group as well. One word changes:</p>
 <pre><code class="language-vgl">    folded group ibs: SystemBoundary "Internet Banking System" {
@@ -250,7 +252,7 @@ The C4 Model Notation</div>
  <figcaption>
   Level 1 — the System Context view. The whole system has folded into one «SOFTWARE SYSTEM» card, and the relationships that crossed its boundary now point at that card.
  </figcaption> 
-</figure>
+</figure> 
 <p>Every container has disappeared into a single «SOFTWARE SYSTEM» card, and the relationships that used to run from individual containers to the mainframe and the e-mail system now run from the system as a whole. This is a proper System Context diagram, and not one line of it was drawn twice.</p>
 <h3 id="level-3-zoom-in-to-the-component-view">Level 3 — zoom in to the Component view</h3>
 <p>Now go the other way and open the API Application, by deleting the <code>folded</code> we started with:</p>
@@ -261,7 +263,7 @@ The C4 Model Notation</div>
  <figcaption>
   Level 3 — the Component view. Opening the API Application reveals its components, still inside the system they belong to.
  </figcaption> 
-</figure>
+</figure> 
 <p>The components sit inside their container boundary, inside the system boundary, with the sibling containers still visible around them — which is what makes a Component view readable in the first place. The relationships did not have to be redrawn; they were always between these components, and folding was simply hiding them.</p>
 <p>Three C4 levels, three fold states, one source of truth. Change a container's name once and all three views agree, because there is only one place where the name is written down.</p>
 <h2 id="what-vithanco-checks-for-you">What Vithanco checks for you</h2>
@@ -274,7 +276,7 @@ The C4 Model Notation</div>
 <p>You can see this for yourself in the editor below: move the <code>node db: Database "Database";</code> line out of the <code>group ibs</code> block, render, and <code>db</code> is underlined in the source. Hover it, and the warning reads <em>"Container "Database" is not inside any System boundary — a container should live in a system"</em>.</p>
 <h2 id="try-c4-yourself">Try C4 yourself</h2>
 <p>The editor below is seeded with the full Internet Banking source, at the Container view. The most interesting thing you can do is a one-word edit: <strong>delete the word <code>folded</code> in front of <code>group api</code>, press Cmd+Enter, and you have zoomed into the Component view.</strong> Put it back and you are at the Container view again. Add <code>folded</code> in front of <code>group ibs</code> and you are at System Context.</p>
-<iframe src="/vgraph/index.html?vgl=vgraph%20banking%3A%20C4%20%22Internet%20Banking%20System%22%20%7B%0A%20%20%20%20node%20customer%3A%20Person%20%22Personal%20Banking%20Customer%22%3B%0A%20%20%20%20node%20mainframe%3A%20ExternalSoftwareSystem%20%22Mainframe%20Banking%20System%22%3B%0A%20%20%20%20node%20email%3A%20ExternalSoftwareSystem%20%22E-mail%20System%22%3B%0A%0A%20%20%20%20group%20ibs%3A%20SystemBoundary%20%22Internet%20Banking%20System%22%20%7B%0A%20%20%20%20%20%20%20%20node%20web%3A%20Container%20%22Web%20Application%22%3B%0A%20%20%20%20%20%20%20%20node%20spa%3A%20Container%20%22Single-Page%20App%22%3B%0A%20%20%20%20%20%20%20%20node%20mobile%3A%20Container%20%22Mobile%20App%22%3B%0A%20%20%20%20%20%20%20%20node%20db%3A%20Database%20%22Database%22%3B%0A%0A%20%20%20%20%20%20%20%20folded%20group%20api%3A%20ContainerBoundary%20%22API%20Application%22%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20node%20signin%3A%20Component%20%22Sign%20In%20Controller%22%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20node%20accounts%3A%20Component%20%22Accounts%20Summary%20Controller%22%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20node%20security%3A%20Component%20%22Security%20Component%22%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20node%20mfFacade%3A%20Component%20%22Mainframe%20Banking%20System%20Facade%22%3B%0A%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20edge%20customer%20-%3E%20web%20%22Uses%22%3B%0A%20%20%20%20edge%20customer%20-%3E%20spa%20%22Uses%22%3B%0A%20%20%20%20edge%20customer%20-%3E%20mobile%20%22Uses%22%3B%0A%20%20%20%20edge%20web%20-%3E%20spa%20%22Delivers%22%3B%0A%0A%20%20%20%20edge%20spa%20-%3E%20signin%20%22Makes%20API%20calls%20to%22%3B%0A%20%20%20%20edge%20mobile%20-%3E%20accounts%20%22Makes%20API%20calls%20to%22%3B%0A%20%20%20%20edge%20signin%20-%3E%20security%20%22Uses%22%3B%0A%20%20%20%20edge%20accounts%20-%3E%20mfFacade%20%22Uses%22%3B%0A%20%20%20%20edge%20security%20-%3E%20db%20%22Reads%20from%20and%20writes%20to%22%3B%0A%20%20%20%20edge%20mfFacade%20-%3E%20mainframe%20%22Makes%20API%20calls%20to%22%3B%0A%20%20%20%20edge%20signin%20-%3E%20email%20%22Sends%20e-mail%20using%22%3B%0A%20%20%20%20edge%20email%20-%3E%20customer%20%22Sends%20e-mails%20to%22%3B%0A%7D%0A" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive C4 Editor"></iframe>
+<iframe src="/vgraph/index.html?src=/notations/c4-model/banking.vgl" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive C4 Editor"></iframe>
 <p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p>
 <p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="/tools/vgl">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported Notations.</p>
 <h2 id="background">Background</h2>

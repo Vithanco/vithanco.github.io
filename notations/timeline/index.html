@@ -69,6 +69,8 @@
                         <li>
                             <a href="/notations" class="selected">Notations</a></li>
                         <li>
+                            <a href="/editor">Editor</a></li>
+                        <li>
                             <a href="/tools">Tools</a></li>
                         <li>
                             <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
@@ -147,14 +149,14 @@ Timeline Notation</div>
  <figcaption>
   The Timeline Notation Structure
  </figcaption> 
-</figure>
+</figure> 
 <h3 id="a-basic-example">A Basic Example</h3>
 <figure class="vgl-render img-std"> 
  <img src="/vgl-generated/timeline-19th-century-europe.svg" alt="A Timeline showing 19th Century European events" onclick="openLightbox(this)" /> 
  <figcaption>
   A Timeline showing 19th Century European events
  </figcaption> 
-</figure>
+</figure> 
 <pre><code>vgraph myTimeline: Timeline "19th Century Europe" {
     node t1800: TimePoint "1800" [alignGroup: "1800"]
     node t1850: TimePoint "1850" [alignGroup: "1850"]
@@ -216,7 +218,7 @@ vgraph napoleonicWars: WarTimeline "Napoleonic Wars" {
  <figcaption>
   A WarTimeline showing the Napoleonic Wars with custom Battle and Treaty types in top-to-bottom layout
  </figcaption> 
-</figure>
+</figure> 
 <p>This example shows all three concepts working together:</p>
 <ul>
  <li><strong>alignGroup</strong> pins battles and treaties to their year</li>
@@ -226,7 +228,7 @@ vgraph napoleonicWars: WarTimeline "Napoleonic Wars" {
 <p>Note that WarTimeline declares its own <code>influenced</code> edge type rather than reusing the built-in <code>influence</code>. That built-in runs from Event to Event, and Battle is a new node type, not an Event — so once you introduce custom node types you need custom edge types to connect them.</p>
 <h2 id="try-it-yourself">Try it Yourself</h2>
 <p>Edit the VGL below and click "Render" to see your diagram. Try changing the layout, adding new event types, or creating groups for tracks:</p>
-<iframe src="/vgraph/index.html?vgl=vnotation%20WarTimeline%20extends%20Timeline%20%7B%0A%20%20%20%20layout%3A%20topToBottom%0A%20%20%20%20node%20type%3A%20Battle%20%5BnodeStyle%3A%20withCategory%2C%20color%3A%20%22%23883333%22%2C%20category%3A%20%22Battle%22%5D%0A%20%20%20%20node%20type%3A%20Treaty%20%5BnodeStyle%3A%20withCategory%2C%20color%3A%20%22%23339933%22%2C%20category%3A%20%22Treaty%22%5D%0A%20%20%20%20edge%20type%3A%20resolved_by%20from%3A%20Battle%20to%3A%20Treaty%0A%20%20%20%20edge%20type%3A%20influenced%20from%3A%20Battle%20to%3A%20Battle%0A%7D%0Avgraph%20napoleonicWars%3A%20WarTimeline%20%22Napoleonic%20Wars%22%20%7B%0A%20%20%20%20node%20t1805%3A%20TimePoint%20%221805%22%20%5BalignGroup%3A%20%221805%22%5D%0A%20%20%20%20node%20t1812%3A%20TimePoint%20%221812%22%20%5BalignGroup%3A%20%221812%22%5D%0A%20%20%20%20node%20t1815%3A%20TimePoint%20%221815%22%20%5BalignGroup%3A%20%221815%22%5D%0A%20%20%20%20edge%20t1805%20-%3E%20t1812%3A%20sequence%0A%20%20%20%20edge%20t1812%20-%3E%20t1815%3A%20sequence%0A%20%20%20%20%20%20%20%20node%20f1%3A%20Battle%20%22Battle%20of%20Austerlitz%22%20%5BalignGroup%3A%20%221805%22%5D%0A%20%20%20%20%20%20%20%20node%20f2%3A%20Battle%20%22Invasion%20of%20Russia%22%20%5BalignGroup%3A%20%221812%22%5D%0A%20%20%20%20%20%20%20%20node%20f3%3A%20Battle%20%22Battle%20of%20Waterloo%22%20%5BalignGroup%3A%20%221815%22%5D%0A%20%20%20%20%20%20%20%20node%20e1%3A%20Treaty%20%22Treaty%20of%20Pressburg%22%20%5BalignGroup%3A%20%221805%22%5D%0A%20%20%20%20%20%20%20%20node%20e2%3A%20Treaty%20%22Congress%20of%20Vienna%22%20%5BalignGroup%3A%20%221815%22%5D%0A%20%20%20%20edge%20f1%20-%3E%20e1%3A%20resolved_by%0A%20%20%20%20edge%20f3%20-%3E%20e2%3A%20resolved_by%0A%20%20%20%20edge%20f1%20-%3E%20f2%3A%20influenced%20%22overconfidence%22%0A%20%20%20%20edge%20f2%20-%3E%20f3%3A%20influenced%20%22weakened%20army%22%0A%7D%0A" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive Timeline Editor"></iframe>
+<iframe src="/vgraph/index.html?src=/notations/timeline/napoleonic-wars.vgl" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive Timeline Editor"></iframe>
 <p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p>
 <p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="/tools/vgl">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.</p></div></article>
             <aside class="side-content">

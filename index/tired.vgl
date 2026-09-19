@@ -1,0 +1,8 @@
+vgraph tired: CLD "Why am I always tired?" {
+    node tired: Stock "Tiredness"
+    node coffee: Stock "Coffee"
+    node sleep: Stock "Good Sleep"
+
+    edge tired -> coffee: same
+    edge coffee -> sleep: opposite
+}

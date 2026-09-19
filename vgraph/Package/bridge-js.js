@@ -987,6 +987,19 @@ export async function createInstantiator(options, swift) {
                     const textId = swift.memory.retain(textBytes);
                     instance.exports.bjs_setEditorVGL(textId, textBytes.length);
                 },
+                openEditorDocument: function bjs_openEditorDocument(text, name) {
+                    const textBytes = textEncoder.encode(text);
+                    const textId = swift.memory.retain(textBytes);
+                    const nameBytes = textEncoder.encode(name);
+                    const nameId = swift.memory.retain(nameBytes);
+                    const ret = instance.exports.bjs_openEditorDocument(textId, textBytes.length, nameId, nameBytes.length);
+                    return ret !== 0;
+                },
+                setEditorStatus: function bjs_setEditorStatus(text) {
+                    const textBytes = textEncoder.encode(text);
+                    const textId = swift.memory.retain(textBytes);
+                    instance.exports.bjs_setEditorStatus(textId, textBytes.length);
+                },
                 convertToDot: function bjs_convertToDot(graph) {
                     const graphBytes = textEncoder.encode(graph);
                     const graphId = swift.memory.retain(graphBytes);

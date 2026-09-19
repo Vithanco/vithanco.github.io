@@ -1,0 +1,23 @@
+vgraph launch: PRT "Product Launch Planning" {
+    node obj1: Objective "Launch product by Q3";
+
+    node obs1: Obstacle "Team lacks skills";
+    node obs2: Obstacle "Budget not approved";
+    node obs3: Obstacle "No distribution channel";
+
+    node io1: IntermediateObjective "Train team";
+    node io2: IntermediateObjective "Hire developers";
+    node io3: IntermediateObjective "Present ROI analysis";
+    node io4: IntermediateObjective "Partner with retailer";
+
+    node or1: OR;
+
+    edge obs1 -> obj1
+    edge obs2 -> obj1
+    edge obs3 -> obj1
+    edge io1 -> or1
+    edge io2 -> or1
+    edge or1 -> obs1
+    edge io3 -> obs2
+    edge io4 -> obs3
+}

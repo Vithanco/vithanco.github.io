@@ -69,6 +69,8 @@
                         <li>
                             <a href="/notations" class="selected">Notations</a></li>
                         <li>
+                            <a href="/editor">Editor</a></li>
+                        <li>
                             <a href="/tools">Tools</a></li>
                         <li>
                             <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
@@ -92,7 +94,7 @@ The Evaporating Cloud (EC) Notation</div>
  <figcaption>
   The Evaporating Cloud's basic structure
  </figcaption> 
-</figure>
+</figure> 
 <p>ECs are methodically used in TOC thinking processes when defining a Future Reality Tree (FRT). First, FRTs are created by injecting solutions from Current Reality Trees (CRT). Then, those solutions are formulated through ECs.</p>
 <h3 id="when-to-use-ecs">When to Use ECs</h3>
 <ul>
@@ -114,7 +116,7 @@ The Evaporating Cloud (EC) Notation</div>
  <figcaption>
   The EC Notation Model
  </figcaption> 
-</figure>
+</figure> 
 <p>The Node Types in detail:</p>
 <table>
  <thead>
@@ -174,7 +176,7 @@ The Evaporating Cloud (EC) Notation</div>
 <p>Find more information on ECs <a href="https://en.wikipedia.org/wiki/Evaporating_Cloud">here</a>.</p>
 <h2 id="try-ec-yourself">Try EC Yourself</h2>
 <p>Create and visualise your own Evaporating Cloud diagram right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p>
-<iframe src="/vgraph/index.html?vgl=vgraph%20projectConflict%3A%20EC%20%22Project%20Delivery%20vs%20Quality%22%20%7B%0A%20%20%20%20node%20obj%3A%20CommonObjective%20%22Deliver%20a%20successful%20software%20product%22%3B%0A%20%20%20%20node%20needA%3A%20Need%20%22Meet%20the%20market%20window%20deadline%22%3B%0A%20%20%20%20node%20needB%3A%20Need%20%22Ensure%20product%20quality%20and%20reliability%22%3B%0A%20%20%20%20node%20wantA%3A%20Want%20%22Release%20with%20current%20feature%20set%20now%22%3B%0A%20%20%20%20node%20wantB%3A%20Want%20%22Extend%20timeline%20for%20thorough%20testing%22%3B%0A%20%20%20%20node%20conf%3A%20Conflict%3B%0A%20%20%20%20node%20assA%3A%20Assumption%20%22Testing%20always%20requires%20calendar%20time%22%3B%0A%20%20%20%20node%20assB%3A%20Assumption%20%22Features%20cannot%20be%20descoped%22%3B%0A%20%20%20%20node%20assC%3A%20Assumption%20%22Quality%20requires%20full%20manual%20testing%22%3B%0A%20%20%20%20node%20sol%3A%20Solution%20%22Implement%20automated%20testing%20pipeline%22%3B%0A%20%20%20%20edge%20obj%20-%3E%20needA%3A%20objective_to_need%3B%0A%20%20%20%20edge%20obj%20-%3E%20needB%3A%20objective_to_need%3B%0A%20%20%20%20edge%20needA%20-%3E%20wantA%3A%20need_to_want%3B%0A%20%20%20%20edge%20needB%20-%3E%20wantB%3A%20need_to_want%3B%0A%20%20%20%20edge%20wantA%20-%3E%20conf%3A%20want_to_conflict%3B%0A%20%20%20%20edge%20wantB%20-%3E%20conf%3A%20want_to_conflict%3B%0A%20%20%20%20edge%20needA%20-%3E%20assA%3A%20need_to_assumption%3B%0A%20%20%20%20edge%20needB%20-%3E%20assC%3A%20need_to_assumption%3B%0A%20%20%20%20edge%20conf%20-%3E%20assB%3A%20conflict_to_assumption%3B%0A%20%20%20%20edge%20needB%20-%3E%20sol%3A%20need_to_solution%3B%0A%7D" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive EC Editor"></iframe>
+<iframe src="/vgraph/index.html?src=/notations/TOC/evaporating-cloud/project-conflict.vgl" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive EC Editor"></iframe>
 <p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p>
 <p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="/tools/vgl">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.</p>
 <h2 id="example">Example</h2>
@@ -185,7 +187,7 @@ The Evaporating Cloud (EC) Notation</div>
  <figcaption>
   Goldratt's EC example
  </figcaption> 
-</figure>
+</figure> 
 <p>These assumptions are easier to find when the diagram is verbalised by stating each connection even aloud by constructing "In order to... we must ...". So, the assumptions here violate the phrase "In order to reduce setup cost per unit, we must run <em>large</em> batches." Notice the wording "we must". It invites critics.</p></div></article>
             <aside class="side-content">
                 <div class="relationships-section">                    <div class="item-list">

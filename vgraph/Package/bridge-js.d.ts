@@ -14,6 +14,13 @@ export type Exports = {
     editorRenderNow(): void;
     editorLongPressFired(): void;
     setEditorVGL(text: string): void;
+    /**
+     * Load a document the host fetched for `?src=` (#132). `name` is the last
+     * path segment of the source, which is where the document's name comes
+     * from — the same role a picked file's name plays.
+     */
+    openEditorDocument(text: string, name: string): boolean;
+    setEditorStatus(text: string): void;
     convertToDot(graph: string): string;
     /**
      * Produce the DOT for the host to lay out with Graphviz (decoupled path).

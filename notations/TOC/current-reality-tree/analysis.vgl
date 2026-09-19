@@ -1,0 +1,23 @@
+vgraph analysis: CRT "Sales Decline Analysis" {
+    node ude1: UndesirableEffect "Sales revenue declining";
+    node ude2: UndesirableEffect "Customer complaints increasing";
+
+    node ie1: IntermediateEffect "Customers switching to competitors";
+    node ie2: IntermediateEffect "Product perceived as outdated";
+    node ie3: IntermediateEffect "Support response time is slow";
+
+    node and1: AndJunctor;
+
+    node g1: Given "Market is highly competitive";
+    node c1: Changeable "Product dev cycle too long";
+    node c2: Changeable "Support team understaffed";
+
+    edge c1 -> ie2
+    edge c2 -> ie3
+    edge g1 -> and1
+    edge ie2 -> and1
+    edge and1 -> ie1
+    edge ie3 -> ude2
+    edge ie1 -> ude1
+    edge ude2 -> ude1
+}

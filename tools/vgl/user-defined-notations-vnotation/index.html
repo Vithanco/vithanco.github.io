@@ -69,6 +69,8 @@
                         <li>
                             <a href="/notations">Notations</a></li>
                         <li>
+                            <a href="/editor">Editor</a></li>
+                        <li>
                             <a href="/tools" class="selected">Tools</a></li>
                         <li>
                             <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
@@ -83,13 +85,14 @@ VGL Guide — User-defined notations (`vnotation`)</div>
                 <h1>VGL Guide — User-defined notations (`vnotation`)</h1>
                 <div class="reading-time-container">
                     <span class="fa fa-clock-o"></span>
-                    <p>Estimated reading time: 2 minutes.</p></div>
+                    <p>Estimated reading time: 5 minutes.</p></div>
                 <div class="content"><h1 id="user-defined-notations-vnotation">User-defined notations (<code>vnotation</code>)</h1>
 <p><code>vnotation</code> defines a notation schema inline in a VGL file, with no Swift changes. Everything a built-in notation provides — node types, edge types, layout direction — can be expressed this way.</p>
 <pre><code>vnotation &lt;Name&gt; [extends &lt;BuiltinNotation&gt;] {
     layout: &lt;topToBottom | leftToRight | rightToLeft | bottomToTop&gt;
 
-    node type: &lt;TypeName&gt;  [nodeStyle: &lt;name&gt;, backgroundColor: "#hex", icon: "sf.symbol", ...]
+    icon      &lt;IconName&gt;   [viewBox: "&lt;minX minY width height&gt;", path: "&lt;svg path data&gt;"]
+    node type: &lt;TypeName&gt;  [nodeStyle: &lt;name&gt;, backgroundColor: "#hex", icon: "&lt;IconName&gt;", ...]
     edge type: &lt;edge_id&gt;   from: &lt;TypeName&gt;  to: &lt;TypeName&gt;  [color: "#hex"]
 }
 </code></pre>
@@ -158,6 +161,45 @@ VGL Guide — User-defined notations (`vnotation`)</div>
   </tr>
  </tbody>
 </table>
+<h3 id="icon-artwork-of-your-own"><code>icon</code> — artwork of your own</h3>
+<p><code>icon:</code> on a node type names a mark. Eighteen names are built into VGraph; a</p>
+<p><code>vnotation</code> can add its own, so a notation is not limited to the marks that happened to ship.</p>
+<pre><code class="language-vgl">vnotation RiskMap {
+    icon shield [viewBox: "0 0 24 24", path: "M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5z"]
+
+    node type: Control [nodeStyle: iconWithText, backgroundColor: "#339933", icon: "shield"]
+}
+</code></pre>
+<p>The artwork travels <strong>inside the document</strong>, so it draws wherever VGL draws — website, both plugins, the CLI — with nothing to fetch and no cooperation from the host.</p>
+<ul>
+ <li><strong><code>viewBox:</code> and <code>path:</code> are both required.</strong> The viewBox is four numbers, as in an SVG file; there is no default, because artwork drawn at a guessed scale is worse than a document that says what is wrong.</li>
+ <li><strong>A glyph, not a picture.</strong> One path, no colours of its own: <code>iconColor:</code> fills it at the point of use, which is what makes the same mark work in white on a dark node and in black on a light one.</li>
+ <li><strong><code>path:</code> takes SVG path data and only that</strong> — the path commands, digits, <code>.,+-eE</code> and spaces, up to 4096 characters. Anything else is refused where it is written.</li>
+ <li><strong>Your name wins.</strong> A name resolves against the notation's own artwork first and the built-in set second, so declaring <code>lightbulb.fill</code> yourself replaces it for that document — and a mark added to VGraph in some later release can never change how your document looks.</li>
+ <li><strong>A name nobody has is not fatal.</strong> It draws a placeholder and is reported in the quality report, naming the node type and the icon. The rest of the diagram is untouched.</li>
+</ul>
+<p>Two sets of names are built in, and a document cannot tell them apart.</p>
+<p><strong>Traced from SF Symbols</strong> — 18, mostly the marks the built-in notations use themselves:</p>
+<p><code>and</code>, <code>arrow.triangle.branch</code>, <code>arrow.up.circle.fill</code>, <code>bolt.circle.fill</code>,</p>
+<p><code>checkmark.circle.fill</code>, <code>conflict</code>, <code>exclamationmark.triangle</code>,</p>
+<p><code>flag.pattern.checkered</code>, <code>hand.thumbsdown.circle.fill</code>,</p>
+<p><code>hand.thumbsup.circle.fill</code>, <code>lightbulb.fill</code>, <code>minus.circle.fill</code>, <code>or</code>,</p>
+<p><code>person.circle.fill</code>, <code>plus.circle.fill</code>, <code>questionmark.circle.fill</code>,</p>
+<p><code>shippingbox.fill</code>, <code>tray.full.fill</code>.</p>
+<p><strong>Vithanco's own</strong> — 82, carried over from the desktop app:</p>
+<p><code>addCluster</code>, <code>addSelection</code>, <code>analysis</code>, <code>box</code>, <code>brighter</code>, <code>checkmark</code>,</p>
+<p><code>copy</code>, <code>darker</code>, <code>decision</code>, <code>delete</code>, <code>details</code>, <code>down</code>, <code>dragLine</code>,</p>
+<p><code>dragLineEnd</code>, <code>edgeToSelf</code>, <code>edit</code>, <code>email</code>, <code>exchange</code>, <code>export</code>, <code>eye</code>,</p>
+<p><code>fileImage</code>, <code>flash</code>, <code>focus2</code>, <code>fold</code>, <code>font</code>, <code>forbidden</code>, <code>goIncoming</code>,</p>
+<p><code>goOutgoing</code>, <code>group</code>, <code>heart</code>, <code>importer</code>, <code>info</code>, <code>intoNode</code>, <code>key</code>,</p>
+<p><code>layeredView</code>, <code>leaf</code>, <code>left</code>, <code>lightBulb</code>, <code>magnifier</code>, <code>medicin</code>, <code>menu</code>,</p>
+<p><code>minusSign</code>, <code>new</code>, <code>next</code>, <code>nextSibling</code>, <code>outOfNode</code>, <code>play</code>, <code>plusSign</code>,</p>
+<p><code>powerOnOff</code>, <code>previousSibling</code>, <code>print</code>, <code>purchase</code>, <code>questionMark</code>,</p>
+<p><code>questionMark2</code>, <code>quickEntry</code>, <code>reload</code>, <code>return</code>, <code>right</code>, <code>speech</code>, <code>split</code>,</p>
+<p><code>star</code>, <code>starView</code>, <code>table</code>, <code>template</code>, <code>text</code>, <code>thumbsDown</code>, <code>thumbsUp</code>,</p>
+<p><code>toggle</code>, <code>untickedCheckmark</code>, <code>up</code>, <code>update</code>, <code>upsideDown</code>, <code>usecase</code>,</p>
+<p><code>user</code>, <code>vithanco</code>, <code>warning</code>, <code>warning2</code>, <code>wrench</code>, <code>zoomIn</code>, <code>zoomOut</code>,</p>
+<p><code>zoomTo100</code>, <code>zoomToFit</code>.</p>
 <h3 id="extends"><code>extends</code></h3>
 <p>Adds every node and edge type from a built-in notation, on top of which yours adds more:</p>
 <pre><code class="language-vgl">vnotation RichIBIS extends IBIS {
@@ -171,6 +213,8 @@ VGL Guide — User-defined notations (`vnotation`)</div>
 <h3 id="a-complete-example">A complete example</h3>
 <pre><code class="language-vgl">vnotation RiskMap {
     layout: topToBottom
+
+    icon shield [viewBox: "0 0 24 24", path: "M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5z"]
 
     node type: Risk    [nodeStyle: iconWithText, backgroundColor: "#cc3333", icon: "exclamationmark.triangle"]
     node type: Control [nodeStyle: iconWithText, backgroundColor: "#339933", icon: "shield"]

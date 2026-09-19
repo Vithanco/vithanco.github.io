@@ -69,6 +69,8 @@
                         <li>
                             <a href="/notations" class="selected">Notations</a></li>
                         <li>
+                            <a href="/editor">Editor</a></li>
+                        <li>
                             <a href="/tools">Tools</a></li>
                         <li>
                             <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
@@ -83,7 +85,7 @@ The Arithmetic Notation</div>
                 <h1>The Arithmetic Notation</h1>
                 <div class="reading-time-container">
                     <span class="fa fa-clock-o"></span>
-                    <p>Estimated reading time: 5 minutes.</p></div>
+                    <p>Estimated reading time: 6 minutes.</p></div>
                 <div class="content"><h2 id="why-use-arithmetic">Why use Arithmetic?</h2>
 <p>Most Vithanco Notations help you structure an argument, a plan or a system. Arithmetic is different: it is a <strong>small, complete notation for a single equation</strong>, built for a kids' maths game. Numbers are nodes, the four operators are nodes, and an <code>=</code> node asserts that everything meeting there has the same value — and tells you whether it does.</p>
 <p>It is deliberately tiny. There is no chaining of operators, no brackets and no algebraic variables. Just numbers, one operator at a time, and equality.</p>
@@ -101,7 +103,7 @@ The Arithmetic Notation</div>
  <figcaption>
   The Arithmetic Notation Structure
  </figcaption> 
-</figure>
+</figure> 
 <h3 id="the-building-blocks">The Building Blocks</h3>
 <table>
  <thead>
@@ -232,7 +234,7 @@ edge two -&gt; plusOp: plus_first_operand;   // explicit — fine
  <figcaption>
   2 + 5 = 7 — the operator agrees with the expected answer, so the Equals node is green
  </figcaption> 
-</figure>
+</figure> 
 <pre><code>vgraph arithmeticFirstEquation: Arithmetic "2 + 5 = 7" {
     node two: Number "2";
     node five: Number "5";
@@ -258,24 +260,28 @@ edge two -&gt; plusOp: plus_first_operand;   // explicit — fine
  <figcaption>
   Two correct equations in green, two incorrect ones in red showing computed ≠ expected
  </figcaption> 
-</figure>
-<p>Note that a Number node can feed more than one operator — <code>three</code> and <code>four</code> are each used twice above.</p>
-<h2 id="equality-without-an-answer">Equality Without an Answer</h2>
-<p>Because <code>=</code> is a junctor rather than a separator, you can assert that two expressions are equal without deciding which one is the answer. Give the Equals node no label at all and connect two results to it:</p>
-<figure class="vgl-render img-std"> 
- <img src="/vgl-generated/arithmetic-both-sides.svg" alt="7 − 4 = 2 + 1 drawn with two operators meeting at one Equals node" onclick="openLightbox(this)" /> 
- <figcaption>
-  7 − 4 = 2 + 1 — two operators meet at one Equals node, and neither side is 'the answer'
- </figcaption> 
-</figure>
-<p>Both sides evaluate to 3, so the node turns green and shows <code>= 3</code>. Had they disagreed, it would have shown the two computed values either side of a <code>≠</code>.</p>
-<h2 id="quality-checks">Quality Checks</h2>
-<p>Arithmetic ships one quality check: <strong>division by zero</strong>. If a Divide node has both operands connected and the divisor is zero, Vithanco reports a warning naming the node. An operator that is simply missing an operand is <em>not</em> flagged — that is a puzzle mid-play, not a mistake.</p>
-<h2 id="try-it-yourself">Try it Yourself</h2>
-<p>Edit the VGL below and click "Render". Try changing an expected answer to see a green node turn red, or delete an operand edge to watch the node go neutral:</p>
-<iframe src="/vgraph/index.html?vgl=vgraph%20arithmeticRightAndWrong%3A%20Arithmetic%20%22Right%20and%20Wrong%22%20%7B%0A%20%20%20%20node%20two%3A%20Number%20%222%22%3B%0A%20%20%20%20node%20five%3A%20Number%20%225%22%3B%0A%20%20%20%20node%20eight%3A%20Number%20%228%22%3B%0A%20%20%20%20node%20three%3A%20Number%20%223%22%3B%0A%20%20%20%20node%20four%3A%20Number%20%224%22%3B%0A%20%20%20%20node%20twelve%3A%20Number%20%2212%22%3B%0A%0A%20%20%20%20node%20plusOp%3A%20Plus%3B%0A%20%20%20%20node%20minusOp%3A%20Minus%3B%0A%20%20%20%20node%20timesOp%3A%20Times%3B%0A%20%20%20%20node%20divideOp%3A%20Divide%3B%0A%0A%20%20%20%20node%20eqPlus%3A%20Equals%20%227%22%3B%0A%20%20%20%20node%20eqMinus%3A%20Equals%20%225%22%3B%0A%20%20%20%20node%20eqTimes%3A%20Equals%20%2211%22%3B%0A%20%20%20%20node%20eqDivide%3A%20Equals%20%224%22%3B%0A%0A%20%20%20%20edge%20two%20-%3E%20plusOp%3A%20plus_first_operand%3B%0A%20%20%20%20edge%20five%20-%3E%20plusOp%3A%20plus_second_operand%3B%0A%20%20%20%20edge%20plusOp%20-%3E%20eqPlus%3A%20plus_result%3B%0A%0A%20%20%20%20edge%20eight%20-%3E%20minusOp%3A%20minus_first_operand%3B%0A%20%20%20%20edge%20three%20-%3E%20minusOp%3A%20minus_second_operand%3B%0A%20%20%20%20edge%20minusOp%20-%3E%20eqMinus%3A%20minus_result%3B%0A%0A%20%20%20%20edge%20three%20-%3E%20timesOp%3A%20times_first_operand%3B%0A%20%20%20%20edge%20four%20-%3E%20timesOp%3A%20times_second_operand%3B%0A%20%20%20%20edge%20timesOp%20-%3E%20eqTimes%3A%20times_result%3B%0A%0A%20%20%20%20edge%20twelve%20-%3E%20divideOp%3A%20divide_first_operand%3B%0A%20%20%20%20edge%20four%20-%3E%20divideOp%3A%20divide_second_operand%3B%0A%20%20%20%20edge%20divideOp%20-%3E%20eqDivide%3A%20divide_result%3B%0A%7D%0A" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive Arithmetic Editor"></iframe>
-<p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p>
-<p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="/tools/vgl">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.</p></div></article>
+</figure> 
+<iframe src="/vgraph/index.html?src=/notations/arithmetic/arithmetic-right-and-wrong.vgl" height="600" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph editor: Four equations in the Arithmetic notation, two correct and two incorrect" loading="lazy"></iframe>
+<p>vgl-render id=arithmetic-both-sides alt="7 − 4 = 2 + 1 drawn with two operators meeting at one Equals node" caption="7 − 4 = 2 + 1 — two operators meet at one Equals node, and neither side is 'the answer'" class="img-std" vgraph arithmeticBothSides: Arithmetic "7 − 4 = 2 + 1" { node seven: Number "7"; node four: Number "4"; node two: Number "2"; node one: Number "1";</p>
+<p>node minusOp: Minus; node plusOp: Plus;</p>
+<p>node eq: Equals;</p>
+<p>edge seven -&gt; minusOp: minus<em>first</em>operand; edge four -&gt; minusOp: minus<em>second</em>operand; edge minusOp -&gt; eq: minus_result;</p>
+<p>edge two -&gt; plusOp: plus<em>first</em>operand; edge one -&gt; plusOp: plus<em>second</em>operand; edge plusOp -&gt; eq: plus_result; }</p>
+<pre><code>
+Both sides evaluate to 3, so the node turns green and shows `= 3`. Had they disagreed, it would have shown the two computed values either side of a `≠`.
+
+## Quality Checks
+
+Arithmetic ships one quality check: **division by zero**. If a Divide node has both operands connected and the divisor is zero, Vithanco reports a warning naming the node. An operator that is simply missing an operand is *not* flagged — that is a puzzle mid-play, not a mistake.
+
+## Try it Yourself
+
+Edit the VGL below and click "Render". Try changing an expected answer to see a green node turn red, or delete an operand edge to watch the node go neutral:
+
+**Tip:** Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.
+
+Want to learn more about the VGL syntax? Check out the complete **[VGL Guide](/tools/vgl)** for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.
+</code></pre></div></article>
             <aside class="side-content">
                 <div class="relationships-section"></div>
                 <div class="preview__article-details">

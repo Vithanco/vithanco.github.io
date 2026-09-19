@@ -1,0 +1,69 @@
+vgraph dataConfidentiality: ADTree "Data Confidentiality" {
+    node dataConf: Defense "Data Confidentiality"
+    node networkSec: Defense "Network Security"
+    node physicalSec: Defense "Physical Security"
+    node accessControl: Defense "Access Control"
+    node firewalls: Defense "Firewalls"
+    node passwords: Defense "Passwords"
+    node strongPasswords: Defense "Strong Passwords"
+    node lock1: Defense "Lock"
+    node screening: Defense "Screening"
+    node sensitivityTraining: Defense "Sensitivity Training"
+    node securityGuard: Defense "Security Guard"
+    node videoCameras: Defense "Video Cameras"
+    node employeeAttack: Attack "Employee Attack"
+    node breakIn: Attack "Break In"
+    node corruption: Attack "Corruption"
+    node socialEngineering: Attack "Social Engineering"
+    node dictionaryAttack: Attack "Dictionary Attack"
+    node strongPasswordAttacks: Attack "Strong Password Attacks"
+    node findNote: Attack "Find Note"
+    node samePasswordDiffAccount: Attack "Same Password, Different Account"
+    node backDoor: Attack "Back Door"
+    node fireEscape: Attack "Fire Escape"
+    node defeatLock: Attack "Defeat Lock"
+    node forceOpen: Attack "Force Open"
+    node acquireKeys: Attack "Acquire Keys"
+    node defeatGuard: Attack "Defeat Guard"
+    node bribe: Attack "Bribe"
+    node overpower: Attack "Overpower"
+    node stealKeys: Attack "Steal Keys"
+    node outnumber: Attack "Outnumber"
+    node useWeapons: Attack "Use Weapons"
+    node andDataConf: AndJunctor
+    node andNetworkSec: AndJunctor
+    node andOverpower: AndJunctor
+    edge networkSec -> andDataConf
+    edge physicalSec -> andDataConf
+    edge andDataConf -> dataConf
+    edge accessControl -> andNetworkSec
+    edge firewalls -> andNetworkSec
+    edge andNetworkSec -> networkSec
+    edge passwords -> accessControl
+    edge corruption -> employeeAttack
+    edge socialEngineering -> employeeAttack
+    edge backDoor -> breakIn
+    edge fireEscape -> breakIn
+    edge findNote -> strongPasswordAttacks
+    edge samePasswordDiffAccount -> strongPasswordAttacks
+    edge forceOpen -> defeatLock
+    edge acquireKeys -> defeatLock
+    edge bribe -> defeatGuard
+    edge overpower -> defeatGuard
+    edge stealKeys -> defeatGuard
+    edge strongPasswords -> dictionaryAttack
+    edge lock1 -> backDoor
+    edge screening -> corruption
+    edge sensitivityTraining -> socialEngineering
+    edge securityGuard -> breakIn
+    edge videoCameras -> defeatGuard
+    edge employeeAttack -> dataConf
+    edge breakIn -> physicalSec
+    edge dictionaryAttack -> passwords
+    edge strongPasswordAttacks -> strongPasswords
+    edge defeatLock -> lock1
+    edge defeatGuard -> securityGuard
+    edge outnumber -> andOverpower
+    edge useWeapons -> andOverpower
+    edge andOverpower -> overpower
+}

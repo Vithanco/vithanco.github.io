@@ -1,0 +1,31 @@
+vgraph companyStrategy: GoalTree "Increase Profitability" {
+    node goal: Goal "Make more money, now and in the future";
+
+    node csf1: CriticalSuccessFactor "Maximize Throughput";
+    node csf2: CriticalSuccessFactor "Control Operating Expense";
+    node csf3: CriticalSuccessFactor "Minimize Inventory";
+
+    node nc1: NecessaryCondition "Maximize sales volume";
+    node nc2: NecessaryCondition "Minimize variable costs";
+    node nc3: NecessaryCondition "Highly appealing products";
+    node nc4: NecessaryCondition "Minimize scrap and rework";
+    node nc5: NecessaryCondition "Optimize overhead";
+    node nc6: NecessaryCondition "Optimize supply chain";
+
+    node nc7: NecessaryCondition "Effective market research";
+    node nc8: NecessaryCondition "High-quality products";
+
+    edge csf1 -> goal
+    edge csf2 -> goal
+    edge csf3 -> goal
+
+    edge nc1 -> csf1
+    edge nc2 -> csf1
+    edge nc3 -> csf1
+    edge nc4 -> csf2
+    edge nc5 -> csf2
+    edge nc6 -> csf3
+
+    edge nc7 -> nc1
+    edge nc8 -> nc3
+}

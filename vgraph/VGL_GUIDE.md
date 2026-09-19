@@ -1315,7 +1315,8 @@ layout direction — can be expressed this way.
 vnotation <Name> [extends <BuiltinNotation>] {
     layout: <topToBottom | leftToRight | rightToLeft | bottomToTop>
 
-    node type: <TypeName>  [nodeStyle: <name>, backgroundColor: "#hex", icon: "sf.symbol", ...]
+    icon      <IconName>   [viewBox: "<minX minY width height>", path: "<svg path data>"]
+    node type: <TypeName>  [nodeStyle: <name>, backgroundColor: "#hex", icon: "<IconName>", ...]
     edge type: <edge_id>   from: <TypeName>  to: <TypeName>  [color: "#hex"]
 }
 ```
@@ -1346,6 +1347,69 @@ against this table.
 | `hidden` | — | Not rendered |
 | `custom` | — | Falls back to `bareText`; reserved for future style expressions |
 
+### `icon` — artwork of your own
+
+`icon:` on a node type names a mark. Eighteen names are built into VGraph; a
+`vnotation` can add its own, so a notation is not limited to the marks that
+happened to ship.
+
+```vgl
+vnotation RiskMap {
+    icon shield [viewBox: "0 0 24 24", path: "M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5z"]
+
+    node type: Control [nodeStyle: iconWithText, backgroundColor: "#339933", icon: "shield"]
+}
+```
+
+The artwork travels **inside the document**, so it draws wherever VGL draws —
+website, both plugins, the CLI — with nothing to fetch and no cooperation from
+the host.
+
+- **`viewBox:` and `path:` are both required.** The viewBox is four numbers, as
+  in an SVG file; there is no default, because artwork drawn at a guessed scale
+  is worse than a document that says what is wrong.
+- **A glyph, not a picture.** One path, no colours of its own: `iconColor:` fills
+  it at the point of use, which is what makes the same mark work in white on a
+  dark node and in black on a light one.
+- **`path:` takes SVG path data and only that** — the path commands, digits,
+  `.,+-eE` and spaces, up to 4096 characters. Anything else is refused where it
+  is written.
+- **Your name wins.** A name resolves against the notation's own artwork first
+  and the built-in set second, so declaring `lightbulb.fill` yourself replaces it
+  for that document — and a mark added to VGraph in some later release can never
+  change how your document looks.
+- **A name nobody has is not fatal.** It draws a placeholder and is reported in
+  the quality report, naming the node type and the icon. The rest of the diagram
+  is untouched.
+
+Two sets of names are built in, and a document cannot tell them apart.
+
+**Traced from SF Symbols** — 18, mostly the marks the built-in notations
+use themselves:
+
+`and`, `arrow.triangle.branch`, `arrow.up.circle.fill`, `bolt.circle.fill`,
+`checkmark.circle.fill`, `conflict`, `exclamationmark.triangle`,
+`flag.pattern.checkered`, `hand.thumbsdown.circle.fill`,
+`hand.thumbsup.circle.fill`, `lightbulb.fill`, `minus.circle.fill`, `or`,
+`person.circle.fill`, `plus.circle.fill`, `questionmark.circle.fill`,
+`shippingbox.fill`, `tray.full.fill`.
+
+**Vithanco's own** — 82, carried over from the desktop app:
+
+`addCluster`, `addSelection`, `analysis`, `box`, `brighter`, `checkmark`,
+`copy`, `darker`, `decision`, `delete`, `details`, `down`, `dragLine`,
+`dragLineEnd`, `edgeToSelf`, `edit`, `email`, `exchange`, `export`, `eye`,
+`fileImage`, `flash`, `focus2`, `fold`, `font`, `forbidden`, `goIncoming`,
+`goOutgoing`, `group`, `heart`, `importer`, `info`, `intoNode`, `key`,
+`layeredView`, `leaf`, `left`, `lightBulb`, `magnifier`, `medicin`, `menu`,
+`minusSign`, `new`, `next`, `nextSibling`, `outOfNode`, `play`, `plusSign`,
+`powerOnOff`, `previousSibling`, `print`, `purchase`, `questionMark`,
+`questionMark2`, `quickEntry`, `reload`, `return`, `right`, `speech`, `split`,
+`star`, `starView`, `table`, `template`, `text`, `thumbsDown`, `thumbsUp`,
+`toggle`, `untickedCheckmark`, `up`, `update`, `upsideDown`, `usecase`,
+`user`, `vithanco`, `warning`, `warning2`, `wrench`, `zoomIn`, `zoomOut`,
+`zoomTo100`, `zoomToFit`.
+
 ### `extends`
 
 Adds every node and edge type from a built-in notation, on top of which yours
@@ -1368,6 +1432,8 @@ itself a vnotation is not supported.
 ```vgl
 vnotation RiskMap {
     layout: topToBottom
+
+    icon shield [viewBox: "0 0 24 24", path: "M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5z"]
 
     node type: Risk    [nodeStyle: iconWithText, backgroundColor: "#cc3333", icon: "exclamationmark.triangle"]
     node type: Control [nodeStyle: iconWithText, backgroundColor: "#339933", icon: "shield"]
@@ -1436,6 +1502,8 @@ notation     ::= identifier
 vnotation    ::= "vnotation" identifier ("extends" identifier)? "{" vnotation_body* "}"
 
 vnotation_body ::= ("layout" ":" layout_dir ";"?)
+                 | ("icon" identifier "[" "viewBox" ":" quoted_string ","?
+                                          "path" ":" quoted_string "]" ";"?)
                  | ("node" "type" ":" identifier attributes? ";"?)
                  | ("edge" "type" ":" identifier "from" ":" identifier "to" ":" identifier attributes? ";"?)
 

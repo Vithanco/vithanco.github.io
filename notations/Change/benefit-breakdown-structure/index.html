@@ -69,6 +69,8 @@
                         <li>
                             <a href="/notations" class="selected">Notations</a></li>
                         <li>
+                            <a href="/editor">Editor</a></li>
+                        <li>
                             <a href="/tools">Tools</a></li>
                         <li>
                             <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
@@ -98,7 +100,7 @@ The Benefit Breakdown Structure (BBS) Notation</div>
  <figcaption>
   A BBS schema linking Enablers, Business Changes, Benefits and an Investment Objective
  </figcaption> 
-</figure>
+</figure> 
 <p>An example of a BBS diagram that explains some of the key concepts.</p>
 <p>The diagram above is created with this Notation. It shows how the structure of a (rather small) project could look like. The clusters are used to explain how the diagram translates into a project environment.</p>
 <p>A better understanding of the underlying ideas of benefit realisation through a BBS can be found on the <a href="https://kneupner.de/thoughts/benefit-realisation">author</a>'s website](https://kneupner.de/thoughts/benefit-realisation).</p>
@@ -109,7 +111,7 @@ The Benefit Breakdown Structure (BBS) Notation</div>
  <figcaption>
   The Benefit Breakdown Structure Notation
  </figcaption> 
-</figure>
+</figure> 
 <p>The Benefit Breakdown Structure Notation</p>
 <p>There are a few notes to make:</p>
 <ul>
@@ -153,7 +155,7 @@ The Benefit Breakdown Structure (BBS) Notation</div>
 <p>BBS uses <a href="/tools/Help/Expert_Concepts/diagram-logic/index.html">Necessary Condition Logic</a>.</p>
 <h2 id="try-bbs-yourself">Try BBS Yourself</h2>
 <p>Create and visualize your own Benefit Breakdown Structure diagram right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p>
-<iframe src="/vgraph/index.html?vgl=vgraph%20project%3A%20BBS%20%22Sample%20Project%22%20%7B%0A%20%20%20%20node%20obj1%3A%20InvestmentObjective%20%22Increase%20Revenue%22%3B%0A%20%20%20%20node%20ben1%3A%20Benefit%20%22Faster%20Customer%20Onboarding%22%3B%0A%20%20%20%20node%20ben2%3A%20Benefit%20%22Improved%20Customer%20Satisfaction%22%3B%0A%20%20%20%20node%20bc1%3A%20BusinessChange%20%22Automated%20Registration%20Process%22%3B%0A%20%20%20%20node%20bc2%3A%20BusinessChange%20%22Self-Service%20Portal%22%3B%0A%20%20%20%20node%20en1%3A%20Enabler%20%22Implement%20Online%20Forms%22%3B%0A%20%20%20%20node%20en2%3A%20Enabler%20%22Deploy%20Customer%20Portal%22%3B%0A%20%20%20%20node%20en3%3A%20Enabler%20%22Train%20Support%20Team%22%3B%0A%0A%20%20%20%20edge%20ben1%20-%3E%20obj1%3B%0A%20%20%20%20edge%20ben2%20-%3E%20obj1%3B%0A%20%20%20%20edge%20bc1%20-%3E%20ben1%3B%0A%20%20%20%20edge%20bc2%20-%3E%20ben2%3B%0A%20%20%20%20edge%20en1%20-%3E%20bc1%3B%0A%20%20%20%20edge%20en2%20-%3E%20bc2%3B%0A%20%20%20%20edge%20en3%20-%3E%20bc2%3B%0A%7D" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive BBS Editor"></iframe>
+<iframe src="/vgraph/index.html?src=/notations/Change/benefit-breakdown-structure/project.vgl" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive BBS Editor"></iframe>
 <p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p>
 <p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="/tools/vgl">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported notations.</p>
 <h2 id="further-information">Further Information</h2>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta property="og:site_name" content="Vithanco"/>
+        <link rel="canonical" href="https://vithanco.com/editor"/>
+        <meta name="twitter:url" content="https://vithanco.com/editor"/>
+        <meta property="og:url" content="https://vithanco.com/editor"/>
+        <title>The VGraph Editor — draw diagrams by writing them | Vithanco</title>
+        <meta name="twitter:title" content="The VGraph Editor — draw diagrams by writing them | Vithanco"/>
+        <meta property="og:title" content="The VGraph Editor — draw diagrams by writing them | Vithanco"/>
+        <meta name="description" content="Write VGL on the left, watch the diagram render on the right. Runs entirely in your browser, nothing is uploaded."/>
+        <meta name="twitter:description" content="Write VGL on the left, watch the diagram render on the right. Runs entirely in your browser, nothing is uploaded."/>
+        <meta property="og:description" content="Write VGL on the left, watch the diagram render on the right. Runs entirely in your browser, nothing is uploaded."/>
+        <meta name="twitter:card" content="summary"/>
+        <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+        <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
+        <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
+        <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
+        <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
+    </head>
+    <body>
+        <header>
+            <div class="header-wrapper">
+                <a href="/" class="site-name">
+                    <img src="/logo.png" height="20" width="20"/>
+                    <p>Vithanco</p></a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/services">Services</a></li>
+                        <li>
+                            <a href="/methods">Methods</a></li>
+                        <li>
+                            <a href="/notations">Notations</a></li>
+                        <li>
+                            <a href="/editor" class="selected">Editor</a></li>
+                        <li>
+                            <a href="/tools">Tools</a></li>
+                        <li>
+                            <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
+        <div class="section-wrapper">
+            <article>
+                <h1>The VGraph Editor — draw diagrams by writing them</h1>
+                <div class="content"><iframe id="vgraph-editor-frame" src="/vgraph/index.html" title="VGraph editor" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;height:calc(100vh - 280px);min-height:620px;margin:0 0 28px;border:1px solid #e0e0e0;border-radius:8px;"></iframe><script>
+  // The editor reads `?vgl=` and `?src=` for itself, but it lives inside the
+  // frame — so hand it this page's query string verbatim and interpret nothing
+  // here. One interpreter means /editor/?src=… and /vgraph/index.html?src=…
+  // behave identically, and every other embedding host keeps the same contract.
+  (function () {
+    var frame = document.getElementById('vgraph-editor-frame');
+    if (frame && window.location.search) {
+      frame.src = '/vgraph/index.html' + window.location.search;
+    }
+  })();
+</script><h2>What this is</h2><p>A diagram editor that takes text. You describe nodes, edges and groups in <strong><a href="/tools/vgl/">VGL</a></strong>, and the diagram lays itself out — no dragging boxes into place, no arrows to straighten. Each notation carries its own rules, so the editor will not let you draw something the notation forbids.</p><p>It runs entirely in your browser. Nothing you type is uploaded, and there is no account to make. <strong>Save VGL</strong> gives you the source; <strong>Save SVG</strong> gives you a picture that is also a document — it carries its own VGL inside, so opening it here brings the diagram back, editable.</p><h2>Start from an example</h2><p>Each of these opens a diagram that lives on this site — edit it, and save your version; the original stays where it is.</p><ul><li><a href="/editor/?src=/index/tired.vgl">Why am I always tired?</a> — a causal loop, small enough to read in one go</li><li><a href="/editor/?src=/notations/concept-maps/learning-cm.vgl">How learning works</a> — a <a href="/notations/concept-maps/">concept map</a></li><li><a href="/editor/?src=/notations/TOC/goal-tree/company-strategy.vgl">Increase profitability</a> — a <a href="/notations/TOC/goal-tree/">goal tree</a></li><li><a href="/editor/?src=/notations/TOC/current-reality-tree/analysis.vgl">Sales decline</a> — a <a href="/notations/TOC/current-reality-tree/">current reality tree</a></li><li><a href="/editor/?src=/notations/c4-model/banking.vgl">Internet banking</a> — a <a href="/notations/c4-model/">C4 model</a></li><li><a href="/editor/?src=/notations/attack-defense-tree/adtree-data-confidentiality.vgl">Data confidentiality</a> — an <a href="/notations/attack-defense-tree/">attack-defense tree</a></li><li><a href="/editor/?src=/notations/timeline/napoleonic-wars.vgl">The Napoleonic wars</a> — a <a href="/notations/timeline/">timeline</a>, on a notation defined inside the file itself</li></ul><p>Every diagram on this site is written in VGL, so the <strong><a href="/tools/vgl/notation-reference/">notation reference</a></strong> doubles as a gallery: each page shows what its notation is for, and what it refuses to draw.</p><h2>Where to go next</h2><ul><li><strong><a href="/tools/vgl/concepts/">Concepts</a></strong> — nodes, edges, groups, attributes</li><li><strong><a href="/tools/vgl/grammar/">Grammar</a></strong> — the formal syntax</li><li><strong><a href="/tools/vgl/notation-reference/">Notation reference</a></strong> — every built-in notation, with runnable examples</li><li><strong><a href="/tools/vgl/user-defined-notations-vnotation/">User-defined notations</a></strong> — when none of them fit</li></ul></div></article>
+            <aside class="side-content">
+                <div class="newsletter" height="350" width="250">
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <p>See how you can combine your brain power with structured visual and achieve better results.</p>
+                    <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
+                <div></div></aside></div>
+        <footer>
+            <div>
+                <p class="footer-title">                    <img src="/logo.png" width="16px" class="content_logo"/>
+Vithanco Home </p>
+                <nav>
+                    <p>Dr. Ing. Klaus Kneupner, MBA</p>
+                    <ul>
+                        <li>
+                            <a href="https://linkedIn.com/in/Kneupner">
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bsky.app/profile/vithanco.bsky.social">
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://mastodon.social/@vithanco">
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/feed.rss">
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
+                            </a>
+                        </li>
+                    </ul></nav></div></footer></body>
+</html>

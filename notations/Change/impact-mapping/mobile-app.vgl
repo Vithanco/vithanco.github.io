@@ -1,0 +1,22 @@
+vgraph mobileApp: ImpactMapping "Mobile App Launch" {
+    node g1: Goal "Increase Revenue by 30%";
+    node a1: Actor "New Customers";
+    node a2: Actor "Existing Customers";
+    node i1: Impact "Make First Purchase";
+    node i2: Impact "Increase Purchase Frequency";
+    node i3: Impact "Upgrade to Premium";
+    node d1: Deliverable "Mobile App with Easy Checkout";
+    node d2: Deliverable "Push Notifications for Deals";
+    node d3: Deliverable "Loyalty Rewards Program";
+    node d4: Deliverable "Premium Features Bundle";
+
+    edge g1 -> a1: goal_to_actor;
+    edge g1 -> a2: goal_to_actor;
+    edge a1 -> i1: actor_to_impact;
+    edge a2 -> i2: actor_to_impact;
+    edge a2 -> i3: actor_to_impact;
+    edge i1 -> d1: impact_to_deliverable;
+    edge i2 -> d2: impact_to_deliverable;
+    edge i2 -> d3: impact_to_deliverable;
+    edge i3 -> d4: impact_to_deliverable;
+}

@@ -1,0 +1,48 @@
+vgraph agileTransition: TRT "Agile Transformation Implementation" {
+    // Given conditions (the context we're working within)
+    node g1: Given "Company has 5 development teams";
+    node g2: Given "Current waterfall process causes delays";
+
+    // Changeable causes (actions we will take)
+    node c1: Changeable "Introduce daily standups";
+    node c2: Changeable "Implement CI/CD pipeline";
+    node c3: Changeable "Create cross-functional teams";
+    node c4: Changeable "Train teams on Scrum practices";
+
+    // Intermediate effects (results of our actions)
+    node ie1: IntermediateEffect "Issues identified faster";
+    node ie2: IntermediateEffect "Code integration automated";
+    node ie3: IntermediateEffect "Teams own full features";
+    node ie4: IntermediateEffect "Iterative development adopted";
+
+    // And junctors for combined effects
+    node and1: AndJunctor;
+    node and2: AndJunctor;
+
+    // Desirable effects (our goals)
+    node de1: DesirableEffect "Faster time to market";
+    node de2: DesirableEffect "Higher code quality";
+    node de3: DesirableEffect "Better team collaboration";
+
+    // Connect actions to intermediate effects
+    edge c1 -> ie1
+    edge c2 -> ie2
+    edge c3 -> ie3
+    edge c4 -> ie4
+
+    // Intermediate effects combine to desirable effects
+    edge ie1 -> and1
+    edge ie2 -> and1
+    edge and1 -> de2
+
+    edge ie3 -> and2
+    edge ie4 -> and2
+    edge and2 -> de3
+
+    // Quality and collaboration lead to speed
+    edge de2 -> de1
+    edge de3 -> de1
+
+    // Given waterfall context is addressed by iterative process
+    edge g2 -> ie4
+}

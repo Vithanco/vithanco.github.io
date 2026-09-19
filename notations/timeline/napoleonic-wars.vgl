@@ -1,0 +1,23 @@
+vnotation WarTimeline extends Timeline {
+    layout: topToBottom
+    node type: Battle [nodeStyle: withCategory, color: "#883333", category: "Battle"]
+    node type: Treaty [nodeStyle: withCategory, color: "#339933", category: "Treaty"]
+    edge type: resolved_by from: Battle to: Treaty
+    edge type: influenced from: Battle to: Battle
+}
+vgraph napoleonicWars: WarTimeline "Napoleonic Wars" {
+    node t1805: TimePoint "1805" [alignGroup: "1805"]
+    node t1812: TimePoint "1812" [alignGroup: "1812"]
+    node t1815: TimePoint "1815" [alignGroup: "1815"]
+    edge t1805 -> t1812: sequence
+    edge t1812 -> t1815: sequence
+        node f1: Battle "Battle of Austerlitz" [alignGroup: "1805"]
+        node f2: Battle "Invasion of Russia" [alignGroup: "1812"]
+        node f3: Battle "Battle of Waterloo" [alignGroup: "1815"]
+        node e1: Treaty "Treaty of Pressburg" [alignGroup: "1805"]
+        node e2: Treaty "Congress of Vienna" [alignGroup: "1815"]
+    edge f1 -> e1: resolved_by
+    edge f3 -> e2: resolved_by
+    edge f1 -> f2: influenced "overconfidence"
+    edge f2 -> f3: influenced "weakened army"
+}

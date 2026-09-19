@@ -1,0 +1,18 @@
+vgraph project: BBS "Sample Project" {
+    node obj1: InvestmentObjective "Increase Revenue";
+    node ben1: Benefit "Faster Customer Onboarding";
+    node ben2: Benefit "Improved Customer Satisfaction";
+    node bc1: BusinessChange "Automated Registration Process";
+    node bc2: BusinessChange "Self-Service Portal";
+    node en1: Enabler "Implement Online Forms";
+    node en2: Enabler "Deploy Customer Portal";
+    node en3: Enabler "Train Support Team";
+
+    edge ben1 -> obj1;
+    edge ben2 -> obj1;
+    edge bc1 -> ben1;
+    edge bc2 -> ben2;
+    edge en1 -> bc1;
+    edge en2 -> bc2;
+    edge en3 -> bc2;
+}

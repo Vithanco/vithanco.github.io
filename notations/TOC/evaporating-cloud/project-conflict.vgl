@@ -1,0 +1,22 @@
+vgraph projectConflict: EC "Project Delivery vs Quality" {
+    node obj: CommonObjective "Deliver a successful software product";
+    node needA: Need "Meet the market window deadline";
+    node needB: Need "Ensure product quality and reliability";
+    node wantA: Want "Release with current feature set now";
+    node wantB: Want "Extend timeline for thorough testing";
+    node conf: Conflict;
+    node assA: Assumption "Testing always requires calendar time";
+    node assB: Assumption "Features cannot be descoped";
+    node assC: Assumption "Quality requires full manual testing";
+    node sol: Solution "Implement automated testing pipeline";
+    edge obj -> needA: objective_to_need;
+    edge obj -> needB: objective_to_need;
+    edge needA -> wantA: need_to_want;
+    edge needB -> wantB: need_to_want;
+    edge wantA -> conf: want_to_conflict;
+    edge wantB -> conf: want_to_conflict;
+    edge needA -> assA: need_to_assumption;
+    edge needB -> assC: need_to_assumption;
+    edge conf -> assB: conflict_to_assumption;
+    edge needB -> sol: need_to_solution;
+}
