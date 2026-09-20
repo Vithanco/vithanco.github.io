@@ -1032,6 +1032,22 @@ export async function createInstantiator(options, swift) {
                     tmpRetString = undefined;
                     return ret;
                 },
+                renderGraphWithQuality: function bjs_renderGraphWithQuality(graph) {
+                    const graphBytes = textEncoder.encode(graph);
+                    const graphId = swift.memory.retain(graphBytes);
+                    instance.exports.bjs_renderGraphWithQuality(graphId, graphBytes.length);
+                    const ret = tmpRetString;
+                    tmpRetString = undefined;
+                    return ret;
+                },
+                describeNotation: function bjs_describeNotation(notation) {
+                    const notationBytes = textEncoder.encode(notation);
+                    const notationId = swift.memory.retain(notationBytes);
+                    instance.exports.bjs_describeNotation(notationId, notationBytes.length);
+                    const ret = tmpRetString;
+                    tmpRetString = undefined;
+                    return ret;
+                },
                 debugGraph: function bjs_debugGraph(graph) {
                     const graphBytes = textEncoder.encode(graph);
                     const graphId = swift.memory.retain(graphBytes);

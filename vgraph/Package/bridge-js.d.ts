@@ -38,6 +38,25 @@ export type Exports = {
      * Dark-mode variant of `renderGraph` (§11 of the Diagram Style Guide).
      */
     renderGraphDark(graph: string): string;
+    /**
+     * SVG *and* the quality report, as `{"svg": …, "quality": [{severity, message}]}`.
+     *
+     * Restored: this export existed as `renderGraphWithQuality` until 99c8d5c,
+     * where the Graphviz-decoupling refactor reused its body for a layout
+     * variant and dropped the quality half — leaving `App.renderGraphJSON`
+     * ("the shape JavaScript callers read") with no JavaScript caller.
+     * `renderGraph` discards the report the editor already displays.
+     */
+    renderGraphWithQuality(graph: string): string;
+    /**
+     * A notation's self-describing Markdown, or `Error: …`.
+     *
+     * Same path as the CLI's `describe` subcommand and the `describe_notation`
+     * MCP tool: parse a `metadescription` declaration and read the document
+     * off the graph. Without this export a wasm host can render every notation
+     * but not explain one, which is the half a model needs first.
+     */
+    describeNotation(notation: string): string;
     debugGraph(graph: string): string;
     /**
      * Lay out a graph (in-process Graphviz) and return position information as
