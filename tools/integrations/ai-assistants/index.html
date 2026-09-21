@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta property="og:site_name" content="Vithanco"/>
+        <link rel="canonical" href="https://vithanco.com/tools/integrations/ai-assistants"/>
+        <meta name="twitter:url" content="https://vithanco.com/tools/integrations/ai-assistants"/>
+        <meta property="og:url" content="https://vithanco.com/tools/integrations/ai-assistants"/>
+        <title>Vithanco for AI Assistants | Vithanco</title>
+        <meta name="twitter:title" content="Vithanco for AI Assistants | Vithanco"/>
+        <meta property="og:title" content="Vithanco for AI Assistants | Vithanco"/>
+        <meta name="description" content="An MCP server that lets Claude and other assistants draw Concept Maps, IBIS diagrams, Causal Loop Diagrams and Timelines."/>
+        <meta name="twitter:description" content="An MCP server that lets Claude and other assistants draw Concept Maps, IBIS diagrams, Causal Loop Diagrams and Timelines."/>
+        <meta property="og:description" content="An MCP server that lets Claude and other assistants draw Concept Maps, IBIS diagrams, Causal Loop Diagrams and Timelines."/>
+        <meta name="twitter:card" content="summary"/>
+        <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+        <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
+        <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
+        <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
+        <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
+    </head>
+    <body class="item-page">
+        <header>
+            <div class="header-wrapper">
+                <a href="/" class="site-name">
+                    <img src="/logo.png" height="20" width="20"/>
+                    <p>Vithanco</p></a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/services">Services</a></li>
+                        <li>
+                            <a href="/methods">Methods</a></li>
+                        <li>
+                            <a href="/notations">Notations</a></li>
+                        <li>
+                            <a href="/editor">Editor</a></li>
+                        <li>
+                            <a href="/tools" class="selected">Tools</a></li>
+                        <li>
+                            <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
+        <div class="item-wrapper">
+            <article>
+                <div class="breadcrumbs">                    <a href="/" class="breadcrumb-home">                        <img src="/logo.png" class="breadcrumb-icon"/>
+Home</a>
+                    <span class="breadcrumb-separator"> / </span>
+                    <a href="/tools">The best Tools for Structured Visual Thinking</a>
+                    <span class="breadcrumb-separator"> / </span>
+Vithanco for AI Assistants</div>
+                <h1>Vithanco for AI Assistants</h1>
+                <div class="reading-time-container">
+                    <span class="fa fa-clock-o"></span>
+                    <p>Estimated reading time: 2 minutes.</p></div>
+                <div class="content"><p>Ask your assistant to map a decision, and get the diagram back as an image — not a description of one, and not a wall of Mermaid that renders into something nobody would call a Concept Map.</p>
+<p>Vithanco ships an <a href="https://modelcontextprotocol.io">MCP</a> server in two forms. Both offer the same tools; they differ only in where the work happens.</p>
+<h2 id="the-tools">The tools</h2>
+<ul>
+ <li><strong><code>create_concept_map</code></strong> — define a domain's vocabulary as falsifiable propositions.</li>
+ <li><strong><code>create_ibis</code></strong> — map a decision as questions, answers, pros and cons.</li>
+ <li><strong><code>create_cld</code></strong> — Causal Loop Diagrams, with reinforcing and balancing feedback.</li>
+ <li><strong><code>create_timeline</code></strong> — events over time, optionally across several tracks.</li>
+ <li><strong><code>describe_notation</code></strong> — hands the assistant a notation's own documentation.</li>
+</ul>
+<h2 id="what-makes-it-more-than-a-renderer">What makes it more than a renderer</h2>
+<p><strong>The assistant learns the notation.</strong> Rather than hoping a model already knows what separates a good Concept Map from a box-and-arrow sketch,</p>
+<p><code>describe_notation</code> gives it the notation's own definition: the node types, the legal edges, and the conventions that make a diagram readable.</p>
+<p><strong>Every diagram comes back with a critique.</strong> Alongside the image, each render returns a quality report — concepts left unconnected, a relation-to-concept ratio that suggests a thin map, propositions that do not read as sentences, edges the notation does not allow. A capable assistant reads that and improves the diagram before showing it to you.</p>
+<p>That feedback loop is the point. You are not asking a model to draw; you are asking it to think in a notation, and giving it the means to check its work.</p>
+<h2 id="local">Local</h2>
+<p><code>@vithanco/vgraph-mcp</code> runs the engine on your own machine as WebAssembly. Nothing is sent anywhere, there is no service to be down, and a diagram renders in milliseconds rather than a network round trip.</p>
+<pre><code class="language-json">{
+  "mcpServers": {
+    "vgraph": { "command": "npx", "args": ["-y", "@vithanco/vgraph-mcp"] }
+  }
+}
+</code></pre>
+<p>Use this wherever your assistant can run a command — Claude Code, Claude Desktop, Cursor, and most editor-based assistants.</p>
+<h2 id="hosted">Hosted</h2>
+<p>The same tools behind a URL, for clients that cannot run a local command: Claude in the browser, ChatGPT connectors, and anything else that takes a server address and nothing more.</p>
+<pre><code class="language-json">{
+  "mcpServers": {
+    "vgraph": { "url": "https://mcp.vithanco.com/mcp" }
+  }
+}
+</code></pre>
+<h2 id="which-one">Which one</h2>
+<p>If you have a terminal, take the local one — it is faster, private, and depends on nothing but your own machine. If you are configuring an assistant that only accepts a URL, take the hosted one.</p>
+<p>Both are listed in the <a href="https://registry.modelcontextprotocol.io">MCP Registry</a> as</p>
+<p><code>com.vithanco/vgraph-mcp</code>.</p>
+<h2 id="see-also">See also</h2>
+<ul>
+ <li><a href="/tools/vgl/">VGL Syntax Guide</a> — the language the assistant writes</li>
+ <li><a href="/notations/">Notations</a> — what each diagram type is for</li>
+ <li><a href="/tools/integrations/">All integrations</a></li>
+</ul></div></article>
+            <aside class="side-content">
+                <div class="relationships-section"></div>
+                <div class="preview__article-details">
+                    <p class="tag-list-title">Tagged with:</p>
+                    <ul class="preview__article-tags">
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/tools">Tools</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/vgl">VGL</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/mcp">MCP</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/ai">AI</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/claude">Claude</a></div></li></ul></div>
+                <div class="newsletter" height="350" width="250">
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <p>See how you can combine your brain power with structured visual and achieve better results.</p>
+                    <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
+                <div></div></aside></div>
+        <footer>
+            <div>
+                <p class="footer-title">                    <img src="/logo.png" width="16px" class="content_logo"/>
+Vithanco Home </p>
+                <nav>
+                    <p>Dr. Ing. Klaus Kneupner, MBA</p>
+                    <ul>
+                        <li>
+                            <a href="https://linkedIn.com/in/Kneupner">
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bsky.app/profile/vithanco.bsky.social">
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://mastodon.social/@vithanco">
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/feed.rss">
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
+                            </a>
+                        </li>
+                    </ul></nav></div></footer></body>
+</html>

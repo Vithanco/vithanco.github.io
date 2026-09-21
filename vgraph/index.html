@@ -67,6 +67,36 @@
       // long press; the editor checks before arming the timer.
       window.__vgraphLongPress = exports.editorLongPressFired;
 
+      // The editor's draft storage. It lives here, not in Swift, because
+      // `localStorage` *throws* rather than fails quietly when a browser has
+      // site data switched off (some private-browsing modes) — and a JS
+      // exception is not something this embedded build can catch. A host that
+      // omits this object simply has no autosave; the editor checks first.
+      window.__vgraphDraft = {
+        read() {
+          try {
+            return window.localStorage.getItem('vgraph.editor.draft') || '';
+          } catch (e) {
+            return '';
+          }
+        },
+        readName() {
+          try {
+            return window.localStorage.getItem('vgraph.editor.draft-name') || '';
+          } catch (e) {
+            return '';
+          }
+        },
+        write(vgl, name) {
+          try {
+            window.localStorage.setItem('vgraph.editor.draft', vgl);
+            window.localStorage.setItem('vgraph.editor.draft-name', name);
+          } catch (e) {
+            /* storage full, or switched off — the diagram is still on screen */
+          }
+        },
+      };
+
       exports.mountEditor('editor-root');
 
       boot.remove();

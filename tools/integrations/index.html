@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta property="og:site_name" content="Vithanco"/>
+        <link rel="canonical" href="https://vithanco.com/tools/integrations"/>
+        <meta name="twitter:url" content="https://vithanco.com/tools/integrations"/>
+        <meta property="og:url" content="https://vithanco.com/tools/integrations"/>
+        <title>Vithanco in Your Editor and Your AI Assistant | Vithanco</title>
+        <meta name="twitter:title" content="Vithanco in Your Editor and Your AI Assistant | Vithanco"/>
+        <meta property="og:title" content="Vithanco in Your Editor and Your AI Assistant | Vithanco"/>
+        <meta name="description" content="Four ways to use Vithanco diagrams outside the app — Obsidian, VS Code, and two MCP servers for AI assistants."/>
+        <meta name="twitter:description" content="Four ways to use Vithanco diagrams outside the app — Obsidian, VS Code, and two MCP servers for AI assistants."/>
+        <meta property="og:description" content="Four ways to use Vithanco diagrams outside the app — Obsidian, VS Code, and two MCP servers for AI assistants."/>
+        <meta name="twitter:card" content="summary"/>
+        <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+        <link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Vithanco"/>
+        <meta name="twitter:image" content="https://vithanco.com/logo.png"/>
+        <meta property="og:image" content="https://vithanco.com/logo.png"/>
+        <style>    #lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }</style>
+        <script>    function openLightbox(img) {
+        var lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.onclick = function() { lightbox.style.display = 'none'; };
+            document.body.appendChild(lightbox);
+        }
+        lightbox.innerHTML = '';
+        var newImg = document.createElement('img');
+        newImg.src = img.src;
+        lightbox.appendChild(newImg);
+        lightbox.style.display = 'flex';
+    }</script>
+        <script>    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_5Cyj6ACFJq02Ews6GFYzP8ONYXNXoHcmY1k21kacuam',{api_host:'https://eu.posthog.com'})</script>
+    </head>
+    <body class="item-page">
+        <header>
+            <div class="header-wrapper">
+                <a href="/" class="site-name">
+                    <img src="/logo.png" height="20" width="20"/>
+                    <p>Vithanco</p></a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/services">Services</a></li>
+                        <li>
+                            <a href="/methods">Methods</a></li>
+                        <li>
+                            <a href="/notations">Notations</a></li>
+                        <li>
+                            <a href="/editor">Editor</a></li>
+                        <li>
+                            <a href="/tools" class="selected">Tools</a></li>
+                        <li>
+                            <a href="/newsletter">Newsletter</a></li></ul></nav></div></header>
+        <div class="item-wrapper">
+            <article>
+                <div class="breadcrumbs">                    <a href="/" class="breadcrumb-home">                        <img src="/logo.png" class="breadcrumb-icon"/>
+Home</a>
+                    <span class="breadcrumb-separator"> / </span>
+                    <a href="/tools">The best Tools for Structured Visual Thinking</a>
+                    <span class="breadcrumb-separator"> / </span>
+Vithanco in Your Editor and Your AI Assistant</div>
+                <h1>Vithanco in Your Editor and Your AI Assistant</h1>
+                <div class="reading-time-container">
+                    <span class="fa fa-clock-o"></span>
+                    <p>Estimated reading time: 2 minutes.</p></div>
+                <div class="content"><p>The Vithanco diagram engine no longer only lives in the Mac app. The same engine — the one that reads VGL, enforces each notation's rules, lays the graph out and draws it — is compiled to WebAssembly and shipped in four other places: two editor extensions, and two servers that let an AI assistant draw diagrams for you.</p>
+<p>They all produce identical diagrams, because they are all the same engine.</p>
+<figure class="vgl-render img-std"> 
+ <img src="/vgl-generated/vithanco-integrations.svg" alt="A Concept Map of how the Vithanco engine reaches editors and AI assistants" onclick="openLightbox(this)" /> 
+ <figcaption>
+  One engine, four surfaces
+ </figcaption> 
+</figure> 
+<h2 id="in-your-notes">In your notes</h2>
+<p>A fenced code block tagged <code>vgl</code> becomes a rendered diagram. Your note keeps the text; the reader sees the picture.</p>
+<ul>
+ <li><strong><a href="/tools/integrations/obsidian/">Obsidian</a></strong> — rendered in reading view.</li>
+ <li><strong><a href="/tools/integrations/vscode/">Visual Studio Code</a></strong> — rendered in the built-in Markdown preview.</li>
+</ul>
+<p>Both work the same way and share three properties worth knowing:</p>
+<p><strong>Every notation.</strong> IBIS, Concept Map, Causal Loop Diagram, Timeline, Decision Tree, Goal Tree, Impact Mapping, Benefit Breakdown Structure, Attack-Defense Tree, and the full Theory of Constraints set — Current Reality Tree, Evaporating Cloud, Future Reality Tree, Prerequisite Tree, Transition Tree.</p>
+<p><strong>The rules, enforced.</strong> Each notation defines which node types may exist and which edges are legal between them. An invalid diagram is reported, not quietly drawn.</p>
+<p><strong>Nothing leaves your machine.</strong> The engine is embedded in the extension as WebAssembly. No server, no CDN, no network call, no "allow content" prompt — and it works on a plane.</p>
+<h2 id="from-your-ai-assistant">From your AI assistant</h2>
+<p><strong><a href="/tools/integrations/ai-assistants/">AI assistants</a></strong> — an MCP server lets an assistant like Claude draw Vithanco diagrams as part of a conversation. Ask it to map a decision and you get the diagram back as an image, not a description of one.</p>
+<p>It also learns the notation rather than guessing at it, and every diagram comes back with a critique it can act on.</p>
+<h2 id="where-to-go-next">Where to go next</h2>
+<ul>
+ <li><strong><a href="/tools/vgl/">VGL Syntax Guide</a></strong> — the language all of these read.</li>
+ <li><strong><a href="/notations/">Notations</a></strong> — what each diagram type is for.</li>
+ <li><strong><a href="/editor/">The editor</a></strong> — try VGL in the browser, nothing to install.</li>
+</ul></div></article>
+            <aside class="side-content">
+                <div class="toc-list">
+                    <p class="aside-title">Table of Contents</p>
+                    <ul>
+                        <li>
+                            <a href="/tools/integrations/obsidian/index.html">
+                                <p>Obsidian</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/integrations/vscode/index.html">
+                                <p>VS Code</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/integrations/ai-assistants/index.html">
+                                <p>AI Assistants</p>
+                            </a>
+                        </li>
+                    </ul></div>
+                <div class="relationships-section"></div>
+                <div class="preview__article-details">
+                    <p class="tag-list-title">Tagged with:</p>
+                    <ul class="preview__article-tags">
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/tools">Tools</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/vgl">VGL</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/obsidian">Obsidian</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/vs-code">VS Code</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/mcp">MCP</a></div></li>
+                        <li>
+                            <div class="tag-preview">
+                                <a href="/tags/ai">AI</a></div></li></ul></div>
+                <div class="newsletter" height="350" width="250">
+                    <img src="/socialmedia-icons/SubstackWordmarkSmall.svg" alt="Newsletter Wordmark" width="250"/>
+                    <p>See how you can combine your brain power with structured visual and achieve better results.</p>
+                    <a href="https://newsletter.vithanco.com">Subscribe to my newsletter</a></div>
+                <div></div></aside></div>
+        <footer>
+            <div>
+                <p class="footer-title">                    <img src="/logo.png" width="16px" class="content_logo"/>
+Vithanco Home </p>
+                <nav>
+                    <p>Dr. Ing. Klaus Kneupner, MBA</p>
+                    <ul>
+                        <li>
+                            <a href="https://linkedIn.com/in/Kneupner">
+                                <img src="/socialmedia-icons/linkedin.svg" alt="LinkedIn"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bsky.app/profile/vithanco.bsky.social">
+                                <img src="/socialmedia-icons/bluesky.svg" alt="Bluesky"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://mastodon.social/@vithanco">
+                                <img src="/socialmedia-icons/mastodon.svg" alt="Mastodon"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/feed.rss">
+                                <img src="/socialmedia-icons/rss.svg" alt="RSS"/>
+                            </a>
+                        </li>
+                    </ul></nav></div></footer></body>
+</html>
