@@ -1,0 +1,148 @@
+<svg width="968.0" height="589.76" viewBox="-50.0 -50.0 968.0 589.76" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[// c4model.com's Internet Banking example. The model is unfolded to the code;
+// each view zooms out by folding one node type.
+vgraph banking: C4 "Internet Banking System" {
+    node customer: Person "Personal Banking Customer";
+
+    group bigBank: Organisation "Big Bank" {
+        node serviceStaff: Person "Customer Service Staff";
+        node backOfficeStaff: Person "Back Office Staff";
+        node atm: SoftwareSystem "ATM" [backgroundColor: "#8e24aa"];
+        node cbs: SoftwareSystem "Core Banking System" [backgroundColor: "#e8710a"];
+
+        group ibs: SoftwareSystem "Internet Banking System" {
+            isfolded: false;
+            node staticContent: Container "Static Content";
+            node ui: Container "UI";
+            node statementStore: Database "Statement Store";
+            node database: Database "Database";
+
+            group backend: Container "Backend" {
+                isfolded: false;
+                node statementApi: Component "Statement API";
+                node signInApi: Component "Sign In API";
+                node accountsSummaryApi: Component "Accounts Summary API";
+                node statementComponent: Component "Statement Component";
+                node securityComponent: Component "Security Component";
+                node emailComponent: Component "Email Component";
+
+                group adapter: Component "Core Banking System Adapter" {
+                    isfolded: false;
+                    node adapterInterface: CodeElement "CoreBankingSystemAdapter";
+                    node adapterImpl: CodeElement "CoreBankingSystemAdapterImpl";
+                    node connection: CodeElement "CoreBankingSystemConnection";
+                    node response: CodeElement "Response";
+                    node request: CodeElement "Request";
+                    node bankAccountsResponse: CodeElement "BankAccountsResponse";
+                    node bankAccountsRequest: CodeElement "BankAccountsRequest";
+                };
+            };
+        };
+    };
+
+    group aws: Organisation "Amazon Web Services" {
+        node ses: SoftwareSystem "Amazon Web Services Simple Email Service" [backgroundColor: "#c62828"];
+    };
+
+    edge customer -> serviceStaff "Asks questions to";
+    edge customer -> atm "Withdraws cash using";
+    edge serviceStaff -> cbs "Support customers using";
+    edge backOfficeStaff -> cbs "Investigate and troubleshoot problems using";
+    edge atm -> cbs "Makes transactions using";
+    edge ses -> customer "Sends e-mails to";
+
+    // Edges join elements, never boundaries: a detailed node's relationships
+    // start at its details, and folding it gathers them onto its box.
+    edge customer -> staticContent "Loads the UI from";
+    edge customer -> ui "Views account balances and makes payments using";
+    edge staticContent -> ui "Delivers";
+    edge ui -> statementApi "Requests statements from";
+    edge ui -> signInApi "Makes sign in requests to";
+    edge ui -> accountsSummaryApi "Requests a list of bank accounts from";
+
+    edge statementApi -> statementComponent "Requests statements from";
+    edge statementApi -> securityComponent "Validates authentication token using";
+    edge signInApi -> securityComponent "Validates credentials using";
+    edge accountsSummaryApi -> securityComponent "Validates authentication token using";
+    edge accountsSummaryApi -> adapterInterface "Requests lists of bank accounts from";
+    edge statementComponent -> adapterInterface "Requests statement information from";
+    edge securityComponent -> emailComponent "Sends emails using";
+    edge statementComponent -> statementStore "Reads from and writes to";
+    edge securityComponent -> database "Reads from and writes to";
+    edge emailComponent -> ses "Sends e-mails to customers using";
+
+    edge adapterImpl -> adapterInterface [arrowhead: "empty"; style: dashed];
+    edge adapterImpl -> connection "initialises and pools" [headlabel: "1..20"];
+    edge adapterImpl -> bankAccountsRequest "creates";
+    edge connection -> response "creates";
+    edge connection -> request "executes";
+    edge bankAccountsResponse -> response [arrowhead: "empty"; style: dashed];
+    edge bankAccountsRequest -> request [arrowhead: "empty"; style: dashed];
+    edge connection -> cbs "Makes API requests to";
+}
+
+vview landscape "System Landscape View" {
+    folded node type: SoftwareSystem;
+}
+
+// The narrower views turn derived edges off: a C4 diagram shows what it shows.
+vview context "System Context View: Internet Banking System" [derivedEdges: false] {
+    include group ibs;
+    expand 1;
+    folded node type: SoftwareSystem;
+}
+
+vview containers "Container View: Internet Banking System" [derivedEdges: false] {
+    include group ibs;
+    expand 1;
+    folded node type: Container;
+}
+
+vview components "Component View: Internet Banking System - Backend" [derivedEdges: false] {
+    include group backend;
+    expand 1;
+    folded node type: Component;
+}
+
+vview code "Code View: Internet Banking System - Backend - Core Banking System Adapter" [derivedEdges: false] {
+    include group adapter;
+}
+]]></vithanco:vgl></metadata><style>@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;display=swap');</style><style>.vgraph-node, .vgraph-edge, .vgraph-group > rect { transition: opacity 0.12s ease-out, filter 0.12s ease-out; }
+.vgraph-node, .vgraph-edge, .loop-indicator { cursor: pointer; }
+svg:has(.vgraph-node:hover, .vgraph-edge:hover, .loop-indicator:hover) .vgraph-node,
+svg:has(.vgraph-node:hover, .vgraph-edge:hover, .loop-indicator:hover) .vgraph-edge { opacity: 0.15; }
+.vgraph-node:hover, .vgraph-edge:hover { opacity: 1 !important; }
+.vgraph-node:hover { filter: drop-shadow(0 0 10px rgba(59,130,246,0.95)) drop-shadow(0 0 3px rgba(59,130,246,1)); }
+.vgraph-edge:hover { filter: drop-shadow(0 0 9px rgba(59,130,246,0.95)); }
+.vgraph-edge:hover path { stroke: #3b82f6; stroke-width: 4; }
+.vgraph-edge:hover polygon, .vgraph-edge:hover ellipse, .vgraph-edge:hover circle { fill: #3b82f6; stroke: #3b82f6; }
+.vgraph-group:hover > rect { filter: drop-shadow(0 0 8px rgba(59,130,246,0.85)); stroke: #3b82f6; }
+.vgraph-url-badge { cursor: pointer; }
+.vgraph-url-badge:hover { opacity: 0.75; }</style><defs><symbol id="vithanco-watermark" viewBox="0 0 162.12 162.0"><path d="M 121.68 34.67 L 94.40 81.89 L 81.07 104.96 L 101.28 139.95 L 114.61 116.88 L 162.12 34.67 Z" fill="#c8c4bc"/><path d="M 81.07 58.81 L 95.01 34.67 L 121.68 34.67 L 141.72 0 L 115.05 0 L 47.07 0 L 20.40 0 L 40.44 34.67 L 67.11 34.67 Z" fill="#c8c4bc"/><path d="M 40.44 34.67 L 0 34.67 L 47.51 116.88 L 60.84 139.96 L 81.07 104.96 L 67.73 81.89 Z" fill="#c8c4bc"/><text x="9.13" y="158.59" font-family="Arial" font-size="18.67" fill="#c8c4bc">VITHANCO.COM</text></symbol></defs><style>svg:has(#node-adapterInterface:hover) #edge-100024,svg:has(#node-adapterInterface:hover) #node-adapterImpl{opacity:1;filter:drop-shadow(0 0 8px rgba(59,130,246,0.9));}
+svg:has(#node-adapterInterface:hover) #edge-100024 path{stroke:#3b82f6;stroke-width:3;}
+svg:has(#node-adapterInterface:hover) #edge-100024 polygon,svg:has(#node-adapterInterface:hover) #edge-100024 ellipse,svg:has(#node-adapterInterface:hover) #edge-100024 circle{fill:#3b82f6;stroke:#3b82f6;}
+svg:has(#node-adapterImpl:hover) #edge-100024,svg:has(#node-adapterImpl:hover) #edge-100025,svg:has(#node-adapterImpl:hover) #edge-100026,svg:has(#node-adapterImpl:hover) #node-adapterInterface,svg:has(#node-adapterImpl:hover) #node-connection,svg:has(#node-adapterImpl:hover) #node-bankAccountsRequest{opacity:1;filter:drop-shadow(0 0 8px rgba(59,130,246,0.9));}
+svg:has(#node-adapterImpl:hover) #edge-100024 path,svg:has(#node-adapterImpl:hover) #edge-100025 path,svg:has(#node-adapterImpl:hover) #edge-100026 path{stroke:#3b82f6;stroke-width:3;}
+svg:has(#node-adapterImpl:hover) #edge-100024 polygon,svg:has(#node-adapterImpl:hover) #edge-100024 ellipse,svg:has(#node-adapterImpl:hover) #edge-100024 circle,svg:has(#node-adapterImpl:hover) #edge-100025 polygon,svg:has(#node-adapterImpl:hover) #edge-100025 ellipse,svg:has(#node-adapterImpl:hover) #edge-100025 circle,svg:has(#node-adapterImpl:hover) #edge-100026 polygon,svg:has(#node-adapterImpl:hover) #edge-100026 ellipse,svg:has(#node-adapterImpl:hover) #edge-100026 circle{fill:#3b82f6;stroke:#3b82f6;}
+svg:has(#node-connection:hover) #edge-100025,svg:has(#node-connection:hover) #edge-100027,svg:has(#node-connection:hover) #edge-100028,svg:has(#node-connection:hover) #node-adapterImpl,svg:has(#node-connection:hover) #node-response,svg:has(#node-connection:hover) #node-request{opacity:1;filter:drop-shadow(0 0 8px rgba(59,130,246,0.9));}
+svg:has(#node-connection:hover) #edge-100025 path,svg:has(#node-connection:hover) #edge-100027 path,svg:has(#node-connection:hover) #edge-100028 path{stroke:#3b82f6;stroke-width:3;}
+svg:has(#node-connection:hover) #edge-100025 polygon,svg:has(#node-connection:hover) #edge-100025 ellipse,svg:has(#node-connection:hover) #edge-100025 circle,svg:has(#node-connection:hover) #edge-100027 polygon,svg:has(#node-connection:hover) #edge-100027 ellipse,svg:has(#node-connection:hover) #edge-100027 circle,svg:has(#node-connection:hover) #edge-100028 polygon,svg:has(#node-connection:hover) #edge-100028 ellipse,svg:has(#node-connection:hover) #edge-100028 circle{fill:#3b82f6;stroke:#3b82f6;}
+svg:has(#node-response:hover) #edge-100027,svg:has(#node-response:hover) #edge-100029,svg:has(#node-response:hover) #node-connection,svg:has(#node-response:hover) #node-bankAccountsResponse{opacity:1;filter:drop-shadow(0 0 8px rgba(59,130,246,0.9));}
+svg:has(#node-response:hover) #edge-100027 path,svg:has(#node-response:hover) #edge-100029 path{stroke:#3b82f6;stroke-width:3;}
+svg:has(#node-response:hover) #edge-100027 polygon,svg:has(#node-response:hover) #edge-100027 ellipse,svg:has(#node-response:hover) #edge-100027 circle,svg:has(#node-response:hover) #edge-100029 polygon,svg:has(#node-response:hover) #edge-100029 ellipse,svg:has(#node-response:hover) #edge-100029 circle{fill:#3b82f6;stroke:#3b82f6;}
+svg:has(#node-request:hover) #edge-100028,svg:has(#node-request:hover) #edge-100030,svg:has(#node-request:hover) #node-connection,svg:has(#node-request:hover) #node-bankAccountsRequest{opacity:1;filter:drop-shadow(0 0 8px rgba(59,130,246,0.9));}
+svg:has(#node-request:hover) #edge-100028 path,svg:has(#node-request:hover) #edge-100030 path{stroke:#3b82f6;stroke-width:3;}
+svg:has(#node-request:hover) #edge-100028 polygon,svg:has(#node-request:hover) #edge-100028 ellipse,svg:has(#node-request:hover) #edge-100028 circle,svg:has(#node-request:hover) #edge-100030 polygon,svg:has(#node-request:hover) #edge-100030 ellipse,svg:has(#node-request:hover) #edge-100030 circle{fill:#3b82f6;stroke:#3b82f6;}
+svg:has(#node-bankAccountsResponse:hover) #edge-100029,svg:has(#node-bankAccountsResponse:hover) #node-response{opacity:1;filter:drop-shadow(0 0 8px rgba(59,130,246,0.9));}
+svg:has(#node-bankAccountsResponse:hover) #edge-100029 path{stroke:#3b82f6;stroke-width:3;}
+svg:has(#node-bankAccountsResponse:hover) #edge-100029 polygon,svg:has(#node-bankAccountsResponse:hover) #edge-100029 ellipse,svg:has(#node-bankAccountsResponse:hover) #edge-100029 circle{fill:#3b82f6;stroke:#3b82f6;}
+svg:has(#node-bankAccountsRequest:hover) #edge-100026,svg:has(#node-bankAccountsRequest:hover) #edge-100030,svg:has(#node-bankAccountsRequest:hover) #node-adapterImpl,svg:has(#node-bankAccountsRequest:hover) #node-request{opacity:1;filter:drop-shadow(0 0 8px rgba(59,130,246,0.9));}
+svg:has(#node-bankAccountsRequest:hover) #edge-100026 path,svg:has(#node-bankAccountsRequest:hover) #edge-100030 path{stroke:#3b82f6;stroke-width:3;}
+svg:has(#node-bankAccountsRequest:hover) #edge-100026 polygon,svg:has(#node-bankAccountsRequest:hover) #edge-100026 ellipse,svg:has(#node-bankAccountsRequest:hover) #edge-100026 circle,svg:has(#node-bankAccountsRequest:hover) #edge-100030 polygon,svg:has(#node-bankAccountsRequest:hover) #edge-100030 ellipse,svg:has(#node-bankAccountsRequest:hover) #edge-100030 circle{fill:#3b82f6;stroke:#3b82f6;}
+svg:has(#edge-100024:hover) #node-adapterImpl,svg:has(#edge-100024:hover) #node-adapterInterface{opacity:1;filter:drop-shadow(0 0 8px rgba(59,130,246,0.9));}
+svg:has(#edge-100025:hover) #node-adapterImpl,svg:has(#edge-100025:hover) #node-connection{opacity:1;filter:drop-shadow(0 0 8px rgba(59,130,246,0.9));}
+svg:has(#edge-100026:hover) #node-adapterImpl,svg:has(#edge-100026:hover) #node-bankAccountsRequest{opacity:1;filter:drop-shadow(0 0 8px rgba(59,130,246,0.9));}
+svg:has(#edge-100027:hover) #node-connection,svg:has(#edge-100027:hover) #node-response{opacity:1;filter:drop-shadow(0 0 8px rgba(59,130,246,0.9));}
+svg:has(#edge-100028:hover) #node-connection,svg:has(#edge-100028:hover) #node-request{opacity:1;filter:drop-shadow(0 0 8px rgba(59,130,246,0.9));}
+svg:has(#edge-100029:hover) #node-bankAccountsResponse,svg:has(#edge-100029:hover) #node-response{opacity:1;filter:drop-shadow(0 0 8px rgba(59,130,246,0.9));}
+svg:has(#edge-100030:hover) #node-bankAccountsRequest,svg:has(#edge-100030:hover) #node-request{opacity:1;filter:drop-shadow(0 0 8px rgba(59,130,246,0.9));}
+</style><g id="group-bigBank" class="vgraph-group depth-0"><rect x="8" y="8" width="852" height="432.96" rx="8" fill="#000000" fill-opacity="0" stroke="#7a7a7a" stroke-width="1.5" stroke-dasharray="8,4"/><text x="22" y="28" text-anchor="start" fill="#505048" font-size="11" font-family="'DM Sans', Helvetica, sans-serif" class="vgraph-group-label" font-weight="600" letter-spacing="0.07em">BIG BANK</text><g id="group-ibs" class="vgraph-group depth-1"><rect x="16" y="40.800000000000004" width="836" height="392.15999999999997" rx="8" fill="#000000" fill-opacity="0" stroke="#7a7a7a" stroke-width="1.5" stroke-dasharray="8,4"/><text x="30" y="60.800000000000004" text-anchor="start" fill="#505048" font-size="11" font-family="'DM Sans', Helvetica, sans-serif" class="vgraph-group-label" font-weight="600" letter-spacing="0.07em">INTERNET BANKING SYSTEM</text><g id="group-backend" class="vgraph-group depth-2"><rect x="24" y="73.60000000000001" width="820" height="351.35999999999996" rx="8" fill="#000000" fill-opacity="0" stroke="#7a7a7a" stroke-width="1.5" stroke-dasharray="8,4"/><text x="38" y="93.60000000000001" text-anchor="start" fill="#505048" font-size="11" font-family="'DM Sans', Helvetica, sans-serif" class="vgraph-group-label" font-weight="600" letter-spacing="0.07em">BACKEND</text><g id="group-adapter" class="vgraph-group depth-3"><rect x="32" y="106.40000000000003" width="804" height="310.55999999999995" rx="8" fill="#000000" fill-opacity="0" stroke="#7a7a7a" stroke-width="1.5" stroke-dasharray="8,4"/><text x="46" y="126.40000000000003" text-anchor="start" fill="#505048" font-size="11" font-family="'DM Sans', Helvetica, sans-serif" class="vgraph-group-label" font-weight="600" letter-spacing="0.07em">CORE BANKING SYSTEM ADAPTER</text></g></g></g></g><g id="edge-100024" class="vgraph-edge"><path d="M 439.7614842695184 194.39184280758727 C 380.26786142847396 209.85432330558484, 305.5599564260667 229.27101822148134, 245.24214945033154 244.94770539409117" fill="none" stroke="#b0a898" stroke-width="1" stroke-dasharray="5,5"/><polygon points="234.1538638436536,247.8295672098957 242.95191522333593,241.92666183029922 244.71272696293096,248.70158190493504" fill="#b0a898" stroke="#b0a898" stroke-width="1"/></g><g id="edge-100025" class="vgraph-edge"><path d="M 543.0 194.1871514892578 C 543.0 206.55908614194018, 543.0 221.4959038187359, 543.0 235.02934662555697" fill="none" stroke="#b0a898" stroke-width="1"/><polygon points="543.0,246.46136720884448 539.5,236.46136720884448 546.5,236.46136720884448" fill="#b0a898" stroke="#b0a898" stroke-width="1"/><text x="598.60693359375" y="220.32000000000002" text-anchor="middle" fill="#5a564e" font-size="11" font-family="'DM Sans', Helvetica, sans-serif" font-style="italic">initialises and pools</text><text x="529" y="238.0613672088445" text-anchor="middle" fill="#5a564e" font-size="15" font-family="'DM Sans', Helvetica, sans-serif" font-weight="700">1..20</text></g><g id="edge-100026" class="vgraph-edge"><path d="M 619.864749675501 194.39056742457277 C 632.8217073398242 199.70832350942752, 645.9629074900843 205.61486789279462, 658.0 211.92000000000004 C 673.5121664296331 220.0454055767392, 689.5905936564185 230.30522151128642, 703.7914065370811 240.08842453759922" fill="none" stroke="#b0a898" stroke-width="1"/><polygon points="712.8274091140877,246.4213375363252 702.6156363164986,243.59827247678157 706.6049725098973,237.84629918615855" fill="#b0a898" stroke="#b0a898" stroke-width="1"/><text x="705.7814447456954" y="220.32000000000002" text-anchor="middle" fill="#5a564e" font-size="11" font-family="'DM Sans', Helvetica, sans-serif" font-style="italic">creates</text></g><g id="edge-100027" class="vgraph-edge"><path d="M 523.5696487426758 301.70715148925774 C 513.9944529191126 314.8289003633149, 502.31387117304035 330.8358482314389, 491.98266559124215 344.99362502353415" fill="none" stroke="#b0a898" stroke-width="1"/><polygon points="485.4241349973367,353.9813672088444 488.4914895839691,343.84029547850633 494.1460538044697,347.96654116632413" fill="#b0a898" stroke="#b0a898" stroke-width="1"/><text x="528.537878375" y="327.84000000000003" text-anchor="middle" fill="#5a564e" font-size="11" font-family="'DM Sans', Helvetica, sans-serif" font-style="italic">creates</text></g><g id="edge-100028" class="vgraph-edge"><path d="M 561.9256668090819 301.70715148925774 C 571.2521562476178 314.8289003633149, 582.6293462600258 330.8358482314389, 592.6922088396992 344.99362502353415" fill="none" stroke="#b0a898" stroke-width="1"/><polygon points="599.0803879896073,353.9813672088444 590.4342110599005,347.8581634313918 596.1398288701412,343.8028058141815" fill="#b0a898" stroke="#b0a898" stroke-width="1"/><text x="609.0870796875" y="327.84000000000003" text-anchor="middle" fill="#5a564e" font-size="11" font-family="'DM Sans', Helvetica, sans-serif" font-style="italic">executes</text></g><g id="edge-100029" class="vgraph-edge"><path d="M 368.05683135986334 301.70715148925774 C 385.1228266372346 315.45374554779374, 406.1199668635341 332.36686185832156, 424.2903969675603 347.00307395432804" fill="none" stroke="#b0a898" stroke-width="1" stroke-dasharray="5,5"/><polygon points="432.9537443551803,353.9813672088444 422.9704241447397,350.4340699876061 427.36153461816923,344.9826345059981" fill="#b0a898" stroke="#b0a898" stroke-width="1"/></g><g id="edge-100030" class="vgraph-edge"><path d="M 715.1955108642578 301.70715148925774 C 698.2597903599965 315.45374554779374, 677.4229336468745 332.36686185832156, 659.3912091161615 347.00307395432804" fill="none" stroke="#b0a898" stroke-width="1" stroke-dasharray="5,5"/><polygon points="650.793994151348,353.9813672088444 656.3524505462764,344.9617462353403 660.7639542119293,350.3966919947688" fill="#b0a898" stroke="#b0a898" stroke-width="1"/></g><g id="node-adapterInterface" class="vgraph-node"><g transform="translate(40.00999999999996,246.82999999999998)"><rect x="0" y="0" width="193.98000000000008" height="54.5" rx="9" fill="#cfd8e6"/><rect x="0.7500000000000001" y="0.7500000000000001" width="192.48000000000008" height="53" rx="9" fill="none" stroke="#cfd8e6" stroke-width="1.5"/><text x="12.75" y="22.59" text-anchor="start" fill="#111111" font-size="11" font-family="'DM Sans', Helvetica, sans-serif" font-weight="600" opacity="0.85" letter-spacing="0.07em">«CODE»</text><text x="96.99000000000004" y="43.8" text-anchor="middle" fill="#111111" font-size="13" font-family="'DM Sans', Helvetica, sans-serif">CoreBankingSystemAdapter</text></g></g><g id="node-adapterImpl" class="vgraph-node"><g transform="translate(431.97,139.31)"><rect x="0" y="0" width="222.06" height="54.5" rx="9" fill="#cfd8e6"/><rect x="0.7500000000000001" y="0.7500000000000001" width="220.56" height="53" rx="9" fill="none" stroke="#cfd8e6" stroke-width="1.5"/><text x="12.75" y="22.59" text-anchor="start" fill="#111111" font-size="11" font-family="'DM Sans', Helvetica, sans-serif" font-weight="600" opacity="0.85" letter-spacing="0.07em">«CODE»</text><text x="111.03" y="43.8" text-anchor="middle" fill="#111111" font-size="13" font-family="'DM Sans', Helvetica, sans-serif">CoreBankingSystemAdapterImpl</text></g></g><g id="node-connection" class="vgraph-node"><g transform="translate(435.48,246.82999999999998)"><rect x="0" y="0" width="215.04000000000002" height="54.5" rx="9" fill="#cfd8e6"/><rect x="0.7500000000000001" y="0.7500000000000001" width="213.54000000000002" height="53" rx="9" fill="none" stroke="#cfd8e6" stroke-width="1.5"/><text x="12.75" y="22.59" text-anchor="start" fill="#111111" font-size="11" font-family="'DM Sans', Helvetica, sans-serif" font-weight="600" opacity="0.85" letter-spacing="0.07em">«CODE»</text><text x="107.52000000000001" y="43.8" text-anchor="middle" fill="#111111" font-size="13" font-family="'DM Sans', Helvetica, sans-serif">CoreBankingSystemConnection</text></g></g><g id="node-response" class="vgraph-node"><g transform="translate(425.17,354.35)"><rect x="0" y="0" width="81.66000000000001" height="54.5" rx="9" fill="#cfd8e6"/><rect x="0.7500000000000001" y="0.7500000000000001" width="80.16000000000001" height="53" rx="9" fill="none" stroke="#cfd8e6" stroke-width="1.5"/><text x="12.75" y="22.59" text-anchor="start" fill="#111111" font-size="11" font-family="'DM Sans', Helvetica, sans-serif" font-weight="600" opacity="0.85" letter-spacing="0.07em">«CODE»</text><text x="40.830000000000005" y="43.8" text-anchor="middle" fill="#111111" font-size="13" font-family="'DM Sans', Helvetica, sans-serif">Response</text></g></g><g id="node-request" class="vgraph-node"><g transform="translate(580.68,354.35)"><rect x="0" y="0" width="74.64" height="54.5" rx="9" fill="#cfd8e6"/><rect x="0.7500000000000001" y="0.7500000000000001" width="73.14" height="53" rx="9" fill="none" stroke="#cfd8e6" stroke-width="1.5"/><text x="12.75" y="22.59" text-anchor="start" fill="#111111" font-size="11" font-family="'DM Sans', Helvetica, sans-serif" font-weight="600" opacity="0.85" letter-spacing="0.07em">«CODE»</text><text x="37.32" y="43.8" text-anchor="middle" fill="#111111" font-size="13" font-family="'DM Sans', Helvetica, sans-serif">Request</text></g></g><g id="node-bankAccountsResponse" class="vgraph-node"><g transform="translate(252.05,246.82999999999998)"><rect x="0" y="0" width="165.9" height="54.5" rx="9" fill="#cfd8e6"/><rect x="0.7500000000000001" y="0.7500000000000001" width="164.4" height="53" rx="9" fill="none" stroke="#cfd8e6" stroke-width="1.5"/><text x="12.75" y="22.59" text-anchor="start" fill="#111111" font-size="11" font-family="'DM Sans', Helvetica, sans-serif" font-weight="600" opacity="0.85" letter-spacing="0.07em">«CODE»</text><text x="82.95" y="43.8" text-anchor="middle" fill="#111111" font-size="13" font-family="'DM Sans', Helvetica, sans-serif">BankAccountsResponse</text></g></g><g id="node-bankAccountsRequest" class="vgraph-node"><g transform="translate(668.56,246.82999999999998)"><rect x="0" y="0" width="158.88000000000005" height="54.5" rx="9" fill="#cfd8e6"/><rect x="0.7500000000000001" y="0.7500000000000001" width="157.38000000000005" height="53" rx="9" fill="none" stroke="#cfd8e6" stroke-width="1.5"/><text x="12.75" y="22.59" text-anchor="start" fill="#111111" font-size="11" font-family="'DM Sans', Helvetica, sans-serif" font-weight="600" opacity="0.85" letter-spacing="0.07em">«CODE»</text><text x="79.44000000000003" y="43.8" text-anchor="middle" fill="#111111" font-size="13" font-family="'DM Sans', Helvetica, sans-serif">BankAccountsRequest</text></g></g><text x="434" y="469.36" text-anchor="middle" fill="#505048" font-size="14" font-family="'DM Sans', Helvetica, sans-serif">Internet Banking System</text><use href="#vithanco-watermark" x="7.3464" y="409.0039774981495" width="73.464" height="73.40962250185048"/></svg>

@@ -85,31 +85,39 @@ VGL Guide — C4</div>
                 <h1>VGL Guide — C4</h1>
                 <div class="reading-time-container">
                     <span class="fa fa-clock-o"></span>
-                    <p>Estimated reading time: 1 minutes.</p></div>
+                    <p>Estimated reading time: 2 minutes.</p></div>
                 <div class="content"><h1 id="c4">C4</h1>
-<p>Software-architecture diagrams in Simon Brown's C4 model: people, software systems, containers and components inside nested boundaries, across four levels of zoom.</p>
-<p><strong>Node types.</strong> <code>Person</code>, <code>SoftwareSystem</code>, <code>Container</code>, <code>Component</code>,</p>
-<p><code>CodeElement</code> and <code>Database</code> (drawn as a cylinder), each with an <code>External…</code> variant that renders greyed. Note that a C4 "container" is a separately deployable unit — an app, service or datastore — <strong>not</strong> the box drawn around things; that is a boundary.</p>
-<p><strong>Relationships</strong> are directed edges labelled with how the elements collaborate ("Uses", "Reads from", "Makes API calls to"). Two carry canonical ids — <code>uses</code> (synchronous) and <code>sends_data_to</code> (asynchronous) — and the notation registers the common <code>element → element</code> pairs so realistic diagrams connect cleanly. A pair it does not register is not an error: the edge becomes an unknown type, rendered bold red and reported as a quality warning, so the document still opens.</p>
-<p><strong>Boundaries are typed groups</strong>: <code>SystemBoundary</code>, <code>ContainerBoundary</code> and</p>
-<p><code>EnterpriseBoundary</code>. Each draws a dashed boundary when unfolded and the corresponding element card when folded — so folding a system boundary is exactly zooming out from the Container view to the System Context view.</p>
-<pre><code class="language-vgl">vgraph banking: C4 "Internet Banking System — Container view" {
+<p>Software-architecture diagrams in Simon Brown's C4 model: people, software systems, containers, components and code, across four levels of zoom.</p>
+<p><strong>Node types.</strong> <code>Person</code>, <code>SoftwareSystem</code>, <code>Container</code>, <code>Database</code> (a container drawn as a cylinder), <code>Component</code> and <code>CodeElement</code>. A C4 "container" is a separately deployable unit — an app, service or datastore — <strong>not</strong> the box drawn around things.</p>
+<p><strong>Zoom is detailing.</strong> A Software System is detailed by Containers and Databases, a Container by Components, a Component by Code Elements. Write the element as a group of its node type, <code>group ibs: SoftwareSystem "…" { … }</code>: folded it is the element's card, unfolded the dashed boundary around its details. Being external is not a type; colour such a system per node with</p>
+<p><code>backgroundColor</code>.</p>
+<p><strong>Relationships</strong> are labelled with how the elements collaborate. There is one type per level — <code>interacts_with</code> (Person → Person), <code>uses</code> (Person → Software System), <code>delivers_to</code> (Software System → Person), <code>depends_on</code> (Software System → Software System), <code>communicates_with</code> (Container → Container),</p>
+<p><code>reads_and_writes</code> (Container → Database), <code>calls</code> (Component → Component) and</p>
+<p><code>references</code> (Code Element → Code Element) — and each also holds with one end replaced by a detail at any depth, so a Person may use a Container and a Component may depend on a Software System. No pair is ambiguous, so a file never names a C4 edge type.</p>
+<p>Edges join elements, never boundaries: a detailed element's relationships start at its details, and folding it gathers them onto its card (<code>×3</code> when three meet). A label written for the system as a whole has no place to go, and neither do C4's descriptions and technologies yet.</p>
+<p><strong>Organisations</strong> are plain groups, <code>group bank: Organisation "Big Bank" { … }</code>.</p>
+<pre><code class="language-vgl">vgraph banking: C4 "Internet Banking System" {
     node customer: Person "Personal Banking Customer";
-    node mainframe: ExternalSoftwareSystem "Mainframe Banking System";
+    node cbs: SoftwareSystem "Core Banking System" [backgroundColor: "#e8710a"];
 
-    group ibs: SystemBoundary "Internet Banking System" {
-        node web: Container "Web Application";
-        node api: Container "API Application";
-        node db: Database "Database";
+    group ibs: SoftwareSystem "Internet Banking System" {
+        isfolded: false;
+        node ui: Container "UI";
+        node backend: Container "Backend";
+        node database: Database "Database";
     };
 
-    edge customer -&gt; web "Uses";
-    edge web -&gt; api "Makes API calls to";
-    edge api -&gt; db "Reads from and writes to";
-    edge api -&gt; mainframe "Makes API calls to";
+    edge customer -&gt; ui "Views account balances and makes payments using";
+    edge ui -&gt; backend "Makes API requests to";
+    edge backend -&gt; database "Reads from and writes to";
+    edge backend -&gt; cbs "Makes API requests to";
+}
+
+vview context "System Context View: Internet Banking System" {
+    folded node type: SoftwareSystem;
 }
 </code></pre>
-<p>A full worked example is in <a href="examples/c4-internet-banking.vgl"><code>docs/examples/c4-internet-banking.vgl</code></a>, and the editor's <em>C4 — Internet Banking System</em> carries the same graph: the single-page and mobile apps the web application delivers, plus an external e-mail system.</p></div></article>
+<p>The editor's <em>C4 — Internet Banking System</em> is c4model.com's current example, modelled down to the code, with one view per diagram there: System Landscape, System Context, Container, Component (Backend) and Code (Core Banking System Adapter). The same file is <a href="examples/c4-internet-banking-views.vgl"><code>docs/examples/c4-internet-banking-views.vgl</code></a>; <a href="examples/c4-internet-banking.vgl"><code>docs/examples/c4-internet-banking.vgl</code></a> is its Container View on its own.</p></div></article>
             <aside class="side-content">
                 <div class="relationships-section"></div>
                 <div class="preview__article-details">

@@ -9,9 +9,9 @@
         <title>VGL Guide — Notations | Vithanco</title>
         <meta name="twitter:title" content="VGL Guide — Notations | Vithanco"/>
         <meta property="og:title" content="VGL Guide — Notations | Vithanco"/>
-        <meta name="description" content="Fifteen notations are built in. Each has its own section in the"/>
-        <meta name="twitter:description" content="Fifteen notations are built in. Each has its own section in the"/>
-        <meta property="og:description" content="Fifteen notations are built in. Each has its own section in the"/>
+        <meta name="description" content="These notations are built in. Each has its own section in the"/>
+        <meta name="twitter:description" content="These notations are built in. Each has its own section in the"/>
+        <meta property="og:description" content="These notations are built in. Each has its own section in the"/>
         <meta name="twitter:card" content="summary"/>
         <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -85,9 +85,9 @@ VGL Guide — Notations</div>
                 <h1>VGL Guide — Notations</h1>
                 <div class="reading-time-container">
                     <span class="fa fa-clock-o"></span>
-                    <p>Estimated reading time: 4 minutes.</p></div>
+                    <p>Estimated reading time: 5 minutes.</p></div>
                 <div class="content"><h1 id="notations">Notations</h1>
-<p>Fifteen notations are built in. Each has its own section in the <a href="/tools/vgl/notation-reference/">notation reference</a>, giving its node types, its edge types and a complete worked example.</p>
+<p>These notations are built in. Each has its own section in the <a href="/tools/vgl/notation-reference/">notation reference</a>, giving its node types, its edge types and a complete worked example.</p>
 <table>
  <thead>
   <tr>
@@ -156,6 +156,10 @@ VGL Guide — Notations</div>
    <td><a href="/tools/vgl/notation-reference/c4/"><strong>C4</strong></a></td>
    <td>software architecture across four levels of zoom</td>
   </tr>
+  <tr>
+   <td><a href="/tools/vgl/notation-reference/arithmetic/"><strong>Arithmetic</strong></a></td>
+   <td>simple equations, checked as they are built</td>
+  </tr>
  </tbody>
 </table>
 <p>You can also render a notation's own structure as a diagram with a <code>metagraph</code> declaration — see <a href="/tools/vgl/metagraph-visualising-a-notation/">Metagraph</a>.</p>
@@ -196,7 +200,9 @@ VGL Guide — Notations</div>
 <p><code>OrJunctor</code> only for "any one of these alternatives". Adding the implicit junctor raises a <code>redundantJunctor</code> warning, since direct edges already say the same thing with less noise. The same applies to notations you declare with</p>
 <p><code>vnotation</code>.</p>
 <h3 id="quality-checks">Quality checks</h3>
-<p>Separately from notation breaks, four notations run <strong>quality checks</strong>: advisory analyses of the <em>shape</em> of a graph rather than its syntax. Each result carries a severity — <strong>info</strong>, <strong>warning</strong> or <strong>error</strong> — but none of them stops a document opening, and an error here means "this cannot be read as the notation intends", not "this failed to parse". Most are advice you can knowingly ignore; the thresholds are fixed, so they are worth knowing before you argue with one.</p>
+<p>Separately from notation breaks, notations run <strong>quality checks</strong>: advisory analyses of the <em>shape</em> of a graph rather than its syntax. Each result carries a severity — <strong>info</strong>, <strong>warning</strong> or <strong>error</strong> — but none of them stops a document opening, and an error here means "this cannot be read as the notation intends", not "this failed to parse". Most are advice you can knowingly ignore; the thresholds are fixed, so they are worth knowing before you argue with one.</p>
+<p><strong>Shared by most notations:</strong> <code>noParallelEdges</code> — <em>error</em> — two edges between the same two nodes in the same direction. The editor does not offer to draw the second one. C4 and Arithmetic do without it.</p>
+<p>The notation-specific checks below were current when written; there may be more by now.</p>
 <p><strong>IBIS</strong></p>
 <ul>
  <li><em>warning</em> — a <code>Question</code> with no <code>Answer</code>.</li>
@@ -222,24 +228,34 @@ VGL Guide — Notations</div>
 </ul>
 <p><strong>C4</strong></p>
 <ul>
- <li><em>warning</em> — an external element inside the Enterprise boundary.</li>
- <li><em>warning</em> — a <code>Container</code> or <code>Database</code> not inside any System boundary. External containers are exempt: they legitimately live outside one.</li>
  <li><em>warning</em> — an element with no relationships at all. This one applies to every node type, not just elements that look like they should collaborate.</li>
+ <li>Where elements may sit is the containment check every notation with <a href="/tools/vgl/user-defined-notations-vnotation/#detailedby-a-hierarchical-notation">detailings</a> gets (below).</li>
 </ul>
-<p>Two more quality warnings come from elsewhere: a <a href="/tools/vgl/notations/#diagram-logic-and-junctors">redundant junctor</a>, and an <a href="/tools/vgl/grammar/">unknown node or edge type</a>.</p>
+<p><strong>CLD</strong></p>
+<ul>
+ <li><em>warning</em> — more loops than can be marked; only the shortest get a marker.</li>
+</ul>
+<p><strong>Arithmetic</strong></p>
+<ul>
+ <li><em>warning</em> — a division by zero, which cannot be evaluated.</li>
+ <li><em>error</em> — an operator with more than one first operand, second operand or result.</li>
+</ul>
+<p>More quality warnings come from elsewhere: a <a href="/tools/vgl/notations/#diagram-logic-and-junctors">redundant junctor</a>, an <a href="/tools/vgl/grammar/">unknown node or edge type</a>, and a node placed where its notation's <a href="/tools/vgl/user-defined-notations-vnotation/#detailedby-a-hierarchical-notation">detailings</a> do not allow.</p>
 <h3 id="extensions">Extensions</h3>
 <p>Extensions add cross-cutting node types to any notation, listed after it and comma-separated:</p>
 <pre><code class="language-vgl">vgraph myGraph: ConceptMap, Annotation "My Diagram" { ... }
 </code></pre>
-<p><strong>Annotation</strong> is the available extension: it adds an <code>Annotation</code> node type that can be connected <em>from</em> any node in the notation, for notes and clarifications. Edge types to <code>Annotation</code> are inferred, so annotation edges need no explicit type.</p>
+<p><strong>Annotation</strong> is the available extension: it adds two node types, <code>Annotation</code> for notes and clarifications and <code>Warning</code> for caveats, that can be connected <em>from</em> any node in the notation. Edge types to them are inferred, so these edges need no explicit type.</p>
 <pre><code class="language-vgl">vgraph productMap: ConceptMap, Annotation "Product Strategy" {
     node c1: Concept "Customer Need"
     node r1: Relation "drives"
     node c2: Concept "Feature"
     node a1: Annotation "Validated in user research"
+    node w1: Warning "Depends on a vendor contract"
     edge c1 -&gt; r1
     edge r1 -&gt; c2
     edge c1 -&gt; a1
+    edge c2 -&gt; w1
 }
 </code></pre></div></article>
             <aside class="side-content">

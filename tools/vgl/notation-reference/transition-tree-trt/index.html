@@ -90,11 +90,11 @@ VGL Guide — Transition Tree (TRT)</div>
 <p>Step-by-step implementation planning (ToC). Shares CRT/FRT's node types but answers "how do we <em>cause</em> the change?", giving the step-by-step action sequence.</p>
 <p><strong>Node types</strong></p>
 <ul>
- <li><code>UndesirableEffect</code> — current-state problems being addressed (default: red)</li>
- <li><code>IntermediateEffect</code> — stepping-stone outcomes from actions (default: blue)</li>
- <li><code>DesirableEffect</code> — goal outcomes (default: green)</li>
- <li><code>Given</code> — unchangeable facts and constraints (default: dark purple)</li>
- <li><code>Changeable</code> — actions we can take to cause change (default: light purple)</li>
+ <li><code>UndesirableEffect</code> — current-state problems being addressed</li>
+ <li><code>IntermediateEffect</code> — stepping-stone outcomes from actions</li>
+ <li><code>DesirableEffect</code> — goal outcomes</li>
+ <li><code>Given</code> — unchangeable facts and constraints</li>
+ <li><code>Changeable</code> — actions we can take to cause change</li>
  <li><code>AndJunctor</code> — as in CRT</li>
 </ul>
 <p><strong>Edge types</strong> — the CRT family, shared by CRT, FRT and TRT; see <a href="/tools/vgl/notation-reference/current-reality-tree-crt/">Current Reality Tree</a>.</p>
@@ -155,8 +155,7 @@ VGL Guide — Transition Tree (TRT)</div>
     // Given waterfall context is addressed by iterative process
     edge g2 -&gt; ie4: given_causes_intermediate;
 }
-</code></pre>
-<p><strong>Note</strong>: TRT graphs flow bottom-to-top like other TOC tools. The focus is on detailed implementation planning - answering "HOW TO CAUSE the change?" Unlike FRT which validates that solutions will work, TRT provides the step-by-step action sequence needed to implement those solutions. Changeable nodes represent the specific actions to take, and the graph shows how those actions combine through intermediate effects to achieve desirable outcomes. The AndJunctor indicates multiple conditions must occur together for an effect.</p></div></article>
+</code></pre></div></article>
             <aside class="side-content">
                 <div class="relationships-section"></div>
                 <div class="preview__article-details">

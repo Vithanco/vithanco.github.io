@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VGraph Editor</title>
+  <title>Vithanco</title>
   <script type="importmap">
     {
       "imports": {
@@ -28,10 +28,9 @@
     }
     #editor-root { flex: 1 1 auto; min-height: 0; }
     #status-boot { color: #888; font-size: 13px; padding: 16px 20px; }
-    /* The diagram renders at its natural size; the preview pane
-       (#vg-editor-preview, overflow:auto) supplies scrollbars whenever the
-       SVG is bigger than the available space. Do NOT constrain the SVG to
-       the container width — that would shrink it and hide the scrollbars. */
+    /* The editor sizes the SVG itself (Zoom+Editor.swift): fitted to the pane
+       until the user picks a zoom, after which the preview (overflow:auto)
+       scrolls whatever is bigger than the pane. */
     #vg-editor-preview svg { display: block; }
   </style>
   <link rel="canonical" href="https://vithanco.com/editor/" />
@@ -87,10 +86,18 @@
             return '';
           }
         },
-        write(vgl, name) {
+        readView() {
+          try {
+            return window.localStorage.getItem('vgraph.editor.draft-view') || '';
+          } catch (e) {
+            return '';
+          }
+        },
+        write(vgl, name, view) {
           try {
             window.localStorage.setItem('vgraph.editor.draft', vgl);
             window.localStorage.setItem('vgraph.editor.draft-name', name);
+            window.localStorage.setItem('vgraph.editor.draft-view', view || '');
           } catch (e) {
             /* storage full, or switched off — the diagram is still on screen */
           }

@@ -87,14 +87,14 @@ VGL Guide — Attack-Defense Tree (ADTree)</div>
                     <span class="fa fa-clock-o"></span>
                     <p>Estimated reading time: 3 minutes.</p></div>
                 <div class="content"><h1 id="attack-defense-tree-adtree">Attack-Defense Tree (ADTree)</h1>
-<p>Security modelling after Kordy et al. (2014), extending classical attack trees with defense nodes at any level. Sufficient-cause logic: unjoined children are implicitly OR.</p>
+<p>Security modelling after Kordy et al. (2014), extending classical attack trees with defense nodes at any level. Sufficient-cause logic: unjoined children are implicitly OR. The root can be an Attack or a Defense, which decides whether the proponent is the attacker or the defender.</p>
 <p><strong>Node types</strong></p>
 <ul>
- <li><code>Attack</code> — an attacker's goal or sub-goal (default: red)</li>
- <li><code>Defense</code> — a defender's countermeasure (default: green)</li>
+ <li><code>Attack</code> — an attacker's goal or sub-goal</li>
+ <li><code>Defense</code> — a defender's countermeasure</li>
  <li><code>AndJunctor</code> — conjunctive refinement: all children required together</li>
 </ul>
-<p><strong>Edge types</strong> — flowing top-to-bottom from the root goal, with refinement edges drawn solid and countermeasure edges dotted.</p>
+<p><strong>Edge types</strong> — the tree reads top to bottom from the root goal. Refinement edges (same type) are drawn solid, countermeasure edges (opposite type) dotted.</p>
 <ul>
  <li><code>attack_refines_attack</code> — decompose an attack into sub-attacks</li>
  <li><code>defense_refines_defense</code> — decompose a defense into sub-defenses</li>
@@ -174,7 +174,6 @@ VGL Guide — Attack-Defense Tree (ADTree)</div>
     edge andOverpower -&gt; overpower: and_junctor_to_attack;
 }
 </code></pre>
-<p><strong>Note</strong>: ADTree graphs flow bottom-to-top with the root goal at the top and leaf actions at the bottom. The key feature is the distinction between refinement edges (solid lines for same-type decomposition) and countermeasure edges (dotted lines for opposite-type countering). This allows modelling the ongoing arms race between attacker and defender at any level of the tree. The root node can be either an Attack or Defense node, determining whether the proponent is the attacker or defender.</p>
 <p>The editor's <em>ADTree — Data Confidentiality</em> is the full Kordy tree, with firewalls, sensitivity training, a fire-escape break-in route and a strong-password attack subtree — and it leaves every edge type to inference.</p></div></article>
             <aside class="side-content">
                 <div class="relationships-section"></div>

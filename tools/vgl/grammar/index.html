@@ -85,14 +85,26 @@ VGL Guide — Grammar</div>
                 <h1>VGL Guide — Grammar</h1>
                 <div class="reading-time-container">
                     <span class="fa fa-clock-o"></span>
-                    <p>Estimated reading time: 1 minutes.</p></div>
+                    <p>Estimated reading time: 2 minutes.</p></div>
                 <div class="content"><h1 id="grammar">Grammar</h1>
 <p>Simplified BNF:</p>
-<pre><code>file         ::= vnotation* (document | metagraph)
+<pre><code>file         ::= vnotation* (document | metagraph) view*
+
+view         ::= "vview" identifier label? attributes? "{" (view_rule | view_statement)* "}"
+
+view_rule    ::= ("include" | "exclude") selector ";"?
+               | "expand" number ";"?
+
+selector     ::= ("*" | ("node" | "group") ("type" ":")? identifier ("," identifier)*) reach?
+
+reach        ::= "+" number | "downstream" number | "upstream" number
+
+view_statement ::= "folded"? ("node" | "group") ("type" ":")? identifier ("," identifier)*
+                   attributes? ";"?
 
 document     ::= "vgraph" identifier ":" notation ("," extension)* label? "{" statement* "}"
 
-metagraph    ::= "metagraph" notation label? ";"?
+metagraph    ::= ("metagraph" | "metadescription") notation label? ";"?
 
 notation     ::= identifier
                  // a built-in notation, or a vnotation declared earlier in the file
@@ -102,8 +114,16 @@ vnotation    ::= "vnotation" identifier ("extends" identifier)? "{" vnotation_bo
 vnotation_body ::= ("layout" ":" layout_dir ";"?)
                  | ("icon" identifier "[" "viewBox" ":" quoted_string ","?
                                           "path" ":" quoted_string "]" ";"?)
-                 | ("node" "type" ":" identifier attributes? ";"?)
+                 | ("node" "type" ":" identifier type_attributes? ";"?)
                  | ("edge" "type" ":" identifier "from" ":" identifier "to" ":" identifier attributes? ";"?)
+                 | ("group" "type" ":" identifier attributes? ";"?)
+                 | ("qualityCheck" ":" identifier ("(" value ("," value)* ")")? ";"?)
+                 | ("transform" ":" identifier ";"?)
+                 | attribute
+
+type_attributes ::= "[" ((attribute | detailed_by) (";" | ",")?)* "]"
+
+detailed_by  ::= "detailedBy" ":" "(" identifier ("," identifier)* ")"
 
 layout_dir   ::= "topToBottom" | "leftToRight" | "bottomToTop" | "rightToLeft"
 
@@ -111,7 +131,8 @@ extension    ::= identifier            // available: Annotation
 
 statement    ::= group | node | edge | attribute
 
-group        ::= "group" identifier label? "{" statement* "}" ";"?
+group        ::= "folded"? "group" identifier (":" identifier)? label? "{" statement* "}" ";"?
+                 // the type is a group type, or a node type for a detailed node
 
 node         ::= "node" identifier ":" identifier label? attributes? ";"?
 
@@ -125,7 +146,7 @@ label        ::= quoted_string
 
 value        ::= quoted_string | number | identifier
 
-identifier   ::= [a-zA-Z0-9_\.\,\-]+
+identifier   ::= [a-zA-Z_][a-zA-Z0-9_.\-]*
 
 number       ::= [-]?[0-9]+(\.[0-9]+)?
 

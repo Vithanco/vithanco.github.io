@@ -85,17 +85,17 @@ VGL Guide — Current Reality Tree (CRT)</div>
                 <h1>VGL Guide — Current Reality Tree (CRT)</h1>
                 <div class="reading-time-container">
                     <span class="fa fa-clock-o"></span>
-                    <p>Estimated reading time: 3 minutes.</p></div>
+                    <p>Estimated reading time: 2 minutes.</p></div>
                 <div class="content"><h1 id="current-reality-tree-crt">Current Reality Tree (CRT)</h1>
 <p>Root cause analysis (Theory of Constraints), showing how causes lead to undesirable effects. Sufficient-cause logic, so multiple unjoined causes feeding one effect are implicitly OR; only AND is explicit.</p>
 <p><strong>Node types</strong></p>
 <ul>
- <li><code>UndesirableEffect</code> — an unwanted outcome requiring investigation (default: red)</li>
- <li><code>IntermediateEffect</code> — a neutral outcome in the causal chain (default: blue)</li>
- <li><code>DesirableEffect</code> — a wanted outcome caused by other conditions (default: green)</li>
- <li><code>Given</code> — an unchangeable constant, such as a law or physics (default: dark purple)</li>
- <li><code>Changeable</code> — a modifiable condition that can be addressed (default: light purple)</li>
- <li><code>AndJunctor</code> — multiple conditions required together to produce the downstream effect (icon: AND circle)</li>
+ <li><code>UndesirableEffect</code> — an unwanted outcome requiring investigation</li>
+ <li><code>IntermediateEffect</code> — a neutral outcome in the causal chain</li>
+ <li><code>DesirableEffect</code> — a wanted outcome caused by other conditions</li>
+ <li><code>Given</code> — an unchangeable constant, such as a law or physics</li>
+ <li><code>Changeable</code> — a modifiable condition that can be addressed</li>
+ <li><code>AndJunctor</code> — multiple conditions required together to produce the downstream effect (icon: AND circle; usually unlabelled, since the icon says it)</li>
 </ul>
 <p><strong>Edge types.</strong> CRT, FRT and TRT share one family, flowing bottom-to-top (causes and actions at the bottom, effects at the top). Names are mechanical,</p>
 <p><code>&lt;source&gt;_causes_&lt;target&gt;</code>:</p>
@@ -161,8 +161,7 @@ VGL Guide — Current Reality Tree (CRT)</div>
     // Brand reputation affected but still positive
     edge ie2 -&gt; de1: intermediate_causes_desirable;
 }
-</code></pre>
-<p><strong>Note</strong>: CRT graphs flow bottom-to-top, with root causes (Given and Changeable) at the bottom and Undesirable Effects at the top. CRT uses sufficient-cause logic: multiple unjoined arrows into the same effect are read as OR (any one is sufficient). The AndJunctor is the explicit exception, indicating multiple conditions that must be true together. Labels for junctors are typically empty as the icon conveys the meaning.</p></div></article>
+</code></pre></div></article>
             <aside class="side-content">
                 <div class="relationships-section"></div>
                 <div class="preview__article-details">

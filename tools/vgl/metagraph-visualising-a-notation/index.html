@@ -90,12 +90,12 @@ VGL Guide — Metagraph (visualising a notation)</div>
 <p>A notation <em>is</em> a graph — its node types are vertices and its edge types are edges — so it can be drawn directly. That is useful for documentation, for teaching, and for seeing how a <code>vnotation</code> you just wrote will actually look.</p>
 <pre><code>metagraph &lt;NotationName&gt; ["&lt;optional_label&gt;"]
 </code></pre>
-<p>No id and no body. The label defaults to <code>"&lt;NotationName&gt; Meta Model"</code>. A file contains either one <code>vgraph</code> or one <code>metagraph</code>, never both, and <code>vnotation</code> blocks may precede a <code>metagraph</code> — so you can declare and visualise a custom notation in one file.</p>
-<p>Each node is styled <strong>exactly</strong> as it would appear in a real diagram, which is what makes the metagraph self-documenting.</p>
+<p>No id and no body. The label defaults to <code>"&lt;NotationName&gt; Meta Model"</code>. A file contains either one <code>vgraph</code> or one <code>metagraph</code>, never both, and <code>vnotation</code> blocks may precede a <code>metagraph</code> — so you can declare and visualise a custom notation in one file. <code>metadescription &lt;NotationName&gt;</code> takes the same form and adds the notation's self-description in Markdown alongside the diagram.</p>
+<p>Each node is styled <strong>exactly</strong> as it would appear in a real diagram, which is what makes the metagraph self-documenting. A <a href="/tools/vgl/user-defined-notations-vnotation/#detailedby-a-hierarchical-notation">detailing</a> is drawn as a dashed <code>detailed by</code> edge from the type to each of its detail types.</p>
 <pre><code class="language-vgl">metagraph Timeline
 </code></pre>
 <pre><code class="language-vgl">vnotation MyNotation extends ConceptMap {
-    node type: Hypothesis [nodeStyle: iconWithText; icon: lightbulb.fill]
+    node type: Hypothesis [nodeStyle: iconWithText]
     edge type: supports from: Hypothesis to: Concept
 }
 metagraph MyNotation

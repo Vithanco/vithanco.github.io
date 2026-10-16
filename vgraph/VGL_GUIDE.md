@@ -79,10 +79,65 @@ collapsed box, and the editor can fold and unfold in place.
 folded group methodology "Methods" { … };
 ```
 
-**Typed groups (boundaries).** A group can carry a type after its id, mirroring
-node typing — `group <id>: <GroupType> "<label>" { … }`. The type selects its
-appearance: a C4 `SystemBoundary` draws a dashed boundary when unfolded and its
-element card when folded. See [C4](#c4).
+**Typed groups.** A group can carry a type after its id, mirroring node typing —
+`group <id>: <GroupType> "<label>" { … }`. The type selects its appearance: a
+C4 `Organisation` draws a dashed boundary when unfolded and a grey card when
+folded. See [C4](#c4).
+
+**Detailed nodes.** When the type is a *node* type rather than a group type, the
+group is a detailed node: the node itself, with its details inside —
+`group ibs: SoftwareSystem "Internet Banking System" { … }`. It takes the node's
+attributes (`url`, `tooltip`, `backgroundcolor`, …) in its body and in views; a
+key that a node and a group share means the node's. It starts folded;
+`isfolded: false` in a view (or in its body) opens it, and the boundary it then
+draws comes from its node type. See ADR-0032.
+
+### Views
+
+One file can show its model several ways. A `vview` after the `vgraph` block
+changes only how things are *shown* — fold state, layout direction, colours —
+never what is true, so quality checks read the same in every view.
+
+```vgl
+vview context "System Context" {
+    folded node type: SoftwareSystem;
+}
+
+vview containers "Containers" [rankdir: LR] {
+    node db [backgroundColor: "#ffd27f"];
+    node customer, web [fontsize: 16];
+}
+```
+
+A view sets presentation attributes on `node`/`group` ids or, spelled with a
+colon, on a type (`node type: Container`). It cannot type, label or add members.
+A value equal to what the model already gives is dropped on export, so a view
+follows the model rather than pinning it. A view naming something the model
+lacks is kept and affects nothing.
+
+A view also chooses *what* it shows, with rules applied in order. `include` and
+`exclude` take a selector — `node`/`group` ids, `node type:`/`group type:`
+names, or `*` — optionally widened along edges by `+n` (n steps either way),
+`downstream n` or `upstream n`; `expand n` widens the result so far. A view whose
+first rule is `include` starts empty, any other starts with everything.
+Selectors always read the model, never what earlier rules left. Edges are never
+selected: one shows when both its ends do, and where a view hides the middle of
+a chain it draws a dotted derived edge instead (`derivedEdges: false` turns them
+off). A rule chooses elements and sets nothing.
+
+```vgl
+vview journey "Customer journey" {
+    include node customer downstream 2;
+    exclude node type: Database;
+}
+```
+
+A node type also stands for its detailed nodes: `include node type:
+SoftwareSystem` shows them with their details, and `folded node type:
+SoftwareSystem` folds them. `group type:` picks plain groups only.
+
+The model itself is the default view. Pick another by name:
+`vgraph-cli svg --view context`.
 
 ### Attributes
 
@@ -94,7 +149,7 @@ group body.
 | Node | `color`, `fontColor`, `fontsize`, `shape`, `url`, `alignGroup` (nodes sharing a value are placed at the same rank) |
 | Edge | `style` (`solid`/`dashed`/`dotted`), `color`, `weight`, `label`, `url` |
 | Group | `style` (`filled`/`dashed`/`dotted`), `color`, `label`, `url` |
-| Graph | `rankdir` (`LR`/`TB`), `fontcolor`, `labeljust` (`l`/`r`/`c`) |
+| Graph | `rankdir` (`LR`/`TB`), `fontcolor`, `labeljust` (`l`/`r`/`c`), `loopMarkers` (`all`/`independent`/`none`, Causal Loop Diagrams: which loops get an R/B marker) |
 
 **Colouring one node.** `color` sets a node's fill, overriding whatever its type
 says. `fontColor` sets the text on it; leave it out and the text is set to black
@@ -188,7 +243,7 @@ vgraph minimal: IBIS "Minimal Example" {
 
 ## Notations
 
-Fifteen notations are built in. Each has its own section in the
+These notations are built in. Each has its own section in the
 [notation reference](#notation-reference), giving its node types, its edge types
 and a complete worked example.
 
@@ -209,6 +264,7 @@ and a complete worked example.
 | [**DecisionTree**](#decision-tree) | decision logic as questions, choices and outcomes |
 | [**Timeline**](#timeline) | events across multiple tracks on a shared time axis |
 | [**C4**](#c4) | software architecture across four levels of zoom |
+| [**Arithmetic**](#arithmetic) | simple equations, checked as they are built |
 
 You can also render a notation's own structure as a diagram with a `metagraph`
 declaration — see [Metagraph](#metagraph-visualising-a-notation).
@@ -238,12 +294,19 @@ same thing with less noise. The same applies to notations you declare with
 
 ### Quality checks
 
-Separately from notation breaks, four notations run **quality checks**: advisory
+Separately from notation breaks, notations run **quality checks**: advisory
 analyses of the *shape* of a graph rather than its syntax. Each result carries a
 severity — **info**, **warning** or **error** — but none of them stops a document
 opening, and an error here means "this cannot be read as the notation intends",
 not "this failed to parse". Most are advice you can knowingly ignore; the
 thresholds are fixed, so they are worth knowing before you argue with one.
+
+**Shared by most notations:** `noParallelEdges` — *error* — two edges between
+the same two nodes in the same direction. The editor does not offer to draw the
+second one. C4 and Arithmetic do without it.
+
+The notation-specific checks below were current when written; there may be more
+by now.
 
 **IBIS**
 - *warning* — a `Question` with no `Answer`.
@@ -279,15 +342,23 @@ thresholds are fixed, so they are worth knowing before you argue with one.
   reports this too.
 
 **C4**
-- *warning* — an external element inside the Enterprise boundary.
-- *warning* — a `Container` or `Database` not inside any System boundary.
-  External containers are exempt: they legitimately live outside one.
 - *warning* — an element with no relationships at all. This one applies to every
   node type, not just elements that look like they should collaborate.
+- Where elements may sit is the containment check every notation with
+  [detailings](#detailedby--a-hierarchical-notation) gets (below).
 
-Two more quality warnings come from elsewhere: a
-[redundant junctor](#diagram-logic-and-junctors), and an
-[unknown node or edge type](#grammar).
+**CLD**
+- *warning* — more loops than can be marked; only the shortest get a marker.
+
+**Arithmetic**
+- *warning* — a division by zero, which cannot be evaluated.
+- *error* — an operator with more than one first operand, second operand or
+  result.
+
+More quality warnings come from elsewhere: a
+[redundant junctor](#diagram-logic-and-junctors), an
+[unknown node or edge type](#grammar), and a node placed where its notation's
+[detailings](#detailedby--a-hierarchical-notation) do not allow.
 
 ### Extensions
 
@@ -298,10 +369,10 @@ comma-separated:
 vgraph myGraph: ConceptMap, Annotation "My Diagram" { ... }
 ```
 
-**Annotation** is the available extension: it adds an `Annotation` node type
-that can be connected *from* any node in the notation, for notes and
-clarifications. Edge types to `Annotation` are inferred, so annotation edges
-need no explicit type.
+**Annotation** is the available extension: it adds two node types, `Annotation`
+for notes and clarifications and `Warning` for caveats, that can be connected
+*from* any node in the notation. Edge types to them are inferred, so these
+edges need no explicit type.
 
 ```vgl
 vgraph productMap: ConceptMap, Annotation "Product Strategy" {
@@ -309,9 +380,11 @@ vgraph productMap: ConceptMap, Annotation "Product Strategy" {
     node r1: Relation "drives"
     node c2: Concept "Feature"
     node a1: Annotation "Validated in user research"
+    node w1: Warning "Depends on a vendor contract"
     edge c1 -> r1
     edge r1 -> c2
     edge c1 -> a1
+    edge c2 -> w1
 }
 ```
 
@@ -322,13 +395,11 @@ complete worked example. Edge types constrain which connections make sense in
 the notation's domain, and most are inferred from the node types, so you rarely
 name one explicitly.
 
-The editor's **Examples…** picker loads any of seventeen graphs straight into the
+The editor's **Examples…** picker loads ready-made graphs straight into the
 text area, and most of the examples below are the same graph. Where the guide's
 version is the simpler one, the note under the example says so — the editor
-carries a fuller variant worth opening. Four of the editor's examples have no
-counterpart here at all: two further IBIS graphs (*Complex System Architecture
-Decision*, *Software Project Planning*), one showing folded groups (*System
-Architecture with Folded Modules*), and the BBS graph reproduced below. The two
+carries a fuller variant worth opening. Some of the editor's examples have no
+counterpart here, such as further IBIS graphs and one showing folded groups. The
 syntax examples in [Concepts](#type-inference-and-minimal-syntax) are
 guide-only.
 
@@ -337,10 +408,10 @@ guide-only.
 Decision-making and argumentation.
 
 **Node types**
-- `Question` — a question or issue to be resolved (default: blue)
-- `Answer` — a proposed answer or solution (default: pink)
-- `Pro` — an argument supporting an answer (default: green)
-- `Con` — an argument opposing an answer (default: red)
+- `Question` — a question or issue to be resolved
+- `Answer` — a proposed answer or solution
+- `Pro` — an argument supporting an answer
+- `Con` — an argument opposing an answer
 
 **Edge types**
 - `answered_by` — Question → Answer
@@ -447,10 +518,10 @@ vgraph customerSatisfaction: BBS "Customer Satisfaction Initiative" {
 A strategic planning graph showing goals, actors, impacts, and deliverables.
 
 **Node types**
-- `Goal` — strategic goal or objective (default: dark blue)
-- `Actor` — person or group who can produce impact (default: blue)
-- `Impact` — behavioural change or outcome (default: cyan)
-- `Deliverable` — product feature or capability (default: green)
+- `Goal` — strategic goal or objective
+- `Actor` — person or group who can produce impact
+- `Impact` — behavioural change or outcome
+- `Deliverable` — product feature or capability
 
 **Edge types**
 - `goal_to_actor` — Goal → Actor
@@ -542,13 +613,13 @@ undesirable effects. Sufficient-cause logic, so multiple unjoined causes feeding
 one effect are implicitly OR; only AND is explicit.
 
 **Node types**
-- `UndesirableEffect` — an unwanted outcome requiring investigation (default: red)
-- `IntermediateEffect` — a neutral outcome in the causal chain (default: blue)
-- `DesirableEffect` — a wanted outcome caused by other conditions (default: green)
-- `Given` — an unchangeable constant, such as a law or physics (default: dark purple)
-- `Changeable` — a modifiable condition that can be addressed (default: light purple)
+- `UndesirableEffect` — an unwanted outcome requiring investigation
+- `IntermediateEffect` — a neutral outcome in the causal chain
+- `DesirableEffect` — a wanted outcome caused by other conditions
+- `Given` — an unchangeable constant, such as a law or physics
+- `Changeable` — a modifiable condition that can be addressed
 - `AndJunctor` — multiple conditions required together to produce the downstream
-  effect (icon: AND circle)
+  effect (icon: AND circle; usually unlabelled, since the icon says it)
 
 **Edge types.** CRT, FRT and TRT share one family, flowing bottom-to-top (causes
 and actions at the bottom, effects at the top). Names are mechanical,
@@ -624,8 +695,6 @@ vgraph salesDecline: CRT "Sales Decline Analysis" {
 }
 ```
 
-**Note**: CRT graphs flow bottom-to-top, with root causes (Given and Changeable) at the bottom and Undesirable Effects at the top. CRT uses sufficient-cause logic: multiple unjoined arrows into the same effect are read as OR (any one is sufficient). The AndJunctor is the explicit exception, indicating multiple conditions that must be true together. Labels for junctors are typically empty as the icon conveys the meaning.
-
 ### Future Reality Tree (FRT)
 
 Solution validation (ToC), showing how proposed solutions lead to desired
@@ -634,11 +703,11 @@ Constraints tools. The difference is use: FRT starts from solutions
 (`Changeable` injections) and builds upward to desirable effects.
 
 **Node types**
-- `Changeable` — proposed solutions or injections to implement (default: light purple)
-- `Given` — unchangeable facts that still apply (default: dark purple)
-- `IntermediateEffect` — expected intermediate outcomes (default: blue)
-- `DesirableEffect` — goals we want to achieve (default: green)
-- `UndesirableEffect` — potential negative side effects to monitor (default: red)
+- `Changeable` — proposed solutions or injections to implement
+- `Given` — unchangeable facts that still apply
+- `IntermediateEffect` — expected intermediate outcomes
+- `DesirableEffect` — goals we want to achieve
+- `UndesirableEffect` — potential negative side effects to monitor
 - `AndJunctor` — as in CRT
 
 **Edge types** — the CRT family, shared by CRT, FRT and TRT; see
@@ -702,8 +771,6 @@ vgraph salesSolution: FRT "Sales Improvement Plan" {
 }
 ```
 
-**Note**: FRT graphs also flow bottom-to-top like CRT, but with a different focus. While CRT starts with problems (Undesirable Effects) and traces back to root causes, FRT starts with proposed solutions (Changeable/injections) and traces forward to show how they achieve desired outcomes. This makes FRT ideal for validating that proposed changes will actually deliver the expected benefits.
-
 ### Transition Tree (TRT)
 
 Step-by-step implementation planning (ToC). Shares CRT/FRT's node types but
@@ -711,11 +778,11 @@ answers "how do we *cause* the change?", giving the step-by-step action
 sequence.
 
 **Node types**
-- `UndesirableEffect` — current-state problems being addressed (default: red)
-- `IntermediateEffect` — stepping-stone outcomes from actions (default: blue)
-- `DesirableEffect` — goal outcomes (default: green)
-- `Given` — unchangeable facts and constraints (default: dark purple)
-- `Changeable` — actions we can take to cause change (default: light purple)
+- `UndesirableEffect` — current-state problems being addressed
+- `IntermediateEffect` — stepping-stone outcomes from actions
+- `DesirableEffect` — goal outcomes
+- `Given` — unchangeable facts and constraints
+- `Changeable` — actions we can take to cause change
 - `AndJunctor` — as in CRT
 
 **Edge types** — the CRT family, shared by CRT, FRT and TRT; see
@@ -783,17 +850,15 @@ vgraph agileTransition: TRT "Agile Transformation Implementation" {
 }
 ```
 
-**Note**: TRT graphs flow bottom-to-top like other TOC tools. The focus is on detailed implementation planning - answering "HOW TO CAUSE the change?" Unlike FRT which validates that solutions will work, TRT provides the step-by-step action sequence needed to implement those solutions. Changeable nodes represent the specific actions to take, and the graph shows how those actions combine through intermediate effects to achieve desirable outcomes. The AndJunctor indicates multiple conditions must occur together for an effect.
-
 ### Prerequisite Tree (PRT)
 
 Planning with necessary-condition thinking, starting from the objective and
 working back to obstacles.
 
 **Node types**
-- `Objective` — the desired goal (default: green)
-- `Obstacle` — a barrier preventing achievement (default: red)
-- `IntermediateObjective` — a milestone overcoming a specific obstacle (default: blue)
+- `Objective` — the desired goal
+- `Obstacle` — a barrier preventing achievement
+- `IntermediateObjective` — a milestone overcoming a specific obstacle
 - `OR` — allows optional conditions instead of requiring all predecessors (icon: OR circle)
 
 **Edge types** — flowing bottom-to-top, intermediate objectives at the bottom.
@@ -856,22 +921,21 @@ vgraph projectLaunch: PRT "New Product Launch Planning" {
 }
 ```
 
-**Note**: PRT graphs flow bottom-to-top like other TOC tools. The main Objective sits at the top, with Obstacles directly below showing what blocks it. IntermediateObjectives below the obstacles show what needs to be achieved to overcome them. The OR junctor indicates alternative paths - only one of the connected intermediate objectives needs to be achieved. PRT embodies "necessary condition thinking" - working backward from the goal to identify all prerequisites.
-
 ### Evaporating Cloud (EC)
 
-A conflict-resolution tool using necessary-condition logic, flowing
-left-to-right from Common Objective to Conflict. Multiple necessary inputs are
-implicitly AND; OR is explicit.
+A conflict-resolution tool using necessary-condition logic — "in order to
+[Common Objective], we must [Need]" — flowing left-to-right from Common
+Objective to Conflict. Multiple necessary inputs are implicitly AND; OR is
+explicit.
 
 **Node types**
-- `CommonObjective` — the shared objective valid for both sides (default: green)
-- `Need` — a perceived need that must be met (default: blue)
-- `Want` — a perceived want derived from a need (default: orange)
+- `CommonObjective` — the shared objective valid for both sides
+- `Need` — a perceived need that must be met
+- `Want` — a perceived want derived from a need
 - `Conflict` — the conflict as mutually exclusive wants (lightning-bolt icon, no text)
 - `OrJunctor` — alternative necessary inputs, any one of which suffices (icon: OR circle)
-- `Assumption` — an underlying assumption behind the conflict (default: purple)
-- `Solution` — the solution that breaks the conflict (default: teal)
+- `Assumption` — an underlying assumption behind the conflict
+- `Solution` — the solution that breaks the conflict
 
 **Edge types** — necessary-condition relationships flowing left-to-right from the
 shared objective through needs and wants to the conflict.
@@ -930,21 +994,21 @@ vgraph projectConflict: EC "Project Delivery vs Quality" {
 }
 ```
 
-**Note**: EC graphs flow left-to-right, with the Common Objective on the far left and the Conflict on the far right. The two branches represent competing Needs and Wants that create the conflict. Assumptions are surfaced on each edge to identify which assumption can be challenged. The Solution breaks the conflict by invalidating one or more assumptions. EC uses necessary condition logic — "In order to [Objective] we must provide [Need]". The Conflict node has no text label; it is rendered as a lightning bolt icon.
-
 ### Goal Tree
 
 Strategic planning with Theory of Constraints necessity logic (H. William
 Dettmer's Logical Thinking Process). The Goal Tree defines what an organization
 must achieve through a hierarchy of a single Goal, Critical Success Factors
-(CSFs), and Necessary Conditions (NCs).
+(CSFs), and Necessary Conditions (NCs). Height says nothing about importance:
+if the lowest NC fails, nothing above it happens. NCs may cross-connect between
+branches.
 
 **Node types**
-- `Goal` — the single top-level objective the system exists for (default: cyan/teal)
+- `Goal` — the single top-level objective the system exists for
 - `CriticalSuccessFactor` — high-level terminal outcomes, 3–5 maximum, without
-  which the Goal cannot be achieved (default: light blue)
+  which the Goal cannot be achieved
 - `NecessaryCondition` — indispensable prerequisite tasks supporting CSFs, which
-  can cascade into more specific sub-conditions (default: amber/yellow)
+  can cascade into more specific sub-conditions
 
 **Edge types** — flowing top-to-bottom, each edge reading "in order to achieve
 [upper], we must have [lower]".
@@ -999,21 +1063,20 @@ vgraph companyStrategy: GoalTree "Increase Profitability" {
 }
 ```
 
-**Note**: GoalTree graphs flow top-to-bottom with the single Goal at the top, Critical Success Factors directly below it, and Necessary Conditions expanding downward. NCs become progressively more detailed, specific, and functional at lower levels. The vertical placement implies nothing about importance — due to necessity logic, the lowest NC is equally important as a CSF because if you fail to accomplish it, nothing above it will happen. There are usually no more than 3-5 CSFs, and NCs can have lateral cross-connections between branches.
-
 ### Attack-Defense Tree (ADTree)
 
 Security modelling after Kordy et al. (2014), extending classical attack trees
 with defense nodes at any level. Sufficient-cause logic: unjoined children are
-implicitly OR.
+implicitly OR. The root can be an Attack or a Defense, which decides whether the
+proponent is the attacker or the defender.
 
 **Node types**
-- `Attack` — an attacker's goal or sub-goal (default: red)
-- `Defense` — a defender's countermeasure (default: green)
+- `Attack` — an attacker's goal or sub-goal
+- `Defense` — a defender's countermeasure
 - `AndJunctor` — conjunctive refinement: all children required together
 
-**Edge types** — flowing top-to-bottom from the root goal, with refinement edges
-drawn solid and countermeasure edges dotted.
+**Edge types** — the tree reads top to bottom from the root goal. Refinement
+edges (same type) are drawn solid, countermeasure edges (opposite type) dotted.
 - `attack_refines_attack` — decompose an attack into sub-attacks
 - `defense_refines_defense` — decompose a defense into sub-defenses
 - `defense_counters_attack` — a defense mitigating an attack
@@ -1098,8 +1161,6 @@ vgraph dataConfidentiality: ADTree "Data Confidentiality" {
 }
 ```
 
-**Note**: ADTree graphs flow bottom-to-top with the root goal at the top and leaf actions at the bottom. The key feature is the distinction between refinement edges (solid lines for same-type decomposition) and countermeasure edges (dotted lines for opposite-type countering). This allows modelling the ongoing arms race between attacker and defender at any level of the tree. The root node can be either an Attack or Defense node, determining whether the proponent is the attacker or defender.
-
 The editor's *ADTree — Data Confidentiality* is the full Kordy tree, with
 firewalls, sensitivity training, a fire-escape break-in route and a
 strong-password attack subtree — and it leaves every edge type to inference.
@@ -1110,10 +1171,11 @@ Systems analysis: what reinforces or balances what over time. Every element is a
 Stock whose amount changes according to its incoming connections.
 
 **Node types**
-- `Stock` — a variable whose value changes over time (default: blue)
+- `Stock` — a variable whose value changes over time
 
 **Edge types** — a loop with an even number of `opposite` links (including zero)
-is reinforcing; an odd number makes it balancing.
+is reinforcing (growth or decline); an odd number makes it balancing (towards
+equilibrium).
 - `same` — Stock → Stock, a positive causal link: both change in the same
   direction (solid, marked "+")
 - `opposite` — Stock → Stock, a negative causal link: they change in opposite
@@ -1148,16 +1210,14 @@ vgraph populationCLD: CLD "Population Dynamics" {
 }
 ```
 
-**Note**: CLD graphs model feedback loops in systems. Loops with an even number of "opposite" links (including zero) are reinforcing loops that produce exponential growth or decline. Loops with an odd number of "opposite" links are balancing loops that reach equilibrium. In this example, the births-population loop is reinforcing, while the population-deaths loop and population-food supply-births loop are balancing.
-
 ### Decision Tree
 
-Decision logic as questions, choices and outcomes.
+Decision logic as questions, choices and outcomes, read top to bottom.
 
 **Node types**
-- `DecisionPoint` — a question determining which path to follow (default: amber)
-- `Choice` — a potential answer branching from a question (default: blue)
-- `Outcome` — a terminal result (default: green)
+- `DecisionPoint` — a question determining which path to follow
+- `Choice` — a potential answer branching from a question
+- `Outcome` — a terminal result
 
 **Edge types**
 - `decision_to_choice` — DecisionPoint → Choice (the question branches)
@@ -1202,8 +1262,6 @@ vgraph hiringDecision: DecisionTree "Should We Hire This Candidate?" {
 }
 ```
 
-**Note**: Decision Trees flow top-to-bottom. Every `DecisionPoint` branches into one or more `Choice` nodes. Each `Choice` leads either to another `DecisionPoint` (continuing the logic) or to an `Outcome` (terminal result). Outcomes have no outgoing edges.
-
 ### Timeline
 
 Events across multiple tracks on a shared time axis, aligned by column.
@@ -1213,8 +1271,7 @@ Events across multiple tracks on a shared time axis, aligned by column.
   horizontal baseline with the year centred below it, and a dashed vertical guide
   descending through the diagram to anchor Events sharing its `alignGroup`.
   TimePoints are **not** drawn as boxed nodes.
-- `Event` — a thing that happened at a point in time (boxed, default: steel
-  blue). Use `alignGroup` to pin it to a TimePoint's column.
+- `Event` — a thing that happened at a point in time (boxed). Use `alignGroup` to pin it to a TimePoint's column.
 
 **Edge types**
 - `sequence` — TimePoint → TimePoint. Used by Graphviz for rank ordering but
@@ -1259,51 +1316,114 @@ arrows are suppressed, because the baseline already conveys order. A
 ### C4
 
 Software-architecture diagrams in Simon Brown's C4 model: people, software
-systems, containers and components inside nested boundaries, across four levels
-of zoom.
+systems, containers, components and code, across four levels of zoom.
 
-**Node types.** `Person`, `SoftwareSystem`, `Container`, `Component`,
-`CodeElement` and `Database` (drawn as a cylinder), each with an `External…`
-variant that renders greyed. Note that a C4 "container" is a separately
-deployable unit — an app, service or datastore — **not** the box drawn around
-things; that is a boundary.
+**Node types.** `Person`, `SoftwareSystem`, `Container`, `Database` (a container
+drawn as a cylinder), `Component` and `CodeElement`. A C4 "container" is a
+separately deployable unit — an app, service or datastore — **not** the box
+drawn around things.
 
-**Relationships** are directed edges labelled with how the elements collaborate
-("Uses", "Reads from", "Makes API calls to"). Two carry canonical ids — `uses`
-(synchronous) and `sends_data_to` (asynchronous) — and the notation registers
-the common `element → element` pairs so realistic diagrams connect cleanly. A
-pair it does not register is not an error: the edge becomes an unknown type,
-rendered bold red and reported as a quality warning, so the document still
-opens.
+**Zoom is detailing.** A Software System is detailed by Containers and
+Databases, a Container by Components, a Component by Code Elements. Write the
+element as a group of its node type, `group ibs: SoftwareSystem "…" { … }`: folded
+it is the element's card, unfolded the dashed boundary around its details.
+Being external is not a type; colour such a system per node with
+`backgroundColor`.
 
-**Boundaries are typed groups**: `SystemBoundary`, `ContainerBoundary` and
-`EnterpriseBoundary`. Each draws a dashed boundary when unfolded and the
-corresponding element card when folded — so folding a system boundary is exactly
-zooming out from the Container view to the System Context view.
+**Relationships** are labelled with how the elements collaborate. There is one
+type per level — `interacts_with` (Person → Person), `uses` (Person → Software
+System), `delivers_to` (Software System → Person), `depends_on` (Software System
+→ Software System), `communicates_with` (Container → Container),
+`reads_and_writes` (Container → Database), `calls` (Component → Component) and
+`references` (Code Element → Code Element) — and each also holds with one end
+replaced by a detail at any depth, so a Person may use a Container and a
+Component may depend on a Software System. No pair is ambiguous, so a file never
+names a C4 edge type.
+
+Edges join elements, never boundaries: a detailed element's relationships start
+at its details, and folding it gathers them onto its card (`×3` when three
+meet). A label written for the system as a whole has no place to go, and neither
+do C4's descriptions and technologies yet.
+
+**Organisations** are plain groups, `group bank: Organisation "Big Bank" { … }`.
 
 ```vgl
-vgraph banking: C4 "Internet Banking System — Container view" {
+vgraph banking: C4 "Internet Banking System" {
     node customer: Person "Personal Banking Customer";
-    node mainframe: ExternalSoftwareSystem "Mainframe Banking System";
+    node cbs: SoftwareSystem "Core Banking System" [backgroundColor: "#e8710a"];
 
-    group ibs: SystemBoundary "Internet Banking System" {
-        node web: Container "Web Application";
-        node api: Container "API Application";
-        node db: Database "Database";
+    group ibs: SoftwareSystem "Internet Banking System" {
+        isfolded: false;
+        node ui: Container "UI";
+        node backend: Container "Backend";
+        node database: Database "Database";
     };
 
-    edge customer -> web "Uses";
-    edge web -> api "Makes API calls to";
-    edge api -> db "Reads from and writes to";
-    edge api -> mainframe "Makes API calls to";
+    edge customer -> ui "Views account balances and makes payments using";
+    edge ui -> backend "Makes API requests to";
+    edge backend -> database "Reads from and writes to";
+    edge backend -> cbs "Makes API requests to";
+}
+
+vview context "System Context View: Internet Banking System" {
+    folded node type: SoftwareSystem;
 }
 ```
 
-A full worked example is in
-[`docs/examples/c4-internet-banking.vgl`](examples/c4-internet-banking.vgl), and
-the editor's *C4 — Internet Banking System* carries the same graph: the
-single-page and mobile apps the web application delivers, plus an external
-e-mail system.
+The editor's *C4 — Internet Banking System* is c4model.com's current example,
+modelled down to the code, with one view per diagram there: System Landscape,
+System Context, Container, Component (Backend) and Code (Core Banking System
+Adapter). The same file is
+[`docs/examples/c4-internet-banking-views.vgl`](examples/c4-internet-banking-views.vgl);
+[`docs/examples/c4-internet-banking.vgl`](examples/c4-internet-banking.vgl) is its
+Container View on its own.
+
+### Arithmetic
+
+Simple equations as diagrams, built for a kids' maths game: numbers, the four
+operators, and an `Equals` node that checks them. Deliberately small — no
+chaining of operators and no variables.
+
+**Node types**
+- `Number` — a value, given or filled in as a candidate answer
+- `Plus`, `Minus`, `Times`, `Divide` — takes two operands and produces a result
+- `Equals` — asserts that everything connected to it, plus its own label if it
+  has one, shares one value. Green and showing the value when they agree, red
+  and showing what is wrong when they don't, neutral while incomplete.
+
+**Edge types** — for each operator, a first operand, a second operand and a
+result: `plus_first_operand`, `plus_second_operand` (Number → Plus) and
+`plus_result` (Plus → Equals), and likewise `minus_…`, `times_…` and
+`divide_…`. Both operand edges join the same pair of types, so these are always
+named. More than one of each on an operator is an error.
+
+```vgl
+vgraph arithmeticRightAndWrong: Arithmetic "Right and Wrong" {
+    node two: Number "2";
+    node five: Number "5";
+    node three: Number "3";
+    node four: Number "4";
+
+    node plusOp: Plus;
+    node timesOp: Times;
+
+    // Each Equals carries the expected answer as its label.
+    node eqPlus: Equals "7";
+    node eqTimes: Equals "11";
+
+    // 2 + 5 = 7 — correct, shows "= 7" in green
+    edge two -> plusOp: plus_first_operand;
+    edge five -> plusOp: plus_second_operand;
+    edge plusOp -> eqPlus: plus_result;
+
+    // 3 × 4 is 12, but 11 was expected — shows "12 ≠ 11" in red
+    edge three -> timesOp: times_first_operand;
+    edge four -> timesOp: times_second_operand;
+    edge timesOp -> eqTimes: times_result;
+}
+```
+
+The editor's *Arithmetic — Right and Wrong* adds subtraction and division.
 
 ## User-defined notations (`vnotation`)
 
@@ -1318,8 +1438,23 @@ vnotation <Name> [extends <BuiltinNotation>] {
     icon      <IconName>   [viewBox: "<minX minY width height>", path: "<svg path data>"]
     node type: <TypeName>  [nodeStyle: <name>, backgroundColor: "#hex", icon: "<IconName>", ...]
     edge type: <edge_id>   from: <TypeName>  to: <TypeName>  [color: "#hex"]
+    group type: <GroupTypeName> [boundaryDash: "8,4", boundaryColor: "#hex", ...]
 }
 ```
+
+`group type:` names a kind of plain group, so `group g: <GroupTypeName> { … }`
+is accepted and `group type:` view rules can select it.
+
+**Boundary look.** `node type:` and `group type:` both take four keys for the
+boundary an unfolded group draws: `boundaryDash` (an SVG dash pattern, `""` for
+a solid line), `boundaryColor`, `boundaryFill` (hex, `#rrggbbaa` for
+transparency) and `boundaryRadius`. On a node type it is the boundary of its
+detailed nodes; on a group type, of its groups. A key left out keeps the look
+the type already had, so `group type: Organisation [boundaryColor: "#00aa00"]`
+in a block extending C4 recolours the boundary and keeps its dashes. A type with
+no boundary of its own, from the block or the notation it extends, draws the
+generic cluster. These are the only keys `group type:` takes; a group type
+declared in a `vnotation` folds into the generic folded box.
 
 A `vgraph` then references it by name exactly like a built-in notation.
 **`vnotation` blocks must appear before any `vgraph` or `metagraph` that
@@ -1328,6 +1463,12 @@ references them**, which allows single-pass parsing.
 `backgroundColor:` is the fill. `color:` is accepted as an older spelling of it
 on input, but `backgroundColor` is what a document exports — the same name a node
 instance stores it under, so the two surfaces agree.
+
+`qualityCheck: <name>` adds a [quality check](#quality-checks) by name — a graph
+criterion such as `noParallelEdges`; an unknown name is refused with the list of
+available ones. `transform: <name>` adds a step that rewrites the graph before
+layout — `mergeRelations`, say, which merges Concept Map relations — refused the
+same way when unknown.
 
 ### `nodeStyle:` — required on every node type
 
@@ -1338,7 +1479,7 @@ against this table.
 |---|---|---|
 | `iconWithText` | `backgroundColor:` (required), `icon:`, `iconColor:` (default white), `iconSize:` (default 24) | Icon above text, coloured background |
 | `simpleRoundedText` | `backgroundColor:` | Text in a rounded rectangle |
-| `roundedBox` | `backgroundColor:` | Plain rounded box |
+| `simpleRoundedBox` | `backgroundColor:` | Plain rounded box (`roundedBox` is accepted as an older spelling) |
 | `withCategory` | `backgroundColor:`, `category:` (short header label) | Box with a coloured category bar on top |
 | `withCategoryAndIcon` | `backgroundColor:`, `category:`, `icon:`, `iconColor:`, `iconSize:` | Category bar plus icon |
 | `iconOnly` | `icon:`, `iconColor:` (default black), `iconSize:` | Icon without text |
@@ -1349,8 +1490,8 @@ against this table.
 
 ### `icon` — artwork of your own
 
-`icon:` on a node type names a mark. Eighteen names are built into VGraph; a
-`vnotation` can add its own, so a notation is not limited to the marks that
+`icon:` on a node type names an icon. A set of names is built into VGraph; a
+`vnotation` can add its own, so a notation is not limited to the icons that
 happened to ship.
 
 ```vgl
@@ -1368,47 +1509,29 @@ the host.
 - **`viewBox:` and `path:` are both required.** The viewBox is four numbers, as
   in an SVG file; there is no default, because artwork drawn at a guessed scale
   is worse than a document that says what is wrong.
-- **A glyph, not a picture.** One path, no colours of its own: `iconColor:` fills
-  it at the point of use, which is what makes the same mark work in white on a
+- **One shape, not a picture.** One path, no colours of its own: `iconColor:` fills
+  it at the point of use, which is what makes the same icon work in white on a
   dark node and in black on a light one.
 - **`path:` takes SVG path data and only that** — the path commands, digits,
   `.,+-eE` and spaces, up to 4096 characters. Anything else is refused where it
   is written.
 - **Your name wins.** A name resolves against the notation's own artwork first
-  and the built-in set second, so declaring `lightbulb.fill` yourself replaces it
-  for that document — and a mark added to VGraph in some later release can never
+  and the built-in set second, so declaring `and` yourself replaces it
+  for that document — and an icon added to VGraph in some later release can never
   change how your document looks.
 - **A name nobody has is not fatal.** It draws a placeholder and is reported in
   the quality report, naming the node type and the icon. The rest of the diagram
   is untouched.
 
-Two sets of names are built in, and a document cannot tell them apart.
+Five icons are built in, all drawn for VGraph; the style guide's Icons section
+holds their masters:
 
-**Traced from SF Symbols** — 18, mostly the marks the built-in notations
-use themselves:
+`and` and `or` (the junctors), `conflict` (the Evaporating Cloud's conflict), `default` (drawn when an icon style names no icon) and `vithanco` (the
+logo).
 
-`and`, `arrow.triangle.branch`, `arrow.up.circle.fill`, `bolt.circle.fill`,
-`checkmark.circle.fill`, `conflict`, `exclamationmark.triangle`,
-`flag.pattern.checkered`, `hand.thumbsdown.circle.fill`,
-`hand.thumbsup.circle.fill`, `lightbulb.fill`, `minus.circle.fill`, `or`,
-`person.circle.fill`, `plus.circle.fill`, `questionmark.circle.fill`,
-`shippingbox.fill`, `tray.full.fill`.
-
-**Vithanco's own** — 82, carried over from the desktop app:
-
-`addCluster`, `addSelection`, `analysis`, `box`, `brighter`, `checkmark`,
-`copy`, `darker`, `decision`, `delete`, `details`, `down`, `dragLine`,
-`dragLineEnd`, `edgeToSelf`, `edit`, `email`, `exchange`, `export`, `eye`,
-`fileImage`, `flash`, `focus2`, `fold`, `font`, `forbidden`, `goIncoming`,
-`goOutgoing`, `group`, `heart`, `importer`, `info`, `intoNode`, `key`,
-`layeredView`, `leaf`, `left`, `lightBulb`, `magnifier`, `medicin`, `menu`,
-`minusSign`, `new`, `next`, `nextSibling`, `outOfNode`, `play`, `plusSign`,
-`powerOnOff`, `previousSibling`, `print`, `purchase`, `questionMark`,
-`questionMark2`, `quickEntry`, `reload`, `return`, `right`, `speech`, `split`,
-`star`, `starView`, `table`, `template`, `text`, `thumbsDown`, `thumbsUp`,
-`toggle`, `untickedCheckmark`, `up`, `update`, `upsideDown`, `usecase`,
-`user`, `vithanco`, `warning`, `warning2`, `wrench`, `zoomIn`, `zoomOut`,
-`zoomTo100`, `zoomToFit`.
+Anything else a document draws, it declares. The SF Symbols-style names and the
+desktop app's icons that earlier versions shipped draw the placeholder until a
+`vnotation` declares them.
 
 ### `extends`
 
@@ -1427,15 +1550,43 @@ vnotation RichIBIS extends IBIS {
 Only **built-in** notations can be extended — `vnotation A extends B` where B is
 itself a vnotation is not supported.
 
+### `detailedBy:` — a hierarchical notation
+
+A node type can name the types its nodes are detailed by, the way a software
+system is made of containers and databases:
+
+```vgl
+vnotation Architecture {
+    node type: System    [nodeStyle: withCategory, backgroundColor: "#1168bd", detailedBy: (Container, Database)]
+    node type: Container [nodeStyle: withCategory, backgroundColor: "#438dd5"]
+    node type: Database  [nodeStyle: withCategory, backgroundColor: "#438dd5"]
+}
+```
+
+- Every name in the list must be a node type of the notation.
+- One type may be a detail type of several types.
+- A type may be detailed by itself, for sub-processes or work packages. Any
+  longer cycle is an error: no type could then stand at the top level.
+- With `extends`, the list **adds** to what the built-in notation already says
+  for that type. Detailings cannot be removed, so no document that relied on one
+  becomes invalid. A saved file writes back only the ones the `vnotation` added.
+- A name cannot be both a node type and a group type, since `group x: Name`
+  would not say which it is.
+
+The quality report then warns, for any notation with detailings, about a node
+inside a detailed node that its type is not detailed by, and about a detail type
+at the top level unless it details itself. Plain groups in between do not count.
+
 ### A complete example
 
 ```vgl
 vnotation RiskMap {
     layout: topToBottom
 
+    icon risk   [viewBox: "0 0 24 24", path: "M12 2 22.5 21h-21zM11 9v6h2V9zm0 8v2h2v-2z"]
     icon shield [viewBox: "0 0 24 24", path: "M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5z"]
 
-    node type: Risk    [nodeStyle: iconWithText, backgroundColor: "#cc3333", icon: "exclamationmark.triangle"]
+    node type: Risk    [nodeStyle: iconWithText, backgroundColor: "#cc3333", icon: "risk"]
     node type: Control [nodeStyle: iconWithText, backgroundColor: "#339933", icon: "shield"]
     node type: Owner   [nodeStyle: circle,       backgroundColor: "#3366cc"]
 
@@ -1468,10 +1619,12 @@ metagraph <NotationName> ["<optional_label>"]
 No id and no body. The label defaults to `"<NotationName> Meta Model"`. A file
 contains either one `vgraph` or one `metagraph`, never both, and `vnotation`
 blocks may precede a `metagraph` — so you can declare and visualise a custom
-notation in one file.
+notation in one file. `metadescription <NotationName>` takes the same form and
+adds the notation's self-description in Markdown alongside the diagram.
 
 Each node is styled **exactly** as it would appear in a real diagram, which is
-what makes the metagraph self-documenting.
+what makes the metagraph self-documenting. A [detailing](#detailedby--a-hierarchical-notation)
+is drawn as a dashed `detailed by` edge from the type to each of its detail types.
 
 ```vgl
 metagraph Timeline
@@ -1479,7 +1632,7 @@ metagraph Timeline
 
 ```vgl
 vnotation MyNotation extends ConceptMap {
-    node type: Hypothesis [nodeStyle: iconWithText; icon: lightbulb.fill]
+    node type: Hypothesis [nodeStyle: iconWithText]
     edge type: supports from: Hypothesis to: Concept
 }
 metagraph MyNotation
@@ -1490,11 +1643,23 @@ metagraph MyNotation
 Simplified BNF:
 
 ```
-file         ::= vnotation* (document | metagraph)
+file         ::= vnotation* (document | metagraph) view*
+
+view         ::= "vview" identifier label? attributes? "{" (view_rule | view_statement)* "}"
+
+view_rule    ::= ("include" | "exclude") selector ";"?
+               | "expand" number ";"?
+
+selector     ::= ("*" | ("node" | "group") ("type" ":")? identifier ("," identifier)*) reach?
+
+reach        ::= "+" number | "downstream" number | "upstream" number
+
+view_statement ::= "folded"? ("node" | "group") ("type" ":")? identifier ("," identifier)*
+                   attributes? ";"?
 
 document     ::= "vgraph" identifier ":" notation ("," extension)* label? "{" statement* "}"
 
-metagraph    ::= "metagraph" notation label? ";"?
+metagraph    ::= ("metagraph" | "metadescription") notation label? ";"?
 
 notation     ::= identifier
                  // a built-in notation, or a vnotation declared earlier in the file
@@ -1504,8 +1669,16 @@ vnotation    ::= "vnotation" identifier ("extends" identifier)? "{" vnotation_bo
 vnotation_body ::= ("layout" ":" layout_dir ";"?)
                  | ("icon" identifier "[" "viewBox" ":" quoted_string ","?
                                           "path" ":" quoted_string "]" ";"?)
-                 | ("node" "type" ":" identifier attributes? ";"?)
+                 | ("node" "type" ":" identifier type_attributes? ";"?)
                  | ("edge" "type" ":" identifier "from" ":" identifier "to" ":" identifier attributes? ";"?)
+                 | ("group" "type" ":" identifier attributes? ";"?)
+                 | ("qualityCheck" ":" identifier ("(" value ("," value)* ")")? ";"?)
+                 | ("transform" ":" identifier ";"?)
+                 | attribute
+
+type_attributes ::= "[" ((attribute | detailed_by) (";" | ",")?)* "]"
+
+detailed_by  ::= "detailedBy" ":" "(" identifier ("," identifier)* ")"
 
 layout_dir   ::= "topToBottom" | "leftToRight" | "bottomToTop" | "rightToLeft"
 
@@ -1513,7 +1686,8 @@ extension    ::= identifier            // available: Annotation
 
 statement    ::= group | node | edge | attribute
 
-group        ::= "group" identifier label? "{" statement* "}" ";"?
+group        ::= "folded"? "group" identifier (":" identifier)? label? "{" statement* "}" ";"?
+                 // the type is a group type, or a node type for a detailed node
 
 node         ::= "node" identifier ":" identifier label? attributes? ";"?
 
@@ -1527,7 +1701,7 @@ label        ::= quoted_string
 
 value        ::= quoted_string | number | identifier
 
-identifier   ::= [a-zA-Z0-9_\.\,\-]+
+identifier   ::= [a-zA-Z_][a-zA-Z0-9_.\-]*
 
 number       ::= [-]?[0-9]+(\.[0-9]+)?
 

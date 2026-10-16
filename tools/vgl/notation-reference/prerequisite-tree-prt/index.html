@@ -90,9 +90,9 @@ VGL Guide — Prerequisite Tree (PRT)</div>
 <p>Planning with necessary-condition thinking, starting from the objective and working back to obstacles.</p>
 <p><strong>Node types</strong></p>
 <ul>
- <li><code>Objective</code> — the desired goal (default: green)</li>
- <li><code>Obstacle</code> — a barrier preventing achievement (default: red)</li>
- <li><code>IntermediateObjective</code> — a milestone overcoming a specific obstacle (default: blue)</li>
+ <li><code>Objective</code> — the desired goal</li>
+ <li><code>Obstacle</code> — a barrier preventing achievement</li>
+ <li><code>IntermediateObjective</code> — a milestone overcoming a specific obstacle</li>
  <li><code>OR</code> — allows optional conditions instead of requiring all predecessors (icon: OR circle)</li>
 </ul>
 <p><strong>Edge types</strong> — flowing bottom-to-top, intermediate objectives at the bottom.</p>
@@ -151,8 +151,7 @@ VGL Guide — Prerequisite Tree (PRT)</div>
     edge obs4 -&gt; io1: obstacle_blocks_intermediate_objective;
     edge obs5 -&gt; io2: obstacle_blocks_intermediate_objective;
 }
-</code></pre>
-<p><strong>Note</strong>: PRT graphs flow bottom-to-top like other TOC tools. The main Objective sits at the top, with Obstacles directly below showing what blocks it. IntermediateObjectives below the obstacles show what needs to be achieved to overcome them. The OR junctor indicates alternative paths - only one of the connected intermediate objectives needs to be achieved. PRT embodies "necessary condition thinking" - working backward from the goal to identify all prerequisites.</p></div></article>
+</code></pre></div></article>
             <aside class="side-content">
                 <div class="relationships-section"></div>
                 <div class="preview__article-details">

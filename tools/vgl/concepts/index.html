@@ -85,7 +85,7 @@ VGL Guide — Concepts</div>
                 <h1>VGL Guide — Concepts</h1>
                 <div class="reading-time-container">
                     <span class="fa fa-clock-o"></span>
-                    <p>Estimated reading time: 5 minutes.</p></div>
+                    <p>Estimated reading time: 7 minutes.</p></div>
                 <div class="content"><h1 id="concepts">Concepts</h1>
 <h3 id="the-document">The document</h3>
 <p>Every VGL document declares a notation, which fixes the node and edge types available:</p>
@@ -124,7 +124,34 @@ edge q2 -&gt; a2;                              // type inferred
 <p><strong>Folded groups.</strong> Prefix a group with <code>folded</code> to render it collapsed into a single box. Folding auto-redirects any edges that crossed the boundary to the collapsed box, and the editor can fold and unfold in place.</p>
 <pre><code class="language-vgl">folded group methodology "Methods" { … };
 </code></pre>
-<p><strong>Typed groups (boundaries).</strong> A group can carry a type after its id, mirroring node typing — <code>group &lt;id&gt;: &lt;GroupType&gt; "&lt;label&gt;" { … }</code>. The type selects its appearance: a C4 <code>SystemBoundary</code> draws a dashed boundary when unfolded and its element card when folded. See <a href="/tools/vgl/notation-reference/c4/">C4</a>.</p>
+<p><strong>Typed groups.</strong> A group can carry a type after its id, mirroring node typing —</p>
+<p><code>group &lt;id&gt;: &lt;GroupType&gt; "&lt;label&gt;" { … }</code>. The type selects its appearance: a C4 <code>Organisation</code> draws a dashed boundary when unfolded and a grey card when folded. See <a href="/tools/vgl/notation-reference/c4/">C4</a>.</p>
+<p><strong>Detailed nodes.</strong> When the type is a <em>node</em> type rather than a group type, the group is a detailed node: the node itself, with its details inside —</p>
+<p><code>group ibs: SoftwareSystem "Internet Banking System" { … }</code>. It takes the node's attributes (<code>url</code>, <code>tooltip</code>, <code>backgroundcolor</code>, …) in its body and in views; a key that a node and a group share means the node's. It starts folded;</p>
+<p><code>isfolded: false</code> in a view (or in its body) opens it, and the boundary it then draws comes from its node type. See ADR-0032.</p>
+<h3 id="views">Views</h3>
+<p>One file can show its model several ways. A <code>vview</code> after the <code>vgraph</code> block changes only how things are <em>shown</em> — fold state, layout direction, colours — never what is true, so quality checks read the same in every view.</p>
+<pre><code class="language-vgl">vview context "System Context" {
+    folded node type: SoftwareSystem;
+}
+
+vview containers "Containers" [rankdir: LR] {
+    node db [backgroundColor: "#ffd27f"];
+    node customer, web [fontsize: 16];
+}
+</code></pre>
+<p>A view sets presentation attributes on <code>node</code>/<code>group</code> ids or, spelled with a colon, on a type (<code>node type: Container</code>). It cannot type, label or add members. A value equal to what the model already gives is dropped on export, so a view follows the model rather than pinning it. A view naming something the model lacks is kept and affects nothing.</p>
+<p>A view also chooses <em>what</em> it shows, with rules applied in order. <code>include</code> and</p>
+<p><code>exclude</code> take a selector — <code>node</code>/<code>group</code> ids, <code>node type:</code>/<code>group type:</code> names, or <code>*</code> — optionally widened along edges by <code>+n</code> (n steps either way),</p>
+<p><code>downstream n</code> or <code>upstream n</code>; <code>expand n</code> widens the result so far. A view whose first rule is <code>include</code> starts empty, any other starts with everything. Selectors always read the model, never what earlier rules left. Edges are never selected: one shows when both its ends do, and where a view hides the middle of a chain it draws a dotted derived edge instead (<code>derivedEdges: false</code> turns them off). A rule chooses elements and sets nothing.</p>
+<pre><code class="language-vgl">vview journey "Customer journey" {
+    include node customer downstream 2;
+    exclude node type: Database;
+}
+</code></pre>
+<p>A node type also stands for its detailed nodes: `include node type: SoftwareSystem<code> shows them with their details, and </code>folded node type: SoftwareSystem<code> folds them. </code>group type:` picks plain groups only.</p>
+<p>The model itself is the default view. Pick another by name:</p>
+<p><code>vgraph-cli svg --view context</code>.</p>
 <h3 id="attributes">Attributes</h3>
 <p>Inline in brackets, <code>[a: 1; b: 2]</code>, or as bare statements inside a graph or group body.</p>
 <table>
@@ -149,7 +176,7 @@ edge q2 -&gt; a2;                              // type inferred
   </tr>
   <tr>
    <td>Graph</td>
-   <td><code>rankdir</code> (<code>LR</code>/<code>TB</code>), <code>fontcolor</code>, <code>labeljust</code> (<code>l</code>/<code>r</code>/<code>c</code>)</td>
+   <td><code>rankdir</code> (<code>LR</code>/<code>TB</code>), <code>fontcolor</code>, <code>labeljust</code> (<code>l</code>/<code>r</code>/<code>c</code>), <code>loopMarkers</code> (<code>all</code>/<code>independent</code>/<code>none</code>, Causal Loop Diagrams: which loops get an R/B marker)</td>
   </tr>
  </tbody>
 </table>

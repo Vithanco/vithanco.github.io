@@ -87,12 +87,12 @@ VGL Guide — Goal Tree</div>
                     <span class="fa fa-clock-o"></span>
                     <p>Estimated reading time: 2 minutes.</p></div>
                 <div class="content"><h1 id="goal-tree">Goal Tree</h1>
-<p>Strategic planning with Theory of Constraints necessity logic (H. William Dettmer's Logical Thinking Process). The Goal Tree defines what an organization must achieve through a hierarchy of a single Goal, Critical Success Factors (CSFs), and Necessary Conditions (NCs).</p>
+<p>Strategic planning with Theory of Constraints necessity logic (H. William Dettmer's Logical Thinking Process). The Goal Tree defines what an organization must achieve through a hierarchy of a single Goal, Critical Success Factors (CSFs), and Necessary Conditions (NCs). Height says nothing about importance: if the lowest NC fails, nothing above it happens. NCs may cross-connect between branches.</p>
 <p><strong>Node types</strong></p>
 <ul>
- <li><code>Goal</code> — the single top-level objective the system exists for (default: cyan/teal)</li>
- <li><code>CriticalSuccessFactor</code> — high-level terminal outcomes, 3–5 maximum, without which the Goal cannot be achieved (default: light blue)</li>
- <li><code>NecessaryCondition</code> — indispensable prerequisite tasks supporting CSFs, which can cascade into more specific sub-conditions (default: amber/yellow)</li>
+ <li><code>Goal</code> — the single top-level objective the system exists for</li>
+ <li><code>CriticalSuccessFactor</code> — high-level terminal outcomes, 3–5 maximum, without which the Goal cannot be achieved</li>
+ <li><code>NecessaryCondition</code> — indispensable prerequisite tasks supporting CSFs, which can cascade into more specific sub-conditions</li>
 </ul>
 <p><strong>Edge types</strong> — flowing top-to-bottom, each edge reading "in order to achieve [upper], we must have [lower]".</p>
 <ul>
@@ -144,8 +144,7 @@ VGL Guide — Goal Tree</div>
     edge nc8 -&gt; nc1: nc_to_nc;
     edge nc9 -&gt; nc3: nc_to_nc;
 }
-</code></pre>
-<p><strong>Note</strong>: GoalTree graphs flow top-to-bottom with the single Goal at the top, Critical Success Factors directly below it, and Necessary Conditions expanding downward. NCs become progressively more detailed, specific, and functional at lower levels. The vertical placement implies nothing about importance — due to necessity logic, the lowest NC is equally important as a CSF because if you fail to accomplish it, nothing above it will happen. There are usually no more than 3-5 CSFs, and NCs can have lateral cross-connections between branches.</p></div></article>
+</code></pre></div></article>
             <aside class="side-content">
                 <div class="relationships-section"></div>
                 <div class="preview__article-details">

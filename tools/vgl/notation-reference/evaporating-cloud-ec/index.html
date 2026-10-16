@@ -9,9 +9,9 @@
         <title>VGL Guide — Evaporating Cloud (EC) | Vithanco</title>
         <meta name="twitter:title" content="VGL Guide — Evaporating Cloud (EC) | Vithanco"/>
         <meta property="og:title" content="VGL Guide — Evaporating Cloud (EC) | Vithanco"/>
-        <meta name="description" content="A conflict-resolution tool using necessary-condition logic, flowing"/>
-        <meta name="twitter:description" content="A conflict-resolution tool using necessary-condition logic, flowing"/>
-        <meta property="og:description" content="A conflict-resolution tool using necessary-condition logic, flowing"/>
+        <meta name="description" content=""A conflict-resolution tool using necessary-condition logic — \"in order to""/>
+        <meta name="twitter:description" content=""A conflict-resolution tool using necessary-condition logic — \"in order to""/>
+        <meta property="og:description" content=""A conflict-resolution tool using necessary-condition logic — \"in order to""/>
         <meta name="twitter:card" content="summary"/>
         <link rel="stylesheet" href="/CopenhagenTheme/bright.css" type="text/css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -87,16 +87,16 @@ VGL Guide — Evaporating Cloud (EC)</div>
                     <span class="fa fa-clock-o"></span>
                     <p>Estimated reading time: 2 minutes.</p></div>
                 <div class="content"><h1 id="evaporating-cloud-ec">Evaporating Cloud (EC)</h1>
-<p>A conflict-resolution tool using necessary-condition logic, flowing left-to-right from Common Objective to Conflict. Multiple necessary inputs are implicitly AND; OR is explicit.</p>
+<p>A conflict-resolution tool using necessary-condition logic — "in order to [Common Objective], we must [Need]" — flowing left-to-right from Common Objective to Conflict. Multiple necessary inputs are implicitly AND; OR is explicit.</p>
 <p><strong>Node types</strong></p>
 <ul>
- <li><code>CommonObjective</code> — the shared objective valid for both sides (default: green)</li>
- <li><code>Need</code> — a perceived need that must be met (default: blue)</li>
- <li><code>Want</code> — a perceived want derived from a need (default: orange)</li>
+ <li><code>CommonObjective</code> — the shared objective valid for both sides</li>
+ <li><code>Need</code> — a perceived need that must be met</li>
+ <li><code>Want</code> — a perceived want derived from a need</li>
  <li><code>Conflict</code> — the conflict as mutually exclusive wants (lightning-bolt icon, no text)</li>
  <li><code>OrJunctor</code> — alternative necessary inputs, any one of which suffices (icon: OR circle)</li>
- <li><code>Assumption</code> — an underlying assumption behind the conflict (default: purple)</li>
- <li><code>Solution</code> — the solution that breaks the conflict (default: teal)</li>
+ <li><code>Assumption</code> — an underlying assumption behind the conflict</li>
+ <li><code>Solution</code> — the solution that breaks the conflict</li>
 </ul>
 <p><strong>Edge types</strong> — necessary-condition relationships flowing left-to-right from the shared objective through needs and wants to the conflict.</p>
 <ul>
@@ -150,8 +150,7 @@ VGL Guide — Evaporating Cloud (EC)</div>
     // Solution resolves by breaking assumption
     edge needB -&gt; sol: need_to_solution;
 }
-</code></pre>
-<p><strong>Note</strong>: EC graphs flow left-to-right, with the Common Objective on the far left and the Conflict on the far right. The two branches represent competing Needs and Wants that create the conflict. Assumptions are surfaced on each edge to identify which assumption can be challenged. The Solution breaks the conflict by invalidating one or more assumptions. EC uses necessary condition logic — "In order to [Objective] we must provide [Need]". The Conflict node has no text label; it is rendered as a lightning bolt icon.</p></div></article>
+</code></pre></div></article>
             <aside class="side-content">
                 <div class="relationships-section"></div>
                 <div class="preview__article-details">

@@ -90,9 +90,9 @@ VGL Guide — Causal Loop Diagram (CLD)</div>
 <p>Systems analysis: what reinforces or balances what over time. Every element is a Stock whose amount changes according to its incoming connections.</p>
 <p><strong>Node types</strong></p>
 <ul>
- <li><code>Stock</code> — a variable whose value changes over time (default: blue)</li>
+ <li><code>Stock</code> — a variable whose value changes over time</li>
 </ul>
-<p><strong>Edge types</strong> — a loop with an even number of <code>opposite</code> links (including zero) is reinforcing; an odd number makes it balancing.</p>
+<p><strong>Edge types</strong> — a loop with an even number of <code>opposite</code> links (including zero) is reinforcing (growth or decline); an odd number makes it balancing (towards equilibrium).</p>
 <ul>
  <li><code>same</code> — Stock → Stock, a positive causal link: both change in the same direction (solid, marked "+")</li>
  <li><code>opposite</code> — Stock → Stock, a negative causal link: they change in opposite directions (dashed, marked "−")</li>
@@ -121,8 +121,7 @@ VGL Guide — Causal Loop Diagram (CLD)</div>
     edge population -&gt; crowding: same;
     edge crowding -&gt; deaths: same;
 }
-</code></pre>
-<p><strong>Note</strong>: CLD graphs model feedback loops in systems. Loops with an even number of "opposite" links (including zero) are reinforcing loops that produce exponential growth or decline. Loops with an odd number of "opposite" links are balancing loops that reach equilibrium. In this example, the births-population loop is reinforcing, while the population-deaths loop and population-food supply-births loop are balancing.</p></div></article>
+</code></pre></div></article>
             <aside class="side-content">
                 <div class="relationships-section"></div>
                 <div class="preview__article-details">

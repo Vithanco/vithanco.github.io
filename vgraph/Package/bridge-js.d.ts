@@ -15,7 +15,7 @@ export type Exports = {
     editorLongPressFired(): void;
     setEditorVGL(text: string): void;
     /**
-     * Load a document the host fetched for `?src=` (#132). `name` is the last
+     * Load a document the host fetched for `?src=`. `name` is the last
      * path segment of the source, which is where the document's name comes
      * from — the same role a picked file's name plays.
      */
@@ -46,15 +46,22 @@ export type Exports = {
      * variant and dropped the quality half — leaving `App.renderGraphJSON`
      * ("the shape JavaScript callers read") with no JavaScript caller.
      * `renderGraph` discards the report the editor already displays.
+     *
+     * An empty `view` is the default view: the model, shown even in a document
+     * that declares views. An unknown name returns the error listing them.
      */
-    renderGraphWithQuality(graph: string): string;
+    renderGraphWithQuality(graph: string, view: string): string;
+    /**
+     * `[{"name": …, "label": …}]` in document order; `[]` for a document without views.
+     */
+    listViews(graph: string): string;
     /**
      * A notation's self-describing Markdown, or `Error: …`.
      *
-     * Same path as the CLI's `describe` subcommand and the `describe_notation`
-     * MCP tool: parse a `metadescription` declaration and read the document
-     * off the graph. Without this export a wasm host can render every notation
-     * but not explain one, which is the half a model needs first.
+     * The same document as the CLI's `describe` subcommand and the
+     * `describe_notation` MCP tool. Without this export a wasm host can
+     * render every notation but not explain one, which is the half a model
+     * needs first.
      */
     describeNotation(notation: string): string;
     debugGraph(graph: string): string;
