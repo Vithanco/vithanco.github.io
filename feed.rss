@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Vithanco</title><description>Use Visual Thinking to Improve Your Decision Making and Problem Solving Skills.</description><link>https://vithanco.com</link><language>en</language><lastBuildDate>Fri, 16 Oct 2026 08:36:52 +0200</lastBuildDate><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><ttl>250</ttl><atom:link href="https://vithanco.com/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/grammar</guid><title>VGL Guide — Grammar</title><description>"Simplified BNF:"</description><link>https://vithanco.com/tools/vgl/grammar</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="grammar">Grammar</h1>
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Vithanco</title><description>Use Visual Thinking to Improve Your Decision Making and Problem Solving Skills.</description><link>https://vithanco.com</link><language>en</language><lastBuildDate>Mon, 26 Oct 2026 20:57:09 +0100</lastBuildDate><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><ttl>250</ttl><atom:link href="https://vithanco.com/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/grammar</guid><title>VGL Guide — Grammar</title><description>"Simplified BNF:"</description><link>https://vithanco.com/tools/vgl/grammar</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="grammar">Grammar</h1>
 <p>Simplified BNF:</p>
 <pre><code>file         ::= vnotation* (document | metagraph) view*
 
@@ -71,7 +71,7 @@ comment      ::= "//" [^\n]*
  <li>Node ids must be unique throughout the document, and an edge may only reference nodes already declared.</li>
  <li>Semicolons are optional after nodes, edges, groups and standalone attributes.</li>
  <li>A node or edge type that is not valid for the notation is not an error: it becomes an <strong>unknown</strong> type, rendered bold red and reported as a quality warning, so a document always opens. Check the spelling.</li>
-</ul>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/metagraph-visualising-a-notation</guid><title>VGL Guide — Metagraph (visualising a notation)</title><description>A notation is a graph — its node types are vertices and its edge types are</description><link>https://vithanco.com/tools/vgl/metagraph-visualising-a-notation</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="metagraph-visualising-a-notation">Metagraph (visualising a notation)</h1>
+</ul>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/metagraph-visualising-a-notation</guid><title>VGL Guide — Metagraph (visualising a notation)</title><description>A notation is a graph — its node types are vertices and its edge types are</description><link>https://vithanco.com/tools/vgl/metagraph-visualising-a-notation</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="metagraph-visualising-a-notation">Metagraph (visualising a notation)</h1>
 <p>A notation <em>is</em> a graph — its node types are vertices and its edge types are edges — so it can be drawn directly. That is useful for documentation, for teaching, and for seeing how a <code>vnotation</code> you just wrote will actually look.</p>
 <pre><code>metagraph &lt;NotationName&gt; ["&lt;optional_label&gt;"]
 </code></pre>
@@ -84,7 +84,7 @@ comment      ::= "//" [^\n]*
     edge type: supports from: Hypothesis to: Concept
 }
 metagraph MyNotation
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/user-defined-notations-vnotation</guid><title>VGL Guide — User-defined notations (`vnotation`)</title><description>vnotation defines a notation schema inline in a VGL file, with no Swift</description><link>https://vithanco.com/tools/vgl/user-defined-notations-vnotation</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="user-defined-notations-vnotation">User-defined notations (<code>vnotation</code>)</h1>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/user-defined-notations-vnotation</guid><title>VGL Guide — User-defined notations (`vnotation`)</title><description>vnotation defines a notation schema inline in a VGL file, with no Swift</description><link>https://vithanco.com/tools/vgl/user-defined-notations-vnotation</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="user-defined-notations-vnotation">User-defined notations (<code>vnotation</code>)</h1>
 <p><code>vnotation</code> defines a notation schema inline in a VGL file, with no Swift changes. Everything a built-in notation provides — node types, edge types, layout direction — can be expressed this way.</p>
 <pre><code>vnotation &lt;Name&gt; [extends &lt;BuiltinNotation&gt;] {
     layout: &lt;topToBottom | leftToRight | rightToLeft | bottomToTop&gt;
@@ -180,8 +180,53 @@ metagraph MyNotation
  <li><strong>Your name wins.</strong> A name resolves against the notation's own artwork first and the built-in set second, so declaring <code>and</code> yourself replaces it for that document — and an icon added to VGraph in some later release can never change how your document looks.</li>
  <li><strong>A name nobody has is not fatal.</strong> It draws a placeholder and is reported in the quality report, naming the node type and the icon. The rest of the diagram is untouched.</li>
 </ul>
-<p>Five icons are built in, all drawn for VGraph; the style guide's Icons section holds their masters:</p>
-<p><code>and</code> and <code>or</code> (the junctors), <code>conflict</code> (the Evaporating Cloud's conflict), <code>default</code> (drawn when an icon style names no icon) and <code>vithanco</code> (the logo).</p>
+<p>Forty-eight icon names are built in, all drawn for VGraph; the design system's Icons section holds the masters. A name says what the icon means, and several names share one drawing, so <code>need</code>, <code>answer</code> and <code>undesirable-effect</code> look alike.</p>
+<table>
+ <thead>
+  <tr>
+   <th>Used for</th>
+   <th>Names</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Whole node, with its own circle</td>
+   <td><code>and</code>, <code>or</code> (the junctors), <code>conflict</code>, <code>default</code> (drawn when an icon style names no icon)</td>
+  </tr>
+  <tr>
+   <td>Reality trees</td>
+   <td><code>undesirable-effect</code>, <code>intermediate-effect</code>, <code>desirable-effect</code>, <code>given</code>, <code>changeable</code></td>
+  </tr>
+  <tr>
+   <td>Questions and decisions</td>
+   <td><code>question</code>, <code>answer</code>, <code>pro</code>, <code>con</code>, <code>decision-point</code>, <code>choice</code>, <code>outcome</code>, <code>assumption</code></td>
+  </tr>
+  <tr>
+   <td>Goals and obstacles</td>
+   <td><code>goal</code>, <code>objective</code>, <code>intermediate-objective</code>, <code>common-objective</code>, <code>investment-objective</code>, <code>critical-success-factor</code>, <code>necessary-condition</code>, <code>obstacle</code>, <code>need</code>, <code>want</code>, <code>solution</code></td>
+  </tr>
+  <tr>
+   <td>Change and delivery</td>
+   <td><code>benefit</code>, <code>business-change</code>, <code>enabler</code>, <code>impact</code>, <code>actor</code>, <code>deliverable</code>, <code>event</code></td>
+  </tr>
+  <tr>
+   <td>Attack and defence</td>
+   <td><code>attack</code>, <code>defense</code></td>
+  </tr>
+  <tr>
+   <td>General</td>
+   <td><code>concept</code>, <code>variable</code>, <code>annotation</code>, <code>warning</code></td>
+  </tr>
+  <tr>
+   <td>Arithmetic</td>
+   <td><code>plus</code>, <code>minus</code>, <code>times</code>, <code>divide</code>, <code>equals</code>, <code>not-equal</code></td>
+  </tr>
+  <tr>
+   <td>Brand</td>
+   <td><code>vithanco</code> (the logo)</td>
+  </tr>
+ </tbody>
+</table>
 <p>Anything else a document draws, it declares. The SF Symbols-style names and the desktop app's icons that earlier versions shipped draw the placeholder until a</p>
 <p><code>vnotation</code> declares them.</p>
 <h3 id="extends"><code>extends</code></h3>
@@ -234,7 +279,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
 }
 </code></pre>
 <p>A vnotation can take extensions like any other notation:</p>
-<p><code>vgraph sm1: SimpleMap, Annotation "Annotated Map" { … }</code>.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/arithmetic</guid><title>VGL Guide — Arithmetic</title><description>"Simple equations as diagrams, built for a kids' maths game: numbers, the four"</description><link>https://vithanco.com/tools/vgl/notation-reference/arithmetic</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="arithmetic">Arithmetic</h1>
+<p><code>vgraph sm1: SimpleMap, Annotation "Annotated Map" { … }</code>.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/arithmetic</guid><title>VGL Guide — Arithmetic</title><description>"Simple equations as diagrams, built for a kids' maths game: numbers, the four"</description><link>https://vithanco.com/tools/vgl/notation-reference/arithmetic</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="arithmetic">Arithmetic</h1>
 <p>Simple equations as diagrams, built for a kids' maths game: numbers, the four operators, and an <code>Equals</code> node that checks them. Deliberately small — no chaining of operators and no variables.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -269,7 +314,7 @@ vgraph rm1: RiskMap "Project Risk Map" {
     edge timesOp -&gt; eqTimes: times_result;
 }
 </code></pre>
-<p>The editor's <em>Arithmetic — Right and Wrong</em> adds subtraction and division.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/c4</guid><title>VGL Guide — C4</title><description>"Software-architecture diagrams in Simon Brown's C4 model: people, software"</description><link>https://vithanco.com/tools/vgl/notation-reference/c4</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="c4">C4</h1>
+<p>The editor's <em>Arithmetic — Right and Wrong</em> adds subtraction and division.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/c4</guid><title>VGL Guide — C4</title><description>"Software-architecture diagrams in Simon Brown's C4 model: people, software"</description><link>https://vithanco.com/tools/vgl/notation-reference/c4</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="c4">C4</h1>
 <p>Software-architecture diagrams in Simon Brown's C4 model: people, software systems, containers, components and code, across four levels of zoom.</p>
 <p><strong>Node types.</strong> <code>Person</code>, <code>SoftwareSystem</code>, <code>Container</code>, <code>Database</code> (a container drawn as a cylinder), <code>Component</code> and <code>CodeElement</code>. A C4 "container" is a separately deployable unit — an app, service or datastore — <strong>not</strong> the box drawn around things.</p>
 <p><strong>Zoom is detailing.</strong> A Software System is detailed by Containers and Databases, a Container by Components, a Component by Code Elements. Write the element as a group of its node type, <code>group ibs: SoftwareSystem "…" { … }</code>: folded it is the element's card, unfolded the dashed boundary around its details. Being external is not a type; colour such a system per node with</p>
@@ -300,7 +345,7 @@ vview context "System Context View: Internet Banking System" {
     folded node type: SoftwareSystem;
 }
 </code></pre>
-<p>The editor's <em>C4 — Internet Banking System</em> is c4model.com's current example, modelled down to the code, with one view per diagram there: System Landscape, System Context, Container, Component (Backend) and Code (Core Banking System Adapter). The same file is <a href="examples/c4-internet-banking-views.vgl"><code>docs/examples/c4-internet-banking-views.vgl</code></a>; <a href="examples/c4-internet-banking.vgl"><code>docs/examples/c4-internet-banking.vgl</code></a> is its Container View on its own.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/timeline</guid><title>VGL Guide — Timeline</title><description>Events across multiple tracks on a shared time axis, aligned by column.</description><link>https://vithanco.com/tools/vgl/notation-reference/timeline</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="timeline">Timeline</h1>
+<p>The editor's <em>C4 — Internet Banking System</em> is c4model.com's current example, modelled down to the code, with one view per diagram there: System Landscape, System Context, Container, Component (Backend) and Code (Core Banking System Adapter). The same file is <a href="examples/c4-internet-banking-views.vgl"><code>docs/examples/c4-internet-banking-views.vgl</code></a>; <a href="examples/c4-internet-banking.vgl"><code>docs/examples/c4-internet-banking.vgl</code></a> is its Container View on its own.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/timeline</guid><title>VGL Guide — Timeline</title><description>Events across multiple tracks on a shared time axis, aligned by column.</description><link>https://vithanco.com/tools/vgl/notation-reference/timeline</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="timeline">Timeline</h1>
 <p>Events across multiple tracks on a shared time axis, aligned by column.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -336,7 +381,7 @@ vview context "System Context View: Internet Banking System" {
 </code></pre>
 <p>Timelines flow left to right, and groups become visual tracks. <code>alignGroup</code> is what puts nodes in the same column — TimePoints are optional, and <code>alignGroup</code> alone suffices for alignment.</p>
 <p>Each TimePoint renders as a filled dot on a horizontal baseline with its label centred below, and a dashed vertical guide descends through the diagram so a reader can trace from a year down to every Event in that column. The <code>sequence</code> arrows are suppressed, because the baseline already conveys order. A</p>
-<p><code>vnotation … extends Timeline</code> inherits this rendering.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/decision-tree</guid><title>VGL Guide — Decision Tree</title><description>Decision logic as questions, choices and outcomes, read top to bottom.</description><link>https://vithanco.com/tools/vgl/notation-reference/decision-tree</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="decision-tree">Decision Tree</h1>
+<p><code>vnotation … extends Timeline</code> inherits this rendering.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/decision-tree</guid><title>VGL Guide — Decision Tree</title><description>Decision logic as questions, choices and outcomes, read top to bottom.</description><link>https://vithanco.com/tools/vgl/notation-reference/decision-tree</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="decision-tree">Decision Tree</h1>
 <p>Decision logic as questions, choices and outcomes, read top to bottom.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -383,7 +428,7 @@ vview context "System Context View: Internet Banking System" {
     edge c3 -&gt; o1: choice_to_outcome;
     edge c4 -&gt; o3: choice_to_outcome;
 }
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/causal-loop-diagram-cld</guid><title>VGL Guide — Causal Loop Diagram (CLD)</title><description>"Systems analysis: what reinforces or balances what over time. Every element is a"</description><link>https://vithanco.com/tools/vgl/notation-reference/causal-loop-diagram-cld</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="causal-loop-diagram-cld">Causal Loop Diagram (CLD)</h1>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/causal-loop-diagram-cld</guid><title>VGL Guide — Causal Loop Diagram (CLD)</title><description>"Systems analysis: what reinforces or balances what over time. Every element is a"</description><link>https://vithanco.com/tools/vgl/notation-reference/causal-loop-diagram-cld</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="causal-loop-diagram-cld">Causal Loop Diagram (CLD)</h1>
 <p>Systems analysis: what reinforces or balances what over time. Every element is a Stock whose amount changes according to its incoming connections.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -418,7 +463,7 @@ vview context "System Context View: Internet Banking System" {
     edge population -&gt; crowding: same;
     edge crowding -&gt; deaths: same;
 }
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/attack-defense-tree-adtree</guid><title>VGL Guide — Attack-Defense Tree (ADTree)</title><description>Security modelling after Kordy et al. (2014), extending classical attack trees</description><link>https://vithanco.com/tools/vgl/notation-reference/attack-defense-tree-adtree</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="attack-defense-tree-adtree">Attack-Defense Tree (ADTree)</h1>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/attack-defense-tree-adtree</guid><title>VGL Guide — Attack-Defense Tree (ADTree)</title><description>Security modelling after Kordy et al. (2014), extending classical attack trees</description><link>https://vithanco.com/tools/vgl/notation-reference/attack-defense-tree-adtree</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="attack-defense-tree-adtree">Attack-Defense Tree (ADTree)</h1>
 <p>Security modelling after Kordy et al. (2014), extending classical attack trees with defense nodes at any level. Sufficient-cause logic: unjoined children are implicitly OR. The root can be an Attack or a Defense, which decides whether the proponent is the attacker or the defender.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -506,7 +551,7 @@ vview context "System Context View: Internet Banking System" {
     edge andOverpower -&gt; overpower: and_junctor_to_attack;
 }
 </code></pre>
-<p>The editor's <em>ADTree — Data Confidentiality</em> is the full Kordy tree, with firewalls, sensitivity training, a fire-escape break-in route and a strong-password attack subtree — and it leaves every edge type to inference.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/goal-tree</guid><title>VGL Guide — Goal Tree</title><description>Strategic planning with Theory of Constraints necessity logic (H. William</description><link>https://vithanco.com/tools/vgl/notation-reference/goal-tree</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="goal-tree">Goal Tree</h1>
+<p>The editor's <em>ADTree — Data Confidentiality</em> is the full Kordy tree, with firewalls, sensitivity training, a fire-escape break-in route and a strong-password attack subtree — and it leaves every edge type to inference.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/goal-tree</guid><title>VGL Guide — Goal Tree</title><description>Strategic planning with Theory of Constraints necessity logic (H. William</description><link>https://vithanco.com/tools/vgl/notation-reference/goal-tree</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="goal-tree">Goal Tree</h1>
 <p>Strategic planning with Theory of Constraints necessity logic (H. William Dettmer's Logical Thinking Process). The Goal Tree defines what an organization must achieve through a hierarchy of a single Goal, Critical Success Factors (CSFs), and Necessary Conditions (NCs). Height says nothing about importance: if the lowest NC fails, nothing above it happens. NCs may cross-connect between branches.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -564,7 +609,7 @@ vview context "System Context View: Internet Banking System" {
     edge nc8 -&gt; nc1: nc_to_nc;
     edge nc9 -&gt; nc3: nc_to_nc;
 }
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/evaporating-cloud-ec</guid><title>VGL Guide — Evaporating Cloud (EC)</title><description>"A conflict-resolution tool using necessary-condition logic — \"in order to"</description><link>https://vithanco.com/tools/vgl/notation-reference/evaporating-cloud-ec</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="evaporating-cloud-ec">Evaporating Cloud (EC)</h1>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/evaporating-cloud-ec</guid><title>VGL Guide — Evaporating Cloud (EC)</title><description>"A conflict-resolution tool using necessary-condition logic — \"in order to"</description><link>https://vithanco.com/tools/vgl/notation-reference/evaporating-cloud-ec</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="evaporating-cloud-ec">Evaporating Cloud (EC)</h1>
 <p>A conflict-resolution tool using necessary-condition logic — "in order to [Common Objective], we must [Need]" — flowing left-to-right from Common Objective to Conflict. Multiple necessary inputs are implicitly AND; OR is explicit.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -628,7 +673,7 @@ vview context "System Context View: Internet Banking System" {
     // Solution resolves by breaking assumption
     edge needB -&gt; sol: need_to_solution;
 }
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/prerequisite-tree-prt</guid><title>VGL Guide — Prerequisite Tree (PRT)</title><description>Planning with necessary-condition thinking, starting from the objective and</description><link>https://vithanco.com/tools/vgl/notation-reference/prerequisite-tree-prt</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="prerequisite-tree-prt">Prerequisite Tree (PRT)</h1>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/prerequisite-tree-prt</guid><title>VGL Guide — Prerequisite Tree (PRT)</title><description>Planning with necessary-condition thinking, starting from the objective and</description><link>https://vithanco.com/tools/vgl/notation-reference/prerequisite-tree-prt</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="prerequisite-tree-prt">Prerequisite Tree (PRT)</h1>
 <p>Planning with necessary-condition thinking, starting from the objective and working back to obstacles.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -693,7 +738,7 @@ vview context "System Context View: Internet Banking System" {
     edge obs4 -&gt; io1: obstacle_blocks_intermediate_objective;
     edge obs5 -&gt; io2: obstacle_blocks_intermediate_objective;
 }
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/transition-tree-trt</guid><title>VGL Guide — Transition Tree (TRT)</title><description>Step-by-step implementation planning (ToC). Shares CRT/FRT's node types but</description><link>https://vithanco.com/tools/vgl/notation-reference/transition-tree-trt</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="transition-tree-trt">Transition Tree (TRT)</h1>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/transition-tree-trt</guid><title>VGL Guide — Transition Tree (TRT)</title><description>Step-by-step implementation planning (ToC). Shares CRT/FRT's node types but</description><link>https://vithanco.com/tools/vgl/notation-reference/transition-tree-trt</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="transition-tree-trt">Transition Tree (TRT)</h1>
 <p>Step-by-step implementation planning (ToC). Shares CRT/FRT's node types but answers "how do we <em>cause</em> the change?", giving the step-by-step action sequence.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -762,7 +807,7 @@ vview context "System Context View: Internet Banking System" {
     // Given waterfall context is addressed by iterative process
     edge g2 -&gt; ie4: given_causes_intermediate;
 }
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/future-reality-tree-frt</guid><title>VGL Guide — Future Reality Tree (FRT)</title><description>Solution validation (ToC), showing how proposed solutions lead to desired</description><link>https://vithanco.com/tools/vgl/notation-reference/future-reality-tree-frt</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="future-reality-tree-frt">Future Reality Tree (FRT)</h1>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/future-reality-tree-frt</guid><title>VGL Guide — Future Reality Tree (FRT)</title><description>Solution validation (ToC), showing how proposed solutions lead to desired</description><link>https://vithanco.com/tools/vgl/notation-reference/future-reality-tree-frt</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="future-reality-tree-frt">Future Reality Tree (FRT)</h1>
 <p>Solution validation (ToC), showing how proposed solutions lead to desired outcomes. The same node types as CRT, both being sufficient-cause Theory of Constraints tools. The difference is use: FRT starts from solutions (<code>Changeable</code> injections) and builds upward to desirable effects.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -829,7 +874,7 @@ vview context "System Context View: Internet Banking System" {
     // Given competitive market affects outcomes
     edge g1 -&gt; ie2: given_causes_intermediate;
 }
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/current-reality-tree-crt</guid><title>VGL Guide — Current Reality Tree (CRT)</title><description>Root cause analysis (Theory of Constraints), showing how causes lead to</description><link>https://vithanco.com/tools/vgl/notation-reference/current-reality-tree-crt</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="current-reality-tree-crt">Current Reality Tree (CRT)</h1>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/current-reality-tree-crt</guid><title>VGL Guide — Current Reality Tree (CRT)</title><description>Root cause analysis (Theory of Constraints), showing how causes lead to</description><link>https://vithanco.com/tools/vgl/notation-reference/current-reality-tree-crt</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="current-reality-tree-crt">Current Reality Tree (CRT)</h1>
 <p>Root cause analysis (Theory of Constraints), showing how causes lead to undesirable effects. Sufficient-cause logic, so multiple unjoined causes feeding one effect are implicitly OR; only AND is explicit.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -904,7 +949,7 @@ vview context "System Context View: Internet Banking System" {
     // Brand reputation affected but still positive
     edge ie2 -&gt; de1: intermediate_causes_desirable;
 }
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/concept-map</guid><title>VGL Guide — Concept Map</title><description>Domain vocabulary as falsifiable propositions. The title is a Guiding</description><link>https://vithanco.com/tools/vgl/notation-reference/concept-map</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="concept-map">Concept Map</h1>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/concept-map</guid><title>VGL Guide — Concept Map</title><description>Domain vocabulary as falsifiable propositions. The title is a Guiding</description><link>https://vithanco.com/tools/vgl/notation-reference/concept-map</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="concept-map">Concept Map</h1>
 <p>Domain vocabulary as falsifiable propositions. The title is a <strong>Guiding Question</strong> that decides what belongs on the map, and every</p>
 <p><code>Concept → Relation → Concept</code> chain must read as a falsifiable sentence.</p>
 <p><strong>Node types</strong></p>
@@ -940,7 +985,7 @@ vview context "System Context View: Internet Banking System" {
 }
 </code></pre>
 <p>Relationships are nodes rather than edge labels, which is what makes the propositions readable: "Student learns Subject", "Subject requires Practice". Never leave a concept unconnected. Reuse a single <code>Relation</code> node when several concepts share it ("Dog is a Mammal", "Cat is a Mammal") — but note that a relation with <strong>both</strong> multiple inbound and multiple outbound edges asserts every combination: all n × m propositions must be valid. If any is circular or meaningless, split the relation.</p>
-<p>The editor's <em>ConceptMap — How Learning Works</em> is a variant of this map that names every edge type explicitly, including the <code>EmphasizedConcept</code> pair.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/impact-mapping</guid><title>VGL Guide — Impact Mapping</title><description>A strategic planning graph showing goals, actors, impacts, and deliverables.</description><link>https://vithanco.com/tools/vgl/notation-reference/impact-mapping</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="impact-mapping">Impact Mapping</h1>
+<p>The editor's <em>ConceptMap — How Learning Works</em> is a variant of this map that names every edge type explicitly, including the <code>EmphasizedConcept</code> pair.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/impact-mapping</guid><title>VGL Guide — Impact Mapping</title><description>A strategic planning graph showing goals, actors, impacts, and deliverables.</description><link>https://vithanco.com/tools/vgl/notation-reference/impact-mapping</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="impact-mapping">Impact Mapping</h1>
 <p>A strategic planning graph showing goals, actors, impacts, and deliverables.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -977,7 +1022,7 @@ vview context "System Context View: Internet Banking System" {
     edge i2 -&gt; d3: impact_to_deliverable;
     edge i3 -&gt; d4: impact_to_deliverable;
 }
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/bbs</guid><title>VGL Guide — BBS</title><description>Benefit breakdown and analysis.</description><link>https://vithanco.com/tools/vgl/notation-reference/bbs</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="bbs">BBS</h1>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/bbs</guid><title>VGL Guide — BBS</title><description>Benefit breakdown and analysis.</description><link>https://vithanco.com/tools/vgl/notation-reference/bbs</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="bbs">BBS</h1>
 <p>Benefit breakdown and analysis.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -1023,7 +1068,7 @@ vview context "System Context View: Internet Banking System" {
     edge chg1 -&gt; chg2: change_requires_change;
     edge enb1 -&gt; enb2: enabler_requires_enabler;
 }
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/ibis</guid><title>VGL Guide — IBIS</title><description>Decision-making and argumentation.</description><link>https://vithanco.com/tools/vgl/notation-reference/ibis</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="ibis">IBIS</h1>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference/ibis</guid><title>VGL Guide — IBIS</title><description>Decision-making and argumentation.</description><link>https://vithanco.com/tools/vgl/notation-reference/ibis</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="ibis">IBIS</h1>
 <p>Decision-making and argumentation.</p>
 <p><strong>Node types</strong></p>
 <ul>
@@ -1075,7 +1120,7 @@ vview context "System Context View: Internet Banking System" {
     edge root -&gt; ans1: answered_by "Main path";
     edge ans1 -&gt; q_perf: answered_by [style: dashed; weight: 5];
 }
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference</guid><title>VGL Guide — Notation reference</title><description>"One section per built-in notation: its node types, its edge types, and a"</description><link>https://vithanco.com/tools/vgl/notation-reference</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<p>One section per built-in notation: its node types, its edge types, and a complete worked example. Edge types constrain which connections make sense in the notation's domain, and most are inferred from the node types, so you rarely name one explicitly.</p>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notation-reference</guid><title>VGL Guide — Notation reference</title><description>"One section per built-in notation: its node types, its edge types, and a"</description><link>https://vithanco.com/tools/vgl/notation-reference</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<p>One section per built-in notation: its node types, its edge types, and a complete worked example. Edge types constrain which connections make sense in the notation's domain, and most are inferred from the node types, so you rarely name one explicitly.</p>
 <p>The editor's <strong>Examples…</strong> picker loads ready-made graphs straight into the text area, and most of the examples below are the same graph. Where the guide's version is the simpler one, the note under the example says so — the editor carries a fuller variant worth opening. Some of the editor's examples have no counterpart here, such as further IBIS graphs and one showing folded groups. The syntax examples in <a href="https://vithanco.com/tools/vgl/concepts/%23type-inference-and-minimal-syntax">Concepts</a> are guide-only.</p>
 <h2 id="in-this-section">In this section</h2>
 <ul>
@@ -1095,7 +1140,7 @@ vview context "System Context View: Internet Banking System" {
  <li><a href="https://vithanco.com/tools/vgl/notation-reference/timeline/">Timeline</a> — Events across multiple tracks on a shared time axis, aligned by column.</li>
  <li><a href="https://vithanco.com/tools/vgl/notation-reference/c4/">C4</a> — Software-architecture diagrams in Simon Brown's C4 model: people, software</li>
  <li><a href="https://vithanco.com/tools/vgl/notation-reference/arithmetic/">Arithmetic</a> — Simple equations as diagrams, built for a kids' maths game: numbers, the four</li>
-</ul>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notations</guid><title>VGL Guide — Notations</title><description>These notations are built in. Each has its own section in the</description><link>https://vithanco.com/tools/vgl/notations</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="notations">Notations</h1>
+</ul>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/notations</guid><title>VGL Guide — Notations</title><description>These notations are built in. Each has its own section in the</description><link>https://vithanco.com/tools/vgl/notations</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="notations">Notations</h1>
 <p>These notations are built in. Each has its own section in the <a href="https://vithanco.com/tools/vgl/notation-reference/">notation reference</a>, giving its node types, its edge types and a complete worked example.</p>
 <table>
  <thead>
@@ -1266,7 +1311,7 @@ vview context "System Context View: Internet Banking System" {
     edge c1 -&gt; a1
     edge c2 -&gt; w1
 }
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/concepts</guid><title>VGL Guide — Concepts</title><description>Every VGL document declares a notation, which fixes the node and edge types</description><link>https://vithanco.com/tools/vgl/concepts</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<h1 id="concepts">Concepts</h1>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl/concepts</guid><title>VGL Guide — Concepts</title><description>Every VGL document declares a notation, which fixes the node and edge types</description><link>https://vithanco.com/tools/vgl/concepts</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<h1 id="concepts">Concepts</h1>
 <h3 id="the-document">The document</h3>
 <p>Every VGL document declares a notation, which fixes the node and edge types available:</p>
 <pre><code>vgraph &lt;graph_id&gt;: &lt;NOTATION&gt; "&lt;graph_label&gt;" {
@@ -1356,7 +1401,7 @@ vview containers "Containers" [rankdir: LR] {
   </tr>
   <tr>
    <td>Graph</td>
-   <td><code>rankdir</code> (<code>LR</code>/<code>TB</code>), <code>fontcolor</code>, <code>labeljust</code> (<code>l</code>/<code>r</code>/<code>c</code>), <code>loopMarkers</code> (<code>all</code>/<code>independent</code>/<code>none</code>, Causal Loop Diagrams: which loops get an R/B marker)</td>
+   <td><code>rankdir</code> (<code>LR</code>/<code>TB</code>), <code>fontcolor</code>, <code>labeljust</code> (<code>l</code>/<code>r</code>/<code>c</code>), <code>loopMarkers</code> (<code>all</code>/<code>independent</code>/<code>none</code>, Causal Loop Diagrams: which loops get an R/B marker), <code>watermark</code> (<code>true</code> by default; <code>false</code> leaves the Vithanco mark off the exported image)</td>
   </tr>
  </tbody>
 </table>
@@ -1400,7 +1445,7 @@ node ude1: UndesirableEffect "Suppliers display a less uniform front";
     edge a1 -&gt; p1;      // inferred: supports
     edge a1 -&gt; c1;      // inferred: objects_to
 }
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl</guid><title>Vithanco Graph Language (VGL) Guide</title><description>Learn the VGL syntax for creating and editing graphs in text format</description><link>https://vithanco.com/tools/vgl</link><pubDate>Fri, 16 Oct 2026 08:36:52 +0200</pubDate><content:encoded><![CDATA[<p>VGL is a human-readable text format for creating and editing graphs — a declarative syntax for nodes, edges, groups and their attributes.</p>
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://vithanco.com/tools/vgl</guid><title>Vithanco Graph Language (VGL) Guide</title><description>Learn the VGL syntax for creating and editing graphs in text format</description><link>https://vithanco.com/tools/vgl</link><pubDate>Mon, 26 Oct 2026 20:57:09 +0100</pubDate><content:encoded><![CDATA[<p>VGL is a human-readable text format for creating and editing graphs — a declarative syntax for nodes, edges, groups and their attributes.</p>
 <ul>
  <li><a href="https://vithanco.com/tools/vgl/concepts/">Concepts</a></li>
  <li><a href="https://vithanco.com/tools/vgl/notations/">Notations</a></li>

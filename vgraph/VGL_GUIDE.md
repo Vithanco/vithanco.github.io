@@ -149,7 +149,7 @@ group body.
 | Node | `color`, `fontColor`, `fontsize`, `shape`, `url`, `alignGroup` (nodes sharing a value are placed at the same rank) |
 | Edge | `style` (`solid`/`dashed`/`dotted`), `color`, `weight`, `label`, `url` |
 | Group | `style` (`filled`/`dashed`/`dotted`), `color`, `label`, `url` |
-| Graph | `rankdir` (`LR`/`TB`), `fontcolor`, `labeljust` (`l`/`r`/`c`), `loopMarkers` (`all`/`independent`/`none`, Causal Loop Diagrams: which loops get an R/B marker) |
+| Graph | `rankdir` (`LR`/`TB`), `fontcolor`, `labeljust` (`l`/`r`/`c`), `loopMarkers` (`all`/`independent`/`none`, Causal Loop Diagrams: which loops get an R/B marker), `watermark` (`true` by default; `false` leaves the Vithanco mark off the exported image) |
 
 **Colouring one node.** `color` sets a node's fill, overriding whatever its type
 says. `fontColor` sets the text on it; leave it out and the text is set to black
@@ -1523,11 +1523,21 @@ the host.
   the quality report, naming the node type and the icon. The rest of the diagram
   is untouched.
 
-Five icons are built in, all drawn for VGraph; the style guide's Icons section
-holds their masters:
+Forty-eight icon names are built in, all drawn for VGraph; the design system's
+Icons section holds the masters. A name says what the icon means, and several
+names share one drawing, so `need`, `answer` and `undesirable-effect` look alike.
 
-`and` and `or` (the junctors), `conflict` (the Evaporating Cloud's conflict), `default` (drawn when an icon style names no icon) and `vithanco` (the
-logo).
+| Used for | Names |
+|---|---|
+| Whole node, with its own circle | `and`, `or` (the junctors), `conflict`, `default` (drawn when an icon style names no icon) |
+| Reality trees | `undesirable-effect`, `intermediate-effect`, `desirable-effect`, `given`, `changeable` |
+| Questions and decisions | `question`, `answer`, `pro`, `con`, `decision-point`, `choice`, `outcome`, `assumption` |
+| Goals and obstacles | `goal`, `objective`, `intermediate-objective`, `common-objective`, `investment-objective`, `critical-success-factor`, `necessary-condition`, `obstacle`, `need`, `want`, `solution` |
+| Change and delivery | `benefit`, `business-change`, `enabler`, `impact`, `actor`, `deliverable`, `event` |
+| Attack and defence | `attack`, `defense` |
+| General | `concept`, `variable`, `annotation`, `warning` |
+| Arithmetic | `plus`, `minus`, `times`, `divide`, `equals`, `not-equal` |
+| Brand | `vithanco` (the logo) |
 
 Anything else a document draws, it declares. The SF Symbols-style names and the
 desktop app's icons that earlier versions shipped draw the placeholder until a

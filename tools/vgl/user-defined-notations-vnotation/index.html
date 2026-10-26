@@ -85,7 +85,7 @@ VGL Guide — User-defined notations (`vnotation`)</div>
                 <h1>VGL Guide — User-defined notations (`vnotation`)</h1>
                 <div class="reading-time-container">
                     <span class="fa fa-clock-o"></span>
-                    <p>Estimated reading time: 6 minutes.</p></div>
+                    <p>Estimated reading time: 7 minutes.</p></div>
                 <div class="content"><h1 id="user-defined-notations-vnotation">User-defined notations (<code>vnotation</code>)</h1>
 <p><code>vnotation</code> defines a notation schema inline in a VGL file, with no Swift changes. Everything a built-in notation provides — node types, edge types, layout direction — can be expressed this way.</p>
 <pre><code>vnotation &lt;Name&gt; [extends &lt;BuiltinNotation&gt;] {
@@ -182,8 +182,53 @@ VGL Guide — User-defined notations (`vnotation`)</div>
  <li><strong>Your name wins.</strong> A name resolves against the notation's own artwork first and the built-in set second, so declaring <code>and</code> yourself replaces it for that document — and an icon added to VGraph in some later release can never change how your document looks.</li>
  <li><strong>A name nobody has is not fatal.</strong> It draws a placeholder and is reported in the quality report, naming the node type and the icon. The rest of the diagram is untouched.</li>
 </ul>
-<p>Five icons are built in, all drawn for VGraph; the style guide's Icons section holds their masters:</p>
-<p><code>and</code> and <code>or</code> (the junctors), <code>conflict</code> (the Evaporating Cloud's conflict), <code>default</code> (drawn when an icon style names no icon) and <code>vithanco</code> (the logo).</p>
+<p>Forty-eight icon names are built in, all drawn for VGraph; the design system's Icons section holds the masters. A name says what the icon means, and several names share one drawing, so <code>need</code>, <code>answer</code> and <code>undesirable-effect</code> look alike.</p>
+<table>
+ <thead>
+  <tr>
+   <th>Used for</th>
+   <th>Names</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Whole node, with its own circle</td>
+   <td><code>and</code>, <code>or</code> (the junctors), <code>conflict</code>, <code>default</code> (drawn when an icon style names no icon)</td>
+  </tr>
+  <tr>
+   <td>Reality trees</td>
+   <td><code>undesirable-effect</code>, <code>intermediate-effect</code>, <code>desirable-effect</code>, <code>given</code>, <code>changeable</code></td>
+  </tr>
+  <tr>
+   <td>Questions and decisions</td>
+   <td><code>question</code>, <code>answer</code>, <code>pro</code>, <code>con</code>, <code>decision-point</code>, <code>choice</code>, <code>outcome</code>, <code>assumption</code></td>
+  </tr>
+  <tr>
+   <td>Goals and obstacles</td>
+   <td><code>goal</code>, <code>objective</code>, <code>intermediate-objective</code>, <code>common-objective</code>, <code>investment-objective</code>, <code>critical-success-factor</code>, <code>necessary-condition</code>, <code>obstacle</code>, <code>need</code>, <code>want</code>, <code>solution</code></td>
+  </tr>
+  <tr>
+   <td>Change and delivery</td>
+   <td><code>benefit</code>, <code>business-change</code>, <code>enabler</code>, <code>impact</code>, <code>actor</code>, <code>deliverable</code>, <code>event</code></td>
+  </tr>
+  <tr>
+   <td>Attack and defence</td>
+   <td><code>attack</code>, <code>defense</code></td>
+  </tr>
+  <tr>
+   <td>General</td>
+   <td><code>concept</code>, <code>variable</code>, <code>annotation</code>, <code>warning</code></td>
+  </tr>
+  <tr>
+   <td>Arithmetic</td>
+   <td><code>plus</code>, <code>minus</code>, <code>times</code>, <code>divide</code>, <code>equals</code>, <code>not-equal</code></td>
+  </tr>
+  <tr>
+   <td>Brand</td>
+   <td><code>vithanco</code> (the logo)</td>
+  </tr>
+ </tbody>
+</table>
 <p>Anything else a document draws, it declares. The SF Symbols-style names and the desktop app's icons that earlier versions shipped draw the placeholder until a</p>
 <p><code>vnotation</code> declares them.</p>
 <h3 id="extends"><code>extends</code></h3>
