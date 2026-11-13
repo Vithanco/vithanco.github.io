@@ -108,8 +108,8 @@
 
       boot.remove();
 
-      // `?src=` seeds the editor from a *file* rather than from inline VGL
-      // (#132). Unlike `?vgl=`, which the editor reads for itself, this one
+      // `?src=` seeds the editor from a *file* rather than from inline VGL.
+      // Unlike `?vgl=`, which the editor reads for itself, this one
       // lives in the host page: fetching is asynchronous, and a Swift
       // `JSClosure` cannot be invoked in this embedded build (see Editor.swift's
       // header). Only the fetch is the host's — what the bytes *are* is still

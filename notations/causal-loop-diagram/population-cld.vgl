@@ -1,0 +1,19 @@
+vgraph populationCLD: CLD "Population Dynamics" {
+    node births: Stock "Births";
+    node population: Stock "Population";
+    node deaths: Stock "Deaths";
+    node foodSupply: Stock "Food Supply";
+    node crowding: Stock "Crowding";
+
+    edge births -> population: same;
+    edge population -> births: same;
+
+    edge population -> deaths: same;
+    edge deaths -> population: opposite;
+
+    edge population -> foodSupply: opposite;
+    edge foodSupply -> births: same;
+
+    edge population -> crowding: same;
+    edge crowding -> deaths: same;
+}

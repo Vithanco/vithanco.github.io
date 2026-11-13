@@ -1,0 +1,36 @@
+vgraph lateProject: CLD "Why does the project keep slipping?" {
+    node pressure: Stock "Schedule Pressure";
+    node overtime: Stock "Overtime";
+    node done: Stock "Work Completed";
+    node backlog: Stock "Work Remaining";
+    node fatigue: Stock "Fatigue";
+    node errors: Stock "Errors";
+    node rework: Stock "Rework";
+    node productivity: Stock "Productivity";
+    node hiring: Stock "Hiring";
+    node team: Stock "Team Size";
+    node onboarding: Stock "Onboarding Effort";
+
+    // Work harder: overtime gets more done, which relieves the pressure.
+    edge pressure -> overtime: same;
+    edge overtime -> done: same;
+    edge done -> backlog: opposite;
+    edge backlog -> pressure: same;
+
+    // Burnout: tired people make mistakes, and mistakes come back as work.
+    edge overtime -> fatigue: same;
+    edge fatigue -> errors: same;
+    edge errors -> rework: same;
+    edge rework -> backlog: same;
+    edge fatigue -> productivity: opposite;
+    edge productivity -> done: same;
+
+    // Add people: a bigger team gets more done...
+    edge pressure -> hiring: same;
+    edge hiring -> team: same;
+    edge team -> done: same;
+
+    // ...after the existing team has spent time bringing them up to speed.
+    edge hiring -> onboarding: same;
+    edge onboarding -> productivity: opposite;
+}

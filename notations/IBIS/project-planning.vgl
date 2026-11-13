@@ -1,0 +1,64 @@
+vgraph projectPlanning: IBIS "Software Project Planning" {
+    node q1: Question "How should we approach this project?";
+
+    group planning "Phase 1: Planning" {
+        node a1: Answer "Start with thorough planning";
+        node pro1: Pro "Reduces risks early";
+        node con1: Con "Takes more time upfront";
+
+        group requirements "Requirements Analysis" {
+            node q2: Question "What are the key requirements?";
+            node a2: Answer "Focus on user needs";
+            node a3: Answer "Focus on technical constraints";
+            node pro2: Pro "User-centered approach";
+            node con2: Con "May miss technical issues";
+        };
+
+        group timeline "Timeline Planning" {
+            node q3: Question "What timeline is realistic?";
+            node a4: Answer "3-month sprint cycles";
+            node a5: Answer "6-month waterfall phases";
+            node pro3: Pro "Faster feedback loops";
+            node pro4: Pro "More predictable delivery";
+        };
+    };
+
+    group implementation "Phase 2: Implementation" {
+        node a6: Answer "Move fast and iterate";
+        node pro5: Pro "Quick time to market";
+        node con3: Con "May accumulate tech debt";
+
+        group testing "Testing Strategy" {
+            node q4: Question "How do we ensure quality?";
+            node a7: Answer "Test-driven development";
+            node a8: Answer "QA team testing";
+            node pro6: Pro "Catches bugs early";
+            node con4: Con "Slower initial development";
+        };
+    };
+
+    edge q1 -> a1;
+    edge q1 -> a6;
+    edge a1 -> pro1;
+    edge a1 -> con1;
+
+    edge a1 -> q2;
+    edge q2 -> a2;
+    edge q2 -> a3;
+    edge a2 -> pro2;
+    edge a2 -> con2;
+
+    edge a1 -> q3;
+    edge q3 -> a4;
+    edge q3 -> a5;
+    edge a4 -> pro3;
+    edge a5 -> pro4;
+
+    edge a6 -> pro5;
+    edge a6 -> con3;
+    edge a6 -> q4;
+    edge q4 -> a7;
+    edge q4 -> a8;
+    edge a7 -> pro6;
+    edge a7 -> con4;
+}

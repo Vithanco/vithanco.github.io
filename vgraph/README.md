@@ -90,4 +90,6 @@ Semantic versioning. Within a major version, the WASM exports, the JS API
 
 - **VGL language guide:** `VGL_GUIDE.md`
 - **Issues:** https://github.com/Vithanco/VGraph/issues
-- **License:** MIT
+- **Source:** https://github.com/Vithanco/VGraph
+- **License:** Apache-2.0 (`LICENSE`); third-party components, including
+  Graphviz under EPL-2.0, are listed in `NOTICE`
