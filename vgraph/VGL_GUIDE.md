@@ -117,8 +117,10 @@ lacks is kept and affects nothing.
 
 A view also chooses *what* it shows, with rules applied in order. `include` and
 `exclude` take a selector — `node`/`group` ids, `node type:`/`group type:`
-names, or `*` — optionally widened along edges by `+n` (n steps either way),
-`downstream n` or `upstream n`; `expand n` widens the result so far. A view whose
+names, or `*` — optionally widened by `+n` (n neighbourhoods either way),
+`downstream n` or `upstream n`; `expand n` widens the result so far. A
+neighbourhood is what hovering a node lights, so a claim is never cut in half:
+`downstream 1` from one input of an AND also brings its other inputs. A view whose
 first rule is `include` starts empty, any other starts with everything.
 Selectors always read the model, never what earlier rules left. Edges are never
 selected: one shows when both its ends do, and where a view hides the middle of
@@ -1455,6 +1457,18 @@ in a block extending C4 recolours the boundary and keeps its dashes. A type with
 no boundary of its own, from the block or the notation it extends, draws the
 generic cluster. These are the only keys `group type:` takes; a group type
 declared in a `vnotation` folds into the generic folded box.
+
+**What hovering lights.** Hovering a node lights its edges and the nodes at
+their far ends. `addsToNeighborhood:` on a node type lets the highlight go
+further, for a node that is part of how a claim is written rather than a thing:
+
+- `all` passes it to every end, because together they make one claim. The AND
+  and OR junctors work this way, as do an equation's `=` and its operators.
+- `onward` passes it only to the ends that continue in the direction it came
+  in, because each pair is its own claim. A Concept Map Relation works this way,
+  so hovering a concept lights exactly the propositions it is part of.
+
+Without the key, the highlight stops at the node.
 
 A `vgraph` then references it by name exactly like a built-in notation.
 **`vnotation` blocks must appear before any `vgraph` or `metagraph` that

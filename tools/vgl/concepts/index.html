@@ -142,8 +142,9 @@ vview containers "Containers" [rankdir: LR] {
 </code></pre>
 <p>A view sets presentation attributes on <code>node</code>/<code>group</code> ids or, spelled with a colon, on a type (<code>node type: Container</code>). It cannot type, label or add members. A value equal to what the model already gives is dropped on export, so a view follows the model rather than pinning it. A view naming something the model lacks is kept and affects nothing.</p>
 <p>A view also chooses <em>what</em> it shows, with rules applied in order. <code>include</code> and</p>
-<p><code>exclude</code> take a selector — <code>node</code>/<code>group</code> ids, <code>node type:</code>/<code>group type:</code> names, or <code>*</code> — optionally widened along edges by <code>+n</code> (n steps either way),</p>
-<p><code>downstream n</code> or <code>upstream n</code>; <code>expand n</code> widens the result so far. A view whose first rule is <code>include</code> starts empty, any other starts with everything. Selectors always read the model, never what earlier rules left. Edges are never selected: one shows when both its ends do, and where a view hides the middle of a chain it draws a dotted derived edge instead (<code>derivedEdges: false</code> turns them off). A rule chooses elements and sets nothing.</p>
+<p><code>exclude</code> take a selector — <code>node</code>/<code>group</code> ids, <code>node type:</code>/<code>group type:</code> names, or <code>*</code> — optionally widened by <code>+n</code> (n neighbourhoods either way),</p>
+<p><code>downstream n</code> or <code>upstream n</code>; <code>expand n</code> widens the result so far. A neighbourhood is what hovering a node lights, so a claim is never cut in half:</p>
+<p><code>downstream 1</code> from one input of an AND also brings its other inputs. A view whose first rule is <code>include</code> starts empty, any other starts with everything. Selectors always read the model, never what earlier rules left. Edges are never selected: one shows when both its ends do, and where a view hides the middle of a chain it draws a dotted derived edge instead (<code>derivedEdges: false</code> turns them off). A rule chooses elements and sets nothing.</p>
 <pre><code class="language-vgl">vview journey "Customer journey" {
     include node customer downstream 2;
     exclude node type: Database;
