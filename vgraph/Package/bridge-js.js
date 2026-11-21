@@ -1177,6 +1177,11 @@ export async function createInstantiator(options, swift) {
                 editorLongPressFired: function bjs_editorLongPressFired() {
                     instance.exports.bjs_editorLongPressFired();
                 },
+                editorClipboardRead: function bjs_editorClipboardRead(text) {
+                    const textBytes = textEncoder.encode(text);
+                    const textId = swift.memory.retain(textBytes);
+                    instance.exports.bjs_editorClipboardRead(textId, textBytes.length);
+                },
                 setEditorVGL: function bjs_setEditorVGL(text) {
                     const textBytes = textEncoder.encode(text);
                     const textId = swift.memory.retain(textBytes);

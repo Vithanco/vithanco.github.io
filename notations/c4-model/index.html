@@ -146,7 +146,13 @@ The C4 Model Notation</div>
   Every C4 element type, labelled with the name you type in VGL. Systems, containers and components are shown opened up, with their details inside.
  </figcaption> 
 </figure> 
-<p>Unlike the other Notations on this site, there is no meta model picture here. C4 permits relationships between almost any pair of elements, so a drawing of every permitted pair is a wall of arrows that teaches nothing. The table does the job better.</p>
+<p>The meta model shows how the types fit together. A dashed arrow means <em>detailed by</em>: open a system and you find its containers and databases, open a container and you find its components. A solid arrow is a relationship between elements on the same level. A relationship may also reach into another element's details, so a person who uses a system may use its containers and components too.</p>
+<figure class="vgl-render img-std"> 
+ <img src="/vgl-generated/meta-C4.svg" alt="The C4 Notation Structure" onclick="openLightbox(this)" /> 
+ <figcaption>
+  The C4 Notation Structure
+ </figcaption> 
+</figure> 
 <table>
  <thead>
   <tr>

@@ -13,6 +13,7 @@ export type Exports = {
     mountEditor(elementId: string): void;
     editorRenderNow(): void;
     editorLongPressFired(): void;
+    editorClipboardRead(text: string): void;
     setEditorVGL(text: string): void;
     /**
      * Load a document the host fetched for `?src=`. `name` is the last

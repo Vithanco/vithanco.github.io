@@ -1,0 +1,85 @@
+vnotation NotationClassification {
+    layout: leftToRight
+
+    node type: Stage    [nodeStyle: iconWithText, backgroundColor: "#2f6f6a", icon: "vithanco"]
+    node type: Notation [nodeStyle: simpleRoundedText, backgroundColor: "#ecf3f3"]
+    node type: Purpose  [nodeStyle: bareText]
+
+    edge type: uses   from: Stage    to: Notation
+    edge type: serves from: Notation to: Purpose
+}
+
+vgraph classifyNotations: NotationClassification "A classification of Vithanco Notations" {
+    node listen: Stage "Listen & Learn";
+    node think: Stage "Think & Triumph";
+
+    node cld: Notation "Causal Loop Diagram";
+    node cm: Notation "Concept Map";
+    node ibis: Notation "IBIS";
+    node timeline: Notation "Timeline";
+
+    group toc "Theory of Constraints" {
+        node ec: Notation "Evaporating Cloud";
+        node crt: Notation "Current Reality Tree";
+        node frt: Notation "Future Reality Tree";
+        node prt: Notation "Prerequisite Tree";
+        node trt: Notation "Transition Tree";
+        node gt: Notation "Goal Tree";
+
+        node ecFor: Purpose "Resolve conflicts";
+        node crtFor: Purpose "Find the root cause";
+        node frtFor: Purpose "Check that a change delivers";
+        node prtFor: Purpose "Plan around the obstacles to a goal";
+        node trtFor: Purpose "Detail the transition to a known goal";
+        node gtFor: Purpose "Set department goals and KPIs";
+    };
+
+    node dt: Notation "Decision Tree";
+    node im: Notation "Impact Map";
+    node bbs: Notation "Benefit Breakdown Structure";
+    node adtree: Notation "Attack-Defense Tree";
+    node c4: Notation "C4 Model";
+
+    node cldFor: Purpose "Analyse complex system behaviour";
+    node cmFor: Purpose "Define shared vocabulary";
+    node ibisFor: Purpose "Answer questions, by self-coaching or dialogue mapping";
+    node timelineFor: Purpose "Lay out events on parallel tracks";
+    node dtFor: Purpose "Document a decision-finding process";
+    node imFor: Purpose "Prioritise features";
+    node bbsFor: Purpose "Materialise benefits in a change initiative";
+    node adtreeFor: Purpose "Model threats and the defences against them";
+    node c4For: Purpose "Draw software architecture at four zoom levels";
+
+    edge listen -> cld;
+    edge listen -> cm;
+    edge listen -> ibis;
+    edge listen -> timeline;
+    edge listen -> ec;
+    edge listen -> crt;
+
+    edge think -> frt;
+    edge think -> prt;
+    edge think -> trt;
+    edge think -> gt;
+    edge think -> dt;
+    edge think -> im;
+    edge think -> bbs;
+    edge think -> adtree;
+    edge think -> c4;
+
+    edge cld -> cldFor;
+    edge cm -> cmFor;
+    edge ibis -> ibisFor;
+    edge timeline -> timelineFor;
+    edge ec -> ecFor;
+    edge crt -> crtFor;
+    edge frt -> frtFor;
+    edge prt -> prtFor;
+    edge trt -> trtFor;
+    edge gt -> gtFor;
+    edge dt -> dtFor;
+    edge im -> imFor;
+    edge bbs -> bbsFor;
+    edge adtree -> adtreeFor;
+    edge c4 -> c4For;
+}
