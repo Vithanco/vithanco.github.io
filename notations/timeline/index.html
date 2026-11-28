@@ -101,21 +101,18 @@ Timeline Notation</div>
 <table>
  <thead>
   <tr>
-   <th>Node Type</th>
+   <th>Type</th>
    <th>Description</th>
-   <th>Successors</th>
   </tr>
  </thead>
  <tbody>
   <tr>
-   <td>TimePoint</td>
-   <td>An axis marker labelling a point in time (e.g., "1805", "Q3 2025"). Optional — <code>alignGroup</code> alone is enough for alignment.</td>
-   <td>TimePoint</td>
+   <td>Time Point</td>
+   <td>A marker on the time axis labelling a point in time (e.g., '1805', 'Q3 2025'). Defines the temporal structure of the diagram. Optional: <code>alignGroup</code> alone is enough to align events.</td>
   </tr>
   <tr>
    <td>Event</td>
-   <td>A generic event. Extend with <code>vnotation</code> for domain-specific types (Battle, Release, Incident, …).</td>
-   <td>Event</td>
+   <td>A generic event placed at a point in time. Extend with vnotation for domain-specific event types.</td>
   </tr>
  </tbody>
 </table>
@@ -226,6 +223,11 @@ vgraph napoleonicWars: WarTimeline "Napoleonic Wars" {
  <li><strong>Custom types</strong> (Battle, Treaty) with distinct colours and category labels replace the generic Event</li>
 </ul>
 <p>Note that WarTimeline declares its own <code>influenced</code> edge type rather than reusing the built-in <code>influence</code>. That built-in runs from Event to Event, and Battle is a new node type, not an Event — so once you introduce custom node types you need custom edge types to connect them.</p>
+<h2 id="what-vithanco-checks">What Vithanco checks</h2>
+<ul>
+ <li>Two nodes are joined at most once in each direction. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20rail%3A%20Timeline%20%22Railways%22%20%7B%0A%20%20%20%20node%20t1825%3A%20TimePoint%20%221825%22%20%5BalignGroup%3A%20%221825%22%5D%0A%20%20%20%20node%20t1850%3A%20TimePoint%20%221850%22%20%5BalignGroup%3A%20%221850%22%5D%0A%20%20%20%20edge%20t1825%20-%3E%20t1850%3A%20sequence%0A%20%20%20%20group%20england%20%22England%22%20%7B%0A%20%20%20%20%20%20%20%20node%20first%3A%20Event%20%22First%20public%20railway%20opens%22%20%5BalignGroup%3A%20%221825%22%5D%0A%20%20%20%20%20%20%20%20node%20boom%3A%20Event%20%22Railway%20boom%22%20%5BalignGroup%3A%20%221850%22%5D%0A%20%20%20%20%7D%0A%20%20%20%20edge%20first%20-%3E%20boom%3A%20influence%20%22led%20to%22%0A%20%20%20%20edge%20first%20-%3E%20boom%3A%20influence%20%22led%20to%22%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+</ul>
+<p>The checks every notation runs are listed on <a href="/notations/#checks-every-notation-runs">the notations overview</a>.</p>
 <h2 id="try-it-yourself">Try it Yourself</h2>
 <p>Edit the VGL below and click "Render" to see your diagram. Try changing the layout, adding new event types, or creating groups for tracks:</p>
 <iframe src="/vgraph/index.html?src=/notations/timeline/napoleonic-wars.vgl" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive Timeline Editor"></iframe>

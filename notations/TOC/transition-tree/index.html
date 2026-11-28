@@ -85,7 +85,7 @@ The Transition Tree (TRT) Notation</div>
                 <h1>The Transition Tree (TRT) Notation</h1>
                 <div class="reading-time-container">
                     <span class="fa fa-clock-o"></span>
-                    <p>Estimated reading time: 3 minutes.</p></div>
+                    <p>Estimated reading time: 4 minutes.</p></div>
                 <div class="content"><h2 id="what-is-a-transition-tree-trt">What is a Transition Tree (TRT)?</h2>
 <p>A Transition Tree (TRT) is a cause-and-effect logical tool that answers the question: <strong>"How to cause the change?"</strong> It translates the desired future state (as specified in the <a href="/notations/TOC/future-reality-tree">FRT</a>) into actionable steps and expands elements from the <a href="/notations/TOC/prerequisite-tree">PRT</a> to overcome anticipated obstacles.</p>
 <p>The TRT is essentially a detailed roadmap that connects: 1. <strong>Actions</strong> - What we must do 2. <strong>Intermediate Effects (IEs)</strong> - What result each action produces 3. <strong>Necessary Conditions (NCs)</strong> - Why the action is needed for the next step 4. <strong>Final Objective</strong> - The desired outcome</p>
@@ -137,46 +137,51 @@ The Transition Tree (TRT) Notation</div>
 <table>
  <thead>
   <tr>
-   <th>Node Type</th>
+   <th>Type</th>
+   <th>Also called</th>
    <th>Description</th>
-   <th>Successors</th>
   </tr>
  </thead>
  <tbody>
   <tr>
-   <td>Desirable Effect</td>
-   <td>Goal outcomes we want to achieve. These are the target states that our actions aim to produce.</td>
-   <td>All Effects incl. 'And'</td>
+   <td>Undesirable Effect</td>
+   <td></td>
+   <td>A current-state problem the plan sets out to eliminate. Tracks what the actions are meant to remove.</td>
   </tr>
   <tr>
    <td>Intermediate Effect</td>
-   <td>Stepping stone outcomes from actions. Neither positive nor negative on their own, they connect actions to final effects.</td>
-   <td>All Effects incl. 'And'</td>
+   <td></td>
+   <td>An expected result of a concrete action. Each action produces an effect that enables the next step in the implementation chain.</td>
   </tr>
   <tr>
-   <td>Undesirable Effect</td>
-   <td>Current state problems being addressed. In TRT, these help track what we're trying to eliminate.</td>
-   <td>All Effects incl. 'And'</td>
+   <td>Desirable Effect</td>
+   <td></td>
+   <td>The target condition the plan aims to reach. Confirms that the sequence of actions achieves the intended outcome.</td>
   </tr>
   <tr>
    <td>Given</td>
-   <td>Unchangeable facts and constraints. These are preconditions beyond your sphere of influence.</td>
-   <td>All Effects incl. 'And'</td>
+   <td>Precondition</td>
+   <td>A condition already present in the environment that enables or constrains the planned actions — not itself an action. Enters the tree without predecessors, like gravity.</td>
   </tr>
   <tr>
    <td>Changeable</td>
-   <td>Actions we can take to cause change. These are the specific steps we will implement.</td>
-   <td>All Effects incl. 'And'</td>
+   <td>Action</td>
+   <td>A concrete action taken by the implementer. The primary building block of the Transition Tree — actions drive all subsequent effects.</td>
   </tr>
   <tr>
    <td>And Junctor</td>
-   <td>Indicates multiple conditions required together for an effect. Connects two causes that must both be present.</td>
-   <td>All Effects (excl. 'And')</td>
+   <td></td>
+   <td>Conjunctive cause — all inputs must be present together to produce the downstream effect.</td>
   </tr>
  </tbody>
 </table>
 <h2 id="background-information">Background Information</h2>
 <p>TRT diagrams were developed as part of the <a href="/notations/TOC/index/index.html">Theory of Constraints Thinking Processes</a> by E. Goldratt.</p>
+<h2 id="what-vithanco-checks">What Vithanco checks</h2>
+<ul>
+ <li>Two nodes are joined at most once in each direction. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20standups%3A%20TRT%20%22Daily%20standups%22%20%7B%0A%20%20%20%20node%20standup%3A%20Changeable%20%22Introduce%20daily%20standups%22%3B%0A%20%20%20%20node%20talk%3A%20IntermediateEffect%20%22Teams%20talk%20every%20day%22%3B%0A%20%20%20%20node%20together%3A%20DesirableEffect%20%22Better%20team%20collaboration%22%3B%0A%20%20%20%20edge%20standup%20-%3E%20talk%3A%20changeable_causes_intermediate%3B%0A%20%20%20%20edge%20talk%20-%3E%20together%3A%20intermediate_causes_desirable%3B%0A%20%20%20%20edge%20talk%20-%3E%20together%3A%20intermediate_causes_desirable%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+</ul>
+<p>The checks every notation runs are listed on <a href="/notations/#checks-every-notation-runs">the notations overview</a>.</p>
 <h2 id="try-trt-yourself">Try TRT Yourself</h2>
 <p>Create and visualize your own Transition Tree diagram right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p>
 <iframe src="/vgraph/index.html?src=/notations/TOC/transition-tree/agile-transition.vgl" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive TRT Editor"></iframe>

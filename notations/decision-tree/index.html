@@ -101,26 +101,22 @@ Decision Tree (DT) Notation</div>
 <table>
  <thead>
   <tr>
-   <th>Node Type</th>
+   <th>Type</th>
    <th>Description</th>
-   <th>Successors</th>
   </tr>
  </thead>
  <tbody>
   <tr>
    <td>Decision Point</td>
-   <td>A question describing a decision point</td>
-   <td>Choice</td>
+   <td>A question describing a decision point. Each question branches into two or more choices.</td>
   </tr>
   <tr>
    <td>Choice</td>
-   <td>Choices representing potential paths from a question. Each choice leads either to another Decision Point or to an Outcome.</td>
-   <td>Outcome or Decision Point</td>
+   <td>A potential path from a Decision Point. Leads either to another Decision Point or to a final Outcome.</td>
   </tr>
   <tr>
    <td>Outcome</td>
-   <td>A result of the Decision Tree</td>
-   <td>None</td>
+   <td>A terminal result of the decision process. No further branching occurs.</td>
   </tr>
  </tbody>
 </table>
@@ -138,7 +134,12 @@ Decision Tree (DT) Notation</div>
 <p>Pressing the "Start and plan a project" Choice will lead to the second dialogue.</p>
 <img src="/notations/decision-tree/2019-03-23_15-39-37.png" alt="2019 03 23 15 39 37" onclick="openLightbox(this)" />
 <p>Pressing "Clarify Terminology" will then present the Decision Outcome.</p>
-<img src="/notations/decision-tree/2019-03-23_15-42-16.png" alt="2019 03 23 15 42 16" onclick="openLightbox(this)" /></div></article>
+<img src="/notations/decision-tree/2019-03-23_15-42-16.png" alt="2019 03 23 15 42 16" onclick="openLightbox(this)" />
+<h2 id="what-vithanco-checks">What Vithanco checks</h2>
+<ul>
+ <li>Two nodes are joined at most once in each direction. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20umbrella%3A%20DecisionTree%20%22Umbrella%22%20%7B%0A%20%20%20%20node%20rain%3A%20DecisionPoint%20%22Is%20rain%20forecast%3F%22%3B%0A%20%20%20%20node%20yes%3A%20Choice%20%22Yes%22%3B%0A%20%20%20%20node%20no%3A%20Choice%20%22No%22%3B%0A%20%20%20%20node%20take%3A%20Outcome%20%22Take%20the%20umbrella%22%3B%0A%20%20%20%20node%20leave%3A%20Outcome%20%22Leave%20it%20at%20home%22%3B%0A%20%20%20%20edge%20rain%20-%3E%20yes%3A%20decision_to_choice%3B%0A%20%20%20%20edge%20rain%20-%3E%20no%3A%20decision_to_choice%3B%0A%20%20%20%20edge%20yes%20-%3E%20take%3A%20choice_to_outcome%3B%0A%20%20%20%20edge%20yes%20-%3E%20take%3A%20choice_to_outcome%3B%0A%20%20%20%20edge%20no%20-%3E%20leave%3A%20choice_to_outcome%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+</ul>
+<p>The checks every notation runs are listed on <a href="/notations/#checks-every-notation-runs">the notations overview</a>.</p></div></article>
             <aside class="side-content">
                 <div class="relationships-section"></div>
                 <div class="preview__article-details">

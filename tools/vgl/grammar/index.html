@@ -111,7 +111,7 @@ notation     ::= identifier
 
 vnotation    ::= "vnotation" identifier ("extends" identifier)? "{" vnotation_body* "}"
 
-vnotation_body ::= ("layout" ":" layout_dir ";"?)
+vnotation_body ::= ("layoutDirection" ":" layout_dir ";"?)
                  | ("icon" identifier "[" "viewBox" ":" quoted_string ","?
                                           "path" ":" quoted_string "]" ";"?)
                  | ("node" "type" ":" identifier type_attributes? ";"?)

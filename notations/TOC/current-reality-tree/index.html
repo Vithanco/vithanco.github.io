@@ -104,41 +104,41 @@ The Current Reality Tree (CRT) Notation</div>
 <table>
  <thead>
   <tr>
-   <th>Node Type</th>
+   <th>Type</th>
+   <th>Also called</th>
    <th>Description</th>
-   <th>Successors</th>
   </tr>
  </thead>
  <tbody>
   <tr>
    <td>Undesirable Effect</td>
-   <td>These are starting points for current reality trees. They represent unwanted outcomes that are caused by other events or conditions.</td>
-   <td>All Effects incl. 'And'</td>
+   <td></td>
+   <td>A symptom or problem currently observed in the system — the 'undesirable effect' the analysis aims to eliminate.</td>
   </tr>
   <tr>
    <td>Intermediate Effect</td>
-   <td>These represent outcomes that aren't necessarily good or bad. They too are caused by other events or conditions.</td>
-   <td>All Effects incl. 'And'</td>
+   <td></td>
+   <td>A cause-and-effect step between root causes and the top-level undesirable effects. Neither the root cause nor the final symptom.</td>
   </tr>
   <tr>
    <td>Desirable Effect</td>
-   <td>These are outcomes you want to achieve. Like others, they're caused by other events or conditions.</td>
-   <td>All Effects incl. 'And'</td>
+   <td></td>
+   <td>A positive condition in the system. Included to show that some causes also produce good outcomes that must be preserved.</td>
   </tr>
   <tr>
    <td>Given</td>
-   <td>These are constants, things you can't change. For example, gravity is a given - unless you leave Earth, it's always there.</td>
-   <td>All Effects incl. 'And'</td>
+   <td>Precondition</td>
+   <td>A condition taken as fixed by the environment — not under the organisation's control and not a candidate for change. Enters the tree without predecessors, like gravity.</td>
   </tr>
   <tr>
    <td>Changeable</td>
-   <td>These represent conditions that can be changed to prevent issues from happening again.</td>
-   <td>All Effects incl. 'And'</td>
+   <td></td>
+   <td>A root cause or condition that the organisation can influence. Candidate injection points for breaking the chain of undesirable effects.</td>
   </tr>
   <tr>
    <td>And Junctor</td>
-   <td>These are used in diagrams to show that an outcome happens only when two conditions are both present.</td>
-   <td>All</td>
+   <td></td>
+   <td>Conjunctive cause — all inputs to this junctor must be present simultaneously to produce the downstream effect.</td>
   </tr>
  </tbody>
 </table>
@@ -146,6 +146,11 @@ The Current Reality Tree (CRT) Notation</div>
 <p>The Notation setting will highlight those effects (desirable, undesirable or intermediate incl. And Junctor) that are connected to a cause. This way the not-yet-connected effects are highlighted, so you can focus on them.</p>
 <h2 id="background-information-on-crt-notation">Background Information on CRT Notation</h2>
 <p>CRT diagrams were developed as part of the Theory of Constraints by E. Goldratt. More on the Theory of Constraints can be found <a href="/notations/TOC">here</a>.</p>
+<h2 id="what-vithanco-checks">What Vithanco checks</h2>
+<ul>
+ <li>Two nodes are joined at most once in each direction. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20support%3A%20CRT%20%22Slow%20support%22%20%7B%0A%20%20%20%20node%20understaffed%3A%20Changeable%20%22Support%20team%20is%20understaffed%22%3B%0A%20%20%20%20node%20backlog%3A%20IntermediateEffect%20%22Tickets%20pile%20up%22%3B%0A%20%20%20%20node%20waiting%3A%20UndesirableEffect%20%22Customers%20wait%20days%20for%20an%20answer%22%3B%0A%20%20%20%20edge%20understaffed%20-%3E%20backlog%3A%20changeable_causes_intermediate%3B%0A%20%20%20%20edge%20backlog%20-%3E%20waiting%3A%20intermediate_causes_undesirable%3B%0A%20%20%20%20edge%20backlog%20-%3E%20waiting%3A%20intermediate_causes_undesirable%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+</ul>
+<p>The checks every notation runs are listed on <a href="/notations/#checks-every-notation-runs">the notations overview</a>.</p>
 <h2 id="try-crt-yourself">Try CRT Yourself</h2>
 <p>Create and visualize your own Current Reality Tree diagram right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p>
 <iframe src="/vgraph/index.html?src=/notations/TOC/current-reality-tree/analysis.vgl" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive CRT Editor"></iframe>

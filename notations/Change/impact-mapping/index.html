@@ -110,34 +110,34 @@ Impact Mapping Notation</div>
 <table>
  <thead>
   <tr>
-   <th>Node Type</th>
+   <th>Type</th>
    <th>Description</th>
-   <th>Successors</th>
   </tr>
  </thead>
  <tbody>
   <tr>
    <td>Goal</td>
-   <td>The one goal you are aiming at</td>
-   <td>Actor</td>
+   <td>The goal you are aiming at — the 'Why' of the impact map.</td>
   </tr>
   <tr>
    <td>Actor</td>
-   <td>Any system or person that could be helping to achieve the goal</td>
-   <td>Impact</td>
+   <td>Any system or person that could help or hinder achieving the goal — the 'Who'.</td>
   </tr>
   <tr>
    <td>Impact</td>
-   <td>How could the Actor impact your goal?</td>
-   <td>Deliverable</td>
+   <td>How an Actor could impact the goal, positively or negatively — the 'How'.</td>
   </tr>
   <tr>
    <td>Deliverable</td>
-   <td>What could be done to support an actor to make the desired impact?</td>
-   <td>-</td>
+   <td>What could be done to support an Actor in making the desired impact — the 'What'.</td>
   </tr>
  </tbody>
 </table>
+<h2 id="what-vithanco-checks">What Vithanco checks</h2>
+<ul>
+ <li>Two nodes are joined at most once in each direction. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20orders%3A%20ImpactMapping%20%22Weekly%20orders%22%20%7B%0A%20%20%20%20node%20grow%3A%20Goal%20%22Grow%20weekly%20orders%20by%2010%25%22%3B%0A%20%20%20%20node%20returning%3A%20Actor%20%22Returning%20customers%22%3B%0A%20%20%20%20edge%20grow%20-%3E%20returning%3A%20goal_to_actor%3B%0A%20%20%20%20edge%20grow%20-%3E%20returning%3A%20goal_to_actor%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+</ul>
+<p>The checks every notation runs are listed on <a href="/notations/#checks-every-notation-runs">the notations overview</a>.</p>
 <h2 id="try-impact-mapping-yourself">Try Impact Mapping Yourself</h2>
 <p>Create and visualize your own Impact Map right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p>
 <iframe src="/vgraph/index.html?src=/notations/Change/impact-mapping/mobile-app.vgl" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive Impact Mapping Editor"></iframe>

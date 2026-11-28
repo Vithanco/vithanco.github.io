@@ -97,7 +97,7 @@ VGL Guide — Concepts</div>
 <pre><code>node &lt;id&gt;: &lt;NodeType&gt; "&lt;label&gt;" [&lt;attributes&gt;];
 </code></pre>
 <p>The id must be unique in the document; the label and attributes are optional.</p>
-<pre><code class="language-vgl">node q1: Question "What should we do?" [fontsize: 16; color: red];
+<pre><code class="language-vgl">node q1: Question "What should we do?" [fontsize: 16; backgroundColor: red];
 </code></pre>
 <h3 id="edges">Edges</h3>
 <pre><code>edge &lt;from_id&gt; -&gt; &lt;to_id&gt;: &lt;EdgeType&gt; "&lt;label&gt;" [&lt;attributes&gt;];
@@ -111,7 +111,7 @@ edge q2 -&gt; a2;                              // type inferred
 <p>Groups organise nodes hierarchically, nest to any depth, and may carry attributes. Edges may cross group boundaries freely.</p>
 <pre><code class="language-vgl">group research "Research Phase" {
     style: filled;
-    color: lightblue;
+    backgroundColor: lightblue;
 
     node q1: Question "What to research?";
     node a1: Answer "User interviews";
@@ -127,15 +127,15 @@ edge q2 -&gt; a2;                              // type inferred
 <p><strong>Typed groups.</strong> A group can carry a type after its id, mirroring node typing —</p>
 <p><code>group &lt;id&gt;: &lt;GroupType&gt; "&lt;label&gt;" { … }</code>. The type selects its appearance: a C4 <code>Organisation</code> draws a dashed boundary when unfolded and a grey card when folded. See <a href="/tools/vgl/notation-reference/c4/">C4</a>.</p>
 <p><strong>Detailed nodes.</strong> When the type is a <em>node</em> type rather than a group type, the group is a detailed node: the node itself, with its details inside —</p>
-<p><code>group ibs: SoftwareSystem "Internet Banking System" { … }</code>. It takes the node's attributes (<code>url</code>, <code>tooltip</code>, <code>backgroundcolor</code>, …) in its body and in views; a key that a node and a group share means the node's. It starts folded;</p>
-<p><code>isfolded: false</code> in a view (or in its body) opens it, and the boundary it then draws comes from its node type. See ADR-0032.</p>
+<p><code>group ibs: SoftwareSystem "Internet Banking System" { … }</code>. It takes the node's attributes (<code>url</code>, <code>tooltip</code>, <code>backgroundColor</code>, …) in its body and in views; a key that a node and a group share means the node's. It starts folded;</p>
+<p><code>isFolded: false</code> in a view (or in its body) opens it, and the boundary it then draws comes from its node type. See ADR-0032.</p>
 <h3 id="views">Views</h3>
 <p>One file can show its model several ways. A <code>vview</code> after the <code>vgraph</code> block changes only how things are <em>shown</em> — fold state, layout direction, colours — never what is true, so quality checks read the same in every view.</p>
 <pre><code class="language-vgl">vview context "System Context" {
     folded node type: SoftwareSystem;
 }
 
-vview containers "Containers" [rankdir: LR] {
+vview containers "Containers" [layoutDirection: leftToRight] {
     node db [backgroundColor: "#ffd27f"];
     node customer, web [fontsize: 16];
 }
@@ -165,7 +165,7 @@ vview containers "Containers" [rankdir: LR] {
  <tbody>
   <tr>
    <td>Node</td>
-   <td><code>color</code>, <code>fontColor</code>, <code>fontsize</code>, <code>shape</code>, <code>url</code>, <code>alignGroup</code> (nodes sharing a value are placed at the same rank)</td>
+   <td><code>backgroundColor</code>, <code>fontColor</code>, <code>fontsize</code>, <code>shape</code>, <code>url</code>, <code>alignGroup</code> (nodes sharing a value are placed at the same rank)</td>
   </tr>
   <tr>
    <td>Edge</td>
@@ -173,21 +173,23 @@ vview containers "Containers" [rankdir: LR] {
   </tr>
   <tr>
    <td>Group</td>
-   <td><code>style</code> (<code>filled</code>/<code>dashed</code>/<code>dotted</code>), <code>color</code>, <code>label</code>, <code>url</code></td>
+   <td><code>style</code> (<code>filled</code>/<code>dashed</code>/<code>dotted</code>), <code>backgroundColor</code>, <code>label</code>, <code>url</code></td>
   </tr>
   <tr>
    <td>Graph</td>
-   <td><code>rankdir</code> (<code>LR</code>/<code>TB</code>), <code>fontcolor</code>, <code>labeljust</code> (<code>l</code>/<code>r</code>/<code>c</code>), <code>loopMarkers</code> (<code>all</code>/<code>independent</code>/<code>none</code>, Causal Loop Diagrams: which loops get an R/B marker), <code>watermark</code> (<code>true</code> by default; <code>false</code> leaves the Vithanco mark off the exported image)</td>
+   <td><code>layoutDirection</code> (<code>topToBottom</code>/<code>leftToRight</code>/<code>bottomToTop</code>/<code>rightToLeft</code>), <code>fontColor</code>, <code>labeljust</code> (<code>l</code>/<code>r</code>/<code>c</code>), <code>loopMarkers</code> (<code>all</code>/<code>independent</code>/<code>none</code>, Causal Loop Diagrams: which loops get an R/B marker), <code>watermark</code> (<code>true</code> by default; <code>false</code> leaves the Vithanco mark off the exported image)</td>
   </tr>
  </tbody>
 </table>
-<p><strong>Colouring one node.</strong> <code>color</code> sets a node's fill, overriding whatever its type says. <code>fontColor</code> sets the text on it; leave it out and the text is set to black or white for contrast, but only where it would otherwise stop being legible.</p>
-<pre><code class="language-vgl">node epBackend: Container "Equipment Pooling Backend" [color: "#b6e6bd"];
-node onApp: Container "ON App" [color: "#ffe08a"; fontColor: "#5c3d00"];
+<p><strong>Direction.</strong> <code>layoutDirection</code> is the same key in a document, in a view's header and in a <code>vnotation</code>.</p>
+<p><strong>Given twice.</strong> Keys are read in any case, and a saved file spells them as this guide does. An attribute given twice to one element — in one statement, or again in a group declared a second time — keeps the later value, or the one spelled as here, and a quality warning names both.</p>
+<p><strong>Colouring one node.</strong> <code>backgroundColor</code> sets a node's fill, overriding whatever its type says. <code>fontColor</code> sets the text on it; leave it out and the text is set to black or white for contrast, but only where it would otherwise stop being legible.</p>
+<pre><code class="language-vgl">node epBackend: Container "Equipment Pooling Backend" [backgroundColor: "#b6e6bd"];
+node onApp: Container "ON App" [backgroundColor: "#ffe08a"; fontColor: "#5c3d00"];
 </code></pre>
 <p>This is a per-node exception, not a second axis: the node keeps its type, so its shape, its stereotype line and every quality check still apply. Use it to mark what is new or changed in an otherwise ordinary diagram, and say what the colours mean somewhere the reader can see.</p>
-<p>Every colour in VGL — a node's, an edge's, a group's, a graph's <code>fontcolor</code> — is a hex value or one of the 147 <strong>SVG colour keywords</strong> (<code>red</code>, <code>cornflowerblue</code>,</p>
-<p><code>whitesmoke</code>). Graphviz's larger X11 set is not accepted: <code>chartreuse3</code> is an error, not a silent no-op. A name you write is kept as you wrote it when the document is exported; it is never derived back from a colour, since <code>grey</code> and <code>gray</code> are the same value.</p>
+<p>Every colour in VGL — a node's, an edge's, a group's, a graph's <code>fontColor</code> — is a hex value or one of the 147 <strong>SVG colour keywords</strong> (<code>red</code>, <code>cornflowerblue</code>,</p>
+<p><code>whitesmoke</code>). Graphviz's larger X11 set is not accepted: <code>chartreuse3</code> is a quality warning, not a silent no-op, and the node is drawn as if it had no colour of its own. A name you write is kept as you wrote it when the document is exported; it is never derived back from a colour, since <code>grey</code> and <code>gray</code> are the same value.</p>
 <h3 id="links">Links</h3>
 <p>Any node, edge or group may carry a <code>url</code> pointing at whatever the element stands for — a ticket, a repository, a wiki page:</p>
 <pre><code class="language-vgl">node q1: Question "Which datastore?" [url: "https://issues.example.com/ARCH-14"];

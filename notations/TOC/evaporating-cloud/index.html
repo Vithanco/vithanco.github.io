@@ -121,46 +121,38 @@ The Evaporating Cloud (EC) Notation</div>
 <table>
  <thead>
   <tr>
-   <th>Node Type</th>
+   <th>Type</th>
    <th>Description</th>
-   <th>Successors</th>
   </tr>
  </thead>
  <tbody>
   <tr>
    <td>Common Objective</td>
-   <td>The shared Objective, valid for both branches of the EC</td>
-   <td>-</td>
+   <td>The shared goal that both sides of the conflict genuinely want to achieve. Establishes that both parties are on the same side.</td>
   </tr>
   <tr>
    <td>Need</td>
-   <td>The perceived Need</td>
-   <td>Common Objective</td>
+   <td>A necessary condition each side must satisfy to achieve the Common Objective. Each need is real and legitimate.</td>
   </tr>
   <tr>
    <td>Want</td>
-   <td>The perceived Want</td>
-   <td>Need, And</td>
+   <td>The specific action or requirement each side insists on to satisfy their Need. The Wants are mutually exclusive — the conflict.</td>
   </tr>
   <tr>
    <td>Conflict</td>
-   <td>The perceived Conflict, expressed as mutually exclusive wants</td>
-   <td>Want, And</td>
+   <td>The explicit clash between the two Wants. Rendered as a symbol to make the conflict visible rather than implicit.</td>
   </tr>
   <tr>
-   <td>And</td>
-   <td>Combining two elements that are necessary in combination.</td>
-   <td>All besides Assumptions and Solution</td>
+   <td>Or Junctor</td>
+   <td>Disjunctive necessary condition — any one of the inputs satisfies the downstream condition. Use to express alternative paths within the cloud.</td>
   </tr>
   <tr>
    <td>Assumption</td>
-   <td>Expose the underlying assumptions for the EC</td>
-   <td>Conflict, Want, Need</td>
+   <td>A hidden belief that makes a link in the cloud appear necessary. Challenging or invalidating an Assumption dissolves the conflict.</td>
   </tr>
   <tr>
    <td>Solution</td>
-   <td>In order to mark the final solution</td>
-   <td>Need</td>
+   <td>An injection that breaks an Assumption, creating a path to satisfy both Needs simultaneously without the conflict.</td>
   </tr>
  </tbody>
 </table>
@@ -174,6 +166,11 @@ The Evaporating Cloud (EC) Notation</div>
  <li>Goldratt's theory is that conflicts occur due to implicit assumptions. If you can identify the underlying assumptions, will you be able to find the flaws in one or both opposing approaches?</li>
 </ul>
 <p>Find more information on ECs <a href="https://en.wikipedia.org/wiki/Evaporating_Cloud">here</a>.</p>
+<h2 id="what-vithanco-checks">What Vithanco checks</h2>
+<ul>
+ <li>Two nodes are joined at most once in each direction. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20launch%3A%20EC%20%22Launch%20or%20polish%22%20%7B%0A%20%20%20%20node%20succeed%3A%20CommonObjective%20%22A%20product%20customers%20love%22%3B%0A%20%20%20%20node%20early%3A%20Need%20%22Reach%20customers%20early%22%3B%0A%20%20%20%20node%20ship%3A%20Want%20%22Ship%20the%20beta%20now%22%3B%0A%20%20%20%20edge%20succeed%20-%3E%20early%3A%20objective_to_need%3B%0A%20%20%20%20edge%20succeed%20-%3E%20early%3A%20objective_to_need%3B%0A%20%20%20%20edge%20early%20-%3E%20ship%3A%20need_to_want%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+</ul>
+<p>The checks every notation runs are listed on <a href="/notations/#checks-every-notation-runs">the notations overview</a>.</p>
 <h2 id="try-ec-yourself">Try EC Yourself</h2>
 <p>Create and visualise your own Evaporating Cloud diagram right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p>
 <iframe src="/vgraph/index.html?src=/notations/TOC/evaporating-cloud/project-conflict.vgl" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive EC Editor"></iframe>

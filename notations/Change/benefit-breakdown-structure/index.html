@@ -124,35 +124,35 @@ The Benefit Breakdown Structure (BBS) Notation</div>
 <table>
  <thead>
   <tr>
-   <th>Node Type</th>
+   <th>Type</th>
    <th>Description</th>
-   <th>Successors</th>
   </tr>
  </thead>
  <tbody>
   <tr>
    <td>Investment Objective</td>
-   <td>Investment Objectives are the goal of the initiative. They should be linked into the organisation's strategy.</td>
-   <td>-</td>
+   <td>The strategic intent of the initiative, linked to the organisation's strategy — the 'why' of the investment.</td>
   </tr>
   <tr>
    <td>Benefit</td>
-   <td>A benefit is an advantage on behalf of a stakeholder. What are the benefits associated with the investment objective? What benefits can we achieve that support the investment objective?</td>
-   <td>Investment Objective</td>
+   <td>An advantage gained by a stakeholder. Benefits are realised through changed business processes, not directly by the project. Ask: which benefits support the Investment Objective?</td>
   </tr>
   <tr>
    <td>Business Change</td>
-   <td>Business Changes are changed processes that create the expected benefit by execution. Please note that a benefit is not created during the project. Instead, a changed process will create the benefits each time it is executed. Which process(es) is (are) creating the benefit? It doesn't have to be a formal process, it doesn't even need to be executed twice.</td>
-   <td>Benefit</td>
+   <td>A changed process that creates the expected benefit each time it is executed. The mechanism through which benefits are delivered. Ask: which processes create the benefit? They need not be formal, nor run more than once.</td>
   </tr>
   <tr>
    <td>Enabler</td>
-   <td>Enabler are what a project is delivering. Enablers are one-off changes that enable the business processes to be executed in a better way. They are therefore prerequisites to the Business Changes</td>
-   <td>Business Change</td>
+   <td>A one-off project deliverable that enables the business process to change. The tangible output of the project.</td>
   </tr>
  </tbody>
 </table>
 <p>BBS uses <a href="/tools/Help/Expert_Concepts/diagram-logic/index.html">Necessary Condition Logic</a>.</p>
+<h2 id="what-vithanco-checks">What Vithanco checks</h2>
+<ul>
+ <li>Two nodes are joined at most once in each direction. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20support%3A%20BBS%20%22Support%22%20%7B%0A%20%20%20%20node%20goal%3A%20InvestmentObjective%20%22Answer%20every%20customer%20within%20a%20day%22%3B%0A%20%20%20%20node%20faster%3A%20Benefit%20%22Faster%20replies%22%3B%0A%20%20%20%20edge%20faster%20-%3E%20goal%3A%20requires_benefit%3B%0A%20%20%20%20edge%20faster%20-%3E%20goal%3A%20requires_benefit%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+</ul>
+<p>The checks every notation runs are listed on <a href="/notations/#checks-every-notation-runs">the notations overview</a>.</p>
 <h2 id="try-bbs-yourself">Try BBS Yourself</h2>
 <p>Create and visualize your own Benefit Breakdown Structure diagram right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p>
 <iframe src="/vgraph/index.html?src=/notations/Change/benefit-breakdown-structure/project.vgl" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive BBS Editor"></iframe>

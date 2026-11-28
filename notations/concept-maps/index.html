@@ -85,7 +85,7 @@ The Concept Map Notation</div>
                 <h1>The Concept Map Notation</h1>
                 <div class="reading-time-container">
                     <span class="fa fa-clock-o"></span>
-                    <p>Estimated reading time: 2 minutes.</p></div>
+                    <p>Estimated reading time: 3 minutes.</p></div>
                 <div class="content"><h2 id="why-use-concept-maps">Why use Concept Maps?</h2>
 <p>Concept Maps are one of my standard artefacts of projects or whenever I need to understand a new area. They help to define the vocabulary by setting all relevant terms in relation to each other. NotebookLM helped me to create this infographic to explain Concept Maps:</p>
 <figure class="img-std"> 
@@ -125,29 +125,38 @@ The Concept Map Notation</div>
 <table>
  <thead>
   <tr>
-   <th>Node Type</th>
+   <th>Type</th>
    <th>Description</th>
-   <th>Successors</th>
   </tr>
  </thead>
  <tbody>
   <tr>
    <td>Concept</td>
-   <td>Concepts (or Terms) are nouns. They are explained in a concept map by putting them in relation to each other.</td>
-   <td>Relation</td>
+   <td>A noun or term placed in relation to others. Concepts are connected through Relations to form falsifiable propositions.</td>
+  </tr>
+  <tr>
+   <td>Emphasized Concept</td>
+   <td>A highlighted concept to draw attention to key terms. Use sparingly for maximum impact.</td>
   </tr>
   <tr>
    <td>Relation</td>
-   <td>A verb, connecting a Concept with another. The Relation creates with the source and destination Nodes a sentence that can easily be validated.</td>
-   <td>Concept, Emphasised Concept</td>
-  </tr>
-  <tr>
-   <td>Emphasised Concept</td>
-   <td>This is a second Concept Node in order to highlight some important concepts. Use this type sparingly.</td>
-   <td>Relation</td>
+   <td>A verb or linking phrase connecting two concepts. Together with source and target, forms a falsifiable proposition.</td>
   </tr>
  </tbody>
 </table>
+<h2 id="what-vithanco-checks">What Vithanco checks</h2>
+<ul>
+ <li>Two nodes are joined at most once in each direction. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20plants%3A%20ConceptMap%20%22Plants%22%20%7B%0A%20%20%20%20node%20plants%3A%20Concept%20%22Plants%22%3B%20node%20water%3A%20Concept%20%22Water%22%3B%20node%20sunlight%3A%20Concept%20%22Sunlight%22%3B%0A%20%20%20%20node%20soil%3A%20Concept%20%22Soil%22%3B%20node%20leaves%3A%20Concept%20%22Leaves%22%3B%0A%20%20%20%20node%20need%3A%20Relation%20%22need%22%3B%20node%20stores%3A%20Relation%20%22stores%22%3B%20node%20grow%3A%20Relation%20%22grow%22%3B%0A%20%20%20%20edge%20plants%20-%3E%20need%3B%20edge%20need%20-%3E%20water%3B%20edge%20need%20-%3E%20sunlight%3B%0A%20%20%20%20edge%20soil%20-%3E%20stores%3B%20edge%20stores%20-%3E%20water%3B%0A%20%20%20%20edge%20plants%20-%3E%20grow%3B%20edge%20grow%20-%3E%20leaves%3B%0A%20%20%20%20edge%20soil%20-%3E%20stores%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+ <li>A map has between 5 and 25 concepts. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20plants%3A%20ConceptMap%20%22Plants%22%20%7B%0A%20%20%20%20node%20plants%3A%20Concept%20%22Plants%22%3B%20node%20water%3A%20Concept%20%22Water%22%3B%20node%20sunlight%3A%20Concept%20%22Sunlight%22%3B%0A%20%20%20%20node%20need%3A%20Relation%20%22need%22%3B%0A%20%20%20%20edge%20plants%20-%3E%20need%3B%20edge%20need%20-%3E%20water%3B%20edge%20need%20-%3E%20sunlight%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+ <li>Every concept's label has at most three words. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20plants%3A%20ConceptMap%20%22Plants%22%20%7B%0A%20%20%20%20node%20plants%3A%20Concept%20%22Plants%22%3B%20node%20water%3A%20Concept%20%22Water%22%3B%20node%20sunlight%3A%20Concept%20%22Sunlight%22%3B%0A%20%20%20%20node%20soil%3A%20Concept%20%22Soil%22%3B%20node%20leaves%3A%20Concept%20%22Green%20leaves%20on%20branches%22%3B%0A%20%20%20%20node%20need%3A%20Relation%20%22need%22%3B%20node%20stores%3A%20Relation%20%22stores%22%3B%20node%20grow%3A%20Relation%20%22grow%22%3B%0A%20%20%20%20edge%20plants%20-%3E%20need%3B%20edge%20need%20-%3E%20water%3B%20edge%20need%20-%3E%20sunlight%3B%0A%20%20%20%20edge%20soil%20-%3E%20stores%3B%20edge%20stores%20-%3E%20water%3B%0A%20%20%20%20edge%20plants%20-%3E%20grow%3B%20edge%20grow%20-%3E%20leaves%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+ <li>No relation has a vague label such as "is related to". <a class="see-it-flagged" href="/editor/#vgl=vgraph%20plants%3A%20ConceptMap%20%22Plants%22%20%7B%0A%20%20%20%20node%20plants%3A%20Concept%20%22Plants%22%3B%20node%20water%3A%20Concept%20%22Water%22%3B%20node%20sunlight%3A%20Concept%20%22Sunlight%22%3B%0A%20%20%20%20node%20soil%3A%20Concept%20%22Soil%22%3B%20node%20leaves%3A%20Concept%20%22Leaves%22%3B%0A%20%20%20%20node%20need%3A%20Relation%20%22need%22%3B%20node%20stores%3A%20Relation%20%22stores%22%3B%20node%20grow%3A%20Relation%20%22is%20related%20to%22%3B%0A%20%20%20%20edge%20plants%20-%3E%20need%3B%20edge%20need%20-%3E%20water%3B%20edge%20need%20-%3E%20sunlight%3B%0A%20%20%20%20edge%20soil%20-%3E%20stores%3B%20edge%20stores%20-%3E%20water%3B%0A%20%20%20%20edge%20plants%20-%3E%20grow%3B%20edge%20grow%20-%3E%20leaves%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+ <li>The map is one connected whole. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20plants%3A%20ConceptMap%20%22Plants%22%20%7B%0A%20%20%20%20node%20plants%3A%20Concept%20%22Plants%22%3B%20node%20water%3A%20Concept%20%22Water%22%3B%20node%20sunlight%3A%20Concept%20%22Sunlight%22%3B%0A%20%20%20%20node%20soil%3A%20Concept%20%22Soil%22%3B%20node%20minerals%3A%20Concept%20%22Minerals%22%3B%0A%20%20%20%20node%20need%3A%20Relation%20%22need%22%3B%20node%20contains%3A%20Relation%20%22contains%22%3B%0A%20%20%20%20edge%20plants%20-%3E%20need%3B%20edge%20need%20-%3E%20water%3B%20edge%20need%20-%3E%20sunlight%3B%0A%20%20%20%20edge%20soil%20-%3E%20contains%3B%20edge%20contains%20-%3E%20minerals%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+ <li>Two concepts are linked in one direction only. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20plants%3A%20ConceptMap%20%22Plants%22%20%7B%0A%20%20%20%20node%20plants%3A%20Concept%20%22Plants%22%3B%20node%20water%3A%20Concept%20%22Water%22%3B%20node%20sunlight%3A%20Concept%20%22Sunlight%22%3B%0A%20%20%20%20node%20soil%3A%20Concept%20%22Soil%22%3B%20node%20leaves%3A%20Concept%20%22Leaves%22%3B%0A%20%20%20%20node%20need%3A%20Relation%20%22need%22%3B%20node%20stores%3A%20Relation%20%22stores%22%3B%20node%20grow%3A%20Relation%20%22grow%22%3B%0A%20%20%20%20edge%20plants%20-%3E%20need%3B%20edge%20need%20-%3E%20water%3B%20edge%20need%20-%3E%20sunlight%3B%0A%20%20%20%20edge%20soil%20-%3E%20stores%3B%20edge%20stores%20-%3E%20water%3B%0A%20%20%20%20edge%20plants%20-%3E%20grow%3B%20edge%20grow%20-%3E%20leaves%3B%0A%20%20%20%20node%20feeds%3A%20Relation%20%22feeds%22%3B%20node%20enrich%3A%20Relation%20%22enrich%22%3B%0A%20%20%20%20edge%20soil%20-%3E%20feeds%3B%20edge%20feeds%20-%3E%20plants%3B%0A%20%20%20%20edge%20plants%20-%3E%20enrich%3B%20edge%20enrich%20-%3E%20soil%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+ <li>No two relations share a label and their targets. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20plants%3A%20ConceptMap%20%22Plants%22%20%7B%0A%20%20%20%20node%20plants%3A%20Concept%20%22Plants%22%3B%20node%20water%3A%20Concept%20%22Water%22%3B%20node%20sunlight%3A%20Concept%20%22Sunlight%22%3B%0A%20%20%20%20node%20soil%3A%20Concept%20%22Soil%22%3B%20node%20leaves%3A%20Concept%20%22Leaves%22%3B%0A%20%20%20%20node%20need%3A%20Relation%20%22need%22%3B%20node%20stores%3A%20Relation%20%22stores%22%3B%20node%20grow%3A%20Relation%20%22grow%22%3B%0A%20%20%20%20edge%20plants%20-%3E%20need%3B%20edge%20need%20-%3E%20water%3B%20edge%20need%20-%3E%20sunlight%3B%0A%20%20%20%20edge%20soil%20-%3E%20stores%3B%20edge%20stores%20-%3E%20water%3B%0A%20%20%20%20edge%20plants%20-%3E%20grow%3B%20edge%20grow%20-%3E%20leaves%3B%0A%20%20%20%20node%20alsoNeed%3A%20Relation%20%22need%22%3B%0A%20%20%20%20edge%20leaves%20-%3E%20alsoNeed%3B%20edge%20alsoNeed%20-%3E%20water%3B%20edge%20alsoNeed%20-%3E%20sunlight%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+ <li>If a relation links several concepts to several others, it must hold for every combination of them. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20animals%3A%20ConceptMap%20%22What%20animals%20eat%22%20%7B%0A%20%20%20%20node%20cats%3A%20Concept%20%22Cats%22%3B%20node%20cows%3A%20Concept%20%22Cows%22%3B%0A%20%20%20%20node%20mice%3A%20Concept%20%22Mice%22%3B%20node%20grass%3A%20Concept%20%22Grass%22%3B%20node%20farm%3A%20Concept%20%22Farm%22%3B%0A%20%20%20%20node%20eat%3A%20Relation%20%22eat%22%3B%20node%20liveOn%3A%20Relation%20%22live%20on%22%3B%0A%20%20%20%20edge%20cats%20-%3E%20eat%3B%20edge%20cows%20-%3E%20eat%3B%20edge%20eat%20-%3E%20mice%3B%20edge%20eat%20-%3E%20grass%3B%0A%20%20%20%20edge%20cows%20-%3E%20liveOn%3B%20edge%20liveOn%20-%3E%20farm%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+ <li>Every relation has a concept on each side. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20plants%3A%20ConceptMap%20%22Plants%22%20%7B%0A%20%20%20%20node%20plants%3A%20Concept%20%22Plants%22%3B%20node%20water%3A%20Concept%20%22Water%22%3B%20node%20sunlight%3A%20Concept%20%22Sunlight%22%3B%0A%20%20%20%20node%20soil%3A%20Concept%20%22Soil%22%3B%20node%20leaves%3A%20Concept%20%22Leaves%22%3B%0A%20%20%20%20node%20need%3A%20Relation%20%22need%22%3B%20node%20stores%3A%20Relation%20%22stores%22%3B%20node%20grow%3A%20Relation%20%22grow%22%3B%0A%20%20%20%20edge%20plants%20-%3E%20need%3B%20edge%20need%20-%3E%20water%3B%20edge%20need%20-%3E%20sunlight%3B%0A%20%20%20%20edge%20soil%20-%3E%20stores%3B%20edge%20stores%20-%3E%20water%3B%0A%20%20%20%20edge%20plants%20-%3E%20grow%3B%20edge%20grow%20-%3E%20leaves%3B%0A%20%20%20%20node%20turnInto%3A%20Relation%20%22turn%20into%22%3B%0A%20%20%20%20edge%20leaves%20-%3E%20turnInto%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+</ul>
+<p>The checks every notation runs are listed on <a href="/notations/#checks-every-notation-runs">the notations overview</a>.</p>
 <h2 id="try-concept-map-yourself">Try Concept Map Yourself</h2>
 <p>Create and visualize your own Concept Map right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p>
 <iframe src="/vgraph/index.html?src=/notations/concept-maps/learning-cm.vgl" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive Concept Map Editor"></iframe>

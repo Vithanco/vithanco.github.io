@@ -85,7 +85,7 @@ The IBIS Notation</div>
                 <h1>The IBIS Notation</h1>
                 <div class="reading-time-container">
                     <span class="fa fa-clock-o"></span>
-                    <p>Estimated reading time: 4 minutes.</p></div>
+                    <p>Estimated reading time: 3 minutes.</p></div>
                 <div class="content"><h2 id="why-use-ibis">Why use IBIS?</h2>
 <p>I use the IBIS to describe itself.</p>
 <figure class="vgl-render img-std"> 
@@ -106,41 +106,31 @@ The IBIS Notation</div>
 <table>
  <thead>
   <tr>
-   <th>Node Type</th>
+   <th>Type</th>
+   <th>Also called</th>
    <th>Description</th>
-   <th>Successors</th>
   </tr>
  </thead>
  <tbody>
   <tr>
    <td>Question</td>
-   <td>Questions are the key driver of IBIS. They are the starting point and the one item that can be connected to all other nodes.</td>
-   <td>Idea, Question</td>
+   <td></td>
+   <td>Questions are the key driver of IBIS. They are the starting point and can be connected to all other node types.</td>
   </tr>
   <tr>
+   <td>Answer</td>
    <td>Idea</td>
-   <td>An idea (depending on the context, you can call it as well as an answer) for a question. Ideas are used to answer your questions.</td>
-   <td>Pro, Con, Question</td>
+   <td>An idea or answer for a question. Answers are evaluated through pro and con arguments.</td>
   </tr>
   <tr>
    <td>Pro</td>
-   <td>Arguments in favour of an idea. Add anything that you think is relevant to a given idea or answer. The Pros will later help you make a decision.</td>
-   <td>Question</td>
+   <td></td>
+   <td>An argument in favour of an answer. Pros help evaluate and decide between competing answers.</td>
   </tr>
   <tr>
    <td>Con</td>
-   <td>Arguments against an idea. Add anything that you think is relevant to a given idea or answer. The Cons will later help you make a decision.</td>
-   <td>Question</td>
-  </tr>
-  <tr>
-   <td>Decision</td>
-   <td>When the IBIS map is finalised, you often want to evaluate the map and decide on your next step. Attach this Node Type to an Idea to depict your chosen idea/answer.</td>
-   <td>(None)</td>
-  </tr>
-  <tr>
-   <td>Best Idea</td>
-   <td>(not depicted in the diagram above) Instead of using the decision, you can highlight one idea as the "best idea".</td>
-   <td>(same as Idea)</td>
+   <td></td>
+   <td>An argument against an answer. Cons help evaluate and decide between competing answers.</td>
   </tr>
  </tbody>
 </table>
@@ -160,6 +150,13 @@ The IBIS Notation</div>
  <li>question pro or con (“What could we do to overcome this disadvantage?”).</li>
 </ul>
 <p>Each question would have its structure with answers/ideas and pros&amp; cons. And, of course, can these have further questions attached? Nothing restricts how big the IBIS diagram might become. You, as the creator, decide how many questions you want to include asks and how "deep" you want to go with your diagram to analyse the topic at hand.</p>
+<h2 id="what-vithanco-checks">What Vithanco checks</h2>
+<ul>
+ <li>Two nodes are joined at most once in each direction. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20offsite%3A%20IBIS%20%22Team%20offsite%22%20%7B%0A%20%20%20%20node%20where%3A%20Question%20%22Where%20should%20we%20hold%20the%20offsite%3F%22%3B%0A%20%20%20%20node%20mountains%3A%20Answer%20%22A%20lodge%20in%20the%20mountains%22%3B%0A%20%20%20%20edge%20where%20-%3E%20mountains%3B%0A%20%20%20%20edge%20where%20-%3E%20mountains%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+ <li>The diagram is a tree: every node has at most one parent. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20laptops%3A%20IBIS%20%22Laptops%22%20%7B%0A%20%20%20%20node%20hires%3A%20Question%20%22Which%20laptop%20do%20new%20hires%20get%3F%22%3B%0A%20%20%20%20node%20contractors%3A%20Question%20%22Which%20laptop%20do%20contractors%20get%3F%22%3B%0A%20%20%20%20node%20small%3A%20Answer%20%22The%2014-inch%20model%22%3B%0A%20%20%20%20edge%20hires%20-%3E%20small%3B%0A%20%20%20%20edge%20contractors%20-%3E%20small%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+ <li>Every Question has at least one Answer. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20release%3A%20IBIS%20%22Release%20risk%22%20%7B%0A%20%20%20%20node%20risk%3A%20Question%20%22How%20do%20we%20make%20Friday%20releases%20safer%3F%22%3B%0A%20%20%20%20node%20staging%3A%20Answer%20%22Add%20a%20staging%20week%22%3B%0A%20%20%20%20node%20who%3A%20Question%20%22Who%20runs%20the%20staging%20tests%3F%22%3B%0A%20%20%20%20edge%20risk%20-%3E%20staging%3B%0A%20%20%20%20edge%20staging%20-%3E%20who%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+</ul>
+<p>The checks every notation runs are listed on <a href="/notations/#checks-every-notation-runs">the notations overview</a>.</p>
 <h2 id="try-ibis-yourself">Try IBIS Yourself</h2>
 <p>Create and visualize your own IBIS diagram right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p>
 <iframe src="/vgraph/index.html" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive IBIS Editor"></iframe>

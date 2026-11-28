@@ -156,34 +156,34 @@ The C4 Model Notation</div>
 <table>
  <thead>
   <tr>
-   <th>Node Type</th>
+   <th>Type</th>
    <th>Description</th>
   </tr>
  </thead>
  <tbody>
   <tr>
-   <td><code>Person</code></td>
-   <td>A human user of the system — a customer, an administrator, a support agent.</td>
+   <td>Person</td>
+   <td>A person who uses the software: a user, actor, role or persona.</td>
   </tr>
   <tr>
-   <td><code>SoftwareSystem</code></td>
-   <td>A whole system, drawn as a single box. The unit of the System Context view. Detailed by containers and databases.</td>
+   <td>Software System</td>
+   <td>Something that delivers value to its users, owned by one team.</td>
   </tr>
   <tr>
-   <td><code>Container</code></td>
-   <td>A separately deployable or runnable thing: a web app, an API, a mobile app. Detailed by components.</td>
+   <td>Container</td>
+   <td>A separately deployable or runnable unit: an application or a service, such as a web app, an API or a mobile app.</td>
   </tr>
   <tr>
-   <td><code>Database</code></td>
-   <td>A <code>Container</code> that stores data, drawn as a cylinder.</td>
+   <td>Component</td>
+   <td>A grouping of related functionality behind a well-defined interface.</td>
   </tr>
   <tr>
-   <td><code>Component</code></td>
-   <td>A major structural building block inside one container. Detailed by code elements.</td>
+   <td>Code Element</td>
+   <td>A class, interface, function or table that implements a component.</td>
   </tr>
   <tr>
-   <td><code>CodeElement</code></td>
-   <td>A class, interface or module inside a component.</td>
+   <td>Database</td>
+   <td>A container that stores data: a database, schema or file store. Drawn as a cylinder.</td>
   </tr>
  </tbody>
 </table>
@@ -244,51 +244,54 @@ The C4 Model Notation</div>
   Level 1 — the System Context view. Every software system is a single card, and the relationships of its containers now point at that card.
  </figcaption> 
 </figure> 
-<p>vgl-render id=c4-container-view src=notations/c4-model/banking.vgl view=containers alt="The Internet Banking System drawn as a C4 Container view" caption="Level 2 — the Container view. The Backend is folded, so it draws as a single container card." class="img-std"</p>
-<pre><code>
-Fold containers instead of systems, and the system opens: the UI, the static content, the datastores and the backend appear, with the relationships between them.
-
-### Level 3 — the Component view
-
-</code></pre>
-<p>vgl-render id=c4-component-view src=notations/c4-model/banking.vgl view=components alt="The Backend drawn as a C4 Component view" caption="Level 3 — the Component view. The Backend is opened up to show its components." class="img-std"</p>
-<pre><code>
-Focus on the Backend and fold components, and you see the building blocks inside it and who calls whom. The relationships did not have to be redrawn; they were always between these components, and the view was simply hiding them.
-
-### Level 4 — the Code view
-
-</code></pre>
-<p>vgl-render id=c4-code-view src=notations/c4-model/banking.vgl view=code alt="The Core Banking System Adapter drawn as a C4 Code view" caption="Level 4 — the Code view. One component, opened up to the classes and interfaces that implement it." class="img-std"</p>
-<pre><code>
-As advised above, you would rarely draw this by hand — but when you do want one component explained down to its classes, the model already holds them. A further view, `landscape`, shows every software system at once.
-
-Four levels, four views, one source of truth. Change a container's name once and all of them agree, because there is only one place where the name is written down.
-
-## What Vithanco checks for you
-
-The C4 Notation checks that every element sits in the thing that details it. A `Container` or `Database` at the top level of the diagram, outside any `SoftwareSystem`, is almost always a modelling slip — it belongs to *some* system — and the same holds for a `Component` outside a container and a `CodeElement` outside a component. The check runs every time the diagram is rendered.
-
-You can see this for yourself in the editor below: move the `node database: Database "Database";` line out of the `group ibs` block and render, and the database is flagged in the source.
-
-## Try C4 yourself
-
-The editor below is seeded with the full Internet Banking model and its views. Fold and unfold a group in place, or change what a view folds: in the `containers` view, replace `folded node type: Container;` with `folded node type: SoftwareSystem;` and you are looking at the System Context.
-
-&lt;iframe src="/vgraph/index.html?src=/notations/c4-model/banking.vgl" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive C4 Editor"&gt;&lt;/iframe&gt;
-
-**Tip:** Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.
-
-Want to learn more about the VGL syntax? Check out the complete **[VGL Guide](/tools/vgl)** for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported Notations.
-
-## Background
-
-The C4 model was created by **Simon Brown** in the 2010s as a lightweight, notation-independent way to describe software architecture, distilling ideas from UML and Philippe Kruchten's "4+1" architectural view model into four simple levels. The name comes from those levels: **C**ontext, **C**ontainers, **C**omponents, **C**ode.
-
-The Internet Banking System used throughout this page is Brown's own teaching example, adapted here to VGL.
-
-- [The C4 model for visualising software architecture](https://c4model.com) — the official site
-- [C4 model](https://en.wikipedia.org/wiki/C4_model) on Wikipedia
-</code></pre></div></article>
+<p>The system, the people who use it and the systems it depends on — nothing more. The relationships that used to start at individual containers and components now start at the Internet Banking System as a whole.</p>
+<h3 id="level-2-the-container-view">Level 2 — the Container view</h3>
+<figure class="vgl-render img-std"> 
+ <img src="/vgl-generated/c4-container-view.svg" alt="The Internet Banking System drawn as a C4 Container view" onclick="openLightbox(this)" /> 
+ <figcaption>
+  Level 2 — the Container view. The Backend is folded, so it draws as a single container card.
+ </figcaption> 
+</figure> 
+<p>Fold containers instead of systems, and the system opens: the UI, the static content, the datastores and the backend appear, with the relationships between them.</p>
+<h3 id="level-3-the-component-view">Level 3 — the Component view</h3>
+<figure class="vgl-render img-std"> 
+ <img src="/vgl-generated/c4-component-view.svg" alt="The Backend drawn as a C4 Component view" onclick="openLightbox(this)" /> 
+ <figcaption>
+  Level 3 — the Component view. The Backend is opened up to show its components.
+ </figcaption> 
+</figure> 
+<p>Focus on the Backend and fold components, and you see the building blocks inside it and who calls whom. The relationships did not have to be redrawn; they were always between these components, and the view was simply hiding them.</p>
+<h3 id="level-4-the-code-view">Level 4 — the Code view</h3>
+<figure class="vgl-render img-std"> 
+ <img src="/vgl-generated/c4-code-view.svg" alt="The Core Banking System Adapter drawn as a C4 Code view" onclick="openLightbox(this)" /> 
+ <figcaption>
+  Level 4 — the Code view. One component, opened up to the classes and interfaces that implement it.
+ </figcaption> 
+</figure> 
+<p>As advised above, you would rarely draw this by hand — but when you do want one component explained down to its classes, the model already holds them. A further view, <code>landscape</code>, shows every software system at once.</p>
+<p>Four levels, four views, one source of truth. Change a container's name once and all of them agree, because there is only one place where the name is written down.</p>
+<h2 id="what-vithanco-checks">What Vithanco checks</h2>
+<ul>
+ <li>Every relationship has a label saying what it is for. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20shop%3A%20C4%20%22Online%20shop%22%20%7B%0A%20%20%20%20node%20customer%3A%20Person%20%22Customer%22%3B%0A%20%20%20%20node%20shop%3A%20SoftwareSystem%20%22Online%20Shop%22%3B%0A%20%20%20%20node%20payments%3A%20SoftwareSystem%20%22Payment%20Provider%22%3B%0A%20%20%20%20edge%20customer%20-%3E%20shop%20%22Places%20orders%20using%22%3B%0A%20%20%20%20edge%20shop%20-%3E%20payments%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+ <li>A Container belongs inside a Software System.</li>
+ <li>A Component belongs inside a Container.</li>
+ <li>A Code Element belongs inside a Component.</li>
+ <li>A Database belongs inside a Software System.</li>
+</ul>
+<p>The checks every notation runs are listed on <a href="/notations/#checks-every-notation-runs">the notations overview</a>.</p>
+<p>You can see the nesting check for yourself in the editor below: move the <code>node database: Database "Database";</code> line out of the <code>group ibs</code> block and render, and the database is flagged in the source.</p>
+<h2 id="try-c4-yourself">Try C4 yourself</h2>
+<p>The editor below is seeded with the full Internet Banking model and its views. Fold and unfold a group in place, or change what a view folds: in the <code>containers</code> view, replace <code>folded node type: Container;</code> with <code>folded node type: SoftwareSystem;</code> and you are looking at the System Context.</p>
+<iframe src="/vgraph/index.html?src=/notations/c4-model/banking.vgl" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive C4 Editor"></iframe>
+<p><strong>Tip:</strong> Use Ctrl+Enter (or Cmd+Enter on Mac) to quickly render your graph while editing.</p>
+<p>Want to learn more about the VGL syntax? Check out the complete <strong><a href="/tools/vgl">VGL Guide</a></strong> for detailed documentation on creating graphs in text format, including syntax reference and examples for all supported Notations.</p>
+<h2 id="background">Background</h2>
+<p>The C4 model was created by <strong>Simon Brown</strong> in the 2010s as a lightweight, notation-independent way to describe software architecture, distilling ideas from UML and Philippe Kruchten's "4+1" architectural view model into four simple levels. The name comes from those levels: <strong>C</strong>ontext, <strong>C</strong>ontainers, <strong>C</strong>omponents, <strong>C</strong>ode.</p>
+<p>The Internet Banking System used throughout this page is Brown's own teaching example, adapted here to VGL.</p>
+<ul>
+ <li><a href="https://c4model.com">The C4 model for visualising software architecture</a> — the official site</li>
+ <li><a href="https://en.wikipedia.org/wiki/C4_model">C4 model</a> on Wikipedia</li>
+</ul></div></article>
             <aside class="side-content">
                 <div class="relationships-section"></div>
                 <div class="preview__article-details">

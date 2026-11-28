@@ -1,0 +1,29 @@
+vgraph waterCycleDraft: ConceptMap "The Water Cycle, first draft" {
+    node cycle: Concept "The Water Cycle";
+    node sun: Concept "The Sun";
+    node water: Concept "Water";
+    node evaporation: Concept "Evaporation";
+    node vapour: Concept "Water Vapour";
+    node rain: Concept "Rain";
+    node ground: Concept "Water that soaks into the ground";
+    node plants: Concept "Plants";
+    node transpiration: Concept "Transpiration";
+    node wind: Concept "Wind";
+
+    node rDriven: Relation "is driven by";
+    node rMoves: Relation "moves";
+    node rProduces: Relation "produces";
+    node rComesFrom: Relation "comes from";
+    node rRelated: Relation "is related to";
+    node rFalls: Relation "falls as";
+    node rRelease: Relation "release";
+
+    edge cycle -> rDriven;        edge rDriven -> sun;
+    edge cycle -> rMoves;         edge rMoves -> water;
+    edge evaporation -> rProduces; edge rProduces -> vapour;
+    edge vapour -> rComesFrom;    edge rComesFrom -> evaporation;
+    edge sun -> rRelated;         edge rRelated -> evaporation;
+    edge water -> rFalls;         edge rFalls -> rain; edge rFalls -> ground;
+    edge vapour -> rMoves;
+    edge plants -> rRelease;      edge rRelease -> transpiration;
+}

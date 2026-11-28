@@ -101,36 +101,36 @@ The Prerequisite Tree (PRT) Notation</div>
 <table>
  <thead>
   <tr>
-   <th>Node Type</th>
+   <th>Type</th>
    <th>Description</th>
-   <th>Successors</th>
   </tr>
  </thead>
  <tbody>
   <tr>
    <td>Objective</td>
-   <td>The Objective that you really care about</td>
-   <td>-</td>
+   <td>The goal to be achieved — the top of the tree. Stated as a specific condition that will exist when the change is complete.</td>
   </tr>
   <tr>
    <td>Obstacle</td>
-   <td>One of potentially many obstacles that you need to overcome to meet an Objective</td>
-   <td>Objective, Intermediate Objective, (OR)</td>
+   <td>A condition currently in the way of achieving an Objective or Intermediate Objective. Each obstacle must be named and overcome.</td>
   </tr>
   <tr>
    <td>Intermediate Objective</td>
-   <td>An objective that if achieved will overcome the following Obstacle</td>
-   <td>Obstacle (OR)</td>
+   <td>A condition that, when achieved, directly overcomes an Obstacle. IOs cascade downward to break the path clear to the main Objective.</td>
   </tr>
   <tr>
    <td>OR</td>
-   <td>As a necessary condition all incoming arrows normally mean that all are necessary. You can change this with an OR</td>
-   <td>all other Nodes Types</td>
+   <td>Disjunctive necessary condition — any one of the connected alternatives is sufficient to satisfy the upstream requirement.</td>
   </tr>
  </tbody>
 </table>
 <h2 id="background-information-on-prt-notation">Background Information on PRT Notation</h2>
 <p>PRT diagrams were developed as part of the Theory of Constraints by E. Goldratt. More on the Theory of Constraints can be found <a href="/notations/TOC">here</a>.</p>
+<h2 id="what-vithanco-checks">What Vithanco checks</h2>
+<ul>
+ <li>Two nodes are joined at most once in each direction. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20launch%3A%20PRT%20%22Product%20launch%22%20%7B%0A%20%20%20%20node%20launch%3A%20Objective%20%22Launch%20the%20product%20by%20spring%22%3B%0A%20%20%20%20node%20budget%3A%20Obstacle%20%22Marketing%20budget%20not%20approved%22%3B%0A%20%20%20%20node%20roi%3A%20IntermediateObjective%20%22Show%20the%20board%20a%20return%20on%20investment%22%3B%0A%20%20%20%20edge%20budget%20-%3E%20launch%3A%20obstacle_blocks_objective%3B%0A%20%20%20%20edge%20roi%20-%3E%20budget%3A%20intermediate_objective_overcomes_obstacle%3B%0A%20%20%20%20edge%20roi%20-%3E%20budget%3A%20intermediate_objective_overcomes_obstacle%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+</ul>
+<p>The checks every notation runs are listed on <a href="/notations/#checks-every-notation-runs">the notations overview</a>.</p>
 <h2 id="try-prt-yourself">Try PRT Yourself</h2>
 <p>Create and visualize your own Prerequisite Tree diagram right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p>
 <iframe src="/vgraph/index.html?src=/notations/TOC/prerequisite-tree/launch.vgl" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive PRT Editor"></iframe>

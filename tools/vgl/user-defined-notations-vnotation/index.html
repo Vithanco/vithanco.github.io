@@ -85,20 +85,24 @@ VGL Guide — User-defined notations (`vnotation`)</div>
                 <h1>VGL Guide — User-defined notations (`vnotation`)</h1>
                 <div class="reading-time-container">
                     <span class="fa fa-clock-o"></span>
-                    <p>Estimated reading time: 7 minutes.</p></div>
+                    <p>Estimated reading time: 8 minutes.</p></div>
                 <div class="content"><h1 id="user-defined-notations-vnotation">User-defined notations (<code>vnotation</code>)</h1>
 <p><code>vnotation</code> defines a notation schema inline in a VGL file, with no Swift changes. Everything a built-in notation provides — node types, edge types, layout direction — can be expressed this way.</p>
 <pre><code>vnotation &lt;Name&gt; [extends &lt;BuiltinNotation&gt;] {
-    layout: &lt;topToBottom | leftToRight | rightToLeft | bottomToTop&gt;
+    layoutDirection: &lt;topToBottom | leftToRight | rightToLeft | bottomToTop&gt;
 
     icon      &lt;IconName&gt;   [viewBox: "&lt;minX minY width height&gt;", path: "&lt;svg path data&gt;"]
     node type: &lt;TypeName&gt;  [nodeStyle: &lt;name&gt;, backgroundColor: "#hex", icon: "&lt;IconName&gt;", ...]
     edge type: &lt;edge_id&gt;   from: &lt;TypeName&gt;  to: &lt;TypeName&gt;  [color: "#hex"]
-    group type: &lt;GroupTypeName&gt; [boundaryDash: "8,4", boundaryColor: "#hex", ...]
+    group type: &lt;GroupTypeName&gt; [frameDash: "8,4", frameColor: "#hex", ...]
 }
 </code></pre>
 <p><code>group type:</code> names a kind of plain group, so <code>group g: &lt;GroupTypeName&gt; { … }</code> is accepted and <code>group type:</code> view rules can select it.</p>
-<p><strong>Boundary look.</strong> <code>node type:</code> and <code>group type:</code> both take four keys for the boundary an unfolded group draws: <code>boundaryDash</code> (an SVG dash pattern, <code>""</code> for a solid line), <code>boundaryColor</code>, <code>boundaryFill</code> (hex, <code>#rrggbbaa</code> for transparency) and <code>boundaryRadius</code>. On a node type it is the boundary of its detailed nodes; on a group type, of its groups. A key left out keeps the look the type already had, so <code>group type: Organisation [boundaryColor: "#00aa00"]</code> in a block extending C4 recolours the boundary and keeps its dashes. A type with no boundary of its own, from the block or the notation it extends, draws the generic cluster. These are the only keys <code>group type:</code> takes; a group type declared in a <code>vnotation</code> folds into the generic folded box.</p>
+<p><strong>Frame.</strong> <code>node type:</code> and <code>group type:</code> both take four keys for the frame an unfolded group draws: <code>frameDash</code> (an SVG dash pattern, <code>""</code> for a solid line),</p>
+<p><code>frameColor</code>, <code>frameFill</code> (hex, <code>#rrggbbaa</code> for transparency) and</p>
+<p><code>frameRadius</code>. On a node type it is the frame of its detailed nodes; on a group type, of its groups. A key left out keeps the look the type already had, so</p>
+<p><code>group type: Organisation [frameColor: "#00aa00"]</code> in a block extending C4 recolours the frame and keeps its dashes. A type with no frame of its own, from the block or the notation it extends, draws the generic cluster. These are the only keys <code>group type:</code> takes; a group type declared in a <code>vnotation</code> folds into the generic folded box.</p>
+<p><strong>Spelling.</strong> A <code>vnotation</code> key is read in any case, <code>framedash</code> as <code>frameDash</code>, and a saved file spells it as this guide does. A key given twice is read as an <a href="/tools/vgl/concepts/#attributes">attribute</a> given twice is.</p>
 <p><strong>What hovering lights.</strong> Hovering a node lights its edges and the nodes at their far ends. <code>addsToNeighborhood:</code> on a node type lets the highlight go further, for a node that is part of how a claim is written rather than a thing:</p>
 <ul>
  <li><code>all</code> passes it to every end, because together they make one claim. The AND and OR junctors work this way, as do an equation's <code>=</code> and its operators.</li>
@@ -106,8 +110,9 @@ VGL Guide — User-defined notations (`vnotation`)</div>
 </ul>
 <p>Without the key, the highlight stops at the node.</p>
 <p>A <code>vgraph</code> then references it by name exactly like a built-in notation. <strong><code>vnotation</code> blocks must appear before any <code>vgraph</code> or <code>metagraph</code> that references them</strong>, which allows single-pass parsing.</p>
-<p><code>backgroundColor:</code> is the fill. <code>color:</code> is accepted as an older spelling of it on input, but <code>backgroundColor</code> is what a document exports — the same name a node instance stores it under, so the two surfaces agree.</p>
-<p><code>qualityCheck: &lt;name&gt;</code> adds a <a href="/tools/vgl/notations/#quality-checks">quality check</a> by name — a graph criterion such as <code>noParallelEdges</code>; an unknown name is refused with the list of available ones. <code>transform: &lt;name&gt;</code> adds a step that rewrites the graph before layout — <code>mergeRelations</code>, say, which merges Concept Map relations — refused the same way when unknown.</p>
+<p><code>backgroundColor:</code> is the fill, under the same name a node takes in a document.</p>
+<p><code>qualityCheck: &lt;name&gt;</code> adds a <a href="/tools/vgl/notations/#quality-checks">quality check</a> by name, such as</p>
+<p><code>noParallelEdges</code>. <code>disconnectedNodes</code> and <code>redundantJunctor</code> run for every notation anyway, so naming them changes nothing; an unknown name is a warning in the quality report, with the list of available ones, and the diagram still renders. <code>transform: &lt;name&gt;</code> adds a step that rewrites the graph before layout — <code>mergeRelations</code>, say, which merges Concept Map relations — and an unknown one is refused with the list of available ones.</p>
 <h3 id="nodestyle-required-on-every-node-type"><code>nodeStyle:</code> — required on every node type</h3>
 <p>The parser treats the value as an opaque string; the semantic layer validates it against this table.</p>
 <table>
@@ -132,7 +137,7 @@ VGL Guide — User-defined notations (`vnotation`)</div>
   <tr>
    <td><code>simpleRoundedBox</code></td>
    <td><code>backgroundColor:</code></td>
-   <td>Plain rounded box (<code>roundedBox</code> is accepted as an older spelling)</td>
+   <td>Plain rounded box</td>
   </tr>
   <tr>
    <td><code>withCategory</code></td>
@@ -265,7 +270,7 @@ VGL Guide — User-defined notations (`vnotation`)</div>
 <p>The quality report then warns, for any notation with detailings, about a node inside a detailed node that its type is not detailed by, and about a detail type at the top level unless it details itself. Plain groups in between do not count.</p>
 <h3 id="a-complete-example">A complete example</h3>
 <pre><code class="language-vgl">vnotation RiskMap {
-    layout: topToBottom
+    layoutDirection: topToBottom
 
     icon risk   [viewBox: "0 0 24 24", path: "M12 2 22.5 21h-21zM11 9v6h2V9zm0 8v2h2v-2z"]
     icon shield [viewBox: "0 0 24 24", path: "M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5z"]

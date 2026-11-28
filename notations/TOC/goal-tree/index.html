@@ -115,26 +115,26 @@ The Goal Tree (GT) Notation</div>
 <table>
  <thead>
   <tr>
-   <th>Node Type</th>
+   <th>Type</th>
+   <th>Also called</th>
    <th>Description</th>
-   <th>Successors</th>
   </tr>
  </thead>
  <tbody>
   <tr>
    <td>Goal</td>
-   <td>The ultimate purpose for which the system exists. There is always exactly one Goal, placed at the top of the tree. It states the end to which the system's collective efforts are directed.</td>
-   <td>-</td>
+   <td></td>
+   <td>The ultimate purpose the system exists to achieve. Exactly one Goal sits at the top of the tree.</td>
   </tr>
   <tr>
    <td>Critical Success Factor</td>
-   <td>A high-level terminal outcome without which the Goal cannot be achieved. Typically 3 to 5 CSFs sit directly below the Goal. They represent the last things that must happen before the Goal is realized, each summarizing the outcome of many subordinate activities.</td>
-   <td>Goal</td>
+   <td>CSF</td>
+   <td>A high-level outcome without which the Goal cannot be achieved: one of the last things that must happen before it. Typically 3 to 5 CSFs sit directly below the Goal.</td>
   </tr>
   <tr>
    <td>Necessary Condition</td>
-   <td>An indispensable functional task or prerequisite that supports either a CSF or another NC. NCs can cascade into multiple levels, becoming more detailed, specific, and operational at lower tiers. They may also have lateral cross-connections between branches when a condition supports elements in different parts of the tree.</td>
-   <td>Critical Success Factor, Necessary Condition</td>
+   <td>NC</td>
+   <td>An indispensable task or prerequisite supporting a CSF or another NC. NCs cascade into multiple levels of increasing detail, and may cross-connect between branches when one condition supports several.</td>
   </tr>
  </tbody>
 </table>
@@ -174,6 +174,13 @@ The Goal Tree (GT) Notation</div>
  <li>Dettmer, H. William. "Our goal is...What <em>is</em> our goal?" Goal Systems International, 2011. Available at <a href="https://www.readkong.com/page/our-goal-is-what-is-our-goal-goal-systems-international-3345479">readkong.com</a>.</li>
  <li>Dettmer, H. William. <em>The Logical Thinking Process: A Systems Approach to Complex Problem Solving.</em> ASQ Quality Press, 2007.</li>
 </ul>
+<h2 id="what-vithanco-checks">What Vithanco checks</h2>
+<ul>
+ <li>Two nodes are joined at most once in each direction. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20cafe%3A%20GoalTree%20%22Our%20caf%C3%A9%22%20%7B%0A%20%20%20%20node%20goal%3A%20Goal%20%22A%20caf%C3%A9%20people%20return%20to%22%3B%0A%20%20%20%20node%20coffee%3A%20CriticalSuccessFactor%20%22Excellent%20coffee%22%3B%0A%20%20%20%20node%20service%3A%20CriticalSuccessFactor%20%22Friendly%20service%22%3B%0A%20%20%20%20node%20seats%3A%20CriticalSuccessFactor%20%22Comfortable%20seats%22%3B%0A%20%20%20%20edge%20coffee%20-%3E%20goal%3A%20csf_to_goal%3B%0A%20%20%20%20edge%20service%20-%3E%20goal%3A%20csf_to_goal%3B%0A%20%20%20%20edge%20seats%20-%3E%20goal%3A%20csf_to_goal%3B%0A%20%20%20%20edge%20seats%20-%3E%20goal%3A%20csf_to_goal%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+ <li>A Goal Tree has exactly one Goal. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20company%3A%20GoalTree%20%22Company%20goals%22%20%7B%0A%20%20%20%20node%20revenue%3A%20Goal%20%22Grow%20revenue%22%3B%0A%20%20%20%20node%20costs%3A%20Goal%20%22Cut%20costs%22%3B%0A%20%20%20%20node%20customers%3A%20CriticalSuccessFactor%20%22Win%20new%20customers%22%3B%0A%20%20%20%20node%20prices%3A%20CriticalSuccessFactor%20%22Raise%20prices%22%3B%0A%20%20%20%20node%20suppliers%3A%20CriticalSuccessFactor%20%22Renegotiate%20suppliers%22%3B%0A%20%20%20%20edge%20customers%20-%3E%20revenue%3A%20csf_to_goal%3B%0A%20%20%20%20edge%20prices%20-%3E%20revenue%3A%20csf_to_goal%3B%0A%20%20%20%20edge%20suppliers%20-%3E%20costs%3A%20csf_to_goal%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+ <li>A Goal Tree has between three and five Critical Success Factors. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20cafe%3A%20GoalTree%20%22Our%20caf%C3%A9%22%20%7B%0A%20%20%20%20node%20goal%3A%20Goal%20%22A%20caf%C3%A9%20people%20return%20to%22%3B%0A%20%20%20%20node%20coffee%3A%20CriticalSuccessFactor%20%22Excellent%20coffee%22%3B%0A%20%20%20%20node%20service%3A%20CriticalSuccessFactor%20%22Friendly%20service%22%3B%0A%20%20%20%20edge%20coffee%20-%3E%20goal%3A%20csf_to_goal%3B%0A%20%20%20%20edge%20service%20-%3E%20goal%3A%20csf_to_goal%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+</ul>
+<p>The checks every notation runs are listed on <a href="/notations/#checks-every-notation-runs">the notations overview</a>.</p>
 <h2 id="try-gt-yourself">Try GT Yourself</h2>
 <p>Create and visualize your own Goal Tree diagram right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p>
 <iframe src="/vgraph/index.html?src=/notations/TOC/goal-tree/company-strategy.vgl" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive GT Editor"></iframe>

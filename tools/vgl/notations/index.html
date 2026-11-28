@@ -208,14 +208,13 @@ VGL Guide — Notations</div>
  <li><em>warning</em> — a <code>Question</code> with no <code>Answer</code>.</li>
  <li><em>warning</em> — any node with two or more incoming edges. This is a tree-shape check across every node type, so a Question raised by two separate <code>Pro</code> nodes trips it even though the map is legitimate.</li>
 </ul>
-<p><strong>ConceptMap</strong> — the largest set, ten diagnostics in all.</p>
+<p><strong>ConceptMap</strong> — the largest set, nine diagnostics in all.</p>
 <ul>
  <li><em>info</em> — the concept and relation counts and their ratio, reported on every map. This one is a statistic, not a complaint.</li>
  <li><em>warning</em> — fewer than 5 concepts ("consider adding more"), or more than 25 ("consider splitting into sub-maps").</li>
  <li><em>warning</em> — a concept label of 4 words or more; 1–3 is the preferred range.</li>
  <li><em>warning</em> — a vague relation verb. This matches a fixed list of eleven exact phrases — "relates to", "is related to", "is connected to", "involves", "is involved in", "is associated with", "is linked to", "pertains to", "concerns", "has something to do with", "is about" — case-insensitively, and nothing else. It is a blocklist, not a judgement of your wording.</li>
- <li><em>warning</em> — a concept connected to no relation.</li>
- <li><em>warning</em> — more than one disconnected cluster (single stray nodes are left to the check above).</li>
+ <li><em>warning</em> — more than one disconnected cluster (single stray nodes are left to the shared check for a node with no relationships, below).</li>
  <li><em>warning</em> — two concepts linked in both directions; keep the more meaningful one.</li>
  <li><em>warning</em> — a relation with several concepts on both sides, which asserts every combination: <em>n</em> inbound × <em>m</em> outbound propositions, all of which must hold.</li>
  <li><em>error</em> — the same, but where a concept appears on both sides, making a proposition circular.</li>
@@ -228,7 +227,7 @@ VGL Guide — Notations</div>
 </ul>
 <p><strong>C4</strong></p>
 <ul>
- <li><em>warning</em> — an element with no relationships at all. This one applies to every node type, not just elements that look like they should collaborate.</li>
+ <li><em>warning</em> — a relationship with no label, except a code-level <code>references</code>.</li>
  <li>Where elements may sit is the containment check every notation with <a href="/tools/vgl/user-defined-notations-vnotation/#detailedby-a-hierarchical-notation">detailings</a> gets (below).</li>
 </ul>
 <p><strong>CLD</strong></p>
@@ -240,7 +239,8 @@ VGL Guide — Notations</div>
  <li><em>warning</em> — a division by zero, which cannot be evaluated.</li>
  <li><em>error</em> — an operator with more than one first operand, second operand or result.</li>
 </ul>
-<p>More quality warnings come from elsewhere: a <a href="/tools/vgl/notations/#diagram-logic-and-junctors">redundant junctor</a>, an <a href="/tools/vgl/grammar/">unknown node or edge type</a>, and a node placed where its notation's <a href="/tools/vgl/user-defined-notations-vnotation/#detailedby-a-hierarchical-notation">detailings</a> do not allow.</p>
+<p>More quality warnings come from elsewhere: a node with no relationships at all, a <a href="/tools/vgl/notations/#diagram-logic-and-junctors">redundant junctor</a>, an <a href="/tools/vgl/grammar/">unknown node or edge type</a>, and a node placed where its notation's <a href="/tools/vgl/user-defined-notations-vnotation/#detailedby-a-hierarchical-notation">detailings</a> do not allow, and an <a href="/tools/vgl/concepts/#attributes">attribute</a> whose value is not of its type (<code>fontsize: big</code>,</p>
+<p><code>backgroundColor: chartreuse3</code>, <code>isFolded: maybe</code>), which is drawn as if it were not there, and an attribute <a href="/tools/vgl/concepts/#attributes">given twice</a>.</p>
 <h3 id="extensions">Extensions</h3>
 <p>Extensions add cross-cutting node types to any notation, listed after it and comma-separated:</p>
 <pre><code class="language-vgl">vgraph myGraph: ConceptMap, Annotation "My Diagram" { ... }

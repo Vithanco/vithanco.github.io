@@ -107,46 +107,51 @@ The Future Reality Tree (FRT) Notation</div>
 <table>
  <thead>
   <tr>
-   <th>Node Type</th>
+   <th>Type</th>
+   <th>Also called</th>
    <th>Description</th>
-   <th>Successors</th>
   </tr>
  </thead>
  <tbody>
   <tr>
-   <td>Desirable Effect</td>
-   <td>A wanted effect. These are the goals we aim to achieve through our solutions. They are caused by other effects or causes.</td>
-   <td>All Effects incl. 'And'</td>
+   <td>Undesirable Effect</td>
+   <td></td>
+   <td>A negative side-effect that may arise from an injection. Used in FRT to detect and prevent 'negative branches' introduced by the solution.</td>
   </tr>
   <tr>
    <td>Intermediate Effect</td>
-   <td>Effects that are neither negative nor positive on their own. They are caused by other effects or causes.</td>
-   <td>All Effects incl. 'And'</td>
+   <td></td>
+   <td>A cause-and-effect step between the injected solution and the target desirable effect. Traces the logical chain of consequences.</td>
   </tr>
   <tr>
-   <td>Undesirable Effect</td>
-   <td>Potential negative side effects to monitor. In FRT, these help identify risks of the proposed solutions.</td>
-   <td>All Effects incl. 'And'</td>
+   <td>Desirable Effect</td>
+   <td></td>
+   <td>A positive outcome that the proposed solution is expected to produce. The FRT is valid when all key desirable effects are reached.</td>
   </tr>
   <tr>
    <td>Given</td>
-   <td>Given entities are beyond your sphere of influence. They are sometimes called Preconditions. These always enter the tree without predecessors. E.g. Gravity is a given force unless you leave Earth.</td>
-   <td>All Effects incl. 'And'</td>
+   <td>Precondition</td>
+   <td>A condition taken as fixed by the environment — present in the future reality regardless of the injected changes. Enters the tree without predecessors, like gravity.</td>
   </tr>
   <tr>
    <td>Changeable</td>
-   <td>These are the proposed solutions or "injections" - the changes we plan to implement to achieve desirable effects.</td>
-   <td>All Effects incl. 'And'</td>
+   <td>Injection</td>
+   <td>An injection — a proposed change or action introduced into the system to drive the desired future state.</td>
   </tr>
   <tr>
    <td>And Junctor</td>
-   <td>In a sufficient cause diagram, each cause alone creates connected effects. The 'And' Junctor connects two causes, expressing that an event only happens if both causes are present.</td>
-   <td>All Effects (excl. 'And')</td>
+   <td></td>
+   <td>Conjunctive cause — all inputs must be present together to produce the downstream effect.</td>
   </tr>
  </tbody>
 </table>
 <h2 id="background-information-on-frt-notation">Background Information on FRT Notation</h2>
 <p>FRT diagrams were developed as part of the Theory of Constraints by E. Goldratt. More on the Theory of Constraints can be found <a href="/notations/TOC">here</a>.</p>
+<h2 id="what-vithanco-checks">What Vithanco checks</h2>
+<ul>
+ <li>Two nodes are joined at most once in each direction. <a class="see-it-flagged" href="/editor/#vgl=vgraph%20support%3A%20FRT%20%22Faster%20support%22%20%7B%0A%20%20%20%20node%20hire%3A%20Changeable%20%22Hire%20two%20support%20staff%22%3B%0A%20%20%20%20node%20quick%3A%20IntermediateEffect%20%22Tickets%20are%20answered%20the%20same%20day%22%3B%0A%20%20%20%20node%20happy%3A%20DesirableEffect%20%22Customers%20stay%20with%20us%22%3B%0A%20%20%20%20edge%20hire%20-%3E%20quick%3A%20changeable_causes_intermediate%3B%0A%20%20%20%20edge%20hire%20-%3E%20quick%3A%20changeable_causes_intermediate%3B%0A%20%20%20%20edge%20quick%20-%3E%20happy%3A%20intermediate_causes_desirable%3B%0A%7D" target="_blank" rel="noopener">See it flagged</a></li>
+</ul>
+<p>The checks every notation runs are listed on <a href="/notations/#checks-every-notation-runs">the notations overview</a>.</p>
 <h2 id="try-frt-yourself">Try FRT Yourself</h2>
 <p>Create and visualize your own Future Reality Tree diagram right here in your browser. Edit the VGL (Vithanco Graph Language) text on the left and click "Render" to see your diagram:</p>
 <iframe src="/vgraph/index.html?src=/notations/TOC/future-reality-tree/solution.vgl" height="750" style="display:block;box-sizing:border-box;position:relative;z-index:1;width:calc(min(100vw, 1300px) - 4rem);max-width:none;margin:20px 0;border:1px solid #e0e0e0;border-radius:8px;" title="VGraph Interactive FRT Editor"></iframe>

@@ -105,24 +105,24 @@ VGL Guide — IBIS</div>
 </ul>
 <p>The example below also serves as the tour of groups, attributes and cross-group edges; for the smallest possible IBIS document see <a href="/tools/vgl/concepts/#type-inference-and-minimal-syntax">Type inference and minimal syntax</a>.</p>
 <pre><code class="language-vgl">vgraph comprehensive: IBIS "Comprehensive Example" {
-    rankdir: LR;
-    fontcolor: darkblue;
+    layoutDirection: leftToRight;
+    fontColor: darkblue;
     labeljust: l;
 
-    node root: Question "Main Question" [fontsize: 20; color: navy];
+    node root: Question "Main Question" [fontsize: 20; backgroundColor: navy];
     node ans1: Answer "Primary Solution" [fontsize: 16];
 
     group analysis "Detailed Analysis" {
         style: filled;
-        color: lightgray;
+        backgroundColor: lightgray;
 
         node q_perf: Question "What about performance?";
-        node a_fast: Answer "Optimize critical paths" [color: green];
+        node a_fast: Answer "Optimize critical paths" [backgroundColor: green];
         node pro_perf: Pro "40% faster response time";
 
         group tradeoffs "Trade-offs" {
             style: dashed;
-            color: yellow;
+            backgroundColor: yellow;
 
             node con_complex: Con "Increased code complexity";
             node q_maint: Question "Can we maintain this?";
