@@ -1,4 +1,4 @@
-<svg width="864.36" height="665.68" viewBox="-50.0 -50.0 864.36 665.68" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph integrations: ConceptMap "How does Vithanco reach my tools?" {
+<svg width="804.36" height="605.68" viewBox="-20.0 -20.0 804.36 605.68" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph integrations: ConceptMap "How does Vithanco reach my tools?" {
     node engine: EmphasizedConcept "VGraph engine";
     node vgl: Concept "VGL";
     node notation: Concept "Notation";

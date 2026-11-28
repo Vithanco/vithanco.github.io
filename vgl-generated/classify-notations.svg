@@ -1,4 +1,4 @@
-<svg width="569.24" height="884.4" viewBox="-50.0 -50.0 569.24 884.4" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vnotation NotationClassification {
+<svg width="509.24" height="824.4" viewBox="-20.0 -20.0 509.24 824.4" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vnotation NotationClassification {
     layout: leftToRight
 
     node type: Stage    [nodeStyle: iconWithText, backgroundColor: "#2f6f6a", icon: "vithanco"]

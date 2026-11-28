@@ -1,4 +1,4 @@
-<svg width="999.9544307158052" height="680.2399999999999" viewBox="-50.0 -50.0 999.9544307158052 680.2399999999999" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[// c4model.com's Internet Banking example. The model is unfolded to the code;
+<svg width="939.9544307158052" height="620.2399999999999" viewBox="-20.0 -20.0 939.9544307158052 620.2399999999999" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[// c4model.com's Internet Banking example. The model is unfolded to the code;
 // each view zooms out by folding one node type.
 vgraph banking: C4 "Internet Banking System" {
     node customer: Person "Personal Banking Customer";

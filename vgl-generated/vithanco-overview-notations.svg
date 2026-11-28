@@ -1,4 +1,4 @@
-<svg width="414.40000000000003" height="795.9999999999999" viewBox="-50.0 -50.0 414.40000000000003 795.9999999999999" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph vithancoOverviewNotations: ConceptMap "Vithanco Overview" {
+<svg width="354.40000000000003" height="735.9999999999999" viewBox="-20.0 -20.0 354.40000000000003 735.9999999999999" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph vithancoOverviewNotations: ConceptMap "Vithanco Overview" {
     node graphN: Concept "Graph";
     node notation: Concept "Notation";
     node nodeTypes: Concept "Node Type(s)";

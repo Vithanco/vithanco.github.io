@@ -1,4 +1,4 @@
-<svg width="1183.48" height="749.9200000000001" viewBox="-50.0 -50.0 1183.48 749.9200000000001" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph whyAndWhenIbis: IBIS "Why and When IBIS" {
+<svg width="1123.48" height="689.9200000000001" viewBox="-20.0 -20.0 1123.48 689.9200000000001" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph whyAndWhenIbis: IBIS "Why and When IBIS" {
     node qWhen: Question "When should IBIS be used?";
     node aThink: Answer "If you want to think something through";
     node aShared: Answer "For a shared session";

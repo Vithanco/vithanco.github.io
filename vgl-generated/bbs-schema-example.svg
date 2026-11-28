@@ -1,4 +1,4 @@
-<svg width="1006.8161328125" height="595.8" viewBox="-50.0 -50.0 1006.8161328125 595.8" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph schema: BBS "BBS Schema" {
+<svg width="946.8161328125" height="535.8" viewBox="-20.0 -20.0 946.8161328125 535.8" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph schema: BBS "BBS Schema" {
     node obj: InvestmentObjective "Normally a link to Strategy"
 
     group benefits "Goals of Project" {

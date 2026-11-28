@@ -1,4 +1,4 @@
-<svg width="506.0" height="797.4799999999999" viewBox="-50.0 -50.0 506.0 797.4799999999999" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph c4Elements: C4 "The C4 element types" {
+<svg width="446.0" height="737.4799999999999" viewBox="-20.0 -20.0 446.0 737.4799999999999" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph c4Elements: C4 "The C4 element types" {
     node person: Person "Person";
 
     group org: Organisation "Organisation" {

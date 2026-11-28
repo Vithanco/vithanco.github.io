@@ -1,4 +1,4 @@
-<svg width="1087.24" height="327.28" viewBox="-50.0 -50.0 1087.24 327.28" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph shortcutQuestions: IBIS "Shortcut Questions" {
+<svg width="1027.24" height="267.28" viewBox="-20.0 -20.0 1027.24 267.28" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph shortcutQuestions: IBIS "Shortcut Questions" {
     node q: Question "What shortcut questions can be used in dialogue maps?";
     node a1: Answer "Really?";
     node a2: Answer "Example?";

@@ -1,6 +1,6 @@
 # VGraph JavaScript Library
 
-**Version:** 1.1.0
+**Version:** 1.2.0
 
 A small JavaScript library for rendering and converting Vithanco Graph Language
 (VGL) in the browser. It wraps the VGraph WebAssembly engine and exposes a simple
@@ -12,11 +12,25 @@ so there is no separate Graphviz/CDN dependency to load.
 > WASM. This library is for programmatic use: calling `render`/`toDot`/`exportVGL`
 > from your own code.
 
+## Drop-in embed
+
+No code: one script tag renders every `<pre class="vgl">` on the page.
+
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/@vithanco/vgraph@1/embed.js"></script>
+<pre class="vgl">vgraph demo: IBIS "My Graph" {
+  node q1: Question "What should we do?";
+}</pre>
+```
+
+Also `code.language-vgl` and `<vgl-diagram>`; `data-theme="light|dark"` pins
+a diagram's theme, and `embed.js?fonts=none` skips the Google Fonts request.
+
 ## Quick start
 
 ```html
 <script type="module">
-  import VGraphLib from '/vgraph/v1.1.0/vgraph-v1.1.0.js';
+  import VGraphLib from '/vgraph/v1.2.0/vgraph-v1.2.0.js';
 
   const vgraph = new VGraphLib();
   await vgraph.init({ wasmPath: '/vgraph/Package' });

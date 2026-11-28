@@ -1,4 +1,4 @@
-<svg width="484.76" height="702.4" viewBox="-50.0 -50.0 484.76 702.4" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph jedi: ConceptMap "Star Wars" {
+<svg width="424.76" height="642.4" viewBox="-20.0 -20.0 424.76 642.4" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph jedi: ConceptMap "Star Wars" {
     node emperor: Concept "The Emperor"
     node deathStar: Concept "The Death Star"
     node resistance: Concept "The Resistance"

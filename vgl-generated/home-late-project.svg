@@ -1,4 +1,4 @@
-<svg width="652.0851126861572" height="810.8517166193735" viewBox="-50.0 -50.0 652.0851126861572 810.8517166193735" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph lateProject: CLD "Why does the project keep slipping?" {
+<svg width="592.0851126861572" height="750.8517166193735" viewBox="-20.0 -20.0 592.0851126861572 750.8517166193735" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph lateProject: CLD "Why does the project keep slipping?" {
     node pressure: Stock "Schedule Pressure";
     node overtime: Stock "Overtime";
     node done: Stock "Work Completed";

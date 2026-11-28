@@ -1,4 +1,4 @@
-<svg width="928.92" height="1056.6399999999999" viewBox="-50.0 -50.0 928.92 1056.6399999999999" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph dataConfidentiality: ADTree "Data Confidentiality" {
+<svg width="868.92" height="996.64" viewBox="-20.0 -20.0 868.92 996.64" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph dataConfidentiality: ADTree "Data Confidentiality" {
     node dataConf: Defense "Data Confidentiality"
     node networkSec: Defense "Network Security"
     node physicalSec: Defense "Physical Security"

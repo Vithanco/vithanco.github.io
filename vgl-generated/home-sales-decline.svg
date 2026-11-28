@@ -1,4 +1,4 @@
-<svg width="486.9200000000001" height="674.3199999999999" viewBox="-50.0 -50.0 486.9200000000001 674.3199999999999" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph analysis: CRT "Sales Decline Analysis" {
+<svg width="426.9200000000001" height="614.3199999999999" viewBox="-20.0 -20.0 426.9200000000001 614.3199999999999" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph analysis: CRT "Sales Decline Analysis" {
     node ude1: UndesirableEffect "Sales revenue declining";
     node ude2: UndesirableEffect "Customer complaints increasing";
 

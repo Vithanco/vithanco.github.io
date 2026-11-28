@@ -1,4 +1,4 @@
-<svg width="763.84" height="809.04" viewBox="-50.0 -50.0 763.84 809.04" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph buyingCar: ImpactMapping "Buying a Family Car" {
+<svg width="703.84" height="749.04" viewBox="-20.0 -20.0 703.84 749.04" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph buyingCar: ImpactMapping "Buying a Family Car" {
     node g: Goal "Have a family car available when we need it"
 
     node a1: Actor "My Spouse"

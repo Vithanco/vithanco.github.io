@@ -1,4 +1,4 @@
-<svg width="955.3599999999999" height="531.04" viewBox="-50.0 -50.0 955.3599999999999 531.04" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph customerSatisfaction: BBS "Customer Satisfaction Initiative" {
+<svg width="895.3599999999999" height="471.04" viewBox="-20.0 -20.0 895.3599999999999 471.04" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph customerSatisfaction: BBS "Customer Satisfaction Initiative" {
     node obj1: InvestmentObjective "Increase Customer Satisfaction by 25%";
     node ben1: Benefit "Faster Response Times";
     node ben2: Benefit "Improved Service Quality";

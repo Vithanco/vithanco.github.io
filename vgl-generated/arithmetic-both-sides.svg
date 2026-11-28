@@ -1,4 +1,4 @@
-<svg width="280.0" height="314.6" viewBox="-50.0 -50.0 280.0 314.6" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph arithmeticBothSides: Arithmetic "7 − 4 = 2 + 1" {
+<svg width="220.00000000000003" height="254.6" viewBox="-20.0 -20.0 220.00000000000003 254.6" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph arithmeticBothSides: Arithmetic "7 − 4 = 2 + 1" {
     node seven: Number "7";
     node four: Number "4";
     node two: Number "2";

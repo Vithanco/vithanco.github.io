@@ -1,4 +1,4 @@
-<svg width="388.54405738830565" height="196.1977566242218" viewBox="-50.0 -50.0 388.54405738830565 196.1977566242218" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph bankAccount: CLD "Bank Account" {
+<svg width="328.54405738830565" height="136.1977566242218" viewBox="-20.0 -20.0 328.54405738830565 136.1977566242218" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph bankAccount: CLD "Bank Account" {
     node bank: Stock "Bank Account"
     node interest: Stock "Earned Interest"
 

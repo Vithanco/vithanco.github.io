@@ -1,4 +1,4 @@
-<svg width="1302.24" height="640.4799999999999" viewBox="-50.0 -50.0 1302.24 640.4799999999999" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph rootQuestionTypes: IBIS "The 7 Root Question Types" {
+<svg width="1242.24" height="580.4799999999999" viewBox="-20.0 -20.0 1242.24 580.4799999999999" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph rootQuestionTypes: IBIS "The 7 Root Question Types" {
     node q0: Question "What are the seven root question types?";
     node a1: Answer "1. Deontic";
     node a2: Answer "2. Instrumental";

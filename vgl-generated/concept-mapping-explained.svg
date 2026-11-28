@@ -1,4 +1,4 @@
-<svg width="475.36" height="715.36" viewBox="-50.0 -50.0 475.36 715.36" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph conceptMappingExplained: ConceptMap "What is a Concept Map?" {
+<svg width="415.36" height="655.36" viewBox="-20.0 -20.0 415.36 655.36" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph conceptMappingExplained: ConceptMap "What is a Concept Map?" {
     node cm: Concept "Concept Mapping";
     node vt: Concept "Visual Thinking Method";
     node review: Concept "Shared Review";

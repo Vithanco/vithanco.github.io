@@ -1,4 +1,4 @@
-<svg width="455.56" height="819.04" viewBox="-50.0 -50.0 455.56 819.04" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph waterCycleDraft: ConceptMap "The Water Cycle, first draft" {
+<svg width="395.56" height="759.04" viewBox="-20.0 -20.0 395.56 759.04" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph waterCycleDraft: ConceptMap "The Water Cycle, first draft" {
     node cycle: Concept "The Water Cycle";
     node sun: Concept "The Sun";
     node water: Concept "Water";

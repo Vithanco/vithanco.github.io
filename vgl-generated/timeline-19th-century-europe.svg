@@ -1,4 +1,4 @@
-<svg width="659.8107421875001" height="471.24" viewBox="-50.0 -50.0 659.8107421875001 471.24" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph europe19c: Timeline "19th Century Europe" {
+<svg width="599.8107421875001" height="411.24" viewBox="-20.0 -20.0 599.8107421875001 411.24" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph europe19c: Timeline "19th Century Europe" {
     node t1800: TimePoint "1800" [alignGroup: "1800"]
     node t1850: TimePoint "1850" [alignGroup: "1850"]
     node t1871: TimePoint "1871" [alignGroup: "1871"]

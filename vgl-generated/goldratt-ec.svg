@@ -1,4 +1,4 @@
-<svg width="686.8000000000001" height="463.2" viewBox="-50.0 -50.0 686.8000000000001 463.2" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph goldrattEC: EC "Goldratt's EC" {
+<svg width="626.8000000000001" height="403.2" viewBox="-20.0 -20.0 626.8000000000001 403.2" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph goldrattEC: EC "Goldratt's EC" {
     node obj: CommonObjective "Reduce cost per Unit";
     node needSetup: Need "Reduce setup cost per unit";
     node needCarry: Need "Reduce carrying cost per unit";

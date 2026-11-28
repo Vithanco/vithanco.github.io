@@ -1,4 +1,4 @@
-<svg width="1201.76" height="784.4799999999999" viewBox="-50.0 -50.0 1201.76 784.4799999999999" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph chooseNotation: DecisionTree "Which Vithanco Notation?" {
+<svg width="1141.76" height="724.4799999999999" viewBox="-20.0 -20.0 1141.76 724.4799999999999" xmlns="http://www.w3.org/2000/svg"><metadata><vithanco:vgl xmlns:vithanco="https://vithanco.com/ns/vgl" version="1"><![CDATA[vgraph chooseNotation: DecisionTree "Which Vithanco Notation?" {
     node q1: DecisionPoint "What are you trying to achieve?"
 
     node ch1: Choice "Start and plan a project?"
